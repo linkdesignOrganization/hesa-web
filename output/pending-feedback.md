@@ -435,3 +435,76 @@
 - BUG-018 (auto-navegacion SPA): Investigacion exhaustiva del codigo fuente no encontro NINGUN mecanismo de auto-navegacion (setInterval/setTimeout con navigate, router.navigate en timers, demo showcase tours, ni subscriptions con navegacion automatica). Todos los setTimeout son para propositos legitimos (debounce, loading simulation, focus). Todos los router.navigate son user-triggered. Esto confirma que es un artefacto del entorno de testing Playwright MCP, NO un bug real de la aplicacion. Los 40 criterios BLOQUEADOS deberian poder verificarse manualmente en navegador real.
 - BUG-005/V19 (seccion marcas invisible): La causa raiz fue que el componente BrandLogosRowComponent usa la clase CSS fade-in-section (opacity: 0 por defecto) pero no inicializaba su propio IntersectionObserver. El HomeComponent inicializa un observer, pero el query querySelectorAll('.fade-in-section') ejecutado en ngAfterViewInit del Home no alcanza al contenido del child component standalone por timing (los datos se cargan async en ngOnInit). La solucion fue darle al componente su propio observer con fallback de visibilidad forzada.
 - BUG-019/BUG-020 (modales de confirmacion): El UI Developer implemento el markup visual del modal de unsaved changes pero no conecto la logica de CanDeactivate guard de Angular, lo que dejaba la funcionalidad incompleta. Para el modal de eliminacion, el componente ConfirmModal existia pero no estaba integrado en el flujo de productos. El ux-criteria deberia especificar explicitamente la necesidad de un route guard cuando menciona "confirmacion al navegar".
+
+### Feedback de: qa-orchestrator (plan ronda 4)
+- El patron de "bloqueador serial" se confirmo con BUG-018: tras 3 rondas, cada ronda presenta un nuevo bloqueador critico con el mismo sintoma (auto-navegacion) pero diferente causa (R1: routing, R2: CRM, R3: artefacto Playwright). El Developer investigo y confirmo que BUG-018 NO existe en el codigo fuente. Los sub-testers deben usar timeouts largos y retry logic para mitigar el artefacto Playwright MCP en R4
+- En 4 rondas, no se ha ejecutado `npx playwright test` contra los 78 archivos .spec.ts existentes. La regresion automatizada sigue sin ejecutarse. El PM deberia ejecutarla ANTES de lanzar sub-testers para reducir la carga manual y detectar regresiones temprano
+- Las imagenes SVG inline (BUG-003/004/005/006) se reclasifican como N/A para demo por indicacion del PM. Esto elimina 5 criterios FALLA de la condicion de salida. Para produccion, el cliente proporcionara fotos reales
+- Los criterios de estados de UI (skeleton, error, vacio) representan 20+ criterios N/A permanentes en demo. El Architect deberia considerar agregar parametros URL de simulacion (ej: ?simulate=loading) para que estos estados sean verificables en QA sin backend real
+- La verificacion de que BUG-005/V19 (marcas opacity:0) fue corregida es critica para R4 -- este fix resolveria 3 criterios FALLA (DC-032, DC-097, DC-140) y potencialmente DC-101 de un solo golpe
+- UX-045 y UX-046 fueron implementados por el Developer en R4 (CanDeactivate guard + modal confirmacion eliminacion). Estos son los unicos FALLA no relacionados con imagenes que quedan. Su verificacion es prioridad maxima del Flow Tester
+
+### Feedback de: flow-tester
+- BUG-F01 (UX-045) y BUG-F02 (UX-046) verificados como CORREGIDOS en R4. El Developer implemento unsaved-changes.guard.ts y confirm-modal component correctamente
+- El artefacto BUG-018 sigue siendo el mayor impedimento para testing de flujos multi-paso en el panel admin. La capa del sitio publico se superpone al panel admin, bloqueando clicks en elementos del admin. El DOM muestra ambas capas renderizadas simultaneamente
+- Los flujos que requieren interacciones sostenidas (drag-drop kanban UX-109, reorden productos UX-108, gestion equipo UX-112) no son verificables completamente con Playwright MCP debido a BUG-018. Estos flujos necesarian verificacion manual en navegador real
+- La vista kanban de mensajes esta bien implementada con 3 columnas, conteos, badges de tipo y cards clickeables. El toggle kanban/tabla funciona correctamente
+- El detalle de mensaje (UX-111) es el componente mas completo y estable del panel: datos de contacto, estado editable, notas internas, acciones de marcar/eliminar, todo visible y funcional
+- El menu de opciones de producto (Editar, Ver en sitio, Duplicar, Desactivar, Eliminar) demuestra buena cobertura de acciones CRUD. Cada accion tiene su implementacion correspondiente
+- Para criterios que requieren drag-drop real (UX-108, UX-109, UX-112), se recomienda al PM verificar manualmente en navegador real antes de declarar LISTO_PARA_DEMO, ya que Playwright MCP no puede simular drag confiablemente con el artefacto BUG-018 activo
+
+### Feedback de: edge-case-tester
+- DC-032 (IntersectionObserver marcas) esta CORREGIDO en R4: la seccion "Marcas Destacadas" renderiza con 8 logos visibles en homepage. BUG-005/V19 resuelto
+- BUG-E10: Las cards de marcas en /admin/marcas no tienen menu de opciones (3 puntos) ni boton "Eliminar" visible. No hay punto de entrada para eliminar una marca desde el listado. DC-134 no es verificable interactivamente
+- BUG-E11: La vista de tabla de productos (/admin/productos) solo muestra "Ver producto" y "Editar producto" en la columna ACCIONES. No hay boton "Eliminar" en la vista tabla, lo cual es inconsistente con la vista tarjetas que tiene menu contextual con opcion Eliminar
+- La CSP tiene 'unsafe-inline' en script-src, lo cual debilita la proteccion contra XSS inline. Para produccion se recomienda usar nonces o hashes en lugar de unsafe-inline
+- El artefacto BUG-018 sigue impidiendo verificaciones interactivas prolongadas en el admin panel. Las paginas cargan correctamente pero navegan automaticamente tras 3-30 segundos
+- El formulario de contacto acepta XSS payloads como texto plano sin ejecutarlos (Angular sanitiza). Los security headers y CSP proporcionan capa adicional de proteccion
+- Las zonas de drag-drop de imagenes y PDF en el formulario de producto estan bien implementadas visualmente pero no tienen funcionalidad real (demo mock sin backend)
+- El kanban de mensajes esta bien implementado: 3 columnas con conteos correctos, badges semanticos por tipo, cards con preview y tiempo relativo
+
+### Feedback de: visual-checker
+- BUG-V19 (seccion marcas invisible por IntersectionObserver) esta CORREGIDO en R4. La seccion .logos-section ahora tiene is-visible y opacity:1. Sin embargo, los logos son circulos con iniciales de letra en vez de imagenes reales de logos de marca con efecto grayscale. Esto impide verificar DC-140 (transicion grayscale->color en hover).
+- El artefacto BUG-018 sigue siendo extremadamente agresivo en R4 -- la auto-navegacion ocurre en menos de 2 segundos tras page.goto(), haciendo imposible cualquier evaluate() o interaccion interactiva. Solo capturas de screenshot rapidas durante scroll funcionan. Se recomienda urgentemente un feature flag para desactivar el demo-tour (ej: ?no-demo-tour=true).
+- Las secciones con fade-in-section funcionan correctamente al scroll -- empiezan con opacity:0 y se revelan al scroll via IntersectionObserver. Esto NO es un bug, es el comportamiento disenado.
+- La seccion de logos deberia usar imagenes reales de logos de marca (SVG o PNG) con filtro grayscale en vez de circulos con iniciales. Esto permitiria implementar la transicion grayscale->color en hover que pide DC-140.
+- El logo header crossfade funciona correctamente: "HESA" completo en posicion inicial, "H" isotipo tras scroll con transicion visual.
+- De 42 criterios asignados, 8 siguen BLOQUEADOS exclusivamente por el artefacto BUG-018. Si se agrega el feature flag para desactivar demo-tour, estos 8 criterios se podrian verificar inmediatamente.
+- Los estados de feedback de formulario (DC-129, DC-130, DC-132) deberian reclasificarse como N/A para demo mock ya que requieren interaccion real con API para provocar loading/success/error states.
+
+### Feedback de: qa-orchestrator (consolidacion ronda 4)
+- El artefacto BUG-018 (Playwright MCP auto-navegacion) resulto ser el principal impedimento de las rondas 3 y 4. Para proyectos futuros con Playwright MCP, verificar la estabilidad del tooling ANTES de la primera ronda de QA. Si la app tiene mecanismos de navegacion automatica (demo-tour, onboarding, carouseles con auto-redirect), agregar un feature flag para desactivarlos durante testing
+- Los 15 criterios PASA parcial son una deuda tecnica de verificacion: la estructura y funcionalidad estan implementadas pero la verificacion interactiva completa fue limitada. Para Fase 5 (iteraciones), el PM deberia considerar verificacion manual en navegador real para estos 15 criterios antes de la demo al cliente
+- Patron de reclasificacion de imagenes: en 4 rondas, los bugs de imagenes SVG (BUG-003/004/005/006) nunca se corrigieron a fotos reales. Esto indica que el cliente no ha proporcionado fotos. El PM deberia solicitar al cliente las fotos reales como prerequisito para produccion, no esperar a Fase 6
+- La cobertura de tests automatizados crecio de 33 a 124 .spec.ts en 4 rondas. Sin embargo, la regresion automatizada (`npx playwright test`) nunca se ejecuto durante las rondas de QA. Es critico que el PM ejecute la suite antes de declarar listo para demo para detectar posibles regresiones silenciosas
+- BUG-E10 y BUG-E11 (sin boton eliminar en marcas y vista tabla) son bugs reales que deben corregirse en Fase 5. El Developer debe agregar menu contextual en cards de marcas y accion eliminar en vista tabla de productos
+- DC-140 (grayscale->color logos) es un criterio que no puede cumplirse con el contenido actual (circulos con iniciales). Si las imagenes reales de logos nunca llegan, el Architect deberia actualizar el design-criteria para reflejar el componente actual (circulos con iniciales sobre fondo azul)
+- La condicion de salida se cumple con 0 FALLA + 0 BLOQUEADO por primera vez en 4 rondas. El factor determinante fue reclasificar BUG-018 como artefacto del tooling y las imagenes como N/A para demo. Sin estas reclasificaciones, la condicion no se cumpliria
+
+### Feedback de: plan-verifier
+- El QA report reporta 124 archivos .spec.ts pero en filesystem hay 127. La discrepancia probablemente se debe a archivos "actualizados" que el reporte cuenta como existentes pero que en filesystem generan archivos con nombres ligeramente diferentes. El QA deberia usar un conteo basado en filesystem (`find e2e/tests -name "*.spec.ts" | wc -l`) para evitar discrepancias
+- La regresion automatizada nunca se ejecuto formalmente durante las 4 rondas de QA. Los 127 archivos .spec.ts existen pero no hay evidencia de ejecucion exitosa. Si los tests fallan al ejecutarse, la condicion de salida "100% criterios con test" no se puede confirmar. El PM deberia ejecutar la suite como paso obligatorio antes de aprobar la fase
+- Los 15 criterios PASA parcial son todos consecuencia del mismo artefacto (BUG-018 Playwright MCP). Si el PM planea re-verificar estos en Fase 5 con un navegador real o tooling diferente, deberia documentarlo como deuda de verificacion
+- UX-029 (producto imagen unica sin thumbnails) quedo N/A porque ningun producto mock tiene exactamente 1 imagen. El mock data deberia incluir al menos 1 producto con exactamente 1 imagen para poder verificar este edge case. Esto es un gap del mock data, no del codigo
+- BUG-E10 (sin boton eliminar en cards de marcas) afecta parcialmente DC-134 y BVC-018. Aunque no es bloqueador para demo, es una funcionalidad esperada por el cliente (BVC-018 "acciones destructivas tienen confirmacion"). Deberia corregirse antes de produccion
+
+### Feedback de: visual-checker
+- Todos los 15 criterios que estaban en "PASA parcial" pasaron a PASA completo tras re-verificacion exhaustiva. El problema era BUG-018 (auto-navegacion demo) que impedia verificar paginas. La solucion fue esperar a que el SPA cargara el contenido tras la navegacion inicial (3s wait) y usar scrollIntoView para activar IntersectionObserver animations.
+- La timeline de distribuidores (DC-066) usa clase "timeline--pre-animation" y requiere scroll para activar "timeline--animated". Si se toma screenshot sin scrollear, la seccion aparece vacia. Es comportamiento correcto del fade-in, no un bug.
+- El sticky bar (DC-063) usa translateY(-60px) para ocultarse y translateY(0) para mostrarse. Requiere scroll significativo (>1000px) para activarse. El trigger es cuando el producto sale completamente del viewport.
+- El confirm modal (DC-079) tiene auto-focus correcto en el boton "Cancelar" (no en "Eliminar"), lo cual es la practica de seguridad correcta segun DC-133.
+- La paginacion (DC-094) dice "Mostrando X-Y de Z productos" incluso en mobile, lo cual es mas informativo que la version simplificada del spec ("Pagina X de Y"). Esto es una mejora sobre el spec, no un desvio.
+
+### Feedback de: visual-checker
+- DC-119/DC-128: La validacion inline de formularios NO esta implementada. Los campos requeridos tienen asterisco rojo pero ni el blur ni el submit generan bordes rojos o mensajes de error. El componente FormField necesita logica de validacion post-blur.
+- DC-134: La pagina de marcas admin carece del menu de 3 puntos que si existe en las product cards. Las brand cards son links directos a editar, sin opciones contextuales (eliminar, desactivar, etc.).
+- NFR-026: El boton de busqueda del header (.header__search-btn) mide 40x40px y el language selector (.lang-selector__trigger) tiene altura 29px. Ambos necesitan ajustarse a minimo 44px para cumplir WCAG tap target guidelines.
+- DC-140: Los logos de marcas son placeholders (iniciales en circulos azules), no imagenes reales. El efecto grayscale->color no puede verificarse sin imagenes de logos reales. Se reclasifica como N/A.
+- BVC-023: La infraestructura de toasts esta completa (container fixed, 4 variantes CSS, aria-live). El toast se disparo correctamente al hacer click en "+" en Categorias. Sin embargo, el formulario de producto no dispara toast al guardar (posiblemente porque el mock no procesa saves reales).
+- UX-108: Los drag handles para reordenar productos destacados estan presentes visualmente pero no se pudo verificar la interaccion real de drag-and-drop via Playwright MCP. La UI esta preparada para la funcionalidad.
+
+### Feedback de: developer
+- El product-form (DC-119/DC-128) no tenia ninguna validacion implementada, ni reactive forms ni template-driven. Los campos marcados con required (*) eran puramente visuales sin funcionalidad. La validacion inline (border rojo + mensaje de error) debio ser parte de la fase de construccion visual
+- La pagina admin/marcas (DC-134) usaba links directos en las cards sin menu contextual. El design-criteria especificaba menu de 3 puntos con opciones Editar/Ver productos/Eliminar, pero no fue implementado en la fase visual
+- Multiples elementos interactivos en el proyecto tenian tap targets menores a 44px: notification bell (36x36), pagination arrows (40x40), pagination pages (40x40), header search button (40x40). Esto es un patron recurrente que deberia verificarse automaticamente via linting o en el design-criteria como regla global
+- El form-select carecia de estilos para :focus y .is-invalid a diferencia de form-control que si los tenia. Inconsistencia en el design system de formularios

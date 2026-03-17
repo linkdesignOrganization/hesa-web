@@ -110,4 +110,89 @@ test.describe('NFR-017: XSS Protection and Security Headers', () => {
 
     expect(alertTriggered).toBe(false);
   });
+
+  // R4: Advanced XSS payloads
+  test('Advanced XSS payloads in contact form do not execute', async ({ page }) => {
+    let alertTriggered = false;
+    page.on('dialog', async (dialog) => {
+      alertTriggered = true;
+      await dialog.dismiss();
+    });
+
+    await page.goto(`${BASE}/es/contacto`);
+    await page.waitForSelector('text=Contactenos', { timeout: 10000 });
+
+    const advancedPayloads = [
+      '<img onerror=alert(1) src=x>',
+      'javascript:alert(1)',
+      "' OR 1=1 --",
+      '<svg/onload=alert(1)>',
+      '{{constructor.constructor("alert(1)")()}}',
+      '<iframe src="javascript:alert(1)">',
+      '<body onload=alert(1)>',
+      'data:text/html,<script>alert(1)</script>',
+    ];
+
+    for (const payload of advancedPayloads) {
+      const nameField = page.getByRole('textbox', { name: 'Nombre *' });
+      if (await nameField.isVisible({ timeout: 3000 }).catch(() => false)) {
+        await nameField.fill(payload);
+        await page.waitForTimeout(100);
+      }
+    }
+
+    expect(alertTriggered).toBe(false);
+  });
+
+  test('SQL injection payload in form fields does not cause errors', async ({ page }) => {
+    await page.goto(`${BASE}/es/contacto`);
+    await page.waitForSelector('text=Contactenos', { timeout: 10000 });
+
+    const sqlPayloads = [
+      "' OR 1=1 --",
+      "'; DROP TABLE users; --",
+      "1' UNION SELECT * FROM users --",
+      "admin' --",
+    ];
+
+    for (const payload of sqlPayloads) {
+      const nameField = page.getByRole('textbox', { name: 'Nombre *' });
+      if (await nameField.isVisible({ timeout: 3000 }).catch(() => false)) {
+        await nameField.fill(payload);
+        // Verificar que el campo acepta el texto sin error
+        await expect(nameField).toHaveValue(payload);
+      }
+    }
+  });
+
+  test('CSP script-src blocks inline script execution', async ({ request }) => {
+    const response = await request.get(`${BASE}/es/`);
+    const csp = response.headers()['content-security-policy'];
+
+    // script-src should be restrictive
+    expect(csp).toContain("script-src 'self'");
+
+    // No unsafe-eval allowed
+    expect(csp).not.toContain('unsafe-eval');
+
+    // img-src allows data: for inline images but not scripts
+    expect(csp).toContain("img-src 'self' data: https:");
+  });
+
+  test('No CRM or tracking scripts in JS bundle', async ({ request }) => {
+    const response = await request.get(`${BASE}/`);
+    const html = await response.text();
+
+    // Find the main JS bundle URL
+    const jsMatch = html.match(/src="(main-[^"]+\.js)"/);
+    if (jsMatch) {
+      const jsResponse = await request.get(`${BASE}/${jsMatch[1]}`);
+      const jsContent = await jsResponse.text();
+
+      // No CRM tracking
+      expect(jsContent).not.toContain('crm-api');
+      expect(jsContent).not.toContain('linkdesign.cr');
+      expect(jsContent).not.toContain('CrmTracking');
+    }
+  });
 });

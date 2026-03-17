@@ -103,6 +103,7 @@
     color: var(--neutral-400);
     text-decoration: none;
     transition: all 0.15s ease-out;
+    min-height: 44px;
 
     svg {
       flex-shrink: 0;
@@ -188,6 +189,12 @@
     overflow: hidden;
     text-overflow: ellipsis;
 
+    @media (max-width: 1023px) {
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+    }
+
     &:hover {
       background-color: var(--neutral-50);
       color: var(--neutral-900);
@@ -248,8 +255,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     color: var(--neutral-900);
 
     @media (min-width: 1024px) {
@@ -266,6 +273,7 @@
     background-color: var(--neutral-100);
     border-radius: var(--radius-input);
     padding: 8px 12px;
+    min-height: 44px;
   }
 
   &__header-search-input {
@@ -293,8 +301,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 36px;
-    height: 36px;
+    width: 44px;
+    height: 44px;
     border-radius: 8px;
     background: none;
     border: none;
@@ -310,8 +318,8 @@
 
   &__header-notification-badge {
     position: absolute;
-    top: 4px;
-    right: 4px;
+    top: 6px;
+    right: 6px;
     width: 16px;
     height: 16px;
     border-radius: 50%;
@@ -375,6 +383,7 @@
     width: 100%;
     cursor: pointer;
     transition: background-color 0.15s ease-out;
+    min-height: 44px;
 
     &:hover {
       background-color: var(--neutral-50);

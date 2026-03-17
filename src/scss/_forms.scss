@@ -83,6 +83,26 @@ textarea.form-control {
   background-position: right 12px center;
   background-size: 16px;
   padding-right: 40px;
+
+  &:focus {
+    border-color: var(--brand-primary);
+    border-width: 2px;
+    padding: 11px 15px;
+    padding-right: 39px;
+    box-shadow: 0 0 0 3px rgba(0, 141, 201, 0.15);
+    outline: none;
+  }
+
+  &.is-invalid {
+    border-color: var(--semantic-danger);
+    border-width: 2px;
+    padding: 11px 15px;
+    padding-right: 39px;
+
+    &:focus {
+      box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+    }
+  }
 }
 
 // DC-128: Validation message

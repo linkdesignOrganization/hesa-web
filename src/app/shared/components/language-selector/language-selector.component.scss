@@ -15,6 +15,8 @@
     font-weight: var(--weight-medium);
     color: var(--neutral-900);
     transition: background-color 0.15s ease-out;
+    min-height: 44px;
+    min-width: 44px;
 
     &:hover {
       background-color: var(--neutral-50);
@@ -67,6 +69,7 @@
     color: var(--neutral-900);
     transition: background-color 0.15s ease-out;
     text-align: left;
+    min-height: 44px;
 
     &:hover {
       background-color: var(--neutral-50);

@@ -1,0 +1,11363 @@
+
+Running 488 tests using 11 workers
+
+  ✓    2 [chromium] › e2e\tests\edge-case\DC-115-login-error.spec.ts:6:7 › DC-115: Admin Login Page › Login page renders correctly (5.1s)
+  ✓    3 [chromium] › e2e\tests\edge-case\DC-032-marcas-section-visible.spec.ts:10:7 › DC-032: Seccion Marcas Destacadas visible en homepage › seccion marcas es visible (opacity != 0, no hidden) (7.5s)
+  ✓    5 [chromium] › e2e\tests\edge-case\DC-097-marcas-responsive.spec.ts:6:7 › DC-097: Marcas Destacadas responsive › seccion marcas visible en mobile 375px (7.6s)
+  ✓   14 [chromium] › e2e\tests\edge-case\DC-097-marcas-responsive.spec.ts:24:7 › DC-097: Marcas Destacadas responsive › seccion marcas visible en tablet 768px (2.6s)
+  ✓   13 [chromium] › e2e\tests\edge-case\DC-032-marcas-section-visible.spec.ts:20:7 › DC-032: Seccion Marcas Destacadas visible en homepage › seccion marcas muestra 8 logos de marcas (3.4s)
+  ✘   12 [chromium] › e2e\tests\edge-case\DC-115-login-error.spec.ts:16:7 › DC-115: Admin Login Page › Login page has Microsoft icon (6.3s)
+  ✓   15 [chromium] › e2e\tests\edge-case\DC-097-marcas-responsive.spec.ts:44:7 › DC-097: Marcas Destacadas responsive › seccion marcas visible en desktop 1440px (3.0s)
+  ✓   16 [chromium] › e2e\tests\edge-case\DC-032-marcas-section-visible.spec.ts:35:7 › DC-032: Seccion Marcas Destacadas visible en homepage › marcas tienen nombres correctos (3.8s)
+  ✘    4 [chromium] › e2e\tests\edge-case\DC-090-092-panel-responsive.spec.ts:6:7 › DC-090: Panel Tables Responsive › Product list renders in mobile viewport (14.9s)
+  ✘   10 [chromium] › e2e\tests\edge-case\DC-137-138-panel-hover.spec.ts:6:7 › DC-137: Panel Card Hover Effects › Product cards have cursor pointer (15.0s)
+  ✘    1 [chromium] › e2e\tests\edge-case\DC-077-078-form-fields-uploader.spec.ts:6:7 › DC-077: Form Fields Panel Styling › Input fields have border-radius 10px (14.9s)
+  ✘    9 [chromium] › e2e\tests\edge-case\DC-122-127-feedback-panel.spec.ts:7:7 › DC-122 to DC-127: Panel Feedback Visual › DC-123/DC-131: Save product triggers toast success (15.1s)
+  ✘    8 [chromium] › e2e\tests\edge-case\BVC-018-destructive-confirmation.spec.ts:6:7 › BVC-018: Acciones destructivas tienen confirmacion modal › admin productos tiene vista tarjetas y tabla (16.1s)
+  ✘   11 [chromium] › e2e\tests\edge-case\DC-146-kanban-mensajes.spec.ts:15:7 › DC-146: Kanban de mensajes layout y contenido › kanban tiene 3 columnas con conteos (15.9s)
+  ✘    6 [chromium] › e2e\tests\edge-case\DC-138-table-view-products.spec.ts:15:7 › DC-138: Hover filas tabla panel y estructura tabla productos › toggle de vista tarjetas a vista tabla funciona (16.2s)
+  ✘    7 [chromium] › e2e\tests\edge-case\DC-135-unsaved-changes-guard.spec.ts:6:7 › DC-135: Modal cambios sin guardar › formulario crear producto tiene campos editables (15.9s)
+  ✓   19 [chromium] › e2e\tests\edge-case\DC-032-marcas-section-visible.spec.ts:52:7 › DC-032: Seccion Marcas Destacadas visible en homepage › seccion tiene link "Ver todas las marcas" (2.9s)
+  ✘   17 [chromium] › e2e\tests\edge-case\DC-115-login-error.spec.ts:16:7 › DC-115: Admin Login Page › Login page has Microsoft icon (retry #1) (6.2s)
+  ✓   24 [chromium] › e2e\tests\edge-case\DC-032-marcas-section-visible.spec.ts:58:7 › DC-032: Seccion Marcas Destacadas visible en homepage › seccion tiene subtitulo descriptivo (2.9s)
+  ✓   29 [chromium] › e2e\tests\edge-case\NFR-009-semantic-urls.spec.ts:7:7 › NFR-009: Semantic and Readable URLs › Home page URL uses language prefix (1.0s)
+  ✓   18 [chromium] › e2e\tests\edge-case\DC-097-marcas-responsive.spec.ts:67:7 › DC-097: Marcas Destacadas responsive › link "Ver todas las marcas" visible en todos los breakpoints (8.4s)
+  ✓   32 [chromium] › e2e\tests\edge-case\NFR-017-xss-security.spec.ts:6:7 › NFR-017: XSS Protection and Security Headers › Security headers are properly set (455ms)
+  ✓   33 [chromium] › e2e\tests\edge-case\NFR-017-xss-security.spec.ts:30:7 › NFR-017: XSS Protection and Security Headers › CSP header is properly configured (116ms)
+  ✓   34 [chromium] › e2e\tests\edge-case\NFR-017-xss-security.spec.ts:45:7 › NFR-017: XSS Protection and Security Headers › Permissions-Policy restricts camera, mic, geolocation (101ms)
+  ✓   31 [chromium] › e2e\tests\edge-case\NFR-009-semantic-urls.spec.ts:12:7 › NFR-009: Semantic and Readable URLs › Catalog URL is semantic: /es/catalogo (1.3s)
+  ✓   36 [chromium] › e2e\tests\edge-case\NFR-009-semantic-urls.spec.ts:18:7 › NFR-009: Semantic and Readable URLs › Category catalog URL is semantic: /es/catalogo/farmacos (869ms)
+  ✓   35 [chromium] › e2e\tests\edge-case\NFR-017-xss-security.spec.ts:54:7 › NFR-017: XSS Protection and Security Headers › XSS payload in contact form name field does not execute (2.0s)
+  ✓   30 [chromium] › e2e\tests\edge-case\DC-032-marcas-section-visible.spec.ts:64:7 › DC-032: Seccion Marcas Destacadas visible en homepage › logos de marcas son clickables (3.8s)
+  ✓   37 [chromium] › e2e\tests\edge-case\NFR-009-semantic-urls.spec.ts:23:7 › NFR-009: Semantic and Readable URLs › Product URL uses slug: /es/catalogo/farmacos/amoxicilina-250ml (1.2s)
+  ✓   40 [chromium] › e2e\tests\edge-case\NFR-009-semantic-urls.spec.ts:28:7 › NFR-009: Semantic and Readable URLs › English URLs mirror Spanish structure (993ms)
+  ✓   38 [chromium] › e2e\tests\edge-case\NFR-017-xss-security.spec.ts:80:7 › NFR-017: XSS Protection and Security Headers › XSS payload in distributor form does not execute (2.0s)
+  ✓   41 [chromium] › e2e\tests\edge-case\NFR-009-semantic-urls.spec.ts:33:7 › NFR-009: Semantic and Readable URLs › Admin URLs are under /admin/ prefix (888ms)
+  ✓   43 [chromium] › e2e\tests\edge-case\NFR-009-semantic-urls.spec.ts:38:7 › NFR-009: Semantic and Readable URLs › Filter params use readable query strings (861ms)
+  ✓   39 [chromium] › e2e\tests\edge-case\DC-032-marcas-section-visible.spec.ts:72:7 › DC-032: Seccion Marcas Destacadas visible en homepage › IntersectionObserver no bloquea la seccion (opacity check) (3.9s)
+  ✓   44 [chromium] › e2e\tests\edge-case\NFR-031-032-responsive.spec.ts:7:7 › NFR-031: Mobile-first responsive (public site) › Mobile 375px: hamburger menu visible, nav links hidden (892ms)
+  ✘   20 [chromium] › e2e\tests\edge-case\DC-090-092-panel-responsive.spec.ts:6:7 › DC-090: Panel Tables Responsive › Product list renders in mobile viewport (retry #1) (11.3s)
+  ✘   21 [chromium] › e2e\tests\edge-case\DC-137-138-panel-hover.spec.ts:6:7 › DC-137: Panel Card Hover Effects › Product cards have cursor pointer (retry #1) (11.5s)
+  ✘   22 [chromium] › e2e\tests\edge-case\DC-122-127-feedback-panel.spec.ts:7:7 › DC-122 to DC-127: Panel Feedback Visual › DC-123/DC-131: Save product triggers toast success (retry #1) (11.5s)
+  ✘   23 [chromium] › e2e\tests\edge-case\DC-077-078-form-fields-uploader.spec.ts:6:7 › DC-077: Form Fields Panel Styling › Input fields have border-radius 10px (retry #1) (11.5s)
+  ✓   46 [chromium] › e2e\tests\edge-case\NFR-031-032-responsive.spec.ts:13:7 › NFR-031: Mobile-first responsive (public site) › Mobile 375px: footer uses accordion pattern (993ms)
+  ✓   47 [chromium] › e2e\tests\edge-case\NFR-031-032-responsive.spec.ts:20:7 › NFR-031: Mobile-first responsive (public site) › Mobile 375px: WhatsApp FAB visible (1.1s)
+  ✘   28 [chromium] › e2e\tests\edge-case\DC-135-unsaved-changes-guard.spec.ts:6:7 › DC-135: Modal cambios sin guardar › formulario crear producto tiene campos editables (retry #1) (12.5s)
+  ✘   25 [chromium] › e2e\tests\edge-case\BVC-018-destructive-confirmation.spec.ts:6:7 › BVC-018: Acciones destructivas tienen confirmacion modal › admin productos tiene vista tarjetas y tabla (retry #1) (12.7s)
+  ✘   26 [chromium] › e2e\tests\edge-case\DC-146-kanban-mensajes.spec.ts:15:7 › DC-146: Kanban de mensajes layout y contenido › kanban tiene 3 columnas con conteos (retry #1) (12.7s)
+  ✘   27 [chromium] › e2e\tests\edge-case\DC-138-table-view-products.spec.ts:15:7 › DC-138: Hover filas tabla panel y estructura tabla productos › toggle de vista tarjetas a vista tabla funciona (retry #1) (12.6s)
+  ✓   52 [chromium] › e2e\tests\edge-case\NFR-031-032-responsive.spec.ts:26:7 › NFR-031: Mobile-first responsive (public site) › Desktop 1280px: full navigation visible (1.2s)
+  ✓   53 [chromium] › e2e\tests\edge-case\NFR-031-032-responsive.spec.ts:33:7 › NFR-031: Mobile-first responsive (public site) › Extreme small viewport 320px renders without overflow (999ms)
+  ✓   57 [chromium] › e2e\tests\edge-case\NFR-031-032-responsive.spec.ts:51:7 › NFR-032: Panel desktop-first responsive › Desktop: sidebar visible with navigation items (2.5s)
+  ✘   42 [chromium] › e2e\tests\edge-case\NFR-017-xss-security.spec.ts:97:7 › NFR-017: XSS Protection and Security Headers › XSS payload in product form does not execute (10.9s)
+  ✓   59 [chromium] › e2e\tests\edge-case\NFR-031-032-responsive.spec.ts:57:7 › NFR-032: Panel desktop-first responsive › Desktop: dashboard summary cards visible (3.1s)
+  ✘   45 [chromium] › e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:14:7 › UX-043: Product Form Structure and Edge Cases › Form has all 6 required sections (10.9s)
+  ✓   61 [chromium] › e2e\tests\edge-case\UX-075-search-overlay.spec.ts:7:7 › UX-075: Search Overlay Edge Cases › Search overlay opens with auto-focus on click (1.4s)
+  ✓   62 [chromium] › e2e\tests\edge-case\UX-075-search-overlay.spec.ts:14:7 › UX-075: Search Overlay Edge Cases › Minimum character hint shown for 0-2 characters (1.1s)
+  ✘   48 [chromium] › e2e\tests\edge-case\DC-090-092-panel-responsive.spec.ts:18:7 › DC-091: Panel Forms Responsive › Product form renders in mobile viewport with single column (11.0s)
+  ✘   49 [chromium] › e2e\tests\edge-case\DC-137-138-panel-hover.spec.ts:19:7 › DC-137: Panel Card Hover Effects › Dashboard category cards have hover cursor (11.2s)
+  ✘   50 [chromium] › e2e\tests\edge-case\DC-077-078-form-fields-uploader.spec.ts:19:7 › DC-077: Form Fields Panel Styling › Input fields have label above (11.2s)
+  ✘   51 [chromium] › e2e\tests\edge-case\DC-122-127-feedback-panel.spec.ts:26:7 › DC-122 to DC-127: Panel Feedback Visual › DC-133: Modal confirm layout verification (11.3s)
+  ✘   64 [chromium] › e2e\tests\edge-case\UX-075-search-overlay.spec.ts:29:7 › UX-075: Search Overlay Edge Cases › Results appear for 3+ characters (2.0s)
+  ✘   56 [chromium] › e2e\tests\edge-case\DC-146-kanban-mensajes.spec.ts:26:7 › DC-146: Kanban de mensajes layout y contenido › columna NUEVOS tiene 3 cards (12.5s)
+  ✘   69 [chromium] › e2e\tests\edge-case\UX-075-search-overlay.spec.ts:29:7 › UX-075: Search Overlay Edge Cases › Results appear for 3+ characters (retry #1) (2.0s)
+  ✘   60 [chromium] › e2e\tests\edge-case\NFR-017-xss-security.spec.ts:97:7 › NFR-017: XSS Protection and Security Headers › XSS payload in product form does not execute (retry #1) (11.0s)
+  ✓   71 [chromium] › e2e\tests\edge-case\UX-075-search-overlay.spec.ts:37:7 › UX-075: Search Overlay Edge Cases › XSS in search input does not execute script (2.4s)
+  ✘   63 [chromium] › e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:14:7 › UX-043: Product Form Structure and Edge Cases › Form has all 6 required sections (retry #1) (11.0s)
+  ✓   72 [chromium] › e2e\tests\edge-case\UX-075-search-overlay.spec.ts:49:7 › UX-075: Search Overlay Edge Cases › Close search overlay with close button (1.4s)
+  ✓   73 [chromium] › e2e\tests\edge-case\NFR-017-xss-security.spec.ts:115:7 › NFR-017: XSS Protection and Security Headers › Advanced XSS payloads in contact form do not execute (2.2s)
+  ✘   65 [chromium] › e2e\tests\edge-case\DC-090-092-panel-responsive.spec.ts:18:7 › DC-091: Panel Forms Responsive › Product form renders in mobile viewport with single column (retry #1) (11.0s)
+  ✘   66 [chromium] › e2e\tests\edge-case\DC-137-138-panel-hover.spec.ts:19:7 › DC-137: Panel Card Hover Effects › Dashboard category cards have hover cursor (retry #1) (11.0s)
+  ✘   67 [chromium] › e2e\tests\edge-case\DC-077-078-form-fields-uploader.spec.ts:19:7 › DC-077: Form Fields Panel Styling › Input fields have label above (retry #1) (11.1s)
+  ✘   74 [chromium] › e2e\tests\edge-case\UX-076-catalog-filters.spec.ts:7:7 › UX-076: Catalog Filters Edge Cases › Filter by category updates product count and URL (2.9s)
+  ✓   76 [chromium] › e2e\tests\edge-case\NFR-017-xss-security.spec.ts:147:7 › NFR-017: XSS Protection and Security Headers › SQL injection payload in form fields does not cause errors (1.6s)
+  ✘   68 [chromium] › e2e\tests\edge-case\DC-122-127-feedback-panel.spec.ts:26:7 › DC-122 to DC-127: Panel Feedback Visual › DC-133: Modal confirm layout verification (retry #1) (11.2s)
+  ✓   77 [chromium] › e2e\tests\edge-case\NFR-017-xss-security.spec.ts:168:7 › NFR-017: XSS Protection and Security Headers › CSP script-src blocks inline script execution (460ms)
+  ✓   79 [chromium] › e2e\tests\edge-case\NFR-017-xss-security.spec.ts:182:7 › NFR-017: XSS Protection and Security Headers › No CRM or tracking scripts in JS bundle (210ms)
+  ✓   80 [chromium] › e2e\tests\edge-case\UX-078-pagination.spec.ts:7:7 › UX-078: Pagination Edge Cases › Pagination shows correct info text (3.0s)
+  ✘   70 [chromium] › e2e\tests\edge-case\DC-146-kanban-mensajes.spec.ts:26:7 › DC-146: Kanban de mensajes layout y contenido › columna NUEVOS tiene 3 cards (retry #1) (12.2s)
+  ✘   83 [chromium] › e2e\tests\edge-case\UX-076-catalog-filters.spec.ts:7:7 › UX-076: Catalog Filters Edge Cases › Filter by category updates product count and URL (retry #1) (3.2s)
+  ✘   87 [chromium] › e2e\tests\edge-case\UX-076-catalog-filters.spec.ts:16:7 › UX-076: Catalog Filters Edge Cases › Filter pills appear with remove button (1.4s)
+  ✘   54 [chromium] › e2e\tests\edge-case\DC-135-unsaved-changes-guard.spec.ts:19:7 › DC-135: Modal cambios sin guardar › XSS payload es aceptado como texto plano en campo nombre (30.1s)
+  ✓   85 [chromium] › e2e\tests\edge-case\UX-078-pagination.spec.ts:12:7 › UX-078: Pagination Edge Cases › Previous button disabled on first page (4.7s)
+  ✘   55 [chromium] › e2e\tests\edge-case\BVC-018-destructive-confirmation.spec.ts:17:7 › BVC-018: Acciones destructivas tienen confirmacion modal › vista tabla tiene acciones Ver y Editar por producto (30.1s)
+  ✘   58 [chromium] › e2e\tests\edge-case\DC-138-table-view-products.spec.ts:25:7 › DC-138: Hover filas tabla panel y estructura tabla productos › tabla tiene headers UPPERCASE correctos (30.1s)
+  ✘   75 [chromium] › e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:23:7 › UX-043: Product Form Structure and Edge Cases › Form has Cancel and Save buttons in toolbar (11.4s)
+  ✓   88 [chromium] › e2e\tests\edge-case\UX-078-pagination.spec.ts:18:7 › UX-078: Pagination Edge Cases › Next button navigates to page 2 (2.1s)
+  ✘   89 [chromium] › e2e\tests\edge-case\UX-076-catalog-filters.spec.ts:16:7 › UX-076: Catalog Filters Edge Cases › Filter pills appear with remove button (retry #1) (1.4s)
+  ✘   78 [chromium] › e2e\tests\edge-case\DC-090-092-panel-responsive.spec.ts:33:7 › DC-092: Panel Kanban Responsive › Messages page renders in mobile viewport (11.1s)
+  ✘   81 [chromium] › e2e\tests\edge-case\DC-137-138-panel-hover.spec.ts:34:7 › DC-138: Table Row Hover Effects › Product list in table view has rows (11.1s)
+  ✓   93 [chromium] › e2e\tests\edge-case\UX-078-pagination.spec.ts:24:7 › UX-078: Pagination Edge Cases › Page numbers are clickable (2.1s)
+  ✘   82 [chromium] › e2e\tests\edge-case\DC-077-078-form-fields-uploader.spec.ts:28:7 › DC-077: Form Fields Panel Styling › Focus ring shows 2px brand-primary (#008DC9) on input (11.2s)
+  ✘   84 [chromium] › e2e\tests\edge-case\DC-122-127-feedback-panel.spec.ts:49:7 › DC-122 to DC-127: Panel Feedback Visual › DC-119: Form validation shows red border and message (11.2s)
+  ✘   95 [chromium] › e2e\tests\edge-case\UX-076-catalog-filters.spec.ts:23:7 › UX-076: Catalog Filters Edge Cases › Clear filters button resets all filters (2.3s)
+  ✓   96 [chromium] › e2e\tests\edge-case\UX-081-cta-solicitar-info.spec.ts:7:7 › UX-081: CTA Solicitar Informacion › CTA navigates to contact with product query param (2.9s)
+  ✓  101 [chromium] › e2e\tests\edge-case\UX-081-cta-solicitar-info.spec.ts:13:7 › UX-081: CTA Solicitar Informacion › Sticky bar also has Solicitar informacion CTA (2.3s)
+  ✘   86 [chromium] › e2e\tests\edge-case\DC-146-kanban-mensajes.spec.ts:32:7 › DC-146: Kanban de mensajes layout y contenido › columna EN PROCESO tiene 1 card (12.2s)
+  ✘  102 [chromium] › e2e\tests\edge-case\UX-076-catalog-filters.spec.ts:23:7 › UX-076: Catalog Filters Edge Cases › Clear filters button resets all filters (retry #1) (2.1s)
+  ✓  103 [chromium] › e2e\tests\edge-case\UX-082-cta-whatsapp.spec.ts:7:7 › UX-082: CTA WhatsApp Contextual › WhatsApp CTA on product detail has contextual message (2.6s)
+  ✓  105 [chromium] › e2e\tests\edge-case\UX-076-catalog-filters.spec.ts:32:7 › UX-076: Catalog Filters Edge Cases › Adaptive filters appear for category (Familia for Farmacos) (1.3s)
+  ✓  106 [chromium] › e2e\tests\edge-case\UX-082-cta-whatsapp.spec.ts:17:7 › UX-082: CTA WhatsApp Contextual › WhatsApp FAB is visible on all pages (1.5s)
+  ✘   94 [chromium] › e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:23:7 › UX-043: Product Form Structure and Edge Cases › Form has Cancel and Save buttons in toolbar (retry #1) (11.0s)
+  ✘  107 [chromium] › e2e\tests\edge-case\UX-076-catalog-filters.spec.ts:44:7 › UX-076: Catalog Filters Edge Cases › Brand dropdown filters adaptively when Farmacos selected (BUG-011 fix) (1.2s)
+  ✘   97 [chromium] › e2e\tests\edge-case\DC-090-092-panel-responsive.spec.ts:33:7 › DC-092: Panel Kanban Responsive › Messages page renders in mobile viewport (retry #1) (11.1s)
+  ✓  108 [chromium] › e2e\tests\edge-case\UX-083-084-085-product-interactions.spec.ts:7:7 › UX-083: PDF Download CTA › Product with PDF shows download button (2.8s)
+  ✘   98 [chromium] › e2e\tests\edge-case\DC-137-138-panel-hover.spec.ts:34:7 › DC-138: Table Row Hover Effects › Product list in table view has rows (retry #1) (11.0s)
+  ✘  110 [chromium] › e2e\tests\edge-case\UX-076-catalog-filters.spec.ts:44:7 › UX-076: Catalog Filters Edge Cases › Brand dropdown filters adaptively when Farmacos selected (BUG-011 fix) (retry #1) (1.3s)
+  ✘   99 [chromium] › e2e\tests\edge-case\DC-077-078-form-fields-uploader.spec.ts:28:7 › DC-077: Form Fields Panel Styling › Focus ring shows 2px brand-primary (#008DC9) on input (retry #1) (11.2s)
+  ✘  100 [chromium] › e2e\tests\edge-case\DC-122-127-feedback-panel.spec.ts:49:7 › DC-122 to DC-127: Panel Feedback Visual › DC-119: Form validation shows red border and message (retry #1) (11.1s)
+  ✓  111 [chromium] › e2e\tests\edge-case\UX-083-084-085-product-interactions.spec.ts:16:7 › UX-084: Category Blocks CTA Navigation › Home category block CTA navigates to filtered catalog (1.3s)
+  ✓  113 [chromium] › e2e\tests\edge-case\UX-083-084-085-product-interactions.spec.ts:22:7 › UX-084: Category Blocks CTA Navigation › Alimentos category block CTA navigates correctly (1.6s)
+  ✓  114 [chromium] › e2e\tests\edge-case\UX-090-contact-form-validation.spec.ts:12:7 › UX-090: Contact Form Validation Edge Cases › Empty form shows required field errors (1.4s)
+  ✓  112 [chromium] › e2e\tests\edge-case\UX-086-089-home-interactions.spec.ts:7:7 › UX-086: Brand Logos Home › Brand logos are clickable and navigate to brand page (3.2s)
+  ✓  119 [chromium] › e2e\tests\edge-case\UX-090-contact-form-validation.spec.ts:17:7 › UX-090: Contact Form Validation Edge Cases › Page does NOT navigate away on empty submit (BUG-012 fix) (1.5s)
+  ✓  117 [chromium] › e2e\tests\edge-case\UX-091-distributor-form-spanish.spec.ts:6:7 › UX-091: Distributor Form Labels in Spanish › All form labels are in Spanish on /es/distribuidores (2.1s)
+  ✓  118 [chromium] › e2e\tests\edge-case\UX-083-084-085-product-interactions.spec.ts:28:7 › UX-084: Category Blocks CTA Navigation › Equipos category block CTA navigates correctly (2.2s)
+  ✓  115 [chromium] › e2e\tests\edge-case\UX-076-catalog-filters.spec.ts:69:7 › UX-076: Catalog Filters Edge Cases › Pagination updates with filters (3.0s)
+  ✓  121 [chromium] › e2e\tests\edge-case\UX-090-contact-form-validation.spec.ts:24:7 › UX-090: Contact Form Validation Edge Cases › Honeypot field is present but hidden (1.2s)
+  ✓  122 [chromium] › e2e\tests\edge-case\UX-091-distributor-form-spanish.spec.ts:22:7 › UX-091: Distributor Form Labels in Spanish › No English labels remain in Spanish route (1.3s)
+  ✘  124 [chromium] › e2e\tests\edge-case\UX-091-distributor-form-validation.spec.ts:12:7 › UX-091: Distributor Form Validation and Language › Page headings are in Spanish on /es/ route (BUG-008 partial fix) (1.4s)
+  ✘  104 [chromium] › e2e\tests\edge-case\DC-146-kanban-mensajes.spec.ts:32:7 › DC-146: Kanban de mensajes layout y contenido › columna EN PROCESO tiene 1 card (retry #1) (12.6s)
+  ✓  123 [chromium] › e2e\tests\edge-case\UX-083-084-085-product-interactions.spec.ts:37:7 › UX-085: Featured Products Carousel › Carousel has navigation arrows (2.2s)
+  ✓  126 [chromium] › e2e\tests\edge-case\UX-091-distributor-form-spanish.spec.ts:34:7 › UX-091: Distributor Form Labels in Spanish › Empty submit shows validation errors in Spanish (1.7s)
+  ✓  125 [chromium] › e2e\tests\edge-case\UX-090-contact-form-validation.spec.ts:30:7 › UX-090: Contact Form Validation Edge Cases › XSS in name field does not execute (2.6s)
+  ✓  129 [chromium] › e2e\tests\edge-case\UX-091-distributor-form-spanish.spec.ts:47:7 › UX-091: Distributor Form Labels in Spanish › Spanish placeholders are correct (1.4s)
+  ✘  128 [chromium] › e2e\tests\edge-case\UX-091-distributor-form-validation.spec.ts:12:7 › UX-091: Distributor Form Validation and Language › Page headings are in Spanish on /es/ route (BUG-008 partial fix) (retry #1) (1.5s)
+  ✓  127 [chromium] › e2e\tests\edge-case\UX-083-084-085-product-interactions.spec.ts:43:7 › UX-085: Featured Products Carousel › Carousel card clicks navigate to product detail (2.4s)
+  ✘  109 [chromium] › e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:28:7 › UX-043: Product Form Structure and Edge Cases › Category selector has 3 cards (Farmacos, Alimentos, Equipos) (11.1s)
+  ✓  131 [chromium] › e2e\tests\edge-case\UX-090-contact-form-validation.spec.ts:39:7 › UX-090: Contact Form Validation Edge Cases › Form has required fields: Nombre, Correo, Tipo consulta, Mensaje (1.4s)
+  ✘  120 [chromium] › e2e\tests\edge-case\UX-086-089-home-interactions.spec.ts:12:7 › UX-086: Brand Logos Home › 8 brand logos are displayed (6.1s)
+  ✓  132 [chromium] › e2e\tests\edge-case\UX-092-language-selector.spec.ts:7:7 › UX-092: Language Selector › Language selector visible in header (1.1s)
+  ✓  134 [chromium] › e2e\tests\edge-case\UX-090-contact-form-validation.spec.ts:46:7 › UX-090: Contact Form Validation Edge Cases › Optional fields are present (1.2s)
+  ✓  135 [chromium] › e2e\tests\edge-case\UX-092-language-selector.spec.ts:12:7 › UX-092: Language Selector › Language selector visible in footer (976ms)
+  ✘  133 [chromium] › e2e\tests\edge-case\UX-095-096-card-hover.spec.ts:7:7 › UX-095/UX-096: Product and Brand Card Hover › Product cards have links that navigate to product detail (2.9s)
+  ✓  137 [chromium] › e2e\tests\edge-case\UX-090-contact-form-validation.spec.ts:51:7 › UX-090: Contact Form Validation Edge Cases › Tipo de consulta combobox has correct options (1.4s)
+  ✘  116 [chromium] › e2e\tests\edge-case\DC-077-078-form-fields-uploader.spec.ts:55:7 › DC-078: Image Uploader Styling › Image upload zone has dashed border (11.2s)
+  ✘   90 [chromium] › e2e\tests\edge-case\DC-135-unsaved-changes-guard.spec.ts:19:7 › DC-135: Modal cambios sin guardar › XSS payload es aceptado como texto plano en campo nombre (retry #1) (30.1s)
+  ✓  141 [chromium] › e2e\tests\edge-case\UX-090-contact-form-validation.spec.ts:62:7 › UX-090: Contact Form Validation Edge Cases › Page does NOT navigate when selecting combobox option (BUG-012 fix) (2.2s)
+  ✘   91 [chromium] › e2e\tests\edge-case\BVC-018-destructive-confirmation.spec.ts:17:7 › BVC-018: Acciones destructivas tienen confirmacion modal › vista tabla tiene acciones Ver y Editar por producto (retry #1) (30.1s)
+  ✘   92 [chromium] › e2e\tests\edge-case\DC-138-table-view-products.spec.ts:25:7 › DC-138: Hover filas tabla panel y estructura tabla productos › tabla tiene headers UPPERCASE correctos (retry #1) (30.1s)
+  ✓  143 [chromium] › e2e\tests\edge-case\UX-090-contact-form-validation.spec.ts:71:7 › UX-090: Contact Form Validation Edge Cases › SQL injection in fields does not cause errors (1.4s)
+  ✘  142 [chromium] › e2e\tests\edge-case\UX-095-096-card-hover.spec.ts:7:7 › UX-095/UX-096: Product and Brand Card Hover › Product cards have links that navigate to product detail (retry #1) (3.2s)
+  ✓  145 [chromium] › e2e\tests\edge-case\UX-090-contact-form-validation.spec.ts:82:7 › UX-090: Contact Form Validation Edge Cases › Very long input in name field (1000 chars) (1.3s)
+  ✘  136 [chromium] › e2e\tests\edge-case\UX-091-distributor-form-validation.spec.ts:23:7 › UX-091: Distributor Form Validation and Language › Form labels should be in Spanish on /es/ route (BUG-E07 - currently fails) (6.5s)
+  ✘  138 [chromium] › e2e\tests\edge-case\UX-092-language-selector.spec.ts:17:7 › UX-092: Language Selector › Switching language changes URL prefix (6.5s)
+  ✘  140 [chromium] › e2e\tests\edge-case\UX-086-089-home-interactions.spec.ts:12:7 › UX-086: Brand Logos Home › 8 brand logos are displayed (retry #1) (6.5s)
+  ✓  149 [chromium] › e2e\tests\edge-case\UX-090-contact-form-validation.spec.ts:90:7 › UX-090: Contact Form Validation Edge Cases › Unicode and emoji in message field (1.3s)
+  ✘  130 [chromium] › e2e\tests\edge-case\DC-146-kanban-mensajes.spec.ts:36:7 › DC-146: Kanban de mensajes layout y contenido › columna ATENDIDOS tiene 8 cards (12.3s)
+  ✓  151 [chromium] › e2e\tests\edge-case\UX-090-contact-form-validation.spec.ts:96:7 › UX-090: Contact Form Validation Edge Cases › R3: Complete form submit with valid data shows success message (2.5s)
+  ✓  154 [chromium] › e2e\tests\edge-case\UX-086-089-home-interactions.spec.ts:21:7 › UX-089: CTA Fabricantes Home › CTA navigates to distribuidores page (1.6s)
+  ✘  139 [chromium] › e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:28:7 › UX-043: Product Form Structure and Edge Cases › Category selector has 3 cards (Farmacos, Alimentos, Equipos) (retry #1) (11.4s)
+  ✓  150 [chromium] › e2e\tests\edge-case\UX-095-096-card-hover.spec.ts:13:7 › UX-095/UX-096: Product and Brand Card Hover › Brand logos on home are clickable (4.2s)
+  ✓  156 [chromium] › e2e\tests\edge-case\UX-097-related-products.spec.ts:7:7 › UX-097: Related Products Section › Product detail shows "Tambien te puede interesar" section (3.0s)
+  ✘  160 [chromium] › e2e\tests\edge-case\UX-097-related-products.spec.ts:13:7 › UX-097: Related Products Section › Related products are from same category (980ms)
+  ✘  152 [chromium] › e2e\tests\edge-case\UX-091-distributor-form-validation.spec.ts:23:7 › UX-091: Distributor Form Validation and Language › Form labels should be in Spanish on /es/ route (BUG-E07 - currently fails) (retry #1) (6.3s)
+  ✓  158 [chromium] › e2e\tests\edge-case\UX-095-096-card-hover.spec.ts:19:7 › UX-095/UX-096: Product and Brand Card Hover › Product cards show "Ver producto" text (2.9s)
+  ✘  153 [chromium] › e2e\tests\edge-case\UX-092-language-selector.spec.ts:17:7 › UX-092: Language Selector › Switching language changes URL prefix (retry #1) (6.4s)
+  ✘  144 [chromium] › e2e\tests\edge-case\DC-077-078-form-fields-uploader.spec.ts:55:7 › DC-078: Image Uploader Styling › Image upload zone has dashed border (retry #1) (11.1s)
+  ✓  161 [chromium] › e2e\tests\edge-case\UX-098-toggle-card-table.spec.ts:15:7 › UX-098: Toggle Card/Table View in Admin › Product list has card and table view toggle buttons (2.6s)
+  ✘  162 [chromium] › e2e\tests\edge-case\UX-097-related-products.spec.ts:13:7 › UX-097: Related Products Section › Related products are from same category (retry #1) (1.3s)
+  ✓  163 [chromium] › e2e\tests\edge-case\UX-091-distributor-form-validation.spec.ts:38:7 › UX-091: Distributor Form Validation and Language › Empty form shows required field errors in Spanish (1.5s)
+  ✘  147 [chromium] › e2e\tests\edge-case\BVC-018-destructive-confirmation.spec.ts:32:7 › BVC-018: Acciones destructivas tienen confirmacion modal › admin marcas renderiza correctamente (12.3s)
+  ✓  164 [chromium] › e2e\tests\edge-case\UX-092-language-selector.spec.ts:23:7 › UX-092: Language Selector › Content changes to English after switching (2.3s)
+  ✓  168 [chromium] › e2e\tests\edge-case\UX-092-language-selector.spec.ts:28:7 › UX-092: Language Selector › Content changes to Spanish (2.0s)
+  ✘  157 [chromium] › e2e\tests\edge-case\DC-146-kanban-mensajes.spec.ts:36:7 › DC-146: Kanban de mensajes layout y contenido › columna ATENDIDOS tiene 8 cards (retry #1) (12.3s)
+  ✘  167 [chromium] › e2e\tests\edge-case\UX-091-distributor-form-validation.spec.ts:44:7 › UX-091: Distributor Form Validation and Language › Form has terms checkbox (currently in English) (6.2s)
+  ✘  159 [chromium] › e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:34:7 › UX-043: Product Form Structure and Edge Cases › Bilingual tabs present in description section (11.1s)
+  ✘  166 [chromium] › e2e\tests\edge-case\UX-098-toggle-card-table.spec.ts:21:7 › UX-098: Toggle Card/Table View in Admin › Table view toggle switches view (7.7s)
+  ✘  165 [chromium] › e2e\tests\edge-case\DC-077-078-form-fields-uploader.spec.ts:78:7 › DC-078: Image Uploader Styling › Upload zone has upload icon (11.2s)
+  ✘  170 [chromium] › e2e\tests\edge-case\BVC-018-destructive-confirmation.spec.ts:32:7 › BVC-018: Acciones destructivas tienen confirmacion modal › admin marcas renderiza correctamente (retry #1) (12.1s)
+  ✘  171 [chromium] › e2e\tests\edge-case\UX-100-103-product-form-interactions.spec.ts:12:7 › UX-100 to UX-103: Product Form Interactions Edge Cases › UX-100: Image drag-drop zone is visible and clickable (10.9s)
+  ✘  173 [chromium] › e2e\tests\edge-case\UX-091-distributor-form-validation.spec.ts:44:7 › UX-091: Distributor Form Validation and Language › Form has terms checkbox (currently in English) (retry #1) (6.3s)
+  ✘  175 [chromium] › e2e\tests\edge-case\UX-098-toggle-card-table.spec.ts:21:7 › UX-098: Toggle Card/Table View in Admin › Table view toggle switches view (retry #1) (7.6s)
+  ✓  179 [chromium] › e2e\tests\edge-case\UX-091-distributor-form-validation.spec.ts:48:7 › UX-091: Distributor Form Validation and Language › Honeypot field exists in distributor form (1.3s)
+  ✘  146 [chromium] › e2e\tests\edge-case\DC-135-unsaved-changes-guard.spec.ts:33:7 › DC-135: Modal cambios sin guardar › formulario sin cambios no deberia activar guard al navegar (30.1s)
+  ✘  148 [chromium] › e2e\tests\edge-case\DC-138-table-view-products.spec.ts:34:7 › DC-138: Hover filas tabla panel y estructura tabla productos › tabla muestra todos los 48 productos (30.1s)
+  ✓  180 [chromium] › e2e\tests\edge-case\UX-091-distributor-form-validation.spec.ts:54:7 › UX-091: Distributor Form Validation and Language › Submit button is in Spanish (1.2s)
+  ✘  172 [chromium] › e2e\tests\edge-case\DC-146-kanban-mensajes.spec.ts:53:7 › DC-146: Kanban de mensajes layout y contenido › cards tienen badges de tipo (12.3s)
+  ✘  174 [chromium] › e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:34:7 › UX-043: Product Form Structure and Edge Cases › Bilingual tabs present in description section (retry #1) (11.0s)
+  ✓  182 [chromium] › e2e\tests\edge-case\UX-091-distributor-form-validation.spec.ts:58:7 › UX-091: Distributor Form Validation and Language › Country dropdown has options (1.3s)
+  ✘  184 [chromium] › e2e\tests\edge-case\UX-091-distributor-form-validation.spec.ts:67:7 › UX-091: Distributor Form Validation and Language › XSS in company name is not executed (1.4s)
+  ✘  155 [chromium] › e2e\tests\edge-case\UX-090-contact-form-validation.spec.ts:108:7 › UX-090: Contact Form Validation Edge Cases › R3: Double submit does not cause errors (30.1s)
+  ✘  176 [chromium] › e2e\tests\edge-case\DC-077-078-form-fields-uploader.spec.ts:78:7 › DC-078: Image Uploader Styling › Upload zone has upload icon (retry #1) (11.0s)
+  ✘  188 [chromium] › e2e\tests\edge-case\UX-091-distributor-form-validation.spec.ts:67:7 › UX-091: Distributor Form Validation and Language › XSS in company name is not executed (retry #1) (1.5s)
+  ✘  178 [chromium] › e2e\tests\edge-case\UX-100-103-product-form-interactions.spec.ts:12:7 › UX-100 to UX-103: Product Form Interactions Edge Cases › UX-100: Image drag-drop zone is visible and clickable (retry #1) (11.1s)
+  ✘  177 [chromium] › e2e\tests\edge-case\BVC-018-destructive-confirmation.spec.ts:43:7 › BVC-018: Acciones destructivas tienen confirmacion modal › admin marcas muestra 12 marcas (12.4s)
+  ✘  181 [chromium] › e2e\tests\edge-case\UX-102-103-tabs-categories.spec.ts:14:7 › UX-102/UX-103: Tabs bilingues y seleccion categoria › UX-102: tabs Espanol y English son visibles (12.2s)
+  ✘  169 [chromium] › e2e\tests\edge-case\UX-100-101-drag-drop-zones.spec.ts:15:7 › UX-100/UX-101: Drag-drop zones para imagenes y PDF › UX-100: zona drag-drop de imagenes es visible (30.1s)
+  ✘  187 [chromium] › e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:39:7 › UX-043: Product Form Structure and Edge Cases › Image upload zone has dashed border and instructions (11.0s)
+  ✘  186 [chromium] › e2e\tests\edge-case\DC-146-kanban-mensajes.spec.ts:53:7 › DC-146: Kanban de mensajes layout y contenido › cards tienen badges de tipo (retry #1) (12.2s)
+  ✘  190 [chromium] › e2e\tests\edge-case\DC-077-078-form-fields-uploader.spec.ts:88:7 › DC-078: Image Uploader Styling › Upload zone shows format restriction text (11.1s)
+  ✘  192 [chromium] › e2e\tests\edge-case\UX-100-103-product-form-interactions.spec.ts:21:7 › UX-100 to UX-103: Product Form Interactions Edge Cases › UX-101: PDF drag-drop zone is visible (11.1s)
+  ✘  193 [chromium] › e2e\tests\edge-case\BVC-018-destructive-confirmation.spec.ts:43:7 › BVC-018: Acciones destructivas tienen confirmacion modal › admin marcas muestra 12 marcas (retry #1) (12.1s)
+  ✘  194 [chromium] › e2e\tests\edge-case\UX-102-103-tabs-categories.spec.ts:14:7 › UX-102/UX-103: Tabs bilingues y seleccion categoria › UX-102: tabs Espanol y English son visibles (retry #1) (12.1s)
+  ✘  196 [chromium] › e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:39:7 › UX-043: Product Form Structure and Edge Cases › Image upload zone has dashed border and instructions (retry #1) (11.0s)
+  ✘  197 [chromium] › e2e\tests\edge-case\DC-146-kanban-mensajes.spec.ts:60:7 › DC-146: Kanban de mensajes layout y contenido › cards tienen preview de mensaje y tiempo relativo (12.1s)
+  ✘  198 [chromium] › e2e\tests\edge-case\DC-077-078-form-fields-uploader.spec.ts:88:7 › DC-078: Image Uploader Styling › Upload zone shows format restriction text (retry #1) (10.9s)
+  ✘  183 [chromium] › e2e\tests\edge-case\DC-135-unsaved-changes-guard.spec.ts:33:7 › DC-135: Modal cambios sin guardar › formulario sin cambios no deberia activar guard al navegar (retry #1) (30.1s)
+  ✘  185 [chromium] › e2e\tests\edge-case\DC-138-table-view-products.spec.ts:34:7 › DC-138: Hover filas tabla panel y estructura tabla productos › tabla muestra todos los 48 productos (retry #1) (30.1s)
+  ✘  199 [chromium] › e2e\tests\edge-case\UX-100-103-product-form-interactions.spec.ts:21:7 › UX-100 to UX-103: Product Form Interactions Edge Cases › UX-101: PDF drag-drop zone is visible (retry #1) (11.1s)
+  ✘  189 [chromium] › e2e\tests\edge-case\UX-090-contact-form-validation.spec.ts:108:7 › UX-090: Contact Form Validation Edge Cases › R3: Double submit does not cause errors (retry #1) (30.1s)
+  ✓  204 [chromium] › e2e\tests\edge-case\UX-104-112-panel-interactions.spec.ts:6:7 › UX-104: Brand Form › Brand create form renders with expected fields (6.0s)
+  ✘  200 [chromium] › e2e\tests\edge-case\BVC-018-destructive-confirmation.spec.ts:61:7 › BVC-018: Acciones destructivas tienen confirmacion modal › admin mensajes kanban permite ver detalle de mensaje (12.3s)
+  ✘  191 [chromium] › e2e\tests\edge-case\UX-091-distributor-form-validation.spec.ts:74:7 › UX-091: Distributor Form Validation and Language › Invalid email shows validation error (30.1s)
+  ✘  202 [chromium] › e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:44:7 › UX-043: Product Form Structure and Edge Cases › PDF upload zone has instructions (11.0s)
+  ✓  209 [chromium] › e2e\tests\edge-case\UX-090-contact-form-validation.spec.ts:124:7 › UX-090: Contact Form Validation Edge Cases › R3: Invalid email format shows validation error (1.8s)
+  ✘  201 [chromium] › e2e\tests\edge-case\UX-102-103-tabs-categories.spec.ts:19:7 › UX-102/UX-103: Tabs bilingues y seleccion categoria › UX-102: tab Espanol esta activo por defecto (12.2s)
+  ✘  203 [chromium] › e2e\tests\edge-case\DC-146-kanban-mensajes.spec.ts:60:7 › DC-146: Kanban de mensajes layout y contenido › cards tienen preview de mensaje y tiempo relativo (retry #1) (12.2s)
+  ✓  211 [chromium] › e2e\tests\edge-case\UX-113-dashboard-clickable.spec.ts:14:7 › UX-113: Dashboard Cards Clickable › Category cards navigate to filtered product list (3.2s)
+  ✘  195 [chromium] › e2e\tests\edge-case\UX-100-101-drag-drop-zones.spec.ts:15:7 › UX-100/UX-101: Drag-drop zones para imagenes y PDF › UX-100: zona drag-drop de imagenes es visible (retry #1) (30.1s)
+  ✓  215 [chromium] › e2e\tests\edge-case\UX-113-dashboard-clickable.spec.ts:19:7 › UX-113: Dashboard Cards Clickable › Messages "Ver todos" link navigates to messages (3.1s)
+  ✘  207 [chromium] › e2e\tests\edge-case\UX-100-103-product-form-interactions.spec.ts:26:7 › UX-100 to UX-103: Product Form Interactions Edge Cases › UX-102: Bilingual tabs switch between ES and EN (11.0s)
+  ✓  217 [chromium] › e2e\tests\edge-case\UX-113-dashboard-clickable.spec.ts:24:7 › UX-113: Dashboard Cards Clickable › Message items navigate to message detail (3.1s)
+  ✓  220 [chromium] › e2e\tests\edge-case\UX-114-crm-tracking-eliminated.spec.ts:6:7 › UX-114: CRM Tracking Script Eliminated › No CRM references in JavaScript bundle (515ms)
+  ✓  221 [chromium] › e2e\tests\edge-case\UX-114-crm-tracking-eliminated.spec.ts:23:7 › UX-114: CRM Tracking Script Eliminated › CSP header does not include crm-api.linkdesign.cr (93ms)
+  ✓  222 [chromium] › e2e\tests\edge-case\UX-114-crm-tracking-eliminated.spec.ts:31:7 › UX-114: CRM Tracking Script Eliminated › connect-src is restricted to self only (95ms)
+  ✘  210 [chromium] › e2e\tests\edge-case\BVC-018-destructive-confirmation.spec.ts:61:7 › BVC-018: Acciones destructivas tienen confirmacion modal › admin mensajes kanban permite ver detalle de mensaje (retry #1) (12.1s)
+  ✓  223 [chromium] › e2e\tests\edge-case\UX-114-crm-tracking-eliminated.spec.ts:41:7 › UX-114: CRM Tracking Script Eliminated › No console errors for crm-api in page load (1.7s)
+  ✘  213 [chromium] › e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:44:7 › UX-043: Product Form Structure and Edge Cases › PDF upload zone has instructions (retry #1) (11.0s)
+  ✓  224 [chromium] › e2e\tests\flow\UX-001-root-redirect.spec.ts:6:5 › UX-001: Root URL redirects to language-prefixed route (1.7s)
+  ✘  208 [chromium] › e2e\tests\edge-case\UX-104-112-panel-interactions.spec.ts:22:7 › UX-105: Categories Tags › Categories page renders in admin panel (15.9s)
+  ✘  214 [chromium] › e2e\tests\edge-case\UX-102-103-tabs-categories.spec.ts:19:7 › UX-102/UX-103: Tabs bilingues y seleccion categoria › UX-102: tab Espanol esta activo por defecto (retry #1) (12.2s)
+  ✓  227 [chromium] › e2e\tests\flow\UX-001-root-redirect.spec.ts:15:5 › UX-001: Spanish home page loads correctly at /es (2.0s)
+  ✘  216 [chromium] › e2e\tests\edge-case\DC-146-kanban-mensajes.spec.ts:68:7 › DC-146: Kanban de mensajes layout y contenido › cards son links navegables (12.1s)
+  ✓  225 [chromium] › e2e\tests\edge-case\UX-114-crm-tracking.spec.ts:7:7 › UX-114: CRM Tracking Edge Cases › CRM tracking API should not cause console errors (4.1s)
+  ✓  230 [chromium] › e2e\tests\flow\UX-001-root-redirect.spec.ts:23:5 › UX-001: English home page loads correctly at /en (2.0s)
+  ✓  232 [chromium] › e2e\tests\flow\UX-002-deep-linking-es.spec.ts:8:7 › UX-002: Deep linking rutas ES › catalogo farmacos via deep link (1.2s)
+  ✘  219 [chromium] › e2e\tests\edge-case\UX-100-103-product-form-interactions.spec.ts:26:7 › UX-100 to UX-103: Product Form Interactions Edge Cases › UX-102: Bilingual tabs switch between ES and EN (retry #1) (10.9s)
+  ✘  218 [chromium] › e2e\tests\edge-case\UX-100-101-drag-drop-zones.spec.ts:21:7 › UX-100/UX-101: Drag-drop zones para imagenes y PDF › UX-100: zona de imagenes muestra restricciones de formato (12.1s)
+  ✓  234 [chromium] › e2e\tests\flow\UX-002-deep-linking-es.spec.ts:14:7 › UX-002: Deep linking rutas ES › catalogo alimentos via deep link (1.8s)
+  ✓  237 [chromium] › e2e\tests\flow\UX-002-deep-linking-es.spec.ts:19:7 › UX-002: Deep linking rutas ES › catalogo equipos via deep link (2.0s)
+  ✓  231 [chromium] › e2e\tests\edge-case\UX-114-crm-tracking.spec.ts:25:7 › UX-114: CRM Tracking Edge Cases › CRM tracking should NOT cause navigation changes (6.2s)
+  ✘  205 [chromium] › e2e\tests\edge-case\DC-135-unsaved-changes-guard.spec.ts:49:7 › DC-135: Modal cambios sin guardar › escribir en campo deberia activar dirty state (30.1s)
+  ✓  238 [chromium] › e2e\tests\flow\UX-002-deep-linking-es.spec.ts:24:7 › UX-002: Deep linking rutas ES › marcas via deep link (1.2s)
+  ✘  206 [chromium] › e2e\tests\edge-case\DC-138-table-view-products.spec.ts:43:7 › DC-138: Hover filas tabla panel y estructura tabla productos › cada fila tiene acciones Ver y Editar (30.1s)
+  ✘  226 [chromium] › e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:48:7 › UX-043: Product Form Structure and Edge Cases › Configuration section has toggle switches (11.0s)
+  ✓  240 [chromium] › e2e\tests\flow\UX-002-deep-linking-es.spec.ts:29:7 › UX-002: Deep linking rutas ES › nosotros via deep link (1.3s)
+  ✓  242 [chromium] › e2e\tests\flow\UX-002-deep-linking-es.spec.ts:34:7 › UX-002: Deep linking rutas ES › distribuidores via deep link (1.3s)
+  ✓  239 [chromium] › e2e\tests\edge-case\UX-114-crm-tracking.spec.ts:34:7 › UX-114: CRM Tracking Edge Cases › CRM tracking should NOT be present in admin panel (3.9s)
+  ✓  245 [chromium] › e2e\tests\flow\UX-002-deep-linking-es.spec.ts:39:7 › UX-002: Deep linking rutas ES › contacto via deep link (1.3s)
+  ✘  247 [chromium] › e2e\tests\flow\UX-002-deep-linking-es.spec.ts:44:7 › UX-002: Deep linking rutas ES › catalogo general via deep link (1.3s)
+  ✘  233 [chromium] › e2e\tests\edge-case\DC-146-kanban-mensajes.spec.ts:68:7 › DC-146: Kanban de mensajes layout y contenido › cards son links navegables (retry #1) (12.5s)
+  ✘  212 [chromium] › e2e\tests\edge-case\UX-091-distributor-form-validation.spec.ts:74:7 › UX-091: Distributor Form Validation and Language › Invalid email shows validation error (retry #1) (30.1s)
+  ✘  228 [chromium] › e2e\tests\edge-case\UX-104-112-panel-interactions.spec.ts:22:7 › UX-105: Categories Tags › Categories page renders in admin panel (retry #1) (16.1s)
+  ✘  235 [chromium] › e2e\tests\edge-case\UX-100-103-product-form-interactions.spec.ts:43:7 › UX-100 to UX-103: Product Form Interactions Edge Cases › UX-103: Category cards have visual selection state (11.6s)
+  ✘  248 [chromium] › e2e\tests\flow\UX-002-deep-linking-es.spec.ts:44:7 › UX-002: Deep linking rutas ES › catalogo general via deep link (retry #1) (1.5s)
+  ✓  246 [chromium] › e2e\tests\edge-case\UX-114-crm-tracking.spec.ts:53:7 › UX-114: CRM Tracking Edge Cases › SPA should maintain current route without automatic redirects (5.9s)
+  ✓  250 [chromium] › e2e\tests\flow\UX-003-deep-linking-en.spec.ts:8:7 › UX-003: Deep linking rutas EN › EN brands via deep link (1.6s)
+  ✘  236 [chromium] › e2e\tests\edge-case\UX-100-101-drag-drop-zones.spec.ts:21:7 › UX-100/UX-101: Drag-drop zones para imagenes y PDF › UX-100: zona de imagenes muestra restricciones de formato (retry #1) (13.2s)
+  ✓  252 [chromium] › e2e\tests\flow\UX-005-008-header-footer.spec.ts:6:5 › UX-005: Public header has logo linked to home (2.0s)
+  ✓  255 [chromium] › e2e\tests\flow\UX-003-deep-linking-en.spec.ts:13:7 › UX-003: Deep linking rutas EN › EN catalog pharmaceuticals via deep link (1.4s)
+  ✓  257 [chromium] › e2e\tests\flow\UX-003-deep-linking-en.spec.ts:18:7 › UX-003: Deep linking rutas EN › EN about via deep link (1.3s)
+  ✓  256 [chromium] › e2e\tests\flow\UX-005-008-header-footer.spec.ts:15:5 › UX-005: Header has navigation links (1.7s)
+  ✘  244 [chromium] › e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:48:7 › UX-043: Product Form Structure and Edge Cases › Configuration section has toggle switches (retry #1) (11.0s)
+  ✓  259 [chromium] › e2e\tests\flow\UX-003-deep-linking-en.spec.ts:23:7 › UX-003: Deep linking rutas EN › EN distributors via deep link (1.4s)
+  ✓  260 [chromium] › e2e\tests\flow\UX-005-008-header-footer.spec.ts:29:5 › UX-005: Catalog submenu has 3 category links (1.9s)
+  ✓  261 [chromium] › e2e\tests\flow\UX-003-deep-linking-en.spec.ts:28:7 › UX-003: Deep linking rutas EN › EN contact via deep link (1.3s)
+  ✓  263 [chromium] › e2e\tests\flow\UX-005-008-header-footer.spec.ts:43:5 › UX-006: Search button opens search overlay (1.8s)
+  ✓  264 [chromium] › e2e\tests\flow\UX-009-whatsapp-fab.spec.ts:6:5 › UX-009: WhatsApp FAB is visible on home page (1.7s)
+  ✓  265 [chromium] › e2e\tests\flow\UX-005-008-header-footer.spec.ts:54:5 › UX-006: Language selector is present (1.7s)
+  ✓  266 [chromium] › e2e\tests\flow\UX-009-whatsapp-fab.spec.ts:14:5 › UX-009: WhatsApp FAB is visible on catalog page (1.5s)
+  ✓  267 [chromium] › e2e\tests\flow\UX-005-008-header-footer.spec.ts:63:5 › UX-007: No cart or account links in header (1.6s)
+  ✓  268 [chromium] › e2e\tests\flow\UX-009-whatsapp-fab.spec.ts:22:5 › UX-009: WhatsApp FAB is visible on contact page (1.6s)
+  ✘  249 [chromium] › e2e\tests\edge-case\DC-146-kanban-mensajes.spec.ts:74:7 › DC-146: Kanban de mensajes layout y contenido › toggle Vista Kanban / Vista Tabla existe (12.3s)
+  ✘  254 [chromium] › e2e\tests\flow\UX-004-deep-linking-admin.spec.ts:8:7 › UX-004: Deep linking rutas panel admin › admin dashboard via deep link (11.1s)
+  ✘  253 [chromium] › e2e\tests\edge-case\UX-100-103-product-form-interactions.spec.ts:43:7 › UX-100 to UX-103: Product Form Interactions Edge Cases › UX-103: Category cards have visual selection state (retry #1) (11.2s)
+  ✓  269 [chromium] › e2e\tests\flow\UX-005-008-header-footer.spec.ts:73:5 › UX-008: Footer has logo, navigation, contact info, social links, copyright (1.9s)
+  ✘  229 [chromium] › e2e\tests\edge-case\UX-102-103-tabs-categories.spec.ts:29:7 › UX-102/UX-103: Tabs bilingues y seleccion categoria › UX-102: click en tab English cambia campos (30.1s)
+  ✓  270 [chromium] › e2e\tests\flow\UX-009-whatsapp-fab.spec.ts:30:5 › UX-009: WhatsApp FAB is visible on distributors page (1.8s)
+  ✓  271 [chromium] › e2e\tests\flow\UX-009-whatsapp-pages.spec.ts:8:7 › UX-009: WhatsApp FAB en todas las paginas › WhatsApp visible en /es/nosotros (1.8s)
+  ✘  258 [chromium] › e2e\tests\edge-case\UX-100-101-drag-drop-zones.spec.ts:25:7 › UX-100/UX-101: Drag-drop zones para imagenes y PDF › UX-100: seccion imagenes tiene heading correcto (12.1s)
+  ✘  251 [chromium] › e2e\tests\edge-case\UX-104-112-panel-interactions.spec.ts:32:7 › UX-109: Messages Kanban › Messages page renders with message list (16.1s)
+  ✘  262 [chromium] › e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:56:7 › UX-043: Product Form Structure and Edge Cases › Species tags pre-populated with defaults (11.0s)
+  ✓  277 [chromium] › e2e\tests\flow\UX-009-whatsapp-pages.spec.ts:14:7 › UX-009: WhatsApp FAB en todas las paginas › WhatsApp visible en /es/marcas (3.0s)
+  ✓  280 [chromium] › e2e\tests\flow\UX-009-whatsapp-pages.spec.ts:20:7 › UX-009: WhatsApp FAB en todas las paginas › WhatsApp visible en /es/catalogo/farmacos (1.9s)
+  ✘  241 [chromium] › e2e\tests\edge-case\DC-135-unsaved-changes-guard.spec.ts:49:7 › DC-135: Modal cambios sin guardar › escribir en campo deberia activar dirty state (retry #1) (30.1s)
+  ✘  273 [chromium] › e2e\tests\flow\UX-010-011-admin-layout.spec.ts:6:5 › UX-010: Admin sidebar has all navigation modules (9.0s)
+  ✓  282 [chromium] › e2e\tests\flow\UX-009-whatsapp-pages.spec.ts:26:7 › UX-009: WhatsApp FAB en todas las paginas › WhatsApp visible en /es/marcas/zoetis (2.8s)
+  ✘  243 [chromium] › e2e\tests\edge-case\DC-138-table-view-products.spec.ts:43:7 › DC-138: Hover filas tabla panel y estructura tabla productos › cada fila tiene acciones Ver y Editar (retry #1) (30.1s)
+  ✓  283 [chromium] › e2e\tests\flow\UX-012-404-page.spec.ts:6:5 › UX-012: Pagina 404 estilizada para URL invalida (1.1s)
+  ✓  285 [chromium] › e2e\tests\flow\UX-012-404-page.spec.ts:14:5 › UX-012: 404 page links work correctly (1.1s)
+  ✘  275 [chromium] › e2e\tests\edge-case\UX-100-103-product-form-interactions.spec.ts:56:7 › UX-100 to UX-103: Product Form Interactions Edge Cases › UX-103: Selecting different category may show conditional fields (11.6s)
+  ✘  274 [chromium] › e2e\tests\flow\UX-004-deep-linking-admin.spec.ts:8:7 › UX-004: Deep linking rutas panel admin › admin dashboard via deep link (retry #1) (11.7s)
+  ✘  272 [chromium] › e2e\tests\edge-case\DC-146-kanban-mensajes.spec.ts:74:7 › DC-146: Kanban de mensajes layout y contenido › toggle Vista Kanban / Vista Tabla existe (retry #1) (12.9s)
+  ✘  288 [chromium] › e2e\tests\flow\UX-013-search-contact-flow.spec.ts:4:5 › UX-013: Search product -> view detail -> request info -> contact form pre-populated (3.2s)
+  ✓  291 [chromium] › e2e\tests\flow\UX-014-distributor-labels-es.spec.ts:4:5 › UX-014: Distributor form labels are all in Spanish on /es/ route (1.5s)
+  ✘  281 [chromium] › e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:56:7 › UX-043: Product Form Structure and Edge Cases › Species tags pre-populated with defaults (retry #1) (11.3s)
+  ✘  278 [chromium] › e2e\tests\edge-case\UX-100-101-drag-drop-zones.spec.ts:25:7 › UX-100/UX-101: Drag-drop zones para imagenes y PDF › UX-100: seccion imagenes tiene heading correcto (retry #1) (13.3s)
+  ✘  286 [chromium] › e2e\tests\flow\UX-010-011-admin-layout.spec.ts:6:5 › UX-010: Admin sidebar has all navigation modules (retry #1) (8.8s)
+  ✘  292 [chromium] › e2e\tests\flow\UX-013-search-contact-flow.spec.ts:4:5 › UX-013: Search product -> view detail -> request info -> contact form pre-populated (retry #1) (3.4s)
+  ✘  279 [chromium] › e2e\tests\edge-case\UX-104-112-panel-interactions.spec.ts:32:7 › UX-109: Messages Kanban › Messages page renders with message list (retry #1) (16.5s)
+  ✘  284 [chromium] › e2e\tests\edge-case\DC-135-unsaved-changes-guard.spec.ts:78:7 › DC-135: Modal cambios sin guardar › botones Cancelar y Guardar producto existen (12.2s)
+  ✓  297 [chromium] › e2e\tests\flow\UX-016-catalogo-filtrado.spec.ts:8:7 › UX-016: Catalogo filtrado via categoria › home category block CTA links to /es/catalogo/farmacos (4.1s)
+  ✘  289 [chromium] › e2e\tests\edge-case\UX-100-103-product-form-interactions.spec.ts:56:7 › UX-100 to UX-103: Product Form Interactions Edge Cases › UX-103: Selecting different category may show conditional fields (retry #1) (11.1s)
+  ✘  290 [chromium] › e2e\tests\flow\UX-004-deep-linking-admin.spec.ts:13:7 › UX-004: Deep linking rutas panel admin › admin productos via deep link (11.1s)
+  ✓  300 [chromium] › e2e\tests\flow\UX-016-catalogo-filtrado.spec.ts:17:7 › UX-016: Catalogo filtrado via categoria › catalogo farmacos has category-specific filters (2.2s)
+  ✘  293 [chromium] › e2e\tests\flow\UX-015-admin-crear-producto.spec.ts:8:7 › UX-015: Admin crear producto E2E › formulario crear producto tiene 5 secciones (11.2s)
+  ✘  298 [chromium] › e2e\tests\edge-case\UX-104-112-panel-interactions.spec.ts:41:7 › UX-111: Message Detail › Message detail page renders (6.0s)
+  ✘  294 [chromium] › e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:61:7 › UX-043: Product Form Structure and Edge Cases › Empty form submit shows validation - name field required (11.0s)
+  ✘  296 [chromium] › e2e\tests\flow\UX-010-011-admin-layout.spec.ts:28:5 › UX-010: Mensajes has badge with count (8.7s)
+  ✓  303 [chromium] › e2e\tests\flow\UX-016-catalogo-filtrado.spec.ts:28:7 › UX-016: Catalogo filtrado via categoria › catalogo farmacos shows 27 products (3.0s)
+  ✘  295 [chromium] › e2e\tests\edge-case\UX-100-101-drag-drop-zones.spec.ts:30:7 › UX-100/UX-101: Drag-drop zones para imagenes y PDF › UX-100: seccion imagenes tiene descripcion (12.2s)
+  ✘  276 [chromium] › e2e\tests\edge-case\UX-102-103-tabs-categories.spec.ts:29:7 › UX-102/UX-103: Tabs bilingues y seleccion categoria › UX-102: click en tab English cambia campos (retry #1) (30.1s)
+  ✓  306 [chromium] › e2e\tests\flow\UX-018-catalogo-filtros-adaptativos.spec.ts:8:7 › UX-018: Catalogo filtros adaptativos › farmacos has marca filter with pharma brands only (1.5s)
+  ✘  310 [chromium] › e2e\tests\flow\UX-018-catalogo-filtros-adaptativos.spec.ts:19:7 › UX-018: Catalogo filtros adaptativos › catalogo general has categoria filter (1.4s)
+  ✘  312 [chromium] › e2e\tests\flow\UX-018-catalogo-filtros-adaptativos.spec.ts:19:7 › UX-018: Catalogo filtros adaptativos › catalogo general has categoria filter (retry #1) (1.3s)
+  ✘  305 [chromium] › e2e\tests\edge-case\UX-104-112-panel-interactions.spec.ts:41:7 › UX-111: Message Detail › Message detail page renders (retry #1) (6.1s)
+  ✘  299 [chromium] › e2e\tests\edge-case\DC-135-unsaved-changes-guard.spec.ts:78:7 › DC-135: Modal cambios sin guardar › botones Cancelar y Guardar producto existen (retry #1) (12.1s)
+  ✘  301 [chromium] › e2e\tests\edge-case\UX-100-103-product-form-interactions.spec.ts:73:7 › UX-100 to UX-103: Product Form Interactions Edge Cases › Species tags can be removed (11.1s)
+  ✘  302 [chromium] › e2e\tests\flow\UX-004-deep-linking-admin.spec.ts:13:7 › UX-004: Deep linking rutas panel admin › admin productos via deep link (retry #1) (11.1s)
+  ✘  313 [chromium] › e2e\tests\flow\UX-025-027-catalogo-detalle.spec.ts:8:7 › UX-025: Catalogo paginacion › catalogo shows pagination with 12 per page (1.5s)
+  ✘  315 [chromium] › e2e\tests\flow\UX-026-catalogo-categoria.spec.ts:8:7 › UX-026: Catalogo por categoria › farmacos muestra breadcrumb y filtros especificos (1.7s)
+  ✘  304 [chromium] › e2e\tests\flow\UX-015-admin-crear-producto.spec.ts:8:7 › UX-015: Admin crear producto E2E › formulario crear producto tiene 5 secciones (retry #1) (11.0s)
+  ✘  308 [chromium] › e2e\tests\flow\UX-010-011-admin-layout.spec.ts:28:5 › UX-010: Mensajes has badge with count (retry #1) (8.6s)
+  ✘  318 [chromium] › e2e\tests\flow\UX-025-027-catalogo-detalle.spec.ts:8:7 › UX-025: Catalogo paginacion › catalogo shows pagination with 12 per page (retry #1) (1.3s)
+  ✘  287 [chromium] › e2e\tests\edge-case\DC-138-table-view-products.spec.ts:52:7 › DC-138: Hover filas tabla panel y estructura tabla productos › filas tienen datos correctos (nombre, marca, categoria, estado) (30.1s)
+  ✘  307 [chromium] › e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:61:7 › UX-043: Product Form Structure and Edge Cases › Empty form submit shows validation - name field required (retry #1) (11.1s)
+  ✘  319 [chromium] › e2e\tests\flow\UX-026-catalogo-categoria.spec.ts:8:7 › UX-026: Catalogo por categoria › farmacos muestra breadcrumb y filtros especificos (retry #1) (1.6s)
+  ✓  314 [chromium] › e2e\tests\edge-case\UX-104-112-panel-interactions.spec.ts:52:7 › UX-112: Team Management › Content/Equipo page renders in admin (6.1s)
+  ✘  309 [chromium] › e2e\tests\edge-case\UX-100-101-drag-drop-zones.spec.ts:30:7 › UX-100/UX-101: Drag-drop zones para imagenes y PDF › UX-100: seccion imagenes tiene descripcion (retry #1) (12.2s)
+  ✘  311 [chromium] › e2e\tests\edge-case\UX-102-103-tabs-categories.spec.ts:38:7 › UX-102/UX-103: Tabs bilingues y seleccion categoria › UX-103: 3 cards de categoria visibles (12.1s)
+  ✓  326 [chromium] › e2e\tests\flow\UX-026-catalogo-categoria.spec.ts:22:7 › UX-026: Catalogo por categoria › alimentos muestra productos y filtros (1.4s)
+  ✓  328 [chromium] › e2e\tests\flow\UX-026-catalogo-categoria.spec.ts:28:7 › UX-026: Catalogo por categoria › equipos muestra productos y filtros (1.2s)
+  ✘  325 [chromium] › e2e\tests\flow\UX-027-deep-link-product.spec.ts:4:5 › UX-027: Product detail loads via deep link without redirect (3.0s)
+  ✘  330 [chromium] › e2e\tests\flow\UX-034-marca-individual.spec.ts:8:7 › UX-034: Marca individual › Zoetis brand page renders with products (2.9s)
+  ✘  316 [chromium] › e2e\tests\edge-case\UX-100-103-product-form-interactions.spec.ts:73:7 › UX-100 to UX-103: Product Form Interactions Edge Cases › Species tags can be removed (retry #1) (11.1s)
+  ✘  317 [chromium] › e2e\tests\flow\UX-004-deep-linking-admin.spec.ts:18:7 › UX-004: Deep linking rutas panel admin › admin marcas via deep link (11.1s)
+  ✘  331 [chromium] › e2e\tests\flow\UX-027-deep-link-product.spec.ts:4:5 › UX-027: Product detail loads via deep link without redirect (retry #1) (3.0s)
+  ✘  320 [chromium] › e2e\tests\flow\UX-015-admin-crear-producto.spec.ts:25:7 › UX-015: Admin crear producto E2E › formulario tiene campos requeridos (11.1s)
+  ✘  332 [chromium] › e2e\tests\flow\UX-034-marca-individual.spec.ts:8:7 › UX-034: Marca individual › Zoetis brand page renders with products (retry #1) (3.1s)
+  ✘  322 [chromium] › e2e\tests\flow\UX-025-027-catalogo-detalle.spec.ts:22:7 › UX-027: Detalle producto 404 › producto inexistente muestra 404 (11.3s)
+  ✘  324 [chromium] › e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:68:7 › UX-043: Product Form Structure and Edge Cases › XSS input in product name is sanitized (11.1s)
+  ✓  335 [chromium] › e2e\tests\flow\UX-038-039-busqueda.spec.ts:9:7 › UX-038/039: Busqueda overlay › search overlay opens and shows min chars message (3.3s)
+  ✘  329 [chromium] › e2e\tests\edge-case\UX-102-103-tabs-categories.spec.ts:38:7 › UX-102/UX-103: Tabs bilingues y seleccion categoria › UX-103: 3 cards de categoria visibles (retry #1) (12.1s)
+  ✘  337 [chromium] › e2e\tests\flow\UX-034-marca-individual.spec.ts:21:7 › UX-034: Marca individual › brand page has breadcrumb (3.1s)
+  ✓  340 [chromium] › e2e\tests\flow\UX-038-039-busqueda.spec.ts:20:7 › UX-038/039: Busqueda overlay › search with valid term shows results (3.2s)
+  ✓  341 [chromium] › e2e\tests\flow\UX-038-039-busqueda.spec.ts:30:7 › UX-038/039: Busqueda overlay › search with no matching term shows empty message (3.9s)
+  ✘  333 [chromium] › e2e\tests\edge-case\UX-100-103-product-form-interactions.spec.ts:82:7 › UX-100 to UX-103: Product Form Interactions Edge Cases › Add species via input (11.0s)
+  ✘  343 [chromium] › e2e\tests\flow\UX-034-marca-individual.spec.ts:21:7 › UX-034: Marca individual › brand page has breadcrumb (retry #1) (3.0s)
+  ✘  334 [chromium] › e2e\tests\flow\UX-004-deep-linking-admin.spec.ts:18:7 › UX-004: Deep linking rutas panel admin › admin marcas via deep link (retry #1) (11.1s)
+  ✘  336 [chromium] › e2e\tests\flow\UX-015-admin-crear-producto.spec.ts:25:7 › UX-015: Admin crear producto E2E › formulario tiene campos requeridos (retry #1) (11.1s)
+  ✓  344 [chromium] › e2e\tests\flow\UX-038-search-no-results.spec.ts:4:5 › UX-038: Search with no-results term shows proper empty state (1.9s)
+  ✘  339 [chromium] › e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:68:7 › UX-043: Product Form Structure and Edge Cases › XSS input in product name is sanitized (retry #1) (11.1s)
+  ✘  338 [chromium] › e2e\tests\flow\UX-025-027-catalogo-detalle.spec.ts:22:7 › UX-027: Detalle producto 404 › producto inexistente muestra 404 (retry #1) (11.2s)
+  ✓  348 [chromium] › e2e\tests\flow\UX-040-041-admin-login-dashboard.spec.ts:6:5 › UX-040: Admin login page shows centered card with Microsoft login (3.6s)
+  ✘  321 [chromium] › e2e\tests\flow\UX-010-011-admin-layout.spec.ts:38:5 › UX-010: Productos submenu expands with category links (30.1s)
+  ✘  342 [chromium] › e2e\tests\edge-case\UX-102-103-tabs-categories.spec.ts:44:7 › UX-102/UX-103: Tabs bilingues y seleccion categoria › UX-103: Farmacos seleccionado por defecto (12.1s)
+  ✓  351 [chromium] › e2e\tests\flow\UX-025-027-catalogo-detalle.spec.ts:31:7 › UX-063: Carrusel productos destacados › home muestra carrusel con productos destacados (4.2s)
+  ✘  323 [chromium] › e2e\tests\edge-case\DC-138-table-view-products.spec.ts:52:7 › DC-138: Hover filas tabla panel y estructura tabla productos › filas tienen datos correctos (nombre, marca, categoria, estado) (retry #1) (30.1s)
+  ✘  327 [chromium] › e2e\tests\edge-case\UX-100-101-drag-drop-zones.spec.ts:36:7 › UX-100/UX-101: Drag-drop zones para imagenes y PDF › UX-101: zona drag-drop de PDF es visible (30.1s)
+  ✘  345 [chromium] › e2e\tests\flow\UX-034-marca-individual.spec.ts:28:7 › UX-034: Marca individual › non-existent brand shows 404 (11.0s)
+  ✘  347 [chromium] › e2e\tests\flow\UX-004-deep-linking-admin.spec.ts:23:7 › UX-004: Deep linking rutas panel admin › admin categorias via deep link (11.2s)
+  ✘  346 [chromium] › e2e\tests\edge-case\UX-100-103-product-form-interactions.spec.ts:82:7 › UX-100 to UX-103: Product Form Interactions Edge Cases › Add species via input (retry #1) (11.2s)
+  ✘  349 [chromium] › e2e\tests\flow\UX-015-admin-crear-producto.spec.ts:35:7 › UX-015: Admin crear producto E2E › categoria selector has 3 options (10.9s)
+  ✘  352 [chromium] › e2e\tests\flow\UX-040-041-admin-login-dashboard.spec.ts:18:5 › UX-041: Dashboard shows summary cards with correct data (8.6s)
+  ✘  350 [chromium] › e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:77:7 › UX-043: Product Form Structure and Edge Cases › Slug URL auto-generates from product name (11.0s)
+  ✘  355 [chromium] › e2e\tests\edge-case\UX-102-103-tabs-categories.spec.ts:44:7 › UX-102/UX-103: Tabs bilingues y seleccion categoria › UX-103: Farmacos seleccionado por defecto (retry #1) (12.1s)
+  ✘  362 [chromium] › e2e\tests\flow\UX-040-041-admin-login-dashboard.spec.ts:18:5 › UX-041: Dashboard shows summary cards with correct data (retry #1) (9.0s)
+  ✘  354 [chromium] › e2e\tests\flow\UX-044-conditional-fields.spec.ts:4:5 › UX-044: Selecting category changes visible fields in product form (16.0s)
+  ✘  358 [chromium] › e2e\tests\flow\UX-034-marca-individual.spec.ts:28:7 › UX-034: Marca individual › non-existent brand shows 404 (retry #1) (11.6s)
+  ✘  359 [chromium] › e2e\tests\flow\UX-004-deep-linking-admin.spec.ts:23:7 › UX-004: Deep linking rutas panel admin › admin categorias via deep link (retry #1) (12.9s)
+  ✘  361 [chromium] › e2e\tests\flow\UX-015-admin-crear-producto.spec.ts:35:7 › UX-015: Admin crear producto E2E › categoria selector has 3 options (retry #1) (11.7s)
+  ✘  360 [chromium] › e2e\tests\edge-case\UX-100-103-product-form-interactions.spec.ts:92:7 › UX-100 to UX-103: Product Form Interactions Edge Cases › Marca dropdown has options (12.9s)
+  ✘  363 [chromium] › e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:77:7 › UX-043: Product Form Structure and Edge Cases › Slug URL auto-generates from product name (retry #1) (10.9s)
+  ✘  365 [chromium] › e2e\tests\flow\UX-040-041-admin-login-dashboard.spec.ts:35:5 › UX-041: Dashboard shows category cards with progress (8.6s)
+  ✘  364 [chromium] › e2e\tests\edge-case\UX-102-103-tabs-categories.spec.ts:60:7 › UX-102/UX-103: Tabs bilingues y seleccion categoria › UX-103: cards de categoria son clickables (12.4s)
+  ✘  353 [chromium] › e2e\tests\flow\UX-010-011-admin-layout.spec.ts:38:5 › UX-010: Productos submenu expands with category links (retry #1) (30.1s)
+  ✘  369 [chromium] › e2e\tests\flow\UX-004-deep-linking-admin.spec.ts:28:7 › UX-004: Deep linking rutas panel admin › admin mensajes via deep link (11.2s)
+  ✘  368 [chromium] › e2e\tests\flow\UX-015-admin-crear-producto.spec.ts:43:7 › UX-015: Admin crear producto E2E › bilingual tabs ES/EN present (11.3s)
+  ✘  370 [chromium] › e2e\tests\edge-case\UX-100-103-product-form-interactions.spec.ts:92:7 › UX-100 to UX-103: Product Form Interactions Edge Cases › Marca dropdown has options (retry #1) (11.3s)
+  ✘  371 [chromium] › e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:85:7 › UX-043: Product Form Structure and Edge Cases › R3: Marca dropdown has options (Zoetis, MSD, Purina) (11.1s)
+  ✘  356 [chromium] › e2e\tests\edge-case\DC-138-table-view-products.spec.ts:63:7 › DC-138: Hover filas tabla panel y estructura tabla productos › tabla muestra productos de diferentes categorias (30.1s)
+  ✘  366 [chromium] › e2e\tests\flow\UX-044-conditional-fields.spec.ts:4:5 › UX-044: Selecting category changes visible fields in product form (retry #1) (16.1s)
+  ✘  367 [chromium] › e2e\tests\flow\UX-045-unsaved-changes-modal.spec.ts:7:7 › UX-045: Modal de cambios sin guardar › UX-045: Muestra modal al intentar navegar con cambios en formulario crear producto (16.1s)
+  ✘  357 [chromium] › e2e\tests\edge-case\UX-100-101-drag-drop-zones.spec.ts:36:7 › UX-100/UX-101: Drag-drop zones para imagenes y PDF › UX-101: zona drag-drop de PDF es visible (retry #1) (30.1s)
+  ✘  372 [chromium] › e2e\tests\flow\UX-040-041-admin-login-dashboard.spec.ts:35:5 › UX-041: Dashboard shows category cards with progress (retry #1) (8.6s)
+  ✘  374 [chromium] › e2e\tests\flow\UX-010-011-admin-layout.spec.ts:53:5 › UX-011: Admin header has search, notifications, and avatar (8.7s)
+  ✘  373 [chromium] › e2e\tests\edge-case\UX-102-103-tabs-categories.spec.ts:60:7 › UX-102/UX-103: Tabs bilingues y seleccion categoria › UX-103: cards de categoria son clickables (retry #1) (12.4s)
+  ✘  375 [chromium] › e2e\tests\flow\UX-004-deep-linking-admin.spec.ts:28:7 › UX-004: Deep linking rutas panel admin › admin mensajes via deep link (retry #1) (11.2s)
+  ✘  376 [chromium] › e2e\tests\flow\UX-015-admin-crear-producto.spec.ts:43:7 › UX-015: Admin crear producto E2E › bilingual tabs ES/EN present (retry #1) (11.2s)
+  ✘  378 [chromium] › e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:85:7 › UX-043: Product Form Structure and Edge Cases › R3: Marca dropdown has options (Zoetis, MSD, Purina) (retry #1) (11.2s)
+  ✘  383 [chromium] › e2e\tests\flow\UX-040-041-admin-login-dashboard.spec.ts:49:5 › UX-041: Dashboard shows recent messages (8.6s)
+  ✘  382 [chromium] › e2e\tests\edge-case\UX-100-101-drag-drop-zones.spec.ts:42:7 › UX-100/UX-101: Drag-drop zones para imagenes y PDF › UX-101: seccion PDF tiene heading correcto (12.1s)
+  ✘  377 [chromium] › e2e\tests\flow\UX-046-delete-confirmation-modal.spec.ts:7:7 › UX-046: Modal de confirmacion de eliminacion › UX-046: Muestra modal al clickar Eliminar en menu opciones de producto (16.4s)
+  ✘  384 [chromium] › e2e\tests\flow\UX-010-011-admin-layout.spec.ts:53:5 › UX-011: Admin header has search, notifications, and avatar (retry #1) (8.6s)
+  ✘  380 [chromium] › e2e\tests\flow\UX-047-product-readonly.spec.ts:4:5 › UX-047: Admin product detail shows read-only view with edit link (16.0s)
+  ✘  381 [chromium] › e2e\tests\flow\UX-045-unsaved-changes-modal.spec.ts:7:7 › UX-045: Modal de cambios sin guardar › UX-045: Muestra modal al intentar navegar con cambios en formulario crear producto (retry #1) (16.0s)
+  ✘  385 [chromium] › e2e\tests\edge-case\UX-102-103-tabs-categories.spec.ts:70:7 › UX-102/UX-103: Tabs bilingues y seleccion categoria › UX-103: cada card tiene icono (12.2s)
+  ✘  389 [chromium] › e2e\tests\flow\UX-040-041-admin-login-dashboard.spec.ts:49:5 › UX-041: Dashboard shows recent messages (retry #1) (8.6s)
+  ✘  386 [chromium] › e2e\tests\flow\UX-004-deep-linking-admin.spec.ts:33:7 › UX-004: Deep linking rutas panel admin › admin productos crear via deep link (11.0s)
+  ✘  387 [chromium] › e2e\tests\flow\UX-015-admin-crear-producto.spec.ts:50:7 › UX-015: Admin crear producto E2E › action buttons present (11.0s)
+  ✘  388 [chromium] › e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:94:7 › UX-043: Product Form Structure and Edge Cases › R3: Presentaciones tag with remove button (11.0s)
+  ✘  390 [chromium] › e2e\tests\edge-case\UX-100-101-drag-drop-zones.spec.ts:42:7 › UX-100/UX-101: Drag-drop zones para imagenes y PDF › UX-101: seccion PDF tiene heading correcto (retry #1) (12.1s)
+  ✘  379 [chromium] › e2e\tests\edge-case\DC-138-table-view-products.spec.ts:63:7 › DC-138: Hover filas tabla panel y estructura tabla productos › tabla muestra productos de diferentes categorias (retry #1) (30.1s)
+  ✘  396 [chromium] › e2e\tests\flow\UX-040-041-admin-login-dashboard.spec.ts:64:5 › UX-041: Dashboard shows recent activity (8.6s)
+  ✘  391 [chromium] › e2e\tests\flow\UX-046-delete-confirmation-modal.spec.ts:7:7 › UX-046: Modal de confirmacion de eliminacion › UX-046: Muestra modal al clickar Eliminar en menu opciones de producto (retry #1) (16.0s)
+  ✘  395 [chromium] › e2e\tests\edge-case\UX-102-103-tabs-categories.spec.ts:70:7 › UX-102/UX-103: Tabs bilingues y seleccion categoria › UX-103: cada card tiene icono (retry #1) (12.1s)
+  ✘  392 [chromium] › e2e\tests\flow\UX-048-brands-listing.spec.ts:4:5 › UX-048: Admin brands listing shows brands with create button (16.1s)
+  ✘  397 [chromium] › e2e\tests\flow\UX-004-deep-linking-admin.spec.ts:33:7 › UX-004: Deep linking rutas panel admin › admin productos crear via deep link (retry #1) (11.0s)
+  ✘  393 [chromium] › e2e\tests\flow\UX-047-product-readonly.spec.ts:4:5 › UX-047: Admin product detail shows read-only view with edit link (retry #1) (16.0s)
+  ✘  398 [chromium] › e2e\tests\flow\UX-015-admin-crear-producto.spec.ts:50:7 › UX-015: Admin crear producto E2E › action buttons present (retry #1) (11.0s)
+  ✘  394 [chromium] › e2e\tests\flow\UX-045-unsaved-changes-modal.spec.ts:24:7 › UX-045: Modal de cambios sin guardar › UX-045: "Seguir editando" mantiene datos en formulario (16.0s)
+  ✘  399 [chromium] › e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:94:7 › UX-043: Product Form Structure and Edge Cases › R3: Presentaciones tag with remove button (retry #1) (11.0s)
+  ✘  400 [chromium] › e2e\tests\edge-case\UX-100-101-drag-drop-zones.spec.ts:47:7 › UX-100/UX-101: Drag-drop zones para imagenes y PDF › UX-101: seccion PDF marca como opcional (12.1s)
+  ✘  402 [chromium] › e2e\tests\flow\UX-040-041-admin-login-dashboard.spec.ts:64:5 › UX-041: Dashboard shows recent activity (retry #1) (8.5s)
+  ✓  412 [chromium] › e2e\tests\flow\UX-063-carousel-6-products.spec.ts:4:5 › UX-063: Featured products carousel shows 6 products (2.0s)
+  ✘  407 [chromium] › e2e\tests\flow\UX-060-067-mock-data.spec.ts:6:5 › UX-060: Admin products list shows 48 products (8.8s)
+  ✘  404 [chromium] › e2e\tests\edge-case\UX-102-103-tabs-categories.spec.ts:76:7 › UX-102/UX-103: Tabs bilingues y seleccion categoria › especies tags con boton remover (12.2s)
+  ✘  408 [chromium] › e2e\tests\flow\UX-015-admin-crear-producto.spec.ts:57:7 › UX-015: Admin crear producto E2E › drag-drop zones for images and PDF (11.2s)
+  ✓  413 [chromium] › e2e\tests\flow\UX-068-073-mock-content.spec.ts:6:5 › UX-068: Spanish home hero has tag, headline, and 2 CTAs (3.9s)
+  ✘  410 [chromium] › e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:99:7 › UX-043: Product Form Structure and Edge Cases › R3: Species remove buttons work (11.3s)
+  ✘  403 [chromium] › e2e\tests\flow\UX-046-delete-confirmation-modal.spec.ts:31:7 › UX-046: Modal de confirmacion de eliminacion › UX-046: Cancelar cierra modal y mantiene producto (16.0s)
+  ✘  405 [chromium] › e2e\tests\flow\UX-048-brands-listing.spec.ts:4:5 › UX-048: Admin brands listing shows brands with create button (retry #1) (16.1s)
+  ✘  406 [chromium] › e2e\tests\flow\UX-049-brand-form.spec.ts:4:5 › UX-049: Brand creation form shows all fields for creating a brand (16.1s)
+  ✓  416 [chromium] › e2e\tests\flow\UX-068-073-mock-content.spec.ts:18:5 › UX-068: English home hero has tag, headline, and 2 CTAs (4.0s)
+  ✘  409 [chromium] › e2e\tests\flow\UX-045-unsaved-changes-modal.spec.ts:24:7 › UX-045: Modal de cambios sin guardar › UX-045: "Seguir editando" mantiene datos en formulario (retry #1) (16.1s)
+  ✘  411 [chromium] › e2e\tests\edge-case\UX-100-101-drag-drop-zones.spec.ts:47:7 › UX-100/UX-101: Drag-drop zones para imagenes y PDF › UX-101: seccion PDF marca como opcional (retry #1) (12.2s)
+  ✘  414 [chromium] › e2e\tests\flow\UX-060-067-mock-data.spec.ts:6:5 › UX-060: Admin products list shows 48 products (retry #1) (8.8s)
+  ✘  420 [chromium] › e2e\tests\flow\UX-068-073-mock-content.spec.ts:31:5 › UX-069: Home shows value proposition stats (37+, 100%, 50+, 20+) (3.9s)
+  ✘  415 [chromium] › e2e\tests\edge-case\UX-102-103-tabs-categories.spec.ts:76:7 › UX-102/UX-103: Tabs bilingues y seleccion categoria › especies tags con boton remover (retry #1) (12.2s)
+  ✘  417 [chromium] › e2e\tests\flow\UX-015-admin-crear-producto.spec.ts:57:7 › UX-015: Admin crear producto E2E › drag-drop zones for images and PDF (retry #1) (11.1s)
+  ✘  418 [chromium] › e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:99:7 › UX-043: Product Form Structure and Edge Cases › R3: Species remove buttons work (retry #1) (11.1s)
+  ✘  401 [chromium] › e2e\tests\edge-case\DC-138-table-view-products.spec.ts:74:7 › DC-138: Hover filas tabla panel y estructura tabla productos › tabla muestra producto inactivo con estado diferente (30.1s)
+  ✘  426 [chromium] › e2e\tests\flow\UX-068-073-mock-content.spec.ts:31:5 › UX-069: Home shows value proposition stats (37+, 100%, 50+, 20+) (retry #1) (4.0s)
+  ✘  421 [chromium] › e2e\tests\flow\UX-070-admin-categorias.spec.ts:8:7 › UX-070: Admin categorias panel › 3 categorias con subcategorias visibles (11.0s)
+  ✘  425 [chromium] › e2e\tests\flow\UX-060-067-mock-data.spec.ts:17:5 › UX-060: Products span 3 categories with correct counts (8.6s)
+  ✘  419 [chromium] › e2e\tests\flow\UX-046-delete-confirmation-modal.spec.ts:31:7 › UX-046: Modal de confirmacion de eliminacion › UX-046: Cancelar cierra modal y mantiene producto (retry #1) (16.7s)
+  ✘  431 [chromium] › e2e\tests\flow\UX-068-073-mock-content.spec.ts:48:5 › UX-071: About page has history, numbers, coverage map, and team (5.8s)
+  ✘  422 [chromium] › e2e\tests\flow\UX-049-brand-form.spec.ts:4:5 › UX-049: Brand creation form shows all fields for creating a brand (retry #1) (16.0s)
+  ✘  423 [chromium] › e2e\tests\flow\UX-045-unsaved-changes-modal.spec.ts:39:7 › UX-045: Modal de cambios sin guardar › UX-045: "Salir sin guardar" navega sin mantener datos (16.1s)
+  ✘  428 [chromium] › e2e\tests\flow\UX-015-admin-crear-producto.spec.ts:64:7 › UX-015: Admin crear producto E2E › toggle switches for active and featured (11.1s)
+  ✘  429 [chromium] › e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:104:7 › UX-043: Product Form Structure and Edge Cases › R3: Add species input accepts text (11.1s)
+  ✘  427 [chromium] › e2e\tests\edge-case\UX-102-103-tabs-categories.spec.ts:85:7 › UX-102/UX-103: Tabs bilingues y seleccion categoria › input para agregar especie existe (12.3s)
+  ✘  433 [chromium] › e2e\tests\flow\UX-060-067-mock-data.spec.ts:17:5 › UX-060: Products span 3 categories with correct counts (retry #1) (8.5s)
+  ✘  432 [chromium] › e2e\tests\flow\UX-070-admin-categorias.spec.ts:8:7 › UX-070: Admin categorias panel › 3 categorias con subcategorias visibles (retry #1) (10.9s)
+  ✘  435 [chromium] › e2e\tests\flow\UX-068-073-mock-content.spec.ts:48:5 › UX-071: About page has history, numbers, coverage map, and team (retry #1) (6.6s)
+  ✘  436 [chromium] › e2e\tests\flow\UX-104-formulario-marca.spec.ts:7:7 › UX-104: Formulario de marca › UX-104: Formulario crear marca tiene todos los campos requeridos (6.5s)
+  ✓  441 [chromium] › e2e\tests\flow\UX-060-067-mock-data.spec.ts:30:5 › UX-062: Brands page shows 12+ brands via SPA navigation (5.7s)
+  ✘  434 [chromium] › e2e\tests\flow\UX-046-delete-confirmation-modal.spec.ts:54:7 › UX-046: Modal de confirmacion de eliminacion › UX-046: Confirmar eliminacion muestra toast y remueve producto (15.9s)
+  ✘  444 [chromium] › e2e\tests\flow\UX-104-formulario-marca.spec.ts:7:7 › UX-104: Formulario de marca › UX-104: Formulario crear marca tiene todos los campos requeridos (retry #1) (6.0s)
+  ✘  438 [chromium] › e2e\tests\flow\UX-015-admin-crear-producto.spec.ts:64:7 › UX-015: Admin crear producto E2E › toggle switches for active and featured (retry #1) (11.0s)
+  ✘  424 [chromium] › e2e\tests\edge-case\UX-100-101-drag-drop-zones.spec.ts:53:7 › UX-100/UX-101: Drag-drop zones para imagenes y PDF › zonas de upload son clickables (30.1s)
+  ✘  439 [chromium] › e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:104:7 › UX-043: Product Form Structure and Edge Cases › R3: Add species input accepts text (retry #1) (11.1s)
+  ✘  443 [chromium] › e2e\tests\flow\UX-068-073-mock-content.spec.ts:65:5 › UX-072: Distributors page has hero, benefits, timeline, and form (8.7s)
+  ✘  440 [chromium] › e2e\tests\edge-case\UX-102-103-tabs-categories.spec.ts:85:7 › UX-102/UX-103: Tabs bilingues y seleccion categoria › input para agregar especie existe (retry #1) (12.1s)
+  ✘  437 [chromium] › e2e\tests\flow\UX-045-unsaved-changes-modal.spec.ts:39:7 › UX-045: Modal de cambios sin guardar › UX-045: "Salir sin guardar" navega sin mantener datos (retry #1) (16.1s)
+  ✓  448 [chromium] › e2e\tests\flow\UX-106-gestion-hero.spec.ts:7:7 › UX-106: Gestion Hero panel admin › UX-106: Pagina de gestion Hero carga correctamente (1.3s)
+  ✘  442 [chromium] › e2e\tests\flow\UX-070-admin-categorias.spec.ts:17:7 › UX-070: Admin categorias panel › farmacos has familia and especie tags (11.0s)
+  ✓  451 [chromium] › e2e\tests\flow\UX-107-108-productos-destacados.spec.ts:7:7 › UX-107/UX-108: Productos y marcas destacados › UX-107: Pagina de productos destacados carga correctamente (1.1s)
+  ✓  455 [chromium] › e2e\tests\flow\UX-107-108-productos-destacados.spec.ts:15:7 › UX-107/UX-108: Productos y marcas destacados › UX-108: Pagina de marcas destacadas carga correctamente (1.3s)
+  ✘  445 [chromium] › e2e\tests\flow\UX-060-067-mock-data.spec.ts:48:5 › UX-064: Home shows 8 featured brand logos (8.9s)
+  ✘  430 [chromium] › e2e\tests\edge-case\DC-138-table-view-products.spec.ts:74:7 › DC-138: Hover filas tabla panel y estructura tabla productos › tabla muestra producto inactivo con estado diferente (retry #1) (30.1s)
+  ✘  452 [chromium] › e2e\tests\flow\UX-068-073-mock-content.spec.ts:65:5 › UX-072: Distributors page has hero, benefits, timeline, and form (retry #1) (8.8s)
+  ✘  450 [chromium] › e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:112:7 › UX-043: Product Form Structure and Edge Cases › R3: Descripcion field accepts long text (11.0s)
+  ✘  456 [chromium] › e2e\tests\flow\UX-070-admin-categorias.spec.ts:17:7 › UX-070: Admin categorias panel › farmacos has familia and especie tags (retry #1) (11.1s)
+  ✘  458 [chromium] › e2e\tests\flow\UX-060-067-mock-data.spec.ts:48:5 › UX-064: Home shows 8 featured brand logos (retry #1) (8.9s)
+  ✘  454 [chromium] › e2e\tests\edge-case\UX-102-103-tabs-categories.spec.ts:90:7 › UX-102/UX-103: Tabs bilingues y seleccion categoria › presentaciones tag con boton remover (12.4s)
+  ✘  446 [chromium] › e2e\tests\flow\UX-046-delete-confirmation-modal.spec.ts:54:7 › UX-046: Modal de confirmacion de eliminacion › UX-046: Confirmar eliminacion muestra toast y remueve producto (retry #1) (16.1s)
+  ✓  460 [chromium] › e2e\tests\flow\UX-068-073-mock-content.spec.ts:83:5 › UX-073: Contact page has phone, email, address, hours, social links (4.0s)
+  ✘  447 [chromium] › e2e\tests\flow\UX-104-formulario-marca.spec.ts:18:7 › UX-104: Formulario de marca › UX-104: Lista de marcas muestra todas las marcas (16.1s)
+  ✘  453 [chromium] › e2e\tests\flow\UX-045-unsaved-changes-modal.spec.ts:53:7 › UX-045: Modal de cambios sin guardar › UX-045: No muestra modal si no hay cambios (16.3s)
+  ✓  464 [chromium] › e2e\tests\flow\UX-068-073-mock-content.spec.ts:97:5 › UX-037: Contact form has all required fields (3.9s)
+  ✘  457 [chromium] › e2e\tests\flow\UX-109-kanban-drag-drop.spec.ts:7:7 › UX-109: Kanban drag-and-drop mensajes › UX-109: Vista kanban muestra 3 columnas con conteos (15.9s)
+  ✓  468 [chromium] › e2e\tests\flow\UX-112-equipo-liderazgo.spec.ts:7:7 › UX-112: Gestion equipo de liderazgo › UX-112: Pagina de gestion equipo carga correctamente (1.1s)
+  ✘  459 [chromium] › e2e\tests\flow\UX-110-mensajes-toggle-kanban-tabla.spec.ts:7:7 › UX-110: Toggle Kanban/Tabla en mensajes › UX-110: Botones de toggle Kanban y Tabla presentes (16.0s)
+  ✘  461 [chromium] › e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:112:7 › UX-043: Product Form Structure and Edge Cases › R3: Descripcion field accepts long text (retry #1) (11.0s)
+  ✓  473 [chromium] › e2e\tests\visual\BVC-014-021-parcial.spec.ts:6:7 › BVC-014: Conditional fields with fade animation › BVC-014: Category selection shows/hides conditional fields (1.5s)
+  ✘  470 [chromium] › e2e\tests\visual\BVC-013-form-sections.spec.ts:6:7 › BVC-013: Formularios con secciones claras › formulario crear producto tiene secciones con subtitulos Bold y separadores (5.9s)
+  ✘  462 [chromium] › e2e\tests\flow\UX-070-admin-categorias.spec.ts:32:7 › UX-070: Admin categorias panel › alimentos has etapa de vida tags (11.2s)
+  ✘  465 [chromium] › e2e\tests\edge-case\UX-102-103-tabs-categories.spec.ts:90:7 › UX-102/UX-103: Tabs bilingues y seleccion categoria › presentaciones tag con boton remover (retry #1) (12.4s)
+  ✘  449 [chromium] › e2e\tests\edge-case\UX-100-101-drag-drop-zones.spec.ts:53:7 › UX-100/UX-101: Drag-drop zones para imagenes y PDF › zonas de upload son clickables (retry #1) (30.1s)
+  ✓  477 [chromium] › e2e\tests\visual\BVC-018-019-023-desbloqueados.spec.ts:6:7 › BVC-018: Destructive actions have confirmation modal › BVC-018: Delete product shows confirmation modal (1.6s)
+  ✘  466 [chromium] › e2e\tests\flow\UX-111-detalle-mensaje.spec.ts:7:7 › UX-111: Detalle de mensaje › UX-111: Muestra datos de contacto completos (16.1s)
+  ✓  479 [chromium] › e2e\tests\visual\BVC-018-019-023-desbloqueados.spec.ts:30:7 › BVC-019: Empty states designed › BVC-019: EmptyState component exists in DOM (1.6s)
+  ✘  467 [chromium] › e2e\tests\flow\UX-104-formulario-marca.spec.ts:18:7 › UX-104: Formulario de marca › UX-104: Lista de marcas muestra todas las marcas (retry #1) (16.3s)
+  ✘  475 [chromium] › e2e\tests\visual\BVC-013-form-sections.spec.ts:6:7 › BVC-013: Formularios con secciones claras › formulario crear producto tiene secciones con subtitulos Bold y separadores (retry #1) (5.9s)
+  ✓  480 [chromium] › e2e\tests\visual\BVC-018-019-023-desbloqueados.spec.ts:44:7 › BVC-023: Toast notifications post-actions › BVC-023: Toast container exists in DOM (1.5s)
+  ✓  483 [chromium] › e2e\tests\flow\UX-104-formulario-marca.spec.ts:32:7 › UX-104: Formulario de marca › UX-104: Editar marca carga datos existentes (1.0s)
+  ✘  469 [chromium] › e2e\tests\flow\UX-045-unsaved-changes-modal.spec.ts:53:7 › UX-045: Modal de cambios sin guardar › UX-045: No muestra modal si no hay cambios (retry #1) (16.0s)
+  ✓  482 [chromium] › e2e\tests\visual\BVC-negative-checks.spec.ts:7:7 › BVC Negative Checks - Anti-patterns › BVC-025: No prices visible on any page (1.4s)
+  ✓  484 [chromium] › e2e\tests\visual\BVC-computed-style-checks.spec.ts:7:7 › BVC Computed Style Checks › BVC-004: Colors correspond to defined palette (1.1s)
+  ✓  485 [chromium] › e2e\tests\visual\DC-001-to-029-design-tokens.spec.ts:7:7 › DC-001 to DC-029: Design Tokens › DC-001: Brand primary #008DC9 defined in :root (938ms)
+  ✘  471 [chromium] › e2e\tests\flow\UX-109-kanban-drag-drop.spec.ts:7:7 › UX-109: Kanban drag-and-drop mensajes › UX-109: Vista kanban muestra 3 columnas con conteos (retry #1) (16.0s)
+  ✓  486 [chromium] › e2e\tests\visual\BVC-negative-checks.spec.ts:20:7 › BVC Negative Checks - Anti-patterns › BVC-026: No cart or checkout elements (1.0s)
+  ✓  487 [chromium] › e2e\tests\visual\BVC-computed-style-checks.spec.ts:35:7 › BVC Computed Style Checks › BVC-031: Hero titles >= 48px desktop, >= 32px mobile (1.1s)
+  ✓  488 [chromium] › e2e\tests\visual\DC-001-to-029-design-tokens.spec.ts:15:7 › DC-001 to DC-029: Design Tokens › DC-002: Brand secondary #50B92A defined in :root (1.0s)
+  ✓  489 [chromium] › e2e\tests\visual\BVC-negative-checks.spec.ts:32:7 › BVC Negative Checks - Anti-patterns › BVC-027: No public login/register on public site (1.1s)
+  ✘  478 [chromium] › e2e\tests\visual\BVC-034-036-panel-layout.spec.ts:11:7 › BVC-034 & BVC-036: Panel layout computed styles › BVC-034: sidebar width ~260-280px (6.6s)
+  ✓  491 [chromium] › e2e\tests\visual\BVC-computed-style-checks.spec.ts:45:7 › BVC Computed Style Checks › BVC-032: Block color border-radius 20-30px, padding 60-80px (1.2s)
+  ✓  492 [chromium] › e2e\tests\visual\DC-001-to-029-design-tokens.spec.ts:23:7 › DC-001 to DC-029: Design Tokens › DC-003: Brand dark #005A85 defined in :root (1.0s)
+  ✘  476 [chromium] › e2e\tests\flow\UX-070-admin-categorias.spec.ts:32:7 › UX-070: Admin categorias panel › alimentos has etapa de vida tags (retry #1) (11.0s)
+  ✓  493 [chromium] › e2e\tests\visual\BVC-negative-checks.spec.ts:46:7 › BVC Negative Checks - Anti-patterns › BVC-028: No offers, discounts, reviews or blog (1.1s)
+  ✓  490 [chromium] › e2e\tests\visual\DC-013-mobile-typography.spec.ts:6:7 › DC-013: Escala tipografica mobile › hero headline es 32px/700 en mobile 375px (2.1s)
+  ✓  495 [chromium] › e2e\tests\visual\BVC-computed-style-checks.spec.ts:63:7 › BVC Computed Style Checks › BVC-033: Card hover shadow + scale(1.02) with transition 0.3s (1.2s)
+  ✓  496 [chromium] › e2e\tests\visual\DC-001-to-029-design-tokens.spec.ts:31:7 › DC-001 to DC-029: Design Tokens › DC-004: Neutral colors defined in :root (1.1s)
+  ✘  472 [chromium] › e2e\tests\flow\UX-110-mensajes-toggle-kanban-tabla.spec.ts:7:7 › UX-110: Toggle Kanban/Tabla en mensajes › UX-110: Botones de toggle Kanban y Tabla presentes (retry #1) (16.1s)
+  ✓  497 [chromium] › e2e\tests\visual\BVC-negative-checks.spec.ts:62:7 › BVC Negative Checks - Anti-patterns › BVC-029: No live chat widget (only WhatsApp) (1.2s)
+  ✓  499 [chromium] › e2e\tests\visual\BVC-computed-style-checks.spec.ts:74:7 › BVC Computed Style Checks › BVC-037: Panel summary cards radius 12-16px and shadow (1.2s)
+  ✘  498 [chromium] › e2e\tests\visual\DC-030-to-034-home-images.spec.ts:6:7 › DC-030 to DC-034: Home images regression › DC-030: Hero should have photographic background image, not SVG (1.7s)
+  ✓  501 [chromium] › e2e\tests\visual\DC-001-to-029-design-tokens.spec.ts:52:7 › DC-001 to DC-029: Design Tokens › DC-005: Surface colors per category defined in :root (1.3s)
+  ✘  504 [chromium] › e2e\tests\visual\DC-035-cta-fabricantes.spec.ts:6:7 › DC-035: CTA fabricantes banner › background #008DC9, padding 80px, titulo 36px Bold blanco (1.1s)
+  ✓  505 [chromium] › e2e\tests\visual\DC-001-to-029-design-tokens.spec.ts:67:7 › DC-001 to DC-029: Design Tokens › DC-006: Semantic colors defined in :root (1.1s)
+  ✘  474 [chromium] › e2e\tests\visual\BVC-014-021-parcial.spec.ts:29:7 › BVC-021: Flujo Listado > Crear > Detalle › BVC-021: Navigation flow from list to create (16.5s)
+  ✘  502 [chromium] › e2e\tests\visual\DC-032-brands-section.spec.ts:11:7 › DC-032: Home - Marcas Destacadas section › DC-032: Logos section is visible (opacity != 0, is-visible class applied) (2.9s)
+  ✓  507 [chromium] › e2e\tests\visual\DC-001-to-029-design-tokens.spec.ts:92:7 › DC-001 to DC-029: Design Tokens › DC-007: Semantic text colors defined in :root (1.0s)
+  ✘  508 [chromium] › e2e\tests\visual\DC-030-to-034-home-images.spec.ts:6:7 › DC-030 to DC-034: Home images regression › DC-030: Hero should have photographic background image, not SVG (retry #1) (1.5s)
+  ✓  509 [chromium] › e2e\tests\visual\DC-001-to-029-design-tokens.spec.ts:109:7 › DC-001 to DC-029: Design Tokens › DC-008: Purple color for manufacturer messages defined (953ms)
+  ✘  510 [chromium] › e2e\tests\visual\DC-035-cta-fabricantes.spec.ts:6:7 › DC-035: CTA fabricantes banner › background #008DC9, padding 80px, titulo 36px Bold blanco (retry #1) (1.1s)
+  ✓  512 [chromium] › e2e\tests\visual\DC-001-to-029-design-tokens.spec.ts:124:7 › DC-001 to DC-029: Design Tokens › DC-009: Special colors (WhatsApp, overlay) defined (1.1s)
+  ✘  463 [chromium] › e2e\tests\flow\UX-060-067-mock-data.spec.ts:63:5 › UX-065: Messages kanban has 3 columns with correct counts (30.1s)
+  ✓  514 [chromium] › e2e\tests\visual\DC-001-to-029-design-tokens.spec.ts:139:7 › DC-001 to DC-029: Design Tokens › DC-010: Inter font from Google Fonts (1.0s)
+  ✘  500 [chromium] › e2e\tests\visual\BVC-034-036-panel-layout.spec.ts:11:7 › BVC-034 & BVC-036: Panel layout computed styles › BVC-034: sidebar width ~260-280px (retry #1) (6.8s)
+  ✓  517 [chromium] › e2e\tests\visual\DC-001-to-029-design-tokens.spec.ts:151:7 › DC-001 to DC-029: Design Tokens › DC-011: Fallback font stack defined (978ms)
+  ✘  513 [chromium] › e2e\tests\visual\DC-032-brands-section.spec.ts:11:7 › DC-032: Home - Marcas Destacadas section › DC-032: Logos section is visible (opacity != 0, is-visible class applied) (retry #1) (2.9s)
+  ✓  519 [chromium] › e2e\tests\visual\DC-001-to-029-design-tokens.spec.ts:162:7 › DC-001 to DC-029: Design Tokens › DC-012: Typographic scale tokens defined (1.1s)
+  ✓  516 [chromium] › e2e\tests\visual\DC-036-catalog-layout.spec.ts:7:7 › DC-036: Catalog Layout › DC-036: Catalog grid has 3 columns on desktop (2.5s)
+  ✓  521 [chromium] › e2e\tests\visual\DC-001-to-029-design-tokens.spec.ts:187:7 › DC-001 to DC-029: Design Tokens › DC-014: Panel typographic scale tokens defined (1.2s)
+  ✓  522 [chromium] › e2e\tests\visual\DC-036-catalog-layout.spec.ts:29:7 › DC-036: Catalog Layout › DC-019: Container max-width 1280px with 40px padding (1.0s)
+  ✓  515 [chromium] › e2e\tests\visual\DC-030-to-034-home-images.spec.ts:28:7 › DC-030 to DC-034: Home images regression › DC-032: Marcas Destacadas section should be visible (not opacity 0) (4.2s)
+  ✘  481 [chromium] › e2e\tests\flow\UX-111-detalle-mensaje.spec.ts:7:7 › UX-111: Detalle de mensaje › UX-111: Muestra datos de contacto completos (retry #1) (16.0s)
+  ✓  524 [chromium] › e2e\tests\visual\DC-001-to-029-design-tokens.spec.ts:210:7 › DC-001 to DC-029: Design Tokens › DC-015: Tracking tight -0.02em defined (1.2s)
+  ✓  527 [chromium] › e2e\tests\visual\DC-001-to-029-design-tokens.spec.ts:218:7 › DC-001 to DC-029: Design Tokens › DC-016: Spacing scale base 4px defined (881ms)
+  ✘  503 [chromium] › e2e\tests\flow\UX-070-admin-categorias.spec.ts:40:7 › UX-070: Admin categorias panel › equipos has tipo tags (11.2s)
+  ✓  523 [chromium] › e2e\tests\visual\DC-032-brands-section.spec.ts:22:7 › DC-032: Home - Marcas Destacadas section › DC-032: Heading is centered 42px Bold (2.8s)
+  ✓  526 [chromium] › e2e\tests\visual\DC-030-to-034-home-images.spec.ts:56:7 › DC-030 to DC-034: Home images regression › DC-030: Hero text elements are correctly styled (2.2s)
+  ✓  525 [chromium] › e2e\tests\visual\DC-036-catalog-layout.spec.ts:48:7 › DC-036: Catalog Layout › DC-081: Catalog grid responsive - 2 cols on tablet (2.6s)
+  ✓  529 [chromium] › e2e\tests\visual\DC-001-to-029-design-tokens.spec.ts:237:7 › DC-001 to DC-029: Design Tokens › DC-017: Section spacing tokens defined (1.1s)
+  ✓  531 [chromium] › e2e\tests\visual\DC-037-catalog-categoria.spec.ts:6:7 › DC-037: Catalogo por categoria layout › DC-037: Category catalog has breadcrumb and contextualized title (1.9s)
+  ✓  533 [chromium] › e2e\tests\visual\DC-001-to-029-design-tokens.spec.ts:252:7 › DC-001 to DC-029: Design Tokens › DC-018: Block padding tokens defined (1.1s)
+  ✘  494 [chromium] › e2e\tests\flow\UX-109-kanban-drag-drop.spec.ts:21:7 › UX-109: Kanban drag-and-drop mensajes › UX-109: Cards de mensajes muestran badge tipo, nombre y preview (16.1s)
+  ✘  530 [chromium] › e2e\tests\visual\DC-032-brands-section.spec.ts:38:7 › DC-032: Home - Marcas Destacadas section › DC-032: 6-8 logos displayed in grid (2.9s)
+  ✓  536 [chromium] › e2e\tests\visual\DC-001-to-029-design-tokens.spec.ts:267:7 › DC-001 to DC-029: Design Tokens › DC-019: Container max-width 1280px and padding tokens (921ms)
+  ✓  535 [chromium] › e2e\tests\visual\DC-037-catalog-categoria.spec.ts:22:7 › DC-037: Catalogo por categoria layout › DC-037: Category catalog has product grid (1.6s)
+  ✓  537 [chromium] › e2e\tests\visual\DC-001-to-029-design-tokens.spec.ts:282:7 › DC-001 to DC-029: Design Tokens › DC-020: Panel spacing tokens defined (1.0s)
+  ✓  532 [chromium] › e2e\tests\visual\DC-040-marca-individual.spec.ts:6:7 › DC-040: Individual brand page › DC-040: Brand page shows logo, name, and products grid (3.9s)
+  ✓  540 [chromium] › e2e\tests\visual\DC-001-to-029-design-tokens.spec.ts:299:7 › DC-001 to DC-029: Design Tokens › DC-021: Shadow tokens defined (sm, md, lg) (940ms)
+  ✓  538 [chromium] › e2e\tests\visual\DC-041-nosotros-layout.spec.ts:11:7 › DC-041: Nosotros page layout › DC-041: hero section with heading "Herrera y Elizondo S.A." (1.6s)
+  ✘  506 [chromium] › e2e\tests\flow\UX-110-mensajes-toggle-kanban-tabla.spec.ts:15:7 › UX-110: Toggle Kanban/Tabla en mensajes › UX-110: Vista Kanban muestra columnas con cards (16.2s)
+  ✓  543 [chromium] › e2e\tests\visual\DC-001-to-029-design-tokens.spec.ts:314:7 › DC-001 to DC-029: Design Tokens › DC-022: Border-radius tokens defined (938ms)
+  ✓  542 [chromium] › e2e\tests\visual\DC-041-nosotros.spec.ts:6:7 › DC-041: Nosotros page layout › DC-041: Nosotros page renders with hero and sections (1.8s)
+  ✓  544 [chromium] › e2e\tests\visual\DC-041-nosotros-layout.spec.ts:17:7 › DC-041: Nosotros page layout › DC-041: historia section with narrative blocks (1.6s)
+  ✘  541 [chromium] › e2e\tests\visual\DC-032-brands-section.spec.ts:38:7 › DC-032: Home - Marcas Destacadas section › DC-032: 6-8 logos displayed in grid (retry #1) (2.9s)
+  ✓  545 [chromium] › e2e\tests\visual\DC-001-to-029-design-tokens.spec.ts:335:7 › DC-001 to DC-029: Design Tokens › DC-023: Button hover transition token defined (1.3s)
+  ✓  546 [chromium] › e2e\tests\visual\DC-043-contact-page.spec.ts:7:7 › DC-043: Contact Page › DC-043: Contact page has title, 2-column layout on desktop (1.4s)
+  ✓  549 [chromium] › e2e\tests\visual\DC-001-to-029-design-tokens.spec.ts:345:7 › DC-001 to DC-029: Design Tokens › DC-024: Card hover transition token defined (1.1s)
+  ✓  547 [chromium] › e2e\tests\visual\DC-041-nosotros-layout.spec.ts:22:7 › DC-041: Nosotros page layout › DC-041: mision section present (1.7s)
+  ✓  550 [chromium] › e2e\tests\visual\DC-043-contact-page.spec.ts:14:7 › DC-043: Contact Page › DC-059: Contact form has labels, inputs with radius 10px, height 44px (1.4s)
+  ✘  511 [chromium] › e2e\tests\visual\BVC-014-021-parcial.spec.ts:29:7 › BVC-021: Flujo Listado > Crear > Detalle › BVC-021: Navigation flow from list to create (retry #1) (16.7s)
+  ✓  551 [chromium] › e2e\tests\visual\DC-001-to-029-design-tokens.spec.ts:355:7 › DC-001 to DC-029: Design Tokens › DC-025: Scroll fade-in transition token defined (918ms)
+  ✓  552 [chromium] › e2e\tests\visual\DC-041-nosotros-layout.spec.ts:27:7 › DC-041: Nosotros page layout › DC-041: numeros clave section with 4 stats (1.6s)
+  ✓  554 [chromium] › e2e\tests\visual\DC-043-contact-page.spec.ts:27:7 › DC-043: Contact Page › DC-096: Contact is 1 column on mobile (1.3s)
+  ✓  555 [chromium] › e2e\tests\visual\DC-001-to-029-design-tokens.spec.ts:365:7 › DC-001 to DC-029: Design Tokens › DC-027: Z-index scale tokens defined (960ms)
+  ✓  558 [chromium] › e2e\tests\visual\DC-001-to-029-design-tokens.spec.ts:388:7 › DC-001 to DC-029: Design Tokens › DC-028: Icon size tokens defined (979ms)
+  ✘  557 [chromium] › e2e\tests\visual\DC-045-panel-login.spec.ts:7:7 › DC-045: Panel Login › DC-045: Login card centered, white bg, radius 16px, shadow (1.1s)
+  ✓  553 [chromium] › e2e\tests\visual\DC-032-brands-section.spec.ts:48:7 › DC-032: Home - Marcas Destacadas section › DC-032: "Ver todas las marcas" link present and links to /marcas (2.9s)
+  ✓  556 [chromium] › e2e\tests\visual\DC-041-nosotros-layout.spec.ts:42:7 › DC-041: Nosotros page layout › DC-041: cobertura nacional section with SVG map (1.7s)
+  ✓  560 [chromium] › e2e\tests\visual\DC-001-to-029-design-tokens.spec.ts:403:7 › DC-001 to DC-029: Design Tokens › DC-029: Icon circle size token defined (898ms)
+  ✓  559 [chromium] › e2e\tests\visual\DC-044-search-results.spec.ts:6:7 › DC-044: Search results layout › DC-044: Search results page has breadcrumb and grouped results (1.7s)
+  ✘  534 [chromium] › e2e\tests\flow\UX-070-admin-categorias.spec.ts:40:7 › UX-070: Admin categorias panel › equipos has tipo tags (retry #1) (11.1s)
+  ✓  563 [chromium] › e2e\tests\visual\DC-001-to-029-design-tokens.spec.ts:411:7 › DC-001 to DC-029: Design Tokens › DC-149: Smooth scroll behavior enabled (944ms)
+  ✓  562 [chromium] › e2e\tests\visual\DC-041-nosotros-layout.spec.ts:51:7 › DC-041: Nosotros page layout › DC-041: equipo liderazgo grid with team members (2.1s)
+  ✓  564 [chromium] › e2e\tests\visual\DC-049-panel-mensajes.spec.ts:11:7 › DC-049: Panel Mensajes kanban layout › DC-049: Kanban view has toggle and 3 columns (1.7s)
+  ✓  566 [chromium] › e2e\tests\visual\DC-050-header.spec.ts:7:7 › DC-050: Header (Navbar) › DC-050: Header height 70px, white background, fixed position, z-index 200 (1.0s)
+  ✘  565 [chromium] › e2e\tests\visual\DC-045-panel-login.spec.ts:7:7 › DC-045: Panel Login › DC-045: Login card centered, white bg, radius 16px, shadow (retry #1) (1.3s)
+  ✓  570 [chromium] › e2e\tests\visual\DC-050-header.spec.ts:28:7 › DC-050: Header (Navbar) › DC-080: Header collapses to hamburger below 1024px (1.1s)
+  ✘  528 [chromium] › e2e\tests\flow\UX-111-detalle-mensaje.spec.ts:24:7 › UX-111: Detalle de mensaje › UX-111: Notas internas con textarea y boton guardar (16.0s)
+  ✓  569 [chromium] › e2e\tests\visual\DC-049-panel-mensajes.spec.ts:25:7 › DC-049: Panel Mensajes kanban layout › DC-049: Kanban cards have badge with message type (1.7s)
+  ✓  571 [chromium] › e2e\tests\visual\DC-050-header.spec.ts:35:7 › DC-050: Header (Navbar) › DC-050: Header has HESA logo linked to home (932ms)
+  ✓  568 [chromium] › e2e\tests\visual\DC-041-nosotros-layout.spec.ts:57:7 › DC-041: Nosotros page layout › DC-041: responsive mobile - stacked layout (2.4s)
+  ✓  572 [chromium] › e2e\tests\visual\DC-045-panel-login.spec.ts:27:7 › DC-045: Panel Login › DC-045: Login page background is #F7F8FA (1.1s)
+  ✓  573 [chromium] › e2e\tests\visual\DC-051-footer.spec.ts:7:7 › DC-051: Footer › DC-051: Footer background #005A85, text white (970ms)
+  ✓  574 [chromium] › e2e\tests\visual\DC-050-header.spec.ts:44:7 › DC-050: Header (Navbar) › DC-050: Header has search button (1.0s)
+  ✓  575 [chromium] › e2e\tests\visual\DC-052-whatsapp-fab.spec.ts:7:7 › DC-052: WhatsApp FAB › DC-052: WhatsApp FAB visible on home page (1.0s)
+  ✓  576 [chromium] › e2e\tests\visual\DC-045-panel-login.spec.ts:43:7 › DC-045: Panel Login › DC-045: Login has HESA logo and Microsoft button (1.1s)
+  ✓  577 [chromium] › e2e\tests\visual\DC-051-footer.spec.ts:21:7 › DC-051: Footer › BVC-040: Footer background is #005A85 with white text (1.1s)
+  ✘  561 [chromium] › e2e\tests\visual\DC-047-panel-productos-listado.spec.ts:11:7 › DC-047: Panel Productos listado › DC-047: titulo "Productos" con 24px Bold (6.5s)
+  ✓  579 [chromium] › e2e\tests\visual\DC-050-header.spec.ts:51:7 › DC-050: Header (Navbar) › DC-068: Language selector visible in header (1.1s)
+  ✓  580 [chromium] › e2e\tests\visual\DC-052-whatsapp-fab.spec.ts:14:7 › DC-052: WhatsApp FAB › BVC-038: WhatsApp FAB visible on catalog page (1.2s)
+  ✓  582 [chromium] › e2e\tests\visual\DC-051-footer.spec.ts:34:7 › DC-051: Footer › DC-051: Footer has 4 columns on desktop (1.2s)
+  ✓  581 [chromium] › e2e\tests\visual\DC-045-panel-login.spec.ts:52:7 › DC-045: Panel Login › DC-099: Login card full-width on mobile (1.3s)
+  ✓  584 [chromium] › e2e\tests\visual\DC-052-whatsapp-fab.spec.ts:21:7 › DC-052: WhatsApp FAB › BVC-038: WhatsApp FAB visible on contact page (1.1s)
+  ✘  539 [chromium] › e2e\tests\flow\UX-109-kanban-drag-drop.spec.ts:21:7 › UX-109: Kanban drag-and-drop mensajes › UX-109: Cards de mensajes muestran badge tipo, nombre y preview (retry #1) (16.0s)
+  ✓  585 [chromium] › e2e\tests\visual\DC-051-footer.spec.ts:42:7 › DC-051: Footer › DC-086: Footer uses accordions on mobile (1.0s)
+  ✓  583 [chromium] › e2e\tests\visual\DC-053-search-overlay.spec.ts:6:7 › DC-053: Search Overlay layout › DC-053: Search overlay opens on click (1.9s)
+  ✓  588 [chromium] › e2e\tests\visual\DC-052-whatsapp-fab.spec.ts:28:7 › DC-052: WhatsApp FAB › BVC-029: No live chat widget present (only WhatsApp) (1.1s)
+  ✓  589 [chromium] › e2e\tests\visual\DC-051-footer.spec.ts:49:7 › DC-051: Footer › DC-051: Footer has copyright text (997ms)
+  ✓  586 [chromium] › e2e\tests\visual\DC-054-product-card.spec.ts:7:7 › DC-054: Product Card (public) › DC-054: Product card has white bg, 12px radius, shadow sm (2.5s)
+  ✓  592 [chromium] › e2e\tests\visual\DC-051-footer.spec.ts:56:7 › DC-051: Footer › BVC-039: Language selector in footer (1.0s)
+  ✘  548 [chromium] › e2e\tests\flow\UX-110-mensajes-toggle-kanban-tabla.spec.ts:15:7 › UX-110: Toggle Kanban/Tabla en mensajes › UX-110: Vista Kanban muestra columnas con cards (retry #1) (16.1s)
+  ✓  591 [chromium] › e2e\tests\visual\DC-063-sticky-bar.spec.ts:6:7 › DC-063: Sticky Bar on product detail › DC-063: Desktop sticky bar appears on scroll (2.7s)
+  ✓  594 [chromium] › e2e\tests\visual\DC-054-product-card.spec.ts:29:7 › DC-054: Product Card (public) › DC-054: Product card name is 16px Bold (2.3s)
+  ✓  595 [chromium] › e2e\tests\visual\DC-065-team-member-card.spec.ts:6:7 › DC-065: Team Member Card › DC-065: Team members on Nosotros page (2.8s)
+  ✘  567 [chromium] › e2e\tests\flow\UX-070-admin-categorias.spec.ts:49:7 › UX-070: Admin categorias panel › tags have remove buttons (editable) (11.2s)
+  ✘  518 [chromium] › e2e\tests\flow\UX-060-067-mock-data.spec.ts:63:5 › UX-065: Messages kanban has 3 columns with correct counts (retry #1) (30.1s)
+  ✓  596 [chromium] › e2e\tests\visual\DC-063-sticky-bar.spec.ts:31:7 › DC-063: Sticky Bar on product detail › DC-063: Mobile sticky bar fixed at bottom (2.6s)
+  ✓  597 [chromium] › e2e\tests\visual\DC-054-product-card.spec.ts:46:7 › DC-054: Product Card (public) › DC-054: Product card brand is 14px grey (2.3s)
+  ✘  520 [chromium] › e2e\tests\visual\BVC-034-036-panel-layout.spec.ts:20:7 › BVC-034 & BVC-036: Panel layout computed styles › BVC-034: sidebar background white (30.1s)
+  ✘  587 [chromium] › e2e\tests\visual\DC-047-panel-productos-listado.spec.ts:11:7 › DC-047: Panel Productos listado › DC-047: titulo "Productos" con 24px Bold (retry #1) (6.6s)
+  ✘  590 [chromium] › e2e\tests\visual\DC-058-product-gallery.spec.ts:6:7 › DC-058: Product Gallery › DC-058: Gallery has thumbnails and main image (6.7s)
+  ✓  599 [chromium] › e2e\tests\visual\DC-066-095-timeline.spec.ts:6:7 › DC-066/DC-095: Timeline distribuidores › DC-066: Desktop timeline is horizontal with 4 nodes (2.6s)
+  ✓  600 [chromium] › e2e\tests\visual\DC-069-070-badges-pills.spec.ts:6:7 › DC-069/DC-070: Species Badges and Presentation Pills › DC-069: Species badges visible on product detail (1.7s)
+  ✓  601 [chromium] › e2e\tests\visual\DC-054-product-card.spec.ts:63:7 › DC-054: Product Card (public) › BVC-008: No prices shown on product cards (2.4s)
+  ✓  605 [chromium] › e2e\tests\visual\DC-069-070-badges-pills.spec.ts:18:7 › DC-069/DC-070: Species Badges and Presentation Pills › DC-070: Presentation pills visible on product detail (1.7s)
+  ✓  604 [chromium] › e2e\tests\visual\DC-066-095-timeline.spec.ts:22:7 › DC-066/DC-095: Timeline distribuidores › DC-095: Mobile timeline is vertical (2.6s)
+  ✓  608 [chromium] › e2e\tests\visual\DC-054-product-card.spec.ts:80:7 › DC-054: Product Card (public) › BVC-025: No prices visible anywhere on the site (2.7s)
+  ✓  611 [chromium] › e2e\tests\visual\DC-076-data-table.spec.ts:6:7 › DC-076: Data Table panel › DC-076: Table view toggle exists in productos page (1.5s)
+  ✓  612 [chromium] › e2e\tests\visual\DC-054-product-card.spec.ts:90:7 › DC-054: Product Card (public) › BVC-026: No cart or checkout elements (910ms)
+  ✓  603 [chromium] › e2e\tests\flow\UX-060-067-mock-data.spec.ts:80:5 › UX-066: About page shows 6 team members (5.8s)
+  ✘  578 [chromium] › e2e\tests\flow\UX-111-detalle-mensaje.spec.ts:24:7 › UX-111: Detalle de mensaje › UX-111: Notas internas con textarea y boton guardar (retry #1) (16.1s)
+  ✓  613 [chromium] › e2e\tests\visual\DC-076-data-table.spec.ts:17:7 › DC-076: Data Table panel › DC-076: Table headers are uppercase when table view is active (1.5s)
+  ✓  614 [chromium] › e2e\tests\visual\DC-079-DC-133-confirm-modal.spec.ts:6:7 › DC-079/DC-133: Confirm Modal › DC-079: Modal appears on destructive action (1.8s)
+  ✓  616 [chromium] › e2e\tests\visual\DC-087-094-responsive-filters-pagination.spec.ts:6:7 › DC-087: Filtros drawer mobile › DC-087: Mobile shows filter button instead of inline filters (1.8s)
+  ✘  607 [chromium] › e2e\tests\visual\DC-047-panel-productos-listado.spec.ts:21:7 › DC-047: Panel Productos listado › DC-047: boton "+ Crear producto" presente con fondo #008DC9 (7.0s)
+  ✓  617 [chromium] › e2e\tests\visual\DC-079-DC-133-confirm-modal.spec.ts:37:7 › DC-079/DC-133: Confirm Modal › DC-133: Modal has danger icon and proper layout (2.1s)
+  ✘  610 [chromium] › e2e\tests\visual\DC-074-075-panel-cards-toggle.spec.ts:11:7 › DC-074: View Toggle & DC-075: Product Card Admin › DC-074: view toggle has two pill buttons (card/table) (6.6s)
+  ✘  609 [chromium] › e2e\tests\visual\DC-058-product-gallery.spec.ts:6:7 › DC-058: Product Gallery › DC-058: Gallery has thumbnails and main image (retry #1) (7.3s)
+  ✘  593 [chromium] › e2e\tests\flow\UX-109-kanban-drag-drop.spec.ts:32:7 › UX-109: Kanban drag-and-drop mensajes › UX-109: Cards son clickeables y llevan al detalle (16.0s)
+  ✓  619 [chromium] › e2e\tests\visual\DC-087-094-responsive-filters-pagination.spec.ts:20:7 › DC-094: Pagination responsive › DC-094: Desktop shows pagination with numbers (2.9s)
+  ✘  602 [chromium] › e2e\tests\flow\UX-070-admin-categorias.spec.ts:49:7 › UX-070: Admin categorias panel › tags have remove buttons (editable) (retry #1) (11.1s)
+  ✓  623 [chromium] › e2e\tests\visual\DC-093-carousel-responsive.spec.ts:6:7 › DC-093: Carousel responsive › DC-093: Desktop shows carousel with navigation arrows (2.1s)
+  ✓  624 [chromium] › e2e\tests\visual\DC-087-094-responsive-filters-pagination.spec.ts:35:7 › DC-094: Pagination responsive › DC-094: Mobile shows simplified pagination (2.2s)
+  ✘  598 [chromium] › e2e\tests\flow\UX-110-mensajes-toggle-kanban-tabla.spec.ts:25:7 › UX-110: Toggle Kanban/Tabla en mensajes › UX-110: Toggle a vista Tabla muestra tabla con datos (16.0s)
+  ✘  615 [chromium] › e2e\tests\flow\UX-060-067-mock-data.spec.ts:100:5 › UX-067: Dashboard data is coherent (48 products, 3 new messages, 12 brands, 6 featured) (8.8s)
+  ✓  627 [chromium] › e2e\tests\visual\DC-093-carousel-responsive.spec.ts:24:7 › DC-093: Carousel responsive › DC-093: Mobile hides carousel arrows (1.8s)
+  ✘  626 [chromium] › e2e\tests\visual\DC-097-brands-responsive.spec.ts:6:7 › DC-097: Brands section responsive › DC-097: Desktop 1440px - 4 logos per row (2.9s)
+  ✘  620 [chromium] › e2e\tests\visual\DC-089-panel-cards-responsive.spec.ts:6:7 › DC-089: Panel cards responsive › product cards render as grid with radius 16px in admin (6.6s)
+  ✘  621 [chromium] › e2e\tests\visual\DC-047-panel-productos-listado.spec.ts:21:7 › DC-047: Panel Productos listado › DC-047: boton "+ Crear producto" presente con fondo #008DC9 (retry #1) (7.3s)
+  ✓  629 [chromium] › e2e\tests\visual\DC-101-home-all-sections.spec.ts:6:7 › DC-101: Home - All sections visible › DC-101: All main sections render on home page (2.8s)
+  ✘  622 [chromium] › e2e\tests\visual\DC-074-075-panel-cards-toggle.spec.ts:11:7 › DC-074: View Toggle & DC-075: Product Card Admin › DC-074: view toggle has two pill buttons (card/table) (retry #1) (6.9s)
+  ✘  628 [chromium] › e2e\tests\visual\DC-098-tabs-pill.spec.ts:6:7 › DC-098: Tabs pill responsive › bilingual tabs visible in product form (6.0s)
+  ✘  632 [chromium] › e2e\tests\visual\DC-097-brands-responsive.spec.ts:6:7 › DC-097: Brands section responsive › DC-097: Desktop 1440px - 4 logos per row (retry #1) (2.9s)
+  ✓  634 [chromium] › e2e\tests\visual\DC-101-home-all-sections.spec.ts:41:7 › DC-101: Home - All sections visible › DC-101: Sections become visible with IntersectionObserver on scroll (3.8s)
+  ✘  633 [chromium] › e2e\tests\visual\DC-089-panel-cards-responsive.spec.ts:6:7 › DC-089: Panel cards responsive › product cards render as grid with radius 16px in admin (retry #1) (6.1s)
+  ✘  638 [chromium] › e2e\tests\visual\DC-097-brands-responsive.spec.ts:19:7 › DC-097: Brands section responsive › DC-097: Mobile 375px - logos grid adapts (2.7s)
+  ✓  639 [chromium] › e2e\tests\visual\DC-111-detalle-404.spec.ts:6:7 › DC-111: Detalle producto 404 › producto inexistente muestra pagina 404 estilizada (3.0s)
+  ✘  618 [chromium] › e2e\tests\flow\UX-111-detalle-mensaje.spec.ts:34:7 › UX-111: Detalle de mensaje › UX-111: Dropdown de estado con opciones (16.9s)
+  ✘  631 [chromium] › e2e\tests\flow\UX-060-067-mock-data.spec.ts:100:5 › UX-067: Dashboard data is coherent (48 products, 3 new messages, 12 brands, 6 featured) (retry #1) (8.6s)
+  ✘  635 [chromium] › e2e\tests\visual\DC-047-panel-productos-listado.spec.ts:28:7 › DC-047: Panel Productos listado › DC-047: toggle Card/Table presente (6.6s)
+  ✘  640 [chromium] › e2e\tests\visual\DC-128-validation-inline.spec.ts:6:7 › DC-128: Inline form validation › DC-128: Required field shows error on blur (2.3s)
+  ✘  637 [chromium] › e2e\tests\visual\DC-098-tabs-pill.spec.ts:6:7 › DC-098: Tabs pill responsive › bilingual tabs visible in product form (retry #1) (6.1s)
+  ✓  644 [chromium] › e2e\tests\visual\DC-129-130-132-form-feedback.spec.ts:6:7 › DC-129/DC-130/DC-132: Form feedback states › DC-129: Submit button shows loading state (1.9s)
+  ✘  625 [chromium] › e2e\tests\flow\UX-109-kanban-drag-drop.spec.ts:32:7 › UX-109: Kanban drag-and-drop mensajes › UX-109: Cards son clickeables y llevan al detalle (retry #1) (16.1s)
+  ✓  641 [chromium] › e2e\tests\visual\DC-113-sin-ficha-pdf.spec.ts:6:7 › DC-113: Sin ficha PDF › detalle producto con ficha PDF muestra boton de descarga (3.2s)
+  ✘  642 [chromium] › e2e\tests\visual\DC-097-brands-responsive.spec.ts:19:7 › DC-097: Brands section responsive › DC-097: Mobile 375px - logos grid adapts (retry #1) (2.9s)
+  ✓  648 [chromium] › e2e\tests\visual\DC-129-130-132-form-feedback.spec.ts:29:7 › DC-129/DC-130/DC-132: Form feedback states › DC-130: Success state shows confirmation with checkmark (2.0s)
+  ✓  649 [chromium] › e2e\tests\visual\DC-141-underline-links.spec.ts:6:7 › DC-141: Underline links menu animation › DC-141: Menu links have ::after pseudo-element for underline (2.2s)
+  ✓  647 [chromium] › e2e\tests\visual\DC-139-scroll-fadein.spec.ts:6:7 › DC-139: Scroll fade-in on all sections › DC-139: fade-in-section elements exist on home page (2.3s)
+  ✘  646 [chromium] › e2e\tests\visual\DC-128-validation-inline.spec.ts:6:7 › DC-128: Inline form validation › DC-128: Required field shows error on blur (retry #1) (2.6s)
+  ✘  630 [chromium] › e2e\tests\flow\UX-110-mensajes-toggle-kanban-tabla.spec.ts:25:7 › UX-110: Toggle Kanban/Tabla en mensajes › UX-110: Toggle a vista Tabla muestra tabla con datos (retry #1) (16.0s)
+  ✘  606 [chromium] › e2e\tests\visual\BVC-034-036-panel-layout.spec.ts:20:7 › BVC-034 & BVC-036: Panel layout computed styles › BVC-034: sidebar background white (retry #1) (30.1s)
+  ✓  650 [chromium] › e2e\tests\visual\DC-140-logos-grayscale.spec.ts:6:7 › DC-140: Logos grayscale to color transition › DC-140: Logo items have filter or opacity transition defined (2.8s)
+  ✓  652 [chromium] › e2e\tests\visual\DC-147-logo-scroll-crossfade.spec.ts:6:7 › DC-147: Logo header scroll crossfade › DC-147: Logo crossfades from full to isotipo on scroll (2.5s)
+  ✘  651 [chromium] › e2e\tests\visual\DC-097-brands-responsive.spec.ts:33:7 › DC-097: Brands section responsive › DC-097: Tablet 768px - logos grid adapts (2.8s)
+  ✘  645 [chromium] › e2e\tests\visual\DC-047-panel-productos-listado.spec.ts:28:7 › DC-047: Panel Productos listado › DC-047: toggle Card/Table presente (retry #1) (6.6s)
+  ✓  653 [chromium] › e2e\tests\visual\DC-148-mobile-menu.spec.ts:6:7 › DC-148: Mobile menu slide-in › hamburger menu present in mobile viewport (3.1s)
+  ✓  655 [chromium] › e2e\tests\visual\DC-128-validation-inline.spec.ts:31:7 › DC-128: Inline form validation › DC-119: Validation shows red border 2px on invalid fields (1.8s)
+  ✓  654 [chromium] › e2e\tests\visual\DC-139-scroll-fadein.spec.ts:17:7 › DC-139: Scroll fade-in on all sections › DC-139: IntersectionObserver applies is-visible on scroll (3.8s)
+  ✓  657 [chromium] › e2e\tests\visual\NFR-021-wcag-accessibility.spec.ts:6:7 › NFR-021: WCAG AA Accessibility › NFR-021: ARIA landmarks present on home page (2.1s)
+  ✓  658 [chromium] › e2e\tests\visual\NFR-001-003-performance.spec.ts:6:7 › NFR-001/NFR-003: Performance metrics › NFR-001: LCP on home page (2.1s)
+  ✓  663 [chromium] › e2e\tests\visual\DC-139-scroll-fadein.spec.ts:38:7 › DC-139: Scroll fade-in on all sections › DC-139: fade-in-section has opacity transition CSS (2.2s)
+  ✓  660 [chromium] › e2e\tests\visual\DC-148-mobile-menu.spec.ts:25:7 › DC-148: Mobile menu slide-in › mobile menu is a dialog with navigation links (3.1s)
+  ✓  665 [chromium] › e2e\tests\visual\DC-047-panel-productos-listado.spec.ts:35:7 › DC-047: Panel Productos listado › DC-047: grid 3 columnas en desktop (1.9s)
+  ✓  664 [chromium] › e2e\tests\visual\NFR-021-wcag-accessibility.spec.ts:23:7 › NFR-021: WCAG AA Accessibility › NFR-021: Focus visible on interactive elements (2.4s)
+  ✓  661 [chromium] › e2e\tests\visual\NFR-026-tap-targets.spec.ts:6:7 › NFR-026: Tap targets >= 44x44px en mobile › WhatsApp FAB cumple minimo 44px (3.1s)
+  ✘  662 [chromium] › e2e\tests\visual\DC-097-brands-responsive.spec.ts:33:7 › DC-097: Brands section responsive › DC-097: Tablet 768px - logos grid adapts (retry #1) (3.0s)
+  ✘  667 [chromium] › e2e\tests\visual\DC-047-panel-productos-listado.spec.ts:42:7 › DC-047: Panel Productos listado › DC-047: product cards tienen badges de categoria y estado (1.5s)
+  ✘  656 [chromium] › e2e\tests\visual\NFR-005-panel-load.spec.ts:6:7 › NFR-005: Panel carga inicial < 3s › admin productos carga en menos de 3 segundos (6.1s)
+  ✓  668 [chromium] › e2e\tests\visual\NFR-021-wcag-accessibility.spec.ts:52:7 › NFR-021: WCAG AA Accessibility › NFR-021: Language attribute set on html (1.8s)
+  ✘  666 [chromium] › e2e\tests\visual\NFR-001-003-performance.spec.ts:34:7 › NFR-001/NFR-003: Performance metrics › NFR-003: CLS on home page is acceptable (5.2s)
+  ✘  669 [chromium] › e2e\tests\visual\NFR-026-tap-targets.spec.ts:22:7 › NFR-026: Tap targets >= 44x44px en mobile › majority of interactive elements meet 44px minimum (3.1s)
+  ✘  670 [chromium] › e2e\tests\visual\DC-047-panel-productos-listado.spec.ts:42:7 › DC-047: Panel Productos listado › DC-047: product cards tienen badges de categoria y estado (retry #1) (1.6s)
+  ✘  643 [chromium] › e2e\tests\flow\UX-111-detalle-mensaje.spec.ts:34:7 › UX-111: Detalle de mensaje › UX-111: Dropdown de estado con opciones (retry #1) (16.1s)
+  ✘  673 [chromium] › e2e\tests\visual\NFR-026-tap-targets.spec.ts:22:7 › NFR-026: Tap targets >= 44x44px en mobile › majority of interactive elements meet 44px minimum (retry #1) (3.2s)
+  ✘  671 [chromium] › e2e\tests\visual\NFR-005-panel-load.spec.ts:6:7 › NFR-005: Panel carga inicial < 3s › admin productos carga en menos de 3 segundos (retry #1) (6.1s)
+  ✘  672 [chromium] › e2e\tests\visual\NFR-001-003-performance.spec.ts:34:7 › NFR-001/NFR-003: Performance metrics › NFR-003: CLS on home page is acceptable (retry #1) (5.0s)
+  ✘  636 [chromium] › e2e\tests\visual\DC-074-075-panel-cards-toggle.spec.ts:18:7 › DC-074: View Toggle & DC-075: Product Card Admin › DC-074: active toggle has blue background #008DC9 (30.1s)
+  ✘  674 [chromium] › e2e\tests\visual\DC-047-panel-productos-listado.spec.ts:48:7 › DC-047: Panel Productos listado › DC-047: product cards tienen menu 3 puntos (6.6s)
+  ✘  677 [chromium] › e2e\tests\visual\DC-047-panel-productos-listado.spec.ts:48:7 › DC-047: Panel Productos listado › DC-047: product cards tienen menu 3 puntos (retry #1) (6.6s)
+  ✘  675 [chromium] › e2e\tests\flow\UX-111-detalle-mensaje.spec.ts:46:7 › UX-111: Detalle de mensaje › UX-111: Botones de accion presentes (15.9s)
+  ✘  659 [chromium] › e2e\tests\visual\BVC-034-036-panel-layout.spec.ts:26:7 › BVC-034 & BVC-036: Panel layout computed styles › BVC-034: sidebar has right border (30.1s)
+  ✘  678 [chromium] › e2e\tests\flow\UX-111-detalle-mensaje.spec.ts:46:7 › UX-111: Detalle de mensaje › UX-111: Botones de accion presentes (retry #1) (16.0s)
+  ✘  676 [chromium] › e2e\tests\visual\DC-074-075-panel-cards-toggle.spec.ts:18:7 › DC-074: View Toggle & DC-075: Product Card Admin › DC-074: active toggle has blue background #008DC9 (retry #1) (30.1s)
+  ✓  681 [chromium] › e2e\tests\visual\DC-074-075-panel-cards-toggle.spec.ts:25:7 › DC-074: View Toggle & DC-075: Product Card Admin › DC-075: product card admin has radius 16px (1.7s)
+  ✘  682 [chromium] › e2e\tests\visual\DC-074-075-panel-cards-toggle.spec.ts:32:7 › DC-074: View Toggle & DC-075: Product Card Admin › DC-075: product card has name bold, brand grey, and badges (6.5s)
+  ✘  680 [chromium] › e2e\tests\flow\UX-111-detalle-mensaje.spec.ts:55:7 › UX-111: Detalle de mensaje › UX-111: Link "Volver a mensajes" presente (16.0s)
+  ✘  679 [chromium] › e2e\tests\visual\BVC-034-036-panel-layout.spec.ts:26:7 › BVC-034 & BVC-036: Panel layout computed styles › BVC-034: sidebar has right border (retry #1) (30.1s)
+  ✘  683 [chromium] › e2e\tests\visual\DC-074-075-panel-cards-toggle.spec.ts:32:7 › DC-074: View Toggle & DC-075: Product Card Admin › DC-075: product card has name bold, brand grey, and badges (retry #1) (6.6s)
+  ✘  685 [chromium] › e2e\tests\visual\BVC-034-036-panel-layout.spec.ts:33:7 › BVC-034 & BVC-036: Panel layout computed styles › BVC-036: content area background #F7F8FA (6.6s)
+  ✘  686 [chromium] › e2e\tests\visual\DC-074-075-panel-cards-toggle.spec.ts:42:7 › DC-074: View Toggle & DC-075: Product Card Admin › DC-075: product card has 3-dot menu (6.5s)
+  ✘  687 [chromium] › e2e\tests\visual\BVC-034-036-panel-layout.spec.ts:33:7 › BVC-034 & BVC-036: Panel layout computed styles › BVC-036: content area background #F7F8FA (retry #1) (6.5s)
+  ✘  684 [chromium] › e2e\tests\flow\UX-111-detalle-mensaje.spec.ts:55:7 › UX-111: Detalle de mensaje › UX-111: Link "Volver a mensajes" presente (retry #1) (16.0s)
+  ✘  688 [chromium] › e2e\tests\visual\DC-074-075-panel-cards-toggle.spec.ts:42:7 › DC-074: View Toggle & DC-075: Product Card Admin › DC-075: product card has 3-dot menu (retry #1) (6.5s)
+  ✘  689 [chromium] › e2e\tests\visual\BVC-034-036-panel-layout.spec.ts:40:7 › BVC-034 & BVC-036: Panel layout computed styles › BVC-036: content area padding 32px desktop (30.1s)
+  ✘  690 [chromium] › e2e\tests\visual\BVC-034-036-panel-layout.spec.ts:40:7 › BVC-034 & BVC-036: Panel layout computed styles › BVC-036: content area padding 32px desktop (retry #1) (30.1s)
+
+
+  1) [chromium] › e2e\tests\edge-case\BVC-018-destructive-confirmation.spec.ts:6:7 › BVC-018: Acciones destructivas tienen confirmacion modal › admin productos tiene vista tarjetas y tabla 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('button', { name: 'Vista de tarjetas' })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('button', { name: 'Vista de tarjetas' })[22m
+
+
+      11 |     }
+      12 |
+    > 13 |     await expect(page.getByRole('button', { name: 'Vista de tarjetas' })).toBeVisible({ timeout: 10000 });
+         |                                                                           ^
+      14 |     await expect(page.getByRole('button', { name: 'Vista de tabla' })).toBeVisible({ timeout: 10000 });
+      15 |   });
+      16 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\BVC-018-destructive-confirmation.spec.ts:13:75
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-BVC-018-destruct-9e075-iene-vista-tarjetas-y-tabla-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-BVC-018-destruct-9e075-iene-vista-tarjetas-y-tabla-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('button', { name: 'Vista de tarjetas' })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('button', { name: 'Vista de tarjetas' })[22m
+
+
+      11 |     }
+      12 |
+    > 13 |     await expect(page.getByRole('button', { name: 'Vista de tarjetas' })).toBeVisible({ timeout: 10000 });
+         |                                                                           ^
+      14 |     await expect(page.getByRole('button', { name: 'Vista de tabla' })).toBeVisible({ timeout: 10000 });
+      15 |   });
+      16 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\BVC-018-destructive-confirmation.spec.ts:13:75
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-BVC-018-destruct-9e075-iene-vista-tarjetas-y-tabla-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-BVC-018-destruct-9e075-iene-vista-tarjetas-y-tabla-chromium-retry1\error-context.md
+
+  2) [chromium] › e2e\tests\edge-case\BVC-018-destructive-confirmation.spec.ts:17:7 › BVC-018: Acciones destructivas tienen confirmacion modal › vista tabla tiene acciones Ver y Editar por producto 
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('button', { name: 'Vista de tabla' })[22m
+
+
+      22 |     }
+      23 |
+    > 24 |     await page.getByRole('button', { name: 'Vista de tabla' }).click();
+         |                                                                ^
+      25 |
+      26 |     // Verificar que la primera fila tiene acciones
+      27 |     const firstProductRow = page.getByRole('row').nth(1);
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\BVC-018-destructive-confirmation.spec.ts:24:64
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-BVC-018-destruct-b58b1-s-Ver-y-Editar-por-producto-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-BVC-018-destruct-b58b1-s-Ver-y-Editar-por-producto-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('button', { name: 'Vista de tabla' })[22m
+
+
+      22 |     }
+      23 |
+    > 24 |     await page.getByRole('button', { name: 'Vista de tabla' }).click();
+         |                                                                ^
+      25 |
+      26 |     // Verificar que la primera fila tiene acciones
+      27 |     const firstProductRow = page.getByRole('row').nth(1);
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\BVC-018-destructive-confirmation.spec.ts:24:64
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-BVC-018-destruct-b58b1-s-Ver-y-Editar-por-producto-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-BVC-018-destruct-b58b1-s-Ver-y-Editar-por-producto-chromium-retry1\error-context.md
+
+  3) [chromium] › e2e\tests\edge-case\BVC-018-destructive-confirmation.spec.ts:32:7 › BVC-018: Acciones destructivas tienen confirmacion modal › admin marcas renderiza correctamente 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: 'Marcas', level: 1 })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'Marcas', level: 1 })[22m
+
+
+      37 |     }
+      38 |
+    > 39 |     await expect(heading).toBeVisible({ timeout: 10000 });
+         |                           ^
+      40 |     await expect(page.getByRole('link', { name: 'Crear marca' })).toBeVisible({ timeout: 10000 });
+      41 |   });
+      42 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\BVC-018-destructive-confirmation.spec.ts:39:27
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-BVC-018-destruct-0a774-cas-renderiza-correctamente-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-BVC-018-destruct-0a774-cas-renderiza-correctamente-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: 'Marcas', level: 1 })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'Marcas', level: 1 })[22m
+
+
+      37 |     }
+      38 |
+    > 39 |     await expect(heading).toBeVisible({ timeout: 10000 });
+         |                           ^
+      40 |     await expect(page.getByRole('link', { name: 'Crear marca' })).toBeVisible({ timeout: 10000 });
+      41 |   });
+      42 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\BVC-018-destructive-confirmation.spec.ts:39:27
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-BVC-018-destruct-0a774-cas-renderiza-correctamente-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-BVC-018-destruct-0a774-cas-renderiza-correctamente-chromium-retry1\error-context.md
+
+  4) [chromium] › e2e\tests\edge-case\BVC-018-destructive-confirmation.spec.ts:43:7 › BVC-018: Acciones destructivas tienen confirmacion modal › admin marcas muestra 12 marcas 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Zoetis').first()
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByText('Zoetis').first()[22m
+
+
+      55 |
+      56 |     for (const brand of expectedBrands) {
+    > 57 |       await expect(page.getByText(brand).first()).toBeVisible({ timeout: 10000 });
+         |                                                   ^
+      58 |     }
+      59 |   });
+      60 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\BVC-018-destructive-confirmation.spec.ts:57:51
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-BVC-018-destruct-a4fcf-in-marcas-muestra-12-marcas-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-BVC-018-destruct-a4fcf-in-marcas-muestra-12-marcas-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Zoetis').first()
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByText('Zoetis').first()[22m
+
+
+      55 |
+      56 |     for (const brand of expectedBrands) {
+    > 57 |       await expect(page.getByText(brand).first()).toBeVisible({ timeout: 10000 });
+         |                                                   ^
+      58 |     }
+      59 |   });
+      60 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\BVC-018-destructive-confirmation.spec.ts:57:51
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-BVC-018-destruct-a4fcf-in-marcas-muestra-12-marcas-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-BVC-018-destruct-a4fcf-in-marcas-muestra-12-marcas-chromium-retry1\error-context.md
+
+  5) [chromium] › e2e\tests\edge-case\BVC-018-destructive-confirmation.spec.ts:61:7 › BVC-018: Acciones destructivas tienen confirmacion modal › admin mensajes kanban permite ver detalle de mensaje 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('link', { name: /Dr. Roberto Campos/ })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('link', { name: /Dr. Roberto Campos/ })[22m
+
+
+      68 |     // Las cards son links clickables
+      69 |     const firstCard = page.getByRole('link', { name: /Dr. Roberto Campos/ });
+    > 70 |     await expect(firstCard).toBeVisible({ timeout: 10000 });
+         |                             ^
+      71 |     await expect(firstCard).toHaveAttribute('href', '/admin/mensajes/m1');
+      72 |   });
+      73 | });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\BVC-018-destructive-confirmation.spec.ts:70:29
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-BVC-018-destruct-757a1-mite-ver-detalle-de-mensaje-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-BVC-018-destruct-757a1-mite-ver-detalle-de-mensaje-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('link', { name: /Dr. Roberto Campos/ })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('link', { name: /Dr. Roberto Campos/ })[22m
+
+
+      68 |     // Las cards son links clickables
+      69 |     const firstCard = page.getByRole('link', { name: /Dr. Roberto Campos/ });
+    > 70 |     await expect(firstCard).toBeVisible({ timeout: 10000 });
+         |                             ^
+      71 |     await expect(firstCard).toHaveAttribute('href', '/admin/mensajes/m1');
+      72 |   });
+      73 | });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\BVC-018-destructive-confirmation.spec.ts:70:29
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-BVC-018-destruct-757a1-mite-ver-detalle-de-mensaje-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-BVC-018-destruct-757a1-mite-ver-detalle-de-mensaje-chromium-retry1\error-context.md
+
+  6) [chromium] › e2e\tests\edge-case\DC-077-078-form-fields-uploader.spec.ts:6:7 › DC-077: Form Fields Panel Styling › Input fields have border-radius 10px 
+
+    TimeoutError: page.waitForSelector: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('text=Crear Producto') to be visible[22m
+
+
+       6 |   test('Input fields have border-radius 10px', async ({ page }) => {
+       7 |     await page.goto(`${BASE}/admin/productos/crear`);
+    >  8 |     await page.waitForSelector('text=Crear Producto', { timeout: 10000 });
+         |                ^
+       9 |
+      10 |     const input = page.getByRole('textbox', { name: 'Nombre del producto' });
+      11 |     await expect(input).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-077-078-form-fields-uploader.spec.ts:8:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-077-078-form--93446-lds-have-border-radius-10px-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-077-078-form--93446-lds-have-border-radius-10px-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TimeoutError: page.waitForSelector: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('text=Crear Producto') to be visible[22m
+
+
+       6 |   test('Input fields have border-radius 10px', async ({ page }) => {
+       7 |     await page.goto(`${BASE}/admin/productos/crear`);
+    >  8 |     await page.waitForSelector('text=Crear Producto', { timeout: 10000 });
+         |                ^
+       9 |
+      10 |     const input = page.getByRole('textbox', { name: 'Nombre del producto' });
+      11 |     await expect(input).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-077-078-form-fields-uploader.spec.ts:8:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-077-078-form--93446-lds-have-border-radius-10px-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-077-078-form--93446-lds-have-border-radius-10px-chromium-retry1\error-context.md
+
+  7) [chromium] › e2e\tests\edge-case\DC-077-078-form-fields-uploader.spec.ts:19:7 › DC-077: Form Fields Panel Styling › Input fields have label above 
+
+    TimeoutError: page.waitForSelector: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('text=Crear Producto') to be visible[22m
+
+
+      19 |   test('Input fields have label above', async ({ page }) => {
+      20 |     await page.goto(`${BASE}/admin/productos/crear`);
+    > 21 |     await page.waitForSelector('text=Crear Producto', { timeout: 10000 });
+         |                ^
+      22 |
+      23 |     await expect(page.getByText('Nombre del producto *')).toBeVisible();
+      24 |     await expect(page.getByText('Marca *')).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-077-078-form-fields-uploader.spec.ts:21:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-077-078-form--0bfd6-put-fields-have-label-above-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-077-078-form--0bfd6-put-fields-have-label-above-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TimeoutError: page.waitForSelector: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('text=Crear Producto') to be visible[22m
+
+
+      19 |   test('Input fields have label above', async ({ page }) => {
+      20 |     await page.goto(`${BASE}/admin/productos/crear`);
+    > 21 |     await page.waitForSelector('text=Crear Producto', { timeout: 10000 });
+         |                ^
+      22 |
+      23 |     await expect(page.getByText('Nombre del producto *')).toBeVisible();
+      24 |     await expect(page.getByText('Marca *')).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-077-078-form-fields-uploader.spec.ts:21:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-077-078-form--0bfd6-put-fields-have-label-above-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-077-078-form--0bfd6-put-fields-have-label-above-chromium-retry1\error-context.md
+
+  8) [chromium] › e2e\tests\edge-case\DC-077-078-form-fields-uploader.spec.ts:28:7 › DC-077: Form Fields Panel Styling › Focus ring shows 2px brand-primary (#008DC9) on input 
+
+    TimeoutError: page.waitForSelector: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('text=Crear Producto') to be visible[22m
+
+
+      28 |   test('Focus ring shows 2px brand-primary (#008DC9) on input', async ({ page }) => {
+      29 |     await page.goto(`${BASE}/admin/productos/crear`);
+    > 30 |     await page.waitForSelector('text=Crear Producto', { timeout: 10000 });
+         |                ^
+      31 |
+      32 |     const input = page.getByRole('textbox', { name: 'Nombre del producto' });
+      33 |     await input.focus();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-077-078-form-fields-uploader.spec.ts:30:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-077-078-form--5eb62-and-primary-008DC9-on-input-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-077-078-form--5eb62-and-primary-008DC9-on-input-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TimeoutError: page.waitForSelector: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('text=Crear Producto') to be visible[22m
+
+
+      28 |   test('Focus ring shows 2px brand-primary (#008DC9) on input', async ({ page }) => {
+      29 |     await page.goto(`${BASE}/admin/productos/crear`);
+    > 30 |     await page.waitForSelector('text=Crear Producto', { timeout: 10000 });
+         |                ^
+      31 |
+      32 |     const input = page.getByRole('textbox', { name: 'Nombre del producto' });
+      33 |     await input.focus();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-077-078-form-fields-uploader.spec.ts:30:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-077-078-form--5eb62-and-primary-008DC9-on-input-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-077-078-form--5eb62-and-primary-008DC9-on-input-chromium-retry1\error-context.md
+
+  9) [chromium] › e2e\tests\edge-case\DC-077-078-form-fields-uploader.spec.ts:55:7 › DC-078: Image Uploader Styling › Image upload zone has dashed border 
+
+    TimeoutError: page.waitForSelector: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('text=Crear Producto') to be visible[22m
+
+
+      55 |   test('Image upload zone has dashed border', async ({ page }) => {
+      56 |     await page.goto(`${BASE}/admin/productos/crear`);
+    > 57 |     await page.waitForSelector('text=Crear Producto', { timeout: 10000 });
+         |                ^
+      58 |
+      59 |     const uploadZone = page.locator('text=Arrastra imagenes aqui o selecciona archivos').locator('..');
+      60 |     await expect(uploadZone).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-077-078-form-fields-uploader.spec.ts:57:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-077-078-form--2997a-load-zone-has-dashed-border-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-077-078-form--2997a-load-zone-has-dashed-border-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TimeoutError: page.waitForSelector: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('text=Crear Producto') to be visible[22m
+
+
+      55 |   test('Image upload zone has dashed border', async ({ page }) => {
+      56 |     await page.goto(`${BASE}/admin/productos/crear`);
+    > 57 |     await page.waitForSelector('text=Crear Producto', { timeout: 10000 });
+         |                ^
+      58 |
+      59 |     const uploadZone = page.locator('text=Arrastra imagenes aqui o selecciona archivos').locator('..');
+      60 |     await expect(uploadZone).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-077-078-form-fields-uploader.spec.ts:57:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-077-078-form--2997a-load-zone-has-dashed-border-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-077-078-form--2997a-load-zone-has-dashed-border-chromium-retry1\error-context.md
+
+  10) [chromium] › e2e\tests\edge-case\DC-077-078-form-fields-uploader.spec.ts:78:7 › DC-078: Image Uploader Styling › Upload zone has upload icon 
+
+    TimeoutError: page.waitForSelector: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('text=Crear Producto') to be visible[22m
+
+
+      78 |   test('Upload zone has upload icon', async ({ page }) => {
+      79 |     await page.goto(`${BASE}/admin/productos/crear`);
+    > 80 |     await page.waitForSelector('text=Crear Producto', { timeout: 10000 });
+         |                ^
+      81 |
+      82 |     // Upload icon (SVG or img) should be present near the upload text
+      83 |     const uploadSection = page.locator('text=Arrastra imagenes aqui o selecciona archivos').locator('..');
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-077-078-form-fields-uploader.spec.ts:80:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-077-078-form--f1c81-Upload-zone-has-upload-icon-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-077-078-form--f1c81-Upload-zone-has-upload-icon-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TimeoutError: page.waitForSelector: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('text=Crear Producto') to be visible[22m
+
+
+      78 |   test('Upload zone has upload icon', async ({ page }) => {
+      79 |     await page.goto(`${BASE}/admin/productos/crear`);
+    > 80 |     await page.waitForSelector('text=Crear Producto', { timeout: 10000 });
+         |                ^
+      81 |
+      82 |     // Upload icon (SVG or img) should be present near the upload text
+      83 |     const uploadSection = page.locator('text=Arrastra imagenes aqui o selecciona archivos').locator('..');
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-077-078-form-fields-uploader.spec.ts:80:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-077-078-form--f1c81-Upload-zone-has-upload-icon-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-077-078-form--f1c81-Upload-zone-has-upload-icon-chromium-retry1\error-context.md
+
+  11) [chromium] › e2e\tests\edge-case\DC-077-078-form-fields-uploader.spec.ts:88:7 › DC-078: Image Uploader Styling › Upload zone shows format restriction text 
+
+    TimeoutError: page.waitForSelector: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('text=Crear Producto') to be visible[22m
+
+
+      88 |   test('Upload zone shows format restriction text', async ({ page }) => {
+      89 |     await page.goto(`${BASE}/admin/productos/crear`);
+    > 90 |     await page.waitForSelector('text=Crear Producto', { timeout: 10000 });
+         |                ^
+      91 |
+      92 |     await expect(page.getByText('PNG, JPG hasta 5MB')).toBeVisible();
+      93 |   });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-077-078-form-fields-uploader.spec.ts:90:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-077-078-form--4dea3-ows-format-restriction-text-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-077-078-form--4dea3-ows-format-restriction-text-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TimeoutError: page.waitForSelector: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('text=Crear Producto') to be visible[22m
+
+
+      88 |   test('Upload zone shows format restriction text', async ({ page }) => {
+      89 |     await page.goto(`${BASE}/admin/productos/crear`);
+    > 90 |     await page.waitForSelector('text=Crear Producto', { timeout: 10000 });
+         |                ^
+      91 |
+      92 |     await expect(page.getByText('PNG, JPG hasta 5MB')).toBeVisible();
+      93 |   });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-077-078-form-fields-uploader.spec.ts:90:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-077-078-form--4dea3-ows-format-restriction-text-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-077-078-form--4dea3-ows-format-restriction-text-chromium-retry1\error-context.md
+
+  12) [chromium] › e2e\tests\edge-case\DC-090-092-panel-responsive.spec.ts:6:7 › DC-090: Panel Tables Responsive › Product list renders in mobile viewport 
+
+    TimeoutError: page.waitForSelector: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('text=Productos') to be visible[22m
+
+
+       7 |     await page.setViewportSize({ width: 375, height: 812 });
+       8 |     await page.goto(`${BASE}/admin/productos`);
+    >  9 |     await page.waitForSelector('text=Productos', { timeout: 10000 });
+         |                ^
+      10 |
+      11 |     // Products should be visible (stacked cards in mobile)
+      12 |     await expect(page.getByRole('heading', { name: 'Productos' })).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-090-092-panel-responsive.spec.ts:9:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-090-092-panel-ce902--renders-in-mobile-viewport-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-090-092-panel-ce902--renders-in-mobile-viewport-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TimeoutError: page.waitForSelector: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('text=Productos') to be visible[22m
+
+
+       7 |     await page.setViewportSize({ width: 375, height: 812 });
+       8 |     await page.goto(`${BASE}/admin/productos`);
+    >  9 |     await page.waitForSelector('text=Productos', { timeout: 10000 });
+         |                ^
+      10 |
+      11 |     // Products should be visible (stacked cards in mobile)
+      12 |     await expect(page.getByRole('heading', { name: 'Productos' })).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-090-092-panel-responsive.spec.ts:9:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-090-092-panel-ce902--renders-in-mobile-viewport-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-090-092-panel-ce902--renders-in-mobile-viewport-chromium-retry1\error-context.md
+
+  13) [chromium] › e2e\tests\edge-case\DC-090-092-panel-responsive.spec.ts:18:7 › DC-091: Panel Forms Responsive › Product form renders in mobile viewport with single column 
+
+    TimeoutError: page.waitForSelector: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('text=Crear Producto') to be visible[22m
+
+
+      19 |     await page.setViewportSize({ width: 375, height: 812 });
+      20 |     await page.goto(`${BASE}/admin/productos/crear`);
+    > 21 |     await page.waitForSelector('text=Crear Producto', { timeout: 10000 });
+         |                ^
+      22 |
+      23 |     // Form should be visible
+      24 |     await expect(page.getByRole('heading', { name: 'Informacion Basica' })).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-090-092-panel-responsive.spec.ts:21:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-090-092-panel-184e3-viewport-with-single-column-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-090-092-panel-184e3-viewport-with-single-column-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TimeoutError: page.waitForSelector: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('text=Crear Producto') to be visible[22m
+
+
+      19 |     await page.setViewportSize({ width: 375, height: 812 });
+      20 |     await page.goto(`${BASE}/admin/productos/crear`);
+    > 21 |     await page.waitForSelector('text=Crear Producto', { timeout: 10000 });
+         |                ^
+      22 |
+      23 |     // Form should be visible
+      24 |     await expect(page.getByRole('heading', { name: 'Informacion Basica' })).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-090-092-panel-responsive.spec.ts:21:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-090-092-panel-184e3-viewport-with-single-column-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-090-092-panel-184e3-viewport-with-single-column-chromium-retry1\error-context.md
+
+  14) [chromium] › e2e\tests\edge-case\DC-090-092-panel-responsive.spec.ts:33:7 › DC-092: Panel Kanban Responsive › Messages page renders in mobile viewport 
+
+    TimeoutError: page.waitForSelector: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('text=Mensajes') to be visible[22m
+
+
+      34 |     await page.setViewportSize({ width: 375, height: 812 });
+      35 |     await page.goto(`${BASE}/admin/mensajes`);
+    > 36 |     await page.waitForSelector('text=Mensajes', { timeout: 10000 });
+         |                ^
+      37 |
+      38 |     // Messages section should be visible
+      39 |     await expect(page.getByRole('heading', { name: 'Mensajes' })).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-090-092-panel-responsive.spec.ts:36:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-090-092-panel-c05cd--renders-in-mobile-viewport-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-090-092-panel-c05cd--renders-in-mobile-viewport-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TimeoutError: page.waitForSelector: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('text=Mensajes') to be visible[22m
+
+
+      34 |     await page.setViewportSize({ width: 375, height: 812 });
+      35 |     await page.goto(`${BASE}/admin/mensajes`);
+    > 36 |     await page.waitForSelector('text=Mensajes', { timeout: 10000 });
+         |                ^
+      37 |
+      38 |     // Messages section should be visible
+      39 |     await expect(page.getByRole('heading', { name: 'Mensajes' })).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-090-092-panel-responsive.spec.ts:36:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-090-092-panel-c05cd--renders-in-mobile-viewport-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-090-092-panel-c05cd--renders-in-mobile-viewport-chromium-retry1\error-context.md
+
+  15) [chromium] › e2e\tests\edge-case\DC-115-login-error.spec.ts:16:7 › DC-115: Admin Login Page › Login page has Microsoft icon 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('button', { name: 'Iniciar sesion con Microsoft' }).locator('img')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('button', { name: 'Iniciar sesion con Microsoft' }).locator('img')[22m
+
+
+      20 |     const btn = page.getByRole('button', { name: 'Iniciar sesion con Microsoft' });
+      21 |     const img = btn.locator('img');
+    > 22 |     await expect(img).toBeVisible();
+         |                       ^
+      23 |   });
+      24 | });
+      25 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-115-login-error.spec.ts:22:23
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-115-login-err-0cce9-gin-page-has-Microsoft-icon-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-115-login-err-0cce9-gin-page-has-Microsoft-icon-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('button', { name: 'Iniciar sesion con Microsoft' }).locator('img')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('button', { name: 'Iniciar sesion con Microsoft' }).locator('img')[22m
+
+
+      20 |     const btn = page.getByRole('button', { name: 'Iniciar sesion con Microsoft' });
+      21 |     const img = btn.locator('img');
+    > 22 |     await expect(img).toBeVisible();
+         |                       ^
+      23 |   });
+      24 | });
+      25 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-115-login-error.spec.ts:22:23
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-115-login-err-0cce9-gin-page-has-Microsoft-icon-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-115-login-err-0cce9-gin-page-has-Microsoft-icon-chromium-retry1\error-context.md
+
+  16) [chromium] › e2e\tests\edge-case\DC-122-127-feedback-panel.spec.ts:7:7 › DC-122 to DC-127: Panel Feedback Visual › DC-123/DC-131: Save product triggers toast success 
+
+    TimeoutError: page.waitForSelector: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('text=Crear Producto') to be visible[22m
+
+
+       7 |   test('DC-123/DC-131: Save product triggers toast success', async ({ page }) => {
+       8 |     await page.goto(`${BASE}/admin/productos/crear`);
+    >  9 |     await page.waitForSelector('text=Crear Producto', { timeout: 10000 });
+         |                ^
+      10 |
+      11 |     // Fill minimum required fields
+      12 |     await page.getByRole('textbox', { name: 'Nombre del producto' }).fill('Producto Test');
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-122-127-feedback-panel.spec.ts:9:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-122-127-feedb-07354-duct-triggers-toast-success-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-122-127-feedb-07354-duct-triggers-toast-success-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TimeoutError: page.waitForSelector: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('text=Crear Producto') to be visible[22m
+
+
+       7 |   test('DC-123/DC-131: Save product triggers toast success', async ({ page }) => {
+       8 |     await page.goto(`${BASE}/admin/productos/crear`);
+    >  9 |     await page.waitForSelector('text=Crear Producto', { timeout: 10000 });
+         |                ^
+      10 |
+      11 |     // Fill minimum required fields
+      12 |     await page.getByRole('textbox', { name: 'Nombre del producto' }).fill('Producto Test');
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-122-127-feedback-panel.spec.ts:9:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-122-127-feedb-07354-duct-triggers-toast-success-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-122-127-feedb-07354-duct-triggers-toast-success-chromium-retry1\error-context.md
+
+  17) [chromium] › e2e\tests\edge-case\DC-122-127-feedback-panel.spec.ts:26:7 › DC-122 to DC-127: Panel Feedback Visual › DC-133: Modal confirm layout verification 
+
+    TimeoutError: page.waitForSelector: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('text=Productos') to be visible[22m
+
+
+      26 |   test('DC-133: Modal confirm layout verification', async ({ page }) => {
+      27 |     await page.goto(`${BASE}/admin/productos`);
+    > 28 |     await page.waitForSelector('text=Productos', { timeout: 10000 });
+         |                ^
+      29 |
+      30 |     // Click options on first product
+      31 |     const optionsBtn = page.getByRole('button', { name: 'Opciones del producto' }).first();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-122-127-feedback-panel.spec.ts:28:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-122-127-feedb-274e4-confirm-layout-verification-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-122-127-feedb-274e4-confirm-layout-verification-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TimeoutError: page.waitForSelector: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('text=Productos') to be visible[22m
+
+
+      26 |   test('DC-133: Modal confirm layout verification', async ({ page }) => {
+      27 |     await page.goto(`${BASE}/admin/productos`);
+    > 28 |     await page.waitForSelector('text=Productos', { timeout: 10000 });
+         |                ^
+      29 |
+      30 |     // Click options on first product
+      31 |     const optionsBtn = page.getByRole('button', { name: 'Opciones del producto' }).first();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-122-127-feedback-panel.spec.ts:28:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-122-127-feedb-274e4-confirm-layout-verification-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-122-127-feedb-274e4-confirm-layout-verification-chromium-retry1\error-context.md
+
+  18) [chromium] › e2e\tests\edge-case\DC-122-127-feedback-panel.spec.ts:49:7 › DC-122 to DC-127: Panel Feedback Visual › DC-119: Form validation shows red border and message 
+
+    TimeoutError: page.waitForSelector: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('text=Crear Producto') to be visible[22m
+
+
+      49 |   test('DC-119: Form validation shows red border and message', async ({ page }) => {
+      50 |     await page.goto(`${BASE}/admin/productos/crear`);
+    > 51 |     await page.waitForSelector('text=Crear Producto', { timeout: 10000 });
+         |                ^
+      52 |
+      53 |     // Submit without filling required fields
+      54 |     await page.getByRole('button', { name: 'Guardar producto' }).click();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-122-127-feedback-panel.spec.ts:51:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-122-127-feedb-52221-hows-red-border-and-message-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-122-127-feedb-52221-hows-red-border-and-message-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TimeoutError: page.waitForSelector: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('text=Crear Producto') to be visible[22m
+
+
+      49 |   test('DC-119: Form validation shows red border and message', async ({ page }) => {
+      50 |     await page.goto(`${BASE}/admin/productos/crear`);
+    > 51 |     await page.waitForSelector('text=Crear Producto', { timeout: 10000 });
+         |                ^
+      52 |
+      53 |     // Submit without filling required fields
+      54 |     await page.getByRole('button', { name: 'Guardar producto' }).click();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-122-127-feedback-panel.spec.ts:51:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-122-127-feedb-52221-hows-red-border-and-message-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-122-127-feedb-52221-hows-red-border-and-message-chromium-retry1\error-context.md
+
+  19) [chromium] › e2e\tests\edge-case\DC-135-unsaved-changes-guard.spec.ts:6:7 › DC-135: Modal cambios sin guardar › formulario crear producto tiene campos editables 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('textbox', { name: 'Nombre del producto *' })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('textbox', { name: 'Nombre del producto *' })[22m
+
+
+      12 |
+      13 |     // Verificar que los campos editables existen
+    > 14 |     await expect(page.getByRole('textbox', { name: 'Nombre del producto *' })).toBeVisible({ timeout: 10000 });
+         |                                                                                ^
+      15 |     await expect(page.getByRole('combobox', { name: 'Marca *' })).toBeVisible({ timeout: 10000 });
+      16 |     await expect(page.getByRole('textbox', { name: 'Descripcion *' })).toBeVisible({ timeout: 10000 });
+      17 |   });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-135-unsaved-changes-guard.spec.ts:14:80
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-135-unsaved-c-a99c9-ucto-tiene-campos-editables-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-135-unsaved-c-a99c9-ucto-tiene-campos-editables-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('textbox', { name: 'Nombre del producto *' })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('textbox', { name: 'Nombre del producto *' })[22m
+
+
+      12 |
+      13 |     // Verificar que los campos editables existen
+    > 14 |     await expect(page.getByRole('textbox', { name: 'Nombre del producto *' })).toBeVisible({ timeout: 10000 });
+         |                                                                                ^
+      15 |     await expect(page.getByRole('combobox', { name: 'Marca *' })).toBeVisible({ timeout: 10000 });
+      16 |     await expect(page.getByRole('textbox', { name: 'Descripcion *' })).toBeVisible({ timeout: 10000 });
+      17 |   });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-135-unsaved-changes-guard.spec.ts:14:80
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-135-unsaved-c-a99c9-ucto-tiene-campos-editables-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-135-unsaved-c-a99c9-ucto-tiene-campos-editables-chromium-retry1\error-context.md
+
+  20) [chromium] › e2e\tests\edge-case\DC-135-unsaved-changes-guard.spec.ts:19:7 › DC-135: Modal cambios sin guardar › XSS payload es aceptado como texto plano en campo nombre 
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.fill: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('textbox', { name: 'Nombre del producto *' })[22m
+
+
+      25 |
+      26 |     const nameField = page.getByRole('textbox', { name: 'Nombre del producto *' });
+    > 27 |     await nameField.fill('<script>alert("xss")</script>');
+         |                     ^
+      28 |
+      29 |     // Verificar que el texto se muestra como texto plano, no se ejecuta
+      30 |     await expect(nameField).toHaveValue('<script>alert("xss")</script>');
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-135-unsaved-changes-guard.spec.ts:27:21
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-135-unsaved-c-5104d-texto-plano-en-campo-nombre-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-135-unsaved-c-5104d-texto-plano-en-campo-nombre-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.fill: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('textbox', { name: 'Nombre del producto *' })[22m
+
+
+      25 |
+      26 |     const nameField = page.getByRole('textbox', { name: 'Nombre del producto *' });
+    > 27 |     await nameField.fill('<script>alert("xss")</script>');
+         |                     ^
+      28 |
+      29 |     // Verificar que el texto se muestra como texto plano, no se ejecuta
+      30 |     await expect(nameField).toHaveValue('<script>alert("xss")</script>');
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-135-unsaved-changes-guard.spec.ts:27:21
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-135-unsaved-c-5104d-texto-plano-en-campo-nombre-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-135-unsaved-c-5104d-texto-plano-en-campo-nombre-chromium-retry1\error-context.md
+
+  21) [chromium] › e2e\tests\edge-case\DC-135-unsaved-changes-guard.spec.ts:33:7 › DC-135: Modal cambios sin guardar › formulario sin cambios no deberia activar guard al navegar 
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('link', { name: 'Dashboard' })[22m
+
+
+      39 |
+      40 |     // Sin modificar nada, navegar al Dashboard
+    > 41 |     await page.getByRole('link', { name: 'Dashboard' }).click();
+         |                                                         ^
+      42 |
+      43 |     // Deberia navegar sin modal (sin cambios = no guard)
+      44 |     await page.waitForTimeout(2000);
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-135-unsaved-changes-guard.spec.ts:41:57
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-135-unsaved-c-77f3f-ia-activar-guard-al-navegar-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-135-unsaved-c-77f3f-ia-activar-guard-al-navegar-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('link', { name: 'Dashboard' })[22m
+
+
+      39 |
+      40 |     // Sin modificar nada, navegar al Dashboard
+    > 41 |     await page.getByRole('link', { name: 'Dashboard' }).click();
+         |                                                         ^
+      42 |
+      43 |     // Deberia navegar sin modal (sin cambios = no guard)
+      44 |     await page.waitForTimeout(2000);
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-135-unsaved-changes-guard.spec.ts:41:57
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-135-unsaved-c-77f3f-ia-activar-guard-al-navegar-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-135-unsaved-c-77f3f-ia-activar-guard-al-navegar-chromium-retry1\error-context.md
+
+  22) [chromium] › e2e\tests\edge-case\DC-135-unsaved-changes-guard.spec.ts:49:7 › DC-135: Modal cambios sin guardar › escribir en campo deberia activar dirty state 
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.fill: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('textbox', { name: 'Nombre del producto *' })[22m
+
+
+      56 |     // Escribir en el campo para activar dirty state
+      57 |     const nameField = page.getByRole('textbox', { name: 'Nombre del producto *' });
+    > 58 |     await nameField.fill('Producto de prueba');
+         |                     ^
+      59 |     await expect(nameField).toHaveValue('Producto de prueba');
+      60 |
+      61 |     // Click en Dashboard en sidebar
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-135-unsaved-changes-guard.spec.ts:58:21
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-135-unsaved-c-4fbc7-deberia-activar-dirty-state-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-135-unsaved-c-4fbc7-deberia-activar-dirty-state-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.fill: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('textbox', { name: 'Nombre del producto *' })[22m
+
+
+      56 |     // Escribir en el campo para activar dirty state
+      57 |     const nameField = page.getByRole('textbox', { name: 'Nombre del producto *' });
+    > 58 |     await nameField.fill('Producto de prueba');
+         |                     ^
+      59 |     await expect(nameField).toHaveValue('Producto de prueba');
+      60 |
+      61 |     // Click en Dashboard en sidebar
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-135-unsaved-changes-guard.spec.ts:58:21
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-135-unsaved-c-4fbc7-deberia-activar-dirty-state-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-135-unsaved-c-4fbc7-deberia-activar-dirty-state-chromium-retry1\error-context.md
+
+  23) [chromium] › e2e\tests\edge-case\DC-135-unsaved-changes-guard.spec.ts:78:7 › DC-135: Modal cambios sin guardar › botones Cancelar y Guardar producto existen 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('button', { name: 'Cancelar' })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('button', { name: 'Cancelar' })[22m
+
+
+      83 |     }
+      84 |
+    > 85 |     await expect(page.getByRole('button', { name: 'Cancelar' })).toBeVisible({ timeout: 10000 });
+         |                                                                  ^
+      86 |     await expect(page.getByRole('button', { name: 'Guardar producto' })).toBeVisible({ timeout: 10000 });
+      87 |   });
+      88 | });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-135-unsaved-changes-guard.spec.ts:85:66
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-135-unsaved-c-ddfae--y-Guardar-producto-existen-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-135-unsaved-c-ddfae--y-Guardar-producto-existen-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('button', { name: 'Cancelar' })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('button', { name: 'Cancelar' })[22m
+
+
+      83 |     }
+      84 |
+    > 85 |     await expect(page.getByRole('button', { name: 'Cancelar' })).toBeVisible({ timeout: 10000 });
+         |                                                                  ^
+      86 |     await expect(page.getByRole('button', { name: 'Guardar producto' })).toBeVisible({ timeout: 10000 });
+      87 |   });
+      88 | });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-135-unsaved-changes-guard.spec.ts:85:66
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-135-unsaved-c-ddfae--y-Guardar-producto-existen-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-135-unsaved-c-ddfae--y-Guardar-producto-existen-chromium-retry1\error-context.md
+
+  24) [chromium] › e2e\tests\edge-case\DC-137-138-panel-hover.spec.ts:6:7 › DC-137: Panel Card Hover Effects › Product cards have cursor pointer 
+
+    TimeoutError: page.waitForSelector: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('text=Productos') to be visible[22m
+
+
+       6 |   test('Product cards have cursor pointer', async ({ page }) => {
+       7 |     await page.goto(`${BASE}/admin/productos`);
+    >  8 |     await page.waitForSelector('text=Productos', { timeout: 10000 });
+         |                ^
+       9 |
+      10 |     const firstCard = page.locator('a[href*="/admin/productos/"]').first();
+      11 |     await expect(firstCard).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-137-138-panel-hover.spec.ts:8:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-137-138-panel-20f0d-t-cards-have-cursor-pointer-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-137-138-panel-20f0d-t-cards-have-cursor-pointer-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TimeoutError: page.waitForSelector: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('text=Productos') to be visible[22m
+
+
+       6 |   test('Product cards have cursor pointer', async ({ page }) => {
+       7 |     await page.goto(`${BASE}/admin/productos`);
+    >  8 |     await page.waitForSelector('text=Productos', { timeout: 10000 });
+         |                ^
+       9 |
+      10 |     const firstCard = page.locator('a[href*="/admin/productos/"]').first();
+      11 |     await expect(firstCard).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-137-138-panel-hover.spec.ts:8:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-137-138-panel-20f0d-t-cards-have-cursor-pointer-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-137-138-panel-20f0d-t-cards-have-cursor-pointer-chromium-retry1\error-context.md
+
+  25) [chromium] › e2e\tests\edge-case\DC-137-138-panel-hover.spec.ts:19:7 › DC-137: Panel Card Hover Effects › Dashboard category cards have hover cursor 
+
+    TimeoutError: page.waitForSelector: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('text=Dashboard') to be visible[22m
+
+
+      19 |   test('Dashboard category cards have hover cursor', async ({ page }) => {
+      20 |     await page.goto(`${BASE}/admin/dashboard`);
+    > 21 |     await page.waitForSelector('text=Dashboard', { timeout: 10000 });
+         |                ^
+      22 |
+      23 |     const categoryCard = page.locator('a[href*="/admin/productos?"]').first();
+      24 |     if (await categoryCard.isVisible()) {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-137-138-panel-hover.spec.ts:21:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-137-138-panel-7afb3-ory-cards-have-hover-cursor-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-137-138-panel-7afb3-ory-cards-have-hover-cursor-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TimeoutError: page.waitForSelector: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('text=Dashboard') to be visible[22m
+
+
+      19 |   test('Dashboard category cards have hover cursor', async ({ page }) => {
+      20 |     await page.goto(`${BASE}/admin/dashboard`);
+    > 21 |     await page.waitForSelector('text=Dashboard', { timeout: 10000 });
+         |                ^
+      22 |
+      23 |     const categoryCard = page.locator('a[href*="/admin/productos?"]').first();
+      24 |     if (await categoryCard.isVisible()) {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-137-138-panel-hover.spec.ts:21:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-137-138-panel-7afb3-ory-cards-have-hover-cursor-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-137-138-panel-7afb3-ory-cards-have-hover-cursor-chromium-retry1\error-context.md
+
+  26) [chromium] › e2e\tests\edge-case\DC-137-138-panel-hover.spec.ts:34:7 › DC-138: Table Row Hover Effects › Product list in table view has rows 
+
+    TimeoutError: page.waitForSelector: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('text=Productos') to be visible[22m
+
+
+      34 |   test('Product list in table view has rows', async ({ page }) => {
+      35 |     await page.goto(`${BASE}/admin/productos`);
+    > 36 |     await page.waitForSelector('text=Productos', { timeout: 10000 });
+         |                ^
+      37 |
+      38 |     // Toggle to table view
+      39 |     const tableToggle = page.getByRole('button', { name: 'Vista de tabla' });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-137-138-panel-hover.spec.ts:36:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-137-138-panel-2de98-list-in-table-view-has-rows-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-137-138-panel-2de98-list-in-table-view-has-rows-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TimeoutError: page.waitForSelector: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('text=Productos') to be visible[22m
+
+
+      34 |   test('Product list in table view has rows', async ({ page }) => {
+      35 |     await page.goto(`${BASE}/admin/productos`);
+    > 36 |     await page.waitForSelector('text=Productos', { timeout: 10000 });
+         |                ^
+      37 |
+      38 |     // Toggle to table view
+      39 |     const tableToggle = page.getByRole('button', { name: 'Vista de tabla' });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-137-138-panel-hover.spec.ts:36:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-137-138-panel-2de98-list-in-table-view-has-rows-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-137-138-panel-2de98-list-in-table-view-has-rows-chromium-retry1\error-context.md
+
+  27) [chromium] › e2e\tests\edge-case\DC-138-table-view-products.spec.ts:15:7 › DC-138: Hover filas tabla panel y estructura tabla productos › toggle de vista tarjetas a vista tabla funciona 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('button', { name: 'Vista de tabla' })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('button', { name: 'Vista de tabla' })[22m
+
+
+      15 |   test('toggle de vista tarjetas a vista tabla funciona', async ({ page }) => {
+      16 |     const tableButton = page.getByRole('button', { name: 'Vista de tabla' });
+    > 17 |     await expect(tableButton).toBeVisible({ timeout: 10000 });
+         |                               ^
+      18 |     await tableButton.click();
+      19 |
+      20 |     // Verificar que se muestra la tabla
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-138-table-view-products.spec.ts:17:31
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-138-table-vie-559e4-etas-a-vista-tabla-funciona-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-138-table-vie-559e4-etas-a-vista-tabla-funciona-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('button', { name: 'Vista de tabla' })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('button', { name: 'Vista de tabla' })[22m
+
+
+      15 |   test('toggle de vista tarjetas a vista tabla funciona', async ({ page }) => {
+      16 |     const tableButton = page.getByRole('button', { name: 'Vista de tabla' });
+    > 17 |     await expect(tableButton).toBeVisible({ timeout: 10000 });
+         |                               ^
+      18 |     await tableButton.click();
+      19 |
+      20 |     // Verificar que se muestra la tabla
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-138-table-view-products.spec.ts:17:31
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-138-table-vie-559e4-etas-a-vista-tabla-funciona-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-138-table-vie-559e4-etas-a-vista-tabla-funciona-chromium-retry1\error-context.md
+
+  28) [chromium] › e2e\tests\edge-case\DC-138-table-view-products.spec.ts:25:7 › DC-138: Hover filas tabla panel y estructura tabla productos › tabla tiene headers UPPERCASE correctos 
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('button', { name: 'Vista de tabla' })[22m
+
+
+      24 |
+      25 |   test('tabla tiene headers UPPERCASE correctos', async ({ page }) => {
+    > 26 |     await page.getByRole('button', { name: 'Vista de tabla' }).click();
+         |                                                                ^
+      27 |
+      28 |     const headers = ['PRODUCTO', 'MARCA', 'CATEGORIA', 'ESTADO', 'ACCIONES'];
+      29 |     for (const header of headers) {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-138-table-view-products.spec.ts:26:64
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-138-table-vie-d9241-headers-UPPERCASE-correctos-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-138-table-vie-d9241-headers-UPPERCASE-correctos-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('button', { name: 'Vista de tabla' })[22m
+
+
+      24 |
+      25 |   test('tabla tiene headers UPPERCASE correctos', async ({ page }) => {
+    > 26 |     await page.getByRole('button', { name: 'Vista de tabla' }).click();
+         |                                                                ^
+      27 |
+      28 |     const headers = ['PRODUCTO', 'MARCA', 'CATEGORIA', 'ESTADO', 'ACCIONES'];
+      29 |     for (const header of headers) {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-138-table-view-products.spec.ts:26:64
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-138-table-vie-d9241-headers-UPPERCASE-correctos-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-138-table-vie-d9241-headers-UPPERCASE-correctos-chromium-retry1\error-context.md
+
+  29) [chromium] › e2e\tests\edge-case\DC-138-table-view-products.spec.ts:34:7 › DC-138: Hover filas tabla panel y estructura tabla productos › tabla muestra todos los 48 productos 
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('button', { name: 'Vista de tabla' })[22m
+
+
+      33 |
+      34 |   test('tabla muestra todos los 48 productos', async ({ page }) => {
+    > 35 |     await page.getByRole('button', { name: 'Vista de tabla' }).click();
+         |                                                                ^
+      36 |
+      37 |     const rows = page.getByRole('row');
+      38 |     // +1 for header row
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-138-table-view-products.spec.ts:35:64
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-138-table-vie-4d7eb-stra-todos-los-48-productos-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-138-table-vie-4d7eb-stra-todos-los-48-productos-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('button', { name: 'Vista de tabla' })[22m
+
+
+      33 |
+      34 |   test('tabla muestra todos los 48 productos', async ({ page }) => {
+    > 35 |     await page.getByRole('button', { name: 'Vista de tabla' }).click();
+         |                                                                ^
+      36 |
+      37 |     const rows = page.getByRole('row');
+      38 |     // +1 for header row
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-138-table-view-products.spec.ts:35:64
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-138-table-vie-4d7eb-stra-todos-los-48-productos-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-138-table-vie-4d7eb-stra-todos-los-48-productos-chromium-retry1\error-context.md
+
+  30) [chromium] › e2e\tests\edge-case\DC-138-table-view-products.spec.ts:43:7 › DC-138: Hover filas tabla panel y estructura tabla productos › cada fila tiene acciones Ver y Editar 
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('button', { name: 'Vista de tabla' })[22m
+
+
+      42 |
+      43 |   test('cada fila tiene acciones Ver y Editar', async ({ page }) => {
+    > 44 |     await page.getByRole('button', { name: 'Vista de tabla' }).click();
+         |                                                                ^
+      45 |
+      46 |     // Verificar primera fila tiene links de accion
+      47 |     const firstRow = page.getByRole('row').nth(1);
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-138-table-view-products.spec.ts:44:64
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-138-table-vie-ed9c7-tiene-acciones-Ver-y-Editar-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-138-table-vie-ed9c7-tiene-acciones-Ver-y-Editar-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('button', { name: 'Vista de tabla' })[22m
+
+
+      42 |
+      43 |   test('cada fila tiene acciones Ver y Editar', async ({ page }) => {
+    > 44 |     await page.getByRole('button', { name: 'Vista de tabla' }).click();
+         |                                                                ^
+      45 |
+      46 |     // Verificar primera fila tiene links de accion
+      47 |     const firstRow = page.getByRole('row').nth(1);
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-138-table-view-products.spec.ts:44:64
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-138-table-vie-ed9c7-tiene-acciones-Ver-y-Editar-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-138-table-vie-ed9c7-tiene-acciones-Ver-y-Editar-chromium-retry1\error-context.md
+
+  31) [chromium] › e2e\tests\edge-case\DC-138-table-view-products.spec.ts:52:7 › DC-138: Hover filas tabla panel y estructura tabla productos › filas tienen datos correctos (nombre, marca, categoria, estado) 
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('button', { name: 'Vista de tabla' })[22m
+
+
+      51 |
+      52 |   test('filas tienen datos correctos (nombre, marca, categoria, estado)', async ({ page }) => {
+    > 53 |     await page.getByRole('button', { name: 'Vista de tabla' }).click();
+         |                                                                ^
+      54 |
+      55 |     // Verificar primera fila: Amoxicilina 250ml, Zoetis, Farmacos, Activo
+      56 |     const firstRow = page.getByRole('row', { name: /Amoxicilina 250ml/ });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-138-table-view-products.spec.ts:53:64
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-138-table-vie-be17a-bre-marca-categoria-estado--chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-138-table-vie-be17a-bre-marca-categoria-estado--chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('button', { name: 'Vista de tabla' })[22m
+
+
+      51 |
+      52 |   test('filas tienen datos correctos (nombre, marca, categoria, estado)', async ({ page }) => {
+    > 53 |     await page.getByRole('button', { name: 'Vista de tabla' }).click();
+         |                                                                ^
+      54 |
+      55 |     // Verificar primera fila: Amoxicilina 250ml, Zoetis, Farmacos, Activo
+      56 |     const firstRow = page.getByRole('row', { name: /Amoxicilina 250ml/ });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-138-table-view-products.spec.ts:53:64
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-138-table-vie-be17a-bre-marca-categoria-estado--chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-138-table-vie-be17a-bre-marca-categoria-estado--chromium-retry1\error-context.md
+
+  32) [chromium] › e2e\tests\edge-case\DC-138-table-view-products.spec.ts:63:7 › DC-138: Hover filas tabla panel y estructura tabla productos › tabla muestra productos de diferentes categorias 
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('button', { name: 'Vista de tabla' })[22m
+
+
+      62 |
+      63 |   test('tabla muestra productos de diferentes categorias', async ({ page }) => {
+    > 64 |     await page.getByRole('button', { name: 'Vista de tabla' }).click();
+         |                                                                ^
+      65 |
+      66 |     // Farmacos
+      67 |     await expect(page.getByRole('row', { name: /Amoxicilina 250ml/ })).toBeVisible({ timeout: 5000 });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-138-table-view-products.spec.ts:64:64
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-138-table-vie-03c6b-os-de-diferentes-categorias-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-138-table-vie-03c6b-os-de-diferentes-categorias-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('button', { name: 'Vista de tabla' })[22m
+
+
+      62 |
+      63 |   test('tabla muestra productos de diferentes categorias', async ({ page }) => {
+    > 64 |     await page.getByRole('button', { name: 'Vista de tabla' }).click();
+         |                                                                ^
+      65 |
+      66 |     // Farmacos
+      67 |     await expect(page.getByRole('row', { name: /Amoxicilina 250ml/ })).toBeVisible({ timeout: 5000 });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-138-table-view-products.spec.ts:64:64
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-138-table-vie-03c6b-os-de-diferentes-categorias-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-138-table-vie-03c6b-os-de-diferentes-categorias-chromium-retry1\error-context.md
+
+  33) [chromium] › e2e\tests\edge-case\DC-138-table-view-products.spec.ts:74:7 › DC-138: Hover filas tabla panel y estructura tabla productos › tabla muestra producto inactivo con estado diferente 
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('button', { name: 'Vista de tabla' })[22m
+
+
+      73 |
+      74 |   test('tabla muestra producto inactivo con estado diferente', async ({ page }) => {
+    > 75 |     await page.getByRole('button', { name: 'Vista de tabla' }).click();
+         |                                                                ^
+      76 |
+      77 |     const inactiveRow = page.getByRole('row', { name: /Flunixin Meglumine/ });
+      78 |     await inactiveRow.scrollIntoViewIfNeeded();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-138-table-view-products.spec.ts:75:64
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-138-table-vie-6e50d-activo-con-estado-diferente-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-138-table-vie-6e50d-activo-con-estado-diferente-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('button', { name: 'Vista de tabla' })[22m
+
+
+      73 |
+      74 |   test('tabla muestra producto inactivo con estado diferente', async ({ page }) => {
+    > 75 |     await page.getByRole('button', { name: 'Vista de tabla' }).click();
+         |                                                                ^
+      76 |
+      77 |     const inactiveRow = page.getByRole('row', { name: /Flunixin Meglumine/ });
+      78 |     await inactiveRow.scrollIntoViewIfNeeded();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-138-table-view-products.spec.ts:75:64
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-138-table-vie-6e50d-activo-con-estado-diferente-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-138-table-vie-6e50d-activo-con-estado-diferente-chromium-retry1\error-context.md
+
+  34) [chromium] › e2e\tests\edge-case\DC-146-kanban-mensajes.spec.ts:15:7 › DC-146: Kanban de mensajes layout y contenido › kanban tiene 3 columnas con conteos 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('NUEVOS')
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByText('NUEVOS')[22m
+
+
+      14 |
+      15 |   test('kanban tiene 3 columnas con conteos', async ({ page }) => {
+    > 16 |     await expect(page.getByText('NUEVOS')).toBeVisible({ timeout: 10000 });
+         |                                            ^
+      17 |     await expect(page.getByText('EN PROCESO')).toBeVisible({ timeout: 10000 });
+      18 |     await expect(page.getByText('ATENDIDOS')).toBeVisible({ timeout: 10000 });
+      19 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-146-kanban-mensajes.spec.ts:16:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-146-kanban-me-5058e-iene-3-columnas-con-conteos-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-146-kanban-me-5058e-iene-3-columnas-con-conteos-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('NUEVOS')
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByText('NUEVOS')[22m
+
+
+      14 |
+      15 |   test('kanban tiene 3 columnas con conteos', async ({ page }) => {
+    > 16 |     await expect(page.getByText('NUEVOS')).toBeVisible({ timeout: 10000 });
+         |                                            ^
+      17 |     await expect(page.getByText('EN PROCESO')).toBeVisible({ timeout: 10000 });
+      18 |     await expect(page.getByText('ATENDIDOS')).toBeVisible({ timeout: 10000 });
+      19 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-146-kanban-mensajes.spec.ts:16:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-146-kanban-me-5058e-iene-3-columnas-con-conteos-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-146-kanban-me-5058e-iene-3-columnas-con-conteos-chromium-retry1\error-context.md
+
+  35) [chromium] › e2e\tests\edge-case\DC-146-kanban-mensajes.spec.ts:26:7 › DC-146: Kanban de mensajes layout y contenido › columna NUEVOS tiene 3 cards 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: 'Dr. Roberto Campos' })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'Dr. Roberto Campos' })[22m
+
+
+      25 |
+      26 |   test('columna NUEVOS tiene 3 cards', async ({ page }) => {
+    > 27 |     await expect(page.getByRole('heading', { name: 'Dr. Roberto Campos' })).toBeVisible({ timeout: 10000 });
+         |                                                                             ^
+      28 |     await expect(page.getByRole('heading', { name: 'John Mitchell' })).toBeVisible({ timeout: 10000 });
+      29 |     await expect(page.getByRole('heading', { name: 'Cadena VetCR' })).toBeVisible({ timeout: 10000 });
+      30 |   });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-146-kanban-mensajes.spec.ts:27:77
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-146-kanban-me-5feb5-olumna-NUEVOS-tiene-3-cards-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-146-kanban-me-5feb5-olumna-NUEVOS-tiene-3-cards-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: 'Dr. Roberto Campos' })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'Dr. Roberto Campos' })[22m
+
+
+      25 |
+      26 |   test('columna NUEVOS tiene 3 cards', async ({ page }) => {
+    > 27 |     await expect(page.getByRole('heading', { name: 'Dr. Roberto Campos' })).toBeVisible({ timeout: 10000 });
+         |                                                                             ^
+      28 |     await expect(page.getByRole('heading', { name: 'John Mitchell' })).toBeVisible({ timeout: 10000 });
+      29 |     await expect(page.getByRole('heading', { name: 'Cadena VetCR' })).toBeVisible({ timeout: 10000 });
+      30 |   });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-146-kanban-mensajes.spec.ts:27:77
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-146-kanban-me-5feb5-olumna-NUEVOS-tiene-3-cards-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-146-kanban-me-5feb5-olumna-NUEVOS-tiene-3-cards-chromium-retry1\error-context.md
+
+  36) [chromium] › e2e\tests\edge-case\DC-146-kanban-mensajes.spec.ts:32:7 › DC-146: Kanban de mensajes layout y contenido › columna EN PROCESO tiene 1 card 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: 'Dra. Carolina Mendez' })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'Dra. Carolina Mendez' })[22m
+
+
+      31 |
+      32 |   test('columna EN PROCESO tiene 1 card', async ({ page }) => {
+    > 33 |     await expect(page.getByRole('heading', { name: 'Dra. Carolina Mendez' })).toBeVisible({ timeout: 10000 });
+         |                                                                               ^
+      34 |   });
+      35 |
+      36 |   test('columna ATENDIDOS tiene 8 cards', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-146-kanban-mensajes.spec.ts:33:79
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-146-kanban-me-1efb8-mna-EN-PROCESO-tiene-1-card-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-146-kanban-me-1efb8-mna-EN-PROCESO-tiene-1-card-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: 'Dra. Carolina Mendez' })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'Dra. Carolina Mendez' })[22m
+
+
+      31 |
+      32 |   test('columna EN PROCESO tiene 1 card', async ({ page }) => {
+    > 33 |     await expect(page.getByRole('heading', { name: 'Dra. Carolina Mendez' })).toBeVisible({ timeout: 10000 });
+         |                                                                               ^
+      34 |   });
+      35 |
+      36 |   test('columna ATENDIDOS tiene 8 cards', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-146-kanban-mensajes.spec.ts:33:79
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-146-kanban-me-1efb8-mna-EN-PROCESO-tiene-1-card-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-146-kanban-me-1efb8-mna-EN-PROCESO-tiene-1-card-chromium-retry1\error-context.md
+
+  37) [chromium] › e2e\tests\edge-case\DC-146-kanban-mensajes.spec.ts:36:7 › DC-146: Kanban de mensajes layout y contenido › columna ATENDIDOS tiene 8 cards 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: 'Agroveterinaria El Campo' })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'Agroveterinaria El Campo' })[22m
+
+
+      47 |
+      48 |     for (const name of atendidosCards) {
+    > 49 |       await expect(page.getByRole('heading', { name })).toBeVisible({ timeout: 10000 });
+         |                                                         ^
+      50 |     }
+      51 |   });
+      52 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-146-kanban-mensajes.spec.ts:49:57
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-146-kanban-me-812e6-mna-ATENDIDOS-tiene-8-cards-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-146-kanban-me-812e6-mna-ATENDIDOS-tiene-8-cards-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: 'Agroveterinaria El Campo' })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'Agroveterinaria El Campo' })[22m
+
+
+      47 |
+      48 |     for (const name of atendidosCards) {
+    > 49 |       await expect(page.getByRole('heading', { name })).toBeVisible({ timeout: 10000 });
+         |                                                         ^
+      50 |     }
+      51 |   });
+      52 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-146-kanban-mensajes.spec.ts:49:57
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-146-kanban-me-812e6-mna-ATENDIDOS-tiene-8-cards-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-146-kanban-me-812e6-mna-ATENDIDOS-tiene-8-cards-chromium-retry1\error-context.md
+
+  38) [chromium] › e2e\tests\edge-case\DC-146-kanban-mensajes.spec.ts:53:7 › DC-146: Kanban de mensajes layout y contenido › cards tienen badges de tipo 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Informacion').first()
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByText('Informacion').first()[22m
+
+
+      54 |     const badges = ['Informacion', 'Fabricante', 'Comercial', 'Soporte', 'Otro'];
+      55 |     for (const badge of badges) {
+    > 56 |       await expect(page.getByText(badge).first()).toBeVisible({ timeout: 10000 });
+         |                                                   ^
+      57 |     }
+      58 |   });
+      59 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-146-kanban-mensajes.spec.ts:56:51
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-146-kanban-me-7040b-cards-tienen-badges-de-tipo-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-146-kanban-me-7040b-cards-tienen-badges-de-tipo-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Informacion').first()
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByText('Informacion').first()[22m
+
+
+      54 |     const badges = ['Informacion', 'Fabricante', 'Comercial', 'Soporte', 'Otro'];
+      55 |     for (const badge of badges) {
+    > 56 |       await expect(page.getByText(badge).first()).toBeVisible({ timeout: 10000 });
+         |                                                   ^
+      57 |     }
+      58 |   });
+      59 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-146-kanban-mensajes.spec.ts:56:51
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-146-kanban-me-7040b-cards-tienen-badges-de-tipo-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-146-kanban-me-7040b-cards-tienen-badges-de-tipo-chromium-retry1\error-context.md
+
+  39) [chromium] › e2e\tests\edge-case\DC-146-kanban-mensajes.spec.ts:60:7 › DC-146: Kanban de mensajes layout y contenido › cards tienen preview de mensaje y tiempo relativo 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText(/Buenas tardes, me gustaria conocer/).first()
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByText(/Buenas tardes, me gustaria conocer/).first()[22m
+
+
+      60 |   test('cards tienen preview de mensaje y tiempo relativo', async ({ page }) => {
+      61 |     // Verificar que hay texto de preview
+    > 62 |     await expect(page.getByText(/Buenas tardes, me gustaria conocer/).first()).toBeVisible({ timeout: 10000 });
+         |                                                                                ^
+      63 |
+      64 |     // Verificar tiempo relativo
+      65 |     await expect(page.getByText('Hace 2 horas').first()).toBeVisible({ timeout: 10000 });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-146-kanban-mensajes.spec.ts:62:80
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-146-kanban-me-69e04-e-mensaje-y-tiempo-relativo-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-146-kanban-me-69e04-e-mensaje-y-tiempo-relativo-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText(/Buenas tardes, me gustaria conocer/).first()
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByText(/Buenas tardes, me gustaria conocer/).first()[22m
+
+
+      60 |   test('cards tienen preview de mensaje y tiempo relativo', async ({ page }) => {
+      61 |     // Verificar que hay texto de preview
+    > 62 |     await expect(page.getByText(/Buenas tardes, me gustaria conocer/).first()).toBeVisible({ timeout: 10000 });
+         |                                                                                ^
+      63 |
+      64 |     // Verificar tiempo relativo
+      65 |     await expect(page.getByText('Hace 2 horas').first()).toBeVisible({ timeout: 10000 });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-146-kanban-mensajes.spec.ts:62:80
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-146-kanban-me-69e04-e-mensaje-y-tiempo-relativo-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-146-kanban-me-69e04-e-mensaje-y-tiempo-relativo-chromium-retry1\error-context.md
+
+  40) [chromium] › e2e\tests\edge-case\DC-146-kanban-mensajes.spec.ts:68:7 › DC-146: Kanban de mensajes layout y contenido › cards son links navegables 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('link', { name: /Dr. Roberto Campos/ })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('link', { name: /Dr. Roberto Campos/ })[22m
+
+
+      68 |   test('cards son links navegables', async ({ page }) => {
+      69 |     const firstCard = page.getByRole('link', { name: /Dr. Roberto Campos/ });
+    > 70 |     await expect(firstCard).toBeVisible({ timeout: 10000 });
+         |                             ^
+      71 |     await expect(firstCard).toHaveAttribute('href', '/admin/mensajes/m1');
+      72 |   });
+      73 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-146-kanban-mensajes.spec.ts:70:29
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-146-kanban-me-bfc51--cards-son-links-navegables-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-146-kanban-me-bfc51--cards-son-links-navegables-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('link', { name: /Dr. Roberto Campos/ })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('link', { name: /Dr. Roberto Campos/ })[22m
+
+
+      68 |   test('cards son links navegables', async ({ page }) => {
+      69 |     const firstCard = page.getByRole('link', { name: /Dr. Roberto Campos/ });
+    > 70 |     await expect(firstCard).toBeVisible({ timeout: 10000 });
+         |                             ^
+      71 |     await expect(firstCard).toHaveAttribute('href', '/admin/mensajes/m1');
+      72 |   });
+      73 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-146-kanban-mensajes.spec.ts:70:29
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-146-kanban-me-bfc51--cards-son-links-navegables-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-146-kanban-me-bfc51--cards-son-links-navegables-chromium-retry1\error-context.md
+
+  41) [chromium] › e2e\tests\edge-case\DC-146-kanban-mensajes.spec.ts:74:7 › DC-146: Kanban de mensajes layout y contenido › toggle Vista Kanban / Vista Tabla existe 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('button', { name: 'Vista Kanban' })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('button', { name: 'Vista Kanban' })[22m
+
+
+      73 |
+      74 |   test('toggle Vista Kanban / Vista Tabla existe', async ({ page }) => {
+    > 75 |     await expect(page.getByRole('button', { name: 'Vista Kanban' })).toBeVisible({ timeout: 10000 });
+         |                                                                      ^
+      76 |     await expect(page.getByRole('button', { name: 'Vista Tabla' })).toBeVisible({ timeout: 10000 });
+      77 |   });
+      78 | });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-146-kanban-mensajes.spec.ts:75:70
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-146-kanban-me-feb55-a-Kanban-Vista-Tabla-existe-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-146-kanban-me-feb55-a-Kanban-Vista-Tabla-existe-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('button', { name: 'Vista Kanban' })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('button', { name: 'Vista Kanban' })[22m
+
+
+      73 |
+      74 |   test('toggle Vista Kanban / Vista Tabla existe', async ({ page }) => {
+    > 75 |     await expect(page.getByRole('button', { name: 'Vista Kanban' })).toBeVisible({ timeout: 10000 });
+         |                                                                      ^
+      76 |     await expect(page.getByRole('button', { name: 'Vista Tabla' })).toBeVisible({ timeout: 10000 });
+      77 |   });
+      78 | });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\DC-146-kanban-mensajes.spec.ts:75:70
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-DC-146-kanban-me-feb55-a-Kanban-Vista-Tabla-existe-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-DC-146-kanban-me-feb55-a-Kanban-Vista-Tabla-existe-chromium-retry1\error-context.md
+
+  42) [chromium] › e2e\tests\edge-case\NFR-017-xss-security.spec.ts:97:7 › NFR-017: XSS Protection and Security Headers › XSS payload in product form does not execute 
+
+    TimeoutError: page.waitForSelector: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('text=Crear Producto') to be visible[22m
+
+
+      103 |
+      104 |     await page.goto(`${BASE}/admin/productos/crear`);
+    > 105 |     await page.waitForSelector('text=Crear Producto', { timeout: 10000 });
+          |                ^
+      106 |
+      107 |     await page.getByRole('textbox', { name: 'Nombre del producto' }).fill('<script>alert("XSS")</script>');
+      108 |     await page.getByRole('textbox', { name: 'Descripcion' }).fill('"><img src=x onerror=alert(1)>');
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\NFR-017-xss-security.spec.ts:105:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-NFR-017-xss-secu-3d470-oduct-form-does-not-execute-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-NFR-017-xss-secu-3d470-oduct-form-does-not-execute-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TimeoutError: page.waitForSelector: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('text=Crear Producto') to be visible[22m
+
+
+      103 |
+      104 |     await page.goto(`${BASE}/admin/productos/crear`);
+    > 105 |     await page.waitForSelector('text=Crear Producto', { timeout: 10000 });
+          |                ^
+      106 |
+      107 |     await page.getByRole('textbox', { name: 'Nombre del producto' }).fill('<script>alert("XSS")</script>');
+      108 |     await page.getByRole('textbox', { name: 'Descripcion' }).fill('"><img src=x onerror=alert(1)>');
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\NFR-017-xss-security.spec.ts:105:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-NFR-017-xss-secu-3d470-oduct-form-does-not-execute-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-NFR-017-xss-secu-3d470-oduct-form-does-not-execute-chromium-retry1\error-context.md
+
+  43) [chromium] › e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:14:7 › UX-043: Product Form Structure and Edge Cases › Form has all 6 required sections 
+
+    TimeoutError: locator.waitFor: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for getByText('Crear Producto') to be visible[22m
+
+
+       9 |     // Note: Mock auth allows direct access to admin routes
+      10 |     await page.goto(`${BASE_URL}/admin/productos/crear`);
+    > 11 |     await page.getByText('Crear Producto').waitFor({ state: 'visible', timeout: 10000 });
+         |                                            ^
+      12 |   });
+      13 |
+      14 |   test('Form has all 6 required sections', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:11:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-043-product-f-eacb7-has-all-6-required-sections-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-043-product-f-eacb7-has-all-6-required-sections-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TimeoutError: locator.waitFor: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for getByText('Crear Producto') to be visible[22m
+
+
+       9 |     // Note: Mock auth allows direct access to admin routes
+      10 |     await page.goto(`${BASE_URL}/admin/productos/crear`);
+    > 11 |     await page.getByText('Crear Producto').waitFor({ state: 'visible', timeout: 10000 });
+         |                                            ^
+      12 |   });
+      13 |
+      14 |   test('Form has all 6 required sections', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:11:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-043-product-f-eacb7-has-all-6-required-sections-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-043-product-f-eacb7-has-all-6-required-sections-chromium-retry1\error-context.md
+
+  44) [chromium] › e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:23:7 › UX-043: Product Form Structure and Edge Cases › Form has Cancel and Save buttons in toolbar 
+
+    TimeoutError: locator.waitFor: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for getByText('Crear Producto') to be visible[22m
+
+
+       9 |     // Note: Mock auth allows direct access to admin routes
+      10 |     await page.goto(`${BASE_URL}/admin/productos/crear`);
+    > 11 |     await page.getByText('Crear Producto').waitFor({ state: 'visible', timeout: 10000 });
+         |                                            ^
+      12 |   });
+      13 |
+      14 |   test('Form has all 6 required sections', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:11:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-043-product-f-4d7ae-and-Save-buttons-in-toolbar-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-043-product-f-4d7ae-and-Save-buttons-in-toolbar-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TimeoutError: locator.waitFor: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for getByText('Crear Producto') to be visible[22m
+
+
+       9 |     // Note: Mock auth allows direct access to admin routes
+      10 |     await page.goto(`${BASE_URL}/admin/productos/crear`);
+    > 11 |     await page.getByText('Crear Producto').waitFor({ state: 'visible', timeout: 10000 });
+         |                                            ^
+      12 |   });
+      13 |
+      14 |   test('Form has all 6 required sections', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:11:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-043-product-f-4d7ae-and-Save-buttons-in-toolbar-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-043-product-f-4d7ae-and-Save-buttons-in-toolbar-chromium-retry1\error-context.md
+
+  45) [chromium] › e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:28:7 › UX-043: Product Form Structure and Edge Cases › Category selector has 3 cards (Farmacos, Alimentos, Equipos) 
+
+    TimeoutError: locator.waitFor: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for getByText('Crear Producto') to be visible[22m
+
+
+       9 |     // Note: Mock auth allows direct access to admin routes
+      10 |     await page.goto(`${BASE_URL}/admin/productos/crear`);
+    > 11 |     await page.getByText('Crear Producto').waitFor({ state: 'visible', timeout: 10000 });
+         |                                            ^
+      12 |   });
+      13 |
+      14 |   test('Form has all 6 required sections', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:11:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-043-product-f-398db-Farmacos-Alimentos-Equipos--chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-043-product-f-398db-Farmacos-Alimentos-Equipos--chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TimeoutError: locator.waitFor: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for getByText('Crear Producto') to be visible[22m
+
+
+       9 |     // Note: Mock auth allows direct access to admin routes
+      10 |     await page.goto(`${BASE_URL}/admin/productos/crear`);
+    > 11 |     await page.getByText('Crear Producto').waitFor({ state: 'visible', timeout: 10000 });
+         |                                            ^
+      12 |   });
+      13 |
+      14 |   test('Form has all 6 required sections', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:11:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-043-product-f-398db-Farmacos-Alimentos-Equipos--chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-043-product-f-398db-Farmacos-Alimentos-Equipos--chromium-retry1\error-context.md
+
+  46) [chromium] › e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:34:7 › UX-043: Product Form Structure and Edge Cases › Bilingual tabs present in description section 
+
+    TimeoutError: locator.waitFor: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for getByText('Crear Producto') to be visible[22m
+
+
+       9 |     // Note: Mock auth allows direct access to admin routes
+      10 |     await page.goto(`${BASE_URL}/admin/productos/crear`);
+    > 11 |     await page.getByText('Crear Producto').waitFor({ state: 'visible', timeout: 10000 });
+         |                                            ^
+      12 |   });
+      13 |
+      14 |   test('Form has all 6 required sections', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:11:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-043-product-f-b5fb0-sent-in-description-section-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-043-product-f-b5fb0-sent-in-description-section-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TimeoutError: locator.waitFor: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for getByText('Crear Producto') to be visible[22m
+
+
+       9 |     // Note: Mock auth allows direct access to admin routes
+      10 |     await page.goto(`${BASE_URL}/admin/productos/crear`);
+    > 11 |     await page.getByText('Crear Producto').waitFor({ state: 'visible', timeout: 10000 });
+         |                                            ^
+      12 |   });
+      13 |
+      14 |   test('Form has all 6 required sections', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:11:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-043-product-f-b5fb0-sent-in-description-section-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-043-product-f-b5fb0-sent-in-description-section-chromium-retry1\error-context.md
+
+  47) [chromium] › e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:39:7 › UX-043: Product Form Structure and Edge Cases › Image upload zone has dashed border and instructions 
+
+    TimeoutError: locator.waitFor: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for getByText('Crear Producto') to be visible[22m
+
+
+       9 |     // Note: Mock auth allows direct access to admin routes
+      10 |     await page.goto(`${BASE_URL}/admin/productos/crear`);
+    > 11 |     await page.getByText('Crear Producto').waitFor({ state: 'visible', timeout: 10000 });
+         |                                            ^
+      12 |   });
+      13 |
+      14 |   test('Form has all 6 required sections', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:11:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-043-product-f-0dea3-hed-border-and-instructions-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-043-product-f-0dea3-hed-border-and-instructions-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TimeoutError: locator.waitFor: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for getByText('Crear Producto') to be visible[22m
+
+
+       9 |     // Note: Mock auth allows direct access to admin routes
+      10 |     await page.goto(`${BASE_URL}/admin/productos/crear`);
+    > 11 |     await page.getByText('Crear Producto').waitFor({ state: 'visible', timeout: 10000 });
+         |                                            ^
+      12 |   });
+      13 |
+      14 |   test('Form has all 6 required sections', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:11:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-043-product-f-0dea3-hed-border-and-instructions-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-043-product-f-0dea3-hed-border-and-instructions-chromium-retry1\error-context.md
+
+  48) [chromium] › e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:44:7 › UX-043: Product Form Structure and Edge Cases › PDF upload zone has instructions 
+
+    TimeoutError: locator.waitFor: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for getByText('Crear Producto') to be visible[22m
+
+
+       9 |     // Note: Mock auth allows direct access to admin routes
+      10 |     await page.goto(`${BASE_URL}/admin/productos/crear`);
+    > 11 |     await page.getByText('Crear Producto').waitFor({ state: 'visible', timeout: 10000 });
+         |                                            ^
+      12 |   });
+      13 |
+      14 |   test('Form has all 6 required sections', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:11:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-043-product-f-ba1e6-pload-zone-has-instructions-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-043-product-f-ba1e6-pload-zone-has-instructions-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TimeoutError: locator.waitFor: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for getByText('Crear Producto') to be visible[22m
+
+
+       9 |     // Note: Mock auth allows direct access to admin routes
+      10 |     await page.goto(`${BASE_URL}/admin/productos/crear`);
+    > 11 |     await page.getByText('Crear Producto').waitFor({ state: 'visible', timeout: 10000 });
+         |                                            ^
+      12 |   });
+      13 |
+      14 |   test('Form has all 6 required sections', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:11:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-043-product-f-ba1e6-pload-zone-has-instructions-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-043-product-f-ba1e6-pload-zone-has-instructions-chromium-retry1\error-context.md
+
+  49) [chromium] › e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:48:7 › UX-043: Product Form Structure and Edge Cases › Configuration section has toggle switches 
+
+    TimeoutError: locator.waitFor: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for getByText('Crear Producto') to be visible[22m
+
+
+       9 |     // Note: Mock auth allows direct access to admin routes
+      10 |     await page.goto(`${BASE_URL}/admin/productos/crear`);
+    > 11 |     await page.getByText('Crear Producto').waitFor({ state: 'visible', timeout: 10000 });
+         |                                            ^
+      12 |   });
+      13 |
+      14 |   test('Form has all 6 required sections', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:11:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-043-product-f-f18e6-section-has-toggle-switches-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-043-product-f-f18e6-section-has-toggle-switches-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TimeoutError: locator.waitFor: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for getByText('Crear Producto') to be visible[22m
+
+
+       9 |     // Note: Mock auth allows direct access to admin routes
+      10 |     await page.goto(`${BASE_URL}/admin/productos/crear`);
+    > 11 |     await page.getByText('Crear Producto').waitFor({ state: 'visible', timeout: 10000 });
+         |                                            ^
+      12 |   });
+      13 |
+      14 |   test('Form has all 6 required sections', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:11:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-043-product-f-f18e6-section-has-toggle-switches-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-043-product-f-f18e6-section-has-toggle-switches-chromium-retry1\error-context.md
+
+  50) [chromium] › e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:56:7 › UX-043: Product Form Structure and Edge Cases › Species tags pre-populated with defaults 
+
+    TimeoutError: locator.waitFor: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for getByText('Crear Producto') to be visible[22m
+
+
+       9 |     // Note: Mock auth allows direct access to admin routes
+      10 |     await page.goto(`${BASE_URL}/admin/productos/crear`);
+    > 11 |     await page.getByText('Crear Producto').waitFor({ state: 'visible', timeout: 10000 });
+         |                                            ^
+      12 |   });
+      13 |
+      14 |   test('Form has all 6 required sections', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:11:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-043-product-f-e60fd-pre-populated-with-defaults-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-043-product-f-e60fd-pre-populated-with-defaults-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TimeoutError: locator.waitFor: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for getByText('Crear Producto') to be visible[22m
+
+
+       9 |     // Note: Mock auth allows direct access to admin routes
+      10 |     await page.goto(`${BASE_URL}/admin/productos/crear`);
+    > 11 |     await page.getByText('Crear Producto').waitFor({ state: 'visible', timeout: 10000 });
+         |                                            ^
+      12 |   });
+      13 |
+      14 |   test('Form has all 6 required sections', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:11:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-043-product-f-e60fd-pre-populated-with-defaults-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-043-product-f-e60fd-pre-populated-with-defaults-chromium-retry1\error-context.md
+
+  51) [chromium] › e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:61:7 › UX-043: Product Form Structure and Edge Cases › Empty form submit shows validation - name field required 
+
+    TimeoutError: locator.waitFor: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for getByText('Crear Producto') to be visible[22m
+
+
+       9 |     // Note: Mock auth allows direct access to admin routes
+      10 |     await page.goto(`${BASE_URL}/admin/productos/crear`);
+    > 11 |     await page.getByText('Crear Producto').waitFor({ state: 'visible', timeout: 10000 });
+         |                                            ^
+      12 |   });
+      13 |
+      14 |   test('Form has all 6 required sections', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:11:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-043-product-f-d47d5-ation---name-field-required-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-043-product-f-d47d5-ation---name-field-required-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TimeoutError: locator.waitFor: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for getByText('Crear Producto') to be visible[22m
+
+
+       9 |     // Note: Mock auth allows direct access to admin routes
+      10 |     await page.goto(`${BASE_URL}/admin/productos/crear`);
+    > 11 |     await page.getByText('Crear Producto').waitFor({ state: 'visible', timeout: 10000 });
+         |                                            ^
+      12 |   });
+      13 |
+      14 |   test('Form has all 6 required sections', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:11:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-043-product-f-d47d5-ation---name-field-required-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-043-product-f-d47d5-ation---name-field-required-chromium-retry1\error-context.md
+
+  52) [chromium] › e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:68:7 › UX-043: Product Form Structure and Edge Cases › XSS input in product name is sanitized 
+
+    TimeoutError: locator.waitFor: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for getByText('Crear Producto') to be visible[22m
+
+
+       9 |     // Note: Mock auth allows direct access to admin routes
+      10 |     await page.goto(`${BASE_URL}/admin/productos/crear`);
+    > 11 |     await page.getByText('Crear Producto').waitFor({ state: 'visible', timeout: 10000 });
+         |                                            ^
+      12 |   });
+      13 |
+      14 |   test('Form has all 6 required sections', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:11:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-043-product-f-098e5-n-product-name-is-sanitized-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-043-product-f-098e5-n-product-name-is-sanitized-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TimeoutError: locator.waitFor: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for getByText('Crear Producto') to be visible[22m
+
+
+       9 |     // Note: Mock auth allows direct access to admin routes
+      10 |     await page.goto(`${BASE_URL}/admin/productos/crear`);
+    > 11 |     await page.getByText('Crear Producto').waitFor({ state: 'visible', timeout: 10000 });
+         |                                            ^
+      12 |   });
+      13 |
+      14 |   test('Form has all 6 required sections', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:11:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-043-product-f-098e5-n-product-name-is-sanitized-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-043-product-f-098e5-n-product-name-is-sanitized-chromium-retry1\error-context.md
+
+  53) [chromium] › e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:77:7 › UX-043: Product Form Structure and Edge Cases › Slug URL auto-generates from product name 
+
+    TimeoutError: locator.waitFor: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for getByText('Crear Producto') to be visible[22m
+
+
+       9 |     // Note: Mock auth allows direct access to admin routes
+      10 |     await page.goto(`${BASE_URL}/admin/productos/crear`);
+    > 11 |     await page.getByText('Crear Producto').waitFor({ state: 'visible', timeout: 10000 });
+         |                                            ^
+      12 |   });
+      13 |
+      14 |   test('Form has all 6 required sections', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:11:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-043-product-f-75c22-generates-from-product-name-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-043-product-f-75c22-generates-from-product-name-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TimeoutError: locator.waitFor: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for getByText('Crear Producto') to be visible[22m
+
+
+       9 |     // Note: Mock auth allows direct access to admin routes
+      10 |     await page.goto(`${BASE_URL}/admin/productos/crear`);
+    > 11 |     await page.getByText('Crear Producto').waitFor({ state: 'visible', timeout: 10000 });
+         |                                            ^
+      12 |   });
+      13 |
+      14 |   test('Form has all 6 required sections', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:11:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-043-product-f-75c22-generates-from-product-name-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-043-product-f-75c22-generates-from-product-name-chromium-retry1\error-context.md
+
+  54) [chromium] › e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:85:7 › UX-043: Product Form Structure and Edge Cases › R3: Marca dropdown has options (Zoetis, MSD, Purina) 
+
+    TimeoutError: locator.waitFor: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for getByText('Crear Producto') to be visible[22m
+
+
+       9 |     // Note: Mock auth allows direct access to admin routes
+      10 |     await page.goto(`${BASE_URL}/admin/productos/crear`);
+    > 11 |     await page.getByText('Crear Producto').waitFor({ state: 'visible', timeout: 10000 });
+         |                                            ^
+      12 |   });
+      13 |
+      14 |   test('Form has all 6 required sections', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:11:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-043-product-f-82c2a--options-Zoetis-MSD-Purina--chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-043-product-f-82c2a--options-Zoetis-MSD-Purina--chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TimeoutError: locator.waitFor: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for getByText('Crear Producto') to be visible[22m
+
+
+       9 |     // Note: Mock auth allows direct access to admin routes
+      10 |     await page.goto(`${BASE_URL}/admin/productos/crear`);
+    > 11 |     await page.getByText('Crear Producto').waitFor({ state: 'visible', timeout: 10000 });
+         |                                            ^
+      12 |   });
+      13 |
+      14 |   test('Form has all 6 required sections', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:11:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-043-product-f-82c2a--options-Zoetis-MSD-Purina--chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-043-product-f-82c2a--options-Zoetis-MSD-Purina--chromium-retry1\error-context.md
+
+  55) [chromium] › e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:94:7 › UX-043: Product Form Structure and Edge Cases › R3: Presentaciones tag with remove button 
+
+    TimeoutError: locator.waitFor: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for getByText('Crear Producto') to be visible[22m
+
+
+       9 |     // Note: Mock auth allows direct access to admin routes
+      10 |     await page.goto(`${BASE_URL}/admin/productos/crear`);
+    > 11 |     await page.getByText('Crear Producto').waitFor({ state: 'visible', timeout: 10000 });
+         |                                            ^
+      12 |   });
+      13 |
+      14 |   test('Form has all 6 required sections', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:11:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-043-product-f-416a1-ones-tag-with-remove-button-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-043-product-f-416a1-ones-tag-with-remove-button-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TimeoutError: locator.waitFor: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for getByText('Crear Producto') to be visible[22m
+
+
+       9 |     // Note: Mock auth allows direct access to admin routes
+      10 |     await page.goto(`${BASE_URL}/admin/productos/crear`);
+    > 11 |     await page.getByText('Crear Producto').waitFor({ state: 'visible', timeout: 10000 });
+         |                                            ^
+      12 |   });
+      13 |
+      14 |   test('Form has all 6 required sections', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:11:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-043-product-f-416a1-ones-tag-with-remove-button-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-043-product-f-416a1-ones-tag-with-remove-button-chromium-retry1\error-context.md
+
+  56) [chromium] › e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:99:7 › UX-043: Product Form Structure and Edge Cases › R3: Species remove buttons work 
+
+    TimeoutError: locator.waitFor: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for getByText('Crear Producto') to be visible[22m
+
+
+       9 |     // Note: Mock auth allows direct access to admin routes
+      10 |     await page.goto(`${BASE_URL}/admin/productos/crear`);
+    > 11 |     await page.getByText('Crear Producto').waitFor({ state: 'visible', timeout: 10000 });
+         |                                            ^
+      12 |   });
+      13 |
+      14 |   test('Form has all 6 required sections', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:11:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-043-product-f-9ae12-Species-remove-buttons-work-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-043-product-f-9ae12-Species-remove-buttons-work-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TimeoutError: locator.waitFor: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for getByText('Crear Producto') to be visible[22m
+
+
+       9 |     // Note: Mock auth allows direct access to admin routes
+      10 |     await page.goto(`${BASE_URL}/admin/productos/crear`);
+    > 11 |     await page.getByText('Crear Producto').waitFor({ state: 'visible', timeout: 10000 });
+         |                                            ^
+      12 |   });
+      13 |
+      14 |   test('Form has all 6 required sections', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:11:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-043-product-f-9ae12-Species-remove-buttons-work-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-043-product-f-9ae12-Species-remove-buttons-work-chromium-retry1\error-context.md
+
+  57) [chromium] › e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:104:7 › UX-043: Product Form Structure and Edge Cases › R3: Add species input accepts text 
+
+    TimeoutError: locator.waitFor: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for getByText('Crear Producto') to be visible[22m
+
+
+       9 |     // Note: Mock auth allows direct access to admin routes
+      10 |     await page.goto(`${BASE_URL}/admin/productos/crear`);
+    > 11 |     await page.getByText('Crear Producto').waitFor({ state: 'visible', timeout: 10000 });
+         |                                            ^
+      12 |   });
+      13 |
+      14 |   test('Form has all 6 required sections', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:11:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-043-product-f-45ce1--species-input-accepts-text-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-043-product-f-45ce1--species-input-accepts-text-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TimeoutError: locator.waitFor: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for getByText('Crear Producto') to be visible[22m
+
+
+       9 |     // Note: Mock auth allows direct access to admin routes
+      10 |     await page.goto(`${BASE_URL}/admin/productos/crear`);
+    > 11 |     await page.getByText('Crear Producto').waitFor({ state: 'visible', timeout: 10000 });
+         |                                            ^
+      12 |   });
+      13 |
+      14 |   test('Form has all 6 required sections', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:11:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-043-product-f-45ce1--species-input-accepts-text-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-043-product-f-45ce1--species-input-accepts-text-chromium-retry1\error-context.md
+
+  58) [chromium] › e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:112:7 › UX-043: Product Form Structure and Edge Cases › R3: Descripcion field accepts long text 
+
+    TimeoutError: locator.waitFor: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for getByText('Crear Producto') to be visible[22m
+
+
+       9 |     // Note: Mock auth allows direct access to admin routes
+      10 |     await page.goto(`${BASE_URL}/admin/productos/crear`);
+    > 11 |     await page.getByText('Crear Producto').waitFor({ state: 'visible', timeout: 10000 });
+         |                                            ^
+      12 |   });
+      13 |
+      14 |   test('Form has all 6 required sections', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:11:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-043-product-f-d2c0a-ion-field-accepts-long-text-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-043-product-f-d2c0a-ion-field-accepts-long-text-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TimeoutError: locator.waitFor: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for getByText('Crear Producto') to be visible[22m
+
+
+       9 |     // Note: Mock auth allows direct access to admin routes
+      10 |     await page.goto(`${BASE_URL}/admin/productos/crear`);
+    > 11 |     await page.getByText('Crear Producto').waitFor({ state: 'visible', timeout: 10000 });
+         |                                            ^
+      12 |   });
+      13 |
+      14 |   test('Form has all 6 required sections', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:11:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-043-product-f-d2c0a-ion-field-accepts-long-text-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-043-product-f-d2c0a-ion-field-accepts-long-text-chromium-retry1\error-context.md
+
+  59) [chromium] › e2e\tests\edge-case\UX-075-search-overlay.spec.ts:29:7 › UX-075: Search Overlay Edge Cases › Results appear for 3+ characters 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('PRODUCTOS')
+    Expected: visible
+    Error: strict mode violation: getByText('PRODUCTOS') resolved to 2 elements:
+        1) <span _ngcontent-ng-c4085782331="" class="search-overlay__group-label">PRODUCTOS (2)</span> aka getByText('PRODUCTOS (2)')
+        2) <h2 class="text-h2" _ngcontent-ng-c2536367832="">Productos Destacados</h2> aka getByRole('heading', { name: 'Productos Destacados' })
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('PRODUCTOS')[22m
+
+
+      32 |     await page.getByRole('textbox', { name: 'Buscar productos, marcas...' }).pressSequentially('amox');
+      33 |     await expect(page.getByRole('listbox')).toBeVisible();
+    > 34 |     await expect(page.getByText('PRODUCTOS')).toBeVisible();
+         |                                               ^
+      35 |   });
+      36 |
+      37 |   test('XSS in search input does not execute script', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-075-search-overlay.spec.ts:34:47
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-075-search-ov-5ded0-lts-appear-for-3-characters-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-075-search-ov-5ded0-lts-appear-for-3-characters-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('PRODUCTOS')
+    Expected: visible
+    Error: strict mode violation: getByText('PRODUCTOS') resolved to 2 elements:
+        1) <span _ngcontent-ng-c4085782331="" class="search-overlay__group-label">PRODUCTOS (2)</span> aka getByText('PRODUCTOS (2)')
+        2) <h2 class="text-h2" _ngcontent-ng-c2536367832="">Productos Destacados</h2> aka getByRole('heading', { name: 'Productos Destacados' })
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('PRODUCTOS')[22m
+
+
+      32 |     await page.getByRole('textbox', { name: 'Buscar productos, marcas...' }).pressSequentially('amox');
+      33 |     await expect(page.getByRole('listbox')).toBeVisible();
+    > 34 |     await expect(page.getByText('PRODUCTOS')).toBeVisible();
+         |                                               ^
+      35 |   });
+      36 |
+      37 |   test('XSS in search input does not execute script', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-075-search-overlay.spec.ts:34:47
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-075-search-ov-5ded0-lts-appear-for-3-characters-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-075-search-ov-5ded0-lts-appear-for-3-characters-chromium-retry1\error-context.md
+
+  60) [chromium] › e2e\tests\edge-case\UX-076-catalog-filters.spec.ts:7:7 › UX-076: Catalog Filters Edge Cases › Filter by category updates product count and URL 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('47 productos')
+    Expected: visible
+    Error: strict mode violation: getByText('47 productos') resolved to 2 elements:
+        1) <span class="catalog-page__count" _ngcontent-ng-c4117633131="">47 productos</span> aka getByText('47 productos', { exact: true })
+        2) <span class="pagination__info" _ngcontent-ng-c4117633131=""> Mostrando 1-12 de 47 productos </span> aka getByText('Mostrando 1-12 de 47 productos')
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('47 productos')[22m
+
+
+       7 |   test('Filter by category updates product count and URL', async ({ page }) => {
+       8 |     await page.goto(`${BASE_URL}/es/catalogo`);
+    >  9 |     await expect(page.getByText('47 productos')).toBeVisible();
+         |                                                  ^
+      10 |
+      11 |     await page.getByRole('combobox').first().selectOption('Farmacos');
+      12 |     await expect(page).toHaveURL(/category=farmacos/);
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-076-catalog-filters.spec.ts:9:50
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-076-catalog-f-c4fa7-dates-product-count-and-URL-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-076-catalog-f-c4fa7-dates-product-count-and-URL-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('47 productos')
+    Expected: visible
+    Error: strict mode violation: getByText('47 productos') resolved to 2 elements:
+        1) <span class="catalog-page__count" _ngcontent-ng-c4117633131="">47 productos</span> aka getByText('47 productos', { exact: true })
+        2) <span class="pagination__info" _ngcontent-ng-c4117633131=""> Mostrando 1-12 de 47 productos </span> aka getByText('Mostrando 1-12 de 47 productos')
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('47 productos')[22m
+
+
+       7 |   test('Filter by category updates product count and URL', async ({ page }) => {
+       8 |     await page.goto(`${BASE_URL}/es/catalogo`);
+    >  9 |     await expect(page.getByText('47 productos')).toBeVisible();
+         |                                                  ^
+      10 |
+      11 |     await page.getByRole('combobox').first().selectOption('Farmacos');
+      12 |     await expect(page).toHaveURL(/category=farmacos/);
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-076-catalog-filters.spec.ts:9:50
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-076-catalog-f-c4fa7-dates-product-count-and-URL-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-076-catalog-f-c4fa7-dates-product-count-and-URL-chromium-retry1\error-context.md
+
+  61) [chromium] › e2e\tests\edge-case\UX-076-catalog-filters.spec.ts:16:7 › UX-076: Catalog Filters Edge Cases › Filter pills appear with remove button 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('farmacos')
+    Expected: visible
+    Error: strict mode violation: getByText('farmacos') resolved to 4 elements:
+        1) <a _ngcontent-ng-c247534093="" class="header__submenu-item" href="/es/catalogo/farmacos">…</a> aka getByRole('link', { name: 'Farmacos Veterinarios' })
+        2) <a _ngcontent-ng-c247534093="" href="/es/catalogo/farmacos" class="header__mobile-sublink">Farmacos Veterinarios</a> aka getByLabel('Menu de navegacion').getByText('Farmacos Veterinarios')
+        3) <option value="farmacos" _ngcontent-ng-c4117633131="">Farmacos</option> aka getByRole('combobox').first()
+        4) <span class="filter-bar__pill" _ngcontent-ng-c4117633131="">…</span> aka getByText('farmacos', { exact: true })
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('farmacos')[22m
+
+
+      17 |     await page.goto(`${BASE_URL}/es/catalogo`);
+      18 |     await page.getByRole('combobox').first().selectOption('Farmacos');
+    > 19 |     await expect(page.getByText('farmacos')).toBeVisible();
+         |                                              ^
+      20 |     await expect(page.getByRole('button', { name: /Remover filtro/ })).toBeVisible();
+      21 |   });
+      22 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-076-catalog-filters.spec.ts:19:46
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-076-catalog-f-8a31d-s-appear-with-remove-button-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-076-catalog-f-8a31d-s-appear-with-remove-button-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('farmacos')
+    Expected: visible
+    Error: strict mode violation: getByText('farmacos') resolved to 4 elements:
+        1) <a _ngcontent-ng-c247534093="" class="header__submenu-item" href="/es/catalogo/farmacos">…</a> aka getByRole('link', { name: 'Farmacos Veterinarios' })
+        2) <a _ngcontent-ng-c247534093="" href="/es/catalogo/farmacos" class="header__mobile-sublink">Farmacos Veterinarios</a> aka getByLabel('Menu de navegacion').getByText('Farmacos Veterinarios')
+        3) <option value="farmacos" _ngcontent-ng-c4117633131="">Farmacos</option> aka getByRole('combobox').first()
+        4) <span class="filter-bar__pill" _ngcontent-ng-c4117633131="">…</span> aka getByText('farmacos', { exact: true })
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('farmacos')[22m
+
+
+      17 |     await page.goto(`${BASE_URL}/es/catalogo`);
+      18 |     await page.getByRole('combobox').first().selectOption('Farmacos');
+    > 19 |     await expect(page.getByText('farmacos')).toBeVisible();
+         |                                              ^
+      20 |     await expect(page.getByRole('button', { name: /Remover filtro/ })).toBeVisible();
+      21 |   });
+      22 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-076-catalog-filters.spec.ts:19:46
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-076-catalog-f-8a31d-s-appear-with-remove-button-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-076-catalog-f-8a31d-s-appear-with-remove-button-chromium-retry1\error-context.md
+
+  62) [chromium] › e2e\tests\edge-case\UX-076-catalog-filters.spec.ts:23:7 › UX-076: Catalog Filters Edge Cases › Clear filters button resets all filters 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('27 productos')
+    Expected: visible
+    Error: strict mode violation: getByText('27 productos') resolved to 2 elements:
+        1) <span class="catalog-page__count" _ngcontent-ng-c4117633131="">27 productos</span> aka getByText('27 productos', { exact: true })
+        2) <span class="pagination__info" _ngcontent-ng-c4117633131=""> Mostrando 1-12 de 27 productos </span> aka getByText('Mostrando 1-12 de 27 productos')
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('27 productos')[22m
+
+
+      24 |     await page.goto(`${BASE_URL}/es/catalogo`);
+      25 |     await page.getByRole('combobox').first().selectOption('Farmacos');
+    > 26 |     await expect(page.getByText('27 productos')).toBeVisible();
+         |                                                  ^
+      27 |
+      28 |     await page.getByRole('button', { name: 'Limpiar filtros' }).click();
+      29 |     await expect(page.getByText('47 productos')).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-076-catalog-filters.spec.ts:26:50
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-076-catalog-f-84aa1-s-button-resets-all-filters-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-076-catalog-f-84aa1-s-button-resets-all-filters-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('27 productos')
+    Expected: visible
+    Error: strict mode violation: getByText('27 productos') resolved to 2 elements:
+        1) <span class="catalog-page__count" _ngcontent-ng-c4117633131="">27 productos</span> aka getByText('27 productos', { exact: true })
+        2) <span class="pagination__info" _ngcontent-ng-c4117633131=""> Mostrando 1-12 de 27 productos </span> aka getByText('Mostrando 1-12 de 27 productos')
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('27 productos')[22m
+
+
+      24 |     await page.goto(`${BASE_URL}/es/catalogo`);
+      25 |     await page.getByRole('combobox').first().selectOption('Farmacos');
+    > 26 |     await expect(page.getByText('27 productos')).toBeVisible();
+         |                                                  ^
+      27 |
+      28 |     await page.getByRole('button', { name: 'Limpiar filtros' }).click();
+      29 |     await expect(page.getByText('47 productos')).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-076-catalog-filters.spec.ts:26:50
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-076-catalog-f-84aa1-s-button-resets-all-filters-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-076-catalog-f-84aa1-s-button-resets-all-filters-chromium-retry1\error-context.md
+
+  63) [chromium] › e2e\tests\edge-case\UX-076-catalog-filters.spec.ts:44:7 › UX-076: Catalog Filters Edge Cases › Brand dropdown filters adaptively when Farmacos selected (BUG-011 fix) 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeGreaterThanOrEqual[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: >= [32m12[39m
+    Received:    [31m1[39m
+
+      49 |     const marcaDropdown = page.locator('select').nth(1);
+      50 |     const allBrandOptions = await marcaDropdown.locator('option').allTextContents();
+    > 51 |     expect(allBrandOptions.length).toBeGreaterThanOrEqual(12); // 13 brands + "Marca" header
+         |                                    ^
+      52 |
+      53 |     // Select Farmacos category
+      54 |     await page.getByRole('combobox').first().selectOption('Farmacos');
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-076-catalog-filters.spec.ts:51:36
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-076-catalog-f-3e338-macos-selected-BUG-011-fix--chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-076-catalog-f-3e338-macos-selected-BUG-011-fix--chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeGreaterThanOrEqual[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: >= [32m12[39m
+    Received:    [31m1[39m
+
+      49 |     const marcaDropdown = page.locator('select').nth(1);
+      50 |     const allBrandOptions = await marcaDropdown.locator('option').allTextContents();
+    > 51 |     expect(allBrandOptions.length).toBeGreaterThanOrEqual(12); // 13 brands + "Marca" header
+         |                                    ^
+      52 |
+      53 |     // Select Farmacos category
+      54 |     await page.getByRole('combobox').first().selectOption('Farmacos');
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-076-catalog-filters.spec.ts:51:36
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-076-catalog-f-3e338-macos-selected-BUG-011-fix--chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-076-catalog-f-3e338-macos-selected-BUG-011-fix--chromium-retry1\error-context.md
+
+  64) [chromium] › e2e\tests\edge-case\UX-086-089-home-interactions.spec.ts:12:7 › UX-086: Brand Logos Home › 8 brand logos are displayed 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoHaveCount[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator:  getByRole('listitem').filter({ hasText: /Ver productos de/ })
+    Expected: [32m8[39m
+    Received: [31m0[39m
+    Timeout:  5000ms
+
+    Call log:
+    [2m  - Expect "toHaveCount" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('listitem').filter({ hasText: /Ver productos de/ })[22m
+    [2m    9 × locator resolved to 0 elements[22m
+    [2m      - unexpected value "0"[22m
+
+
+      13 |     await page.goto(`${BASE_URL}/es/`);
+      14 |     const brandItems = page.getByRole('listitem').filter({ hasText: /Ver productos de/ });
+    > 15 |     await expect(brandItems).toHaveCount(8);
+         |                              ^
+      16 |   });
+      17 | });
+      18 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-086-089-home-interactions.spec.ts:15:30
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-086-089-home--49d71-8-brand-logos-are-displayed-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-086-089-home--49d71-8-brand-logos-are-displayed-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoHaveCount[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator:  getByRole('listitem').filter({ hasText: /Ver productos de/ })
+    Expected: [32m8[39m
+    Received: [31m0[39m
+    Timeout:  5000ms
+
+    Call log:
+    [2m  - Expect "toHaveCount" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('listitem').filter({ hasText: /Ver productos de/ })[22m
+    [2m    9 × locator resolved to 0 elements[22m
+    [2m      - unexpected value "0"[22m
+
+
+      13 |     await page.goto(`${BASE_URL}/es/`);
+      14 |     const brandItems = page.getByRole('listitem').filter({ hasText: /Ver productos de/ });
+    > 15 |     await expect(brandItems).toHaveCount(8);
+         |                              ^
+      16 |   });
+      17 | });
+      18 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-086-089-home-interactions.spec.ts:15:30
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-086-089-home--49d71-8-brand-logos-are-displayed-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-086-089-home--49d71-8-brand-logos-are-displayed-chromium-retry1\error-context.md
+
+  65) [chromium] › e2e\tests\edge-case\UX-090-contact-form-validation.spec.ts:108:7 › UX-090: Contact Form Validation Edge Cases › R3: Double submit does not cause errors 
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('button', { name: 'Enviar mensaje' })[22m
+    [2m    - locator resolved to <button type="submit" _ngcontent-ng-c1136997086="" class="btn btn-primary btn-lg">…</button>[22m
+    [2m  - attempting click action[22m
+    [2m    2 × waiting for element to be visible, enabled and stable[22m
+    [2m      - element is not enabled[22m
+    [2m    - retrying click action[22m
+    [2m    - waiting 20ms[22m
+    [2m    2 × waiting for element to be visible, enabled and stable[22m
+    [2m      - element is not enabled[22m
+    [2m    - retrying click action[22m
+    [2m      - waiting 100ms[22m
+    [2m    3 × waiting for element to be visible, enabled and stable[22m
+    [2m      - element is not enabled[22m
+    [2m    - retrying click action[22m
+    [2m      - waiting 500ms[22m
+    [2m    - waiting for element to be visible, enabled and stable[22m
+    [2m  - element was detached from the DOM, retrying[22m
+
+
+      115 |     const btn = page.getByRole('button', { name: 'Enviar mensaje' });
+      116 |     await btn.click();
+    > 117 |     await btn.click();
+          |               ^
+      118 |
+      119 |     // Page should handle gracefully
+      120 |     await page.waitForTimeout(1000);
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-090-contact-form-validation.spec.ts:117:15
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-090-contact-f-9bba3-ubmit-does-not-cause-errors-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-090-contact-f-9bba3-ubmit-does-not-cause-errors-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('button', { name: 'Enviar mensaje' })[22m
+
+
+      115 |     const btn = page.getByRole('button', { name: 'Enviar mensaje' });
+      116 |     await btn.click();
+    > 117 |     await btn.click();
+          |               ^
+      118 |
+      119 |     // Page should handle gracefully
+      120 |     await page.waitForTimeout(1000);
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-090-contact-form-validation.spec.ts:117:15
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-090-contact-f-9bba3-ubmit-does-not-cause-errors-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-090-contact-f-9bba3-ubmit-does-not-cause-errors-chromium-retry1\error-context.md
+
+  66) [chromium] › e2e\tests\edge-case\UX-091-distributor-form-validation.spec.ts:12:7 › UX-091: Distributor Form Validation and Language › Page headings are in Spanish on /es/ route (BUG-008 partial fix) 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Cobertura Nacional')
+    Expected: visible
+    Error: strict mode violation: getByText('Cobertura Nacional') resolved to 3 elements:
+        1) <p class="dist-hero__subtitle" _ngcontent-ng-c1839323048="">37 anos de trayectoria comprobada en distribucion…</p> aka getByText('37 anos de trayectoria')
+        2) <h3 _ngcontent-ng-c1839323048="" class="dist-benefits__title">Cobertura Nacional</h3> aka getByRole('heading', { name: 'Cobertura Nacional' })
+        3) <p class="timeline__desc" _ngcontent-ng-c3417883736="">Cobertura nacional con nuestra flotilla propia</p> aka getByText('Cobertura nacional con')
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('Cobertura Nacional')[22m
+
+
+      16 |     await expect(page.getByRole('heading', { name: /Inicie su Alianza/ })).toBeVisible();
+      17 |     // Cards content in Spanish
+    > 18 |     await expect(page.getByText('Cobertura Nacional')).toBeVisible();
+         |                                                        ^
+      19 |     await expect(page.getByText('Flotilla Propia')).toBeVisible();
+      20 |     await expect(page.getByText('Cadena de Frio')).toBeVisible();
+      21 |   });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-091-distributor-form-validation.spec.ts:18:56
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-091-distribut-5a958--route-BUG-008-partial-fix--chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-091-distribut-5a958--route-BUG-008-partial-fix--chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Cobertura Nacional')
+    Expected: visible
+    Error: strict mode violation: getByText('Cobertura Nacional') resolved to 3 elements:
+        1) <p class="dist-hero__subtitle" _ngcontent-ng-c1839323048="">37 anos de trayectoria comprobada en distribucion…</p> aka getByText('37 anos de trayectoria')
+        2) <h3 _ngcontent-ng-c1839323048="" class="dist-benefits__title">Cobertura Nacional</h3> aka getByRole('heading', { name: 'Cobertura Nacional' })
+        3) <p class="timeline__desc" _ngcontent-ng-c3417883736="">Cobertura nacional con nuestra flotilla propia</p> aka getByText('Cobertura nacional con')
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('Cobertura Nacional')[22m
+
+
+      16 |     await expect(page.getByRole('heading', { name: /Inicie su Alianza/ })).toBeVisible();
+      17 |     // Cards content in Spanish
+    > 18 |     await expect(page.getByText('Cobertura Nacional')).toBeVisible();
+         |                                                        ^
+      19 |     await expect(page.getByText('Flotilla Propia')).toBeVisible();
+      20 |     await expect(page.getByText('Cadena de Frio')).toBeVisible();
+      21 |   });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-091-distributor-form-validation.spec.ts:18:56
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-091-distribut-5a958--route-BUG-008-partial-fix--chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-091-distribut-5a958--route-BUG-008-partial-fix--chromium-retry1\error-context.md
+
+  67) [chromium] › e2e\tests\edge-case\UX-091-distributor-form-validation.spec.ts:23:7 › UX-091: Distributor Form Validation and Language › Form labels should be in Spanish on /es/ route (BUG-E07 - currently fails) 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Company Name *')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('Company Name *')[22m
+
+
+      31 |     // await expect(page.getByText('Nombre de Empresa *')).toBeVisible();
+      32 |     // ACTUAL behavior (bug - labels in English):
+    > 33 |     await expect(companyLabel).toBeVisible();
+         |                                ^
+      34 |     await expect(countryLabel).toBeVisible();
+      35 |     await expect(contactLabel).toBeVisible();
+      36 |   });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-091-distributor-form-validation.spec.ts:33:32
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-091-distribut-86a86--BUG-E07---currently-fails--chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-091-distribut-86a86--BUG-E07---currently-fails--chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Company Name *')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('Company Name *')[22m
+
+
+      31 |     // await expect(page.getByText('Nombre de Empresa *')).toBeVisible();
+      32 |     // ACTUAL behavior (bug - labels in English):
+    > 33 |     await expect(companyLabel).toBeVisible();
+         |                                ^
+      34 |     await expect(countryLabel).toBeVisible();
+      35 |     await expect(contactLabel).toBeVisible();
+      36 |   });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-091-distributor-form-validation.spec.ts:33:32
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-091-distribut-86a86--BUG-E07---currently-fails--chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-091-distribut-86a86--BUG-E07---currently-fails--chromium-retry1\error-context.md
+
+  68) [chromium] › e2e\tests\edge-case\UX-091-distributor-form-validation.spec.ts:44:7 › UX-091: Distributor Form Validation and Language › Form has terms checkbox (currently in English) 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('checkbox', { name: 'I accept the terms and conditions' })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('checkbox', { name: 'I accept the terms and conditions' })[22m
+
+
+      43 |
+      44 |   test('Form has terms checkbox (currently in English)', async ({ page }) => {
+    > 45 |     await expect(page.getByRole('checkbox', { name: 'I accept the terms and conditions' })).toBeVisible();
+         |                                                                                             ^
+      46 |   });
+      47 |
+      48 |   test('Honeypot field exists in distributor form', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-091-distributor-form-validation.spec.ts:45:93
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-091-distribut-01c98-ckbox-currently-in-English--chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-091-distribut-01c98-ckbox-currently-in-English--chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('checkbox', { name: 'I accept the terms and conditions' })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('checkbox', { name: 'I accept the terms and conditions' })[22m
+
+
+      43 |
+      44 |   test('Form has terms checkbox (currently in English)', async ({ page }) => {
+    > 45 |     await expect(page.getByRole('checkbox', { name: 'I accept the terms and conditions' })).toBeVisible();
+         |                                                                                             ^
+      46 |   });
+      47 |
+      48 |   test('Honeypot field exists in distributor form', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-091-distributor-form-validation.spec.ts:45:93
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-091-distribut-01c98-ckbox-currently-in-English--chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-091-distribut-01c98-ckbox-currently-in-English--chromium-retry1\error-context.md
+
+  69) [chromium] › e2e\tests\edge-case\UX-091-distributor-form-validation.spec.ts:67:7 › UX-091: Distributor Form Validation and Language › XSS in company name is not executed 
+
+    Error: locator.fill: Error: strict mode violation: getByRole('textbox', { name: /Company Name|Nombre/ }) resolved to 2 elements:
+        1) <input type="text" id="company" maxlength="200" name="companyName" aria-required="true" _ngcontent-ng-c1136997086="" placeholder="Nombre de su empresa" class="form-control ng-untouched ng-pristine ng-valid"/> aka getByRole('textbox', { name: 'Nombre de la empresa *' })
+        2) <input type="text" maxlength="100" id="contact-name" name="contactName" aria-required="true" _ngcontent-ng-c1136997086="" placeholder="Su nombre completo" class="form-control ng-untouched ng-pristine ng-valid"/> aka getByRole('textbox', { name: 'Nombre de contacto *' })
+
+    Call log:
+    [2m  - waiting for getByRole('textbox', { name: /Company Name|Nombre/ })[22m
+
+
+      67 |   test('XSS in company name is not executed', async ({ page }) => {
+      68 |     const xssPayload = '<img src=x onerror=alert(1)>';
+    > 69 |     await page.getByRole('textbox', { name: /Company Name|Nombre/ }).fill(xssPayload);
+         |                                                                      ^
+      70 |     // No alert should appear, text should be sanitized
+      71 |     await expect(page.getByRole('textbox', { name: /Company Name|Nombre/ })).toHaveValue(xssPayload);
+      72 |   });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-091-distributor-form-validation.spec.ts:69:70
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-091-distribut-af46c-ompany-name-is-not-executed-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-091-distribut-af46c-ompany-name-is-not-executed-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: locator.fill: Error: strict mode violation: getByRole('textbox', { name: /Company Name|Nombre/ }) resolved to 2 elements:
+        1) <input type="text" id="company" maxlength="200" name="companyName" aria-required="true" _ngcontent-ng-c1136997086="" placeholder="Nombre de su empresa" class="form-control ng-untouched ng-pristine ng-valid"/> aka getByRole('textbox', { name: 'Nombre de la empresa *' })
+        2) <input type="text" maxlength="100" id="contact-name" name="contactName" aria-required="true" _ngcontent-ng-c1136997086="" placeholder="Su nombre completo" class="form-control ng-untouched ng-pristine ng-valid"/> aka getByRole('textbox', { name: 'Nombre de contacto *' })
+
+    Call log:
+    [2m  - waiting for getByRole('textbox', { name: /Company Name|Nombre/ })[22m
+
+
+      67 |   test('XSS in company name is not executed', async ({ page }) => {
+      68 |     const xssPayload = '<img src=x onerror=alert(1)>';
+    > 69 |     await page.getByRole('textbox', { name: /Company Name|Nombre/ }).fill(xssPayload);
+         |                                                                      ^
+      70 |     // No alert should appear, text should be sanitized
+      71 |     await expect(page.getByRole('textbox', { name: /Company Name|Nombre/ })).toHaveValue(xssPayload);
+      72 |   });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-091-distributor-form-validation.spec.ts:69:70
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-091-distribut-af46c-ompany-name-is-not-executed-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-091-distribut-af46c-ompany-name-is-not-executed-chromium-retry1\error-context.md
+
+  70) [chromium] › e2e\tests\edge-case\UX-091-distributor-form-validation.spec.ts:74:7 › UX-091: Distributor Form Validation and Language › Invalid email shows validation error 
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.fill: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('textbox', { name: /Contact Name/ })[22m
+
+
+      75 |     await page.getByRole('textbox', { name: /Company Name|Nombre/ }).first().fill('Test Company');
+      76 |     await page.getByRole('combobox', { name: /Country|Pais/ }).selectOption('United States');
+    > 77 |     await page.getByRole('textbox', { name: /Contact Name/ }).fill('John Doe');
+         |                                                               ^
+      78 |     await page.getByRole('textbox', { name: /Email/ }).fill('not-an-email');
+      79 |     await page.getByRole('textbox', { name: /Message|Mensaje/ }).fill('Test message');
+      80 |     await page.getByRole('checkbox').check();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-091-distributor-form-validation.spec.ts:77:63
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-091-distribut-a5e8a-mail-shows-validation-error-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-091-distribut-a5e8a-mail-shows-validation-error-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.fill: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('textbox', { name: /Contact Name/ })[22m
+
+
+      75 |     await page.getByRole('textbox', { name: /Company Name|Nombre/ }).first().fill('Test Company');
+      76 |     await page.getByRole('combobox', { name: /Country|Pais/ }).selectOption('United States');
+    > 77 |     await page.getByRole('textbox', { name: /Contact Name/ }).fill('John Doe');
+         |                                                               ^
+      78 |     await page.getByRole('textbox', { name: /Email/ }).fill('not-an-email');
+      79 |     await page.getByRole('textbox', { name: /Message|Mensaje/ }).fill('Test message');
+      80 |     await page.getByRole('checkbox').check();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-091-distributor-form-validation.spec.ts:77:63
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-091-distribut-a5e8a-mail-shows-validation-error-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-091-distribut-a5e8a-mail-shows-validation-error-chromium-retry1\error-context.md
+
+  71) [chromium] › e2e\tests\edge-case\UX-092-language-selector.spec.ts:17:7 › UX-092: Language Selector › Switching language changes URL prefix 
+
+    Error: [2mexpect([22m[31mpage[39m[2m).[22mtoHaveURL[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Expected pattern: [32m/\/en/[39m
+    Received string:  [31m"https://gray-field-02ba8410f.2.azurestaticapps.net/es"[39m
+    Timeout: 5000ms
+
+    Call log:
+    [2m  - Expect "toHaveURL" with timeout 5000ms[22m
+    [2m    2 × unexpected value "https://gray-field-02ba8410f.2.azurestaticapps.net/es/"[22m
+    [2m    7 × unexpected value "https://gray-field-02ba8410f.2.azurestaticapps.net/es"[22m
+
+
+      18 |     await page.goto(`${BASE_URL}/es/`);
+      19 |     await page.getByRole('button', { name: 'English' }).click();
+    > 20 |     await expect(page).toHaveURL(/\/en/);
+         |                        ^
+      21 |   });
+      22 |
+      23 |   test('Content changes to English after switching', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-092-language-selector.spec.ts:20:24
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-092-language--331d9-language-changes-URL-prefix-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-092-language--331d9-language-changes-URL-prefix-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mpage[39m[2m).[22mtoHaveURL[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Expected pattern: [32m/\/en/[39m
+    Received string:  [31m"https://gray-field-02ba8410f.2.azurestaticapps.net/es"[39m
+    Timeout: 5000ms
+
+    Call log:
+    [2m  - Expect "toHaveURL" with timeout 5000ms[22m
+    [2m    3 × unexpected value "https://gray-field-02ba8410f.2.azurestaticapps.net/es/"[22m
+    [2m    6 × unexpected value "https://gray-field-02ba8410f.2.azurestaticapps.net/es"[22m
+
+
+      18 |     await page.goto(`${BASE_URL}/es/`);
+      19 |     await page.getByRole('button', { name: 'English' }).click();
+    > 20 |     await expect(page).toHaveURL(/\/en/);
+         |                        ^
+      21 |   });
+      22 |
+      23 |   test('Content changes to English after switching', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-092-language-selector.spec.ts:20:24
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-092-language--331d9-language-changes-URL-prefix-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-092-language--331d9-language-changes-URL-prefix-chromium-retry1\error-context.md
+
+  72) [chromium] › e2e\tests\edge-case\UX-095-096-card-hover.spec.ts:7:7 › UX-095/UX-096: Product and Brand Card Hover › Product cards have links that navigate to product detail 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoHaveAttribute[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator: getByRole('link', { name: /Ver Amoxicilina/ })
+    Expected pattern: [32m/\/es\/catalogo\/farmacos\/amoxicilina-250ml/[39m
+    Error: strict mode violation: getByRole('link', { name: /Ver Amoxicilina/ }) resolved to 2 elements:
+        1) <a class="product-card" _ngcontent-ng-c1383026834="" aria-label="Ver Amoxicilina 250ml" href="/es/catalogo/farmacos/amoxicilina-250ml">…</a> aka getByRole('link', { name: 'Ver Amoxicilina 250ml' })
+        2) <a class="product-card" _ngcontent-ng-c1383026834="" aria-label="Ver Amoxicilina + Clavulanico" href="/es/catalogo/farmacos/amoxicilina-clavulanico">…</a> aka getByRole('link', { name: 'Ver Amoxicilina + Clavulanico' })
+
+    Call log:
+    [2m  - Expect "toHaveAttribute" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('link', { name: /Ver Amoxicilina/ })[22m
+
+
+       8 |     await page.goto(`${BASE_URL}/es/catalogo`);
+       9 |     const firstCard = page.getByRole('link', { name: /Ver Amoxicilina/ });
+    > 10 |     await expect(firstCard).toHaveAttribute('href', /\/es\/catalogo\/farmacos\/amoxicilina-250ml/);
+         |                             ^
+      11 |   });
+      12 |
+      13 |   test('Brand logos on home are clickable', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-095-096-card-hover.spec.ts:10:29
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-095-096-card--b2989--navigate-to-product-detail-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-095-096-card--b2989--navigate-to-product-detail-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoHaveAttribute[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator: getByRole('link', { name: /Ver Amoxicilina/ })
+    Expected pattern: [32m/\/es\/catalogo\/farmacos\/amoxicilina-250ml/[39m
+    Error: strict mode violation: getByRole('link', { name: /Ver Amoxicilina/ }) resolved to 2 elements:
+        1) <a class="product-card" _ngcontent-ng-c1383026834="" aria-label="Ver Amoxicilina 250ml" href="/es/catalogo/farmacos/amoxicilina-250ml">…</a> aka getByRole('link', { name: 'Ver Amoxicilina 250ml' })
+        2) <a class="product-card" _ngcontent-ng-c1383026834="" aria-label="Ver Amoxicilina + Clavulanico" href="/es/catalogo/farmacos/amoxicilina-clavulanico">…</a> aka getByRole('link', { name: 'Ver Amoxicilina + Clavulanico' })
+
+    Call log:
+    [2m  - Expect "toHaveAttribute" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('link', { name: /Ver Amoxicilina/ })[22m
+
+
+       8 |     await page.goto(`${BASE_URL}/es/catalogo`);
+       9 |     const firstCard = page.getByRole('link', { name: /Ver Amoxicilina/ });
+    > 10 |     await expect(firstCard).toHaveAttribute('href', /\/es\/catalogo\/farmacos\/amoxicilina-250ml/);
+         |                             ^
+      11 |   });
+      12 |
+      13 |   test('Brand logos on home are clickable', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-095-096-card-hover.spec.ts:10:29
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-095-096-card--b2989--navigate-to-product-detail-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-095-096-card--b2989--navigate-to-product-detail-chromium-retry1\error-context.md
+
+  73) [chromium] › e2e\tests\edge-case\UX-097-related-products.spec.ts:13:7 › UX-097: Related Products Section › Related products are from same category 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeGreaterThanOrEqual[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: >= [32m3[39m
+    Received:    [31m0[39m
+
+      17 |     const relatedLinks = page.locator('a[href*="/es/catalogo/farmacos/"]');
+      18 |     // At least 3 related products
+    > 19 |     expect(await relatedLinks.count()).toBeGreaterThanOrEqual(3);
+         |                                        ^
+      20 |   });
+      21 | });
+      22 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-097-related-products.spec.ts:19:40
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-097-related-p-3615b-ucts-are-from-same-category-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-097-related-p-3615b-ucts-are-from-same-category-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeGreaterThanOrEqual[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: >= [32m3[39m
+    Received:    [31m0[39m
+
+      17 |     const relatedLinks = page.locator('a[href*="/es/catalogo/farmacos/"]');
+      18 |     // At least 3 related products
+    > 19 |     expect(await relatedLinks.count()).toBeGreaterThanOrEqual(3);
+         |                                        ^
+      20 |   });
+      21 | });
+      22 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-097-related-products.spec.ts:19:40
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-097-related-p-3615b-ucts-are-from-same-category-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-097-related-p-3615b-ucts-are-from-same-category-chromium-retry1\error-context.md
+
+  74) [chromium] › e2e\tests\edge-case\UX-098-toggle-card-table.spec.ts:21:7 › UX-098: Toggle Card/Table View in Admin › Table view toggle switches view 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Nombre').first()
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('Nombre').first()[22m
+
+
+      23 |     await page.getByRole('button', { name: 'Vista de tabla' }).click();
+      24 |     // Table headers should appear
+    > 25 |     await expect(page.getByText('Nombre').first()).toBeVisible();
+         |                                                    ^
+      26 |   });
+      27 | });
+      28 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-098-toggle-card-table.spec.ts:25:52
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-098-toggle-ca-8f469-e-view-toggle-switches-view-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-098-toggle-ca-8f469-e-view-toggle-switches-view-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Nombre').first()
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('Nombre').first()[22m
+
+
+      23 |     await page.getByRole('button', { name: 'Vista de tabla' }).click();
+      24 |     // Table headers should appear
+    > 25 |     await expect(page.getByText('Nombre').first()).toBeVisible();
+         |                                                    ^
+      26 |   });
+      27 | });
+      28 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-098-toggle-card-table.spec.ts:25:52
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-098-toggle-ca-8f469-e-view-toggle-switches-view-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-098-toggle-ca-8f469-e-view-toggle-switches-view-chromium-retry1\error-context.md
+
+  75) [chromium] › e2e\tests\edge-case\UX-100-101-drag-drop-zones.spec.ts:15:7 › UX-100/UX-101: Drag-drop zones para imagenes y PDF › UX-100: zona drag-drop de imagenes es visible 
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.scrollIntoViewIfNeeded: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for getByText('Arrastra imagenes aqui o selecciona archivos')[22m
+
+
+      15 |   test('UX-100: zona drag-drop de imagenes es visible', async ({ page }) => {
+      16 |     const uploadText = page.getByText('Arrastra imagenes aqui o selecciona archivos');
+    > 17 |     await uploadText.scrollIntoViewIfNeeded();
+         |                      ^
+      18 |     await expect(uploadText).toBeVisible({ timeout: 10000 });
+      19 |   });
+      20 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-100-101-drag-drop-zones.spec.ts:17:22
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-100-101-drag--c1ba8-drop-de-imagenes-es-visible-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-100-101-drag--c1ba8-drop-de-imagenes-es-visible-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.scrollIntoViewIfNeeded: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for getByText('Arrastra imagenes aqui o selecciona archivos')[22m
+
+
+      15 |   test('UX-100: zona drag-drop de imagenes es visible', async ({ page }) => {
+      16 |     const uploadText = page.getByText('Arrastra imagenes aqui o selecciona archivos');
+    > 17 |     await uploadText.scrollIntoViewIfNeeded();
+         |                      ^
+      18 |     await expect(uploadText).toBeVisible({ timeout: 10000 });
+      19 |   });
+      20 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-100-101-drag-drop-zones.spec.ts:17:22
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-100-101-drag--c1ba8-drop-de-imagenes-es-visible-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-100-101-drag--c1ba8-drop-de-imagenes-es-visible-chromium-retry1\error-context.md
+
+  76) [chromium] › e2e\tests\edge-case\UX-100-101-drag-drop-zones.spec.ts:21:7 › UX-100/UX-101: Drag-drop zones para imagenes y PDF › UX-100: zona de imagenes muestra restricciones de formato 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('PNG, JPG hasta 5MB')
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByText('PNG, JPG hasta 5MB')[22m
+
+
+      20 |
+      21 |   test('UX-100: zona de imagenes muestra restricciones de formato', async ({ page }) => {
+    > 22 |     await expect(page.getByText('PNG, JPG hasta 5MB')).toBeVisible({ timeout: 10000 });
+         |                                                        ^
+      23 |   });
+      24 |
+      25 |   test('UX-100: seccion imagenes tiene heading correcto', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-100-101-drag-drop-zones.spec.ts:22:56
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-100-101-drag--da6e8-ra-restricciones-de-formato-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-100-101-drag--da6e8-ra-restricciones-de-formato-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('PNG, JPG hasta 5MB')
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByText('PNG, JPG hasta 5MB')[22m
+
+
+      20 |
+      21 |   test('UX-100: zona de imagenes muestra restricciones de formato', async ({ page }) => {
+    > 22 |     await expect(page.getByText('PNG, JPG hasta 5MB')).toBeVisible({ timeout: 10000 });
+         |                                                        ^
+      23 |   });
+      24 |
+      25 |   test('UX-100: seccion imagenes tiene heading correcto', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-100-101-drag-drop-zones.spec.ts:22:56
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-100-101-drag--da6e8-ra-restricciones-de-formato-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-100-101-drag--da6e8-ra-restricciones-de-formato-chromium-retry1\error-context.md
+
+  77) [chromium] › e2e\tests\edge-case\UX-100-101-drag-drop-zones.spec.ts:25:7 › UX-100/UX-101: Drag-drop zones para imagenes y PDF › UX-100: seccion imagenes tiene heading correcto 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: 'Imagenes', level: 2 })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'Imagenes', level: 2 })[22m
+
+
+      25 |   test('UX-100: seccion imagenes tiene heading correcto', async ({ page }) => {
+      26 |     const heading = page.getByRole('heading', { name: 'Imagenes', level: 2 });
+    > 27 |     await expect(heading).toBeVisible({ timeout: 10000 });
+         |                           ^
+      28 |   });
+      29 |
+      30 |   test('UX-100: seccion imagenes tiene descripcion', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-100-101-drag-drop-zones.spec.ts:27:27
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-100-101-drag--6964f-enes-tiene-heading-correcto-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-100-101-drag--6964f-enes-tiene-heading-correcto-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: 'Imagenes', level: 2 })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'Imagenes', level: 2 })[22m
+
+
+      25 |   test('UX-100: seccion imagenes tiene heading correcto', async ({ page }) => {
+      26 |     const heading = page.getByRole('heading', { name: 'Imagenes', level: 2 });
+    > 27 |     await expect(heading).toBeVisible({ timeout: 10000 });
+         |                           ^
+      28 |   });
+      29 |
+      30 |   test('UX-100: seccion imagenes tiene descripcion', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-100-101-drag-drop-zones.spec.ts:27:27
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-100-101-drag--6964f-enes-tiene-heading-correcto-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-100-101-drag--6964f-enes-tiene-heading-correcto-chromium-retry1\error-context.md
+
+  78) [chromium] › e2e\tests\edge-case\UX-100-101-drag-drop-zones.spec.ts:30:7 › UX-100/UX-101: Drag-drop zones para imagenes y PDF › UX-100: seccion imagenes tiene descripcion 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Sube las fotos del producto. La primera sera la imagen principal.')
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByText('Sube las fotos del producto. La primera sera la imagen principal.')[22m
+
+
+      31 |     await expect(
+      32 |       page.getByText('Sube las fotos del producto. La primera sera la imagen principal.')
+    > 33 |     ).toBeVisible({ timeout: 10000 });
+         |       ^
+      34 |   });
+      35 |
+      36 |   test('UX-101: zona drag-drop de PDF es visible', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-100-101-drag-drop-zones.spec.ts:33:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-100-101-drag--d5547--imagenes-tiene-descripcion-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-100-101-drag--d5547--imagenes-tiene-descripcion-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Sube las fotos del producto. La primera sera la imagen principal.')
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByText('Sube las fotos del producto. La primera sera la imagen principal.')[22m
+
+
+      31 |     await expect(
+      32 |       page.getByText('Sube las fotos del producto. La primera sera la imagen principal.')
+    > 33 |     ).toBeVisible({ timeout: 10000 });
+         |       ^
+      34 |   });
+      35 |
+      36 |   test('UX-101: zona drag-drop de PDF es visible', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-100-101-drag-drop-zones.spec.ts:33:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-100-101-drag--d5547--imagenes-tiene-descripcion-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-100-101-drag--d5547--imagenes-tiene-descripcion-chromium-retry1\error-context.md
+
+  79) [chromium] › e2e\tests\edge-case\UX-100-101-drag-drop-zones.spec.ts:36:7 › UX-100/UX-101: Drag-drop zones para imagenes y PDF › UX-101: zona drag-drop de PDF es visible 
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.scrollIntoViewIfNeeded: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for getByText('Arrastra el PDF aqui o selecciona archivo')[22m
+
+
+      36 |   test('UX-101: zona drag-drop de PDF es visible', async ({ page }) => {
+      37 |     const pdfText = page.getByText('Arrastra el PDF aqui o selecciona archivo');
+    > 38 |     await pdfText.scrollIntoViewIfNeeded();
+         |                   ^
+      39 |     await expect(pdfText).toBeVisible({ timeout: 10000 });
+      40 |   });
+      41 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-100-101-drag-drop-zones.spec.ts:38:19
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-100-101-drag--03754-drag-drop-de-PDF-es-visible-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-100-101-drag--03754-drag-drop-de-PDF-es-visible-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.scrollIntoViewIfNeeded: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for getByText('Arrastra el PDF aqui o selecciona archivo')[22m
+
+
+      36 |   test('UX-101: zona drag-drop de PDF es visible', async ({ page }) => {
+      37 |     const pdfText = page.getByText('Arrastra el PDF aqui o selecciona archivo');
+    > 38 |     await pdfText.scrollIntoViewIfNeeded();
+         |                   ^
+      39 |     await expect(pdfText).toBeVisible({ timeout: 10000 });
+      40 |   });
+      41 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-100-101-drag-drop-zones.spec.ts:38:19
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-100-101-drag--03754-drag-drop-de-PDF-es-visible-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-100-101-drag--03754-drag-drop-de-PDF-es-visible-chromium-retry1\error-context.md
+
+  80) [chromium] › e2e\tests\edge-case\UX-100-101-drag-drop-zones.spec.ts:42:7 › UX-100/UX-101: Drag-drop zones para imagenes y PDF › UX-101: seccion PDF tiene heading correcto 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: 'Ficha Tecnica (PDF)', level: 2 })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'Ficha Tecnica (PDF)', level: 2 })[22m
+
+
+      42 |   test('UX-101: seccion PDF tiene heading correcto', async ({ page }) => {
+      43 |     const heading = page.getByRole('heading', { name: 'Ficha Tecnica (PDF)', level: 2 });
+    > 44 |     await expect(heading).toBeVisible({ timeout: 10000 });
+         |                           ^
+      45 |   });
+      46 |
+      47 |   test('UX-101: seccion PDF marca como opcional', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-100-101-drag-drop-zones.spec.ts:44:27
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-100-101-drag--7976f--PDF-tiene-heading-correcto-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-100-101-drag--7976f--PDF-tiene-heading-correcto-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: 'Ficha Tecnica (PDF)', level: 2 })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'Ficha Tecnica (PDF)', level: 2 })[22m
+
+
+      42 |   test('UX-101: seccion PDF tiene heading correcto', async ({ page }) => {
+      43 |     const heading = page.getByRole('heading', { name: 'Ficha Tecnica (PDF)', level: 2 });
+    > 44 |     await expect(heading).toBeVisible({ timeout: 10000 });
+         |                           ^
+      45 |   });
+      46 |
+      47 |   test('UX-101: seccion PDF marca como opcional', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-100-101-drag-drop-zones.spec.ts:44:27
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-100-101-drag--7976f--PDF-tiene-heading-correcto-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-100-101-drag--7976f--PDF-tiene-heading-correcto-chromium-retry1\error-context.md
+
+  81) [chromium] › e2e\tests\edge-case\UX-100-101-drag-drop-zones.spec.ts:47:7 › UX-100/UX-101: Drag-drop zones para imagenes y PDF › UX-101: seccion PDF marca como opcional 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Sube la ficha tecnica del producto en formato PDF (opcional)')
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByText('Sube la ficha tecnica del producto en formato PDF (opcional)')[22m
+
+
+      48 |     await expect(
+      49 |       page.getByText('Sube la ficha tecnica del producto en formato PDF (opcional)')
+    > 50 |     ).toBeVisible({ timeout: 10000 });
+         |       ^
+      51 |   });
+      52 |
+      53 |   test('zonas de upload son clickables', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-100-101-drag-drop-zones.spec.ts:50:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-100-101-drag--deafe-ion-PDF-marca-como-opcional-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-100-101-drag--deafe-ion-PDF-marca-como-opcional-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Sube la ficha tecnica del producto en formato PDF (opcional)')
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByText('Sube la ficha tecnica del producto en formato PDF (opcional)')[22m
+
+
+      48 |     await expect(
+      49 |       page.getByText('Sube la ficha tecnica del producto en formato PDF (opcional)')
+    > 50 |     ).toBeVisible({ timeout: 10000 });
+         |       ^
+      51 |   });
+      52 |
+      53 |   test('zonas de upload son clickables', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-100-101-drag-drop-zones.spec.ts:50:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-100-101-drag--deafe-ion-PDF-marca-como-opcional-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-100-101-drag--deafe-ion-PDF-marca-como-opcional-chromium-retry1\error-context.md
+
+  82) [chromium] › e2e\tests\edge-case\UX-100-101-drag-drop-zones.spec.ts:53:7 › UX-100/UX-101: Drag-drop zones para imagenes y PDF › zonas de upload son clickables 
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.scrollIntoViewIfNeeded: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for getByText('Arrastra imagenes aqui o selecciona archivos').locator('..')[22m
+
+
+      54 |     // La zona de imagenes debe tener cursor pointer
+      55 |     const imageZone = page.getByText('Arrastra imagenes aqui o selecciona archivos').locator('..');
+    > 56 |     await imageZone.scrollIntoViewIfNeeded();
+         |                     ^
+      57 |     const cursor = await imageZone.evaluate(el => getComputedStyle(el).cursor);
+      58 |     expect(cursor).toBe('pointer');
+      59 |   });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-100-101-drag-drop-zones.spec.ts:56:21
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-100-101-drag--916d2-as-de-upload-son-clickables-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-100-101-drag--916d2-as-de-upload-son-clickables-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.scrollIntoViewIfNeeded: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for getByText('Arrastra imagenes aqui o selecciona archivos').locator('..')[22m
+
+
+      54 |     // La zona de imagenes debe tener cursor pointer
+      55 |     const imageZone = page.getByText('Arrastra imagenes aqui o selecciona archivos').locator('..');
+    > 56 |     await imageZone.scrollIntoViewIfNeeded();
+         |                     ^
+      57 |     const cursor = await imageZone.evaluate(el => getComputedStyle(el).cursor);
+      58 |     expect(cursor).toBe('pointer');
+      59 |   });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-100-101-drag-drop-zones.spec.ts:56:21
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-100-101-drag--916d2-as-de-upload-son-clickables-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-100-101-drag--916d2-as-de-upload-son-clickables-chromium-retry1\error-context.md
+
+  83) [chromium] › e2e\tests\edge-case\UX-100-103-product-form-interactions.spec.ts:12:7 › UX-100 to UX-103: Product Form Interactions Edge Cases › UX-100: Image drag-drop zone is visible and clickable 
+
+    TimeoutError: locator.waitFor: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for getByText('Crear Producto') to be visible[22m
+
+
+       7 |   test.beforeEach(async ({ page }) => {
+       8 |     await page.goto(`${BASE_URL}/admin/productos/crear`);
+    >  9 |     await page.getByText('Crear Producto').waitFor({ state: 'visible', timeout: 10000 });
+         |                                            ^
+      10 |   });
+      11 |
+      12 |   test('UX-100: Image drag-drop zone is visible and clickable', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-100-103-product-form-interactions.spec.ts:9:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-100-103-produ-c6ecc-ne-is-visible-and-clickable-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-100-103-produ-c6ecc-ne-is-visible-and-clickable-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TimeoutError: locator.waitFor: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for getByText('Crear Producto') to be visible[22m
+
+
+       7 |   test.beforeEach(async ({ page }) => {
+       8 |     await page.goto(`${BASE_URL}/admin/productos/crear`);
+    >  9 |     await page.getByText('Crear Producto').waitFor({ state: 'visible', timeout: 10000 });
+         |                                            ^
+      10 |   });
+      11 |
+      12 |   test('UX-100: Image drag-drop zone is visible and clickable', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-100-103-product-form-interactions.spec.ts:9:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-100-103-produ-c6ecc-ne-is-visible-and-clickable-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-100-103-produ-c6ecc-ne-is-visible-and-clickable-chromium-retry1\error-context.md
+
+  84) [chromium] › e2e\tests\edge-case\UX-100-103-product-form-interactions.spec.ts:21:7 › UX-100 to UX-103: Product Form Interactions Edge Cases › UX-101: PDF drag-drop zone is visible 
+
+    TimeoutError: locator.waitFor: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for getByText('Crear Producto') to be visible[22m
+
+
+       7 |   test.beforeEach(async ({ page }) => {
+       8 |     await page.goto(`${BASE_URL}/admin/productos/crear`);
+    >  9 |     await page.getByText('Crear Producto').waitFor({ state: 'visible', timeout: 10000 });
+         |                                            ^
+      10 |   });
+      11 |
+      12 |   test('UX-100: Image drag-drop zone is visible and clickable', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-100-103-product-form-interactions.spec.ts:9:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-100-103-produ-ce8c1-F-drag-drop-zone-is-visible-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-100-103-produ-ce8c1-F-drag-drop-zone-is-visible-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TimeoutError: locator.waitFor: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for getByText('Crear Producto') to be visible[22m
+
+
+       7 |   test.beforeEach(async ({ page }) => {
+       8 |     await page.goto(`${BASE_URL}/admin/productos/crear`);
+    >  9 |     await page.getByText('Crear Producto').waitFor({ state: 'visible', timeout: 10000 });
+         |                                            ^
+      10 |   });
+      11 |
+      12 |   test('UX-100: Image drag-drop zone is visible and clickable', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-100-103-product-form-interactions.spec.ts:9:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-100-103-produ-ce8c1-F-drag-drop-zone-is-visible-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-100-103-produ-ce8c1-F-drag-drop-zone-is-visible-chromium-retry1\error-context.md
+
+  85) [chromium] › e2e\tests\edge-case\UX-100-103-product-form-interactions.spec.ts:26:7 › UX-100 to UX-103: Product Form Interactions Edge Cases › UX-102: Bilingual tabs switch between ES and EN 
+
+    TimeoutError: locator.waitFor: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for getByText('Crear Producto') to be visible[22m
+
+
+       7 |   test.beforeEach(async ({ page }) => {
+       8 |     await page.goto(`${BASE_URL}/admin/productos/crear`);
+    >  9 |     await page.getByText('Crear Producto').waitFor({ state: 'visible', timeout: 10000 });
+         |                                            ^
+      10 |   });
+      11 |
+      12 |   test('UX-100: Image drag-drop zone is visible and clickable', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-100-103-product-form-interactions.spec.ts:9:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-100-103-produ-3c93e-bs-switch-between-ES-and-EN-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-100-103-produ-3c93e-bs-switch-between-ES-and-EN-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TimeoutError: locator.waitFor: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for getByText('Crear Producto') to be visible[22m
+
+
+       7 |   test.beforeEach(async ({ page }) => {
+       8 |     await page.goto(`${BASE_URL}/admin/productos/crear`);
+    >  9 |     await page.getByText('Crear Producto').waitFor({ state: 'visible', timeout: 10000 });
+         |                                            ^
+      10 |   });
+      11 |
+      12 |   test('UX-100: Image drag-drop zone is visible and clickable', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-100-103-product-form-interactions.spec.ts:9:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-100-103-produ-3c93e-bs-switch-between-ES-and-EN-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-100-103-produ-3c93e-bs-switch-between-ES-and-EN-chromium-retry1\error-context.md
+
+  86) [chromium] › e2e\tests\edge-case\UX-100-103-product-form-interactions.spec.ts:43:7 › UX-100 to UX-103: Product Form Interactions Edge Cases › UX-103: Category cards have visual selection state 
+
+    TimeoutError: locator.waitFor: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for getByText('Crear Producto') to be visible[22m
+
+
+       7 |   test.beforeEach(async ({ page }) => {
+       8 |     await page.goto(`${BASE_URL}/admin/productos/crear`);
+    >  9 |     await page.getByText('Crear Producto').waitFor({ state: 'visible', timeout: 10000 });
+         |                                            ^
+      10 |   });
+      11 |
+      12 |   test('UX-100: Image drag-drop zone is visible and clickable', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-100-103-product-form-interactions.spec.ts:9:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-100-103-produ-18bb4-have-visual-selection-state-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-100-103-produ-18bb4-have-visual-selection-state-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TimeoutError: locator.waitFor: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for getByText('Crear Producto') to be visible[22m
+
+
+       7 |   test.beforeEach(async ({ page }) => {
+       8 |     await page.goto(`${BASE_URL}/admin/productos/crear`);
+    >  9 |     await page.getByText('Crear Producto').waitFor({ state: 'visible', timeout: 10000 });
+         |                                            ^
+      10 |   });
+      11 |
+      12 |   test('UX-100: Image drag-drop zone is visible and clickable', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-100-103-product-form-interactions.spec.ts:9:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-100-103-produ-18bb4-have-visual-selection-state-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-100-103-produ-18bb4-have-visual-selection-state-chromium-retry1\error-context.md
+
+  87) [chromium] › e2e\tests\edge-case\UX-100-103-product-form-interactions.spec.ts:56:7 › UX-100 to UX-103: Product Form Interactions Edge Cases › UX-103: Selecting different category may show conditional fields 
+
+    TimeoutError: locator.waitFor: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for getByText('Crear Producto') to be visible[22m
+
+
+       7 |   test.beforeEach(async ({ page }) => {
+       8 |     await page.goto(`${BASE_URL}/admin/productos/crear`);
+    >  9 |     await page.getByText('Crear Producto').waitFor({ state: 'visible', timeout: 10000 });
+         |                                            ^
+      10 |   });
+      11 |
+      12 |   test('UX-100: Image drag-drop zone is visible and clickable', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-100-103-product-form-interactions.spec.ts:9:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-100-103-produ-c741e-may-show-conditional-fields-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-100-103-produ-c741e-may-show-conditional-fields-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TimeoutError: locator.waitFor: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for getByText('Crear Producto') to be visible[22m
+
+
+       7 |   test.beforeEach(async ({ page }) => {
+       8 |     await page.goto(`${BASE_URL}/admin/productos/crear`);
+    >  9 |     await page.getByText('Crear Producto').waitFor({ state: 'visible', timeout: 10000 });
+         |                                            ^
+      10 |   });
+      11 |
+      12 |   test('UX-100: Image drag-drop zone is visible and clickable', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-100-103-product-form-interactions.spec.ts:9:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-100-103-produ-c741e-may-show-conditional-fields-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-100-103-produ-c741e-may-show-conditional-fields-chromium-retry1\error-context.md
+
+  88) [chromium] › e2e\tests\edge-case\UX-100-103-product-form-interactions.spec.ts:73:7 › UX-100 to UX-103: Product Form Interactions Edge Cases › Species tags can be removed 
+
+    TimeoutError: locator.waitFor: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for getByText('Crear Producto') to be visible[22m
+
+
+       7 |   test.beforeEach(async ({ page }) => {
+       8 |     await page.goto(`${BASE_URL}/admin/productos/crear`);
+    >  9 |     await page.getByText('Crear Producto').waitFor({ state: 'visible', timeout: 10000 });
+         |                                            ^
+      10 |   });
+      11 |
+      12 |   test('UX-100: Image drag-drop zone is visible and clickable', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-100-103-product-form-interactions.spec.ts:9:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-100-103-produ-68f5c-Species-tags-can-be-removed-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-100-103-produ-68f5c-Species-tags-can-be-removed-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TimeoutError: locator.waitFor: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for getByText('Crear Producto') to be visible[22m
+
+
+       7 |   test.beforeEach(async ({ page }) => {
+       8 |     await page.goto(`${BASE_URL}/admin/productos/crear`);
+    >  9 |     await page.getByText('Crear Producto').waitFor({ state: 'visible', timeout: 10000 });
+         |                                            ^
+      10 |   });
+      11 |
+      12 |   test('UX-100: Image drag-drop zone is visible and clickable', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-100-103-product-form-interactions.spec.ts:9:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-100-103-produ-68f5c-Species-tags-can-be-removed-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-100-103-produ-68f5c-Species-tags-can-be-removed-chromium-retry1\error-context.md
+
+  89) [chromium] › e2e\tests\edge-case\UX-100-103-product-form-interactions.spec.ts:82:7 › UX-100 to UX-103: Product Form Interactions Edge Cases › Add species via input 
+
+    TimeoutError: locator.waitFor: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for getByText('Crear Producto') to be visible[22m
+
+
+       7 |   test.beforeEach(async ({ page }) => {
+       8 |     await page.goto(`${BASE_URL}/admin/productos/crear`);
+    >  9 |     await page.getByText('Crear Producto').waitFor({ state: 'visible', timeout: 10000 });
+         |                                            ^
+      10 |   });
+      11 |
+      12 |   test('UX-100: Image drag-drop zone is visible and clickable', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-100-103-product-form-interactions.spec.ts:9:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-100-103-produ-ee565-Cases-Add-species-via-input-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-100-103-produ-ee565-Cases-Add-species-via-input-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TimeoutError: locator.waitFor: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for getByText('Crear Producto') to be visible[22m
+
+
+       7 |   test.beforeEach(async ({ page }) => {
+       8 |     await page.goto(`${BASE_URL}/admin/productos/crear`);
+    >  9 |     await page.getByText('Crear Producto').waitFor({ state: 'visible', timeout: 10000 });
+         |                                            ^
+      10 |   });
+      11 |
+      12 |   test('UX-100: Image drag-drop zone is visible and clickable', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-100-103-product-form-interactions.spec.ts:9:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-100-103-produ-ee565-Cases-Add-species-via-input-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-100-103-produ-ee565-Cases-Add-species-via-input-chromium-retry1\error-context.md
+
+  90) [chromium] › e2e\tests\edge-case\UX-100-103-product-form-interactions.spec.ts:92:7 › UX-100 to UX-103: Product Form Interactions Edge Cases › Marca dropdown has options 
+
+    TimeoutError: locator.waitFor: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for getByText('Crear Producto') to be visible[22m
+
+
+       7 |   test.beforeEach(async ({ page }) => {
+       8 |     await page.goto(`${BASE_URL}/admin/productos/crear`);
+    >  9 |     await page.getByText('Crear Producto').waitFor({ state: 'visible', timeout: 10000 });
+         |                                            ^
+      10 |   });
+      11 |
+      12 |   test('UX-100: Image drag-drop zone is visible and clickable', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-100-103-product-form-interactions.spec.ts:9:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-100-103-produ-f5f38--Marca-dropdown-has-options-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-100-103-produ-f5f38--Marca-dropdown-has-options-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TimeoutError: locator.waitFor: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for getByText('Crear Producto') to be visible[22m
+
+
+       7 |   test.beforeEach(async ({ page }) => {
+       8 |     await page.goto(`${BASE_URL}/admin/productos/crear`);
+    >  9 |     await page.getByText('Crear Producto').waitFor({ state: 'visible', timeout: 10000 });
+         |                                            ^
+      10 |   });
+      11 |
+      12 |   test('UX-100: Image drag-drop zone is visible and clickable', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-100-103-product-form-interactions.spec.ts:9:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-100-103-produ-f5f38--Marca-dropdown-has-options-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-100-103-produ-f5f38--Marca-dropdown-has-options-chromium-retry1\error-context.md
+
+  91) [chromium] › e2e\tests\edge-case\UX-102-103-tabs-categories.spec.ts:14:7 › UX-102/UX-103: Tabs bilingues y seleccion categoria › UX-102: tabs Espanol y English son visibles 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('button', { name: 'Espanol' })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('button', { name: 'Espanol' })[22m
+
+
+      13 |
+      14 |   test('UX-102: tabs Espanol y English son visibles', async ({ page }) => {
+    > 15 |     await expect(page.getByRole('button', { name: 'Espanol' })).toBeVisible({ timeout: 10000 });
+         |                                                                 ^
+      16 |     await expect(page.getByRole('button', { name: 'English' })).toBeVisible({ timeout: 10000 });
+      17 |   });
+      18 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-102-103-tabs-categories.spec.ts:15:65
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-102-103-tabs--ff995-anol-y-English-son-visibles-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-102-103-tabs--ff995-anol-y-English-son-visibles-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('button', { name: 'Espanol' })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('button', { name: 'Espanol' })[22m
+
+
+      13 |
+      14 |   test('UX-102: tabs Espanol y English son visibles', async ({ page }) => {
+    > 15 |     await expect(page.getByRole('button', { name: 'Espanol' })).toBeVisible({ timeout: 10000 });
+         |                                                                 ^
+      16 |     await expect(page.getByRole('button', { name: 'English' })).toBeVisible({ timeout: 10000 });
+      17 |   });
+      18 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-102-103-tabs-categories.spec.ts:15:65
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-102-103-tabs--ff995-anol-y-English-son-visibles-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-102-103-tabs--ff995-anol-y-English-son-visibles-chromium-retry1\error-context.md
+
+  92) [chromium] › e2e\tests\edge-case\UX-102-103-tabs-categories.spec.ts:19:7 › UX-102/UX-103: Tabs bilingues y seleccion categoria › UX-102: tab Espanol esta activo por defecto 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('button', { name: 'Espanol' })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('button', { name: 'Espanol' })[22m
+
+
+      19 |   test('UX-102: tab Espanol esta activo por defecto', async ({ page }) => {
+      20 |     const spanishTab = page.getByRole('button', { name: 'Espanol' });
+    > 21 |     await expect(spanishTab).toBeVisible({ timeout: 10000 });
+         |                              ^
+      22 |
+      23 |     // El campo de descripcion muestra placeholder en espanol
+      24 |     const descField = page.getByRole('textbox', { name: 'Descripcion *' });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-102-103-tabs-categories.spec.ts:21:30
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-102-103-tabs--6487c-nol-esta-activo-por-defecto-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-102-103-tabs--6487c-nol-esta-activo-por-defecto-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('button', { name: 'Espanol' })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('button', { name: 'Espanol' })[22m
+
+
+      19 |   test('UX-102: tab Espanol esta activo por defecto', async ({ page }) => {
+      20 |     const spanishTab = page.getByRole('button', { name: 'Espanol' });
+    > 21 |     await expect(spanishTab).toBeVisible({ timeout: 10000 });
+         |                              ^
+      22 |
+      23 |     // El campo de descripcion muestra placeholder en espanol
+      24 |     const descField = page.getByRole('textbox', { name: 'Descripcion *' });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-102-103-tabs-categories.spec.ts:21:30
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-102-103-tabs--6487c-nol-esta-activo-por-defecto-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-102-103-tabs--6487c-nol-esta-activo-por-defecto-chromium-retry1\error-context.md
+
+  93) [chromium] › e2e\tests\edge-case\UX-102-103-tabs-categories.spec.ts:29:7 › UX-102/UX-103: Tabs bilingues y seleccion categoria › UX-102: click en tab English cambia campos 
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('button', { name: 'English' })[22m
+
+
+      29 |   test('UX-102: click en tab English cambia campos', async ({ page }) => {
+      30 |     const englishTab = page.getByRole('button', { name: 'English' });
+    > 31 |     await englishTab.click();
+         |                      ^
+      32 |
+      33 |     // El placeholder deberia cambiar a ingles
+      34 |     const descField = page.getByRole('textbox', { name: /Description|Descripcion/ });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-102-103-tabs-categories.spec.ts:31:22
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-102-103-tabs--c66e8-n-tab-English-cambia-campos-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-102-103-tabs--c66e8-n-tab-English-cambia-campos-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('button', { name: 'English' })[22m
+
+
+      29 |   test('UX-102: click en tab English cambia campos', async ({ page }) => {
+      30 |     const englishTab = page.getByRole('button', { name: 'English' });
+    > 31 |     await englishTab.click();
+         |                      ^
+      32 |
+      33 |     // El placeholder deberia cambiar a ingles
+      34 |     const descField = page.getByRole('textbox', { name: /Description|Descripcion/ });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-102-103-tabs-categories.spec.ts:31:22
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-102-103-tabs--c66e8-n-tab-English-cambia-campos-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-102-103-tabs--c66e8-n-tab-English-cambia-campos-chromium-retry1\error-context.md
+
+  94) [chromium] › e2e\tests\edge-case\UX-102-103-tabs-categories.spec.ts:38:7 › UX-102/UX-103: Tabs bilingues y seleccion categoria › UX-103: 3 cards de categoria visibles 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('button', { name: 'Farmacos' })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('button', { name: 'Farmacos' })[22m
+
+
+      37 |
+      38 |   test('UX-103: 3 cards de categoria visibles', async ({ page }) => {
+    > 39 |     await expect(page.getByRole('button', { name: 'Farmacos' })).toBeVisible({ timeout: 10000 });
+         |                                                                  ^
+      40 |     await expect(page.getByRole('button', { name: 'Alimentos' })).toBeVisible({ timeout: 10000 });
+      41 |     await expect(page.getByRole('button', { name: 'Equipos' })).toBeVisible({ timeout: 10000 });
+      42 |   });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-102-103-tabs-categories.spec.ts:39:66
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-102-103-tabs--251c2-cards-de-categoria-visibles-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-102-103-tabs--251c2-cards-de-categoria-visibles-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('button', { name: 'Farmacos' })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('button', { name: 'Farmacos' })[22m
+
+
+      37 |
+      38 |   test('UX-103: 3 cards de categoria visibles', async ({ page }) => {
+    > 39 |     await expect(page.getByRole('button', { name: 'Farmacos' })).toBeVisible({ timeout: 10000 });
+         |                                                                  ^
+      40 |     await expect(page.getByRole('button', { name: 'Alimentos' })).toBeVisible({ timeout: 10000 });
+      41 |     await expect(page.getByRole('button', { name: 'Equipos' })).toBeVisible({ timeout: 10000 });
+      42 |   });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-102-103-tabs-categories.spec.ts:39:66
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-102-103-tabs--251c2-cards-de-categoria-visibles-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-102-103-tabs--251c2-cards-de-categoria-visibles-chromium-retry1\error-context.md
+
+  95) [chromium] › e2e\tests\edge-case\UX-102-103-tabs-categories.spec.ts:44:7 › UX-102/UX-103: Tabs bilingues y seleccion categoria › UX-103: Farmacos seleccionado por defecto 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('button', { name: 'Farmacos' })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('button', { name: 'Farmacos' })[22m
+
+
+      44 |   test('UX-103: Farmacos seleccionado por defecto', async ({ page }) => {
+      45 |     const farmacosButton = page.getByRole('button', { name: 'Farmacos' });
+    > 46 |     await expect(farmacosButton).toBeVisible({ timeout: 10000 });
+         |                                  ^
+      47 |
+      48 |     // Verificar que tiene estilo de seleccionado (borde azul)
+      49 |     const isSelected = await farmacosButton.evaluate(el => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-102-103-tabs-categories.spec.ts:46:34
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-102-103-tabs--614c6-os-seleccionado-por-defecto-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-102-103-tabs--614c6-os-seleccionado-por-defecto-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('button', { name: 'Farmacos' })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('button', { name: 'Farmacos' })[22m
+
+
+      44 |   test('UX-103: Farmacos seleccionado por defecto', async ({ page }) => {
+      45 |     const farmacosButton = page.getByRole('button', { name: 'Farmacos' });
+    > 46 |     await expect(farmacosButton).toBeVisible({ timeout: 10000 });
+         |                                  ^
+      47 |
+      48 |     // Verificar que tiene estilo de seleccionado (borde azul)
+      49 |     const isSelected = await farmacosButton.evaluate(el => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-102-103-tabs-categories.spec.ts:46:34
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-102-103-tabs--614c6-os-seleccionado-por-defecto-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-102-103-tabs--614c6-os-seleccionado-por-defecto-chromium-retry1\error-context.md
+
+  96) [chromium] › e2e\tests\edge-case\UX-102-103-tabs-categories.spec.ts:60:7 › UX-102/UX-103: Tabs bilingues y seleccion categoria › UX-103: cards de categoria son clickables 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('button', { name: 'Alimentos' })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('button', { name: 'Alimentos' })[22m
+
+
+      60 |   test('UX-103: cards de categoria son clickables', async ({ page }) => {
+      61 |     const alimentosButton = page.getByRole('button', { name: 'Alimentos' });
+    > 62 |     await expect(alimentosButton).toBeVisible({ timeout: 10000 });
+         |                                   ^
+      63 |     await alimentosButton.click();
+      64 |
+      65 |     // Despues del click, Alimentos deberia estar seleccionado
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-102-103-tabs-categories.spec.ts:62:35
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-102-103-tabs--46398-de-categoria-son-clickables-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-102-103-tabs--46398-de-categoria-son-clickables-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('button', { name: 'Alimentos' })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('button', { name: 'Alimentos' })[22m
+
+
+      60 |   test('UX-103: cards de categoria son clickables', async ({ page }) => {
+      61 |     const alimentosButton = page.getByRole('button', { name: 'Alimentos' });
+    > 62 |     await expect(alimentosButton).toBeVisible({ timeout: 10000 });
+         |                                   ^
+      63 |     await alimentosButton.click();
+      64 |
+      65 |     // Despues del click, Alimentos deberia estar seleccionado
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-102-103-tabs-categories.spec.ts:62:35
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-102-103-tabs--46398-de-categoria-son-clickables-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-102-103-tabs--46398-de-categoria-son-clickables-chromium-retry1\error-context.md
+
+  97) [chromium] › e2e\tests\edge-case\UX-102-103-tabs-categories.spec.ts:70:7 › UX-102/UX-103: Tabs bilingues y seleccion categoria › UX-103: cada card tiene icono 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('button', { name: 'Farmacos' }).locator('img, svg').first()
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('button', { name: 'Farmacos' }).locator('img, svg').first()[22m
+
+
+      71 |     const farmacosButton = page.getByRole('button', { name: 'Farmacos' });
+      72 |     const img = farmacosButton.locator('img, svg');
+    > 73 |     await expect(img.first()).toBeVisible({ timeout: 10000 });
+         |                               ^
+      74 |   });
+      75 |
+      76 |   test('especies tags con boton remover', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-102-103-tabs-categories.spec.ts:73:31
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-102-103-tabs--03671-X-103-cada-card-tiene-icono-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-102-103-tabs--03671-X-103-cada-card-tiene-icono-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('button', { name: 'Farmacos' }).locator('img, svg').first()
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('button', { name: 'Farmacos' }).locator('img, svg').first()[22m
+
+
+      71 |     const farmacosButton = page.getByRole('button', { name: 'Farmacos' });
+      72 |     const img = farmacosButton.locator('img, svg');
+    > 73 |     await expect(img.first()).toBeVisible({ timeout: 10000 });
+         |                               ^
+      74 |   });
+      75 |
+      76 |   test('especies tags con boton remover', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-102-103-tabs-categories.spec.ts:73:31
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-102-103-tabs--03671-X-103-cada-card-tiene-icono-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-102-103-tabs--03671-X-103-cada-card-tiene-icono-chromium-retry1\error-context.md
+
+  98) [chromium] › e2e\tests\edge-case\UX-102-103-tabs-categories.spec.ts:76:7 › UX-102/UX-103: Tabs bilingues y seleccion categoria › especies tags con boton remover 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Perros')
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByText('Perros')[22m
+
+
+      75 |
+      76 |   test('especies tags con boton remover', async ({ page }) => {
+    > 77 |     await expect(page.getByText('Perros')).toBeVisible({ timeout: 10000 });
+         |                                            ^
+      78 |     await expect(page.getByText('Gatos')).toBeVisible({ timeout: 10000 });
+      79 |
+      80 |     // Boton X para remover
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-102-103-tabs-categories.spec.ts:77:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-102-103-tabs--bd9b4-cies-tags-con-boton-remover-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-102-103-tabs--bd9b4-cies-tags-con-boton-remover-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Perros')
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByText('Perros')[22m
+
+
+      75 |
+      76 |   test('especies tags con boton remover', async ({ page }) => {
+    > 77 |     await expect(page.getByText('Perros')).toBeVisible({ timeout: 10000 });
+         |                                            ^
+      78 |     await expect(page.getByText('Gatos')).toBeVisible({ timeout: 10000 });
+      79 |
+      80 |     // Boton X para remover
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-102-103-tabs-categories.spec.ts:77:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-102-103-tabs--bd9b4-cies-tags-con-boton-remover-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-102-103-tabs--bd9b4-cies-tags-con-boton-remover-chromium-retry1\error-context.md
+
+  99) [chromium] › e2e\tests\edge-case\UX-102-103-tabs-categories.spec.ts:85:7 › UX-102/UX-103: Tabs bilingues y seleccion categoria › input para agregar especie existe 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('textbox', { name: 'Agregar especie...' })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('textbox', { name: 'Agregar especie...' })[22m
+
+
+      85 |   test('input para agregar especie existe', async ({ page }) => {
+      86 |     const addSpeciesInput = page.getByRole('textbox', { name: 'Agregar especie...' });
+    > 87 |     await expect(addSpeciesInput).toBeVisible({ timeout: 10000 });
+         |                                   ^
+      88 |   });
+      89 |
+      90 |   test('presentaciones tag con boton remover', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-102-103-tabs-categories.spec.ts:87:35
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-102-103-tabs--63169-para-agregar-especie-existe-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-102-103-tabs--63169-para-agregar-especie-existe-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('textbox', { name: 'Agregar especie...' })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('textbox', { name: 'Agregar especie...' })[22m
+
+
+      85 |   test('input para agregar especie existe', async ({ page }) => {
+      86 |     const addSpeciesInput = page.getByRole('textbox', { name: 'Agregar especie...' });
+    > 87 |     await expect(addSpeciesInput).toBeVisible({ timeout: 10000 });
+         |                                   ^
+      88 |   });
+      89 |
+      90 |   test('presentaciones tag con boton remover', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-102-103-tabs-categories.spec.ts:87:35
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-102-103-tabs--63169-para-agregar-especie-existe-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-102-103-tabs--63169-para-agregar-especie-existe-chromium-retry1\error-context.md
+
+  100) [chromium] › e2e\tests\edge-case\UX-102-103-tabs-categories.spec.ts:90:7 › UX-102/UX-103: Tabs bilingues y seleccion categoria › presentaciones tag con boton remover 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Tabletas x 10')
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByText('Tabletas x 10')[22m
+
+
+      89 |
+      90 |   test('presentaciones tag con boton remover', async ({ page }) => {
+    > 91 |     await expect(page.getByText('Tabletas x 10')).toBeVisible({ timeout: 10000 });
+         |                                                   ^
+      92 |     const removeBtn = page.getByRole('button', { name: 'Remover' }).first();
+      93 |     await expect(removeBtn).toBeVisible({ timeout: 5000 });
+      94 |   });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-102-103-tabs-categories.spec.ts:91:51
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-102-103-tabs--fafb1-iones-tag-con-boton-remover-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-102-103-tabs--fafb1-iones-tag-con-boton-remover-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Tabletas x 10')
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByText('Tabletas x 10')[22m
+
+
+      89 |
+      90 |   test('presentaciones tag con boton remover', async ({ page }) => {
+    > 91 |     await expect(page.getByText('Tabletas x 10')).toBeVisible({ timeout: 10000 });
+         |                                                   ^
+      92 |     const removeBtn = page.getByRole('button', { name: 'Remover' }).first();
+      93 |     await expect(removeBtn).toBeVisible({ timeout: 5000 });
+      94 |   });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-102-103-tabs-categories.spec.ts:91:51
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-102-103-tabs--fafb1-iones-tag-con-boton-remover-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-102-103-tabs--fafb1-iones-tag-con-boton-remover-chromium-retry1\error-context.md
+
+  101) [chromium] › e2e\tests\edge-case\UX-104-112-panel-interactions.spec.ts:22:7 › UX-105: Categories Tags › Categories page renders in admin panel 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: /Categorias/i })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('heading', { name: /Categorias/i })[22m
+
+
+      25 |
+      26 |     const heading = page.getByRole('heading', { name: /Categorias/i });
+    > 27 |     await expect(heading).toBeVisible({ timeout: 10000 });
+         |                           ^
+      28 |   });
+      29 | });
+      30 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-104-112-panel-interactions.spec.ts:27:27
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-104-112-panel-c9b34-page-renders-in-admin-panel-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-104-112-panel-c9b34-page-renders-in-admin-panel-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: /Categorias/i })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('heading', { name: /Categorias/i })[22m
+
+
+      25 |
+      26 |     const heading = page.getByRole('heading', { name: /Categorias/i });
+    > 27 |     await expect(heading).toBeVisible({ timeout: 10000 });
+         |                           ^
+      28 |   });
+      29 | });
+      30 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-104-112-panel-interactions.spec.ts:27:27
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-104-112-panel-c9b34-page-renders-in-admin-panel-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-104-112-panel-c9b34-page-renders-in-admin-panel-chromium-retry1\error-context.md
+
+  102) [chromium] › e2e\tests\edge-case\UX-104-112-panel-interactions.spec.ts:32:7 › UX-109: Messages Kanban › Messages page renders with message list 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: 'Mensajes' })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'Mensajes' })[22m
+
+
+      34 |     await page.waitForTimeout(5000);
+      35 |
+    > 36 |     await expect(page.getByRole('heading', { name: 'Mensajes' })).toBeVisible({ timeout: 10000 });
+         |                                                                   ^
+      37 |   });
+      38 | });
+      39 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-104-112-panel-interactions.spec.ts:36:67
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-104-112-panel-ba1cb-e-renders-with-message-list-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-104-112-panel-ba1cb-e-renders-with-message-list-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: 'Mensajes' })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'Mensajes' })[22m
+
+
+      34 |     await page.waitForTimeout(5000);
+      35 |
+    > 36 |     await expect(page.getByRole('heading', { name: 'Mensajes' })).toBeVisible({ timeout: 10000 });
+         |                                                                   ^
+      37 |   });
+      38 | });
+      39 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-104-112-panel-interactions.spec.ts:36:67
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-104-112-panel-ba1cb-e-renders-with-message-list-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-104-112-panel-ba1cb-e-renders-with-message-list-chromium-retry1\error-context.md
+
+  103) [chromium] › e2e\tests\edge-case\UX-104-112-panel-interactions.spec.ts:41:7 › UX-111: Message Detail › Message detail page renders 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoContain[2m([22m[32mexpected[39m[2m) // indexOf[22m
+
+    Expected substring: [32m"/admin/mensajes"[39m
+    Received string:    [31m"https://gray-field-02ba8410f.2.azurestaticapps.net/admin/login"[39m
+
+      45 |     // Should render message detail or redirect to messages list
+      46 |     const pageUrl = page.url();
+    > 47 |     expect(pageUrl).toContain('/admin/mensajes');
+         |                     ^
+      48 |   });
+      49 | });
+      50 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-104-112-panel-interactions.spec.ts:47:21
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-104-112-panel-3f214-Message-detail-page-renders-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-104-112-panel-3f214-Message-detail-page-renders-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoContain[2m([22m[32mexpected[39m[2m) // indexOf[22m
+
+    Expected substring: [32m"/admin/mensajes"[39m
+    Received string:    [31m"https://gray-field-02ba8410f.2.azurestaticapps.net/admin/login"[39m
+
+      45 |     // Should render message detail or redirect to messages list
+      46 |     const pageUrl = page.url();
+    > 47 |     expect(pageUrl).toContain('/admin/mensajes');
+         |                     ^
+      48 |   });
+      49 | });
+      50 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\edge-case\UX-104-112-panel-interactions.spec.ts:47:21
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\edge-case-UX-104-112-panel-3f214-Message-detail-page-renders-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\edge-case-UX-104-112-panel-3f214-Message-detail-page-renders-chromium-retry1\error-context.md
+
+  104) [chromium] › e2e\tests\flow\UX-002-deep-linking-es.spec.ts:44:7 › UX-002: Deep linking rutas ES › catalogo general via deep link 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('productos')
+    Expected: visible
+    Error: strict mode violation: getByText('productos') resolved to 2 elements:
+        1) <h1 class="text-h2" _ngcontent-ng-c4117633131="">Catalogo de Productos</h1> aka getByRole('heading', { name: 'Catalogo de Productos' })
+        2) <span class="catalog-page__count" _ngcontent-ng-c4117633131="">0 productos</span> aka getByText('0 productos')
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByText('productos')[22m
+
+
+      44 |   test('catalogo general via deep link', async ({ page }) => {
+      45 |     await page.goto(`${BASE}/es/catalogo`);
+    > 46 |     await expect(page.getByText('productos')).toBeVisible({ timeout: 10000 });
+         |                                               ^
+      47 |   });
+      48 | });
+      49 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-002-deep-linking-es.spec.ts:46:47
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-002-deep-linking-e-d9114-alogo-general-via-deep-link-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-002-deep-linking-e-d9114-alogo-general-via-deep-link-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('productos')
+    Expected: visible
+    Error: strict mode violation: getByText('productos') resolved to 2 elements:
+        1) <h1 class="text-h2" _ngcontent-ng-c4117633131="">Catalogo de Productos</h1> aka getByRole('heading', { name: 'Catalogo de Productos' })
+        2) <span class="catalog-page__count" _ngcontent-ng-c4117633131="">0 productos</span> aka getByText('0 productos')
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByText('productos')[22m
+
+
+      44 |   test('catalogo general via deep link', async ({ page }) => {
+      45 |     await page.goto(`${BASE}/es/catalogo`);
+    > 46 |     await expect(page.getByText('productos')).toBeVisible({ timeout: 10000 });
+         |                                               ^
+      47 |   });
+      48 | });
+      49 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-002-deep-linking-es.spec.ts:46:47
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-002-deep-linking-e-d9114-alogo-general-via-deep-link-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-002-deep-linking-e-d9114-alogo-general-via-deep-link-chromium-retry1\error-context.md
+
+  105) [chromium] › e2e\tests\flow\UX-004-deep-linking-admin.spec.ts:8:7 › UX-004: Deep linking rutas panel admin › admin dashboard via deep link 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: 'Dashboard', level: 1 })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'Dashboard', level: 1 })[22m
+
+
+       8 |   test('admin dashboard via deep link', async ({ page }) => {
+       9 |     await page.goto(`${BASE}/admin/dashboard`);
+    > 10 |     await expect(page.getByRole('heading', { name: 'Dashboard', level: 1 })).toBeVisible({ timeout: 10000 });
+         |                                                                              ^
+      11 |   });
+      12 |
+      13 |   test('admin productos via deep link', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-004-deep-linking-admin.spec.ts:10:78
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-004-deep-linking-a-338fe-min-dashboard-via-deep-link-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-004-deep-linking-a-338fe-min-dashboard-via-deep-link-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: 'Dashboard', level: 1 })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'Dashboard', level: 1 })[22m
+
+
+       8 |   test('admin dashboard via deep link', async ({ page }) => {
+       9 |     await page.goto(`${BASE}/admin/dashboard`);
+    > 10 |     await expect(page.getByRole('heading', { name: 'Dashboard', level: 1 })).toBeVisible({ timeout: 10000 });
+         |                                                                              ^
+      11 |   });
+      12 |
+      13 |   test('admin productos via deep link', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-004-deep-linking-admin.spec.ts:10:78
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-004-deep-linking-a-338fe-min-dashboard-via-deep-link-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-004-deep-linking-a-338fe-min-dashboard-via-deep-link-chromium-retry1\error-context.md
+
+  106) [chromium] › e2e\tests\flow\UX-004-deep-linking-admin.spec.ts:13:7 › UX-004: Deep linking rutas panel admin › admin productos via deep link 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: 'Productos', level: 1 })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'Productos', level: 1 })[22m
+
+
+      13 |   test('admin productos via deep link', async ({ page }) => {
+      14 |     await page.goto(`${BASE}/admin/productos`);
+    > 15 |     await expect(page.getByRole('heading', { name: 'Productos', level: 1 })).toBeVisible({ timeout: 10000 });
+         |                                                                              ^
+      16 |   });
+      17 |
+      18 |   test('admin marcas via deep link', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-004-deep-linking-admin.spec.ts:15:78
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-004-deep-linking-a-83be0-min-productos-via-deep-link-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-004-deep-linking-a-83be0-min-productos-via-deep-link-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: 'Productos', level: 1 })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'Productos', level: 1 })[22m
+
+
+      13 |   test('admin productos via deep link', async ({ page }) => {
+      14 |     await page.goto(`${BASE}/admin/productos`);
+    > 15 |     await expect(page.getByRole('heading', { name: 'Productos', level: 1 })).toBeVisible({ timeout: 10000 });
+         |                                                                              ^
+      16 |   });
+      17 |
+      18 |   test('admin marcas via deep link', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-004-deep-linking-admin.spec.ts:15:78
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-004-deep-linking-a-83be0-min-productos-via-deep-link-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-004-deep-linking-a-83be0-min-productos-via-deep-link-chromium-retry1\error-context.md
+
+  107) [chromium] › e2e\tests\flow\UX-004-deep-linking-admin.spec.ts:18:7 › UX-004: Deep linking rutas panel admin › admin marcas via deep link 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Marcas')
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByText('Marcas')[22m
+
+
+      18 |   test('admin marcas via deep link', async ({ page }) => {
+      19 |     await page.goto(`${BASE}/admin/marcas`);
+    > 20 |     await expect(page.getByText('Marcas')).toBeVisible({ timeout: 10000 });
+         |                                            ^
+      21 |   });
+      22 |
+      23 |   test('admin categorias via deep link', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-004-deep-linking-admin.spec.ts:20:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-004-deep-linking-a-7274c--admin-marcas-via-deep-link-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-004-deep-linking-a-7274c--admin-marcas-via-deep-link-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Marcas')
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByText('Marcas')[22m
+
+
+      18 |   test('admin marcas via deep link', async ({ page }) => {
+      19 |     await page.goto(`${BASE}/admin/marcas`);
+    > 20 |     await expect(page.getByText('Marcas')).toBeVisible({ timeout: 10000 });
+         |                                            ^
+      21 |   });
+      22 |
+      23 |   test('admin categorias via deep link', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-004-deep-linking-admin.spec.ts:20:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-004-deep-linking-a-7274c--admin-marcas-via-deep-link-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-004-deep-linking-a-7274c--admin-marcas-via-deep-link-chromium-retry1\error-context.md
+
+  108) [chromium] › e2e\tests\flow\UX-004-deep-linking-admin.spec.ts:23:7 › UX-004: Deep linking rutas panel admin › admin categorias via deep link 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: 'Categorias y Filtros', level: 1 })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'Categorias y Filtros', level: 1 })[22m
+
+
+      23 |   test('admin categorias via deep link', async ({ page }) => {
+      24 |     await page.goto(`${BASE}/admin/categorias`);
+    > 25 |     await expect(page.getByRole('heading', { name: 'Categorias y Filtros', level: 1 })).toBeVisible({ timeout: 10000 });
+         |                                                                                         ^
+      26 |   });
+      27 |
+      28 |   test('admin mensajes via deep link', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-004-deep-linking-admin.spec.ts:25:89
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-004-deep-linking-a-c325e-in-categorias-via-deep-link-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-004-deep-linking-a-c325e-in-categorias-via-deep-link-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: 'Categorias y Filtros', level: 1 })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'Categorias y Filtros', level: 1 })[22m
+
+
+      23 |   test('admin categorias via deep link', async ({ page }) => {
+      24 |     await page.goto(`${BASE}/admin/categorias`);
+    > 25 |     await expect(page.getByRole('heading', { name: 'Categorias y Filtros', level: 1 })).toBeVisible({ timeout: 10000 });
+         |                                                                                         ^
+      26 |   });
+      27 |
+      28 |   test('admin mensajes via deep link', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-004-deep-linking-admin.spec.ts:25:89
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-004-deep-linking-a-c325e-in-categorias-via-deep-link-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-004-deep-linking-a-c325e-in-categorias-via-deep-link-chromium-retry1\error-context.md
+
+  109) [chromium] › e2e\tests\flow\UX-004-deep-linking-admin.spec.ts:28:7 › UX-004: Deep linking rutas panel admin › admin mensajes via deep link 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Mensajes')
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByText('Mensajes')[22m
+
+
+      28 |   test('admin mensajes via deep link', async ({ page }) => {
+      29 |     await page.goto(`${BASE}/admin/mensajes`);
+    > 30 |     await expect(page.getByText('Mensajes')).toBeVisible({ timeout: 10000 });
+         |                                              ^
+      31 |   });
+      32 |
+      33 |   test('admin productos crear via deep link', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-004-deep-linking-admin.spec.ts:30:46
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-004-deep-linking-a-b4c0d-dmin-mensajes-via-deep-link-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-004-deep-linking-a-b4c0d-dmin-mensajes-via-deep-link-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Mensajes')
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByText('Mensajes')[22m
+
+
+      28 |   test('admin mensajes via deep link', async ({ page }) => {
+      29 |     await page.goto(`${BASE}/admin/mensajes`);
+    > 30 |     await expect(page.getByText('Mensajes')).toBeVisible({ timeout: 10000 });
+         |                                              ^
+      31 |   });
+      32 |
+      33 |   test('admin productos crear via deep link', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-004-deep-linking-admin.spec.ts:30:46
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-004-deep-linking-a-b4c0d-dmin-mensajes-via-deep-link-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-004-deep-linking-a-b4c0d-dmin-mensajes-via-deep-link-chromium-retry1\error-context.md
+
+  110) [chromium] › e2e\tests\flow\UX-004-deep-linking-admin.spec.ts:33:7 › UX-004: Deep linking rutas panel admin › admin productos crear via deep link 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: 'Crear Producto', level: 1 })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'Crear Producto', level: 1 })[22m
+
+
+      33 |   test('admin productos crear via deep link', async ({ page }) => {
+      34 |     await page.goto(`${BASE}/admin/productos/crear`);
+    > 35 |     await expect(page.getByRole('heading', { name: 'Crear Producto', level: 1 })).toBeVisible({ timeout: 10000 });
+         |                                                                                   ^
+      36 |   });
+      37 | });
+      38 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-004-deep-linking-admin.spec.ts:35:83
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-004-deep-linking-a-35389-oductos-crear-via-deep-link-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-004-deep-linking-a-35389-oductos-crear-via-deep-link-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: 'Crear Producto', level: 1 })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'Crear Producto', level: 1 })[22m
+
+
+      33 |   test('admin productos crear via deep link', async ({ page }) => {
+      34 |     await page.goto(`${BASE}/admin/productos/crear`);
+    > 35 |     await expect(page.getByRole('heading', { name: 'Crear Producto', level: 1 })).toBeVisible({ timeout: 10000 });
+         |                                                                                   ^
+      36 |   });
+      37 | });
+      38 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-004-deep-linking-admin.spec.ts:35:83
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-004-deep-linking-a-35389-oductos-crear-via-deep-link-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-004-deep-linking-a-35389-oductos-crear-via-deep-link-chromium-retry1\error-context.md
+
+  111) [chromium] › e2e\tests\flow\UX-010-011-admin-layout.spec.ts:6:5 › UX-010: Admin sidebar has all navigation modules 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('navigation', { name: /Panel de administracion/i })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('navigation', { name: /Panel de administracion/i })[22m
+
+
+      13 |
+      14 |   const sidebar = page.getByRole('navigation', { name: /Panel de administracion/i });
+    > 15 |   await expect(sidebar).toBeVisible();
+         |                         ^
+      16 |
+      17 |   // Main nav items
+      18 |   await expect(sidebar.getByRole('link', { name: /Dashboard/i })).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-010-011-admin-layout.spec.ts:15:25
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-010-011-admin-layo-c5d66--has-all-navigation-modules-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-010-011-admin-layo-c5d66--has-all-navigation-modules-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('navigation', { name: /Panel de administracion/i })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('navigation', { name: /Panel de administracion/i })[22m
+
+
+      13 |
+      14 |   const sidebar = page.getByRole('navigation', { name: /Panel de administracion/i });
+    > 15 |   await expect(sidebar).toBeVisible();
+         |                         ^
+      16 |
+      17 |   // Main nav items
+      18 |   await expect(sidebar.getByRole('link', { name: /Dashboard/i })).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-010-011-admin-layout.spec.ts:15:25
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-010-011-admin-layo-c5d66--has-all-navigation-modules-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-010-011-admin-layo-c5d66--has-all-navigation-modules-chromium-retry1\error-context.md
+
+  112) [chromium] › e2e\tests\flow\UX-010-011-admin-layout.spec.ts:28:5 › UX-010: Mensajes has badge with count 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('link', { name: /Mensajes.*3/i })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('link', { name: /Mensajes.*3/i })[22m
+
+
+      33 |
+      34 |   const mensajesLink = page.getByRole('link', { name: /Mensajes.*3/i });
+    > 35 |   await expect(mensajesLink).toBeVisible();
+         |                              ^
+      36 | });
+      37 |
+      38 | test('UX-010: Productos submenu expands with category links', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-010-011-admin-layout.spec.ts:35:30
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-010-011-admin-layo-a85ee-nsajes-has-badge-with-count-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-010-011-admin-layo-a85ee-nsajes-has-badge-with-count-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('link', { name: /Mensajes.*3/i })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('link', { name: /Mensajes.*3/i })[22m
+
+
+      33 |
+      34 |   const mensajesLink = page.getByRole('link', { name: /Mensajes.*3/i });
+    > 35 |   await expect(mensajesLink).toBeVisible();
+         |                              ^
+      36 | });
+      37 |
+      38 | test('UX-010: Productos submenu expands with category links', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-010-011-admin-layout.spec.ts:35:30
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-010-011-admin-layo-a85ee-nsajes-has-badge-with-count-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-010-011-admin-layo-a85ee-nsajes-has-badge-with-count-chromium-retry1\error-context.md
+
+  113) [chromium] › e2e\tests\flow\UX-010-011-admin-layout.spec.ts:38:5 › UX-010: Productos submenu expands with category links 
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('button', { name: /Productos/i })[22m
+
+
+      42 |   await page.waitForTimeout(2000);
+      43 |
+    > 44 |   await page.getByRole('button', { name: /Productos/i }).click();
+         |                                                          ^
+      45 |
+      46 |   await expect(page.getByRole('link', { name: 'Todos', exact: true })).toBeVisible();
+      47 |   await expect(page.getByRole('link', { name: 'Farmacos', exact: true })).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-010-011-admin-layout.spec.ts:44:58
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-010-011-admin-layo-63f61-expands-with-category-links-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-010-011-admin-layo-63f61-expands-with-category-links-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('button', { name: /Productos/i })[22m
+
+
+      42 |   await page.waitForTimeout(2000);
+      43 |
+    > 44 |   await page.getByRole('button', { name: /Productos/i }).click();
+         |                                                          ^
+      45 |
+      46 |   await expect(page.getByRole('link', { name: 'Todos', exact: true })).toBeVisible();
+      47 |   await expect(page.getByRole('link', { name: 'Farmacos', exact: true })).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-010-011-admin-layout.spec.ts:44:58
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-010-011-admin-layo-63f61-expands-with-category-links-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-010-011-admin-layo-63f61-expands-with-category-links-chromium-retry1\error-context.md
+
+  114) [chromium] › e2e\tests\flow\UX-010-011-admin-layout.spec.ts:53:5 › UX-011: Admin header has search, notifications, and avatar 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('textbox', { name: /Buscar/i })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('textbox', { name: /Buscar/i })[22m
+
+
+      57 |   await page.waitForTimeout(2000);
+      58 |
+    > 59 |   await expect(page.getByRole('textbox', { name: /Buscar/i })).toBeVisible();
+         |                                                                ^
+      60 |   await expect(page.getByRole('button', { name: /Notificaciones/i })).toBeVisible();
+      61 |   await expect(page.getByText('Admin')).toBeVisible();
+      62 | });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-010-011-admin-layout.spec.ts:59:64
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-010-011-admin-layo-7f2b2-ch-notifications-and-avatar-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-010-011-admin-layo-7f2b2-ch-notifications-and-avatar-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('textbox', { name: /Buscar/i })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('textbox', { name: /Buscar/i })[22m
+
+
+      57 |   await page.waitForTimeout(2000);
+      58 |
+    > 59 |   await expect(page.getByRole('textbox', { name: /Buscar/i })).toBeVisible();
+         |                                                                ^
+      60 |   await expect(page.getByRole('button', { name: /Notificaciones/i })).toBeVisible();
+      61 |   await expect(page.getByText('Admin')).toBeVisible();
+      62 | });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-010-011-admin-layout.spec.ts:59:64
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-010-011-admin-layo-7f2b2-ch-notifications-and-avatar-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-010-011-admin-layo-7f2b2-ch-notifications-and-avatar-chromium-retry1\error-context.md
+
+  115) [chromium] › e2e\tests\flow\UX-013-search-contact-flow.spec.ts:4:5 › UX-013: Search product -> view detail -> request info -> contact form pre-populated 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Zoetis')
+    Expected: visible
+    Error: strict mode violation: getByText('Zoetis') resolved to 3 elements:
+        1) <a href="/es/marcas/zoetis" _ngcontent-ng-c4253407393="" class="product-detail__brand-link">Zoetis</a> aka getByRole('link', { name: 'Zoetis' })
+        2) <p _ngcontent-ng-c4253407393="">En HESA, trabajamos directamente con Zoetis para …</p> aka getByText('En HESA, trabajamos')
+        3) <span class="sticky-bar__brand" _ngcontent-ng-c4253407393="">Zoetis</span> aka locator('span').filter({ hasText: 'Zoetis' })
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('Zoetis')[22m
+
+
+      21 |   await expect(page).toHaveURL(/\/es\/catalogo\/farmacos\/amoxicilina-250ml/);
+      22 |   await expect(page.getByRole('heading', { name: 'Amoxicilina 250ml', level: 1 })).toBeVisible();
+    > 23 |   await expect(page.getByText('Zoetis')).toBeVisible();
+         |                                          ^
+      24 |
+      25 |   // Step 5: Click "Solicitar informacion" to go to contact
+      26 |   await page.locator('section').getByRole('link', { name: 'Solicitar informacion' }).click();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-013-search-contact-flow.spec.ts:23:42
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-013-search-contact-9fde5--contact-form-pre-populated-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-013-search-contact-9fde5--contact-form-pre-populated-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Zoetis')
+    Expected: visible
+    Error: strict mode violation: getByText('Zoetis') resolved to 3 elements:
+        1) <a href="/es/marcas/zoetis" _ngcontent-ng-c4253407393="" class="product-detail__brand-link">Zoetis</a> aka getByRole('link', { name: 'Zoetis' })
+        2) <p _ngcontent-ng-c4253407393="">En HESA, trabajamos directamente con Zoetis para …</p> aka getByText('En HESA, trabajamos')
+        3) <span class="sticky-bar__brand" _ngcontent-ng-c4253407393="">Zoetis</span> aka locator('span').filter({ hasText: 'Zoetis' })
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('Zoetis')[22m
+
+
+      21 |   await expect(page).toHaveURL(/\/es\/catalogo\/farmacos\/amoxicilina-250ml/);
+      22 |   await expect(page.getByRole('heading', { name: 'Amoxicilina 250ml', level: 1 })).toBeVisible();
+    > 23 |   await expect(page.getByText('Zoetis')).toBeVisible();
+         |                                          ^
+      24 |
+      25 |   // Step 5: Click "Solicitar informacion" to go to contact
+      26 |   await page.locator('section').getByRole('link', { name: 'Solicitar informacion' }).click();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-013-search-contact-flow.spec.ts:23:42
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-013-search-contact-9fde5--contact-form-pre-populated-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-013-search-contact-9fde5--contact-form-pre-populated-chromium-retry1\error-context.md
+
+  116) [chromium] › e2e\tests\flow\UX-015-admin-crear-producto.spec.ts:8:7 › UX-015: Admin crear producto E2E › formulario crear producto tiene 5 secciones 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: 'Crear Producto', level: 1 })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'Crear Producto', level: 1 })[22m
+
+
+       8 |   test('formulario crear producto tiene 5 secciones', async ({ page }) => {
+       9 |     await page.goto(`${BASE}/admin/productos/crear`);
+    > 10 |     await expect(page.getByRole('heading', { name: 'Crear Producto', level: 1 })).toBeVisible({ timeout: 10000 });
+         |                                                                                   ^
+      11 |     // Section 1: Informacion Basica
+      12 |     await expect(page.getByRole('heading', { name: 'Informacion Basica', level: 2 })).toBeVisible();
+      13 |     // Section 2: Especies y Clasificacion
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-015-admin-crear-producto.spec.ts:10:83
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-015-admin-crear-pr-732b7--producto-tiene-5-secciones-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-015-admin-crear-pr-732b7--producto-tiene-5-secciones-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: 'Crear Producto', level: 1 })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'Crear Producto', level: 1 })[22m
+
+
+       8 |   test('formulario crear producto tiene 5 secciones', async ({ page }) => {
+       9 |     await page.goto(`${BASE}/admin/productos/crear`);
+    > 10 |     await expect(page.getByRole('heading', { name: 'Crear Producto', level: 1 })).toBeVisible({ timeout: 10000 });
+         |                                                                                   ^
+      11 |     // Section 1: Informacion Basica
+      12 |     await expect(page.getByRole('heading', { name: 'Informacion Basica', level: 2 })).toBeVisible();
+      13 |     // Section 2: Especies y Clasificacion
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-015-admin-crear-producto.spec.ts:10:83
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-015-admin-crear-pr-732b7--producto-tiene-5-secciones-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-015-admin-crear-pr-732b7--producto-tiene-5-secciones-chromium-retry1\error-context.md
+
+  117) [chromium] › e2e\tests\flow\UX-015-admin-crear-producto.spec.ts:25:7 › UX-015: Admin crear producto E2E › formulario tiene campos requeridos 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: 'Crear Producto', level: 1 })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'Crear Producto', level: 1 })[22m
+
+
+      25 |   test('formulario tiene campos requeridos', async ({ page }) => {
+      26 |     await page.goto(`${BASE}/admin/productos/crear`);
+    > 27 |     await expect(page.getByRole('heading', { name: 'Crear Producto', level: 1 })).toBeVisible({ timeout: 10000 });
+         |                                                                                   ^
+      28 |     // Required fields
+      29 |     await expect(page.getByLabel('Nombre del producto *')).toBeVisible();
+      30 |     await expect(page.getByLabel('Marca *')).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-015-admin-crear-producto.spec.ts:27:83
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-015-admin-crear-pr-df373-rio-tiene-campos-requeridos-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-015-admin-crear-pr-df373-rio-tiene-campos-requeridos-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: 'Crear Producto', level: 1 })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'Crear Producto', level: 1 })[22m
+
+
+      25 |   test('formulario tiene campos requeridos', async ({ page }) => {
+      26 |     await page.goto(`${BASE}/admin/productos/crear`);
+    > 27 |     await expect(page.getByRole('heading', { name: 'Crear Producto', level: 1 })).toBeVisible({ timeout: 10000 });
+         |                                                                                   ^
+      28 |     // Required fields
+      29 |     await expect(page.getByLabel('Nombre del producto *')).toBeVisible();
+      30 |     await expect(page.getByLabel('Marca *')).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-015-admin-crear-producto.spec.ts:27:83
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-015-admin-crear-pr-df373-rio-tiene-campos-requeridos-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-015-admin-crear-pr-df373-rio-tiene-campos-requeridos-chromium-retry1\error-context.md
+
+  118) [chromium] › e2e\tests\flow\UX-015-admin-crear-producto.spec.ts:35:7 › UX-015: Admin crear producto E2E › categoria selector has 3 options 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: 'Crear Producto', level: 1 })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'Crear Producto', level: 1 })[22m
+
+
+      35 |   test('categoria selector has 3 options', async ({ page }) => {
+      36 |     await page.goto(`${BASE}/admin/productos/crear`);
+    > 37 |     await expect(page.getByRole('heading', { name: 'Crear Producto', level: 1 })).toBeVisible({ timeout: 10000 });
+         |                                                                                   ^
+      38 |     await expect(page.getByRole('button', { name: 'Farmacos' })).toBeVisible();
+      39 |     await expect(page.getByRole('button', { name: 'Alimentos' })).toBeVisible();
+      40 |     await expect(page.getByRole('button', { name: 'Equipos' })).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-015-admin-crear-producto.spec.ts:37:83
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-015-admin-crear-pr-d30f9-oria-selector-has-3-options-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-015-admin-crear-pr-d30f9-oria-selector-has-3-options-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: 'Crear Producto', level: 1 })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'Crear Producto', level: 1 })[22m
+
+
+      35 |   test('categoria selector has 3 options', async ({ page }) => {
+      36 |     await page.goto(`${BASE}/admin/productos/crear`);
+    > 37 |     await expect(page.getByRole('heading', { name: 'Crear Producto', level: 1 })).toBeVisible({ timeout: 10000 });
+         |                                                                                   ^
+      38 |     await expect(page.getByRole('button', { name: 'Farmacos' })).toBeVisible();
+      39 |     await expect(page.getByRole('button', { name: 'Alimentos' })).toBeVisible();
+      40 |     await expect(page.getByRole('button', { name: 'Equipos' })).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-015-admin-crear-producto.spec.ts:37:83
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-015-admin-crear-pr-d30f9-oria-selector-has-3-options-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-015-admin-crear-pr-d30f9-oria-selector-has-3-options-chromium-retry1\error-context.md
+
+  119) [chromium] › e2e\tests\flow\UX-015-admin-crear-producto.spec.ts:43:7 › UX-015: Admin crear producto E2E › bilingual tabs ES/EN present 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: 'Crear Producto', level: 1 })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'Crear Producto', level: 1 })[22m
+
+
+      43 |   test('bilingual tabs ES/EN present', async ({ page }) => {
+      44 |     await page.goto(`${BASE}/admin/productos/crear`);
+    > 45 |     await expect(page.getByRole('heading', { name: 'Crear Producto', level: 1 })).toBeVisible({ timeout: 10000 });
+         |                                                                                   ^
+      46 |     await expect(page.getByRole('button', { name: 'Espanol' })).toBeVisible();
+      47 |     await expect(page.getByRole('button', { name: 'English' })).toBeVisible();
+      48 |   });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-015-admin-crear-producto.spec.ts:45:83
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-015-admin-crear-pr-fa0ea-ilingual-tabs-ES-EN-present-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-015-admin-crear-pr-fa0ea-ilingual-tabs-ES-EN-present-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: 'Crear Producto', level: 1 })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'Crear Producto', level: 1 })[22m
+
+
+      43 |   test('bilingual tabs ES/EN present', async ({ page }) => {
+      44 |     await page.goto(`${BASE}/admin/productos/crear`);
+    > 45 |     await expect(page.getByRole('heading', { name: 'Crear Producto', level: 1 })).toBeVisible({ timeout: 10000 });
+         |                                                                                   ^
+      46 |     await expect(page.getByRole('button', { name: 'Espanol' })).toBeVisible();
+      47 |     await expect(page.getByRole('button', { name: 'English' })).toBeVisible();
+      48 |   });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-015-admin-crear-producto.spec.ts:45:83
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-015-admin-crear-pr-fa0ea-ilingual-tabs-ES-EN-present-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-015-admin-crear-pr-fa0ea-ilingual-tabs-ES-EN-present-chromium-retry1\error-context.md
+
+  120) [chromium] › e2e\tests\flow\UX-015-admin-crear-producto.spec.ts:50:7 › UX-015: Admin crear producto E2E › action buttons present 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: 'Crear Producto', level: 1 })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'Crear Producto', level: 1 })[22m
+
+
+      50 |   test('action buttons present', async ({ page }) => {
+      51 |     await page.goto(`${BASE}/admin/productos/crear`);
+    > 52 |     await expect(page.getByRole('heading', { name: 'Crear Producto', level: 1 })).toBeVisible({ timeout: 10000 });
+         |                                                                                   ^
+      53 |     await expect(page.getByRole('button', { name: 'Cancelar' })).toBeVisible();
+      54 |     await expect(page.getByRole('button', { name: 'Guardar producto' })).toBeVisible();
+      55 |   });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-015-admin-crear-producto.spec.ts:52:83
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-015-admin-crear-pr-fae52--E2E-action-buttons-present-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-015-admin-crear-pr-fae52--E2E-action-buttons-present-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: 'Crear Producto', level: 1 })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'Crear Producto', level: 1 })[22m
+
+
+      50 |   test('action buttons present', async ({ page }) => {
+      51 |     await page.goto(`${BASE}/admin/productos/crear`);
+    > 52 |     await expect(page.getByRole('heading', { name: 'Crear Producto', level: 1 })).toBeVisible({ timeout: 10000 });
+         |                                                                                   ^
+      53 |     await expect(page.getByRole('button', { name: 'Cancelar' })).toBeVisible();
+      54 |     await expect(page.getByRole('button', { name: 'Guardar producto' })).toBeVisible();
+      55 |   });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-015-admin-crear-producto.spec.ts:52:83
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-015-admin-crear-pr-fae52--E2E-action-buttons-present-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-015-admin-crear-pr-fae52--E2E-action-buttons-present-chromium-retry1\error-context.md
+
+  121) [chromium] › e2e\tests\flow\UX-015-admin-crear-producto.spec.ts:57:7 › UX-015: Admin crear producto E2E › drag-drop zones for images and PDF 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: 'Crear Producto', level: 1 })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'Crear Producto', level: 1 })[22m
+
+
+      57 |   test('drag-drop zones for images and PDF', async ({ page }) => {
+      58 |     await page.goto(`${BASE}/admin/productos/crear`);
+    > 59 |     await expect(page.getByRole('heading', { name: 'Crear Producto', level: 1 })).toBeVisible({ timeout: 10000 });
+         |                                                                                   ^
+      60 |     await expect(page.getByText('Arrastra imagenes aqui o selecciona archivos')).toBeVisible();
+      61 |     await expect(page.getByText('Arrastra el PDF aqui o selecciona archivo')).toBeVisible();
+      62 |   });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-015-admin-crear-producto.spec.ts:59:83
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-015-admin-crear-pr-06892-op-zones-for-images-and-PDF-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-015-admin-crear-pr-06892-op-zones-for-images-and-PDF-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: 'Crear Producto', level: 1 })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'Crear Producto', level: 1 })[22m
+
+
+      57 |   test('drag-drop zones for images and PDF', async ({ page }) => {
+      58 |     await page.goto(`${BASE}/admin/productos/crear`);
+    > 59 |     await expect(page.getByRole('heading', { name: 'Crear Producto', level: 1 })).toBeVisible({ timeout: 10000 });
+         |                                                                                   ^
+      60 |     await expect(page.getByText('Arrastra imagenes aqui o selecciona archivos')).toBeVisible();
+      61 |     await expect(page.getByText('Arrastra el PDF aqui o selecciona archivo')).toBeVisible();
+      62 |   });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-015-admin-crear-producto.spec.ts:59:83
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-015-admin-crear-pr-06892-op-zones-for-images-and-PDF-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-015-admin-crear-pr-06892-op-zones-for-images-and-PDF-chromium-retry1\error-context.md
+
+  122) [chromium] › e2e\tests\flow\UX-015-admin-crear-producto.spec.ts:64:7 › UX-015: Admin crear producto E2E › toggle switches for active and featured 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: 'Crear Producto', level: 1 })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'Crear Producto', level: 1 })[22m
+
+
+      64 |   test('toggle switches for active and featured', async ({ page }) => {
+      65 |     await page.goto(`${BASE}/admin/productos/crear`);
+    > 66 |     await expect(page.getByRole('heading', { name: 'Crear Producto', level: 1 })).toBeVisible({ timeout: 10000 });
+         |                                                                                   ^
+      67 |     await expect(page.getByText('Producto activo')).toBeVisible();
+      68 |     await expect(page.getByText('Producto destacado')).toBeVisible();
+      69 |     // Active checkbox should be checked by default
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-015-admin-crear-producto.spec.ts:66:83
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-015-admin-crear-pr-daf6e-hes-for-active-and-featured-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-015-admin-crear-pr-daf6e-hes-for-active-and-featured-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: 'Crear Producto', level: 1 })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'Crear Producto', level: 1 })[22m
+
+
+      64 |   test('toggle switches for active and featured', async ({ page }) => {
+      65 |     await page.goto(`${BASE}/admin/productos/crear`);
+    > 66 |     await expect(page.getByRole('heading', { name: 'Crear Producto', level: 1 })).toBeVisible({ timeout: 10000 });
+         |                                                                                   ^
+      67 |     await expect(page.getByText('Producto activo')).toBeVisible();
+      68 |     await expect(page.getByText('Producto destacado')).toBeVisible();
+      69 |     // Active checkbox should be checked by default
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-015-admin-crear-producto.spec.ts:66:83
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-015-admin-crear-pr-daf6e-hes-for-active-and-featured-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-015-admin-crear-pr-daf6e-hes-for-active-and-featured-chromium-retry1\error-context.md
+
+  123) [chromium] › e2e\tests\flow\UX-018-catalogo-filtros-adaptativos.spec.ts:19:7 › UX-018: Catalogo filtros adaptativos › catalogo general has categoria filter 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('productos')
+    Expected: visible
+    Error: strict mode violation: getByText('productos') resolved to 2 elements:
+        1) <h1 class="text-h2" _ngcontent-ng-c4117633131="">Catalogo de Productos</h1> aka getByRole('heading', { name: 'Catalogo de Productos' })
+        2) <span class="catalog-page__count" _ngcontent-ng-c4117633131="">0 productos</span> aka getByText('0 productos')
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByText('productos')[22m
+
+
+      19 |   test('catalogo general has categoria filter', async ({ page }) => {
+      20 |     await page.goto(`${BASE}/es/catalogo`);
+    > 21 |     await expect(page.getByText('productos')).toBeVisible({ timeout: 10000 });
+         |                                               ^
+      22 |     // General catalog should have Categoria, Marca, Especie filters
+      23 |     const comboboxes = page.getByRole('combobox');
+      24 |     const count = await comboboxes.count();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-018-catalogo-filtros-adaptativos.spec.ts:21:47
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-018-catalogo-filtr-2c128-eneral-has-categoria-filter-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-018-catalogo-filtr-2c128-eneral-has-categoria-filter-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('productos')
+    Expected: visible
+    Error: strict mode violation: getByText('productos') resolved to 2 elements:
+        1) <h1 class="text-h2" _ngcontent-ng-c4117633131="">Catalogo de Productos</h1> aka getByRole('heading', { name: 'Catalogo de Productos' })
+        2) <span class="catalog-page__count" _ngcontent-ng-c4117633131="">0 productos</span> aka getByText('0 productos')
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByText('productos')[22m
+
+
+      19 |   test('catalogo general has categoria filter', async ({ page }) => {
+      20 |     await page.goto(`${BASE}/es/catalogo`);
+    > 21 |     await expect(page.getByText('productos')).toBeVisible({ timeout: 10000 });
+         |                                               ^
+      22 |     // General catalog should have Categoria, Marca, Especie filters
+      23 |     const comboboxes = page.getByRole('combobox');
+      24 |     const count = await comboboxes.count();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-018-catalogo-filtros-adaptativos.spec.ts:21:47
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-018-catalogo-filtr-2c128-eneral-has-categoria-filter-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-018-catalogo-filtr-2c128-eneral-has-categoria-filter-chromium-retry1\error-context.md
+
+  124) [chromium] › e2e\tests\flow\UX-025-027-catalogo-detalle.spec.ts:8:7 › UX-025: Catalogo paginacion › catalogo shows pagination with 12 per page 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('productos')
+    Expected: visible
+    Error: strict mode violation: getByText('productos') resolved to 2 elements:
+        1) <h1 class="text-h2" _ngcontent-ng-c4117633131="">Catalogo de Productos</h1> aka getByRole('heading', { name: 'Catalogo de Productos' })
+        2) <span class="catalog-page__count" _ngcontent-ng-c4117633131="">0 productos</span> aka getByText('0 productos')
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByText('productos')[22m
+
+
+       8 |   test('catalogo shows pagination with 12 per page', async ({ page }) => {
+       9 |     await page.goto(`${BASE}/es/catalogo`);
+    > 10 |     await expect(page.getByText('productos')).toBeVisible({ timeout: 10000 });
+         |                                               ^
+      11 |     // Pagination controls
+      12 |     await expect(page.getByText(/1-12 de/)).toBeVisible();
+      13 |     // Page buttons
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-025-027-catalogo-detalle.spec.ts:10:47
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-025-027-catalogo-d-7c0a6-pagination-with-12-per-page-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-025-027-catalogo-d-7c0a6-pagination-with-12-per-page-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('productos')
+    Expected: visible
+    Error: strict mode violation: getByText('productos') resolved to 2 elements:
+        1) <h1 class="text-h2" _ngcontent-ng-c4117633131="">Catalogo de Productos</h1> aka getByRole('heading', { name: 'Catalogo de Productos' })
+        2) <span class="catalog-page__count" _ngcontent-ng-c4117633131="">0 productos</span> aka getByText('0 productos')
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByText('productos')[22m
+
+
+       8 |   test('catalogo shows pagination with 12 per page', async ({ page }) => {
+       9 |     await page.goto(`${BASE}/es/catalogo`);
+    > 10 |     await expect(page.getByText('productos')).toBeVisible({ timeout: 10000 });
+         |                                               ^
+      11 |     // Pagination controls
+      12 |     await expect(page.getByText(/1-12 de/)).toBeVisible();
+      13 |     // Page buttons
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-025-027-catalogo-detalle.spec.ts:10:47
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-025-027-catalogo-d-7c0a6-pagination-with-12-per-page-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-025-027-catalogo-d-7c0a6-pagination-with-12-per-page-chromium-retry1\error-context.md
+
+  125) [chromium] › e2e\tests\flow\UX-025-027-catalogo-detalle.spec.ts:22:7 › UX-027: Detalle producto 404 › producto inexistente muestra 404 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Pagina no encontrada').or(getByText('no encontrad'))
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByText('Pagina no encontrada').or(getByText('no encontrad'))[22m
+
+
+      22 |   test('producto inexistente muestra 404', async ({ page }) => {
+      23 |     await page.goto(`${BASE}/es/catalogo/farmacos/producto-inexistente`);
+    > 24 |     await expect(page.getByText('Pagina no encontrada').or(page.getByText('no encontrad'))).toBeVisible({ timeout: 10000 });
+         |                                                                                             ^
+      25 |   });
+      26 | });
+      27 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-025-027-catalogo-detalle.spec.ts:24:93
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-025-027-catalogo-d-b9d55-cto-inexistente-muestra-404-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-025-027-catalogo-d-b9d55-cto-inexistente-muestra-404-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Pagina no encontrada').or(getByText('no encontrad'))
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByText('Pagina no encontrada').or(getByText('no encontrad'))[22m
+
+
+      22 |   test('producto inexistente muestra 404', async ({ page }) => {
+      23 |     await page.goto(`${BASE}/es/catalogo/farmacos/producto-inexistente`);
+    > 24 |     await expect(page.getByText('Pagina no encontrada').or(page.getByText('no encontrad'))).toBeVisible({ timeout: 10000 });
+         |                                                                                             ^
+      25 |   });
+      26 | });
+      27 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-025-027-catalogo-detalle.spec.ts:24:93
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-025-027-catalogo-d-b9d55-cto-inexistente-muestra-404-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-025-027-catalogo-d-b9d55-cto-inexistente-muestra-404-chromium-retry1\error-context.md
+
+  126) [chromium] › e2e\tests\flow\UX-026-catalogo-categoria.spec.ts:8:7 › UX-026: Catalogo por categoria › farmacos muestra breadcrumb y filtros especificos 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('link', { name: 'Inicio' })
+    Expected: visible
+    Error: strict mode violation: getByRole('link', { name: 'Inicio' }) resolved to 3 elements:
+        1) <a href="/es" class="header__logo" _ngcontent-ng-c247534093="" aria-label="HESA - Ir al inicio">…</a> aka getByRole('link', { name: 'HESA - Ir al inicio' })
+        2) <a href="/es" class="breadcrumb__link" _ngcontent-ng-c1539313188="">Inicio</a> aka getByLabel('Breadcrumb').getByRole('link', { name: 'Inicio' })
+        3) <a href="/es" class="footer__link" _ngcontent-ng-c715131497="">Inicio</a> aka getByLabel('Pie de pagina').getByRole('link', { name: 'Inicio' })
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('link', { name: 'Inicio' })[22m
+
+
+      10 |     await expect(page.getByRole('heading', { name: 'Farmacos Veterinarios', level: 1 })).toBeVisible({ timeout: 10000 });
+      11 |     // Breadcrumb
+    > 12 |     await expect(page.getByRole('link', { name: 'Inicio' })).toBeVisible();
+         |                                                              ^
+      13 |     await expect(page.getByRole('link', { name: 'Catalogo' })).toBeVisible();
+      14 |     // Filtros especificos por tipo
+      15 |     await expect(page.getByRole('combobox').nth(0)).toBeVisible(); // Marca
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-026-catalogo-categoria.spec.ts:12:62
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-026-catalogo-categ-0ce97-crumb-y-filtros-especificos-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-026-catalogo-categ-0ce97-crumb-y-filtros-especificos-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('link', { name: 'Inicio' })
+    Expected: visible
+    Error: strict mode violation: getByRole('link', { name: 'Inicio' }) resolved to 3 elements:
+        1) <a href="/es" class="header__logo" _ngcontent-ng-c247534093="" aria-label="HESA - Ir al inicio">…</a> aka getByRole('link', { name: 'HESA - Ir al inicio' })
+        2) <a href="/es" class="breadcrumb__link" _ngcontent-ng-c1539313188="">Inicio</a> aka getByLabel('Breadcrumb').getByRole('link', { name: 'Inicio' })
+        3) <a href="/es" class="footer__link" _ngcontent-ng-c715131497="">Inicio</a> aka getByLabel('Pie de pagina').getByRole('link', { name: 'Inicio' })
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('link', { name: 'Inicio' })[22m
+
+
+      10 |     await expect(page.getByRole('heading', { name: 'Farmacos Veterinarios', level: 1 })).toBeVisible({ timeout: 10000 });
+      11 |     // Breadcrumb
+    > 12 |     await expect(page.getByRole('link', { name: 'Inicio' })).toBeVisible();
+         |                                                              ^
+      13 |     await expect(page.getByRole('link', { name: 'Catalogo' })).toBeVisible();
+      14 |     // Filtros especificos por tipo
+      15 |     await expect(page.getByRole('combobox').nth(0)).toBeVisible(); // Marca
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-026-catalogo-categoria.spec.ts:12:62
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-026-catalogo-categ-0ce97-crumb-y-filtros-especificos-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-026-catalogo-categ-0ce97-crumb-y-filtros-especificos-chromium-retry1\error-context.md
+
+  127) [chromium] › e2e\tests\flow\UX-027-deep-link-product.spec.ts:4:5 › UX-027: Product detail loads via deep link without redirect 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('link', { name: 'Inicio' })
+    Expected: visible
+    Error: strict mode violation: getByRole('link', { name: 'Inicio' }) resolved to 3 elements:
+        1) <a href="/es" class="header__logo" _ngcontent-ng-c247534093="" aria-label="HESA - Ir al inicio">…</a> aka getByRole('link', { name: 'HESA - Ir al inicio' })
+        2) <a href="/es" class="breadcrumb__link" _ngcontent-ng-c1539313188="">Inicio</a> aka getByLabel('Breadcrumb').getByRole('link', { name: 'Inicio' })
+        3) <a href="/es" class="footer__link" _ngcontent-ng-c715131497="">Inicio</a> aka getByLabel('Pie de pagina').getByRole('link', { name: 'Inicio' })
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('link', { name: 'Inicio' })[22m
+
+
+      10 |
+      11 |   // Verify breadcrumb shows the full path
+    > 12 |   await expect(page.getByRole('link', { name: 'Inicio' })).toBeVisible();
+         |                                                            ^
+      13 |   await expect(page.getByRole('link', { name: 'Catalogo' })).toBeVisible();
+      14 |   await expect(page.getByRole('link', { name: 'Farmacos' })).toBeVisible();
+      15 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-027-deep-link-product.spec.ts:12:60
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-027-deep-link-prod-2a7ab--deep-link-without-redirect-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-027-deep-link-prod-2a7ab--deep-link-without-redirect-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('link', { name: 'Inicio' })
+    Expected: visible
+    Error: strict mode violation: getByRole('link', { name: 'Inicio' }) resolved to 3 elements:
+        1) <a href="/es" class="header__logo" _ngcontent-ng-c247534093="" aria-label="HESA - Ir al inicio">…</a> aka getByRole('link', { name: 'HESA - Ir al inicio' })
+        2) <a href="/es" class="breadcrumb__link" _ngcontent-ng-c1539313188="">Inicio</a> aka getByLabel('Breadcrumb').getByRole('link', { name: 'Inicio' })
+        3) <a href="/es" class="footer__link" _ngcontent-ng-c715131497="">Inicio</a> aka getByLabel('Pie de pagina').getByRole('link', { name: 'Inicio' })
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('link', { name: 'Inicio' })[22m
+
+
+      10 |
+      11 |   // Verify breadcrumb shows the full path
+    > 12 |   await expect(page.getByRole('link', { name: 'Inicio' })).toBeVisible();
+         |                                                            ^
+      13 |   await expect(page.getByRole('link', { name: 'Catalogo' })).toBeVisible();
+      14 |   await expect(page.getByRole('link', { name: 'Farmacos' })).toBeVisible();
+      15 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-027-deep-link-product.spec.ts:12:60
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-027-deep-link-prod-2a7ab--deep-link-without-redirect-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-027-deep-link-prod-2a7ab--deep-link-without-redirect-chromium-retry1\error-context.md
+
+  128) [chromium] › e2e\tests\flow\UX-034-marca-individual.spec.ts:8:7 › UX-034: Marca individual › Zoetis brand page renders with products 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Farmacos')
+    Expected: visible
+    Error: strict mode violation: getByText('Farmacos') resolved to 3 elements:
+        1) <a _ngcontent-ng-c247534093="" class="header__submenu-item" href="/es/catalogo/farmacos">…</a> aka getByRole('link', { name: 'Farmacos Veterinarios' })
+        2) <a _ngcontent-ng-c247534093="" href="/es/catalogo/farmacos" class="header__mobile-sublink">Farmacos Veterinarios</a> aka getByLabel('Menu de navegacion').getByText('Farmacos Veterinarios')
+        3) <span class="badge badge-pharma" _ngcontent-ng-c1584882881="">Farmacos</span> aka getByText('Farmacos', { exact: true })
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('Farmacos')[22m
+
+
+      12 |     await expect(page.getByText('Estados Unidos')).toBeVisible();
+      13 |     // Category badge
+    > 14 |     await expect(page.getByText('Farmacos')).toBeVisible();
+         |                                              ^
+      15 |     // Products section
+      16 |     await expect(page.getByRole('heading', { name: 'Productos de Zoetis', level: 2 })).toBeVisible();
+      17 |     // At least one product
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-034-marca-individual.spec.ts:14:46
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-034-marca-individu-24a2e--page-renders-with-products-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-034-marca-individu-24a2e--page-renders-with-products-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Farmacos')
+    Expected: visible
+    Error: strict mode violation: getByText('Farmacos') resolved to 3 elements:
+        1) <a _ngcontent-ng-c247534093="" class="header__submenu-item" href="/es/catalogo/farmacos">…</a> aka getByRole('link', { name: 'Farmacos Veterinarios' })
+        2) <a _ngcontent-ng-c247534093="" href="/es/catalogo/farmacos" class="header__mobile-sublink">Farmacos Veterinarios</a> aka getByLabel('Menu de navegacion').getByText('Farmacos Veterinarios')
+        3) <span class="badge badge-pharma" _ngcontent-ng-c1584882881="">Farmacos</span> aka getByText('Farmacos', { exact: true })
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('Farmacos')[22m
+
+
+      12 |     await expect(page.getByText('Estados Unidos')).toBeVisible();
+      13 |     // Category badge
+    > 14 |     await expect(page.getByText('Farmacos')).toBeVisible();
+         |                                              ^
+      15 |     // Products section
+      16 |     await expect(page.getByRole('heading', { name: 'Productos de Zoetis', level: 2 })).toBeVisible();
+      17 |     // At least one product
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-034-marca-individual.spec.ts:14:46
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-034-marca-individu-24a2e--page-renders-with-products-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-034-marca-individu-24a2e--page-renders-with-products-chromium-retry1\error-context.md
+
+  129) [chromium] › e2e\tests\flow\UX-034-marca-individual.spec.ts:21:7 › UX-034: Marca individual › brand page has breadcrumb 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('link', { name: 'Inicio' })
+    Expected: visible
+    Error: strict mode violation: getByRole('link', { name: 'Inicio' }) resolved to 3 elements:
+        1) <a href="/es" class="header__logo" _ngcontent-ng-c247534093="" aria-label="HESA - Ir al inicio">…</a> aka getByRole('link', { name: 'HESA - Ir al inicio' })
+        2) <a href="/es" class="breadcrumb__link" _ngcontent-ng-c1539313188="">Inicio</a> aka getByLabel('Breadcrumb').getByRole('link', { name: 'Inicio' })
+        3) <a href="/es" class="footer__link" _ngcontent-ng-c715131497="">Inicio</a> aka getByLabel('Pie de pagina').getByRole('link', { name: 'Inicio' })
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('link', { name: 'Inicio' })[22m
+
+
+      22 |     await page.goto(`${BASE}/es/marcas/zoetis`);
+      23 |     await expect(page.getByRole('heading', { name: 'Zoetis', level: 1 })).toBeVisible({ timeout: 10000 });
+    > 24 |     await expect(page.getByRole('link', { name: 'Inicio' })).toBeVisible();
+         |                                                              ^
+      25 |     await expect(page.getByRole('link', { name: 'Marcas' })).toBeVisible();
+      26 |   });
+      27 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-034-marca-individual.spec.ts:24:62
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-034-marca-individu-06d0b-l-brand-page-has-breadcrumb-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-034-marca-individu-06d0b-l-brand-page-has-breadcrumb-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('link', { name: 'Inicio' })
+    Expected: visible
+    Error: strict mode violation: getByRole('link', { name: 'Inicio' }) resolved to 3 elements:
+        1) <a href="/es" class="header__logo" _ngcontent-ng-c247534093="" aria-label="HESA - Ir al inicio">…</a> aka getByRole('link', { name: 'HESA - Ir al inicio' })
+        2) <a href="/es" class="breadcrumb__link" _ngcontent-ng-c1539313188="">Inicio</a> aka getByLabel('Breadcrumb').getByRole('link', { name: 'Inicio' })
+        3) <a href="/es" class="footer__link" _ngcontent-ng-c715131497="">Inicio</a> aka getByLabel('Pie de pagina').getByRole('link', { name: 'Inicio' })
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('link', { name: 'Inicio' })[22m
+
+
+      22 |     await page.goto(`${BASE}/es/marcas/zoetis`);
+      23 |     await expect(page.getByRole('heading', { name: 'Zoetis', level: 1 })).toBeVisible({ timeout: 10000 });
+    > 24 |     await expect(page.getByRole('link', { name: 'Inicio' })).toBeVisible();
+         |                                                              ^
+      25 |     await expect(page.getByRole('link', { name: 'Marcas' })).toBeVisible();
+      26 |   });
+      27 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-034-marca-individual.spec.ts:24:62
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-034-marca-individu-06d0b-l-brand-page-has-breadcrumb-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-034-marca-individu-06d0b-l-brand-page-has-breadcrumb-chromium-retry1\error-context.md
+
+  130) [chromium] › e2e\tests\flow\UX-034-marca-individual.spec.ts:28:7 › UX-034: Marca individual › non-existent brand shows 404 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Pagina no encontrada').or(getByText('no encontrada'))
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByText('Pagina no encontrada').or(getByText('no encontrada'))[22m
+
+
+      28 |   test('non-existent brand shows 404', async ({ page }) => {
+      29 |     await page.goto(`${BASE}/es/marcas/marca-inexistente`);
+    > 30 |     await expect(page.getByText('Pagina no encontrada').or(page.getByText('no encontrada'))).toBeVisible({ timeout: 10000 });
+         |                                                                                              ^
+      31 |   });
+      32 | });
+      33 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-034-marca-individual.spec.ts:30:94
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-034-marca-individu-107e1-on-existent-brand-shows-404-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-034-marca-individu-107e1-on-existent-brand-shows-404-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Pagina no encontrada').or(getByText('no encontrada'))
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByText('Pagina no encontrada').or(getByText('no encontrada'))[22m
+
+
+      28 |   test('non-existent brand shows 404', async ({ page }) => {
+      29 |     await page.goto(`${BASE}/es/marcas/marca-inexistente`);
+    > 30 |     await expect(page.getByText('Pagina no encontrada').or(page.getByText('no encontrada'))).toBeVisible({ timeout: 10000 });
+         |                                                                                              ^
+      31 |   });
+      32 | });
+      33 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-034-marca-individual.spec.ts:30:94
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-034-marca-individu-107e1-on-existent-brand-shows-404-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-034-marca-individu-107e1-on-existent-brand-shows-404-chromium-retry1\error-context.md
+
+  131) [chromium] › e2e\tests\flow\UX-040-041-admin-login-dashboard.spec.ts:18:5 › UX-041: Dashboard shows summary cards with correct data 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('48')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('48')[22m
+
+
+      23 |
+      24 |   // Summary cards
+    > 25 |   await expect(page.getByText('48')).toBeVisible();
+         |                                      ^
+      26 |   await expect(page.getByText('Productos').first()).toBeVisible();
+      27 |   await expect(page.getByText('3').first()).toBeVisible();
+      28 |   await expect(page.getByText('Mensajes Nuevos')).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-040-041-admin-login-dashboard.spec.ts:25:38
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-040-041-admin-logi-1fa29-ary-cards-with-correct-data-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-040-041-admin-logi-1fa29-ary-cards-with-correct-data-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('48')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('48')[22m
+
+
+      23 |
+      24 |   // Summary cards
+    > 25 |   await expect(page.getByText('48')).toBeVisible();
+         |                                      ^
+      26 |   await expect(page.getByText('Productos').first()).toBeVisible();
+      27 |   await expect(page.getByText('3').first()).toBeVisible();
+      28 |   await expect(page.getByText('Mensajes Nuevos')).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-040-041-admin-login-dashboard.spec.ts:25:38
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-040-041-admin-logi-1fa29-ary-cards-with-correct-data-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-040-041-admin-logi-1fa29-ary-cards-with-correct-data-chromium-retry1\error-context.md
+
+  132) [chromium] › e2e\tests\flow\UX-040-041-admin-login-dashboard.spec.ts:35:5 › UX-041: Dashboard shows category cards with progress 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Farmacos').first()
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('Farmacos').first()[22m
+
+
+      39 |   await page.waitForTimeout(2000);
+      40 |
+    > 41 |   await expect(page.getByText('Farmacos').first()).toBeVisible();
+         |                                                    ^
+      42 |   await expect(page.getByText('27 de 28 activos')).toBeVisible();
+      43 |   await expect(page.getByText('Alimentos').first()).toBeVisible();
+      44 |   await expect(page.getByText('14 de 14 activos')).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-040-041-admin-login-dashboard.spec.ts:41:52
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-040-041-admin-logi-7311b-ategory-cards-with-progress-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-040-041-admin-logi-7311b-ategory-cards-with-progress-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Farmacos').first()
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('Farmacos').first()[22m
+
+
+      39 |   await page.waitForTimeout(2000);
+      40 |
+    > 41 |   await expect(page.getByText('Farmacos').first()).toBeVisible();
+         |                                                    ^
+      42 |   await expect(page.getByText('27 de 28 activos')).toBeVisible();
+      43 |   await expect(page.getByText('Alimentos').first()).toBeVisible();
+      44 |   await expect(page.getByText('14 de 14 activos')).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-040-041-admin-login-dashboard.spec.ts:41:52
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-040-041-admin-logi-7311b-ategory-cards-with-progress-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-040-041-admin-logi-7311b-ategory-cards-with-progress-chromium-retry1\error-context.md
+
+  133) [chromium] › e2e\tests\flow\UX-040-041-admin-login-dashboard.spec.ts:49:5 › UX-041: Dashboard shows recent messages 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Mensajes Recientes')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('Mensajes Recientes')[22m
+
+
+      53 |   await page.waitForTimeout(2000);
+      54 |
+    > 55 |   await expect(page.getByText('Mensajes Recientes')).toBeVisible();
+         |                                                      ^
+      56 |   await expect(page.getByRole('link', { name: /Ver todos/i })).toBeVisible();
+      57 |
+      58 |   // Message type badges
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-040-041-admin-login-dashboard.spec.ts:55:54
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-040-041-admin-logi-ca31b-board-shows-recent-messages-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-040-041-admin-logi-ca31b-board-shows-recent-messages-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Mensajes Recientes')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('Mensajes Recientes')[22m
+
+
+      53 |   await page.waitForTimeout(2000);
+      54 |
+    > 55 |   await expect(page.getByText('Mensajes Recientes')).toBeVisible();
+         |                                                      ^
+      56 |   await expect(page.getByRole('link', { name: /Ver todos/i })).toBeVisible();
+      57 |
+      58 |   // Message type badges
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-040-041-admin-login-dashboard.spec.ts:55:54
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-040-041-admin-logi-ca31b-board-shows-recent-messages-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-040-041-admin-logi-ca31b-board-shows-recent-messages-chromium-retry1\error-context.md
+
+  134) [chromium] › e2e\tests\flow\UX-040-041-admin-login-dashboard.spec.ts:64:5 › UX-041: Dashboard shows recent activity 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Actividad Reciente')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('Actividad Reciente')[22m
+
+
+      68 |   await page.waitForTimeout(2000);
+      69 |
+    > 70 |   await expect(page.getByText('Actividad Reciente')).toBeVisible();
+         |                                                      ^
+      71 |   await expect(page.getByText(/Pro Plan Adulto.*actualizado/)).toBeVisible();
+      72 |   await expect(page.getByText(/Virbac.*creada/)).toBeVisible();
+      73 | });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-040-041-admin-login-dashboard.spec.ts:70:54
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-040-041-admin-logi-812b6-board-shows-recent-activity-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-040-041-admin-logi-812b6-board-shows-recent-activity-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Actividad Reciente')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('Actividad Reciente')[22m
+
+
+      68 |   await page.waitForTimeout(2000);
+      69 |
+    > 70 |   await expect(page.getByText('Actividad Reciente')).toBeVisible();
+         |                                                      ^
+      71 |   await expect(page.getByText(/Pro Plan Adulto.*actualizado/)).toBeVisible();
+      72 |   await expect(page.getByText(/Virbac.*creada/)).toBeVisible();
+      73 | });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-040-041-admin-login-dashboard.spec.ts:70:54
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-040-041-admin-logi-812b6-board-shows-recent-activity-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-040-041-admin-logi-812b6-board-shows-recent-activity-chromium-retry1\error-context.md
+
+  135) [chromium] › e2e\tests\flow\UX-044-conditional-fields.spec.ts:4:5 › UX-044: Selecting category changes visible fields in product form 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: 'Crear Producto' })
+    Expected: visible
+    Timeout: 15000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 15000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'Crear Producto' })[22m
+
+
+       6 |
+       7 |   // Wait for the form to load
+    >  8 |   await expect(page.getByRole('heading', { name: 'Crear Producto' })).toBeVisible({ timeout: 15000 });
+         |                                                                       ^
+       9 |
+      10 |   // Verify category buttons are present
+      11 |   await expect(page.getByRole('button', { name: 'Farmacos' })).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-044-conditional-fields.spec.ts:8:71
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-044-conditional-fi-c2936-ible-fields-in-product-form-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-044-conditional-fi-c2936-ible-fields-in-product-form-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: 'Crear Producto' })
+    Expected: visible
+    Timeout: 15000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 15000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'Crear Producto' })[22m
+
+
+       6 |
+       7 |   // Wait for the form to load
+    >  8 |   await expect(page.getByRole('heading', { name: 'Crear Producto' })).toBeVisible({ timeout: 15000 });
+         |                                                                       ^
+       9 |
+      10 |   // Verify category buttons are present
+      11 |   await expect(page.getByRole('button', { name: 'Farmacos' })).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-044-conditional-fields.spec.ts:8:71
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-044-conditional-fi-c2936-ible-fields-in-product-form-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-044-conditional-fi-c2936-ible-fields-in-product-form-chromium-retry1\error-context.md
+
+  136) [chromium] › e2e\tests\flow\UX-045-unsaved-changes-modal.spec.ts:7:7 › UX-045: Modal de cambios sin guardar › UX-045: Muestra modal al intentar navegar con cambios en formulario crear producto 
+
+    TimeoutError: page.waitForSelector: Timeout 15000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('input[placeholder*="Amoxicilina"]') to be visible[22m
+
+
+       7 |   test('UX-045: Muestra modal al intentar navegar con cambios en formulario crear producto', async ({ page }) => {
+       8 |     await page.goto(`${BASE_URL}/admin/productos/crear`);
+    >  9 |     await page.waitForSelector('input[placeholder*="Amoxicilina"]', { timeout: 15000 });
+         |                ^
+      10 |
+      11 |     // Escribir en el campo nombre para marcar el formulario como "dirty"
+      12 |     await page.getByRole('textbox', { name: 'Nombre del producto' }).fill('Producto de prueba QA');
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-045-unsaved-changes-modal.spec.ts:9:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-045-unsaved-change-487b1-n-formulario-crear-producto-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-045-unsaved-change-487b1-n-formulario-crear-producto-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TimeoutError: page.waitForSelector: Timeout 15000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('input[placeholder*="Amoxicilina"]') to be visible[22m
+
+
+       7 |   test('UX-045: Muestra modal al intentar navegar con cambios en formulario crear producto', async ({ page }) => {
+       8 |     await page.goto(`${BASE_URL}/admin/productos/crear`);
+    >  9 |     await page.waitForSelector('input[placeholder*="Amoxicilina"]', { timeout: 15000 });
+         |                ^
+      10 |
+      11 |     // Escribir en el campo nombre para marcar el formulario como "dirty"
+      12 |     await page.getByRole('textbox', { name: 'Nombre del producto' }).fill('Producto de prueba QA');
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-045-unsaved-changes-modal.spec.ts:9:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-045-unsaved-change-487b1-n-formulario-crear-producto-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-045-unsaved-change-487b1-n-formulario-crear-producto-chromium-retry1\error-context.md
+
+  137) [chromium] › e2e\tests\flow\UX-045-unsaved-changes-modal.spec.ts:24:7 › UX-045: Modal de cambios sin guardar › UX-045: "Seguir editando" mantiene datos en formulario 
+
+    TimeoutError: page.waitForSelector: Timeout 15000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('input[placeholder*="Amoxicilina"]') to be visible[22m
+
+
+      24 |   test('UX-045: "Seguir editando" mantiene datos en formulario', async ({ page }) => {
+      25 |     await page.goto(`${BASE_URL}/admin/productos/crear`);
+    > 26 |     await page.waitForSelector('input[placeholder*="Amoxicilina"]', { timeout: 15000 });
+         |                ^
+      27 |
+      28 |     await page.getByRole('textbox', { name: 'Nombre del producto' }).fill('Producto prueba');
+      29 |     await page.getByRole('link', { name: 'Dashboard' }).click();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-045-unsaved-changes-modal.spec.ts:26:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-045-unsaved-change-4b2f9-antiene-datos-en-formulario-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-045-unsaved-change-4b2f9-antiene-datos-en-formulario-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TimeoutError: page.waitForSelector: Timeout 15000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('input[placeholder*="Amoxicilina"]') to be visible[22m
+
+
+      24 |   test('UX-045: "Seguir editando" mantiene datos en formulario', async ({ page }) => {
+      25 |     await page.goto(`${BASE_URL}/admin/productos/crear`);
+    > 26 |     await page.waitForSelector('input[placeholder*="Amoxicilina"]', { timeout: 15000 });
+         |                ^
+      27 |
+      28 |     await page.getByRole('textbox', { name: 'Nombre del producto' }).fill('Producto prueba');
+      29 |     await page.getByRole('link', { name: 'Dashboard' }).click();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-045-unsaved-changes-modal.spec.ts:26:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-045-unsaved-change-4b2f9-antiene-datos-en-formulario-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-045-unsaved-change-4b2f9-antiene-datos-en-formulario-chromium-retry1\error-context.md
+
+  138) [chromium] › e2e\tests\flow\UX-045-unsaved-changes-modal.spec.ts:39:7 › UX-045: Modal de cambios sin guardar › UX-045: "Salir sin guardar" navega sin mantener datos 
+
+    TimeoutError: page.waitForSelector: Timeout 15000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('input[placeholder*="Amoxicilina"]') to be visible[22m
+
+
+      39 |   test('UX-045: "Salir sin guardar" navega sin mantener datos', async ({ page }) => {
+      40 |     await page.goto(`${BASE_URL}/admin/productos/crear`);
+    > 41 |     await page.waitForSelector('input[placeholder*="Amoxicilina"]', { timeout: 15000 });
+         |                ^
+      42 |
+      43 |     await page.getByRole('textbox', { name: 'Nombre del producto' }).fill('Producto prueba');
+      44 |     await page.getByRole('link', { name: 'Dashboard' }).click();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-045-unsaved-changes-modal.spec.ts:41:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-045-unsaved-change-c6ae8-r-navega-sin-mantener-datos-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-045-unsaved-change-c6ae8-r-navega-sin-mantener-datos-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TimeoutError: page.waitForSelector: Timeout 15000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('input[placeholder*="Amoxicilina"]') to be visible[22m
+
+
+      39 |   test('UX-045: "Salir sin guardar" navega sin mantener datos', async ({ page }) => {
+      40 |     await page.goto(`${BASE_URL}/admin/productos/crear`);
+    > 41 |     await page.waitForSelector('input[placeholder*="Amoxicilina"]', { timeout: 15000 });
+         |                ^
+      42 |
+      43 |     await page.getByRole('textbox', { name: 'Nombre del producto' }).fill('Producto prueba');
+      44 |     await page.getByRole('link', { name: 'Dashboard' }).click();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-045-unsaved-changes-modal.spec.ts:41:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-045-unsaved-change-c6ae8-r-navega-sin-mantener-datos-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-045-unsaved-change-c6ae8-r-navega-sin-mantener-datos-chromium-retry1\error-context.md
+
+  139) [chromium] › e2e\tests\flow\UX-045-unsaved-changes-modal.spec.ts:53:7 › UX-045: Modal de cambios sin guardar › UX-045: No muestra modal si no hay cambios 
+
+    TimeoutError: page.waitForSelector: Timeout 15000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('input[placeholder*="Amoxicilina"]') to be visible[22m
+
+
+      53 |   test('UX-045: No muestra modal si no hay cambios', async ({ page }) => {
+      54 |     await page.goto(`${BASE_URL}/admin/productos/crear`);
+    > 55 |     await page.waitForSelector('input[placeholder*="Amoxicilina"]', { timeout: 15000 });
+         |                ^
+      56 |
+      57 |     // Navegar sin modificar campos
+      58 |     await page.getByRole('link', { name: 'Dashboard' }).click();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-045-unsaved-changes-modal.spec.ts:55:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-045-unsaved-change-31107-tra-modal-si-no-hay-cambios-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-045-unsaved-change-31107-tra-modal-si-no-hay-cambios-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TimeoutError: page.waitForSelector: Timeout 15000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('input[placeholder*="Amoxicilina"]') to be visible[22m
+
+
+      53 |   test('UX-045: No muestra modal si no hay cambios', async ({ page }) => {
+      54 |     await page.goto(`${BASE_URL}/admin/productos/crear`);
+    > 55 |     await page.waitForSelector('input[placeholder*="Amoxicilina"]', { timeout: 15000 });
+         |                ^
+      56 |
+      57 |     // Navegar sin modificar campos
+      58 |     await page.getByRole('link', { name: 'Dashboard' }).click();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-045-unsaved-changes-modal.spec.ts:55:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-045-unsaved-change-31107-tra-modal-si-no-hay-cambios-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-045-unsaved-change-31107-tra-modal-si-no-hay-cambios-chromium-retry1\error-context.md
+
+  140) [chromium] › e2e\tests\flow\UX-046-delete-confirmation-modal.spec.ts:7:7 › UX-046: Modal de confirmacion de eliminacion › UX-046: Muestra modal al clickar Eliminar en menu opciones de producto 
+
+    TimeoutError: page.waitForSelector: Timeout 15000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('h1:has-text("Productos")') to be visible[22m
+
+
+       7 |   test('UX-046: Muestra modal al clickar Eliminar en menu opciones de producto', async ({ page }) => {
+       8 |     await page.goto(`${BASE_URL}/admin/productos`);
+    >  9 |     await page.waitForSelector('h1:has-text("Productos")', { timeout: 15000 });
+         |                ^
+      10 |
+      11 |     // Asegurar vista de tarjetas
+      12 |     const cardViewBtn = page.getByRole('button', { name: 'Vista de tarjetas' });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-046-delete-confirmation-modal.spec.ts:9:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-046-delete-confirm-85aa8-n-menu-opciones-de-producto-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-046-delete-confirm-85aa8-n-menu-opciones-de-producto-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TimeoutError: page.waitForSelector: Timeout 15000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('h1:has-text("Productos")') to be visible[22m
+
+
+       7 |   test('UX-046: Muestra modal al clickar Eliminar en menu opciones de producto', async ({ page }) => {
+       8 |     await page.goto(`${BASE_URL}/admin/productos`);
+    >  9 |     await page.waitForSelector('h1:has-text("Productos")', { timeout: 15000 });
+         |                ^
+      10 |
+      11 |     // Asegurar vista de tarjetas
+      12 |     const cardViewBtn = page.getByRole('button', { name: 'Vista de tarjetas' });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-046-delete-confirmation-modal.spec.ts:9:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-046-delete-confirm-85aa8-n-menu-opciones-de-producto-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-046-delete-confirm-85aa8-n-menu-opciones-de-producto-chromium-retry1\error-context.md
+
+  141) [chromium] › e2e\tests\flow\UX-046-delete-confirmation-modal.spec.ts:31:7 › UX-046: Modal de confirmacion de eliminacion › UX-046: Cancelar cierra modal y mantiene producto 
+
+    TimeoutError: page.waitForSelector: Timeout 15000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('h1:has-text("Productos")') to be visible[22m
+
+
+      31 |   test('UX-046: Cancelar cierra modal y mantiene producto', async ({ page }) => {
+      32 |     await page.goto(`${BASE_URL}/admin/productos`);
+    > 33 |     await page.waitForSelector('h1:has-text("Productos")', { timeout: 15000 });
+         |                ^
+      34 |
+      35 |     // Contar productos antes
+      36 |     const productCountBefore = await page.locator('.admin-product-card').count();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-046-delete-confirmation-modal.spec.ts:33:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-046-delete-confirm-6415b-a-modal-y-mantiene-producto-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-046-delete-confirm-6415b-a-modal-y-mantiene-producto-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TimeoutError: page.waitForSelector: Timeout 15000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('h1:has-text("Productos")') to be visible[22m
+
+
+      31 |   test('UX-046: Cancelar cierra modal y mantiene producto', async ({ page }) => {
+      32 |     await page.goto(`${BASE_URL}/admin/productos`);
+    > 33 |     await page.waitForSelector('h1:has-text("Productos")', { timeout: 15000 });
+         |                ^
+      34 |
+      35 |     // Contar productos antes
+      36 |     const productCountBefore = await page.locator('.admin-product-card').count();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-046-delete-confirmation-modal.spec.ts:33:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-046-delete-confirm-6415b-a-modal-y-mantiene-producto-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-046-delete-confirm-6415b-a-modal-y-mantiene-producto-chromium-retry1\error-context.md
+
+  142) [chromium] › e2e\tests\flow\UX-046-delete-confirmation-modal.spec.ts:54:7 › UX-046: Modal de confirmacion de eliminacion › UX-046: Confirmar eliminacion muestra toast y remueve producto 
+
+    TimeoutError: page.waitForSelector: Timeout 15000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('h1:has-text("Productos")') to be visible[22m
+
+
+      54 |   test('UX-046: Confirmar eliminacion muestra toast y remueve producto', async ({ page }) => {
+      55 |     await page.goto(`${BASE_URL}/admin/productos`);
+    > 56 |     await page.waitForSelector('h1:has-text("Productos")', { timeout: 15000 });
+         |                ^
+      57 |
+      58 |     // Abrir menu y click Eliminar
+      59 |     const firstOptionsBtn = page.getByLabel('Opciones del producto').first();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-046-delete-confirmation-modal.spec.ts:56:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-046-delete-confirm-f8397-ra-toast-y-remueve-producto-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-046-delete-confirm-f8397-ra-toast-y-remueve-producto-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TimeoutError: page.waitForSelector: Timeout 15000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('h1:has-text("Productos")') to be visible[22m
+
+
+      54 |   test('UX-046: Confirmar eliminacion muestra toast y remueve producto', async ({ page }) => {
+      55 |     await page.goto(`${BASE_URL}/admin/productos`);
+    > 56 |     await page.waitForSelector('h1:has-text("Productos")', { timeout: 15000 });
+         |                ^
+      57 |
+      58 |     // Abrir menu y click Eliminar
+      59 |     const firstOptionsBtn = page.getByLabel('Opciones del producto').first();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-046-delete-confirmation-modal.spec.ts:56:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-046-delete-confirm-f8397-ra-toast-y-remueve-producto-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-046-delete-confirm-f8397-ra-toast-y-remueve-producto-chromium-retry1\error-context.md
+
+  143) [chromium] › e2e\tests\flow\UX-047-product-readonly.spec.ts:4:5 › UX-047: Admin product detail shows read-only view with edit link 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: 'Amoxicilina 250ml', level: 1 })
+    Expected: visible
+    Timeout: 15000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 15000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'Amoxicilina 250ml', level: 1 })[22m
+
+
+       6 |
+       7 |   // Wait for the product detail to load
+    >  8 |   await expect(page.getByRole('heading', { name: 'Amoxicilina 250ml', level: 1 })).toBeVisible({ timeout: 15000 });
+         |                                                                                    ^
+       9 |
+      10 |   // Verify read-only content is displayed
+      11 |   await expect(page.getByText('Zoetis')).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-047-product-readonly.spec.ts:8:84
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-047-product-readon-1f26e-ad-only-view-with-edit-link-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-047-product-readon-1f26e-ad-only-view-with-edit-link-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: 'Amoxicilina 250ml', level: 1 })
+    Expected: visible
+    Timeout: 15000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 15000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'Amoxicilina 250ml', level: 1 })[22m
+
+
+       6 |
+       7 |   // Wait for the product detail to load
+    >  8 |   await expect(page.getByRole('heading', { name: 'Amoxicilina 250ml', level: 1 })).toBeVisible({ timeout: 15000 });
+         |                                                                                    ^
+       9 |
+      10 |   // Verify read-only content is displayed
+      11 |   await expect(page.getByText('Zoetis')).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-047-product-readonly.spec.ts:8:84
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-047-product-readon-1f26e-ad-only-view-with-edit-link-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-047-product-readon-1f26e-ad-only-view-with-edit-link-chromium-retry1\error-context.md
+
+  144) [chromium] › e2e\tests\flow\UX-048-brands-listing.spec.ts:4:5 › UX-048: Admin brands listing shows brands with create button 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: 'Marcas', level: 1 })
+    Expected: visible
+    Timeout: 15000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 15000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'Marcas', level: 1 })[22m
+
+
+       6 |
+       7 |   // Wait for the brands listing to load
+    >  8 |   await expect(page.getByRole('heading', { name: 'Marcas', level: 1 })).toBeVisible({ timeout: 15000 });
+         |                                                                         ^
+       9 |
+      10 |   // Verify "Crear marca" button exists
+      11 |   await expect(page.getByRole('link', { name: 'Crear marca' })).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-048-brands-listing.spec.ts:8:73
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-048-brands-listing-8306c-s-brands-with-create-button-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-048-brands-listing-8306c-s-brands-with-create-button-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: 'Marcas', level: 1 })
+    Expected: visible
+    Timeout: 15000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 15000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'Marcas', level: 1 })[22m
+
+
+       6 |
+       7 |   // Wait for the brands listing to load
+    >  8 |   await expect(page.getByRole('heading', { name: 'Marcas', level: 1 })).toBeVisible({ timeout: 15000 });
+         |                                                                         ^
+       9 |
+      10 |   // Verify "Crear marca" button exists
+      11 |   await expect(page.getByRole('link', { name: 'Crear marca' })).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-048-brands-listing.spec.ts:8:73
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-048-brands-listing-8306c-s-brands-with-create-button-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-048-brands-listing-8306c-s-brands-with-create-button-chromium-retry1\error-context.md
+
+  145) [chromium] › e2e\tests\flow\UX-049-brand-form.spec.ts:4:5 › UX-049: Brand creation form shows all fields for creating a brand 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: 'Crear Marca' })
+    Expected: visible
+    Timeout: 15000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 15000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'Crear Marca' })[22m
+
+
+       6 |
+       7 |   // Wait for the form to load
+    >  8 |   await expect(page.getByRole('heading', { name: 'Crear Marca' })).toBeVisible({ timeout: 15000 });
+         |                                                                    ^
+       9 |
+      10 |   // Verify form sections
+      11 |   await expect(page.getByRole('heading', { name: 'Informacion de la Marca' })).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-049-brand-form.spec.ts:8:68
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-049-brand-form-UX--6d43d-fields-for-creating-a-brand-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-049-brand-form-UX--6d43d-fields-for-creating-a-brand-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: 'Crear Marca' })
+    Expected: visible
+    Timeout: 15000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 15000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'Crear Marca' })[22m
+
+
+       6 |
+       7 |   // Wait for the form to load
+    >  8 |   await expect(page.getByRole('heading', { name: 'Crear Marca' })).toBeVisible({ timeout: 15000 });
+         |                                                                    ^
+       9 |
+      10 |   // Verify form sections
+      11 |   await expect(page.getByRole('heading', { name: 'Informacion de la Marca' })).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-049-brand-form.spec.ts:8:68
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-049-brand-form-UX--6d43d-fields-for-creating-a-brand-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-049-brand-form-UX--6d43d-fields-for-creating-a-brand-chromium-retry1\error-context.md
+
+  146) [chromium] › e2e\tests\flow\UX-060-067-mock-data.spec.ts:6:5 › UX-060: Admin products list shows 48 products 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('48')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('48')[22m
+
+
+      11 |
+      12 |   // Dashboard shows 48 productos
+    > 13 |   await expect(page.getByText('48')).toBeVisible();
+         |                                      ^
+      14 |   await expect(page.getByText('Productos').first()).toBeVisible();
+      15 | });
+      16 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-060-067-mock-data.spec.ts:13:38
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-060-067-mock-data--29a1f-ucts-list-shows-48-products-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-060-067-mock-data--29a1f-ucts-list-shows-48-products-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('48')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('48')[22m
+
+
+      11 |
+      12 |   // Dashboard shows 48 productos
+    > 13 |   await expect(page.getByText('48')).toBeVisible();
+         |                                      ^
+      14 |   await expect(page.getByText('Productos').first()).toBeVisible();
+      15 | });
+      16 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-060-067-mock-data.spec.ts:13:38
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-060-067-mock-data--29a1f-ucts-list-shows-48-products-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-060-067-mock-data--29a1f-ucts-list-shows-48-products-chromium-retry1\error-context.md
+
+  147) [chromium] › e2e\tests\flow\UX-060-067-mock-data.spec.ts:17:5 › UX-060: Products span 3 categories with correct counts 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('27 de 28 activos')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('27 de 28 activos')[22m
+
+
+      22 |
+      23 |   // Category breakdown
+    > 24 |   await expect(page.getByText('27 de 28 activos')).toBeVisible(); // Farmacos
+         |                                                    ^
+      25 |   await expect(page.getByText('14 de 14 activos')).toBeVisible(); // Alimentos
+      26 |   await expect(page.getByText('6 de 6 activos')).toBeVisible(); // Equipos
+      27 | });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-060-067-mock-data.spec.ts:24:52
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-060-067-mock-data--ad33e-egories-with-correct-counts-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-060-067-mock-data--ad33e-egories-with-correct-counts-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('27 de 28 activos')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('27 de 28 activos')[22m
+
+
+      22 |
+      23 |   // Category breakdown
+    > 24 |   await expect(page.getByText('27 de 28 activos')).toBeVisible(); // Farmacos
+         |                                                    ^
+      25 |   await expect(page.getByText('14 de 14 activos')).toBeVisible(); // Alimentos
+      26 |   await expect(page.getByText('6 de 6 activos')).toBeVisible(); // Equipos
+      27 | });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-060-067-mock-data.spec.ts:24:52
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-060-067-mock-data--ad33e-egories-with-correct-counts-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-060-067-mock-data--ad33e-egories-with-correct-counts-chromium-retry1\error-context.md
+
+  148) [chromium] › e2e\tests\flow\UX-060-067-mock-data.spec.ts:48:5 › UX-064: Home shows 8 featured brand logos 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Marcas que Distribuimos')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('Marcas que Distribuimos')[22m
+
+
+      52 |   await page.waitForTimeout(2000);
+      53 |
+    > 54 |   await expect(page.getByText('Marcas que Distribuimos')).toBeVisible();
+         |                                                           ^
+      55 |
+      56 |   // Verify at least some brands by their aria labels
+      57 |   const brandItems = page.locator('[aria-label*="Ver productos de"]');
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-060-067-mock-data.spec.ts:54:59
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-060-067-mock-data--c390d-hows-8-featured-brand-logos-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-060-067-mock-data--c390d-hows-8-featured-brand-logos-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Marcas que Distribuimos')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('Marcas que Distribuimos')[22m
+
+
+      52 |   await page.waitForTimeout(2000);
+      53 |
+    > 54 |   await expect(page.getByText('Marcas que Distribuimos')).toBeVisible();
+         |                                                           ^
+      55 |
+      56 |   // Verify at least some brands by their aria labels
+      57 |   const brandItems = page.locator('[aria-label*="Ver productos de"]');
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-060-067-mock-data.spec.ts:54:59
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-060-067-mock-data--c390d-hows-8-featured-brand-logos-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-060-067-mock-data--c390d-hows-8-featured-brand-logos-chromium-retry1\error-context.md
+
+  149) [chromium] › e2e\tests\flow\UX-060-067-mock-data.spec.ts:63:5 › UX-065: Messages kanban has 3 columns with correct counts 
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('link', { name: /Mensajes/i })[22m
+
+
+      68 |
+      69 |   // Navigate to messages
+    > 70 |   await page.getByRole('link', { name: /Mensajes/i }).click();
+         |                                                       ^
+      71 |   await page.waitForTimeout(2000);
+      72 |
+      73 |   // Kanban columns
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-060-067-mock-data.spec.ts:70:55
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-060-067-mock-data--4f6e5-columns-with-correct-counts-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-060-067-mock-data--4f6e5-columns-with-correct-counts-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('link', { name: /Mensajes/i })[22m
+
+
+      68 |
+      69 |   // Navigate to messages
+    > 70 |   await page.getByRole('link', { name: /Mensajes/i }).click();
+         |                                                       ^
+      71 |   await page.waitForTimeout(2000);
+      72 |
+      73 |   // Kanban columns
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-060-067-mock-data.spec.ts:70:55
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-060-067-mock-data--4f6e5-columns-with-correct-counts-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-060-067-mock-data--4f6e5-columns-with-correct-counts-chromium-retry1\error-context.md
+
+  150) [chromium] › e2e\tests\flow\UX-060-067-mock-data.spec.ts:100:5 › UX-067: Dashboard data is coherent (48 products, 3 new messages, 12 brands, 6 featured) 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Dashboard')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('Dashboard')[22m
+
+
+      104 |   await page.waitForTimeout(2000);
+      105 |
+    > 106 |   await expect(page.getByText('Dashboard')).toBeVisible();
+          |                                             ^
+      107 |   await expect(page.getByText('Bienvenido al panel de administracion de HESA')).toBeVisible();
+      108 |
+      109 |   // Summary cards with expected values
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-060-067-mock-data.spec.ts:106:45
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-060-067-mock-data--4348f-sages-12-brands-6-featured--chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-060-067-mock-data--4348f-sages-12-brands-6-featured--chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Dashboard')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('Dashboard')[22m
+
+
+      104 |   await page.waitForTimeout(2000);
+      105 |
+    > 106 |   await expect(page.getByText('Dashboard')).toBeVisible();
+          |                                             ^
+      107 |   await expect(page.getByText('Bienvenido al panel de administracion de HESA')).toBeVisible();
+      108 |
+      109 |   // Summary cards with expected values
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-060-067-mock-data.spec.ts:106:45
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-060-067-mock-data--4348f-sages-12-brands-6-featured--chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-060-067-mock-data--4348f-sages-12-brands-6-featured--chromium-retry1\error-context.md
+
+  151) [chromium] › e2e\tests\flow\UX-068-073-mock-content.spec.ts:31:5 › UX-069: Home shows value proposition stats (37+, 100%, 50+, 20+) 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText(/experiencia/i)
+    Expected: visible
+    Error: strict mode violation: getByText(/experiencia/i) resolved to 2 elements:
+        1) <div class="value-stat__label" _ngcontent-ng-c2387275723="">Anos de experiencia en el sector veterinario</div> aka getByText('Anos de experiencia en el')
+        2) <p class="mfr-cta__desc" _ngcontent-ng-c4263517463="">Con 37 anos de experiencia y cobertura nacional, …</p> aka getByText('Con 37 anos de experiencia y')
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText(/experiencia/i)[22m
+
+
+      36 |
+      37 |   await expect(page.getByText('37+')).toBeVisible();
+    > 38 |   await expect(page.getByText(/experiencia/i)).toBeVisible();
+         |                                                ^
+      39 |   await expect(page.getByText('100%')).toBeVisible();
+      40 |   await expect(page.getByText(/cobertura/i)).toBeVisible();
+      41 |   await expect(page.getByText('50+')).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-068-073-mock-content.spec.ts:38:48
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-068-073-mock-conte-12424-osition-stats-37-100-50-20--chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-068-073-mock-conte-12424-osition-stats-37-100-50-20--chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText(/experiencia/i)
+    Expected: visible
+    Error: strict mode violation: getByText(/experiencia/i) resolved to 2 elements:
+        1) <div class="value-stat__label" _ngcontent-ng-c2387275723="">Anos de experiencia en el sector veterinario</div> aka getByText('Anos de experiencia en el')
+        2) <p class="mfr-cta__desc" _ngcontent-ng-c4263517463="">Con 37 anos de experiencia y cobertura nacional, …</p> aka getByText('Con 37 anos de experiencia y')
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText(/experiencia/i)[22m
+
+
+      36 |
+      37 |   await expect(page.getByText('37+')).toBeVisible();
+    > 38 |   await expect(page.getByText(/experiencia/i)).toBeVisible();
+         |                                                ^
+      39 |   await expect(page.getByText('100%')).toBeVisible();
+      40 |   await expect(page.getByText(/cobertura/i)).toBeVisible();
+      41 |   await expect(page.getByText('50+')).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-068-073-mock-content.spec.ts:38:48
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-068-073-mock-conte-12424-osition-stats-37-100-50-20--chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-068-073-mock-conte-12424-osition-stats-37-100-50-20--chromium-retry1\error-context.md
+
+  152) [chromium] › e2e\tests\flow\UX-068-073-mock-content.spec.ts:48:5 › UX-071: About page has history, numbers, coverage map, and team 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText(/1989/)
+    Expected: visible
+    Error: strict mode violation: getByText(/1989/) resolved to 2 elements:
+        1) <p _ngcontent-ng-c3759542314="" class="about-hero__subtitle">Desde 1989, conectando la industria veterinaria c…</p> aka getByText('Desde 1989, conectando la')
+        2) <p _ngcontent-ng-c3759542314="">HESA nacio en 1989 como una empresa familiar cost…</p> aka getByText('HESA nacio en 1989 como una')
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText(/1989/)[22m
+
+
+      56 |
+      57 |   await expect(page.getByText('Nuestra Historia')).toBeVisible();
+    > 58 |   await expect(page.getByText(/1989/)).toBeVisible();
+         |                                        ^
+      59 |   await expect(page.getByText('HESA en Numeros')).toBeVisible();
+      60 |   await expect(page.getByText('Cobertura Nacional')).toBeVisible();
+      61 |   await expect(page.getByText('Equipo de Liderazgo')).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-068-073-mock-content.spec.ts:58:40
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-068-073-mock-conte-b9dd4-mbers-coverage-map-and-team-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-068-073-mock-conte-b9dd4-mbers-coverage-map-and-team-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText(/1989/)
+    Expected: visible
+    Error: strict mode violation: getByText(/1989/) resolved to 2 elements:
+        1) <p _ngcontent-ng-c3759542314="" class="about-hero__subtitle">Desde 1989, conectando la industria veterinaria c…</p> aka getByText('Desde 1989, conectando la')
+        2) <p _ngcontent-ng-c3759542314="">HESA nacio en 1989 como una empresa familiar cost…</p> aka getByText('HESA nacio en 1989 como una')
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText(/1989/)[22m
+
+
+      56 |
+      57 |   await expect(page.getByText('Nuestra Historia')).toBeVisible();
+    > 58 |   await expect(page.getByText(/1989/)).toBeVisible();
+         |                                        ^
+      59 |   await expect(page.getByText('HESA en Numeros')).toBeVisible();
+      60 |   await expect(page.getByText('Cobertura Nacional')).toBeVisible();
+      61 |   await expect(page.getByText('Equipo de Liderazgo')).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-068-073-mock-content.spec.ts:58:40
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-068-073-mock-conte-b9dd4-mbers-coverage-map-and-team-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-068-073-mock-conte-b9dd4-mbers-coverage-map-and-team-chromium-retry1\error-context.md
+
+  153) [chromium] › e2e\tests\flow\UX-068-073-mock-content.spec.ts:65:5 › UX-072: Distributors page has hero, benefits, timeline, and form 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText(/Distribution Partner/i)
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText(/Distribution Partner/i)[22m
+
+
+      70 |
+      71 |   // Hero exists
+    > 72 |   await expect(page.getByText(/Distribution Partner/i)).toBeVisible();
+         |                                                         ^
+      73 |
+      74 |   // Benefits section
+      75 |   await expect(page.getByText(/Why Choose HESA/i)).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-068-073-mock-content.spec.ts:72:57
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-068-073-mock-conte-2f438--benefits-timeline-and-form-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-068-073-mock-conte-2f438--benefits-timeline-and-form-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText(/Distribution Partner/i)
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText(/Distribution Partner/i)[22m
+
+
+      70 |
+      71 |   // Hero exists
+    > 72 |   await expect(page.getByText(/Distribution Partner/i)).toBeVisible();
+         |                                                         ^
+      73 |
+      74 |   // Benefits section
+      75 |   await expect(page.getByText(/Why Choose HESA/i)).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-068-073-mock-content.spec.ts:72:57
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-068-073-mock-conte-2f438--benefits-timeline-and-form-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-068-073-mock-conte-2f438--benefits-timeline-and-form-chromium-retry1\error-context.md
+
+  154) [chromium] › e2e\tests\flow\UX-070-admin-categorias.spec.ts:8:7 › UX-070: Admin categorias panel › 3 categorias con subcategorias visibles 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: 'Categorias y Filtros', level: 1 })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'Categorias y Filtros', level: 1 })[22m
+
+
+       8 |   test('3 categorias con subcategorias visibles', async ({ page }) => {
+       9 |     await page.goto(`${BASE}/admin/categorias`);
+    > 10 |     await expect(page.getByRole('heading', { name: 'Categorias y Filtros', level: 1 })).toBeVisible({ timeout: 10000 });
+         |                                                                                         ^
+      11 |     // 3 categories
+      12 |     await expect(page.getByText('Farmacos Veterinarios')).toBeVisible();
+      13 |     await expect(page.getByText('Alimentos para Animales')).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-070-admin-categorias.spec.ts:10:89
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-070-admin-categori-a5bf9--con-subcategorias-visibles-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-070-admin-categori-a5bf9--con-subcategorias-visibles-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: 'Categorias y Filtros', level: 1 })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'Categorias y Filtros', level: 1 })[22m
+
+
+       8 |   test('3 categorias con subcategorias visibles', async ({ page }) => {
+       9 |     await page.goto(`${BASE}/admin/categorias`);
+    > 10 |     await expect(page.getByRole('heading', { name: 'Categorias y Filtros', level: 1 })).toBeVisible({ timeout: 10000 });
+         |                                                                                         ^
+      11 |     // 3 categories
+      12 |     await expect(page.getByText('Farmacos Veterinarios')).toBeVisible();
+      13 |     await expect(page.getByText('Alimentos para Animales')).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-070-admin-categorias.spec.ts:10:89
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-070-admin-categori-a5bf9--con-subcategorias-visibles-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-070-admin-categori-a5bf9--con-subcategorias-visibles-chromium-retry1\error-context.md
+
+  155) [chromium] › e2e\tests\flow\UX-070-admin-categorias.spec.ts:17:7 › UX-070: Admin categorias panel › farmacos has familia and especie tags 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Categorias y Filtros')
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByText('Categorias y Filtros')[22m
+
+
+      17 |   test('farmacos has familia and especie tags', async ({ page }) => {
+      18 |     await page.goto(`${BASE}/admin/categorias`);
+    > 19 |     await expect(page.getByText('Categorias y Filtros')).toBeVisible({ timeout: 10000 });
+         |                                                          ^
+      20 |     // Familia farmaceutica tags
+      21 |     await expect(page.getByText('Antibioticos')).toBeVisible();
+      22 |     await expect(page.getByText('Desparasitantes')).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-070-admin-categorias.spec.ts:19:58
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-070-admin-categori-dfbb2-as-familia-and-especie-tags-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-070-admin-categori-dfbb2-as-familia-and-especie-tags-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Categorias y Filtros')
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByText('Categorias y Filtros')[22m
+
+
+      17 |   test('farmacos has familia and especie tags', async ({ page }) => {
+      18 |     await page.goto(`${BASE}/admin/categorias`);
+    > 19 |     await expect(page.getByText('Categorias y Filtros')).toBeVisible({ timeout: 10000 });
+         |                                                          ^
+      20 |     // Familia farmaceutica tags
+      21 |     await expect(page.getByText('Antibioticos')).toBeVisible();
+      22 |     await expect(page.getByText('Desparasitantes')).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-070-admin-categorias.spec.ts:19:58
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-070-admin-categori-dfbb2-as-familia-and-especie-tags-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-070-admin-categori-dfbb2-as-familia-and-especie-tags-chromium-retry1\error-context.md
+
+  156) [chromium] › e2e\tests\flow\UX-070-admin-categorias.spec.ts:32:7 › UX-070: Admin categorias panel › alimentos has etapa de vida tags 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Categorias y Filtros')
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByText('Categorias y Filtros')[22m
+
+
+      32 |   test('alimentos has etapa de vida tags', async ({ page }) => {
+      33 |     await page.goto(`${BASE}/admin/categorias`);
+    > 34 |     await expect(page.getByText('Categorias y Filtros')).toBeVisible({ timeout: 10000 });
+         |                                                          ^
+      35 |     await expect(page.getByText('Cachorro/Kitten')).toBeVisible();
+      36 |     await expect(page.getByText('Adulto')).toBeVisible();
+      37 |     await expect(page.getByText('Senior')).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-070-admin-categorias.spec.ts:34:58
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-070-admin-categori-237b2-ntos-has-etapa-de-vida-tags-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-070-admin-categori-237b2-ntos-has-etapa-de-vida-tags-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Categorias y Filtros')
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByText('Categorias y Filtros')[22m
+
+
+      32 |   test('alimentos has etapa de vida tags', async ({ page }) => {
+      33 |     await page.goto(`${BASE}/admin/categorias`);
+    > 34 |     await expect(page.getByText('Categorias y Filtros')).toBeVisible({ timeout: 10000 });
+         |                                                          ^
+      35 |     await expect(page.getByText('Cachorro/Kitten')).toBeVisible();
+      36 |     await expect(page.getByText('Adulto')).toBeVisible();
+      37 |     await expect(page.getByText('Senior')).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-070-admin-categorias.spec.ts:34:58
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-070-admin-categori-237b2-ntos-has-etapa-de-vida-tags-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-070-admin-categori-237b2-ntos-has-etapa-de-vida-tags-chromium-retry1\error-context.md
+
+  157) [chromium] › e2e\tests\flow\UX-070-admin-categorias.spec.ts:40:7 › UX-070: Admin categorias panel › equipos has tipo tags 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Categorias y Filtros')
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByText('Categorias y Filtros')[22m
+
+
+      40 |   test('equipos has tipo tags', async ({ page }) => {
+      41 |     await page.goto(`${BASE}/admin/categorias`);
+    > 42 |     await expect(page.getByText('Categorias y Filtros')).toBeVisible({ timeout: 10000 });
+         |                                                          ^
+      43 |     await expect(page.getByText('Diagnostico')).toBeVisible();
+      44 |     await expect(page.getByText('Quirurgico')).toBeVisible();
+      45 |     await expect(page.getByText('Laboratorio')).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-070-admin-categorias.spec.ts:42:58
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-070-admin-categori-f44bb-panel-equipos-has-tipo-tags-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-070-admin-categori-f44bb-panel-equipos-has-tipo-tags-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Categorias y Filtros')
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByText('Categorias y Filtros')[22m
+
+
+      40 |   test('equipos has tipo tags', async ({ page }) => {
+      41 |     await page.goto(`${BASE}/admin/categorias`);
+    > 42 |     await expect(page.getByText('Categorias y Filtros')).toBeVisible({ timeout: 10000 });
+         |                                                          ^
+      43 |     await expect(page.getByText('Diagnostico')).toBeVisible();
+      44 |     await expect(page.getByText('Quirurgico')).toBeVisible();
+      45 |     await expect(page.getByText('Laboratorio')).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-070-admin-categorias.spec.ts:42:58
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-070-admin-categori-f44bb-panel-equipos-has-tipo-tags-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-070-admin-categori-f44bb-panel-equipos-has-tipo-tags-chromium-retry1\error-context.md
+
+  158) [chromium] › e2e\tests\flow\UX-070-admin-categorias.spec.ts:49:7 › UX-070: Admin categorias panel › tags have remove buttons (editable) 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Categorias y Filtros')
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByText('Categorias y Filtros')[22m
+
+
+      49 |   test('tags have remove buttons (editable)', async ({ page }) => {
+      50 |     await page.goto(`${BASE}/admin/categorias`);
+    > 51 |     await expect(page.getByText('Categorias y Filtros')).toBeVisible({ timeout: 10000 });
+         |                                                          ^
+      52 |     // Each tag should have an "x" remove button
+      53 |     const removeButtons = page.getByRole('button', { name: /Remover|×/ });
+      54 |     await expect(removeButtons.first()).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-070-admin-categorias.spec.ts:51:58
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-070-admin-categori-1cee6-ve-remove-buttons-editable--chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-070-admin-categori-1cee6-ve-remove-buttons-editable--chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Categorias y Filtros')
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByText('Categorias y Filtros')[22m
+
+
+      49 |   test('tags have remove buttons (editable)', async ({ page }) => {
+      50 |     await page.goto(`${BASE}/admin/categorias`);
+    > 51 |     await expect(page.getByText('Categorias y Filtros')).toBeVisible({ timeout: 10000 });
+         |                                                          ^
+      52 |     // Each tag should have an "x" remove button
+      53 |     const removeButtons = page.getByRole('button', { name: /Remover|×/ });
+      54 |     await expect(removeButtons.first()).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-070-admin-categorias.spec.ts:51:58
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-070-admin-categori-1cee6-ve-remove-buttons-editable--chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-070-admin-categori-1cee6-ve-remove-buttons-editable--chromium-retry1\error-context.md
+
+  159) [chromium] › e2e\tests\flow\UX-104-formulario-marca.spec.ts:7:7 › UX-104: Formulario de marca › UX-104: Formulario crear marca tiene todos los campos requeridos 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Nombre')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('Nombre')[22m
+
+
+      10 |
+      11 |     // Verificar campos del formulario
+    > 12 |     await expect(page.getByText('Nombre')).toBeVisible();
+         |                                            ^
+      13 |     await expect(page.getByText(/Pais/i)).toBeVisible();
+      14 |     await expect(page.getByText(/Categor/i)).toBeVisible();
+      15 |     await expect(page.getByText(/Descripcion/i)).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-104-formulario-marca.spec.ts:12:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-104-formulario-mar-88c02-todos-los-campos-requeridos-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-104-formulario-mar-88c02-todos-los-campos-requeridos-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Nombre')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('Nombre')[22m
+
+
+      10 |
+      11 |     // Verificar campos del formulario
+    > 12 |     await expect(page.getByText('Nombre')).toBeVisible();
+         |                                            ^
+      13 |     await expect(page.getByText(/Pais/i)).toBeVisible();
+      14 |     await expect(page.getByText(/Categor/i)).toBeVisible();
+      15 |     await expect(page.getByText(/Descripcion/i)).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-104-formulario-marca.spec.ts:12:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-104-formulario-mar-88c02-todos-los-campos-requeridos-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-104-formulario-mar-88c02-todos-los-campos-requeridos-chromium-retry1\error-context.md
+
+  160) [chromium] › e2e\tests\flow\UX-104-formulario-marca.spec.ts:18:7 › UX-104: Formulario de marca › UX-104: Lista de marcas muestra todas las marcas 
+
+    TimeoutError: page.waitForSelector: Timeout 15000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('h1:has-text("Marcas")') to be visible[22m
+
+
+      18 |   test('UX-104: Lista de marcas muestra todas las marcas', async ({ page }) => {
+      19 |     await page.goto(`${BASE_URL}/admin/marcas`);
+    > 20 |     await page.waitForSelector('h1:has-text("Marcas")', { timeout: 15000 });
+         |                ^
+      21 |
+      22 |     // Verificar que se muestran marcas
+      23 |     await expect(page.getByText('Zoetis')).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-104-formulario-marca.spec.ts:20:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-104-formulario-mar-d329a-as-muestra-todas-las-marcas-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-104-formulario-mar-d329a-as-muestra-todas-las-marcas-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TimeoutError: page.waitForSelector: Timeout 15000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('h1:has-text("Marcas")') to be visible[22m
+
+
+      18 |   test('UX-104: Lista de marcas muestra todas las marcas', async ({ page }) => {
+      19 |     await page.goto(`${BASE_URL}/admin/marcas`);
+    > 20 |     await page.waitForSelector('h1:has-text("Marcas")', { timeout: 15000 });
+         |                ^
+      21 |
+      22 |     // Verificar que se muestran marcas
+      23 |     await expect(page.getByText('Zoetis')).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-104-formulario-marca.spec.ts:20:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-104-formulario-mar-d329a-as-muestra-todas-las-marcas-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-104-formulario-mar-d329a-as-muestra-todas-las-marcas-chromium-retry1\error-context.md
+
+  161) [chromium] › e2e\tests\flow\UX-109-kanban-drag-drop.spec.ts:7:7 › UX-109: Kanban drag-and-drop mensajes › UX-109: Vista kanban muestra 3 columnas con conteos 
+
+    TimeoutError: page.waitForSelector: Timeout 15000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('h1:has-text("Mensajes")') to be visible[22m
+
+
+       7 |   test('UX-109: Vista kanban muestra 3 columnas con conteos', async ({ page }) => {
+       8 |     await page.goto(`${BASE_URL}/admin/mensajes`);
+    >  9 |     await page.waitForSelector('h1:has-text("Mensajes")', { timeout: 15000 });
+         |                ^
+      10 |
+      11 |     // Verificar 3 columnas kanban
+      12 |     await expect(page.getByText('NUEVOS')).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-109-kanban-drag-drop.spec.ts:9:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-109-kanban-drag-dr-e4534-stra-3-columnas-con-conteos-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-109-kanban-drag-dr-e4534-stra-3-columnas-con-conteos-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TimeoutError: page.waitForSelector: Timeout 15000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('h1:has-text("Mensajes")') to be visible[22m
+
+
+       7 |   test('UX-109: Vista kanban muestra 3 columnas con conteos', async ({ page }) => {
+       8 |     await page.goto(`${BASE_URL}/admin/mensajes`);
+    >  9 |     await page.waitForSelector('h1:has-text("Mensajes")', { timeout: 15000 });
+         |                ^
+      10 |
+      11 |     // Verificar 3 columnas kanban
+      12 |     await expect(page.getByText('NUEVOS')).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-109-kanban-drag-drop.spec.ts:9:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-109-kanban-drag-dr-e4534-stra-3-columnas-con-conteos-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-109-kanban-drag-dr-e4534-stra-3-columnas-con-conteos-chromium-retry1\error-context.md
+
+  162) [chromium] › e2e\tests\flow\UX-109-kanban-drag-drop.spec.ts:21:7 › UX-109: Kanban drag-and-drop mensajes › UX-109: Cards de mensajes muestran badge tipo, nombre y preview 
+
+    TimeoutError: page.waitForSelector: Timeout 15000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('h1:has-text("Mensajes")') to be visible[22m
+
+
+      21 |   test('UX-109: Cards de mensajes muestran badge tipo, nombre y preview', async ({ page }) => {
+      22 |     await page.goto(`${BASE_URL}/admin/mensajes`);
+    > 23 |     await page.waitForSelector('h1:has-text("Mensajes")', { timeout: 15000 });
+         |                ^
+      24 |
+      25 |     // Verificar primera card en columna NUEVOS
+      26 |     await expect(page.getByText('Dr. Roberto Campos')).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-109-kanban-drag-drop.spec.ts:23:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-109-kanban-drag-dr-663d6-badge-tipo-nombre-y-preview-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-109-kanban-drag-dr-663d6-badge-tipo-nombre-y-preview-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TimeoutError: page.waitForSelector: Timeout 15000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('h1:has-text("Mensajes")') to be visible[22m
+
+
+      21 |   test('UX-109: Cards de mensajes muestran badge tipo, nombre y preview', async ({ page }) => {
+      22 |     await page.goto(`${BASE_URL}/admin/mensajes`);
+    > 23 |     await page.waitForSelector('h1:has-text("Mensajes")', { timeout: 15000 });
+         |                ^
+      24 |
+      25 |     // Verificar primera card en columna NUEVOS
+      26 |     await expect(page.getByText('Dr. Roberto Campos')).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-109-kanban-drag-drop.spec.ts:23:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-109-kanban-drag-dr-663d6-badge-tipo-nombre-y-preview-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-109-kanban-drag-dr-663d6-badge-tipo-nombre-y-preview-chromium-retry1\error-context.md
+
+  163) [chromium] › e2e\tests\flow\UX-109-kanban-drag-drop.spec.ts:32:7 › UX-109: Kanban drag-and-drop mensajes › UX-109: Cards son clickeables y llevan al detalle 
+
+    TimeoutError: page.waitForSelector: Timeout 15000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('h1:has-text("Mensajes")') to be visible[22m
+
+
+      32 |   test('UX-109: Cards son clickeables y llevan al detalle', async ({ page }) => {
+      33 |     await page.goto(`${BASE_URL}/admin/mensajes`);
+    > 34 |     await page.waitForSelector('h1:has-text("Mensajes")', { timeout: 15000 });
+         |                ^
+      35 |
+      36 |     // Click en primera card
+      37 |     await page.getByText('Dr. Roberto Campos').click();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-109-kanban-drag-drop.spec.ts:34:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-109-kanban-drag-dr-eed7c-keables-y-llevan-al-detalle-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-109-kanban-drag-dr-eed7c-keables-y-llevan-al-detalle-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TimeoutError: page.waitForSelector: Timeout 15000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('h1:has-text("Mensajes")') to be visible[22m
+
+
+      32 |   test('UX-109: Cards son clickeables y llevan al detalle', async ({ page }) => {
+      33 |     await page.goto(`${BASE_URL}/admin/mensajes`);
+    > 34 |     await page.waitForSelector('h1:has-text("Mensajes")', { timeout: 15000 });
+         |                ^
+      35 |
+      36 |     // Click en primera card
+      37 |     await page.getByText('Dr. Roberto Campos').click();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-109-kanban-drag-drop.spec.ts:34:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-109-kanban-drag-dr-eed7c-keables-y-llevan-al-detalle-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-109-kanban-drag-dr-eed7c-keables-y-llevan-al-detalle-chromium-retry1\error-context.md
+
+  164) [chromium] › e2e\tests\flow\UX-110-mensajes-toggle-kanban-tabla.spec.ts:7:7 › UX-110: Toggle Kanban/Tabla en mensajes › UX-110: Botones de toggle Kanban y Tabla presentes 
+
+    TimeoutError: page.waitForSelector: Timeout 15000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('h1:has-text("Mensajes")') to be visible[22m
+
+
+       7 |   test('UX-110: Botones de toggle Kanban y Tabla presentes', async ({ page }) => {
+       8 |     await page.goto(`${BASE_URL}/admin/mensajes`);
+    >  9 |     await page.waitForSelector('h1:has-text("Mensajes")', { timeout: 15000 });
+         |                ^
+      10 |
+      11 |     await expect(page.getByRole('button', { name: 'Vista Kanban' })).toBeVisible();
+      12 |     await expect(page.getByRole('button', { name: 'Vista Tabla' })).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-110-mensajes-toggle-kanban-tabla.spec.ts:9:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-110-mensajes-toggl-03224-le-Kanban-y-Tabla-presentes-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-110-mensajes-toggl-03224-le-Kanban-y-Tabla-presentes-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TimeoutError: page.waitForSelector: Timeout 15000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('h1:has-text("Mensajes")') to be visible[22m
+
+
+       7 |   test('UX-110: Botones de toggle Kanban y Tabla presentes', async ({ page }) => {
+       8 |     await page.goto(`${BASE_URL}/admin/mensajes`);
+    >  9 |     await page.waitForSelector('h1:has-text("Mensajes")', { timeout: 15000 });
+         |                ^
+      10 |
+      11 |     await expect(page.getByRole('button', { name: 'Vista Kanban' })).toBeVisible();
+      12 |     await expect(page.getByRole('button', { name: 'Vista Tabla' })).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-110-mensajes-toggle-kanban-tabla.spec.ts:9:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-110-mensajes-toggl-03224-le-Kanban-y-Tabla-presentes-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-110-mensajes-toggl-03224-le-Kanban-y-Tabla-presentes-chromium-retry1\error-context.md
+
+  165) [chromium] › e2e\tests\flow\UX-110-mensajes-toggle-kanban-tabla.spec.ts:15:7 › UX-110: Toggle Kanban/Tabla en mensajes › UX-110: Vista Kanban muestra columnas con cards 
+
+    TimeoutError: page.waitForSelector: Timeout 15000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('h1:has-text("Mensajes")') to be visible[22m
+
+
+      15 |   test('UX-110: Vista Kanban muestra columnas con cards', async ({ page }) => {
+      16 |     await page.goto(`${BASE_URL}/admin/mensajes`);
+    > 17 |     await page.waitForSelector('h1:has-text("Mensajes")', { timeout: 15000 });
+         |                ^
+      18 |
+      19 |     // En vista kanban deben verse las 3 columnas
+      20 |     await expect(page.getByText('NUEVOS')).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-110-mensajes-toggle-kanban-tabla.spec.ts:17:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-110-mensajes-toggl-e9fcd--muestra-columnas-con-cards-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-110-mensajes-toggl-e9fcd--muestra-columnas-con-cards-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TimeoutError: page.waitForSelector: Timeout 15000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('h1:has-text("Mensajes")') to be visible[22m
+
+
+      15 |   test('UX-110: Vista Kanban muestra columnas con cards', async ({ page }) => {
+      16 |     await page.goto(`${BASE_URL}/admin/mensajes`);
+    > 17 |     await page.waitForSelector('h1:has-text("Mensajes")', { timeout: 15000 });
+         |                ^
+      18 |
+      19 |     // En vista kanban deben verse las 3 columnas
+      20 |     await expect(page.getByText('NUEVOS')).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-110-mensajes-toggle-kanban-tabla.spec.ts:17:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-110-mensajes-toggl-e9fcd--muestra-columnas-con-cards-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-110-mensajes-toggl-e9fcd--muestra-columnas-con-cards-chromium-retry1\error-context.md
+
+  166) [chromium] › e2e\tests\flow\UX-110-mensajes-toggle-kanban-tabla.spec.ts:25:7 › UX-110: Toggle Kanban/Tabla en mensajes › UX-110: Toggle a vista Tabla muestra tabla con datos 
+
+    TimeoutError: page.waitForSelector: Timeout 15000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('h1:has-text("Mensajes")') to be visible[22m
+
+
+      25 |   test('UX-110: Toggle a vista Tabla muestra tabla con datos', async ({ page }) => {
+      26 |     await page.goto(`${BASE_URL}/admin/mensajes`);
+    > 27 |     await page.waitForSelector('h1:has-text("Mensajes")', { timeout: 15000 });
+         |                ^
+      28 |
+      29 |     // Click en Vista Tabla
+      30 |     await page.getByRole('button', { name: 'Vista Tabla' }).click();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-110-mensajes-toggle-kanban-tabla.spec.ts:27:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-110-mensajes-toggl-158cb-bla-muestra-tabla-con-datos-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-110-mensajes-toggl-158cb-bla-muestra-tabla-con-datos-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TimeoutError: page.waitForSelector: Timeout 15000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('h1:has-text("Mensajes")') to be visible[22m
+
+
+      25 |   test('UX-110: Toggle a vista Tabla muestra tabla con datos', async ({ page }) => {
+      26 |     await page.goto(`${BASE_URL}/admin/mensajes`);
+    > 27 |     await page.waitForSelector('h1:has-text("Mensajes")', { timeout: 15000 });
+         |                ^
+      28 |
+      29 |     // Click en Vista Tabla
+      30 |     await page.getByRole('button', { name: 'Vista Tabla' }).click();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-110-mensajes-toggle-kanban-tabla.spec.ts:27:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-110-mensajes-toggl-158cb-bla-muestra-tabla-con-datos-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-110-mensajes-toggl-158cb-bla-muestra-tabla-con-datos-chromium-retry1\error-context.md
+
+  167) [chromium] › e2e\tests\flow\UX-111-detalle-mensaje.spec.ts:7:7 › UX-111: Detalle de mensaje › UX-111: Muestra datos de contacto completos 
+
+    TimeoutError: page.waitForSelector: Timeout 15000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('text=Datos de Contacto') to be visible[22m
+
+
+       7 |   test('UX-111: Muestra datos de contacto completos', async ({ page }) => {
+       8 |     await page.goto(`${BASE_URL}/admin/mensajes/m1`);
+    >  9 |     await page.waitForSelector('text=Datos de Contacto', { timeout: 15000 });
+         |                ^
+      10 |
+      11 |     // Verificar datos de contacto
+      12 |     await expect(page.getByText('Datos de Contacto')).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-111-detalle-mensaje.spec.ts:9:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-111-detalle-mensaj-4538e-datos-de-contacto-completos-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-111-detalle-mensaj-4538e-datos-de-contacto-completos-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TimeoutError: page.waitForSelector: Timeout 15000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('text=Datos de Contacto') to be visible[22m
+
+
+       7 |   test('UX-111: Muestra datos de contacto completos', async ({ page }) => {
+       8 |     await page.goto(`${BASE_URL}/admin/mensajes/m1`);
+    >  9 |     await page.waitForSelector('text=Datos de Contacto', { timeout: 15000 });
+         |                ^
+      10 |
+      11 |     // Verificar datos de contacto
+      12 |     await expect(page.getByText('Datos de Contacto')).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-111-detalle-mensaje.spec.ts:9:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-111-detalle-mensaj-4538e-datos-de-contacto-completos-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-111-detalle-mensaj-4538e-datos-de-contacto-completos-chromium-retry1\error-context.md
+
+  168) [chromium] › e2e\tests\flow\UX-111-detalle-mensaje.spec.ts:24:7 › UX-111: Detalle de mensaje › UX-111: Notas internas con textarea y boton guardar 
+
+    TimeoutError: page.waitForSelector: Timeout 15000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('text=Notas internas') to be visible[22m
+
+
+      24 |   test('UX-111: Notas internas con textarea y boton guardar', async ({ page }) => {
+      25 |     await page.goto(`${BASE_URL}/admin/mensajes/m1`);
+    > 26 |     await page.waitForSelector('text=Notas internas', { timeout: 15000 });
+         |                ^
+      27 |
+      28 |     // Verificar seccion notas internas
+      29 |     await expect(page.getByText('Notas internas')).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-111-detalle-mensaje.spec.ts:26:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-111-detalle-mensaj-8af8a-on-textarea-y-boton-guardar-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-111-detalle-mensaj-8af8a-on-textarea-y-boton-guardar-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TimeoutError: page.waitForSelector: Timeout 15000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('text=Notas internas') to be visible[22m
+
+
+      24 |   test('UX-111: Notas internas con textarea y boton guardar', async ({ page }) => {
+      25 |     await page.goto(`${BASE_URL}/admin/mensajes/m1`);
+    > 26 |     await page.waitForSelector('text=Notas internas', { timeout: 15000 });
+         |                ^
+      27 |
+      28 |     // Verificar seccion notas internas
+      29 |     await expect(page.getByText('Notas internas')).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-111-detalle-mensaje.spec.ts:26:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-111-detalle-mensaj-8af8a-on-textarea-y-boton-guardar-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-111-detalle-mensaj-8af8a-on-textarea-y-boton-guardar-chromium-retry1\error-context.md
+
+  169) [chromium] › e2e\tests\flow\UX-111-detalle-mensaje.spec.ts:34:7 › UX-111: Detalle de mensaje › UX-111: Dropdown de estado con opciones 
+
+    TimeoutError: page.waitForSelector: Timeout 15000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('text=Estado') to be visible[22m
+
+
+      34 |   test('UX-111: Dropdown de estado con opciones', async ({ page }) => {
+      35 |     await page.goto(`${BASE_URL}/admin/mensajes/m1`);
+    > 36 |     await page.waitForSelector('text=Estado', { timeout: 15000 });
+         |                ^
+      37 |
+      38 |     // Verificar dropdown de estado
+      39 |     const statusSelect = page.getByRole('combobox');
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-111-detalle-mensaje.spec.ts:36:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-111-detalle-mensaj-c0730-down-de-estado-con-opciones-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-111-detalle-mensaj-c0730-down-de-estado-con-opciones-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TimeoutError: page.waitForSelector: Timeout 15000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('text=Estado') to be visible[22m
+
+
+      34 |   test('UX-111: Dropdown de estado con opciones', async ({ page }) => {
+      35 |     await page.goto(`${BASE_URL}/admin/mensajes/m1`);
+    > 36 |     await page.waitForSelector('text=Estado', { timeout: 15000 });
+         |                ^
+      37 |
+      38 |     // Verificar dropdown de estado
+      39 |     const statusSelect = page.getByRole('combobox');
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-111-detalle-mensaje.spec.ts:36:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-111-detalle-mensaj-c0730-down-de-estado-con-opciones-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-111-detalle-mensaj-c0730-down-de-estado-con-opciones-chromium-retry1\error-context.md
+
+  170) [chromium] › e2e\tests\flow\UX-111-detalle-mensaje.spec.ts:46:7 › UX-111: Detalle de mensaje › UX-111: Botones de accion presentes 
+
+    TimeoutError: page.waitForSelector: Timeout 15000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('text=Datos de Contacto') to be visible[22m
+
+
+      46 |   test('UX-111: Botones de accion presentes', async ({ page }) => {
+      47 |     await page.goto(`${BASE_URL}/admin/mensajes/m1`);
+    > 48 |     await page.waitForSelector('text=Datos de Contacto', { timeout: 15000 });
+         |                ^
+      49 |
+      50 |     // Verificar botones de accion
+      51 |     await expect(page.getByRole('button', { name: 'Marcar como atendido' })).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-111-detalle-mensaje.spec.ts:48:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-111-detalle-mensaj-84ec2-Botones-de-accion-presentes-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-111-detalle-mensaj-84ec2-Botones-de-accion-presentes-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TimeoutError: page.waitForSelector: Timeout 15000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('text=Datos de Contacto') to be visible[22m
+
+
+      46 |   test('UX-111: Botones de accion presentes', async ({ page }) => {
+      47 |     await page.goto(`${BASE_URL}/admin/mensajes/m1`);
+    > 48 |     await page.waitForSelector('text=Datos de Contacto', { timeout: 15000 });
+         |                ^
+      49 |
+      50 |     // Verificar botones de accion
+      51 |     await expect(page.getByRole('button', { name: 'Marcar como atendido' })).toBeVisible();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-111-detalle-mensaje.spec.ts:48:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-111-detalle-mensaj-84ec2-Botones-de-accion-presentes-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-111-detalle-mensaj-84ec2-Botones-de-accion-presentes-chromium-retry1\error-context.md
+
+  171) [chromium] › e2e\tests\flow\UX-111-detalle-mensaje.spec.ts:55:7 › UX-111: Detalle de mensaje › UX-111: Link "Volver a mensajes" presente 
+
+    TimeoutError: page.waitForSelector: Timeout 15000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('text=Datos de Contacto') to be visible[22m
+
+
+      55 |   test('UX-111: Link "Volver a mensajes" presente', async ({ page }) => {
+      56 |     await page.goto(`${BASE_URL}/admin/mensajes/m1`);
+    > 57 |     await page.waitForSelector('text=Datos de Contacto', { timeout: 15000 });
+         |                ^
+      58 |
+      59 |     await expect(page.getByRole('link', { name: /Volver a mensajes/ })).toBeVisible();
+      60 |     await expect(page.getByRole('link', { name: /Volver a mensajes/ })).toHaveAttribute('href', '/admin/mensajes');
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-111-detalle-mensaje.spec.ts:57:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-111-detalle-mensaj-d5032--Volver-a-mensajes-presente-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-111-detalle-mensaj-d5032--Volver-a-mensajes-presente-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TimeoutError: page.waitForSelector: Timeout 15000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('text=Datos de Contacto') to be visible[22m
+
+
+      55 |   test('UX-111: Link "Volver a mensajes" presente', async ({ page }) => {
+      56 |     await page.goto(`${BASE_URL}/admin/mensajes/m1`);
+    > 57 |     await page.waitForSelector('text=Datos de Contacto', { timeout: 15000 });
+         |                ^
+      58 |
+      59 |     await expect(page.getByRole('link', { name: /Volver a mensajes/ })).toBeVisible();
+      60 |     await expect(page.getByRole('link', { name: /Volver a mensajes/ })).toHaveAttribute('href', '/admin/mensajes');
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\flow\UX-111-detalle-mensaje.spec.ts:57:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\flow-UX-111-detalle-mensaj-d5032--Volver-a-mensajes-presente-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\flow-UX-111-detalle-mensaj-d5032--Volver-a-mensajes-presente-chromium-retry1\error-context.md
+
+  172) [chromium] › e2e\tests\visual\BVC-013-form-sections.spec.ts:6:7 › BVC-013: Formularios con secciones claras › formulario crear producto tiene secciones con subtitulos Bold y separadores 
+
+    TimeoutError: page.waitForSelector: Timeout 5000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('.admin__sidebar') to be visible[22m
+
+
+       6 |   test('formulario crear producto tiene secciones con subtitulos Bold y separadores', async ({ page }) => {
+       7 |     await page.goto(`${BASE}/admin/productos/crear`);
+    >  8 |     await page.waitForSelector('.admin__sidebar', { timeout: 5000 });
+         |                ^
+       9 |
+      10 |     const sectionInfo = await page.evaluate(() => {
+      11 |       const headings = Array.from(document.querySelectorAll('h2, h3, [class*="section-title"], strong'));
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\visual\BVC-013-form-sections.spec.ts:8:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\visual-BVC-013-form-sectio-94efc-btitulos-Bold-y-separadores-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\visual-BVC-013-form-sectio-94efc-btitulos-Bold-y-separadores-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TimeoutError: page.waitForSelector: Timeout 5000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('.admin__sidebar') to be visible[22m
+
+
+       6 |   test('formulario crear producto tiene secciones con subtitulos Bold y separadores', async ({ page }) => {
+       7 |     await page.goto(`${BASE}/admin/productos/crear`);
+    >  8 |     await page.waitForSelector('.admin__sidebar', { timeout: 5000 });
+         |                ^
+       9 |
+      10 |     const sectionInfo = await page.evaluate(() => {
+      11 |       const headings = Array.from(document.querySelectorAll('h2, h3, [class*="section-title"], strong'));
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\visual\BVC-013-form-sections.spec.ts:8:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\visual-BVC-013-form-sectio-94efc-btitulos-Bold-y-separadores-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\visual-BVC-013-form-sectio-94efc-btitulos-Bold-y-separadores-chromium-retry1\error-context.md
+
+  173) [chromium] › e2e\tests\visual\BVC-014-021-parcial.spec.ts:29:7 › BVC-021: Flujo Listado > Crear > Detalle › BVC-021: Navigation flow from list to create 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('h1').filter({ hasText: /productos/i })
+    Expected: visible
+    Timeout: 15000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 15000ms[22m
+    [2m  - waiting for locator('h1').filter({ hasText: /productos/i })[22m
+
+
+      33 |     // Should see product listing
+      34 |     const heading = page.locator('h1').filter({ hasText: /productos/i });
+    > 35 |     await expect(heading).toBeVisible({ timeout: 15000 });
+         |                           ^
+      36 |
+      37 |     // Should have "Crear producto" button
+      38 |     const createBtn = page.locator('a, button').filter({ hasText: /crear producto|new product/i });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\visual\BVC-014-021-parcial.spec.ts:35:27
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\visual-BVC-014-021-parcial-f17b7-on-flow-from-list-to-create-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\visual-BVC-014-021-parcial-f17b7-on-flow-from-list-to-create-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('h1').filter({ hasText: /productos/i })
+    Expected: visible
+    Timeout: 15000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 15000ms[22m
+    [2m  - waiting for locator('h1').filter({ hasText: /productos/i })[22m
+
+
+      33 |     // Should see product listing
+      34 |     const heading = page.locator('h1').filter({ hasText: /productos/i });
+    > 35 |     await expect(heading).toBeVisible({ timeout: 15000 });
+         |                           ^
+      36 |
+      37 |     // Should have "Crear producto" button
+      38 |     const createBtn = page.locator('a, button').filter({ hasText: /crear producto|new product/i });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\visual\BVC-014-021-parcial.spec.ts:35:27
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\visual-BVC-014-021-parcial-f17b7-on-flow-from-list-to-create-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\visual-BVC-014-021-parcial-f17b7-on-flow-from-list-to-create-chromium-retry1\error-context.md
+
+  174) [chromium] › e2e\tests\visual\BVC-034-036-panel-layout.spec.ts:11:7 › BVC-034 & BVC-036: Panel layout computed styles › BVC-034: sidebar width ~260-280px 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('[class*="sidebar"], aside, nav[aria-label*="Panel"]').first()
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('[class*="sidebar"], aside, nav[aria-label*="Panel"]').first()[22m
+
+
+      11 |   test('BVC-034: sidebar width ~260-280px', async ({ page }) => {
+      12 |     const sidebar = page.locator('[class*="sidebar"], aside, nav[aria-label*="Panel"]').first();
+    > 13 |     await expect(sidebar).toBeVisible();
+         |                           ^
+      14 |     const width = await sidebar.evaluate(el => getComputedStyle(el).width);
+      15 |     const widthNum = parseInt(width);
+      16 |     expect(widthNum).toBeGreaterThanOrEqual(260);
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\visual\BVC-034-036-panel-layout.spec.ts:13:27
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\visual-BVC-034-036-panel-l-53a9e-034-sidebar-width-260-280px-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\visual-BVC-034-036-panel-l-53a9e-034-sidebar-width-260-280px-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('[class*="sidebar"], aside, nav[aria-label*="Panel"]').first()
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('[class*="sidebar"], aside, nav[aria-label*="Panel"]').first()[22m
+
+
+      11 |   test('BVC-034: sidebar width ~260-280px', async ({ page }) => {
+      12 |     const sidebar = page.locator('[class*="sidebar"], aside, nav[aria-label*="Panel"]').first();
+    > 13 |     await expect(sidebar).toBeVisible();
+         |                           ^
+      14 |     const width = await sidebar.evaluate(el => getComputedStyle(el).width);
+      15 |     const widthNum = parseInt(width);
+      16 |     expect(widthNum).toBeGreaterThanOrEqual(260);
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\visual\BVC-034-036-panel-layout.spec.ts:13:27
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\visual-BVC-034-036-panel-l-53a9e-034-sidebar-width-260-280px-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\visual-BVC-034-036-panel-l-53a9e-034-sidebar-width-260-280px-chromium-retry1\error-context.md
+
+  175) [chromium] › e2e\tests\visual\BVC-034-036-panel-layout.spec.ts:20:7 › BVC-034 & BVC-036: Panel layout computed styles › BVC-034: sidebar background white 
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.evaluate: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('[class*="sidebar"], aside, nav[aria-label*="Panel"]').first()[22m
+
+
+      20 |   test('BVC-034: sidebar background white', async ({ page }) => {
+      21 |     const sidebar = page.locator('[class*="sidebar"], aside, nav[aria-label*="Panel"]').first();
+    > 22 |     const bg = await sidebar.evaluate(el => getComputedStyle(el).backgroundColor);
+         |                              ^
+      23 |     expect(bg).toBe('rgb(255, 255, 255)');
+      24 |   });
+      25 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\visual\BVC-034-036-panel-layout.spec.ts:22:30
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\visual-BVC-034-036-panel-l-e0066-34-sidebar-background-white-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\visual-BVC-034-036-panel-l-e0066-34-sidebar-background-white-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.evaluate: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('[class*="sidebar"], aside, nav[aria-label*="Panel"]').first()[22m
+
+
+      20 |   test('BVC-034: sidebar background white', async ({ page }) => {
+      21 |     const sidebar = page.locator('[class*="sidebar"], aside, nav[aria-label*="Panel"]').first();
+    > 22 |     const bg = await sidebar.evaluate(el => getComputedStyle(el).backgroundColor);
+         |                              ^
+      23 |     expect(bg).toBe('rgb(255, 255, 255)');
+      24 |   });
+      25 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\visual\BVC-034-036-panel-layout.spec.ts:22:30
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\visual-BVC-034-036-panel-l-e0066-34-sidebar-background-white-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\visual-BVC-034-036-panel-l-e0066-34-sidebar-background-white-chromium-retry1\error-context.md
+
+  176) [chromium] › e2e\tests\visual\BVC-034-036-panel-layout.spec.ts:26:7 › BVC-034 & BVC-036: Panel layout computed styles › BVC-034: sidebar has right border 
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.evaluate: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('[class*="sidebar"], aside, nav[aria-label*="Panel"]').first()[22m
+
+
+      26 |   test('BVC-034: sidebar has right border', async ({ page }) => {
+      27 |     const sidebar = page.locator('[class*="sidebar"], aside, nav[aria-label*="Panel"]').first();
+    > 28 |     const borderRight = await sidebar.evaluate(el => getComputedStyle(el).borderRight);
+         |                                       ^
+      29 |     expect(borderRight).toContain('1px');
+      30 |     expect(borderRight).toContain('solid');
+      31 |   });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\visual\BVC-034-036-panel-layout.spec.ts:28:39
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\visual-BVC-034-036-panel-l-da660-34-sidebar-has-right-border-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\visual-BVC-034-036-panel-l-da660-34-sidebar-has-right-border-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.evaluate: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('[class*="sidebar"], aside, nav[aria-label*="Panel"]').first()[22m
+
+
+      26 |   test('BVC-034: sidebar has right border', async ({ page }) => {
+      27 |     const sidebar = page.locator('[class*="sidebar"], aside, nav[aria-label*="Panel"]').first();
+    > 28 |     const borderRight = await sidebar.evaluate(el => getComputedStyle(el).borderRight);
+         |                                       ^
+      29 |     expect(borderRight).toContain('1px');
+      30 |     expect(borderRight).toContain('solid');
+      31 |   });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\visual\BVC-034-036-panel-layout.spec.ts:28:39
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\visual-BVC-034-036-panel-l-da660-34-sidebar-has-right-border-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\visual-BVC-034-036-panel-l-da660-34-sidebar-has-right-border-chromium-retry1\error-context.md
+
+  177) [chromium] › e2e\tests\visual\BVC-034-036-panel-layout.spec.ts:33:7 › BVC-034 & BVC-036: Panel layout computed styles › BVC-036: content area background #F7F8FA 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('[class*="content"], [class*="main-content"]').first()
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('[class*="content"], [class*="main-content"]').first()[22m
+
+
+      33 |   test('BVC-036: content area background #F7F8FA', async ({ page }) => {
+      34 |     const content = page.locator('[class*="content"], [class*="main-content"]').first();
+    > 35 |     await expect(content).toBeVisible();
+         |                           ^
+      36 |     const bg = await content.evaluate(el => getComputedStyle(el).backgroundColor);
+      37 |     expect(bg).toBe('rgb(247, 248, 250)');
+      38 |   });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\visual\BVC-034-036-panel-layout.spec.ts:35:27
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\visual-BVC-034-036-panel-l-64773-tent-area-background-F7F8FA-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\visual-BVC-034-036-panel-l-64773-tent-area-background-F7F8FA-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('[class*="content"], [class*="main-content"]').first()
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('[class*="content"], [class*="main-content"]').first()[22m
+
+
+      33 |   test('BVC-036: content area background #F7F8FA', async ({ page }) => {
+      34 |     const content = page.locator('[class*="content"], [class*="main-content"]').first();
+    > 35 |     await expect(content).toBeVisible();
+         |                           ^
+      36 |     const bg = await content.evaluate(el => getComputedStyle(el).backgroundColor);
+      37 |     expect(bg).toBe('rgb(247, 248, 250)');
+      38 |   });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\visual\BVC-034-036-panel-layout.spec.ts:35:27
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\visual-BVC-034-036-panel-l-64773-tent-area-background-F7F8FA-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\visual-BVC-034-036-panel-l-64773-tent-area-background-F7F8FA-chromium-retry1\error-context.md
+
+  178) [chromium] › e2e\tests\visual\BVC-034-036-panel-layout.spec.ts:40:7 › BVC-034 & BVC-036: Panel layout computed styles › BVC-036: content area padding 32px desktop 
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.evaluate: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('[class*="content"], [class*="main-content"]').first()[22m
+
+
+      40 |   test('BVC-036: content area padding 32px desktop', async ({ page }) => {
+      41 |     const content = page.locator('[class*="content"], [class*="main-content"]').first();
+    > 42 |     const padding = await content.evaluate(el => getComputedStyle(el).padding);
+         |                                   ^
+      43 |     expect(padding).toBe('32px');
+      44 |   });
+      45 | });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\visual\BVC-034-036-panel-layout.spec.ts:42:35
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\visual-BVC-034-036-panel-l-47fba-t-area-padding-32px-desktop-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\visual-BVC-034-036-panel-l-47fba-t-area-padding-32px-desktop-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.evaluate: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('[class*="content"], [class*="main-content"]').first()[22m
+
+
+      40 |   test('BVC-036: content area padding 32px desktop', async ({ page }) => {
+      41 |     const content = page.locator('[class*="content"], [class*="main-content"]').first();
+    > 42 |     const padding = await content.evaluate(el => getComputedStyle(el).padding);
+         |                                   ^
+      43 |     expect(padding).toBe('32px');
+      44 |   });
+      45 | });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\visual\BVC-034-036-panel-layout.spec.ts:42:35
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\visual-BVC-034-036-panel-l-47fba-t-area-padding-32px-desktop-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\visual-BVC-034-036-panel-l-47fba-t-area-padding-32px-desktop-chromium-retry1\error-context.md
+
+  179) [chromium] › e2e\tests\visual\DC-030-to-034-home-images.spec.ts:6:7 › DC-030 to DC-034: Home images regression › DC-030: Hero should have photographic background image, not SVG 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeTruthy[2m()[22m
+
+    Received: [31mfalse[39m
+
+      22 |     // This test documents the expected behavior -- currently FAILING
+      23 |     // Hero should use a real photo URL, not an inline SVG
+    > 24 |     expect(heroInfo!.hasPhotoUrl).toBeTruthy();
+         |                                   ^
+      25 |     expect(heroInfo!.hasSvgBg).toBeFalsy();
+      26 |   });
+      27 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\visual\DC-030-to-034-home-images.spec.ts:24:35
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\visual-DC-030-to-034-home--e71db-ic-background-image-not-SVG-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\visual-DC-030-to-034-home--e71db-ic-background-image-not-SVG-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeTruthy[2m()[22m
+
+    Received: [31mfalse[39m
+
+      22 |     // This test documents the expected behavior -- currently FAILING
+      23 |     // Hero should use a real photo URL, not an inline SVG
+    > 24 |     expect(heroInfo!.hasPhotoUrl).toBeTruthy();
+         |                                   ^
+      25 |     expect(heroInfo!.hasSvgBg).toBeFalsy();
+      26 |   });
+      27 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\visual\DC-030-to-034-home-images.spec.ts:24:35
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\visual-DC-030-to-034-home--e71db-ic-background-image-not-SVG-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\visual-DC-030-to-034-home--e71db-ic-background-image-not-SVG-chromium-retry1\error-context.md
+
+  180) [chromium] › e2e\tests\visual\DC-032-brands-section.spec.ts:11:7 › DC-032: Home - Marcas Destacadas section › DC-032: Logos section is visible (opacity != 0, is-visible class applied) 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+    Expected: [32m"1"[39m
+    Received: [31m"0"[39m
+
+      14 |
+      15 |     const opacity = await section.evaluate(el => getComputedStyle(el).opacity);
+    > 16 |     expect(opacity).toBe('1');
+         |                     ^
+      17 |
+      18 |     const hasIsVisible = await section.evaluate(el => el.classList.contains('is-visible'));
+      19 |     expect(hasIsVisible).toBe(true);
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\visual\DC-032-brands-section.spec.ts:16:21
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\visual-DC-032-brands-secti-f53ca-0-is-visible-class-applied--chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\visual-DC-032-brands-secti-f53ca-0-is-visible-class-applied--chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+    Expected: [32m"1"[39m
+    Received: [31m"0"[39m
+
+      14 |
+      15 |     const opacity = await section.evaluate(el => getComputedStyle(el).opacity);
+    > 16 |     expect(opacity).toBe('1');
+         |                     ^
+      17 |
+      18 |     const hasIsVisible = await section.evaluate(el => el.classList.contains('is-visible'));
+      19 |     expect(hasIsVisible).toBe(true);
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\visual\DC-032-brands-section.spec.ts:16:21
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\visual-DC-032-brands-secti-f53ca-0-is-visible-class-applied--chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\visual-DC-032-brands-secti-f53ca-0-is-visible-class-applied--chromium-retry1\error-context.md
+
+  181) [chromium] › e2e\tests\visual\DC-032-brands-section.spec.ts:38:7 › DC-032: Home - Marcas Destacadas section › DC-032: 6-8 logos displayed in grid 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeGreaterThanOrEqual[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: >= [32m6[39m
+    Received:    [31m1[39m
+
+      42 |     const logoLinks = section.locator('a');
+      43 |     const count = await logoLinks.count();
+    > 44 |     expect(count).toBeGreaterThanOrEqual(6);
+         |                   ^
+      45 |     expect(count).toBeLessThanOrEqual(10); // 8 + "ver todas" link
+      46 |   });
+      47 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\visual\DC-032-brands-section.spec.ts:44:19
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\visual-DC-032-brands-secti-104af-6-8-logos-displayed-in-grid-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\visual-DC-032-brands-secti-104af-6-8-logos-displayed-in-grid-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeGreaterThanOrEqual[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: >= [32m6[39m
+    Received:    [31m1[39m
+
+      42 |     const logoLinks = section.locator('a');
+      43 |     const count = await logoLinks.count();
+    > 44 |     expect(count).toBeGreaterThanOrEqual(6);
+         |                   ^
+      45 |     expect(count).toBeLessThanOrEqual(10); // 8 + "ver todas" link
+      46 |   });
+      47 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\visual\DC-032-brands-section.spec.ts:44:19
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\visual-DC-032-brands-secti-104af-6-8-logos-displayed-in-grid-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\visual-DC-032-brands-secti-104af-6-8-logos-displayed-in-grid-chromium-retry1\error-context.md
+
+  182) [chromium] › e2e\tests\visual\DC-035-cta-fabricantes.spec.ts:6:7 › DC-035: CTA fabricantes banner › background #008DC9, padding 80px, titulo 36px Bold blanco 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mnot[2m.[22mtoBeNull[2m()[22m
+
+    Received: [31mnull[39m
+
+      24 |     });
+      25 |
+    > 26 |     expect(ctaStyles).not.toBeNull();
+         |                           ^
+      27 |     expect(ctaStyles!.bgColor).toBe('rgb(0, 141, 201)');
+      28 |     expect(ctaStyles!.paddingTop).toBe('80px');
+      29 |     expect(ctaStyles!.titleFontSize).toBe('36px');
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\visual\DC-035-cta-fabricantes.spec.ts:26:27
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\visual-DC-035-cta-fabrican-8205a-0px-titulo-36px-Bold-blanco-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\visual-DC-035-cta-fabrican-8205a-0px-titulo-36px-Bold-blanco-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mnot[2m.[22mtoBeNull[2m()[22m
+
+    Received: [31mnull[39m
+
+      24 |     });
+      25 |
+    > 26 |     expect(ctaStyles).not.toBeNull();
+         |                           ^
+      27 |     expect(ctaStyles!.bgColor).toBe('rgb(0, 141, 201)');
+      28 |     expect(ctaStyles!.paddingTop).toBe('80px');
+      29 |     expect(ctaStyles!.titleFontSize).toBe('36px');
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\visual\DC-035-cta-fabricantes.spec.ts:26:27
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\visual-DC-035-cta-fabrican-8205a-0px-titulo-36px-Bold-blanco-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\visual-DC-035-cta-fabrican-8205a-0px-titulo-36px-Bold-blanco-chromium-retry1\error-context.md
+
+  183) [chromium] › e2e\tests\visual\DC-045-panel-login.spec.ts:7:7 › DC-045: Panel Login › DC-045: Login card centered, white bg, radius 16px, shadow 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+    Expected: [32m"rgb(2[7m55[27m, 2[7m55[27m, 25[7m5[27m)"[39m
+    Received: [31m"rgb(2[7m47[27m, 2[7m48[27m, 25[7m0[27m)"[39m
+
+      20 |     });
+      21 |     expect(card).not.toBeNull();
+    > 22 |     expect(card!.bg).toBe('rgb(255, 255, 255)');
+         |                      ^
+      23 |     expect(card!.borderRadius).toBe('16px');
+      24 |     expect(card!.boxShadow).not.toBe('none');
+      25 |   });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\visual\DC-045-panel-login.spec.ts:22:22
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\visual-DC-045-panel-login--7bfd6-white-bg-radius-16px-shadow-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\visual-DC-045-panel-login--7bfd6-white-bg-radius-16px-shadow-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+    Expected: [32m"rgb(2[7m55[27m, 2[7m55[27m, 25[7m5[27m)"[39m
+    Received: [31m"rgb(2[7m47[27m, 2[7m48[27m, 25[7m0[27m)"[39m
+
+      20 |     });
+      21 |     expect(card).not.toBeNull();
+    > 22 |     expect(card!.bg).toBe('rgb(255, 255, 255)');
+         |                      ^
+      23 |     expect(card!.borderRadius).toBe('16px');
+      24 |     expect(card!.boxShadow).not.toBe('none');
+      25 |   });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\visual\DC-045-panel-login.spec.ts:22:22
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\visual-DC-045-panel-login--7bfd6-white-bg-radius-16px-shadow-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\visual-DC-045-panel-login--7bfd6-white-bg-radius-16px-shadow-chromium-retry1\error-context.md
+
+  184) [chromium] › e2e\tests\visual\DC-047-panel-productos-listado.spec.ts:11:7 › DC-047: Panel Productos listado › DC-047: titulo "Productos" con 24px Bold 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoHaveText[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator: locator('h1')
+    Expected pattern: [32m/Productos/[39m
+    Received string:  [31m"Panel de Administracion"[39m
+    Timeout: 5000ms
+
+    Call log:
+    [2m  - Expect "toHaveText" with timeout 5000ms[22m
+    [2m  - waiting for locator('h1')[22m
+    [2m    9 × locator resolved to <h1 class="login-card__title" _ngcontent-ng-c1496553621="">Panel de Administracion</h1>[22m
+    [2m      - unexpected value "Panel de Administracion"[22m
+
+
+      12 |     const heading = page.locator('h1');
+      13 |     await expect(heading).toBeVisible();
+    > 14 |     await expect(heading).toHaveText(/Productos/);
+         |                           ^
+      15 |     const fontSize = await heading.evaluate(el => getComputedStyle(el).fontSize);
+      16 |     const fontWeight = await heading.evaluate(el => getComputedStyle(el).fontWeight);
+      17 |     expect(fontSize).toBe('24px');
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\visual\DC-047-panel-productos-listado.spec.ts:14:27
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\visual-DC-047-panel-produc-96f0e-ulo-Productos-con-24px-Bold-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\visual-DC-047-panel-produc-96f0e-ulo-Productos-con-24px-Bold-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoHaveText[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator: locator('h1')
+    Expected pattern: [32m/Productos/[39m
+    Received string:  [31m"Panel de Administracion"[39m
+    Timeout: 5000ms
+
+    Call log:
+    [2m  - Expect "toHaveText" with timeout 5000ms[22m
+    [2m  - waiting for locator('h1')[22m
+    [2m    9 × locator resolved to <h1 class="login-card__title" _ngcontent-ng-c1496553621="">Panel de Administracion</h1>[22m
+    [2m      - unexpected value "Panel de Administracion"[22m
+
+
+      12 |     const heading = page.locator('h1');
+      13 |     await expect(heading).toBeVisible();
+    > 14 |     await expect(heading).toHaveText(/Productos/);
+         |                           ^
+      15 |     const fontSize = await heading.evaluate(el => getComputedStyle(el).fontSize);
+      16 |     const fontWeight = await heading.evaluate(el => getComputedStyle(el).fontWeight);
+      17 |     expect(fontSize).toBe('24px');
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\visual\DC-047-panel-productos-listado.spec.ts:14:27
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\visual-DC-047-panel-produc-96f0e-ulo-Productos-con-24px-Bold-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\visual-DC-047-panel-produc-96f0e-ulo-Productos-con-24px-Bold-chromium-retry1\error-context.md
+
+  185) [chromium] › e2e\tests\visual\DC-047-panel-productos-listado.spec.ts:21:7 › DC-047: Panel Productos listado › DC-047: boton "+ Crear producto" presente con fondo #008DC9 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('a[href*="crear"], a:has-text("Crear producto")')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('a[href*="crear"], a:has-text("Crear producto")')[22m
+
+
+      21 |   test('DC-047: boton "+ Crear producto" presente con fondo #008DC9', async ({ page }) => {
+      22 |     const createBtn = page.locator('a[href*="crear"], a:has-text("Crear producto")');
+    > 23 |     await expect(createBtn).toBeVisible();
+         |                             ^
+      24 |     const btnText = await createBtn.innerText();
+      25 |     expect(btnText).toContain('Crear producto');
+      26 |   });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\visual\DC-047-panel-productos-listado.spec.ts:23:29
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\visual-DC-047-panel-produc-e1add-o-presente-con-fondo-008DC9-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\visual-DC-047-panel-produc-e1add-o-presente-con-fondo-008DC9-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('a[href*="crear"], a:has-text("Crear producto")')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('a[href*="crear"], a:has-text("Crear producto")')[22m
+
+
+      21 |   test('DC-047: boton "+ Crear producto" presente con fondo #008DC9', async ({ page }) => {
+      22 |     const createBtn = page.locator('a[href*="crear"], a:has-text("Crear producto")');
+    > 23 |     await expect(createBtn).toBeVisible();
+         |                             ^
+      24 |     const btnText = await createBtn.innerText();
+      25 |     expect(btnText).toContain('Crear producto');
+      26 |   });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\visual\DC-047-panel-productos-listado.spec.ts:23:29
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\visual-DC-047-panel-produc-e1add-o-presente-con-fondo-008DC9-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\visual-DC-047-panel-produc-e1add-o-presente-con-fondo-008DC9-chromium-retry1\error-context.md
+
+  186) [chromium] › e2e\tests\visual\DC-047-panel-productos-listado.spec.ts:28:7 › DC-047: Panel Productos listado › DC-047: toggle Card/Table presente 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('button:has-text("Vista de tarjetas"), button[aria-label*="tarjetas"]').first()
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('button:has-text("Vista de tarjetas"), button[aria-label*="tarjetas"]').first()[22m
+
+
+      29 |     const cardToggle = page.locator('button:has-text("Vista de tarjetas"), button[aria-label*="tarjetas"]').first();
+      30 |     const tableToggle = page.locator('button:has-text("Vista de tabla"), button[aria-label*="tabla"]').first();
+    > 31 |     await expect(cardToggle).toBeVisible();
+         |                              ^
+      32 |     await expect(tableToggle).toBeVisible();
+      33 |   });
+      34 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\visual\DC-047-panel-productos-listado.spec.ts:31:30
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\visual-DC-047-panel-produc-e25a1--toggle-Card-Table-presente-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\visual-DC-047-panel-produc-e25a1--toggle-Card-Table-presente-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('button:has-text("Vista de tarjetas"), button[aria-label*="tarjetas"]').first()
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('button:has-text("Vista de tarjetas"), button[aria-label*="tarjetas"]').first()[22m
+
+
+      29 |     const cardToggle = page.locator('button:has-text("Vista de tarjetas"), button[aria-label*="tarjetas"]').first();
+      30 |     const tableToggle = page.locator('button:has-text("Vista de tabla"), button[aria-label*="tabla"]').first();
+    > 31 |     await expect(cardToggle).toBeVisible();
+         |                              ^
+      32 |     await expect(tableToggle).toBeVisible();
+      33 |   });
+      34 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\visual\DC-047-panel-productos-listado.spec.ts:31:30
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\visual-DC-047-panel-produc-e25a1--toggle-Card-Table-presente-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\visual-DC-047-panel-produc-e25a1--toggle-Card-Table-presente-chromium-retry1\error-context.md
+
+  187) [chromium] › e2e\tests\visual\DC-047-panel-productos-listado.spec.ts:42:7 › DC-047: Panel Productos listado › DC-047: product cards tienen badges de categoria y estado 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeGreaterThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: > [32m0[39m
+    Received:   [31m0[39m
+
+      43 |     const badges = page.locator('[class*="badge"]');
+      44 |     const badgeCount = await badges.count();
+    > 45 |     expect(badgeCount).toBeGreaterThan(0);
+         |                        ^
+      46 |   });
+      47 |
+      48 |   test('DC-047: product cards tienen menu 3 puntos', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\visual\DC-047-panel-productos-listado.spec.ts:45:24
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\visual-DC-047-panel-produc-e3bc2-adges-de-categoria-y-estado-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\visual-DC-047-panel-produc-e3bc2-adges-de-categoria-y-estado-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeGreaterThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: > [32m0[39m
+    Received:   [31m0[39m
+
+      43 |     const badges = page.locator('[class*="badge"]');
+      44 |     const badgeCount = await badges.count();
+    > 45 |     expect(badgeCount).toBeGreaterThan(0);
+         |                        ^
+      46 |   });
+      47 |
+      48 |   test('DC-047: product cards tienen menu 3 puntos', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\visual\DC-047-panel-productos-listado.spec.ts:45:24
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\visual-DC-047-panel-produc-e3bc2-adges-de-categoria-y-estado-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\visual-DC-047-panel-produc-e3bc2-adges-de-categoria-y-estado-chromium-retry1\error-context.md
+
+  188) [chromium] › e2e\tests\visual\DC-047-panel-productos-listado.spec.ts:48:7 › DC-047: Panel Productos listado › DC-047: product cards tienen menu 3 puntos 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('button[class*="menu"], button[class*="dots"], button[class*="more"]').first()
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('button[class*="menu"], button[class*="dots"], button[class*="more"]').first()[22m
+
+
+      48 |   test('DC-047: product cards tienen menu 3 puntos', async ({ page }) => {
+      49 |     const menuBtn = page.locator('button[class*="menu"], button[class*="dots"], button[class*="more"]').first();
+    > 50 |     await expect(menuBtn).toBeVisible();
+         |                           ^
+      51 |   });
+      52 | });
+      53 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\visual\DC-047-panel-productos-listado.spec.ts:50:27
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\visual-DC-047-panel-produc-60156--cards-tienen-menu-3-puntos-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\visual-DC-047-panel-produc-60156--cards-tienen-menu-3-puntos-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('button[class*="menu"], button[class*="dots"], button[class*="more"]').first()
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('button[class*="menu"], button[class*="dots"], button[class*="more"]').first()[22m
+
+
+      48 |   test('DC-047: product cards tienen menu 3 puntos', async ({ page }) => {
+      49 |     const menuBtn = page.locator('button[class*="menu"], button[class*="dots"], button[class*="more"]').first();
+    > 50 |     await expect(menuBtn).toBeVisible();
+         |                           ^
+      51 |   });
+      52 | });
+      53 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\visual\DC-047-panel-productos-listado.spec.ts:50:27
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\visual-DC-047-panel-produc-60156--cards-tienen-menu-3-puntos-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\visual-DC-047-panel-produc-60156--cards-tienen-menu-3-puntos-chromium-retry1\error-context.md
+
+  189) [chromium] › e2e\tests\visual\DC-058-product-gallery.spec.ts:6:7 › DC-058: Product Gallery › DC-058: Gallery has thumbnails and main image 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('[class*="gallery"], [class*="product-images"]').locator('img').first()
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('[class*="gallery"], [class*="product-images"]').locator('img').first()[22m
+
+
+      14 |       // Main image should be visible
+      15 |       const mainImg = gallery.locator('img').first();
+    > 16 |       await expect(mainImg).toBeVisible();
+         |                             ^
+      17 |
+      18 |       // Thumbnails (60x60px)
+      19 |       const thumbnails = gallery.locator('[class*="thumbnail"], [class*="thumb"]');
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\visual\DC-058-product-gallery.spec.ts:16:29
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\visual-DC-058-product-gall-de9c5-s-thumbnails-and-main-image-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\visual-DC-058-product-gall-de9c5-s-thumbnails-and-main-image-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('[class*="gallery"], [class*="product-images"]').locator('img').first()
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('[class*="gallery"], [class*="product-images"]').locator('img').first()[22m
+
+
+      14 |       // Main image should be visible
+      15 |       const mainImg = gallery.locator('img').first();
+    > 16 |       await expect(mainImg).toBeVisible();
+         |                             ^
+      17 |
+      18 |       // Thumbnails (60x60px)
+      19 |       const thumbnails = gallery.locator('[class*="thumbnail"], [class*="thumb"]');
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\visual\DC-058-product-gallery.spec.ts:16:29
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\visual-DC-058-product-gall-de9c5-s-thumbnails-and-main-image-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\visual-DC-058-product-gall-de9c5-s-thumbnails-and-main-image-chromium-retry1\error-context.md
+
+  190) [chromium] › e2e\tests\visual\DC-074-075-panel-cards-toggle.spec.ts:11:7 › DC-074: View Toggle & DC-075: Product Card Admin › DC-074: view toggle has two pill buttons (card/table) 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('button:has-text("Vista de tarjetas"), button[aria-label*="tarjetas"]').first()
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('button:has-text("Vista de tarjetas"), button[aria-label*="tarjetas"]').first()[22m
+
+
+      12 |     const cardToggle = page.locator('button:has-text("Vista de tarjetas"), button[aria-label*="tarjetas"]').first();
+      13 |     const tableToggle = page.locator('button:has-text("Vista de tabla"), button[aria-label*="tabla"]').first();
+    > 14 |     await expect(cardToggle).toBeVisible();
+         |                              ^
+      15 |     await expect(tableToggle).toBeVisible();
+      16 |   });
+      17 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\visual\DC-074-075-panel-cards-toggle.spec.ts:14:30
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\visual-DC-074-075-panel-ca-d1cfc-wo-pill-buttons-card-table--chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\visual-DC-074-075-panel-ca-d1cfc-wo-pill-buttons-card-table--chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('button:has-text("Vista de tarjetas"), button[aria-label*="tarjetas"]').first()
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('button:has-text("Vista de tarjetas"), button[aria-label*="tarjetas"]').first()[22m
+
+
+      12 |     const cardToggle = page.locator('button:has-text("Vista de tarjetas"), button[aria-label*="tarjetas"]').first();
+      13 |     const tableToggle = page.locator('button:has-text("Vista de tabla"), button[aria-label*="tabla"]').first();
+    > 14 |     await expect(cardToggle).toBeVisible();
+         |                              ^
+      15 |     await expect(tableToggle).toBeVisible();
+      16 |   });
+      17 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\visual\DC-074-075-panel-cards-toggle.spec.ts:14:30
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\visual-DC-074-075-panel-ca-d1cfc-wo-pill-buttons-card-table--chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\visual-DC-074-075-panel-ca-d1cfc-wo-pill-buttons-card-table--chromium-retry1\error-context.md
+
+  191) [chromium] › e2e\tests\visual\DC-074-075-panel-cards-toggle.spec.ts:18:7 › DC-074: View Toggle & DC-075: Product Card Admin › DC-074: active toggle has blue background #008DC9 
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.evaluate: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('button:has-text("Vista de tarjetas"), button[aria-label*="tarjetas"]').first()[22m
+
+
+      18 |   test('DC-074: active toggle has blue background #008DC9', async ({ page }) => {
+      19 |     const activeToggle = page.locator('button:has-text("Vista de tarjetas"), button[aria-label*="tarjetas"]').first();
+    > 20 |     const bgColor = await activeToggle.evaluate(el => getComputedStyle(el).backgroundColor);
+         |                                        ^
+      21 |     // Should be #008DC9 = rgb(0, 141, 201)
+      22 |     expect(bgColor).toContain('rgb(0, 141, 201)');
+      23 |   });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\visual\DC-074-075-panel-cards-toggle.spec.ts:20:40
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\visual-DC-074-075-panel-ca-00d15--has-blue-background-008DC9-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\visual-DC-074-075-panel-ca-00d15--has-blue-background-008DC9-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: locator.evaluate: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('button:has-text("Vista de tarjetas"), button[aria-label*="tarjetas"]').first()[22m
+
+
+      18 |   test('DC-074: active toggle has blue background #008DC9', async ({ page }) => {
+      19 |     const activeToggle = page.locator('button:has-text("Vista de tarjetas"), button[aria-label*="tarjetas"]').first();
+    > 20 |     const bgColor = await activeToggle.evaluate(el => getComputedStyle(el).backgroundColor);
+         |                                        ^
+      21 |     // Should be #008DC9 = rgb(0, 141, 201)
+      22 |     expect(bgColor).toContain('rgb(0, 141, 201)');
+      23 |   });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\visual\DC-074-075-panel-cards-toggle.spec.ts:20:40
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\visual-DC-074-075-panel-ca-00d15--has-blue-background-008DC9-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\visual-DC-074-075-panel-ca-00d15--has-blue-background-008DC9-chromium-retry1\error-context.md
+
+  192) [chromium] › e2e\tests\visual\DC-074-075-panel-cards-toggle.spec.ts:32:7 › DC-074: View Toggle & DC-075: Product Card Admin › DC-075: product card has name bold, brand grey, and badges 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('[class*="card"] [class*="name"], [class*="card"] h3, [class*="card"] h4').first()
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('[class*="card"] [class*="name"], [class*="card"] h3, [class*="card"] h4').first()[22m
+
+
+      33 |     // Check product name text exists
+      34 |     const productName = page.locator('[class*="card"] [class*="name"], [class*="card"] h3, [class*="card"] h4').first();
+    > 35 |     await expect(productName).toBeVisible();
+         |                               ^
+      36 |
+      37 |     // Check badges exist
+      38 |     const badge = page.locator('[class*="badge"]').first();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\visual\DC-074-075-panel-cards-toggle.spec.ts:35:31
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\visual-DC-074-075-panel-ca-b98ff--bold-brand-grey-and-badges-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\visual-DC-074-075-panel-ca-b98ff--bold-brand-grey-and-badges-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('[class*="card"] [class*="name"], [class*="card"] h3, [class*="card"] h4').first()
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('[class*="card"] [class*="name"], [class*="card"] h3, [class*="card"] h4').first()[22m
+
+
+      33 |     // Check product name text exists
+      34 |     const productName = page.locator('[class*="card"] [class*="name"], [class*="card"] h3, [class*="card"] h4').first();
+    > 35 |     await expect(productName).toBeVisible();
+         |                               ^
+      36 |
+      37 |     // Check badges exist
+      38 |     const badge = page.locator('[class*="badge"]').first();
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\visual\DC-074-075-panel-cards-toggle.spec.ts:35:31
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\visual-DC-074-075-panel-ca-b98ff--bold-brand-grey-and-badges-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\visual-DC-074-075-panel-ca-b98ff--bold-brand-grey-and-badges-chromium-retry1\error-context.md
+
+  193) [chromium] › e2e\tests\visual\DC-074-075-panel-cards-toggle.spec.ts:42:7 › DC-074: View Toggle & DC-075: Product Card Admin › DC-075: product card has 3-dot menu 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('[class*="card"] button[class*="menu"], [class*="card"] button[class*="dots"]').first()
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('[class*="card"] button[class*="menu"], [class*="card"] button[class*="dots"]').first()[22m
+
+
+      42 |   test('DC-075: product card has 3-dot menu', async ({ page }) => {
+      43 |     const menuDots = page.locator('[class*="card"] button[class*="menu"], [class*="card"] button[class*="dots"]').first();
+    > 44 |     await expect(menuDots).toBeVisible();
+         |                            ^
+      45 |   });
+      46 | });
+      47 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\visual\DC-074-075-panel-cards-toggle.spec.ts:44:28
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\visual-DC-074-075-panel-ca-8d5d9-product-card-has-3-dot-menu-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\visual-DC-074-075-panel-ca-8d5d9-product-card-has-3-dot-menu-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('[class*="card"] button[class*="menu"], [class*="card"] button[class*="dots"]').first()
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('[class*="card"] button[class*="menu"], [class*="card"] button[class*="dots"]').first()[22m
+
+
+      42 |   test('DC-075: product card has 3-dot menu', async ({ page }) => {
+      43 |     const menuDots = page.locator('[class*="card"] button[class*="menu"], [class*="card"] button[class*="dots"]').first();
+    > 44 |     await expect(menuDots).toBeVisible();
+         |                            ^
+      45 |   });
+      46 | });
+      47 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\visual\DC-074-075-panel-cards-toggle.spec.ts:44:28
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\visual-DC-074-075-panel-ca-8d5d9-product-card-has-3-dot-menu-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\visual-DC-074-075-panel-ca-8d5d9-product-card-has-3-dot-menu-chromium-retry1\error-context.md
+
+  194) [chromium] › e2e\tests\visual\DC-089-panel-cards-responsive.spec.ts:6:7 › DC-089: Panel cards responsive › product cards render as grid with radius 16px in admin 
+
+    TimeoutError: page.waitForSelector: Timeout 5000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('.admin__sidebar') to be visible[22m
+
+
+       6 |   test('product cards render as grid with radius 16px in admin', async ({ page }) => {
+       7 |     await page.goto(`${BASE}/admin/productos`);
+    >  8 |     await page.waitForSelector('.admin__sidebar', { timeout: 5000 });
+         |                ^
+       9 |
+      10 |     const cardInfo = await page.evaluate(() => {
+      11 |       const cards = document.querySelectorAll('.product-card, [class*="product-card"]');
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\visual\DC-089-panel-cards-responsive.spec.ts:8:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\visual-DC-089-panel-cards--ea401-d-with-radius-16px-in-admin-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\visual-DC-089-panel-cards--ea401-d-with-radius-16px-in-admin-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TimeoutError: page.waitForSelector: Timeout 5000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('.admin__sidebar') to be visible[22m
+
+
+       6 |   test('product cards render as grid with radius 16px in admin', async ({ page }) => {
+       7 |     await page.goto(`${BASE}/admin/productos`);
+    >  8 |     await page.waitForSelector('.admin__sidebar', { timeout: 5000 });
+         |                ^
+       9 |
+      10 |     const cardInfo = await page.evaluate(() => {
+      11 |       const cards = document.querySelectorAll('.product-card, [class*="product-card"]');
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\visual\DC-089-panel-cards-responsive.spec.ts:8:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\visual-DC-089-panel-cards--ea401-d-with-radius-16px-in-admin-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\visual-DC-089-panel-cards--ea401-d-with-radius-16px-in-admin-chromium-retry1\error-context.md
+
+  195) [chromium] › e2e\tests\visual\DC-097-brands-responsive.spec.ts:6:7 › DC-097: Brands section responsive › DC-097: Desktop 1440px - 4 logos per row 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeGreaterThanOrEqual[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: >= [32m6[39m
+    Received:    [31m1[39m
+
+      14 |     const logoLinks = section.locator('a').filter({ hasNot: page.locator('a[href$="/marcas"]') });
+      15 |     const count = await logoLinks.count();
+    > 16 |     expect(count).toBeGreaterThanOrEqual(6);
+         |                   ^
+      17 |   });
+      18 |
+      19 |   test('DC-097: Mobile 375px - logos grid adapts', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\visual\DC-097-brands-responsive.spec.ts:16:19
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\visual-DC-097-brands-respo-eb272-op-1440px---4-logos-per-row-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\visual-DC-097-brands-respo-eb272-op-1440px---4-logos-per-row-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeGreaterThanOrEqual[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: >= [32m6[39m
+    Received:    [31m1[39m
+
+      14 |     const logoLinks = section.locator('a').filter({ hasNot: page.locator('a[href$="/marcas"]') });
+      15 |     const count = await logoLinks.count();
+    > 16 |     expect(count).toBeGreaterThanOrEqual(6);
+         |                   ^
+      17 |   });
+      18 |
+      19 |   test('DC-097: Mobile 375px - logos grid adapts', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\visual\DC-097-brands-responsive.spec.ts:16:19
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\visual-DC-097-brands-respo-eb272-op-1440px---4-logos-per-row-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\visual-DC-097-brands-respo-eb272-op-1440px---4-logos-per-row-chromium-retry1\error-context.md
+
+  196) [chromium] › e2e\tests\visual\DC-097-brands-responsive.spec.ts:19:7 › DC-097: Brands section responsive › DC-097: Mobile 375px - logos grid adapts 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+    Expected: [32m"1"[39m
+    Received: [31m"0"[39m
+
+      28 |
+      29 |     const opacity = await section.evaluate(el => getComputedStyle(el).opacity);
+    > 30 |     expect(opacity).toBe('1');
+         |                     ^
+      31 |   });
+      32 |
+      33 |   test('DC-097: Tablet 768px - logos grid adapts', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\visual\DC-097-brands-responsive.spec.ts:30:21
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\visual-DC-097-brands-respo-f5fd9-e-375px---logos-grid-adapts-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\visual-DC-097-brands-respo-f5fd9-e-375px---logos-grid-adapts-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+    Expected: [32m"1"[39m
+    Received: [31m"0"[39m
+
+      28 |
+      29 |     const opacity = await section.evaluate(el => getComputedStyle(el).opacity);
+    > 30 |     expect(opacity).toBe('1');
+         |                     ^
+      31 |   });
+      32 |
+      33 |   test('DC-097: Tablet 768px - logos grid adapts', async ({ page }) => {
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\visual\DC-097-brands-responsive.spec.ts:30:21
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\visual-DC-097-brands-respo-f5fd9-e-375px---logos-grid-adapts-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\visual-DC-097-brands-respo-f5fd9-e-375px---logos-grid-adapts-chromium-retry1\error-context.md
+
+  197) [chromium] › e2e\tests\visual\DC-097-brands-responsive.spec.ts:33:7 › DC-097: Brands section responsive › DC-097: Tablet 768px - logos grid adapts 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+    Expected: [32m"1"[39m
+    Received: [31m"0"[39m
+
+      41 |
+      42 |     const opacity = await section.evaluate(el => getComputedStyle(el).opacity);
+    > 43 |     expect(opacity).toBe('1');
+         |                     ^
+      44 |   });
+      45 | });
+      46 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\visual\DC-097-brands-responsive.spec.ts:43:21
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\visual-DC-097-brands-respo-ca92e-t-768px---logos-grid-adapts-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\visual-DC-097-brands-respo-ca92e-t-768px---logos-grid-adapts-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+    Expected: [32m"1"[39m
+    Received: [31m"0"[39m
+
+      41 |
+      42 |     const opacity = await section.evaluate(el => getComputedStyle(el).opacity);
+    > 43 |     expect(opacity).toBe('1');
+         |                     ^
+      44 |   });
+      45 | });
+      46 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\visual\DC-097-brands-responsive.spec.ts:43:21
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\visual-DC-097-brands-respo-ca92e-t-768px---logos-grid-adapts-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\visual-DC-097-brands-respo-ca92e-t-768px---logos-grid-adapts-chromium-retry1\error-context.md
+
+  198) [chromium] › e2e\tests\visual\DC-098-tabs-pill.spec.ts:6:7 › DC-098: Tabs pill responsive › bilingual tabs visible in product form 
+
+    TimeoutError: page.waitForSelector: Timeout 5000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('.admin__sidebar') to be visible[22m
+
+
+       6 |   test('bilingual tabs visible in product form', async ({ page }) => {
+       7 |     await page.goto(`${BASE}/admin/productos/crear`);
+    >  8 |     await page.waitForSelector('.admin__sidebar', { timeout: 5000 });
+         |                ^
+       9 |
+      10 |     const tabsInfo = await page.evaluate(() => {
+      11 |       const buttons = Array.from(document.querySelectorAll('button, a'));
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\visual\DC-098-tabs-pill.spec.ts:8:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\visual-DC-098-tabs-pill-DC-bfeb9-abs-visible-in-product-form-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\visual-DC-098-tabs-pill-DC-bfeb9-abs-visible-in-product-form-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TimeoutError: page.waitForSelector: Timeout 5000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('.admin__sidebar') to be visible[22m
+
+
+       6 |   test('bilingual tabs visible in product form', async ({ page }) => {
+       7 |     await page.goto(`${BASE}/admin/productos/crear`);
+    >  8 |     await page.waitForSelector('.admin__sidebar', { timeout: 5000 });
+         |                ^
+       9 |
+      10 |     const tabsInfo = await page.evaluate(() => {
+      11 |       const buttons = Array.from(document.querySelectorAll('button, a'));
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\visual\DC-098-tabs-pill.spec.ts:8:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\visual-DC-098-tabs-pill-DC-bfeb9-abs-visible-in-product-form-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\visual-DC-098-tabs-pill-DC-bfeb9-abs-visible-in-product-form-chromium-retry1\error-context.md
+
+  199) [chromium] › e2e\tests\visual\DC-128-validation-inline.spec.ts:6:7 › DC-128: Inline form validation › DC-128: Required field shows error on blur 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoContain[2m([22m[32mexpected[39m[2m) // indexOf[22m
+
+    Expected substring: [32m"239"[39m
+    Received string:    [31m"rgb(31, 41, 55)"[39m
+
+      24 |         });
+      25 |         // Error should be red
+    > 26 |         expect(errorStyle.color).toContain('239'); // EF4444 = rgb(239,68,68)
+         |                                  ^
+      27 |       }
+      28 |     }
+      29 |   });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\visual\DC-128-validation-inline.spec.ts:26:34
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\visual-DC-128-validation-i-32282-d-field-shows-error-on-blur-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\visual-DC-128-validation-i-32282-d-field-shows-error-on-blur-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoContain[2m([22m[32mexpected[39m[2m) // indexOf[22m
+
+    Expected substring: [32m"239"[39m
+    Received string:    [31m"rgb(31, 41, 55)"[39m
+
+      24 |         });
+      25 |         // Error should be red
+    > 26 |         expect(errorStyle.color).toContain('239'); // EF4444 = rgb(239,68,68)
+         |                                  ^
+      27 |       }
+      28 |     }
+      29 |   });
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\visual\DC-128-validation-inline.spec.ts:26:34
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\visual-DC-128-validation-i-32282-d-field-shows-error-on-blur-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\visual-DC-128-validation-i-32282-d-field-shows-error-on-blur-chromium-retry1\error-context.md
+
+  200) [chromium] › e2e\tests\visual\NFR-001-003-performance.spec.ts:34:7 › NFR-001/NFR-003: Performance metrics › NFR-003: CLS on home page is acceptable 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: < [32m0.25[39m
+    Received:   [31m0.5269246441122926[39m
+
+      53 |
+      54 |     // CLS should be under 0.1 for good score
+    > 55 |     expect(cls).toBeLessThan(0.25);
+         |                 ^
+      56 |   });
+      57 | });
+      58 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\visual\NFR-001-003-performance.spec.ts:55:17
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\visual-NFR-001-003-perform-e56de--on-home-page-is-acceptable-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\visual-NFR-001-003-perform-e56de--on-home-page-is-acceptable-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: < [32m0.25[39m
+    Received:   [31m0.5269246441122926[39m
+
+      53 |
+      54 |     // CLS should be under 0.1 for good score
+    > 55 |     expect(cls).toBeLessThan(0.25);
+         |                 ^
+      56 |   });
+      57 | });
+      58 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\visual\NFR-001-003-performance.spec.ts:55:17
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\visual-NFR-001-003-perform-e56de--on-home-page-is-acceptable-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\visual-NFR-001-003-perform-e56de--on-home-page-is-acceptable-chromium-retry1\error-context.md
+
+  201) [chromium] › e2e\tests\visual\NFR-005-panel-load.spec.ts:6:7 › NFR-005: Panel carga inicial < 3s › admin productos carga en menos de 3 segundos 
+
+    TimeoutError: page.waitForSelector: Timeout 5000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('.admin__sidebar') to be visible[22m
+
+
+       7 |     const startTime = Date.now();
+       8 |     await page.goto(`${BASE}/admin/productos`);
+    >  9 |     await page.waitForSelector('.admin__sidebar', { timeout: 5000 });
+         |                ^
+      10 |
+      11 |     const loadTime = Date.now() - startTime;
+      12 |     expect(loadTime).toBeLessThan(3000);
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\visual\NFR-005-panel-load.spec.ts:9:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\visual-NFR-005-panel-load--44507-arga-en-menos-de-3-segundos-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\visual-NFR-005-panel-load--44507-arga-en-menos-de-3-segundos-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TimeoutError: page.waitForSelector: Timeout 5000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('.admin__sidebar') to be visible[22m
+
+
+       7 |     const startTime = Date.now();
+       8 |     await page.goto(`${BASE}/admin/productos`);
+    >  9 |     await page.waitForSelector('.admin__sidebar', { timeout: 5000 });
+         |                ^
+      10 |
+      11 |     const loadTime = Date.now() - startTime;
+      12 |     expect(loadTime).toBeLessThan(3000);
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\visual\NFR-005-panel-load.spec.ts:9:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\visual-NFR-005-panel-load--44507-arga-en-menos-de-3-segundos-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\visual-NFR-005-panel-load--44507-arga-en-menos-de-3-segundos-chromium-retry1\error-context.md
+
+  202) [chromium] › e2e\tests\visual\NFR-026-tap-targets.spec.ts:22:7 › NFR-026: Tap targets >= 44x44px en mobile › majority of interactive elements meet 44px minimum 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeGreaterThanOrEqual[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: >= [32m80[39m
+    Received:    [31m74.50980392156863[39m
+
+      42 |
+      43 |     // At least 80% of interactive elements should meet 44px minimum
+    > 44 |     expect(tapInfo.percentage).toBeGreaterThanOrEqual(80);
+         |                                ^
+      45 |   });
+      46 | });
+      47 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\visual\NFR-026-tap-targets.spec.ts:44:32
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\visual-NFR-026-tap-targets-4c929--elements-meet-44px-minimum-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\visual-NFR-026-tap-targets-4c929--elements-meet-44px-minimum-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeGreaterThanOrEqual[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: >= [32m80[39m
+    Received:    [31m74.50980392156863[39m
+
+      42 |
+      43 |     // At least 80% of interactive elements should meet 44px minimum
+    > 44 |     expect(tapInfo.percentage).toBeGreaterThanOrEqual(80);
+         |                                ^
+      45 |   });
+      46 | });
+      47 |
+        at C:\Users\Roberth Castillo\Desktop\HESA\WEB\e2e\tests\visual\NFR-026-tap-targets.spec.ts:44:32
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\visual-NFR-026-tap-targets-4c929--elements-meet-44px-minimum-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\visual-NFR-026-tap-targets-4c929--elements-meet-44px-minimum-chromium-retry1\error-context.md
+
+  202 failed
+    [chromium] › e2e\tests\edge-case\BVC-018-destructive-confirmation.spec.ts:6:7 › BVC-018: Acciones destructivas tienen confirmacion modal › admin productos tiene vista tarjetas y tabla 
+    [chromium] › e2e\tests\edge-case\BVC-018-destructive-confirmation.spec.ts:17:7 › BVC-018: Acciones destructivas tienen confirmacion modal › vista tabla tiene acciones Ver y Editar por producto 
+    [chromium] › e2e\tests\edge-case\BVC-018-destructive-confirmation.spec.ts:32:7 › BVC-018: Acciones destructivas tienen confirmacion modal › admin marcas renderiza correctamente 
+    [chromium] › e2e\tests\edge-case\BVC-018-destructive-confirmation.spec.ts:43:7 › BVC-018: Acciones destructivas tienen confirmacion modal › admin marcas muestra 12 marcas 
+    [chromium] › e2e\tests\edge-case\BVC-018-destructive-confirmation.spec.ts:61:7 › BVC-018: Acciones destructivas tienen confirmacion modal › admin mensajes kanban permite ver detalle de mensaje 
+    [chromium] › e2e\tests\edge-case\DC-077-078-form-fields-uploader.spec.ts:6:7 › DC-077: Form Fields Panel Styling › Input fields have border-radius 10px 
+    [chromium] › e2e\tests\edge-case\DC-077-078-form-fields-uploader.spec.ts:19:7 › DC-077: Form Fields Panel Styling › Input fields have label above 
+    [chromium] › e2e\tests\edge-case\DC-077-078-form-fields-uploader.spec.ts:28:7 › DC-077: Form Fields Panel Styling › Focus ring shows 2px brand-primary (#008DC9) on input 
+    [chromium] › e2e\tests\edge-case\DC-077-078-form-fields-uploader.spec.ts:55:7 › DC-078: Image Uploader Styling › Image upload zone has dashed border 
+    [chromium] › e2e\tests\edge-case\DC-077-078-form-fields-uploader.spec.ts:78:7 › DC-078: Image Uploader Styling › Upload zone has upload icon 
+    [chromium] › e2e\tests\edge-case\DC-077-078-form-fields-uploader.spec.ts:88:7 › DC-078: Image Uploader Styling › Upload zone shows format restriction text 
+    [chromium] › e2e\tests\edge-case\DC-090-092-panel-responsive.spec.ts:6:7 › DC-090: Panel Tables Responsive › Product list renders in mobile viewport 
+    [chromium] › e2e\tests\edge-case\DC-090-092-panel-responsive.spec.ts:18:7 › DC-091: Panel Forms Responsive › Product form renders in mobile viewport with single column 
+    [chromium] › e2e\tests\edge-case\DC-090-092-panel-responsive.spec.ts:33:7 › DC-092: Panel Kanban Responsive › Messages page renders in mobile viewport 
+    [chromium] › e2e\tests\edge-case\DC-115-login-error.spec.ts:16:7 › DC-115: Admin Login Page › Login page has Microsoft icon 
+    [chromium] › e2e\tests\edge-case\DC-122-127-feedback-panel.spec.ts:7:7 › DC-122 to DC-127: Panel Feedback Visual › DC-123/DC-131: Save product triggers toast success 
+    [chromium] › e2e\tests\edge-case\DC-122-127-feedback-panel.spec.ts:26:7 › DC-122 to DC-127: Panel Feedback Visual › DC-133: Modal confirm layout verification 
+    [chromium] › e2e\tests\edge-case\DC-122-127-feedback-panel.spec.ts:49:7 › DC-122 to DC-127: Panel Feedback Visual › DC-119: Form validation shows red border and message 
+    [chromium] › e2e\tests\edge-case\DC-135-unsaved-changes-guard.spec.ts:6:7 › DC-135: Modal cambios sin guardar › formulario crear producto tiene campos editables 
+    [chromium] › e2e\tests\edge-case\DC-135-unsaved-changes-guard.spec.ts:19:7 › DC-135: Modal cambios sin guardar › XSS payload es aceptado como texto plano en campo nombre 
+    [chromium] › e2e\tests\edge-case\DC-135-unsaved-changes-guard.spec.ts:33:7 › DC-135: Modal cambios sin guardar › formulario sin cambios no deberia activar guard al navegar 
+    [chromium] › e2e\tests\edge-case\DC-135-unsaved-changes-guard.spec.ts:49:7 › DC-135: Modal cambios sin guardar › escribir en campo deberia activar dirty state 
+    [chromium] › e2e\tests\edge-case\DC-135-unsaved-changes-guard.spec.ts:78:7 › DC-135: Modal cambios sin guardar › botones Cancelar y Guardar producto existen 
+    [chromium] › e2e\tests\edge-case\DC-137-138-panel-hover.spec.ts:6:7 › DC-137: Panel Card Hover Effects › Product cards have cursor pointer 
+    [chromium] › e2e\tests\edge-case\DC-137-138-panel-hover.spec.ts:19:7 › DC-137: Panel Card Hover Effects › Dashboard category cards have hover cursor 
+    [chromium] › e2e\tests\edge-case\DC-137-138-panel-hover.spec.ts:34:7 › DC-138: Table Row Hover Effects › Product list in table view has rows 
+    [chromium] › e2e\tests\edge-case\DC-138-table-view-products.spec.ts:15:7 › DC-138: Hover filas tabla panel y estructura tabla productos › toggle de vista tarjetas a vista tabla funciona 
+    [chromium] › e2e\tests\edge-case\DC-138-table-view-products.spec.ts:25:7 › DC-138: Hover filas tabla panel y estructura tabla productos › tabla tiene headers UPPERCASE correctos 
+    [chromium] › e2e\tests\edge-case\DC-138-table-view-products.spec.ts:34:7 › DC-138: Hover filas tabla panel y estructura tabla productos › tabla muestra todos los 48 productos 
+    [chromium] › e2e\tests\edge-case\DC-138-table-view-products.spec.ts:43:7 › DC-138: Hover filas tabla panel y estructura tabla productos › cada fila tiene acciones Ver y Editar 
+    [chromium] › e2e\tests\edge-case\DC-138-table-view-products.spec.ts:52:7 › DC-138: Hover filas tabla panel y estructura tabla productos › filas tienen datos correctos (nombre, marca, categoria, estado) 
+    [chromium] › e2e\tests\edge-case\DC-138-table-view-products.spec.ts:63:7 › DC-138: Hover filas tabla panel y estructura tabla productos › tabla muestra productos de diferentes categorias 
+    [chromium] › e2e\tests\edge-case\DC-138-table-view-products.spec.ts:74:7 › DC-138: Hover filas tabla panel y estructura tabla productos › tabla muestra producto inactivo con estado diferente 
+    [chromium] › e2e\tests\edge-case\DC-146-kanban-mensajes.spec.ts:15:7 › DC-146: Kanban de mensajes layout y contenido › kanban tiene 3 columnas con conteos 
+    [chromium] › e2e\tests\edge-case\DC-146-kanban-mensajes.spec.ts:26:7 › DC-146: Kanban de mensajes layout y contenido › columna NUEVOS tiene 3 cards 
+    [chromium] › e2e\tests\edge-case\DC-146-kanban-mensajes.spec.ts:32:7 › DC-146: Kanban de mensajes layout y contenido › columna EN PROCESO tiene 1 card 
+    [chromium] › e2e\tests\edge-case\DC-146-kanban-mensajes.spec.ts:36:7 › DC-146: Kanban de mensajes layout y contenido › columna ATENDIDOS tiene 8 cards 
+    [chromium] › e2e\tests\edge-case\DC-146-kanban-mensajes.spec.ts:53:7 › DC-146: Kanban de mensajes layout y contenido › cards tienen badges de tipo 
+    [chromium] › e2e\tests\edge-case\DC-146-kanban-mensajes.spec.ts:60:7 › DC-146: Kanban de mensajes layout y contenido › cards tienen preview de mensaje y tiempo relativo 
+    [chromium] › e2e\tests\edge-case\DC-146-kanban-mensajes.spec.ts:68:7 › DC-146: Kanban de mensajes layout y contenido › cards son links navegables 
+    [chromium] › e2e\tests\edge-case\DC-146-kanban-mensajes.spec.ts:74:7 › DC-146: Kanban de mensajes layout y contenido › toggle Vista Kanban / Vista Tabla existe 
+    [chromium] › e2e\tests\edge-case\NFR-017-xss-security.spec.ts:97:7 › NFR-017: XSS Protection and Security Headers › XSS payload in product form does not execute 
+    [chromium] › e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:14:7 › UX-043: Product Form Structure and Edge Cases › Form has all 6 required sections 
+    [chromium] › e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:23:7 › UX-043: Product Form Structure and Edge Cases › Form has Cancel and Save buttons in toolbar 
+    [chromium] › e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:28:7 › UX-043: Product Form Structure and Edge Cases › Category selector has 3 cards (Farmacos, Alimentos, Equipos) 
+    [chromium] › e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:34:7 › UX-043: Product Form Structure and Edge Cases › Bilingual tabs present in description section 
+    [chromium] › e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:39:7 › UX-043: Product Form Structure and Edge Cases › Image upload zone has dashed border and instructions 
+    [chromium] › e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:44:7 › UX-043: Product Form Structure and Edge Cases › PDF upload zone has instructions 
+    [chromium] › e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:48:7 › UX-043: Product Form Structure and Edge Cases › Configuration section has toggle switches 
+    [chromium] › e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:56:7 › UX-043: Product Form Structure and Edge Cases › Species tags pre-populated with defaults 
+    [chromium] › e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:61:7 › UX-043: Product Form Structure and Edge Cases › Empty form submit shows validation - name field required 
+    [chromium] › e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:68:7 › UX-043: Product Form Structure and Edge Cases › XSS input in product name is sanitized 
+    [chromium] › e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:77:7 › UX-043: Product Form Structure and Edge Cases › Slug URL auto-generates from product name 
+    [chromium] › e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:85:7 › UX-043: Product Form Structure and Edge Cases › R3: Marca dropdown has options (Zoetis, MSD, Purina) 
+    [chromium] › e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:94:7 › UX-043: Product Form Structure and Edge Cases › R3: Presentaciones tag with remove button 
+    [chromium] › e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:99:7 › UX-043: Product Form Structure and Edge Cases › R3: Species remove buttons work 
+    [chromium] › e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:104:7 › UX-043: Product Form Structure and Edge Cases › R3: Add species input accepts text 
+    [chromium] › e2e\tests\edge-case\UX-043-product-form-structure.spec.ts:112:7 › UX-043: Product Form Structure and Edge Cases › R3: Descripcion field accepts long text 
+    [chromium] › e2e\tests\edge-case\UX-075-search-overlay.spec.ts:29:7 › UX-075: Search Overlay Edge Cases › Results appear for 3+ characters 
+    [chromium] › e2e\tests\edge-case\UX-076-catalog-filters.spec.ts:7:7 › UX-076: Catalog Filters Edge Cases › Filter by category updates product count and URL 
+    [chromium] › e2e\tests\edge-case\UX-076-catalog-filters.spec.ts:16:7 › UX-076: Catalog Filters Edge Cases › Filter pills appear with remove button 
+    [chromium] › e2e\tests\edge-case\UX-076-catalog-filters.spec.ts:23:7 › UX-076: Catalog Filters Edge Cases › Clear filters button resets all filters 
+    [chromium] › e2e\tests\edge-case\UX-076-catalog-filters.spec.ts:44:7 › UX-076: Catalog Filters Edge Cases › Brand dropdown filters adaptively when Farmacos selected (BUG-011 fix) 
+    [chromium] › e2e\tests\edge-case\UX-086-089-home-interactions.spec.ts:12:7 › UX-086: Brand Logos Home › 8 brand logos are displayed 
+    [chromium] › e2e\tests\edge-case\UX-090-contact-form-validation.spec.ts:108:7 › UX-090: Contact Form Validation Edge Cases › R3: Double submit does not cause errors 
+    [chromium] › e2e\tests\edge-case\UX-091-distributor-form-validation.spec.ts:12:7 › UX-091: Distributor Form Validation and Language › Page headings are in Spanish on /es/ route (BUG-008 partial fix) 
+    [chromium] › e2e\tests\edge-case\UX-091-distributor-form-validation.spec.ts:23:7 › UX-091: Distributor Form Validation and Language › Form labels should be in Spanish on /es/ route (BUG-E07 - currently fails) 
+    [chromium] › e2e\tests\edge-case\UX-091-distributor-form-validation.spec.ts:44:7 › UX-091: Distributor Form Validation and Language › Form has terms checkbox (currently in English) 
+    [chromium] › e2e\tests\edge-case\UX-091-distributor-form-validation.spec.ts:67:7 › UX-091: Distributor Form Validation and Language › XSS in company name is not executed 
+    [chromium] › e2e\tests\edge-case\UX-091-distributor-form-validation.spec.ts:74:7 › UX-091: Distributor Form Validation and Language › Invalid email shows validation error 
+    [chromium] › e2e\tests\edge-case\UX-092-language-selector.spec.ts:17:7 › UX-092: Language Selector › Switching language changes URL prefix 
+    [chromium] › e2e\tests\edge-case\UX-095-096-card-hover.spec.ts:7:7 › UX-095/UX-096: Product and Brand Card Hover › Product cards have links that navigate to product detail 
+    [chromium] › e2e\tests\edge-case\UX-097-related-products.spec.ts:13:7 › UX-097: Related Products Section › Related products are from same category 
+    [chromium] › e2e\tests\edge-case\UX-098-toggle-card-table.spec.ts:21:7 › UX-098: Toggle Card/Table View in Admin › Table view toggle switches view 
+    [chromium] › e2e\tests\edge-case\UX-100-101-drag-drop-zones.spec.ts:15:7 › UX-100/UX-101: Drag-drop zones para imagenes y PDF › UX-100: zona drag-drop de imagenes es visible 
+    [chromium] › e2e\tests\edge-case\UX-100-101-drag-drop-zones.spec.ts:21:7 › UX-100/UX-101: Drag-drop zones para imagenes y PDF › UX-100: zona de imagenes muestra restricciones de formato 
+    [chromium] › e2e\tests\edge-case\UX-100-101-drag-drop-zones.spec.ts:25:7 › UX-100/UX-101: Drag-drop zones para imagenes y PDF › UX-100: seccion imagenes tiene heading correcto 
+    [chromium] › e2e\tests\edge-case\UX-100-101-drag-drop-zones.spec.ts:30:7 › UX-100/UX-101: Drag-drop zones para imagenes y PDF › UX-100: seccion imagenes tiene descripcion 
+    [chromium] › e2e\tests\edge-case\UX-100-101-drag-drop-zones.spec.ts:36:7 › UX-100/UX-101: Drag-drop zones para imagenes y PDF › UX-101: zona drag-drop de PDF es visible 
+    [chromium] › e2e\tests\edge-case\UX-100-101-drag-drop-zones.spec.ts:42:7 › UX-100/UX-101: Drag-drop zones para imagenes y PDF › UX-101: seccion PDF tiene heading correcto 
+    [chromium] › e2e\tests\edge-case\UX-100-101-drag-drop-zones.spec.ts:47:7 › UX-100/UX-101: Drag-drop zones para imagenes y PDF › UX-101: seccion PDF marca como opcional 
+    [chromium] › e2e\tests\edge-case\UX-100-101-drag-drop-zones.spec.ts:53:7 › UX-100/UX-101: Drag-drop zones para imagenes y PDF › zonas de upload son clickables 
+    [chromium] › e2e\tests\edge-case\UX-100-103-product-form-interactions.spec.ts:12:7 › UX-100 to UX-103: Product Form Interactions Edge Cases › UX-100: Image drag-drop zone is visible and clickable 
+    [chromium] › e2e\tests\edge-case\UX-100-103-product-form-interactions.spec.ts:21:7 › UX-100 to UX-103: Product Form Interactions Edge Cases › UX-101: PDF drag-drop zone is visible 
+    [chromium] › e2e\tests\edge-case\UX-100-103-product-form-interactions.spec.ts:26:7 › UX-100 to UX-103: Product Form Interactions Edge Cases › UX-102: Bilingual tabs switch between ES and EN 
+    [chromium] › e2e\tests\edge-case\UX-100-103-product-form-interactions.spec.ts:43:7 › UX-100 to UX-103: Product Form Interactions Edge Cases › UX-103: Category cards have visual selection state 
+    [chromium] › e2e\tests\edge-case\UX-100-103-product-form-interactions.spec.ts:56:7 › UX-100 to UX-103: Product Form Interactions Edge Cases › UX-103: Selecting different category may show conditional fields 
+    [chromium] › e2e\tests\edge-case\UX-100-103-product-form-interactions.spec.ts:73:7 › UX-100 to UX-103: Product Form Interactions Edge Cases › Species tags can be removed 
+    [chromium] › e2e\tests\edge-case\UX-100-103-product-form-interactions.spec.ts:82:7 › UX-100 to UX-103: Product Form Interactions Edge Cases › Add species via input 
+    [chromium] › e2e\tests\edge-case\UX-100-103-product-form-interactions.spec.ts:92:7 › UX-100 to UX-103: Product Form Interactions Edge Cases › Marca dropdown has options 
+    [chromium] › e2e\tests\edge-case\UX-102-103-tabs-categories.spec.ts:14:7 › UX-102/UX-103: Tabs bilingues y seleccion categoria › UX-102: tabs Espanol y English son visibles 
+    [chromium] › e2e\tests\edge-case\UX-102-103-tabs-categories.spec.ts:19:7 › UX-102/UX-103: Tabs bilingues y seleccion categoria › UX-102: tab Espanol esta activo por defecto 
+    [chromium] › e2e\tests\edge-case\UX-102-103-tabs-categories.spec.ts:29:7 › UX-102/UX-103: Tabs bilingues y seleccion categoria › UX-102: click en tab English cambia campos 
+    [chromium] › e2e\tests\edge-case\UX-102-103-tabs-categories.spec.ts:38:7 › UX-102/UX-103: Tabs bilingues y seleccion categoria › UX-103: 3 cards de categoria visibles 
+    [chromium] › e2e\tests\edge-case\UX-102-103-tabs-categories.spec.ts:44:7 › UX-102/UX-103: Tabs bilingues y seleccion categoria › UX-103: Farmacos seleccionado por defecto 
+    [chromium] › e2e\tests\edge-case\UX-102-103-tabs-categories.spec.ts:60:7 › UX-102/UX-103: Tabs bilingues y seleccion categoria › UX-103: cards de categoria son clickables 
+    [chromium] › e2e\tests\edge-case\UX-102-103-tabs-categories.spec.ts:70:7 › UX-102/UX-103: Tabs bilingues y seleccion categoria › UX-103: cada card tiene icono 
+    [chromium] › e2e\tests\edge-case\UX-102-103-tabs-categories.spec.ts:76:7 › UX-102/UX-103: Tabs bilingues y seleccion categoria › especies tags con boton remover 
+    [chromium] › e2e\tests\edge-case\UX-102-103-tabs-categories.spec.ts:85:7 › UX-102/UX-103: Tabs bilingues y seleccion categoria › input para agregar especie existe 
+    [chromium] › e2e\tests\edge-case\UX-102-103-tabs-categories.spec.ts:90:7 › UX-102/UX-103: Tabs bilingues y seleccion categoria › presentaciones tag con boton remover 
+    [chromium] › e2e\tests\edge-case\UX-104-112-panel-interactions.spec.ts:22:7 › UX-105: Categories Tags › Categories page renders in admin panel 
+    [chromium] › e2e\tests\edge-case\UX-104-112-panel-interactions.spec.ts:32:7 › UX-109: Messages Kanban › Messages page renders with message list 
+    [chromium] › e2e\tests\edge-case\UX-104-112-panel-interactions.spec.ts:41:7 › UX-111: Message Detail › Message detail page renders 
+    [chromium] › e2e\tests\flow\UX-002-deep-linking-es.spec.ts:44:7 › UX-002: Deep linking rutas ES › catalogo general via deep link 
+    [chromium] › e2e\tests\flow\UX-004-deep-linking-admin.spec.ts:8:7 › UX-004: Deep linking rutas panel admin › admin dashboard via deep link 
+    [chromium] › e2e\tests\flow\UX-004-deep-linking-admin.spec.ts:13:7 › UX-004: Deep linking rutas panel admin › admin productos via deep link 
+    [chromium] › e2e\tests\flow\UX-004-deep-linking-admin.spec.ts:18:7 › UX-004: Deep linking rutas panel admin › admin marcas via deep link 
+    [chromium] › e2e\tests\flow\UX-004-deep-linking-admin.spec.ts:23:7 › UX-004: Deep linking rutas panel admin › admin categorias via deep link 
+    [chromium] › e2e\tests\flow\UX-004-deep-linking-admin.spec.ts:28:7 › UX-004: Deep linking rutas panel admin › admin mensajes via deep link 
+    [chromium] › e2e\tests\flow\UX-004-deep-linking-admin.spec.ts:33:7 › UX-004: Deep linking rutas panel admin › admin productos crear via deep link 
+    [chromium] › e2e\tests\flow\UX-010-011-admin-layout.spec.ts:6:5 › UX-010: Admin sidebar has all navigation modules 
+    [chromium] › e2e\tests\flow\UX-010-011-admin-layout.spec.ts:28:5 › UX-010: Mensajes has badge with count 
+    [chromium] › e2e\tests\flow\UX-010-011-admin-layout.spec.ts:38:5 › UX-010: Productos submenu expands with category links 
+    [chromium] › e2e\tests\flow\UX-010-011-admin-layout.spec.ts:53:5 › UX-011: Admin header has search, notifications, and avatar 
+    [chromium] › e2e\tests\flow\UX-013-search-contact-flow.spec.ts:4:5 › UX-013: Search product -> view detail -> request info -> contact form pre-populated 
+    [chromium] › e2e\tests\flow\UX-015-admin-crear-producto.spec.ts:8:7 › UX-015: Admin crear producto E2E › formulario crear producto tiene 5 secciones 
+    [chromium] › e2e\tests\flow\UX-015-admin-crear-producto.spec.ts:25:7 › UX-015: Admin crear producto E2E › formulario tiene campos requeridos 
+    [chromium] › e2e\tests\flow\UX-015-admin-crear-producto.spec.ts:35:7 › UX-015: Admin crear producto E2E › categoria selector has 3 options 
+    [chromium] › e2e\tests\flow\UX-015-admin-crear-producto.spec.ts:43:7 › UX-015: Admin crear producto E2E › bilingual tabs ES/EN present 
+    [chromium] › e2e\tests\flow\UX-015-admin-crear-producto.spec.ts:50:7 › UX-015: Admin crear producto E2E › action buttons present 
+    [chromium] › e2e\tests\flow\UX-015-admin-crear-producto.spec.ts:57:7 › UX-015: Admin crear producto E2E › drag-drop zones for images and PDF 
+    [chromium] › e2e\tests\flow\UX-015-admin-crear-producto.spec.ts:64:7 › UX-015: Admin crear producto E2E › toggle switches for active and featured 
+    [chromium] › e2e\tests\flow\UX-018-catalogo-filtros-adaptativos.spec.ts:19:7 › UX-018: Catalogo filtros adaptativos › catalogo general has categoria filter 
+    [chromium] › e2e\tests\flow\UX-025-027-catalogo-detalle.spec.ts:8:7 › UX-025: Catalogo paginacion › catalogo shows pagination with 12 per page 
+    [chromium] › e2e\tests\flow\UX-025-027-catalogo-detalle.spec.ts:22:7 › UX-027: Detalle producto 404 › producto inexistente muestra 404 
+    [chromium] › e2e\tests\flow\UX-026-catalogo-categoria.spec.ts:8:7 › UX-026: Catalogo por categoria › farmacos muestra breadcrumb y filtros especificos 
+    [chromium] › e2e\tests\flow\UX-027-deep-link-product.spec.ts:4:5 › UX-027: Product detail loads via deep link without redirect 
+    [chromium] › e2e\tests\flow\UX-034-marca-individual.spec.ts:8:7 › UX-034: Marca individual › Zoetis brand page renders with products 
+    [chromium] › e2e\tests\flow\UX-034-marca-individual.spec.ts:21:7 › UX-034: Marca individual › brand page has breadcrumb 
+    [chromium] › e2e\tests\flow\UX-034-marca-individual.spec.ts:28:7 › UX-034: Marca individual › non-existent brand shows 404 
+    [chromium] › e2e\tests\flow\UX-040-041-admin-login-dashboard.spec.ts:18:5 › UX-041: Dashboard shows summary cards with correct data 
+    [chromium] › e2e\tests\flow\UX-040-041-admin-login-dashboard.spec.ts:35:5 › UX-041: Dashboard shows category cards with progress 
+    [chromium] › e2e\tests\flow\UX-040-041-admin-login-dashboard.spec.ts:49:5 › UX-041: Dashboard shows recent messages 
+    [chromium] › e2e\tests\flow\UX-040-041-admin-login-dashboard.spec.ts:64:5 › UX-041: Dashboard shows recent activity 
+    [chromium] › e2e\tests\flow\UX-044-conditional-fields.spec.ts:4:5 › UX-044: Selecting category changes visible fields in product form 
+    [chromium] › e2e\tests\flow\UX-045-unsaved-changes-modal.spec.ts:7:7 › UX-045: Modal de cambios sin guardar › UX-045: Muestra modal al intentar navegar con cambios en formulario crear producto 
+    [chromium] › e2e\tests\flow\UX-045-unsaved-changes-modal.spec.ts:24:7 › UX-045: Modal de cambios sin guardar › UX-045: "Seguir editando" mantiene datos en formulario 
+    [chromium] › e2e\tests\flow\UX-045-unsaved-changes-modal.spec.ts:39:7 › UX-045: Modal de cambios sin guardar › UX-045: "Salir sin guardar" navega sin mantener datos 
+    [chromium] › e2e\tests\flow\UX-045-unsaved-changes-modal.spec.ts:53:7 › UX-045: Modal de cambios sin guardar › UX-045: No muestra modal si no hay cambios 
+    [chromium] › e2e\tests\flow\UX-046-delete-confirmation-modal.spec.ts:7:7 › UX-046: Modal de confirmacion de eliminacion › UX-046: Muestra modal al clickar Eliminar en menu opciones de producto 
+    [chromium] › e2e\tests\flow\UX-046-delete-confirmation-modal.spec.ts:31:7 › UX-046: Modal de confirmacion de eliminacion › UX-046: Cancelar cierra modal y mantiene producto 
+    [chromium] › e2e\tests\flow\UX-046-delete-confirmation-modal.spec.ts:54:7 › UX-046: Modal de confirmacion de eliminacion › UX-046: Confirmar eliminacion muestra toast y remueve producto 
+    [chromium] › e2e\tests\flow\UX-047-product-readonly.spec.ts:4:5 › UX-047: Admin product detail shows read-only view with edit link 
+    [chromium] › e2e\tests\flow\UX-048-brands-listing.spec.ts:4:5 › UX-048: Admin brands listing shows brands with create button 
+    [chromium] › e2e\tests\flow\UX-049-brand-form.spec.ts:4:5 › UX-049: Brand creation form shows all fields for creating a brand 
+    [chromium] › e2e\tests\flow\UX-060-067-mock-data.spec.ts:6:5 › UX-060: Admin products list shows 48 products 
+    [chromium] › e2e\tests\flow\UX-060-067-mock-data.spec.ts:17:5 › UX-060: Products span 3 categories with correct counts 
+    [chromium] › e2e\tests\flow\UX-060-067-mock-data.spec.ts:48:5 › UX-064: Home shows 8 featured brand logos 
+    [chromium] › e2e\tests\flow\UX-060-067-mock-data.spec.ts:63:5 › UX-065: Messages kanban has 3 columns with correct counts 
+    [chromium] › e2e\tests\flow\UX-060-067-mock-data.spec.ts:100:5 › UX-067: Dashboard data is coherent (48 products, 3 new messages, 12 brands, 6 featured) 
+    [chromium] › e2e\tests\flow\UX-068-073-mock-content.spec.ts:31:5 › UX-069: Home shows value proposition stats (37+, 100%, 50+, 20+) 
+    [chromium] › e2e\tests\flow\UX-068-073-mock-content.spec.ts:48:5 › UX-071: About page has history, numbers, coverage map, and team 
+    [chromium] › e2e\tests\flow\UX-068-073-mock-content.spec.ts:65:5 › UX-072: Distributors page has hero, benefits, timeline, and form 
+    [chromium] › e2e\tests\flow\UX-070-admin-categorias.spec.ts:8:7 › UX-070: Admin categorias panel › 3 categorias con subcategorias visibles 
+    [chromium] › e2e\tests\flow\UX-070-admin-categorias.spec.ts:17:7 › UX-070: Admin categorias panel › farmacos has familia and especie tags 
+    [chromium] › e2e\tests\flow\UX-070-admin-categorias.spec.ts:32:7 › UX-070: Admin categorias panel › alimentos has etapa de vida tags 
+    [chromium] › e2e\tests\flow\UX-070-admin-categorias.spec.ts:40:7 › UX-070: Admin categorias panel › equipos has tipo tags 
+    [chromium] › e2e\tests\flow\UX-070-admin-categorias.spec.ts:49:7 › UX-070: Admin categorias panel › tags have remove buttons (editable) 
+    [chromium] › e2e\tests\flow\UX-104-formulario-marca.spec.ts:7:7 › UX-104: Formulario de marca › UX-104: Formulario crear marca tiene todos los campos requeridos 
+    [chromium] › e2e\tests\flow\UX-104-formulario-marca.spec.ts:18:7 › UX-104: Formulario de marca › UX-104: Lista de marcas muestra todas las marcas 
+    [chromium] › e2e\tests\flow\UX-109-kanban-drag-drop.spec.ts:7:7 › UX-109: Kanban drag-and-drop mensajes › UX-109: Vista kanban muestra 3 columnas con conteos 
+    [chromium] › e2e\tests\flow\UX-109-kanban-drag-drop.spec.ts:21:7 › UX-109: Kanban drag-and-drop mensajes › UX-109: Cards de mensajes muestran badge tipo, nombre y preview 
+    [chromium] › e2e\tests\flow\UX-109-kanban-drag-drop.spec.ts:32:7 › UX-109: Kanban drag-and-drop mensajes › UX-109: Cards son clickeables y llevan al detalle 
+    [chromium] › e2e\tests\flow\UX-110-mensajes-toggle-kanban-tabla.spec.ts:7:7 › UX-110: Toggle Kanban/Tabla en mensajes › UX-110: Botones de toggle Kanban y Tabla presentes 
+    [chromium] › e2e\tests\flow\UX-110-mensajes-toggle-kanban-tabla.spec.ts:15:7 › UX-110: Toggle Kanban/Tabla en mensajes › UX-110: Vista Kanban muestra columnas con cards 
+    [chromium] › e2e\tests\flow\UX-110-mensajes-toggle-kanban-tabla.spec.ts:25:7 › UX-110: Toggle Kanban/Tabla en mensajes › UX-110: Toggle a vista Tabla muestra tabla con datos 
+    [chromium] › e2e\tests\flow\UX-111-detalle-mensaje.spec.ts:7:7 › UX-111: Detalle de mensaje › UX-111: Muestra datos de contacto completos 
+    [chromium] › e2e\tests\flow\UX-111-detalle-mensaje.spec.ts:24:7 › UX-111: Detalle de mensaje › UX-111: Notas internas con textarea y boton guardar 
+    [chromium] › e2e\tests\flow\UX-111-detalle-mensaje.spec.ts:34:7 › UX-111: Detalle de mensaje › UX-111: Dropdown de estado con opciones 
+    [chromium] › e2e\tests\flow\UX-111-detalle-mensaje.spec.ts:46:7 › UX-111: Detalle de mensaje › UX-111: Botones de accion presentes 
+    [chromium] › e2e\tests\flow\UX-111-detalle-mensaje.spec.ts:55:7 › UX-111: Detalle de mensaje › UX-111: Link "Volver a mensajes" presente 
+    [chromium] › e2e\tests\visual\BVC-013-form-sections.spec.ts:6:7 › BVC-013: Formularios con secciones claras › formulario crear producto tiene secciones con subtitulos Bold y separadores 
+    [chromium] › e2e\tests\visual\BVC-014-021-parcial.spec.ts:29:7 › BVC-021: Flujo Listado > Crear > Detalle › BVC-021: Navigation flow from list to create 
+    [chromium] › e2e\tests\visual\BVC-034-036-panel-layout.spec.ts:11:7 › BVC-034 & BVC-036: Panel layout computed styles › BVC-034: sidebar width ~260-280px 
+    [chromium] › e2e\tests\visual\BVC-034-036-panel-layout.spec.ts:20:7 › BVC-034 & BVC-036: Panel layout computed styles › BVC-034: sidebar background white 
+    [chromium] › e2e\tests\visual\BVC-034-036-panel-layout.spec.ts:26:7 › BVC-034 & BVC-036: Panel layout computed styles › BVC-034: sidebar has right border 
+    [chromium] › e2e\tests\visual\BVC-034-036-panel-layout.spec.ts:33:7 › BVC-034 & BVC-036: Panel layout computed styles › BVC-036: content area background #F7F8FA 
+    [chromium] › e2e\tests\visual\BVC-034-036-panel-layout.spec.ts:40:7 › BVC-034 & BVC-036: Panel layout computed styles › BVC-036: content area padding 32px desktop 
+    [chromium] › e2e\tests\visual\DC-030-to-034-home-images.spec.ts:6:7 › DC-030 to DC-034: Home images regression › DC-030: Hero should have photographic background image, not SVG 
+    [chromium] › e2e\tests\visual\DC-032-brands-section.spec.ts:11:7 › DC-032: Home - Marcas Destacadas section › DC-032: Logos section is visible (opacity != 0, is-visible class applied) 
+    [chromium] › e2e\tests\visual\DC-032-brands-section.spec.ts:38:7 › DC-032: Home - Marcas Destacadas section › DC-032: 6-8 logos displayed in grid 
+    [chromium] › e2e\tests\visual\DC-035-cta-fabricantes.spec.ts:6:7 › DC-035: CTA fabricantes banner › background #008DC9, padding 80px, titulo 36px Bold blanco 
+    [chromium] › e2e\tests\visual\DC-045-panel-login.spec.ts:7:7 › DC-045: Panel Login › DC-045: Login card centered, white bg, radius 16px, shadow 
+    [chromium] › e2e\tests\visual\DC-047-panel-productos-listado.spec.ts:11:7 › DC-047: Panel Productos listado › DC-047: titulo "Productos" con 24px Bold 
+    [chromium] › e2e\tests\visual\DC-047-panel-productos-listado.spec.ts:21:7 › DC-047: Panel Productos listado › DC-047: boton "+ Crear producto" presente con fondo #008DC9 
+    [chromium] › e2e\tests\visual\DC-047-panel-productos-listado.spec.ts:28:7 › DC-047: Panel Productos listado › DC-047: toggle Card/Table presente 
+    [chromium] › e2e\tests\visual\DC-047-panel-productos-listado.spec.ts:42:7 › DC-047: Panel Productos listado › DC-047: product cards tienen badges de categoria y estado 
+    [chromium] › e2e\tests\visual\DC-047-panel-productos-listado.spec.ts:48:7 › DC-047: Panel Productos listado › DC-047: product cards tienen menu 3 puntos 
+    [chromium] › e2e\tests\visual\DC-058-product-gallery.spec.ts:6:7 › DC-058: Product Gallery › DC-058: Gallery has thumbnails and main image 
+    [chromium] › e2e\tests\visual\DC-074-075-panel-cards-toggle.spec.ts:11:7 › DC-074: View Toggle & DC-075: Product Card Admin › DC-074: view toggle has two pill buttons (card/table) 
+    [chromium] › e2e\tests\visual\DC-074-075-panel-cards-toggle.spec.ts:18:7 › DC-074: View Toggle & DC-075: Product Card Admin › DC-074: active toggle has blue background #008DC9 
+    [chromium] › e2e\tests\visual\DC-074-075-panel-cards-toggle.spec.ts:32:7 › DC-074: View Toggle & DC-075: Product Card Admin › DC-075: product card has name bold, brand grey, and badges 
+    [chromium] › e2e\tests\visual\DC-074-075-panel-cards-toggle.spec.ts:42:7 › DC-074: View Toggle & DC-075: Product Card Admin › DC-075: product card has 3-dot menu 
+    [chromium] › e2e\tests\visual\DC-089-panel-cards-responsive.spec.ts:6:7 › DC-089: Panel cards responsive › product cards render as grid with radius 16px in admin 
+    [chromium] › e2e\tests\visual\DC-097-brands-responsive.spec.ts:6:7 › DC-097: Brands section responsive › DC-097: Desktop 1440px - 4 logos per row 
+    [chromium] › e2e\tests\visual\DC-097-brands-responsive.spec.ts:19:7 › DC-097: Brands section responsive › DC-097: Mobile 375px - logos grid adapts 
+    [chromium] › e2e\tests\visual\DC-097-brands-responsive.spec.ts:33:7 › DC-097: Brands section responsive › DC-097: Tablet 768px - logos grid adapts 
+    [chromium] › e2e\tests\visual\DC-098-tabs-pill.spec.ts:6:7 › DC-098: Tabs pill responsive › bilingual tabs visible in product form 
+    [chromium] › e2e\tests\visual\DC-128-validation-inline.spec.ts:6:7 › DC-128: Inline form validation › DC-128: Required field shows error on blur 
+    [chromium] › e2e\tests\visual\NFR-001-003-performance.spec.ts:34:7 › NFR-001/NFR-003: Performance metrics › NFR-003: CLS on home page is acceptable 
+    [chromium] › e2e\tests\visual\NFR-005-panel-load.spec.ts:6:7 › NFR-005: Panel carga inicial < 3s › admin productos carga en menos de 3 segundos 
+    [chromium] › e2e\tests\visual\NFR-026-tap-targets.spec.ts:22:7 › NFR-026: Tap targets >= 44x44px en mobile › majority of interactive elements meet 44px minimum 
+  286 passed (11.0m)

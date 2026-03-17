@@ -1,0 +1,188 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e2]:
+  - generic:
+    - navigation "Navegacion principal" [ref=e3]:
+      - generic [ref=e4]:
+        - link "HESA - Ir al inicio" [ref=e5] [cursor=pointer]:
+          - /url: /es
+          - generic [ref=e6]: HESA
+          - generic [ref=e7]: H
+        - navigation [ref=e8]:
+          - generic [ref=e9]:
+            - link "Catalogo" [ref=e10] [cursor=pointer]:
+              - /url: /es/catalogo
+              - text: Catalogo
+              - img [ref=e11]
+            - generic:
+              - link "Farmacos Veterinarios":
+                - /url: /es/catalogo/farmacos
+                - img
+                - text: Farmacos Veterinarios
+              - link "Alimentos para Animales":
+                - /url: /es/catalogo/alimentos
+                - img
+                - text: Alimentos para Animales
+              - link "Equipos Veterinarios":
+                - /url: /es/catalogo/equipos
+                - img
+                - text: Equipos Veterinarios
+          - link "Marcas" [ref=e13] [cursor=pointer]:
+            - /url: /es/marcas
+          - link "Nosotros" [ref=e14] [cursor=pointer]:
+            - /url: /es/nosotros
+          - link "Distribuidores" [ref=e15] [cursor=pointer]:
+            - /url: /es/distribuidores
+          - link "Contacto" [ref=e16] [cursor=pointer]:
+            - /url: /es/contacto
+        - generic [ref=e17]:
+          - button "Buscar productos y marcas" [ref=e18] [cursor=pointer]:
+            - img [ref=e19]
+          - listbox "Seleccionar idioma" [ref=e23]:
+            - button "ES" [ref=e24] [cursor=pointer]:
+              - generic [ref=e25]: ES
+              - img [ref=e26]
+    - generic:
+      - search "Busqueda global":
+        - generic:
+          - button "Cerrar busqueda":
+            - img
+          - generic:
+            - img
+            - textbox "Buscar productos, marcas..."
+          - paragraph: Escribe al menos 3 caracteres
+  - generic [ref=e28]:
+    - generic [ref=e39]:
+      - generic [ref=e41]:
+        - generic [ref=e42]:
+          - heading "Farmacos Veterinarios" [level=2] [ref=e43]
+          - paragraph [ref=e44]: Contamos con una linea completa de farmacos veterinarios de las mejores marcas internacionales para el tratamiento y prevencion de enfermedades en todas las especies.
+          - list [ref=e45]:
+            - listitem [ref=e46]:
+              - img [ref=e47]
+              - generic [ref=e49]: Antibioticos y antiparasitarios de ultima generacion
+            - listitem [ref=e50]:
+              - img [ref=e51]
+              - generic [ref=e53]: Formulas aprobadas por SENASA
+            - listitem [ref=e54]:
+              - img [ref=e55]
+              - generic [ref=e57]: Asesoramiento tecnico especializado
+          - link "Ver farmacos" [ref=e58] [cursor=pointer]:
+            - /url: /es/catalogo/farmacos
+        - img [ref=e61]
+      - generic [ref=e99]:
+        - generic [ref=e100]:
+          - heading "Alimentos para Animales" [level=2] [ref=e101]
+          - paragraph [ref=e102]: Ofrecemos las mejores marcas de nutricion animal para perros, gatos y otras especies, cubriendo todas las etapas de vida con formulas premium.
+          - list [ref=e103]:
+            - listitem [ref=e104]:
+              - img [ref=e105]
+              - generic [ref=e107]: Marcas premium internacionales
+            - listitem [ref=e108]:
+              - img [ref=e109]
+              - generic [ref=e111]: Nutricion especializada por etapa de vida
+            - listitem [ref=e112]:
+              - img [ref=e113]
+              - generic [ref=e115]: Lineas terapeuticas y de prescripcion
+          - link "Ver alimentos" [ref=e116] [cursor=pointer]:
+            - /url: /es/catalogo/alimentos
+        - img [ref=e119]
+      - generic [ref=e163]:
+        - generic [ref=e164]:
+          - heading "Equipos Veterinarios" [level=2] [ref=e165]
+          - paragraph [ref=e166]: Equipamiento profesional para clinicas y hospitales veterinarios, desde instrumental quirurgico hasta equipos de diagnostico de alta precision.
+          - list [ref=e167]:
+            - listitem [ref=e168]:
+              - img [ref=e169]
+              - generic [ref=e171]: Equipos de diagnostico avanzado
+            - listitem [ref=e172]:
+              - img [ref=e173]
+              - generic [ref=e175]: Instrumental quirurgico certificado
+            - listitem [ref=e176]:
+              - img [ref=e177]
+              - generic [ref=e179]: Soporte tecnico y capacitacion
+          - link "Ver equipos" [ref=e180] [cursor=pointer]:
+            - /url: /es/catalogo/equipos
+        - img [ref=e183]
+    - generic [ref=e219]:
+      - generic "37+ Anos de experiencia en el sector veterinario" [ref=e221]:
+        - img [ref=e223]
+        - generic [ref=e225]:
+          - text: 0+
+          - generic [ref=e226]: 37+
+        - generic [ref=e227]: Anos de experiencia en el sector veterinario
+      - generic "100% Cobertura nacional con agentes propios" [ref=e229]:
+        - img [ref=e231]
+        - generic [ref=e233]:
+          - text: 0%
+          - generic [ref=e234]: 100%
+        - generic [ref=e235]: Cobertura nacional con agentes propios
+      - generic "50+ Colaboradores dedicados al sector veterinario" [ref=e237]:
+        - img [ref=e239]
+        - generic [ref=e241]:
+          - text: 0+
+          - generic [ref=e242]: 50+
+        - generic [ref=e243]: Colaboradores dedicados al sector veterinario
+      - generic "20+ Marcas internacionales de primer nivel" [ref=e245]:
+        - img [ref=e247]
+        - generic [ref=e249]:
+          - text: 0+
+          - generic [ref=e250]: 20+
+        - generic [ref=e251]: Marcas internacionales de primer nivel
+    - generic [ref=e275]:
+      - heading "Somos su socio de distribucion en Costa Rica" [level=2] [ref=e276]
+      - paragraph [ref=e277]: Con 37 anos de experiencia y cobertura nacional, conectamos fabricantes internacionales con el mercado veterinario costarricense.
+      - link "Conocer mas" [ref=e278] [cursor=pointer]:
+        - /url: /es/distribuidores
+  - contentinfo "Pie de pagina" [ref=e280]:
+    - generic [ref=e282]:
+      - generic [ref=e283]:
+        - generic [ref=e284]: HESA
+        - paragraph [ref=e285]: 37 anos distribuyendo salud animal en Costa Rica
+      - generic [ref=e287]:
+        - heading "Navegacion" [level=3] [ref=e288]
+        - navigation [ref=e289]:
+          - link "Inicio" [ref=e290] [cursor=pointer]:
+            - /url: /es
+          - link "Catalogo" [ref=e291] [cursor=pointer]:
+            - /url: /es/catalogo
+          - link "Marcas" [ref=e292] [cursor=pointer]:
+            - /url: /es/marcas
+          - link "Nosotros" [ref=e293] [cursor=pointer]:
+            - /url: /es/nosotros
+          - link "Distribuidores" [ref=e294] [cursor=pointer]:
+            - /url: /es/distribuidores
+          - link "Contacto" [ref=e295] [cursor=pointer]:
+            - /url: /es/contacto
+      - generic [ref=e297]:
+        - heading "Contacto" [level=3] [ref=e298]
+        - generic [ref=e299]:
+          - paragraph [ref=e300]:
+            - img [ref=e301]
+            - text: +506 2260-9020
+          - paragraph [ref=e303]:
+            - img [ref=e304]
+            - text: info@hesa.co.cr
+          - paragraph [ref=e307]:
+            - img [ref=e308]
+            - text: Calle 2, av 12. Heredia, Costa Rica
+          - paragraph [ref=e311]:
+            - img [ref=e312]
+            - text: "Lun - Vie: 8:00 - 17:00"
+      - generic [ref=e316]:
+        - heading "Redes Sociales" [level=3] [ref=e317]
+        - generic [ref=e318]:
+          - link "Facebook" [ref=e319] [cursor=pointer]:
+            - /url: https://facebook.com/hesacr
+            - img [ref=e320]
+          - link "Instagram" [ref=e322] [cursor=pointer]:
+            - /url: https://instagram.com/hesacr
+            - img [ref=e323]
+    - generic [ref=e327]:
+      - paragraph [ref=e328]: © HESA 2026. Todos los derechos reservados.
+      - button "English" [ref=e330] [cursor=pointer]
+  - button "Contactar por WhatsApp" [ref=e331] [cursor=pointer]:
+    - img [ref=e332]
+    - generic: Escribenos por WhatsApp
+```

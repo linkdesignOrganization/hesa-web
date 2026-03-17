@@ -31,6 +31,7 @@
     font-weight: var(--weight-medium);
     color: var(--neutral-900);
     transition: border-color 0.15s ease-out;
+    min-height: 44px;
 
     &:hover {
       border-color: var(--brand-primary);
@@ -78,6 +79,14 @@
     border-radius: 50%;
     color: var(--brand-primary);
     transition: background-color 0.15s ease-out;
+    // NFR-026: Ensure minimum 44px touch target on mobile via padding
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: -13px;
+    }
 
     &:hover {
       background-color: var(--brand-primary);
@@ -118,5 +127,6 @@
     color: var(--neutral-900);
     width: 100%;
     justify-content: center;
+    min-height: 44px;
   }
 }

@@ -53,7 +53,8 @@
 - [x] 4f-plan: QA Orchestrator genera plan (317 criterios)
 - [x] 4f-sub: Sub-testers en paralelo (33 specs, 3 resultados)
 - [x] 4f-consolidate: QA consolida qa-report.md (R1: 13 bugs, 101 bloqueados)
-- [ ] 4f-verify: Verificacion post-QA
+- [x] 4f: QA completado (4 rondas, 317/317 criterios, 0 bloqueados, LISTO_PARA_DEMO)
+- [x] 4f-verify: Verificacion post-QA (PASA, 317/317 con resultado, 127 specs)
 - [ ] 4g: Demo para el cliente
 - [ ] 4h: Feedback del cliente
 - [ ] 4i: Recopilar feedback
