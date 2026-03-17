@@ -1,0 +1,166 @@
+// =============================================================================
+// Form Styles (DC-059, DC-077, DC-128, DC-129)
+// =============================================================================
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.form-label {
+  font-size: var(--text-small);
+  font-weight: var(--weight-medium);
+  color: var(--neutral-900);
+
+  .required {
+    color: var(--semantic-danger);
+    margin-left: 2px;
+  }
+}
+
+.form-control {
+  width: 100%;
+  height: 44px;
+  padding: 12px 16px;
+  font-size: 15px;
+  font-family: var(--font-family);
+  color: var(--neutral-900);
+  background-color: var(--neutral-white);
+  border: 1px solid var(--neutral-200);
+  border-radius: var(--radius-input);
+  transition: border-color 0.15s ease-out, box-shadow 0.15s ease-out;
+
+  &::placeholder {
+    color: var(--neutral-400);
+  }
+
+  &:focus {
+    border-color: var(--brand-primary);
+    border-width: 2px;
+    padding: 11px 15px; // compensate for 2px border
+    box-shadow: 0 0 0 3px rgba(0, 141, 201, 0.15);
+    outline: none;
+  }
+
+  &.is-invalid {
+    border-color: var(--semantic-danger);
+    border-width: 2px;
+    padding: 11px 15px;
+
+    &:focus {
+      box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+    }
+  }
+
+  &:disabled {
+    background-color: var(--neutral-50);
+    color: var(--neutral-400);
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+}
+
+textarea.form-control {
+  height: 120px;
+  resize: vertical;
+}
+
+.form-select {
+  width: 100%;
+  height: 44px;
+  padding: 12px 16px;
+  font-size: 15px;
+  font-family: var(--font-family);
+  color: var(--neutral-900);
+  background-color: var(--neutral-white);
+  border: 1px solid var(--neutral-200);
+  border-radius: var(--radius-input);
+  transition: border-color 0.15s ease-out, box-shadow 0.15s ease-out;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%236B7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+  padding-right: 40px;
+}
+
+// DC-128: Validation message
+.form-error {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--text-label);
+  color: var(--semantic-danger);
+  margin-top: var(--space-1);
+
+  svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+  }
+}
+
+// Toggle switch (DC-077)
+.form-switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+
+  input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .switch-slider {
+    position: absolute;
+    inset: 0;
+    background-color: var(--neutral-200);
+    border-radius: 12px;
+    transition: background-color 0.2s ease-out;
+    cursor: pointer;
+
+    &::before {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      left: 2px;
+      bottom: 2px;
+      background-color: var(--neutral-white);
+      border-radius: 50%;
+      transition: transform 0.2s ease-out;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  input:checked + .switch-slider {
+    background-color: var(--brand-primary);
+
+    &::before {
+      transform: translateX(20px);
+    }
+  }
+
+  input:focus-visible + .switch-slider {
+    outline: 2px solid var(--brand-primary);
+    outline-offset: 2px;
+  }
+}
+
+// Form grid (2 cols desktop, 1 col mobile)
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .form-group-full {
+    grid-column: 1 / -1;
+  }
+}

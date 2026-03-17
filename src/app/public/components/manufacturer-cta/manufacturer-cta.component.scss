@@ -1,0 +1,43 @@
+// =============================================================================
+// Manufacturer CTA Banner (DC-035, DC-064)
+// =============================================================================
+
+.mfr-cta {
+  background-color: var(--brand-primary);
+  padding: 48px 20px;
+  text-align: center;
+
+  @media (min-width: 768px) {
+    padding: 80px 40px;
+  }
+
+  &__inner {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  &__title {
+    font-size: 28px;
+    font-weight: var(--weight-bold);
+    color: var(--neutral-white);
+
+    @media (min-width: 768px) {
+      font-size: var(--text-h3);
+    }
+  }
+
+  &__desc {
+    font-size: var(--text-body);
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.7;
+    margin-top: 16px;
+  }
+
+  &__btn {
+    margin-top: 32px;
+
+    @media (max-width: 767px) {
+      width: 100%;
+    }
+  }
+}

@@ -1,0 +1,13 @@
+<section class="logos-section fade-in-section">
+  <div class="container">
+    <h2 class="logos-section__title">{{ i18n.currentLang() === 'es' ? 'Marcas que Distribuimos' : 'Brands We Distribute' }}</h2>
+    <div class="logos-section__grid" role="list">
+      @for (brand of featuredBrands(); track brand.id) {
+        <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'marcas' : 'brands') + '/' + brand.slug" class="logos-section__logo" role="listitem" [attr.aria-label]="(i18n.currentLang() === 'es' ? 'Ver productos de ' : 'View products by ') + brand.name">
+          <span class="logos-section__logo-text">{{ brand.logoPlaceholder }}</span>
+        </a>
+      }
+    </div>
+    <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'marcas' : 'brands')" class="logos-section__view-all">{{ i18n.currentLang() === 'es' ? 'Ver todas las marcas' : 'View all brands' }}</a>
+  </div>
+</section>

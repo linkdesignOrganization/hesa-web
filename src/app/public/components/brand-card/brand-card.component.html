@@ -1,0 +1,19 @@
+<a class="brand-card" [routerLink]="brandLink" [attr.aria-label]="'Ver marca ' + displayName">
+  <div class="brand-card__logo">
+    <span class="brand-card__logo-initial">{{ logoInitial }}</span>
+  </div>
+  <h3 class="brand-card__name">{{ displayName }}</h3>
+  <p class="brand-card__country">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+    {{ displayCountry }}
+  </p>
+  <div class="brand-card__badges">
+    @for (cat of displayCategories; track cat) {
+      <span
+        class="badge"
+        [class.badge-pharma]="cat === 'Farmacos'"
+        [class.badge-food]="cat === 'Alimentos'"
+        [class.badge-equipment]="cat === 'Equipos'">{{ cat }}</span>
+    }
+  </div>
+</a>

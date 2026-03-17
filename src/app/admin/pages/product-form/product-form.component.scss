@@ -1,0 +1,384 @@
+// =============================================================================
+// Admin Product Form (DC-048, DC-077, DC-078, DC-091, DC-098)
+// =============================================================================
+
+.product-form-page {
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+    gap: 16px;
+
+    h1 {
+      font-size: var(--text-panel-title);
+      font-weight: var(--weight-bold);
+    }
+  }
+
+  &__actions {
+    display: flex;
+    gap: 12px;
+
+    @media (max-width: 767px) {
+      display: none;
+    }
+  }
+
+  // Mobile sticky (DC-091)
+  &__sticky-actions {
+    display: none;
+
+    @media (max-width: 767px) {
+      display: flex;
+      gap: 12px;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 16px;
+      background-color: var(--neutral-white);
+      border-top: 1px solid var(--neutral-200);
+      box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+      z-index: var(--z-sticky);
+    }
+  }
+}
+
+// ---- Tabs Pill (DC-098) ----
+.tabs-pill {
+  display: flex;
+  background-color: var(--neutral-white);
+  border: 1px solid var(--neutral-200);
+  border-radius: 24px;
+  overflow: hidden;
+  width: fit-content;
+  margin-bottom: 24px;
+
+  @media (max-width: 767px) {
+    width: 100%;
+  }
+
+  &__btn {
+    padding: 8px 20px;
+    font-size: 14px;
+    font-weight: var(--weight-medium);
+    color: var(--neutral-400);
+    transition: all 0.2s ease-out;
+
+    @media (max-width: 767px) {
+      flex: 1;
+      text-align: center;
+    }
+
+    &--active {
+      background-color: var(--brand-primary);
+      color: var(--neutral-white);
+    }
+
+    &:hover:not(.tabs-pill__btn--active) {
+      background-color: var(--neutral-50);
+    }
+  }
+}
+
+.product-form {
+  background-color: var(--neutral-white);
+  border-radius: var(--radius-card-panel);
+  box-shadow: var(--shadow-sm);
+  padding: 32px;
+
+  @media (max-width: 767px) {
+    padding: 20px;
+    margin-bottom: 80px; // space for sticky
+  }
+
+  &__section {
+    margin-bottom: 8px;
+  }
+
+  &__section-title {
+    font-size: 18px;
+    font-weight: var(--weight-bold);
+    color: var(--neutral-900);
+    margin-bottom: 4px;
+  }
+
+  &__section-desc {
+    font-size: 14px;
+    color: var(--neutral-400);
+    margin-bottom: 20px;
+  }
+
+  &__divider {
+    border: none;
+    border-top: 1px solid var(--neutral-200);
+    margin: 32px 0;
+  }
+
+  // Chips / Tag input (DC-077)
+  &__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 8px 12px;
+    border: 1px solid var(--neutral-200);
+    border-radius: var(--radius-input);
+    min-height: 44px;
+    align-items: center;
+  }
+
+  &__chip {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    background-color: var(--surface-pharma);
+    color: var(--brand-primary);
+    border-radius: var(--radius-pill);
+    font-size: 13px;
+    font-weight: var(--weight-medium);
+
+    button {
+      font-size: 16px;
+      color: var(--brand-primary);
+      margin-left: 2px;
+      line-height: 1;
+    }
+  }
+
+  &__chip-input {
+    border: none;
+    outline: none;
+    font-size: 14px;
+    flex: 1;
+    min-width: 120px;
+
+    &::placeholder {
+      color: var(--neutral-400);
+    }
+  }
+
+  // Toggle row
+  &__toggle-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--neutral-200);
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  &__toggle-hint {
+    font-size: 13px;
+    color: var(--neutral-400);
+    margin-top: 2px;
+  }
+
+  // UX-103: Category selection cards
+  &__category-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+
+    @media (max-width: 480px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__category-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 20px 16px;
+    border: 2px solid var(--neutral-200);
+    border-radius: 12px;
+    background-color: var(--neutral-white);
+    cursor: pointer;
+    transition: all 0.2s ease-out;
+
+    &:hover {
+      border-color: var(--neutral-400);
+      background-color: var(--neutral-50);
+    }
+
+    &--active {
+      border-color: var(--brand-primary);
+      background-color: var(--surface-pharma);
+
+      .product-form__category-label {
+        color: var(--brand-primary);
+        font-weight: var(--weight-bold);
+      }
+    }
+  }
+
+  &__category-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &--pharma {
+      background-color: rgba(0, 141, 201, 0.1);
+      color: var(--brand-primary);
+    }
+
+    &--food {
+      background-color: rgba(34, 197, 94, 0.1);
+      color: var(--semantic-success);
+    }
+
+    &--equipment {
+      background-color: rgba(107, 114, 128, 0.1);
+      color: var(--neutral-400);
+    }
+  }
+
+  &__category-label {
+    font-size: 14px;
+    font-weight: var(--weight-medium);
+    color: var(--neutral-900);
+  }
+
+  // UX-044: Conditional field fade animation
+  &__conditional-field {
+    animation: fadeIn 0.3s ease-out;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// UX-045: Unsaved changes modal
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1050;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal-dialog {
+  background-color: var(--neutral-white);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  padding: 32px;
+  max-width: 420px;
+  width: 100%;
+  text-align: center;
+
+  &__icon {
+    margin-bottom: 16px;
+  }
+
+  &__title {
+    font-size: 20px;
+    font-weight: var(--weight-bold);
+    color: var(--neutral-900);
+    margin-bottom: 8px;
+  }
+
+  &__desc {
+    font-size: 14px;
+    color: var(--neutral-400);
+    line-height: 1.5;
+    margin-bottom: 24px;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+
+    @media (max-width: 480px) {
+      flex-direction: column;
+    }
+  }
+}
+
+// ---- Image Uploader (DC-078) ----
+.image-uploader {
+  &__dropzone {
+    border: 2px dashed var(--neutral-200);
+    border-radius: 12px;
+    background-color: var(--neutral-100);
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.2s ease-out, background-color 0.2s ease-out;
+
+    &:hover {
+      border-color: var(--brand-primary);
+      background-color: var(--surface-pharma);
+    }
+
+    p {
+      font-size: 14px;
+      color: var(--neutral-400);
+
+      span {
+        color: var(--brand-primary);
+        font-weight: var(--weight-medium);
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &__hint {
+    font-size: 12px;
+    color: var(--neutral-400);
+  }
+
+  // DC-122: Upload progress bar
+  &__progress {
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  &__progress-bar {
+    flex: 1;
+    height: 4px;
+    border-radius: 2px;
+    background-color: var(--neutral-200);
+    overflow: hidden;
+  }
+
+  &__progress-fill {
+    height: 100%;
+    border-radius: 2px;
+    background-color: var(--brand-primary);
+    transition: width 0.3s ease-out;
+  }
+
+  &__progress-text {
+    font-size: 13px;
+    color: var(--neutral-400);
+    white-space: nowrap;
+    font-weight: var(--weight-medium);
+  }
+}

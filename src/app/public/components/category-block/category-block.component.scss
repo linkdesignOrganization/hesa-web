@@ -1,0 +1,112 @@
+// =============================================================================
+// Category Block (DC-031, DC-061, DC-083)
+// =============================================================================
+
+.cat-block {
+  border-radius: var(--radius-block);
+  padding: var(--block-padding-mobile);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  align-items: center;
+
+  @media (min-width: 1024px) {
+    grid-template-columns: 1fr 1fr;
+    padding: var(--block-padding-desktop);
+  }
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    padding: var(--block-padding-tablet);
+  }
+
+  // Backgrounds per category (DC-005)
+  &--pharma {
+    background-color: var(--surface-pharma);
+  }
+
+  &--food {
+    background-color: var(--surface-food);
+  }
+
+  &--equipment {
+    background-color: var(--surface-equipment);
+  }
+
+  // Alternate image position (DC-031)
+  &--img-left {
+    @media (min-width: 1024px) {
+      .cat-block__image {
+        order: -1;
+      }
+    }
+  }
+
+  // Mobile: reduce radius (DC-083)
+  @media (max-width: 767px) {
+    border-radius: 16px;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__title {
+    font-size: var(--text-h3);
+    font-weight: var(--weight-bold);
+    color: var(--neutral-900);
+    margin-bottom: 16px;
+
+    @media (max-width: 767px) {
+      font-size: 24px;
+    }
+  }
+
+  &__desc {
+    font-size: var(--text-body);
+    color: var(--neutral-400);
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+
+  &__benefits {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  &__benefit {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 15px;
+    color: var(--neutral-900);
+
+    svg {
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+  }
+
+  &__cta {
+    align-self: flex-start;
+  }
+
+  &__image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__image-placeholder {
+    width: 100%;
+    aspect-ratio: 4/3;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-height: 400px;
+  }
+}

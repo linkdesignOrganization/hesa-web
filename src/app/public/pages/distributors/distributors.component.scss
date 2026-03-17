@@ -1,0 +1,123 @@
+// =============================================================================
+// Distributors Page (DC-042, DC-095, DC-096)
+// =============================================================================
+
+.dist-hero {
+  position: relative;
+  min-height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: var(--neutral-900);
+  padding-top: 70px;
+
+  @media (max-width: 767px) {
+    min-height: 40vh;
+  }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  &__content {
+    position: relative;
+    z-index: 1;
+    max-width: 680px;
+  }
+
+  &__title {
+    font-size: var(--text-h1);
+    font-weight: var(--weight-extrabold);
+    color: var(--neutral-white);
+    letter-spacing: var(--tracking-tight);
+
+    @media (max-width: 767px) {
+      font-size: 32px;
+    }
+  }
+
+  &__subtitle {
+    font-size: var(--text-body-lg);
+    color: rgba(255, 255, 255, 0.85);
+    margin-top: 16px;
+    line-height: 1.6;
+    margin-bottom: 32px;
+  }
+}
+
+// ---- Benefits Grid ----
+.dist-benefits {
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (min-width: 1024px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  &__card {
+    background-color: var(--neutral-white);
+    border-radius: var(--radius-card-public);
+    box-shadow: var(--shadow-sm);
+    padding: 32px 24px;
+    text-align: center;
+  }
+
+  &__icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: rgba(0, 141, 201, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+  }
+
+  &__title {
+    font-size: 18px;
+    font-weight: var(--weight-bold);
+    color: var(--neutral-900);
+    margin-bottom: 8px;
+  }
+
+  &__desc {
+    font-size: 14px;
+    color: var(--neutral-400);
+    line-height: 1.5;
+  }
+}
+
+// ---- Form layout (DC-042) ----
+.dist-form {
+  &__layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 48px;
+
+    @media (min-width: 768px) {
+      grid-template-columns: 40% 60%;
+    }
+  }
+
+  &__info {
+    h2 {
+      margin-bottom: 16px;
+    }
+
+    p {
+      font-size: var(--text-body);
+      color: var(--neutral-400);
+      line-height: 1.7;
+    }
+  }
+}

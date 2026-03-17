@@ -1,0 +1,98 @@
+<!-- CATALOG BY CATEGORY -->
+<section class="catalog-page">
+  <div class="container">
+    <app-breadcrumb [items]="breadcrumbs" />
+
+    <div class="catalog-page__header">
+      <h1 class="text-h2">{{ categoryName }}</h1>
+      <span class="catalog-page__count">{{ filteredProducts().length }} {{ i18n.currentLang() === 'es' ? 'productos' : 'products' }}</span>
+    </div>
+
+    <!-- Contextual Filters -->
+    <div class="filter-bar">
+      <div class="filter-bar__dropdowns">
+        <select class="filter-bar__dropdown" (change)="applyFilter('brand', $any($event.target).value)">
+          <option value="">{{ i18n.currentLang() === 'es' ? 'Marca' : 'Brand' }}</option>
+          @for (brand of uniqueBrands; track brand) { <option [value]="brand">{{ brand }}</option> }
+        </select>
+
+        @if (categoryType === 'farmacos') {
+          <select class="filter-bar__dropdown" (change)="applyFilter('species', $any($event.target).value)">
+            <option value="">{{ i18n.currentLang() === 'es' ? 'Especie' : 'Species' }}</option>
+            <option value="Caninos">Caninos</option><option value="Felinos">Felinos</option><option value="Bovinos">Bovinos</option><option value="Equinos">Equinos</option><option value="Porcinos">Porcinos</option><option value="Aves">Aves</option>
+          </select>
+          <select class="filter-bar__dropdown" (change)="applyFilter('family', $any($event.target).value)">
+            <option value="">{{ i18n.currentLang() === 'es' ? 'Familia' : 'Family' }}</option>
+            <option value="Antibioticos">Antibioticos</option><option value="Desparasitantes">Desparasitantes</option><option value="Vitaminas">Vitaminas</option><option value="Analgosicos">Analgosicos</option><option value="Antiinflamatorios">Antiinflamatorios</option>
+          </select>
+        }
+
+        @if (categoryType === 'alimentos') {
+          <select class="filter-bar__dropdown" (change)="applyFilter('species', $any($event.target).value)">
+            <option value="">{{ i18n.currentLang() === 'es' ? 'Especie' : 'Species' }}</option>
+            <option value="Caninos">Caninos</option><option value="Felinos">Felinos</option>
+          </select>
+          <select class="filter-bar__dropdown" (change)="applyFilter('lifeStage', $any($event.target).value)">
+            <option value="">{{ i18n.currentLang() === 'es' ? 'Etapa de vida' : 'Life stage' }}</option>
+            <option value="Cachorro/Kitten">Cachorro/Kitten</option><option value="Adulto">Adulto</option><option value="Senior">Senior</option><option value="Todas las etapas">Todas las etapas</option>
+          </select>
+        }
+
+        @if (categoryType === 'equipos') {
+          <select class="filter-bar__dropdown" (change)="applyFilter('equipmentType', $any($event.target).value)">
+            <option value="">{{ i18n.currentLang() === 'es' ? 'Tipo' : 'Type' }}</option>
+            <option value="Diagnostico">Diagnostico</option><option value="Quirurgico">Quirurgico</option><option value="Laboratorio">Laboratorio</option><option value="Instrumental">Instrumental</option>
+          </select>
+        }
+      </div>
+    </div>
+
+    @if (activeFilters.length > 0) {
+      <div class="filter-bar__pills">
+        @for (filter of activeFilters; track filter.key) {
+          <span class="filter-bar__pill">{{ filter.label }}
+            <button class="filter-bar__pill-remove" (click)="removeFilter(filter.key)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+          </span>
+        }
+        <button class="filter-bar__clear" (click)="clearFilters()">{{ i18n.currentLang() === 'es' ? 'Limpiar filtros' : 'Clear filters' }}</button>
+      </div>
+    }
+
+    @if (loading()) {
+      <div class="catalog-page__grid">
+        @for (i of [1,2,3,4,5,6,7,8,9]; track i) {
+          <div class="skeleton-card-product"><div class="skeleton-block" style="aspect-ratio: 1; border-radius: 8px;"></div><div class="skeleton-block" style="height: 16px; width: 80%; margin-top: 12px;"></div><div class="skeleton-block" style="height: 12px; width: 50%; margin-top: 8px;"></div></div>
+        }
+      </div>
+    } @else if (filteredProducts().length === 0 && activeFilters.length > 0) {
+      <div class="catalog-page__state catalog-page__state--no-results">
+        <h2 class="catalog-page__state-title">{{ i18n.currentLang() === 'es' ? 'No se encontraron productos con estos filtros' : 'No products found with these filters' }}</h2>
+        <button class="btn btn-outline" (click)="clearFilters()">{{ i18n.currentLang() === 'es' ? 'Limpiar filtros' : 'Clear filters' }}</button>
+      </div>
+    } @else if (filteredProducts().length === 0) {
+      <div class="catalog-page__state catalog-page__state--empty">
+        <h2 class="catalog-page__state-title">{{ i18n.currentLang() === 'es' ? 'No hay productos disponibles actualmente' : 'No products currently available' }}</h2>
+      </div>
+    } @else {
+      <div class="catalog-page__grid">
+        @for (product of paginatedProducts(); track product.id) {
+          <app-product-card [product]="product" />
+        }
+      </div>
+      @if (totalPages() > 1) {
+        <div class="pagination">
+          <span class="pagination__info">{{ (currentPage() - 1) * pageSize + 1 }}-{{ Math.min(currentPage() * pageSize, filteredProducts().length) }} {{ i18n.currentLang() === 'es' ? 'de' : 'of' }} {{ filteredProducts().length }}</span>
+          <div class="pagination__controls">
+            <button class="pagination__btn" [disabled]="currentPage() === 1" (click)="goToPage(currentPage() - 1)">&laquo;</button>
+            @for (page of pagesArray; track page) {
+              <button class="pagination__btn" [class.pagination__btn--active]="page === currentPage()" (click)="goToPage(page)">{{ page }}</button>
+            }
+            <button class="pagination__btn" [disabled]="currentPage() === totalPages()" (click)="goToPage(currentPage() + 1)">&raquo;</button>
+          </div>
+        </div>
+      }
+    }
+  </div>
+</section>

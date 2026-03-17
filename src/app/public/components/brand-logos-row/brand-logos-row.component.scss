@@ -1,0 +1,84 @@
+// =============================================================================
+// Brand Logos Row (DC-032, DC-097, DC-140)
+// =============================================================================
+
+.logos-section {
+  padding: 64px 0;
+  text-align: center;
+
+  &__title {
+    font-size: var(--text-h2);
+    font-weight: var(--weight-bold);
+    color: var(--neutral-900);
+    margin-bottom: 48px;
+
+    @media (max-width: 767px) {
+      font-size: 28px;
+      margin-bottom: 32px;
+    }
+  }
+
+  &__grid {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 48px;
+
+    @media (max-width: 1279px) {
+      gap: 32px;
+    }
+
+    @media (max-width: 767px) {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+  }
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 120px;
+    height: 60px;
+    filter: grayscale(100%) opacity(0.6);
+    transition: filter 0.3s ease-out;
+    text-decoration: none;
+    cursor: pointer;
+
+    @media (max-width: 767px) {
+      width: 80px;
+    }
+
+    &:hover {
+      filter: grayscale(0%) opacity(1);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--brand-primary);
+      outline-offset: 4px;
+    }
+  }
+
+  &__logo-text {
+    font-size: 14px;
+    font-weight: var(--weight-bold);
+    color: var(--neutral-400);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  &__view-all {
+    display: inline-block;
+    margin-top: 40px;
+    font-size: 15px;
+    font-weight: var(--weight-medium);
+    color: var(--brand-primary);
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

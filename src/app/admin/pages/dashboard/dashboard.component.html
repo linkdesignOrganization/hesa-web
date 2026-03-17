@@ -1,0 +1,154 @@
+<!-- ADMIN DASHBOARD -->
+<div class="dashboard">
+  <h1 class="dashboard__title">Dashboard</h1>
+  <p class="dashboard__welcome">Bienvenido al panel de administracion de HESA</p>
+
+  @if (loading()) {
+    <!-- Skeleton State -->
+    <div class="dashboard__summary">
+      @for (i of [1,2,3,4]; track i) {
+        <div class="summary-card">
+          <div class="skeleton-block" style="width: 48px; height: 48px; border-radius: 12px;"></div>
+          <div class="summary-card__data">
+            <div class="skeleton-block" style="height: 28px; width: 60px; margin-bottom: 4px;"></div>
+            <div class="skeleton-block" style="height: 14px; width: 80px;"></div>
+          </div>
+        </div>
+      }
+    </div>
+    <div class="dashboard__categories">
+      @for (i of [1,2,3]; track i) {
+        <div class="skeleton-block" style="height: 120px; border-radius: 12px;"></div>
+      }
+    </div>
+    <div class="dashboard__row3">
+      <div class="skeleton-block" style="height: 300px; border-radius: 12px;"></div>
+      <div class="skeleton-block" style="height: 300px; border-radius: 12px;"></div>
+    </div>
+  } @else if (error()) {
+    <!-- Error State -->
+    <div class="dashboard__error" role="alert">
+      <div class="dashboard__error-icon" aria-hidden="true">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--semantic-danger)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      <p>Error al cargar el dashboard</p>
+      <button class="btn btn-outline" (click)="loadDashboard()">Reintentar</button>
+    </div>
+  } @else if (data()) {
+    <!-- Row 1: Summary Cards -->
+    <div class="dashboard__summary">
+      <div class="summary-card">
+        <div class="summary-card__icon summary-card__icon--blue">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--brand-primary)" stroke-width="1.5"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
+        </div>
+        <div class="summary-card__data">
+          <span class="summary-card__value">{{ data()!.totalProducts }}</span>
+          <span class="summary-card__label">Productos</span>
+        </div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-card__icon summary-card__icon--purple">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--semantic-purple)" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div class="summary-card__data">
+          <span class="summary-card__value">{{ data()!.newMessages }}</span>
+          <span class="summary-card__label">Mensajes Nuevos</span>
+        </div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-card__icon summary-card__icon--green">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--semantic-success)" stroke-width="1.5"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+        </div>
+        <div class="summary-card__data">
+          <span class="summary-card__value">{{ data()!.totalBrands }}</span>
+          <span class="summary-card__label">Marcas</span>
+        </div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-card__icon summary-card__icon--orange">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--semantic-warning)" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <div class="summary-card__data">
+          <span class="summary-card__value">{{ data()!.featuredProducts }}</span>
+          <span class="summary-card__label">Destacados</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 2: Category Cards -->
+    <div class="dashboard__categories">
+      <a routerLink="/admin/productos" [queryParams]="{categoria: 'farmacos'}" class="category-card">
+        <div class="category-card__icon category-card__icon--pharma">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--brand-primary)" stroke-width="1.5"><path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"/><path d="m8.5 8.5 7 7"/></svg>
+        </div>
+        <span class="category-card__label">Farmacos</span>
+        <div class="category-card__progress">
+          <div class="category-card__bar category-card__bar--pharma" [style.width.%]="(data()!.pharmaActive / data()!.pharmaCount) * 100"></div>
+        </div>
+        <span class="category-card__count">{{ data()!.pharmaActive }} de {{ data()!.pharmaCount }} activos</span>
+      </a>
+      <a routerLink="/admin/productos" [queryParams]="{categoria: 'alimentos'}" class="category-card">
+        <div class="category-card__icon category-card__icon--food">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--semantic-success)" stroke-width="1.5"><path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5"/></svg>
+        </div>
+        <span class="category-card__label">Alimentos</span>
+        <div class="category-card__progress">
+          <div class="category-card__bar category-card__bar--food" [style.width.%]="(data()!.foodActive / data()!.foodCount) * 100"></div>
+        </div>
+        <span class="category-card__count">{{ data()!.foodActive }} de {{ data()!.foodCount }} activos</span>
+      </a>
+      <a routerLink="/admin/productos" [queryParams]="{categoria: 'equipos'}" class="category-card">
+        <div class="category-card__icon category-card__icon--equipment">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--neutral-400)" stroke-width="1.5"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76Z"/></svg>
+        </div>
+        <span class="category-card__label">Equipos</span>
+        <div class="category-card__progress">
+          <div class="category-card__bar category-card__bar--equipment" [style.width.%]="(data()!.equipmentActive / data()!.equipmentCount) * 100"></div>
+        </div>
+        <span class="category-card__count">{{ data()!.equipmentActive }} de {{ data()!.equipmentCount }} activos</span>
+      </a>
+    </div>
+
+    <!-- Row 3: Messages + Activity -->
+    <div class="dashboard__row3">
+      <div class="dashboard__messages-card">
+        <div class="dashboard__card-header">
+          <h2>Mensajes Recientes</h2>
+          <a routerLink="/admin/mensajes" class="dashboard__card-link">Ver todos</a>
+        </div>
+        @for (msg of data()!.recentMessages; track msg.id) {
+          <a [routerLink]="'/admin/mensajes/' + msg.id" class="dashboard__message-item">
+            <span class="badge" [class.badge-general]="msg.type === 'Informacion'" [class.badge-commercial]="msg.type === 'Comercial'" [class.badge-manufacturer]="msg.type === 'Fabricante'" [class.badge-support]="msg.type === 'Soporte'">{{ msg.type }}</span>
+            <p class="dashboard__message-preview">{{ msg.message | slice:0:60 }}...</p>
+            <span class="dashboard__message-date">{{ msg.relativeDate }}</span>
+          </a>
+        }
+      </div>
+      <div class="dashboard__activity-card">
+        <div class="dashboard__card-header">
+          <h2>Actividad Reciente</h2>
+        </div>
+        <div class="dashboard__activity-item">
+          <div class="dashboard__activity-dot"></div>
+          <p>Producto "Pro Plan Adulto" actualizado</p>
+          <span>Hace 1 hora</span>
+        </div>
+        <div class="dashboard__activity-item">
+          <div class="dashboard__activity-dot"></div>
+          <p>Nueva marca "Virbac" creada</p>
+          <span>Hace 3 horas</span>
+        </div>
+        <div class="dashboard__activity-item">
+          <div class="dashboard__activity-dot"></div>
+          <p>Mensaje de contacto atendido</p>
+          <span>Ayer</span>
+        </div>
+        <div class="dashboard__activity-item">
+          <div class="dashboard__activity-dot"></div>
+          <p>Hero del sitio actualizado</p>
+          <span>Hace 2 dias</span>
+        </div>
+      </div>
+    </div>
+  }
+</div>

@@ -1,0 +1,80 @@
+<div class="search-overlay" [class.search-overlay--open]="isOpen()" role="search" aria-label="Busqueda global">
+  <div class="search-overlay__backdrop" (click)="close()"></div>
+  <div class="search-overlay__content">
+    <button class="search-overlay__close" (click)="close()" aria-label="Cerrar busqueda">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="search-overlay__input-wrapper">
+      <svg class="search-overlay__input-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      <input
+        #searchInput
+        type="text"
+        class="search-overlay__input"
+        [placeholder]="i18n.currentLang() === 'es' ? 'Buscar productos, marcas...' : 'Search products, brands...'"
+        [value]="searchTerm()"
+        (input)="onInput($event)"
+        (keydown)="onKeydown($event)"
+        aria-autocomplete="list"
+        aria-controls="search-results"
+        maxlength="100" />
+    </div>
+
+    @if (showHint) {
+      <p class="search-overlay__hint">{{ i18n.currentLang() === 'es' ? 'Escribe al menos 3 caracteres' : 'Type at least 3 characters' }}</p>
+    }
+
+    @if (hasResults) {
+      <div class="search-overlay__results" id="search-results" role="listbox">
+        @if (productResults().length > 0) {
+          <div class="search-overlay__group">
+            <span class="search-overlay__group-label">{{ i18n.currentLang() === 'es' ? 'PRODUCTOS' : 'PRODUCTS' }} ({{ productResults().length }})</span>
+            @for (product of productResults(); track product.id; let i = $index) {
+              <div
+                class="search-overlay__item"
+                [class.search-overlay__item--selected]="selectedIndex() === i"
+                role="option"
+                [attr.aria-selected]="selectedIndex() === i"
+                (click)="navigateToProduct(product)">
+                <div class="search-overlay__item-thumb">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--neutral-300)" stroke-width="1.5"><rect width="18" height="18" x="3" y="3" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+                </div>
+                <div>
+                  <div class="search-overlay__item-name">{{ getProductName(product) }}</div>
+                  <div class="search-overlay__item-meta">{{ product.brand }}</div>
+                </div>
+              </div>
+            }
+          </div>
+        }
+        @if (brandResults().length > 0) {
+          <div class="search-overlay__group">
+            <span class="search-overlay__group-label">{{ i18n.currentLang() === 'es' ? 'MARCAS' : 'BRANDS' }} ({{ brandResults().length }})</span>
+            @for (brand of brandResults(); track brand.id; let i = $index) {
+              <div
+                class="search-overlay__item"
+                [class.search-overlay__item--selected]="selectedIndex() === productResults().length + i"
+                role="option"
+                [attr.aria-selected]="selectedIndex() === productResults().length + i"
+                (click)="navigateToBrand(brand)">
+                <div class="search-overlay__item-thumb search-overlay__item-thumb--brand">
+                  {{ brand.logoPlaceholder }}
+                </div>
+                <div>
+                  <div class="search-overlay__item-name">{{ brand.name }}</div>
+                  <div class="search-overlay__item-meta">{{ brand.country }}</div>
+                </div>
+              </div>
+            }
+          </div>
+        }
+      </div>
+    }
+
+    @if (showNoResults) {
+      <div class="search-overlay__no-results">
+        <p>{{ i18n.currentLang() === 'es' ? 'No se encontraron resultados para' : 'No results found for' }} "{{ searchTerm() }}"</p>
+        <a class="search-overlay__catalog-link" (click)="navigateToCatalog()">{{ i18n.currentLang() === 'es' ? 'Explorar catalogo completo' : 'Explore full catalog' }}</a>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,10 @@
+<div class="value-stat" [class.value-stat--pre-scroll]="!counted()" [class.value-stat--counted]="counted()" [attr.aria-label]="number() + suffix() + ' ' + label()">
+  <div class="value-stat__icon" aria-hidden="true">
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--brand-secondary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m22 12-4-4v3H3v2h15v3z"/></svg>
+  </div>
+  <div class="value-stat__number">
+    <span class="value-stat__display">{{ displayValue() }}</span><span class="value-stat__suffix">{{ suffix() }}</span>
+    <span class="visually-hidden">{{ number() }}{{ suffix() }}</span>
+  </div>
+  <div class="value-stat__label">{{ label() }}</div>
+</div>

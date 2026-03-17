@@ -1,0 +1,245 @@
+<!-- CATALOG PAGE -->
+<section class="catalog-page">
+  <div class="container">
+    <app-breadcrumb [items]="breadcrumbs" />
+
+    <div class="catalog-page__header">
+      <h1 class="text-h2">{{ i18n.currentLang() === 'es' ? 'Catalogo de Productos' : 'Product Catalog' }}</h1>
+      <span class="catalog-page__count">{{ filteredProducts().length }} {{ i18n.currentLang() === 'es' ? 'productos' : 'products' }}</span>
+    </div>
+
+    <!-- Mobile Filter Button (< 768px) -->
+    <button class="filter-bar__mobile-trigger" (click)="toggleMobileFilters()" aria-label="Filtrar productos">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+      {{ i18n.currentLang() === 'es' ? 'Filtrar' : 'Filter' }}
+      @if (activeFilters().length > 0) {
+        <span class="filter-bar__mobile-badge">{{ activeFilters().length }}</span>
+      }
+    </button>
+
+    <!-- Desktop Filter Bar (>= 768px) -->
+    <div class="filter-bar filter-bar--desktop">
+      <div class="filter-bar__dropdowns">
+        <select class="filter-bar__dropdown" [value]="selectedCategory()" (change)="applyFilter('category', $any($event.target).value)">
+          <option value="">{{ i18n.currentLang() === 'es' ? 'Categoria' : 'Category' }}</option>
+          <option value="farmacos">{{ i18n.currentLang() === 'es' ? 'Farmacos' : 'Pharmaceuticals' }}</option>
+          <option value="alimentos">{{ i18n.currentLang() === 'es' ? 'Alimentos' : 'Food' }}</option>
+          <option value="equipos">{{ i18n.currentLang() === 'es' ? 'Equipos' : 'Equipment' }}</option>
+        </select>
+        <select class="filter-bar__dropdown" [value]="selectedBrand()" (change)="applyFilter('brand', $any($event.target).value)">
+          <option value="">{{ i18n.currentLang() === 'es' ? 'Marca' : 'Brand' }}</option>
+          @for (brand of uniqueBrands; track brand) {
+            <option [value]="brand">{{ brand }}</option>
+          }
+        </select>
+        @if (showSpeciesFilter()) {
+          <select class="filter-bar__dropdown" [value]="selectedSpecies()" (change)="applyFilter('species', $any($event.target).value)">
+            <option value="">{{ i18n.currentLang() === 'es' ? 'Especie' : 'Species' }}</option>
+            <option value="Caninos">{{ i18n.currentLang() === 'es' ? 'Caninos' : 'Canine' }}</option>
+            <option value="Felinos">{{ i18n.currentLang() === 'es' ? 'Felinos' : 'Feline' }}</option>
+            <option value="Bovinos">{{ i18n.currentLang() === 'es' ? 'Bovinos' : 'Bovine' }}</option>
+            <option value="Equinos">{{ i18n.currentLang() === 'es' ? 'Equinos' : 'Equine' }}</option>
+            <option value="Porcinos">{{ i18n.currentLang() === 'es' ? 'Porcinos' : 'Porcine' }}</option>
+            <option value="Aves">{{ i18n.currentLang() === 'es' ? 'Aves' : 'Poultry' }}</option>
+          </select>
+        }
+        @if (showFamilyFilter()) {
+          <select class="filter-bar__dropdown" [value]="selectedFamily()" (change)="applyFilter('family', $any($event.target).value)">
+            <option value="">{{ i18n.currentLang() === 'es' ? 'Familia' : 'Family' }}</option>
+            <option value="Antibioticos">{{ i18n.currentLang() === 'es' ? 'Antibioticos' : 'Antibiotics' }}</option>
+            <option value="Desparasitantes">{{ i18n.currentLang() === 'es' ? 'Desparasitantes' : 'Dewormers' }}</option>
+            <option value="Vitaminas">{{ i18n.currentLang() === 'es' ? 'Vitaminas' : 'Vitamins' }}</option>
+            <option value="Analgosicos">{{ i18n.currentLang() === 'es' ? 'Analgosicos' : 'Analgesics' }}</option>
+            <option value="Antiinflamatorios">{{ i18n.currentLang() === 'es' ? 'Antiinflamatorios' : 'Anti-inflammatories' }}</option>
+          </select>
+        }
+        @if (showLifeStageFilter()) {
+          <select class="filter-bar__dropdown" [value]="selectedLifeStage()" (change)="applyFilter('lifeStage', $any($event.target).value)">
+            <option value="">{{ i18n.currentLang() === 'es' ? 'Etapa de vida' : 'Life Stage' }}</option>
+            <option value="Cachorro/Kitten">{{ i18n.currentLang() === 'es' ? 'Cachorro/Kitten' : 'Puppy/Kitten' }}</option>
+            <option value="Adulto">{{ i18n.currentLang() === 'es' ? 'Adulto' : 'Adult' }}</option>
+            <option value="Senior">{{ i18n.currentLang() === 'es' ? 'Senior' : 'Senior' }}</option>
+            <option value="Todas las etapas">{{ i18n.currentLang() === 'es' ? 'Todas las etapas' : 'All life stages' }}</option>
+          </select>
+        }
+        @if (showEquipmentTypeFilter()) {
+          <select class="filter-bar__dropdown" [value]="selectedEquipmentType()" (change)="applyFilter('equipmentType', $any($event.target).value)">
+            <option value="">{{ i18n.currentLang() === 'es' ? 'Tipo' : 'Type' }}</option>
+            <option value="Diagnostico">{{ i18n.currentLang() === 'es' ? 'Diagnostico' : 'Diagnostic' }}</option>
+            <option value="Quirurgico">{{ i18n.currentLang() === 'es' ? 'Quirurgico' : 'Surgical' }}</option>
+            <option value="Laboratorio">{{ i18n.currentLang() === 'es' ? 'Laboratorio' : 'Laboratory' }}</option>
+            <option value="Instrumental">{{ i18n.currentLang() === 'es' ? 'Instrumental' : 'Instruments' }}</option>
+          </select>
+        }
+      </div>
+    </div>
+
+    <!-- Mobile Filter Drawer (< 768px) -->
+    @if (mobileFiltersOpen()) {
+      <div class="filter-drawer__backdrop" (click)="toggleMobileFilters()"></div>
+      <div class="filter-drawer">
+        <div class="filter-drawer__header">
+          <h3>{{ i18n.currentLang() === 'es' ? 'Filtros' : 'Filters' }}</h3>
+          <button class="filter-drawer__close" (click)="toggleMobileFilters()" aria-label="Cerrar filtros">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+        <div class="filter-drawer__body">
+          <div class="filter-drawer__group">
+            <label class="filter-drawer__label">{{ i18n.currentLang() === 'es' ? 'Categoria' : 'Category' }}</label>
+            <select class="filter-bar__dropdown" [value]="selectedCategory()" (change)="applyFilter('category', $any($event.target).value)">
+              <option value="">{{ i18n.currentLang() === 'es' ? 'Todas' : 'All' }}</option>
+              <option value="farmacos">{{ i18n.currentLang() === 'es' ? 'Farmacos' : 'Pharmaceuticals' }}</option>
+              <option value="alimentos">{{ i18n.currentLang() === 'es' ? 'Alimentos' : 'Food' }}</option>
+              <option value="equipos">{{ i18n.currentLang() === 'es' ? 'Equipos' : 'Equipment' }}</option>
+            </select>
+          </div>
+          <div class="filter-drawer__group">
+            <label class="filter-drawer__label">{{ i18n.currentLang() === 'es' ? 'Marca' : 'Brand' }}</label>
+            <select class="filter-bar__dropdown" [value]="selectedBrand()" (change)="applyFilter('brand', $any($event.target).value)">
+              <option value="">{{ i18n.currentLang() === 'es' ? 'Todas' : 'All' }}</option>
+              @for (brand of uniqueBrands; track brand) {
+                <option [value]="brand">{{ brand }}</option>
+              }
+            </select>
+          </div>
+          @if (showSpeciesFilter()) {
+            <div class="filter-drawer__group">
+              <label class="filter-drawer__label">{{ i18n.currentLang() === 'es' ? 'Especie' : 'Species' }}</label>
+              <select class="filter-bar__dropdown" [value]="selectedSpecies()" (change)="applyFilter('species', $any($event.target).value)">
+                <option value="">{{ i18n.currentLang() === 'es' ? 'Todas' : 'All' }}</option>
+                <option value="Caninos">{{ i18n.currentLang() === 'es' ? 'Caninos' : 'Canine' }}</option>
+                <option value="Felinos">{{ i18n.currentLang() === 'es' ? 'Felinos' : 'Feline' }}</option>
+                <option value="Bovinos">{{ i18n.currentLang() === 'es' ? 'Bovinos' : 'Bovine' }}</option>
+                <option value="Equinos">{{ i18n.currentLang() === 'es' ? 'Equinos' : 'Equine' }}</option>
+                <option value="Porcinos">{{ i18n.currentLang() === 'es' ? 'Porcinos' : 'Porcine' }}</option>
+                <option value="Aves">{{ i18n.currentLang() === 'es' ? 'Aves' : 'Poultry' }}</option>
+              </select>
+            </div>
+          }
+          @if (showFamilyFilter()) {
+            <div class="filter-drawer__group">
+              <label class="filter-drawer__label">{{ i18n.currentLang() === 'es' ? 'Familia' : 'Family' }}</label>
+              <select class="filter-bar__dropdown" [value]="selectedFamily()" (change)="applyFilter('family', $any($event.target).value)">
+                <option value="">{{ i18n.currentLang() === 'es' ? 'Todas' : 'All' }}</option>
+                <option value="Antibioticos">{{ i18n.currentLang() === 'es' ? 'Antibioticos' : 'Antibiotics' }}</option>
+                <option value="Desparasitantes">{{ i18n.currentLang() === 'es' ? 'Desparasitantes' : 'Dewormers' }}</option>
+                <option value="Vitaminas">{{ i18n.currentLang() === 'es' ? 'Vitaminas' : 'Vitamins' }}</option>
+                <option value="Analgosicos">{{ i18n.currentLang() === 'es' ? 'Analgosicos' : 'Analgesics' }}</option>
+                <option value="Antiinflamatorios">{{ i18n.currentLang() === 'es' ? 'Antiinflamatorios' : 'Anti-inflammatories' }}</option>
+              </select>
+            </div>
+          }
+          @if (showLifeStageFilter()) {
+            <div class="filter-drawer__group">
+              <label class="filter-drawer__label">{{ i18n.currentLang() === 'es' ? 'Etapa de vida' : 'Life Stage' }}</label>
+              <select class="filter-bar__dropdown" [value]="selectedLifeStage()" (change)="applyFilter('lifeStage', $any($event.target).value)">
+                <option value="">{{ i18n.currentLang() === 'es' ? 'Todas' : 'All' }}</option>
+                <option value="Cachorro/Kitten">{{ i18n.currentLang() === 'es' ? 'Cachorro/Kitten' : 'Puppy/Kitten' }}</option>
+                <option value="Adulto">{{ i18n.currentLang() === 'es' ? 'Adulto' : 'Adult' }}</option>
+                <option value="Senior">{{ i18n.currentLang() === 'es' ? 'Senior' : 'Senior' }}</option>
+                <option value="Todas las etapas">{{ i18n.currentLang() === 'es' ? 'Todas las etapas' : 'All life stages' }}</option>
+              </select>
+            </div>
+          }
+          @if (showEquipmentTypeFilter()) {
+            <div class="filter-drawer__group">
+              <label class="filter-drawer__label">{{ i18n.currentLang() === 'es' ? 'Tipo' : 'Type' }}</label>
+              <select class="filter-bar__dropdown" [value]="selectedEquipmentType()" (change)="applyFilter('equipmentType', $any($event.target).value)">
+                <option value="">{{ i18n.currentLang() === 'es' ? 'Todos' : 'All' }}</option>
+                <option value="Diagnostico">{{ i18n.currentLang() === 'es' ? 'Diagnostico' : 'Diagnostic' }}</option>
+                <option value="Quirurgico">{{ i18n.currentLang() === 'es' ? 'Quirurgico' : 'Surgical' }}</option>
+                <option value="Laboratorio">{{ i18n.currentLang() === 'es' ? 'Laboratorio' : 'Laboratory' }}</option>
+                <option value="Instrumental">{{ i18n.currentLang() === 'es' ? 'Instrumental' : 'Instruments' }}</option>
+              </select>
+            </div>
+          }
+        </div>
+        <div class="filter-drawer__footer">
+          @if (activeFilters().length > 0) {
+            <button class="btn btn-outline btn-block" (click)="clearFilters()">{{ i18n.currentLang() === 'es' ? 'Limpiar filtros' : 'Clear filters' }}</button>
+          }
+          <button class="btn btn-primary btn-block" (click)="applyMobileFilters()">{{ i18n.currentLang() === 'es' ? 'Aplicar filtros' : 'Apply filters' }}</button>
+        </div>
+      </div>
+    }
+
+    <!-- Active filter pills -->
+    @if (activeFilters().length > 0) {
+      <div class="filter-bar__pills">
+        @for (filter of activeFilters(); track filter.key) {
+          <span class="filter-bar__pill">
+            {{ filter.label }}
+            <button class="filter-bar__pill-remove" (click)="removeFilter(filter.key)" [attr.aria-label]="'Remover filtro: ' + filter.label">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+          </span>
+        }
+        <button class="filter-bar__clear" (click)="clearFilters()">{{ i18n.currentLang() === 'es' ? 'Limpiar filtros' : 'Clear filters' }}</button>
+      </div>
+    }
+
+    @if (loading()) {
+      <!-- Skeleton State -->
+      <div class="catalog-page__grid">
+        @for (i of [1,2,3,4,5,6,7,8,9,10,11,12]; track i) {
+          <div class="skeleton-card-product"><div class="skeleton-block" style="aspect-ratio: 1; border-radius: 8px;"></div><div class="skeleton-block" style="height: 16px; width: 80%; margin-top: 12px;"></div><div class="skeleton-block" style="height: 12px; width: 50%; margin-top: 8px;"></div></div>
+        }
+      </div>
+    } @else if (filteredProducts().length === 0 && activeFilters().length > 0) {
+      <!-- Filters No Results State -->
+      <div class="catalog-page__state catalog-page__state--no-results">
+        <div class="catalog-page__state-icon" aria-hidden="true">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--neutral-400)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+        </div>
+        <h2 class="catalog-page__state-title">{{ i18n.currentLang() === 'es' ? 'No se encontraron productos con estos filtros' : 'No products found with these filters' }}</h2>
+        <p class="catalog-page__state-desc">{{ i18n.currentLang() === 'es' ? 'Intenta limpiar algunos filtros para ver mas resultados.' : 'Try clearing some filters to see more results.' }}</p>
+        <button class="btn btn-outline" (click)="clearFilters()">{{ i18n.currentLang() === 'es' ? 'Limpiar filtros' : 'Clear filters' }}</button>
+      </div>
+    } @else if (filteredProducts().length === 0) {
+      <!-- Empty State -->
+      <div class="catalog-page__state catalog-page__state--empty">
+        <div class="catalog-page__state-illustration" aria-hidden="true">
+          <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="20" y="30" width="80" height="60" rx="8" fill="var(--neutral-50)" stroke="var(--neutral-200)" stroke-width="2"/>
+            <rect x="30" y="42" width="24" height="24" rx="4" fill="var(--neutral-200)"/>
+            <rect x="62" y="42" width="28" height="6" rx="3" fill="var(--neutral-200)"/>
+            <rect x="62" y="54" width="20" height="4" rx="2" fill="var(--neutral-200)" opacity="0.6"/>
+          </svg>
+        </div>
+        <h2 class="catalog-page__state-title">{{ i18n.currentLang() === 'es' ? 'Aun no hay productos en el catalogo' : 'No products in catalog yet' }}</h2>
+        <p class="catalog-page__state-desc">{{ i18n.currentLang() === 'es' ? 'Vuelve pronto, estamos preparando nuestro catalogo.' : 'Come back soon, we are preparing our catalog.' }}</p>
+      </div>
+    } @else {
+      <!-- Product Grid -->
+      <div class="catalog-page__grid">
+        @for (product of paginatedProducts(); track product.id) {
+          <app-product-card [product]="product" />
+        }
+      </div>
+
+      <!-- Pagination -->
+      @if (totalPages() > 1) {
+        <div class="pagination">
+          <span class="pagination__info">
+            {{ i18n.currentLang() === 'es' ? 'Mostrando' : 'Showing' }}
+            {{ (currentPage() - 1) * pageSize + 1 }}-{{ Math.min(currentPage() * pageSize, filteredProducts().length) }}
+            {{ i18n.currentLang() === 'es' ? 'de' : 'of' }} {{ filteredProducts().length }}
+            {{ i18n.currentLang() === 'es' ? 'productos' : 'products' }}
+          </span>
+          <div class="pagination__controls">
+            <button class="pagination__btn" [disabled]="currentPage() === 1" (click)="goToPage(currentPage() - 1)" aria-label="Pagina anterior">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            @for (page of pagesArray; track page) {
+              <button class="pagination__btn" [class.pagination__btn--active]="page === currentPage()" (click)="goToPage(page)">{{ page }}</button>
+            }
+            <button class="pagination__btn" [disabled]="currentPage() === totalPages()" (click)="goToPage(currentPage() + 1)" aria-label="Pagina siguiente">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+          </div>
+        </div>
+      }
+    }
+  </div>
+</section>

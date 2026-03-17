@@ -1,0 +1,197 @@
+<!-- PRODUCT DETAIL PAGE -->
+
+@if (loading()) {
+  <!-- Skeleton State -->
+  <section class="product-detail">
+    <div class="container">
+      <div class="product-detail__layout">
+        <div class="product-detail__gallery">
+          <div class="skeleton-block" style="aspect-ratio: 1; border-radius: 12px;"></div>
+        </div>
+        <div class="product-detail__info">
+          <div class="skeleton-block" style="height: 32px; width: 70%; margin-bottom: 12px;"></div>
+          <div class="skeleton-block" style="height: 16px; width: 30%; margin-bottom: 24px;"></div>
+          <div class="skeleton-block" style="height: 14px; width: 90%; margin-bottom: 8px;"></div>
+          <div class="skeleton-block" style="height: 14px; width: 80%; margin-bottom: 8px;"></div>
+          <div class="skeleton-block" style="height: 14px; width: 85%; margin-bottom: 32px;"></div>
+          <div class="skeleton-block" style="height: 48px; width: 100%; border-radius: 8px; margin-bottom: 12px;"></div>
+          <div class="skeleton-block" style="height: 48px; width: 100%; border-radius: 8px;"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+} @else if (notFound()) {
+  <!-- 404 Product State -->
+  <section class="product-not-found">
+    <div class="container">
+      <div class="product-not-found__content">
+        <div class="product-not-found__illustration" aria-hidden="true">
+          <svg width="160" height="160" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="80" cy="80" r="64" fill="var(--neutral-50)" stroke="var(--neutral-200)" stroke-width="2"/>
+            <text x="80" y="90" text-anchor="middle" font-size="36" font-weight="700" fill="var(--neutral-300)">404</text>
+          </svg>
+        </div>
+        <h1 class="product-not-found__title">{{ i18n.currentLang() === 'es' ? 'Este producto no esta disponible' : 'This product is not available' }}</h1>
+        <p class="product-not-found__desc">{{ i18n.currentLang() === 'es' ? 'El producto que buscas no existe o fue removido del catalogo.' : 'The product you are looking for does not exist or was removed from the catalog.' }}</p>
+        <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo' : 'catalog')" class="btn btn-primary btn-lg">{{ i18n.currentLang() === 'es' ? 'Volver al catalogo' : 'Back to catalog' }}</a>
+      </div>
+    </div>
+  </section>
+} @else if (product()) {
+  <section class="product-detail">
+    <div class="container">
+      <app-breadcrumb [items]="breadcrumbs" />
+
+      <div class="product-detail__layout">
+        <!-- Gallery Column -->
+        <div class="product-detail__gallery">
+          @if (product()!.images.length > 1) {
+            <div class="product-detail__thumbs">
+              @for (img of product()!.images; track img; let i = $index) {
+                <button class="product-detail__thumb" [class.product-detail__thumb--active]="selectedImage() === i" (click)="selectedImage.set(i)" [attr.aria-label]="'Ver imagen ' + (i + 1)">
+                  <div class="product-detail__thumb-placeholder"></div>
+                </button>
+              }
+            </div>
+          }
+          <div class="product-detail__main-image">
+            <div class="product-detail__image-placeholder">
+              <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--neutral-200)" stroke-width="1"><rect width="18" height="18" x="3" y="3" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Info Column -->
+        <div class="product-detail__info">
+          @if (!product()!.hasEnTranslation && i18n.currentLang() === 'en') {
+            <div class="product-detail__translation-badge">Translation not available</div>
+          }
+          <h1 class="product-detail__name">{{ i18n.t(product()!.name) }}</h1>
+          <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'marcas' : 'brands') + '/' + product()!.brandSlug" class="product-detail__brand-link">{{ product()!.brand }}</a>
+
+          <!-- Species Badges -->
+          @if (product()!.species.length > 0) {
+            <div class="product-detail__species">
+              @for (sp of product()!.species; track sp) {
+                <span class="product-detail__species-badge">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--neutral-400)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/></svg>
+                  {{ sp }}
+                </span>
+              }
+            </div>
+          }
+
+          <!-- Presentation Pills -->
+          <div class="product-detail__presentations">
+            <p class="product-detail__section-label">{{ i18n.currentLang() === 'es' ? 'Presentaciones' : 'Presentations' }}</p>
+            <div class="product-detail__pills">
+              @for (pres of product()!.presentations; track pres; let first = $first) {
+                <button class="product-detail__pill" [class.product-detail__pill--selected]="first">{{ pres }}</button>
+              }
+            </div>
+          </div>
+
+          <p class="product-detail__description">{{ i18n.t(product()!.description) }}</p>
+
+          @if (product()!.composition) {
+            <div class="product-detail__section">
+              <p class="product-detail__section-label">{{ i18n.currentLang() === 'es' ? 'Composicion' : 'Composition' }}</p>
+              <p>{{ i18n.t(product()!.composition!) }}</p>
+            </div>
+          }
+
+          @if (product()!.sanitaryRegistry) {
+            <div class="product-detail__section">
+              <p class="product-detail__section-label">{{ i18n.currentLang() === 'es' ? 'Registro sanitario' : 'Sanitary registry' }}</p>
+              <p>{{ product()!.sanitaryRegistry }}</p>
+            </div>
+          }
+
+          @if (product()!.indications) {
+            <div class="product-detail__section">
+              <p class="product-detail__section-label">{{ i18n.currentLang() === 'es' ? 'Indicaciones' : 'Indications' }}</p>
+              <p>{{ i18n.t(product()!.indications!) }}</p>
+            </div>
+          }
+
+          <!-- Product CTAs -->
+          <div class="product-detail__ctas">
+            <a [routerLink]="['/' + i18n.currentLang(), i18n.currentLang() === 'es' ? 'contacto' : 'contact']" [queryParams]="{producto: product()!.slug[i18n.currentLang()]}" class="btn btn-primary btn-lg btn-block" (click)="trackCTA('Solicitar informacion')">
+              {{ i18n.currentLang() === 'es' ? 'Solicitar informacion' : 'Request information' }}
+            </a>
+            <a [href]="whatsappLink" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp btn-lg btn-block" (click)="trackCTA('Consultar por WhatsApp')">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+              {{ i18n.currentLang() === 'es' ? 'Consultar por WhatsApp' : 'Ask via WhatsApp' }}
+            </a>
+            @if (product()!.hasPdf) {
+              <button class="btn btn-outline btn-lg btn-block" (click)="trackCTA('Descargar ficha tecnica')">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                {{ i18n.currentLang() === 'es' ? 'Descargar ficha tecnica' : 'Download datasheet' }}
+              </button>
+            }
+          </div>
+        </div>
+      </div>
+
+      <!-- Storytelling Blocks -->
+      @if (product()!.storytelling && product()!.storytelling!.length > 0) {
+        <div class="product-detail__storytelling">
+          @for (block of product()!.storytelling!; track $index) {
+            @if (block.image || block.text) {
+              <div class="product-detail__story-block" [class.product-detail__story-block--full]="!block.image">
+                @if (block.image) {
+                  <div class="product-detail__story-image">
+                    <div class="product-detail__image-placeholder" style="aspect-ratio: 16/9;">
+                      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--neutral-200)" stroke-width="1"><rect width="18" height="18" x="3" y="3" rx="2"/></svg>
+                    </div>
+                  </div>
+                }
+                <div class="product-detail__story-text">
+                  <p>{{ i18n.t(block.text) }}</p>
+                </div>
+              </div>
+            }
+          }
+        </div>
+      }
+
+      <!-- Related Products -->
+      @if (relatedProducts().length > 0) {
+        <div class="product-detail__related">
+          <h2 class="text-h3">{{ i18n.currentLang() === 'es' ? 'Tambien te puede interesar' : 'You may also be interested in' }}</h2>
+          <div class="product-detail__related-grid">
+            @for (product of relatedProducts(); track product.id) {
+              <app-product-card [product]="product" />
+            }
+          </div>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- Sticky Bar -->
+  @if (product()) {
+    <div class="sticky-bar" [class.sticky-bar--visible]="stickyVisible()">
+      <div class="container sticky-bar__inner">
+        <!-- Desktop: full info -->
+        <div class="sticky-bar__product sticky-bar__desktop-content">
+          <div class="sticky-bar__thumb"></div>
+          <div>
+            <span class="sticky-bar__name">{{ i18n.t(product()!.name) }}</span>
+            <span class="sticky-bar__brand">{{ product()!.brand }}</span>
+          </div>
+        </div>
+        <a class="btn btn-primary btn-sm sticky-bar__desktop-content" [routerLink]="['/' + i18n.currentLang(), i18n.currentLang() === 'es' ? 'contacto' : 'contact']" [queryParams]="{producto: product()!.slug[i18n.currentLang()]}" (click)="trackCTA('Solicitar informacion')">
+          {{ i18n.currentLang() === 'es' ? 'Solicitar informacion' : 'Request info' }}
+        </a>
+        <!-- Mobile: name + full-width button -->
+        <div class="sticky-bar__mobile-content">
+          <span class="sticky-bar__name">{{ i18n.t(product()!.name) }}</span>
+          <a class="btn btn-primary btn-block" [routerLink]="['/' + i18n.currentLang(), i18n.currentLang() === 'es' ? 'contacto' : 'contact']" [queryParams]="{producto: product()!.slug[i18n.currentLang()]}" (click)="trackCTA('Solicitar informacion')">
+            {{ i18n.currentLang() === 'es' ? 'Solicitar informacion' : 'Request information' }}
+          </a>
+        </div>
+      </div>
+    </div>
+  }
+}

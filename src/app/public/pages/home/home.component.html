@@ -1,0 +1,141 @@
+<!-- ============================================================ -->
+<!-- HOME PAGE                                                    -->
+<!-- ============================================================ -->
+
+<!-- HERO SECTION -->
+<section class="hero">
+  @if (heroLoading()) {
+    <div class="hero__skeleton">
+      <div class="skeleton-block" style="width: 120px; height: 16px; margin-bottom: 16px;"></div>
+      <div class="skeleton-block" style="width: 80%; height: 48px; margin-bottom: 16px;"></div>
+      <div class="skeleton-block" style="width: 60%; height: 20px; margin-bottom: 32px;"></div>
+      <div style="display: flex; gap: 16px;">
+        <div class="skeleton-block" style="width: 180px; height: 48px; border-radius: 8px;"></div>
+        <div class="skeleton-block" style="width: 200px; height: 48px; border-radius: 8px;"></div>
+      </div>
+    </div>
+  } @else {
+    <div class="hero__overlay"></div>
+    <div class="hero__content container">
+      <span class="hero__tag">{{ i18n.t(hero.tag) }}</span>
+      <h1 class="hero__title">{{ i18n.t(hero.headline) }}</h1>
+      <p class="hero__subtitle">{{ i18n.t(hero.subtitle) }}</p>
+      <div class="hero__ctas">
+        <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo' : 'catalog')" class="btn btn-primary btn-lg" (click)="trackCTA('Explorar catalogo')">{{ i18n.t(hero.ctaPrimary) }}</a>
+        <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'distribuidores' : 'distributors')" class="btn btn-outline-white btn-lg" (click)="trackCTA('Distribuya con nosotros')">{{ i18n.t(hero.ctaSecondary) }}</a>
+      </div>
+    </div>
+  }
+</section>
+
+<!-- CATEGORY BLOCKS -->
+<section class="section-spacing">
+  <div class="container">
+    <div class="home-categories">
+      <app-category-block
+        category="pharma"
+        imagePosition="right"
+        [title]="i18n.currentLang() === 'es' ? 'Farmacos Veterinarios' : 'Veterinary Pharmaceuticals'"
+        [description]="i18n.currentLang() === 'es' ? 'Contamos con una linea completa de farmacos veterinarios de las mejores marcas internacionales para el tratamiento y prevencion de enfermedades en todas las especies.' : 'We carry a complete line of veterinary pharmaceuticals from the best international brands for the treatment and prevention of diseases in all species.'"
+        [benefits]="i18n.currentLang() === 'es' ? ['Antibioticos y antiparasitarios de ultima generacion', 'Formulas aprobadas por SENASA', 'Asesoramiento tecnico especializado'] : ['Latest generation antibiotics and antiparasitics', 'SENASA approved formulas', 'Specialized technical advice']"
+        [ctaText]="i18n.currentLang() === 'es' ? 'Ver farmacos' : 'View pharmaceuticals'"
+        [ctaLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/farmacos' : 'catalog/pharmaceuticals')" />
+
+      <app-category-block
+        category="food"
+        imagePosition="left"
+        [title]="i18n.currentLang() === 'es' ? 'Alimentos para Animales' : 'Animal Food'"
+        [description]="i18n.currentLang() === 'es' ? 'Ofrecemos las mejores marcas de nutricion animal para perros, gatos y otras especies, cubriendo todas las etapas de vida con formulas premium.' : 'We offer the best animal nutrition brands for dogs, cats and other species, covering all life stages with premium formulas.'"
+        [benefits]="i18n.currentLang() === 'es' ? ['Marcas premium internacionales', 'Nutricion especializada por etapa de vida', 'Lineas terapeuticas y de prescripcion'] : ['International premium brands', 'Specialized nutrition by life stage', 'Therapeutic and prescription lines']"
+        [ctaText]="i18n.currentLang() === 'es' ? 'Ver alimentos' : 'View food'"
+        [ctaLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/alimentos' : 'catalog/food')" />
+
+      <app-category-block
+        category="equipment"
+        imagePosition="right"
+        [title]="i18n.currentLang() === 'es' ? 'Equipos Veterinarios' : 'Veterinary Equipment'"
+        [description]="i18n.currentLang() === 'es' ? 'Equipamiento profesional para clinicas y hospitales veterinarios, desde instrumental quirurgico hasta equipos de diagnostico de alta precision.' : 'Professional equipment for veterinary clinics and hospitals, from surgical instruments to high-precision diagnostic equipment.'"
+        [benefits]="i18n.currentLang() === 'es' ? ['Equipos de diagnostico avanzado', 'Instrumental quirurgico certificado', 'Soporte tecnico y capacitacion'] : ['Advanced diagnostic equipment', 'Certified surgical instruments', 'Technical support and training']"
+        [ctaText]="i18n.currentLang() === 'es' ? 'Ver equipos' : 'View equipment'"
+        [ctaLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/equipos' : 'catalog/equipment')" />
+    </div>
+  </div>
+</section>
+
+<!-- BRAND LOGOS -->
+@if (!brandsLoading() && featuredBrands().length > 0) {
+  <app-brand-logos-row />
+} @else if (brandsError()) {
+  <div class="section-error" role="alert">
+    <div class="section-error__icon" aria-hidden="true">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--semantic-danger)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    </div>
+    <p class="section-error__text">{{ i18n.currentLang() === 'es' ? 'No pudimos cargar esta seccion' : 'We could not load this section' }}</p>
+    <button class="btn btn-outline btn-sm">{{ i18n.currentLang() === 'es' ? 'Reintentar' : 'Retry' }}</button>
+  </div>
+}
+
+<!-- VALUE PROPOSITION -->
+<section class="value-section fade-in-section">
+  <div class="container">
+    <div class="value-section__grid">
+      @for (stat of stats; track stat.label.es) {
+        <app-value-stat [number]="stat.number" [suffix]="stat.suffix" [label]="i18n.t(stat.label)" />
+      }
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED PRODUCTS CAROUSEL -->
+@if (productsLoading()) {
+  <section class="section-spacing">
+    <div class="container">
+      <div class="featured-header">
+        <div class="skeleton-block" style="width: 200px; height: 28px;"></div>
+      </div>
+      <div class="featured-grid">
+        @for (i of [1,2,3,4]; track i) {
+          <div class="skeleton-card-product"><div class="skeleton-block" style="aspect-ratio: 1; border-radius: 8px;"></div><div class="skeleton-block" style="height: 16px; width: 80%; margin-top: 12px;"></div><div class="skeleton-block" style="height: 12px; width: 50%; margin-top: 8px;"></div></div>
+        }
+      </div>
+    </div>
+  </section>
+} @else if (featuredProducts().length > 0) {
+  <section class="section-spacing">
+    <div class="container">
+      <div class="featured-header">
+        <h2 class="text-h2">{{ i18n.currentLang() === 'es' ? 'Productos Destacados' : 'Featured Products' }}</h2>
+        <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo' : 'catalog')" class="featured-header__link">{{ i18n.currentLang() === 'es' ? 'Ver todos' : 'View all' }}</a>
+      </div>
+      <div class="carousel-wrapper">
+        <button class="carousel-arrow carousel-arrow--prev" (click)="prevSlide()" aria-label="Productos anteriores">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <div class="featured-grid">
+          @for (product of getVisibleProducts(); track product.id) {
+            <app-product-card [product]="product" variant="carousel" />
+          }
+        </div>
+        <button class="carousel-arrow carousel-arrow--next" (click)="nextSlide()" aria-label="Productos siguientes">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+      <div class="carousel-dots">
+        @for (dot of [0, 1]; track dot) {
+          <span class="carousel-dots__dot" [class.carousel-dots__dot--active]="currentSlide() === dot" (click)="currentSlide.set(dot)"></span>
+        }
+      </div>
+    </div>
+  </section>
+} @else if (productsError()) {
+  <div class="section-error" role="alert">
+    <div class="section-error__icon" aria-hidden="true">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--semantic-danger)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    </div>
+    <p class="section-error__text">{{ i18n.currentLang() === 'es' ? 'No pudimos cargar esta seccion' : 'We could not load this section' }}</p>
+    <button class="btn btn-outline btn-sm">{{ i18n.currentLang() === 'es' ? 'Reintentar' : 'Retry' }}</button>
+  </div>
+}
+
+<!-- MANUFACTURER CTA -->
+<app-manufacturer-cta />

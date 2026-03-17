@@ -1,1 +1,10 @@
-/* You can add global styles to this file, and also import other style files */
+// =============================================================================
+// HESA Web — Global Stylesheet
+// =============================================================================
+
+@use 'scss/tokens';
+@use 'scss/reset';
+@use 'scss/utilities';
+@use 'scss/buttons';
+@use 'scss/forms';
+@use 'scss/badges';

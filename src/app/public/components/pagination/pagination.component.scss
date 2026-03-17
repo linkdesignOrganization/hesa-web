@@ -1,0 +1,102 @@
+// =============================================================================
+// Pagination (DC-057, DC-094)
+// =============================================================================
+
+.pagination {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 40px 0;
+
+  &__info {
+    font-size: 14px;
+    color: var(--neutral-400);
+  }
+
+  &__controls {
+    display: none;
+    align-items: center;
+    gap: 4px;
+
+    @media (min-width: 768px) {
+      display: flex;
+    }
+  }
+
+  &__mobile {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    @media (min-width: 768px) {
+      display: none;
+    }
+  }
+
+  &__page-info {
+    font-size: 14px;
+    color: var(--neutral-900);
+    font-weight: var(--weight-medium);
+  }
+
+  &__arrow {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--neutral-white);
+    border: 1px solid var(--neutral-200);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--neutral-900);
+    transition: background-color 0.15s ease-out;
+
+    &:hover:not(.pagination__arrow--disabled) {
+      background-color: var(--neutral-50);
+    }
+
+    &--disabled {
+      opacity: 0.3;
+      cursor: default;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--brand-primary);
+      outline-offset: 2px;
+    }
+  }
+
+  &__page {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-btn);
+    font-size: 14px;
+    font-weight: var(--weight-medium);
+    color: var(--neutral-900);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.15s ease-out;
+
+    &:hover:not(.pagination__page--active) {
+      background-color: var(--neutral-50);
+    }
+
+    &--active {
+      background-color: var(--brand-primary);
+      color: var(--neutral-white);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--brand-primary);
+      outline-offset: 2px;
+    }
+  }
+
+  &__ellipsis {
+    width: 40px;
+    text-align: center;
+    color: var(--neutral-400);
+  }
+}

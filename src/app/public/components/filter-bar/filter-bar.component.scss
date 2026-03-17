@@ -1,0 +1,122 @@
+// =============================================================================
+// Filter Bar (DC-056, DC-087)
+// =============================================================================
+
+.filter-bar {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 24px;
+
+  @media (min-width: 768px) {
+    display: flex;
+  }
+
+  &__dropdowns {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  &__dropdown {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background-color: var(--neutral-white);
+    border: 1px solid var(--neutral-200);
+    border-radius: var(--radius-btn);
+    font-size: 14px;
+    font-weight: var(--weight-medium);
+    color: var(--neutral-900);
+    transition: border-color 0.15s ease-out;
+
+    &:hover {
+      border-color: var(--brand-primary);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--brand-primary);
+      outline-offset: 2px;
+    }
+  }
+
+  &__count {
+    font-size: 14px;
+    color: var(--neutral-400);
+    white-space: nowrap;
+  }
+
+  // Active pills
+  &__pills {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+
+  &__pill {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background-color: var(--surface-pharma);
+    color: var(--brand-primary);
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: var(--weight-medium);
+  }
+
+  &__pill-remove {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    color: var(--brand-primary);
+    transition: background-color 0.15s ease-out;
+
+    &:hover {
+      background-color: var(--brand-primary);
+      color: var(--neutral-white);
+    }
+  }
+
+  &__clear {
+    font-size: 13px;
+    color: var(--semantic-danger);
+    font-weight: var(--weight-medium);
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  // Mobile
+  &__mobile {
+    display: block;
+    margin-bottom: 16px;
+
+    @media (min-width: 768px) {
+      display: none;
+    }
+  }
+
+  &__mobile-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background-color: var(--neutral-white);
+    border: 1px solid var(--neutral-200);
+    border-radius: var(--radius-btn);
+    font-size: 14px;
+    font-weight: var(--weight-medium);
+    color: var(--neutral-900);
+    width: 100%;
+    justify-content: center;
+  }
+}

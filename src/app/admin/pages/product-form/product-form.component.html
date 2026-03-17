@@ -1,0 +1,247 @@
+<!-- ADMIN PRODUCT FORM (DC-048, DC-077, DC-078, DC-091, DC-098, DC-119) -->
+<div class="product-form-page">
+  <div class="product-form-page__header">
+    <h1>Crear Producto</h1>
+    <div class="product-form-page__actions">
+      <button class="btn btn-outline-gray" (click)="onCancel()">Cancelar</button>
+      <button class="btn btn-primary">Guardar producto</button>
+    </div>
+  </div>
+
+  <form class="product-form" (submit)="$event.preventDefault()">
+    <!-- Section 1: Informacion Basica -->
+    <div class="product-form__section">
+      <h2 class="product-form__section-title">Informacion Basica</h2>
+      <p class="product-form__section-desc">Datos principales del producto visibles en el catalogo</p>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label" for="prod-name">Nombre del producto <span class="required">*</span></label>
+          <input type="text" id="prod-name" class="form-control" placeholder="Ej: Amoxicilina Veterinaria 500mg" aria-required="true" (input)="markChanged()">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="prod-brand">Marca <span class="required">*</span></label>
+          <select id="prod-brand" class="form-select" aria-required="true" (change)="markChanged()">
+            <option value="" disabled selected>Seleccionar marca</option>
+            <option>Zoetis</option>
+            <option>MSD</option>
+            <option>Purina</option>
+          </select>
+        </div>
+        <div class="form-group form-group-full">
+          <label class="form-label">Categoria <span class="required">*</span></label>
+          <!-- UX-103: 3 category cards -->
+          <div class="product-form__category-cards">
+            <button type="button" class="product-form__category-card" [class.product-form__category-card--active]="selectedCategory() === 'farmacos'" (click)="selectCategory('farmacos')">
+              <div class="product-form__category-icon product-form__category-icon--pharma">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"/><path d="m8.5 8.5 7 7"/></svg>
+              </div>
+              <span class="product-form__category-label">Farmacos</span>
+            </button>
+            <button type="button" class="product-form__category-card" [class.product-form__category-card--active]="selectedCategory() === 'alimentos'" (click)="selectCategory('alimentos')">
+              <div class="product-form__category-icon product-form__category-icon--food">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5"/></svg>
+              </div>
+              <span class="product-form__category-label">Alimentos</span>
+            </button>
+            <button type="button" class="product-form__category-card" [class.product-form__category-card--active]="selectedCategory() === 'equipos'" (click)="selectCategory('equipos')">
+              <div class="product-form__category-icon product-form__category-icon--equipment">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76Z"/></svg>
+              </div>
+              <span class="product-form__category-label">Equipos</span>
+            </button>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="prod-slug">Slug URL</label>
+          <input type="text" id="prod-slug" class="form-control" placeholder="amoxicilina-veterinaria-500mg" (input)="markChanged()">
+        </div>
+      </div>
+    </div>
+
+    <hr class="product-form__divider">
+
+    <!-- Section 2: Especies y Clasificacion (conditional fields UX-044) -->
+    <div class="product-form__section">
+      <h2 class="product-form__section-title">Especies y Clasificacion</h2>
+      <p class="product-form__section-desc">Define las especies de destino y clasificacion segun categoria</p>
+      <div class="form-grid">
+        <div class="form-group form-group-full">
+          <label class="form-label">Especies</label>
+          <div class="product-form__chips">
+            <span class="product-form__chip">Perros <button aria-label="Remover Perros">&times;</button></span>
+            <span class="product-form__chip">Gatos <button aria-label="Remover Gatos">&times;</button></span>
+            <input type="text" class="product-form__chip-input" placeholder="Agregar especie..." (input)="markChanged()">
+          </div>
+        </div>
+
+        <!-- Conditional: Farmacos -->
+        @if (selectedCategory() === 'farmacos') {
+          <div class="form-group product-form__conditional-field">
+            <label class="form-label" for="prod-family">Familia Farmaceutica</label>
+            <select id="prod-family" class="form-select" (change)="markChanged()">
+              <option value="" disabled selected>Seleccionar familia</option>
+              <option>Antibioticos</option>
+              <option>Desparasitantes</option>
+              <option>Vitaminas</option>
+              <option>Analgosicos</option>
+              <option>Antiinflamatorios</option>
+            </select>
+          </div>
+        }
+
+        <!-- Conditional: Alimentos -->
+        @if (selectedCategory() === 'alimentos') {
+          <div class="form-group product-form__conditional-field">
+            <label class="form-label" for="prod-lifestage">Etapa de Vida</label>
+            <select id="prod-lifestage" class="form-select" (change)="markChanged()">
+              <option value="" disabled selected>Seleccionar etapa</option>
+              <option>Cachorro/Kitten</option>
+              <option>Adulto</option>
+              <option>Senior</option>
+              <option>Todas las etapas</option>
+            </select>
+          </div>
+        }
+
+        <!-- Conditional: Equipos -->
+        @if (selectedCategory() === 'equipos') {
+          <div class="form-group product-form__conditional-field">
+            <label class="form-label" for="prod-eqtype">Tipo de Equipo</label>
+            <select id="prod-eqtype" class="form-select" (change)="markChanged()">
+              <option value="" disabled selected>Seleccionar tipo</option>
+              <option>Diagnostico</option>
+              <option>Quirurgico</option>
+              <option>Laboratorio</option>
+              <option>Instrumental</option>
+            </select>
+          </div>
+        }
+
+        <div class="form-group form-group-full">
+          <label class="form-label">Presentaciones</label>
+          <div class="product-form__chips">
+            <span class="product-form__chip">Tabletas x 10 <button aria-label="Remover">&times;</button></span>
+            <input type="text" class="product-form__chip-input" placeholder="Agregar presentacion..." (input)="markChanged()">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="product-form__divider">
+
+    <!-- Section 3: Descripcion y Contenido -->
+    <div class="product-form__section">
+      <h2 class="product-form__section-title">Descripcion y Contenido</h2>
+      <p class="product-form__section-desc">Informacion detallada del producto</p>
+
+      <!-- Tabs Pill ES/EN (DC-098) -->
+      <div class="tabs-pill">
+        <button type="button" class="tabs-pill__btn" [class.tabs-pill__btn--active]="activeTab() === 'es'" (click)="switchTab('es')">Espanol</button>
+        <button type="button" class="tabs-pill__btn" [class.tabs-pill__btn--active]="activeTab() === 'en'" (click)="switchTab('en')">English</button>
+      </div>
+
+      @if (activeTab() === 'es') {
+        <div class="form-grid">
+          <div class="form-group form-group-full">
+            <label class="form-label" for="prod-desc-es">Descripcion <span class="required">*</span></label>
+            <textarea id="prod-desc-es" class="form-control" placeholder="Describe el producto en espanol..." aria-required="true" (input)="markChanged()"></textarea>
+          </div>
+        </div>
+      } @else {
+        <div class="form-grid">
+          <div class="form-group form-group-full">
+            <label class="form-label" for="prod-desc-en">Description <span class="required">*</span></label>
+            <textarea id="prod-desc-en" class="form-control" placeholder="Describe the product in English..." aria-required="true" (input)="markChanged()"></textarea>
+          </div>
+        </div>
+      }
+    </div>
+
+    <hr class="product-form__divider">
+
+    <!-- Section 4: Imagenes (DC-078, DC-122) -->
+    <div class="product-form__section">
+      <h2 class="product-form__section-title">Imagenes</h2>
+      <p class="product-form__section-desc">Sube las fotos del producto. La primera sera la imagen principal.</p>
+      <div class="image-uploader">
+        <div class="image-uploader__dropzone">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--neutral-400)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          <p>Arrastra imagenes aqui o <span>selecciona archivos</span></p>
+          <span class="image-uploader__hint">PNG, JPG hasta 5MB</span>
+        </div>
+        <!-- Upload Progress Bar (DC-122) — shell -->
+        <div class="image-uploader__progress" style="display: none;">
+          <div class="image-uploader__progress-bar">
+            <div class="image-uploader__progress-fill" style="width: 65%;"></div>
+          </div>
+          <span class="image-uploader__progress-text">Subiendo... 65%</span>
+        </div>
+      </div>
+    </div>
+
+    <hr class="product-form__divider">
+
+    <!-- Section 5: Ficha Tecnica -->
+    <div class="product-form__section">
+      <h2 class="product-form__section-title">Ficha Tecnica (PDF)</h2>
+      <p class="product-form__section-desc">Sube la ficha tecnica del producto en formato PDF (opcional)</p>
+      <div class="image-uploader">
+        <div class="image-uploader__dropzone">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--neutral-400)" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><polyline points="14 2 14 8 20 8"/></svg>
+          <p>Arrastra el PDF aqui o <span>selecciona archivo</span></p>
+        </div>
+      </div>
+    </div>
+
+    <hr class="product-form__divider">
+
+    <!-- Section 6: Estado -->
+    <div class="product-form__section">
+      <h2 class="product-form__section-title">Configuracion</h2>
+      <p class="product-form__section-desc">Estado y visibilidad del producto</p>
+      <div class="product-form__toggle-row">
+        <div>
+          <span class="form-label">Producto activo</span>
+          <p class="product-form__toggle-hint">El producto sera visible en el catalogo publico</p>
+        </div>
+        <label class="form-switch">
+          <input type="checkbox" checked (change)="markChanged()">
+          <span class="switch-slider"></span>
+        </label>
+      </div>
+      <div class="product-form__toggle-row">
+        <div>
+          <span class="form-label">Producto destacado</span>
+          <p class="product-form__toggle-hint">Aparecera en el carrusel de la pagina principal</p>
+        </div>
+        <label class="form-switch">
+          <input type="checkbox" (change)="markChanged()">
+          <span class="switch-slider"></span>
+        </label>
+      </div>
+    </div>
+  </form>
+
+  <!-- Mobile sticky actions (DC-091) -->
+  <div class="product-form-page__sticky-actions">
+    <button class="btn btn-outline-gray btn-block" (click)="onCancel()">Cancelar</button>
+    <button class="btn btn-primary btn-block">Guardar</button>
+  </div>
+</div>
+
+<!-- Unsaved Changes Modal (UX-045) -->
+@if (showUnsavedModal()) {
+  <div class="modal-backdrop" (click)="stayEditing()">
+    <div class="modal-dialog" (click)="$event.stopPropagation()">
+      <div class="modal-dialog__icon" aria-hidden="true">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--semantic-warning)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      <h3 class="modal-dialog__title">Tienes cambios sin guardar</h3>
+      <p class="modal-dialog__desc">Si sales ahora, perderas los cambios realizados en este producto.</p>
+      <div class="modal-dialog__actions">
+        <button class="btn btn-outline-gray" (click)="confirmLeave()">Salir sin guardar</button>
+        <button class="btn btn-primary" (click)="stayEditing()">Seguir editando</button>
+      </div>
+    </div>
+  </div>
+}

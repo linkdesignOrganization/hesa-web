@@ -1,0 +1,7 @@
+<section class="mfr-cta fade-in-section">
+  <div class="mfr-cta__inner">
+    <h2 class="mfr-cta__title">{{ i18n.currentLang() === 'es' ? 'Somos su socio de distribucion en Costa Rica' : 'Your Distribution Partner in Costa Rica' }}</h2>
+    <p class="mfr-cta__desc">{{ i18n.currentLang() === 'es' ? 'Con 37 anos de experiencia y cobertura nacional, conectamos fabricantes internacionales con el mercado veterinario costarricense.' : 'With 37 years of experience and national coverage, we connect international manufacturers with the Costa Rican veterinary market.' }}</p>
+    <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'distribuidores' : 'distributors')" class="btn btn-white mfr-cta__btn">{{ i18n.currentLang() === 'es' ? 'Conocer mas' : 'Learn more' }}</a>
+  </div>
+</section>

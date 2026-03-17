@@ -1,0 +1,94 @@
+// =============================================================================
+// Admin Login (DC-045, DC-099)
+// =============================================================================
+
+.login-page {
+  min-height: 100vh;
+  background-color: var(--neutral-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 420px;
+  background-color: var(--neutral-white);
+  border-radius: var(--radius-card-panel);
+  box-shadow: var(--shadow-lg);
+  padding: 48px 40px;
+  text-align: center;
+
+  @media (max-width: 767px) {
+    max-width: 100%;
+    padding: 32px 20px;
+  }
+
+  &__logo {
+    font-size: 40px;
+    font-weight: var(--weight-extrabold);
+    color: var(--brand-primary);
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+  }
+
+  &__title {
+    font-size: var(--text-panel-title);
+    font-weight: var(--weight-bold);
+    color: var(--neutral-900);
+    margin-bottom: 8px;
+  }
+
+  &__subtitle {
+    font-size: 14px;
+    color: var(--neutral-400);
+    margin-bottom: 32px;
+  }
+
+  &__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    padding: 14px 24px;
+    background-color: var(--neutral-white);
+    border: 1px solid var(--neutral-200);
+    border-radius: var(--radius-btn);
+    font-size: 15px;
+    font-weight: var(--weight-medium);
+    color: var(--neutral-900);
+    transition: all 0.2s ease-out;
+
+    &:hover {
+      background-color: var(--neutral-50);
+      box-shadow: var(--shadow-sm);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--brand-primary);
+      outline-offset: 2px;
+    }
+  }
+
+  &__error {
+    margin-top: 24px;
+    padding: 16px;
+    background-color: var(--semantic-danger-soft);
+    border-radius: var(--radius-btn);
+
+    p {
+      font-size: 14px;
+      color: var(--semantic-danger-text);
+      margin-bottom: 12px;
+    }
+  }
+
+  &__retry {
+    font-size: 14px;
+    font-weight: var(--weight-medium);
+    color: var(--semantic-danger);
+    text-decoration: underline;
+  }
+}

@@ -1,0 +1,196 @@
+// =============================================================================
+// Utility Classes & Mixins
+// =============================================================================
+
+// ---- Breakpoint Mixins (DC-026) ----
+@mixin tablet {
+  @media (min-width: 768px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin desktop-lg {
+  @media (min-width: 1280px) {
+    @content;
+  }
+}
+
+@mixin desktop-xl {
+  @media (min-width: 1440px) {
+    @content;
+  }
+}
+
+@mixin mobile-only {
+  @media (max-width: 767px) {
+    @content;
+  }
+}
+
+@mixin tablet-only {
+  @media (min-width: 768px) and (max-width: 1023px) {
+    @content;
+  }
+}
+
+// ---- Container (DC-019) ----
+.container {
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin-inline: auto;
+  padding-inline: var(--container-padding-mobile);
+
+  @include tablet {
+    padding-inline: var(--container-padding-desktop);
+  }
+}
+
+// ---- Skeleton Shimmer Animation (DC-120) ----
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--neutral-200) 25%,
+    var(--neutral-50) 50%,
+    var(--neutral-200) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+  border-radius: var(--radius-btn);
+}
+
+// ---- Scroll Fade In (DC-025, DC-139) ----
+.fade-in-section {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: var(--transition-fade-in);
+
+  &.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ---- Spinner Animation (DC-121) ----
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: var(--neutral-white);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+// ---- Badge Pulse (DC-145) ----
+@keyframes badge-pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+// ---- Visually Hidden (a11y) ----
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+// ---- Typography Utilities (DC-012) ----
+.text-display {
+  font-size: var(--text-display);
+  font-weight: var(--weight-extrabold);
+  letter-spacing: var(--tracking-tight);
+  line-height: 1.1;
+
+  @include mobile-only {
+    font-size: 32px;
+    font-weight: var(--weight-bold);
+  }
+}
+
+.text-h1 {
+  font-size: var(--text-h1);
+  font-weight: var(--weight-bold);
+
+  @include mobile-only {
+    font-size: 32px;
+  }
+}
+
+.text-h2 {
+  font-size: var(--text-h2);
+  font-weight: var(--weight-bold);
+
+  @include mobile-only {
+    font-size: 28px;
+  }
+}
+
+.text-h3 {
+  font-size: var(--text-h3);
+  font-weight: var(--weight-bold);
+
+  @include mobile-only {
+    font-size: 24px;
+  }
+}
+
+.text-body-lg {
+  font-size: var(--text-body-lg);
+  font-weight: var(--weight-regular);
+}
+
+.text-small {
+  font-size: var(--text-small);
+  font-weight: var(--weight-regular);
+}
+
+.text-label {
+  font-size: var(--text-label);
+  font-weight: var(--weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+// ---- Section Spacing (DC-017) ----
+.section-spacing {
+  padding-block: var(--section-gap-mobile);
+
+  @include tablet {
+    padding-block: var(--section-gap-tablet);
+  }
+
+  @include desktop-lg {
+    padding-block: var(--section-gap-desktop);
+  }
+}

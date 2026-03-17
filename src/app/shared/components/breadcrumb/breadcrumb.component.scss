@@ -1,0 +1,48 @@
+// =============================================================================
+// Breadcrumb (DC-067)
+// =============================================================================
+
+.breadcrumb {
+  &__list {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+
+    @media (max-width: 767px) {
+      font-size: 13px;
+    }
+  }
+
+  &__link {
+    color: var(--neutral-400);
+    text-decoration: none;
+    transition: color 0.2s ease-out;
+
+    &:hover {
+      color: var(--brand-primary);
+      text-decoration: underline;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--brand-primary);
+      outline-offset: 2px;
+    }
+  }
+
+  &__current {
+    color: var(--neutral-900);
+    font-weight: var(--weight-medium);
+  }
+
+  &__separator {
+    color: var(--neutral-200);
+    padding: 0 8px;
+    user-select: none;
+  }
+}

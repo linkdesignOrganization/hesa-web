@@ -1,0 +1,329 @@
+// =============================================================================
+// Admin Dashboard (DC-046, DC-072, DC-073, DC-089)
+// =============================================================================
+
+.dashboard {
+  &__title {
+    font-size: var(--text-panel-title);
+    font-weight: var(--weight-bold);
+  }
+
+  &__welcome {
+    font-size: 14px;
+    color: var(--neutral-400);
+    margin-bottom: 32px;
+  }
+
+  // ---- Summary Cards (DC-072, DC-089) ----
+  &__summary {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--panel-cards-gap);
+    margin-bottom: var(--panel-cards-gap);
+
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (min-width: 1280px) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  // ---- Category Cards (DC-073) ----
+  &__categories {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--panel-cards-gap);
+    margin-bottom: var(--panel-cards-gap);
+
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (min-width: 1280px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  // ---- Row 3: Messages + Activity ----
+  &__row3 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--panel-cards-gap);
+
+    @media (min-width: 1024px) {
+      grid-template-columns: 60% 40%;
+    }
+  }
+
+  &__messages-card,
+  &__activity-card {
+    background-color: var(--neutral-white);
+    border-radius: var(--radius-card-panel);
+    box-shadow: var(--shadow-sm);
+    padding: var(--panel-card-padding);
+  }
+
+  &__card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+
+    h2 {
+      font-size: 16px;
+      font-weight: var(--weight-bold);
+    }
+  }
+
+  &__card-link {
+    font-size: 13px;
+    font-weight: var(--weight-medium);
+    color: var(--brand-primary);
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  // Messages
+  &__message-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--neutral-200);
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  &__message-preview {
+    flex: 1;
+    font-size: 14px;
+    color: var(--neutral-900);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 300px;
+  }
+
+  &__message-date {
+    font-size: 12px;
+    color: var(--neutral-400);
+    white-space: nowrap;
+  }
+
+  // Activity
+  &__activity-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--neutral-200);
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    p {
+      flex: 1;
+      font-size: 14px;
+      color: var(--neutral-900);
+    }
+
+    span {
+      font-size: 12px;
+      color: var(--neutral-400);
+      white-space: nowrap;
+    }
+  }
+
+  &__activity-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--brand-primary);
+    flex-shrink: 0;
+  }
+
+  // ---- Error State ----
+  &__error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 16px;
+    padding: 80px 20px;
+    background-color: var(--neutral-white);
+    border-radius: var(--radius-card-panel);
+    box-shadow: var(--shadow-sm);
+
+    p {
+      font-size: 16px;
+      color: var(--neutral-400);
+    }
+  }
+
+  &__error-icon {
+    margin-bottom: 8px;
+  }
+}
+
+// ---- Summary Card Component (DC-072, BVC-037) ----
+.summary-card {
+  background-color: var(--neutral-white);
+  border-radius: var(--radius-card-panel);
+  box-shadow: var(--shadow-sm);
+  padding: var(--panel-card-padding);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transition: box-shadow 0.2s ease-out;
+
+  &:hover {
+    box-shadow: var(--shadow-md);
+    cursor: pointer;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--brand-primary);
+    outline-offset: 2px;
+  }
+
+  &__icon {
+    width: var(--icon-circle-size);
+    height: var(--icon-circle-size);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    &--blue { background-color: rgba(0, 141, 201, 0.1); }
+    &--green { background-color: rgba(34, 197, 94, 0.1); }
+    &--purple { background-color: rgba(124, 58, 237, 0.1); }
+    &--orange { background-color: rgba(245, 158, 11, 0.1); }
+  }
+
+  &__data {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__value {
+    font-size: 28px;
+    font-weight: var(--weight-bold);
+    color: var(--neutral-900);
+    line-height: 1;
+  }
+
+  &__label {
+    font-size: 14px;
+    color: var(--neutral-400);
+    margin-top: 4px;
+  }
+
+  // DC-117: Error variant
+  &--error {
+    border-left: 4px solid var(--semantic-danger);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  &__error-content {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__error-text {
+    font-size: 14px;
+    font-weight: var(--weight-medium);
+    color: var(--semantic-danger);
+  }
+
+  &__error-retry {
+    font-size: 13px;
+    font-weight: var(--weight-medium);
+    color: var(--brand-primary);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    text-decoration: underline;
+
+    &:hover {
+      color: var(--brand-dark);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--brand-primary);
+      outline-offset: 2px;
+    }
+  }
+}
+
+// ---- Category Card Admin (DC-073) ----
+.category-card {
+  background-color: var(--neutral-white);
+  border-radius: var(--radius-card-panel);
+  box-shadow: var(--shadow-sm);
+  padding: var(--panel-card-padding);
+  transition: box-shadow 0.2s ease-out;
+
+  &:hover {
+    box-shadow: var(--shadow-md);
+    cursor: pointer;
+  }
+
+  &__icon {
+    width: var(--icon-circle-size);
+    height: var(--icon-circle-size);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+
+    &--pharma { background-color: rgba(0, 141, 201, 0.1); }
+    &--food { background-color: rgba(34, 197, 94, 0.1); }
+    &--equipment { background-color: rgba(107, 114, 128, 0.1); }
+  }
+
+  &__label {
+    font-size: 16px;
+    font-weight: var(--weight-semibold);
+    color: var(--neutral-900);
+    display: block;
+    margin-bottom: 12px;
+  }
+
+  &__progress {
+    height: 6px;
+    border-radius: 3px;
+    background-color: var(--neutral-200);
+    overflow: hidden;
+    margin-bottom: 8px;
+  }
+
+  &__bar {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.5s ease-out;
+
+    &--pharma { background-color: var(--brand-primary); }
+    &--food { background-color: var(--semantic-success); }
+    &--equipment { background-color: var(--neutral-400); }
+  }
+
+  &__count {
+    font-size: 13px;
+    color: var(--neutral-400);
+  }
+}

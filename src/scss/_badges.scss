@@ -1,0 +1,73 @@
+// =============================================================================
+// Badge Styles (DC-007, DC-008, DC-075)
+// =============================================================================
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--text-panel-badge);
+  font-weight: var(--weight-semibold);
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+}
+
+// Category badges
+.badge-pharma {
+  background-color: var(--semantic-info-soft);
+  color: var(--brand-primary);
+}
+
+.badge-food {
+  background-color: var(--semantic-success-soft);
+  color: var(--semantic-success);
+}
+
+.badge-equipment {
+  background-color: var(--surface-equipment);
+  color: var(--neutral-400);
+}
+
+// Status badges (DC-007)
+.badge-active {
+  background-color: var(--semantic-success-soft);
+  color: var(--semantic-success-text);
+}
+
+.badge-inactive {
+  background-color: var(--semantic-danger-soft);
+  color: var(--semantic-danger-text);
+}
+
+.badge-pending {
+  background-color: var(--semantic-warning-soft);
+  color: var(--semantic-warning-text);
+}
+
+.badge-info {
+  background-color: var(--semantic-info-soft);
+  color: var(--semantic-info-text);
+}
+
+// DC-008: Purple manufacturer badge
+.badge-manufacturer {
+  background-color: var(--semantic-purple-soft);
+  color: var(--semantic-purple-text);
+}
+
+// Message type badges
+.badge-general {
+  background-color: var(--semantic-info-soft);
+  color: var(--semantic-info-text);
+}
+
+.badge-commercial {
+  background-color: var(--semantic-success-soft);
+  color: var(--semantic-success-text);
+}
+
+.badge-support {
+  background-color: var(--semantic-warning-soft);
+  color: var(--semantic-warning-text);
+}

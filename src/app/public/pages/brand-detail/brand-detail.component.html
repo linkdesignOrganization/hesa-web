@@ -1,0 +1,60 @@
+<!-- BRAND DETAIL PAGE -->
+@if (loading()) {
+  <section class="brand-detail-page">
+    <div class="container">
+      <div class="skeleton-block" style="height: 200px; border-radius: 12px; margin-bottom: 32px;"></div>
+      <div class="brands-page__grid">
+        @for (i of [1,2,3]; track i) {
+          <div class="skeleton-block" style="height: 280px; border-radius: 12px;"></div>
+        }
+      </div>
+    </div>
+  </section>
+} @else if (notFound()) {
+  <section class="brand-detail-page">
+    <div class="container" style="text-align: center; padding: 80px 0;">
+      <h1>{{ i18n.currentLang() === 'es' ? 'Esta marca no esta disponible' : 'This brand is not available' }}</h1>
+      <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'marcas' : 'brands')" class="btn btn-primary" style="margin-top: 24px;">{{ i18n.currentLang() === 'es' ? 'Ver todas las marcas' : 'View all brands' }}</a>
+    </div>
+  </section>
+} @else if (brand()) {
+  <section class="brand-detail-page">
+    <div class="container">
+      <app-breadcrumb [items]="breadcrumbs" />
+
+      <div class="brand-detail-page__header">
+        <div class="brand-detail-page__logo">
+          <span class="brand-detail-page__logo-initial">{{ brand()!.logoPlaceholder }}</span>
+        </div>
+        <div class="brand-detail-page__info">
+          <h1 class="brand-detail-page__name">{{ brand()!.name }}</h1>
+          <p class="brand-detail-page__country">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            {{ brand()!.country }}
+          </p>
+          <div class="brand-detail-page__badges">
+            @for (cat of brand()!.categories; track cat) {
+              <span class="badge" [class.badge-pharma]="cat === 'Farmacos'" [class.badge-food]="cat === 'Alimentos'" [class.badge-equipment]="cat === 'Equipos'">{{ cat }}</span>
+            }
+          </div>
+          <p class="brand-detail-page__desc">{{ i18n.t(brand()!.description) }}</p>
+        </div>
+      </div>
+
+      <hr class="brand-detail-page__divider">
+
+      @if (products().length > 0) {
+        <h2 class="text-h3 brand-detail-page__products-title">{{ i18n.currentLang() === 'es' ? 'Productos de ' + brand()!.name : brand()!.name + ' Products' }}</h2>
+        <div class="brand-detail-page__grid">
+          @for (product of products(); track product.id) {
+            <app-product-card [product]="product" />
+          }
+        </div>
+      } @else {
+        <div style="text-align: center; padding: 40px 0; color: var(--neutral-400);">
+          <p>{{ i18n.currentLang() === 'es' ? 'Esta marca aun no tiene productos publicados' : 'This brand does not have any published products yet' }}</p>
+        </div>
+      }
+    </div>
+  </section>
+}

@@ -1,0 +1,65 @@
+// =============================================================================
+// Value Stat (DC-033, DC-062, DC-143)
+// =============================================================================
+
+.value-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 24px;
+
+  &__icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: rgba(80, 185, 42, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+  }
+
+  &__number {
+    font-size: 42px;
+    font-weight: var(--weight-bold);
+    color: var(--neutral-900);
+    line-height: 1;
+
+    @media (max-width: 767px) {
+      font-size: 36px;
+    }
+  }
+
+  &__suffix {
+    font-size: inherit;
+    font-weight: inherit;
+  }
+
+  &__display {
+    // DC-143: This span holds the animated number value (starts at 0)
+  }
+
+  &__label {
+    font-size: 15px;
+    color: var(--neutral-400);
+    margin-top: 8px;
+    max-width: 180px;
+    line-height: 1.4;
+  }
+
+  // DC-143: Pre-scroll state — number shows "0" and waits for IntersectionObserver
+  &--pre-scroll {
+    .value-stat__number {
+      opacity: 0.4;
+      transition: opacity 0.3s ease-out;
+    }
+  }
+
+  // DC-143: Post-animation state — applied by step 4b when count-up completes
+  &--counted {
+    .value-stat__number {
+      opacity: 1;
+    }
+  }
+}

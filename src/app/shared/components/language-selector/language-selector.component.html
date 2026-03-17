@@ -1,0 +1,35 @@
+@if (variant() === 'header') {
+  <div class="lang-selector" role="listbox" aria-label="Seleccionar idioma">
+    <button
+      class="lang-selector__trigger"
+      (click)="toggleDropdown()"
+      [attr.aria-expanded]="isOpen()">
+      <span class="lang-selector__code">{{ i18n.currentLang() === 'es' ? 'ES' : 'EN' }}</span>
+      <svg class="lang-selector__chevron" [class.lang-selector__chevron--open]="isOpen()" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+    @if (isOpen()) {
+      <div class="lang-selector__dropdown">
+        <button
+          class="lang-selector__option"
+          [class.lang-selector__option--active]="i18n.currentLang() === 'es'"
+          role="option"
+          [attr.aria-selected]="i18n.currentLang() === 'es'"
+          (click)="selectLanguage('es')">
+          Espanol
+        </button>
+        <button
+          class="lang-selector__option"
+          [class.lang-selector__option--active]="i18n.currentLang() === 'en'"
+          role="option"
+          [attr.aria-selected]="i18n.currentLang() === 'en'"
+          (click)="selectLanguage('en')">
+          English
+        </button>
+      </div>
+    }
+  </div>
+} @else {
+  <button class="lang-footer" (click)="selectLanguage(i18n.currentLang() === 'es' ? 'en' : 'es')">
+    {{ i18n.currentLang() === 'es' ? 'English' : 'Espanol' }}
+  </button>
+}

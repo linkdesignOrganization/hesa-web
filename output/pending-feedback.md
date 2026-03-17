@@ -184,3 +184,94 @@
 - La cobertura de los 371 requirements es exhaustiva — cada REQ tiene DEMO en arquitectura y DC/UX en diseno. La cadena de trazabilidad REQ->DEMO->DC/UX es solida
 - El contraste de color de marca (#008DC9 a 3.71:1) es una limitacion inherente que esta bien documentada con restricciones de uso, pero debera verificarse cuidadosamente en la fase de implementacion visual (paso 4a-verify)
 - La calidad de los 4 documentos del plan es excepcional: 371 REQ numerados, 45 DEMO con origen REQ, 149 DC con valores exactos, 117 UX con origen DEMO, 40 BVC con DC relacionado. La trazabilidad bidireccional es completa
+
+### Feedback de: devops
+- La Azure subscription CEFSA-prod tiene 13 Static Web Apps en tier Free, excediendo el limite de 10 -- nuevos SWA deben usar tier Standard ($9/mes) o se deben eliminar SWAs inactivos del Free tier para liberar cuota
+- El proyecto Angular 19 genera build output en `dist/hesa-web/browser/` (no en `dist/hesa-web/` directamente). El CI/CD debe apuntar a la subcarpeta `browser/` como output location para Azure SWA. Si el Developer agrega SSR en el futuro, la estructura de output cambiara y el workflow necesitara actualizacion
+- El `staticwebapp.config.json` debe copiarse al directorio de output durante el build (no se incluye automaticamente). El workflow de GitHub Actions tiene un paso explicito para esto
+- El architect recomienda en GAP-A04 usar App Service para el sitio publico (SSR) y SWA solo para el panel admin. Para la demo (sin SSR), SWA funciona perfectamente. Cuando se implemente SSR en iteraciones posteriores, se necesitara re-evaluar la estrategia de deploy del sitio publico
+
+
+### Feedback de: ui-developer
+- El design-criteria.md no especifica el estado visual del boton "Filtrar" en mobile cuando hay filtros activos (solo dice badge con conteo) -- se implemento con circulo azul 20px con numero blanco
+- Los DC-xxx no definen un color de fondo para el hero del sitio publico cuando no hay imagen cargada -- se uso --neutral-900 como fallback con overlay gradient
+- El contraste de texto blanco sobre --brand-primary (#008DC9) a 3.8:1 efectivamente limita su uso a texto grande (18px+ bold). En CTAs y badges pequenos se deberia considerar usar --brand-dark (#005A85) para cumplir AA en todo tamano
+- La escala monocromatica de colores (--brand-primary-50 a --brand-primary-900) definida en design-tokens.md no fue incluida en los DC-xxx como custom properties requeridas -- se implementaron solo los tokens core definidos en DC-001 a DC-029
+- El DC-048 requiere campos condicionales segun categoria con "fade in/out" pero no especifica que campos son condicionales para cada categoria -- se implemento el formulario base sin logi de campos condicionales (eso es funcionalidad, no cascara visual)
+- Angular 19 usa @use en lugar de @import para Sass -- el scaffold inicial del proyecto generaba @import deprecado en styles.scss. Se migro a @use para eliminar deprecation warnings
+- Los budget limits de angular.json (4kB por component style) son insuficientes para componentes con multiples estados y breakpoints responsive como el header, dashboard y product-detail -- se aumento a 6kB warning / 12kB error
+- El DC-029 define circulos decorativos de iconos como 48px pero el DC-062 los define como 56px para Value Stat -- hay inconsistencia entre el token generico y la especificacion del componente. Se uso 48px para panel (DC-029) y 56px para Value Stat (DC-062)
+- GAP-D12 (sidebar del panel no detallado en components.md) se resolvio como layout component dentro del AdminLayoutComponent con patron de sidebar activo consistente con DC-088
+- No hay imagenes placeholder reales disponibles en el proyecto (carpeta public/ solo tiene favicon.ico). Se usaron SVG inline como placeholders para todas las imagenes de productos, marcas, equipo y heroes
+
+### Feedback de: plan-verifier
+- El UI Developer no implemento templates visuales para estados de error y vacio en catalogo (DC-106, DC-107) ni la pagina 404 estilizada (DC-111) ni el empty state del panel de productos (DC-118). Estos son shells visuales que deben existir independientemente de la logica funcional
+- El carrusel de productos destacados (DC-055) se implemento como grid CSS en lugar de un carrusel real con flechas circulares 44px y swipe. Las flechas son componente visual, no logica
+- La tabla del panel en mobile (DC-090) simplemente se oculta con display:none en lugar de transformarse a stacked cards con labels UPPERCASE, lo cual deja a los usuarios mobile sin acceso a la vista tabla
+- El image uploader (DC-122) carece de la progress bar visual (4px radius 2px) que deberia estar como componente CSS listo, aunque la animacion sea funcional
+- El formulario de contacto publico (DC-130) no tiene el template visual de confirmacion post-submit (checkmark verde 48px + "Mensaje enviado" + fondo #DCFCE7), que es una pieza visual, no logica
+- Los estados de pre-animacion para count-up (DC-143) y timeline secuencial (DC-144) no existen -- los numeros arrancan en su valor final y los nodos son siempre visibles, lo cual requiere CSS initial state para que la animacion funcional pueda activarlos
+- El kanban (DC-146) no tiene los estilos CSS para drag-drop visual (card arrastrada con sombra lg + rotate(2deg) + opacity 0.9, y columna destino con borde 2px dashed #008DC9 + fondo #E8F4FD). Estos son CSS puro, no logica de drag
+- El summary-card del dashboard (DC-117) no tiene la variante visual de error (borde izq 4px #EF4444 + mensaje "Error al cargar" + boton "Reintentar")
+
+### Feedback de: ui-developer (post-verification fix)
+- Los 4 criterios sin cobertura (DC-106, DC-107, DC-111, DC-118) y 10 parciales fueron todos shells visuales que deberian haberse incluido en la implementacion inicial. Patron recurrente: los estados de error y vacio no son "logica funcional" sino templates HTML+CSS que deben existir como cascara visual desde el paso 4a
+- La distincion entre "visual shell" y "logica funcional" deberia estar mas clara en las instrucciones del rol: templates con style="display:none" son visuales, la logica que los muestra/oculta es funcional
+- La tabla mobile stacked (DC-090) requiere HTML duplicado entre desktop table y mobile cards porque CSS-only transforms de table a stacked cards son fragiles en Angular con component encapsulation. El approach de dual rendering (display:none toggle) es mas confiable
+- El design-criteria.md prescribe carousel con swipe touch (DC-055) pero swipe es inherentemente funcional (requiere touch event listeners). Solo las flechas circulares y dots son visuales. El criterio deberia separar "flechas visibles" de "swipe funcional"
+- Los estados pre-animacion (DC-143 count-up, DC-144 timeline secuencial) requieren que el HTML empiece con valores visualmente diferentes (numeros en "0", nodos invisibles) y el CSS tenga las transiciones definidas. El Developer en paso 4b solo necesita agregar IntersectionObserver para togglear la clase CSS
+- RouterLink faltaba como import en componentes standalone que usaban routerLink en templates (home, products-list, product-detail). Angular 19 standalone requiere imports explicitos de directivas de router
+
+### Feedback de: plan-verifier (ronda 2 - paso 4a-verify)
+- Los 14 gaps reportados en ronda 1 fueron corregidos exhaustivamente. El UI Developer implemento todos los shells visuales faltantes con calidad consistente
+- Patron positivo observado: todos los estados de error/vacio usan style="display:none" como shell con role="alert" o role="status" para accesibilidad, listos para ser activados en paso 4b
+- Las ilustraciones SVG para estados vacios (DC-107, DC-111, DC-118) usan tokens del design system (--neutral-50, --neutral-200, --surface-pharma, --brand-primary) en lugar de colores hardcoded, lo cual es correcto
+- La solucion de tabla mobile stacked (DC-090) usa dual rendering (tabla desktop + cards mobile con display toggle) en lugar de CSS transforms, lo cual es mas robusto con Angular encapsulation
+- Los estados pre-animacion (DC-143 count-up con valor "0", DC-144 timeline con --pre-animation) estan correctamente implementados como CSS puro con transition-delay via custom properties, dejando solo el trigger de IntersectionObserver para paso 4b
+- El carousel (DC-055) implemento flechas circulares 44px con todas las variantes (hover, disabled, focus) y ocultamiento correcto en mobile. Touch swipe queda para paso 4b como funcionalidad
+- Recomendacion para futuros proyectos: incluir explicitamente en el checklist del UI Developer "implementar TODOS los shells visuales de estados UI (error, vacio, carga) aunque sean hidden" para evitar la necesidad de ronda 2
+
+### Feedback de: developer
+- El ux-criteria.md especifica rutas con patron `/:lang/catalogo/[categoria]/[slug]` pero no define como manejar colisiones si un producto tiene el mismo slug en dos categorias distintas. En la demo con mock data no es problema pero en produccion debe garantizarse unicidad de slug por idioma
+- El UX-060 pide 48 productos pero la distribucion sugerida (~28 farmacos, ~14 alimentos, ~6 equipos) deja los equipos con muy pocos items para demostrar funcionalidad de filtros y paginacion. Se crearon 6 equipos con tipos variados (Diagnostico, Quirurgico, Laboratorio, Instrumental) pero la paginacion no se puede demostrar con solo 6 items
+- El ux-criteria.md no define que pasa con los formularios de admin (producto, marca, contenido) al recargar la pagina durante una edicion en progreso. En la demo todo es mock sin persistencia, pero en iteraciones reales se necesita definir si se usa localStorage como draft o simplemente se pierden los datos
+- La seccion de storytelling del producto (UX-031b) requiere bloques opcionales con imagen+texto pero no especifica el tamano maximo de texto ni si soporta formato rich-text o solo texto plano. Se implemento como texto plano
+- El CRM tracking (UX-114) envia eventos a un endpoint que no existe en la demo. Los errores de red se capturan silenciosamente (por diseno) pero en console se ven warnings de fetch failed que pueden confundir al cliente durante la presentacion
+- Los filtros adaptativos del catalogo (UX-076) requieren que al cambiar categoria los filtros secundarios cambien dinamicamente. Esto funciona correctamente en la pagina de catalogo por categoria pero en el catalogo general la adaptacion de filtros al seleccionar una categoria es mas limitada porque el dropdown de filtros es generico
+- El ux-flows.md describe la galeria de producto con "zoom on hover / lightbox on click" (UX-079) pero esto requiere una libreria de terceros o implementacion custom significativa. En la demo se implementaron thumbnails clickeables sin lightbox ni zoom
+- El design-criteria.md y el ux-criteria.md tienen referencias cruzadas complejas (DC-xxx + UX-xxx) pero no existe un mapeo explicito de "cual DC corresponde a cual UX para cada componente". El developer debe cruzar manualmente ambos documentos lo cual es propenso a omisiones
+
+### Feedback de: plan-verifier (paso 4b-verify)
+- El Developer implemento correctamente los flujos criticos (UX-013 busqueda+solicitud, UX-014 fabricante evalua HESA) con navegacion funcional completa y datos mock realistas. La calidad de los flujos principales es alta
+- El CRM tracking (UX-114, UX-115) esta completamente implementado con todos los comportamientos definidos: open, page-view, scroll thresholds, heartbeat, CTA tracking, batching, sendBeacon, flush en visibility/beforeunload, exclusion del panel admin. Implementacion ejemplar
+- Los IntersectionObserver para animaciones de scroll (UX-087 count-up, UX-088 fade-in, UX-093 timeline secuencial) NO fueron implementados por el Developer. El UI Developer dejo los estados pre-animacion CSS preparados (DC-143, DC-144) pero el Developer debio agregar los observers para activarlos. El resultado es que los numeros de propuesta de valor muestran "0" permanentemente y las secciones con fade-in-section pueden estar invisibles
+- El BrandLogosRowComponent tiene datos hardcoded en lugar de usar MockDataService, y los enlaces <a> no tienen routerLink funcional. Esto rompe el flujo Home -> Marca individual (UX-086). Es una inconsistencia: todos los demas componentes usan MockDataService correctamente
+- Los filtros del catalogo (UX-076) no sincronizan con query params del URL, lo cual impide compartir URLs filtradas y pierde el estado al usar boton atras del navegador. Esto contradice explicitamente el criterio "URL actualizada con query params de filtros activos"
+- Los filtros en mobile (UX-077) no tienen drawer desde abajo -- se muestran igual que en desktop. Esto impacta la usabilidad mobile significativamente ya que los dropdowns de filtro ocupan mucho espacio horizontal
+- El ManufacturerCtaComponent y el TimelineComponent tienen textos hardcoded en espanol sin i18n. Esto rompe la experiencia bilingue para visitantes en /en/. Patron: componentes simples sin inyeccion de I18nService
+- El header del panel admin (UX-011) no tiene icono de notificaciones con badge ni dropdown de usuario con opcion "cerrar sesion". Solo muestra avatar + nombre estático
+- La distincion entre "shell visual" y "funcionalidad de demo" esta bien delineada en la ux-criteria.md para los flujos 3-8 (shell), pero algunos criterios dentro de esos flujos (como campos condicionales UX-044, cambios sin guardar UX-045) son ambiguos: el criterio los describe como funcionalidad pero el flujo padre esta marcado como "shell". Recomendacion para futuros proyectos: marcar explicitamente cada sub-criterio como "shell" o "funcional" independientemente del flujo padre
+- El mock data service es de calidad excepcional: 48 productos realistas con nombres del sector veterinario costarricense, 12 marcas con paises y categorias correctas, 12 mensajes variados, 6 miembros del equipo, datos de configuracion completos. La variedad y realismo superan expectativas
+
+### Feedback de: developer
+- Los UI Developer dejaron comentarios HTML tipo "count-up triggered by IntersectionObserver in step 4b" y "IntersectionObserver in step 4b adds .timeline--animated" sin implementar la logica JS correspondiente. Esto crea una dependencia implicita no documentada en el ux-criteria.md. Recomendacion: incluir en el design-criteria o ux-criteria un criterio explicito de tipo "El developer debe implementar IntersectionObserver para las siguientes clases CSS: .fade-in-section, .timeline--pre-animation, .value-stat--pre-scroll"
+- El ToastService tiene la firma show(type, message) pero otros componentes existentes usan show(message, type). Esto causa errores de compilacion silenciosos si el developer asume el orden convencional (message, type). Recomendacion: usar los metodos convenience (success, error, warning, info) en vez del generico show() para evitar ambiguedad
+- La verificacion 4b (plan-verifier) fue muy util para identificar gaps funcionales. El formato de reporte con secciones "Gaps CRITICOS" vs "Gaps PARCIALES aceptables" agiliza la priorizacion. Sugerencia: que el reporte incluya la ruta del archivo/componente afectado para cada gap, no solo el UX-xxx
+- El BrandLogosRowComponent original tenia datos hardcoded en vez de usar el MockDataService ya disponible. Esto es un patron recurrente en componentes simples: cuando el UI Developer crea un componente visual, hardcodea datos placeholder en vez de inyectar el servicio de datos. Recomendacion para el UI Developer: siempre inyectar MockDataService y usar datos reales, incluso para componentes visuales simples
+- Los filtros adaptativos en el catalogo general (UX-016) requieren logica de clearing de filtros secundarios al cambiar categoria. Sin esta logica, seleccionar "Farmacos" y filtrar por "Familia: Antibioticos" y luego cambiar a "Alimentos" dejaria el filtro de familia activo pero invisible y sin resultados
+
+### Feedback de: plan-verifier (ronda 2, 4b-verify)
+- El developer corrigio 17 de 18 gaps en una sola ronda. Patron positivo: las correcciones fueron exhaustivas y no introdujeron scope creep ni regresiones en criterios previamente cubiertos
+- UX-079 (galeria producto lightbox/swipe) es el unico gap residual. El criterio UX pide zoom on hover + lightbox on click + swipe mobile, pero la implementacion solo tiene zoom on hover (scale 1.05 via CSS). Lightbox y swipe son features complementarias que no bloquean la demo pero deberian planificarse para una iteracion futura
+- El patron de IntersectionObserver se repite en 4 componentes (ValueStat, HomeComponent fade-in, DistributorsComponent fade-in, DistributorsComponent timeline). Seria beneficioso un servicio compartido o directiva Angular reutilizable para evitar duplicacion de codigo de observer
+- El dashboard paso de carga sincrona a asincrona correctamente, incluyendo skeleton y error state. Sin embargo, la carga es un solo bloque (todo o nada); el criterio UX-041 pide "error parcial" donde secciones individuales puedan fallar. Esto es aceptable para la fase visual demo pero deberia tenerse en cuenta en la implementacion funcional
+- La implementacion del kanban drag-and-drop usa la API nativa HTML5 DnD, que no funciona en mobile touch. Para la fase visual demo esto es aceptable, pero en produccion se necesitara una libreria de DnD con soporte touch (ej: CDK DragDrop de Angular)
+
+### Feedback de: developer (security review)
+- Las rutas admin no tenian ningun guard de autenticacion — cualquier usuario podia acceder a /admin/dashboard directamente. Esto es critico incluso en fase demo porque el deploy es publico en Azure SWA. Se agrego authGuard + AuthService mock
+- El formulario de contacto no tenia limites de longitud en ningun campo ni rate limiting. Un atacante podia enviar payloads de megabytes o hacer spam masivo. Se agregaron maxlength HTML + validacion JS + rate limiting de 30s
+- Los inputs de busqueda (overlay y search results) no sanitizaban caracteres de control. Aunque Angular auto-escapa en interpolacion, los control characters podrian causar problemas en futuras integraciones con APIs/DB
+- staticwebapp.config.json no tenia Content-Security-Policy ni Strict-Transport-Security. Estos headers son la primera linea de defensa contra XSS e intercepciones en produccion
+- Las dependencias tenian 6 vulnerabilidades high severity (serialize-javascript RCE + tar path traversal). Aunque son dev-only dependencies, un atacante con acceso al CI/CD podria explotarlas. Se resolvieron con npm overrides
+- El architecture.md deberia incluir una seccion explicita de "Security Requirements" para cada iteracion, especificando que guards, validaciones y headers son obligatorios desde el inicio
+- Los requirements no especifican politica de rate limiting para el formulario de contacto. Este es un edge case comun que deberia estar documentado para evitar que se implemente de formas inconsistentes

@@ -1,0 +1,303 @@
+// =============================================================================
+// Header Component (DC-050, DC-080, DC-141, DC-147)
+// =============================================================================
+
+:host {
+  display: block;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-sticky);
+  background-color: var(--neutral-white);
+  height: 70px;
+  transition: height 0.3s ease-out, box-shadow 0.3s ease-out;
+
+  &--scrolled {
+    height: 60px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+  }
+
+  // ---- Logo (DC-147) ----
+  &__logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    font-weight: var(--weight-extrabold);
+    font-size: 28px;
+    color: var(--brand-primary);
+    letter-spacing: -0.02em;
+
+    &:hover {
+      color: var(--brand-primary);
+    }
+  }
+
+  &__logo-full {
+    transition: opacity 0.3s ease-out;
+
+    &--hidden {
+      opacity: 0;
+      position: absolute;
+      pointer-events: none;
+    }
+  }
+
+  &__logo-iso {
+    opacity: 0;
+    position: absolute;
+    transition: opacity 0.3s ease-out;
+    font-size: 32px;
+
+    &--visible {
+      opacity: 1;
+      position: static;
+    }
+  }
+
+  // ---- Desktop Navigation (DC-141) ----
+  &__nav {
+    display: none;
+    align-items: center;
+    gap: 40px;
+
+    @media (min-width: 1024px) {
+      display: flex;
+    }
+  }
+
+  &__nav-link {
+    position: relative;
+    font-size: 15px;
+    font-weight: var(--weight-medium);
+    color: var(--neutral-900);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 0;
+    transition: color 0.2s ease-out;
+
+    // Animated underline (DC-141)
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--brand-primary);
+      transition: width 0.2s ease-out;
+    }
+
+    &:hover {
+      color: var(--brand-primary);
+
+      &::after {
+        width: 100%;
+      }
+    }
+
+    &--active {
+      color: var(--brand-primary);
+
+      &::after {
+        width: 100%;
+      }
+    }
+  }
+
+  &__chevron {
+    transition: transform 0.2s ease-out;
+  }
+
+  // ---- Submenu (DC-142) ----
+  &__nav-item--dropdown {
+    position: relative;
+  }
+
+  &__submenu {
+    position: absolute;
+    top: 100%;
+    left: -12px;
+    background-color: var(--neutral-white);
+    box-shadow: var(--shadow-lg);
+    border-radius: 8px;
+    padding: 12px 0;
+    min-width: 260px;
+    opacity: 0;
+    transform: translateY(-8px);
+    pointer-events: none;
+    transition: opacity 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+    &--open {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+  }
+
+  &__submenu-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 24px;
+    font-size: var(--text-small);
+    font-weight: var(--weight-medium);
+    color: var(--neutral-900);
+    text-decoration: none;
+    transition: background-color 0.15s ease-out;
+
+    &:hover {
+      background-color: var(--neutral-50);
+      color: var(--neutral-900);
+    }
+  }
+
+  // ---- Actions ----
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  &__search-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    color: var(--neutral-900);
+    transition: background-color 0.15s ease-out;
+
+    &:hover {
+      background-color: var(--neutral-50);
+    }
+  }
+
+  // ---- Hamburger (DC-080) ----
+  &__hamburger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    padding: 10px;
+
+    @media (min-width: 1024px) {
+      display: none;
+    }
+  }
+
+  &__hamburger-line {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background-color: var(--neutral-900);
+    border-radius: 1px;
+    transition: transform 0.2s ease-out;
+  }
+
+  // ---- Mobile Menu (DC-148) ----
+  &__mobile-backdrop {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: var(--z-overlay);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease-out;
+
+    &--open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
+
+  &__mobile-menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    max-width: 400px;
+    background-color: var(--neutral-white);
+    z-index: calc(var(--z-overlay) + 1);
+    transform: translateX(100%);
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+
+    @media (min-width: 1024px) {
+      display: none;
+    }
+
+    &--open {
+      transform: translateX(0);
+    }
+  }
+
+  &__mobile-close {
+    align-self: flex-end;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--neutral-900);
+  }
+
+  &__mobile-nav {
+    display: flex;
+    flex-direction: column;
+    margin-top: 32px;
+    flex: 1;
+  }
+
+  &__mobile-link {
+    font-size: 20px;
+    font-weight: var(--weight-semibold);
+    color: var(--neutral-900);
+    text-decoration: none;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--neutral-200);
+  }
+
+  &__mobile-sub {
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 8px;
+  }
+
+  &__mobile-sublink {
+    font-size: 16px;
+    font-weight: var(--weight-medium);
+    color: var(--neutral-400);
+    text-decoration: none;
+    padding: 10px 0;
+
+    &:hover {
+      color: var(--brand-primary);
+    }
+  }
+
+  &__mobile-lang {
+    padding-top: 24px;
+    border-top: 1px solid var(--neutral-200);
+  }
+}

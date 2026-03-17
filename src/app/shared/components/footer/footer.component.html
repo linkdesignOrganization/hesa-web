@@ -1,0 +1,86 @@
+<footer class="footer" role="contentinfo" aria-label="Pie de pagina">
+  <div class="footer__main container">
+    <div class="footer__grid">
+      <!-- Column 1: Logo + Tagline -->
+      <div class="footer__brand">
+        <div class="footer__logo">HESA</div>
+        <p class="footer__tagline">{{ i18n.currentLang() === 'es' ? '37 anos distribuyendo salud animal en Costa Rica' : '37 years distributing animal health in Costa Rica' }}</p>
+      </div>
+
+      <!-- Column 2: Navigation -->
+      <div class="footer__section" [class.footer__section--open]="openSection() === 'nav'">
+        <button class="footer__section-toggle" (click)="toggleSection('nav')" [attr.aria-expanded]="openSection() === 'nav'" aria-controls="footer-nav">
+          <span>{{ i18n.currentLang() === 'es' ? 'Navegacion' : 'Navigation' }}</span>
+          <span class="footer__toggle-icon">+</span>
+        </button>
+        <div class="footer__section-content" id="footer-nav">
+          <h3 class="footer__section-title footer__section-title--desktop">{{ i18n.currentLang() === 'es' ? 'Navegacion' : 'Navigation' }}</h3>
+          <nav>
+            <a [routerLink]="i18n.getLangPrefix()" class="footer__link">{{ i18n.currentLang() === 'es' ? 'Inicio' : 'Home' }}</a>
+            <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo' : 'catalog')" class="footer__link">{{ i18n.currentLang() === 'es' ? 'Catalogo' : 'Catalog' }}</a>
+            <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'marcas' : 'brands')" class="footer__link">{{ i18n.currentLang() === 'es' ? 'Marcas' : 'Brands' }}</a>
+            <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'nosotros' : 'about')" class="footer__link">{{ i18n.currentLang() === 'es' ? 'Nosotros' : 'About' }}</a>
+            <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'distribuidores' : 'distributors')" class="footer__link">{{ i18n.currentLang() === 'es' ? 'Distribuidores' : 'Distributors' }}</a>
+            <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'contacto' : 'contact')" class="footer__link">{{ i18n.currentLang() === 'es' ? 'Contacto' : 'Contact' }}</a>
+          </nav>
+        </div>
+      </div>
+
+      <!-- Column 3: Contact -->
+      <div class="footer__section" [class.footer__section--open]="openSection() === 'contact'">
+        <button class="footer__section-toggle" (click)="toggleSection('contact')" [attr.aria-expanded]="openSection() === 'contact'" aria-controls="footer-contact">
+          <span>{{ i18n.currentLang() === 'es' ? 'Contacto' : 'Contact' }}</span>
+          <span class="footer__toggle-icon">+</span>
+        </button>
+        <div class="footer__section-content" id="footer-contact">
+          <h3 class="footer__section-title footer__section-title--desktop">{{ i18n.currentLang() === 'es' ? 'Contacto' : 'Contact' }}</h3>
+          <div class="footer__contact-info">
+            <p>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>
+              +506 2260-9020
+            </p>
+            <p>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              info&#64;hesa.co.cr
+            </p>
+            <p>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+              Calle 2, av 12. Heredia, Costa Rica
+            </p>
+            <p>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              {{ i18n.currentLang() === 'es' ? 'Lun - Vie: 8:00 - 17:00' : 'Mon - Fri: 8:00 - 17:00' }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Column 4: Social -->
+      <div class="footer__section" [class.footer__section--open]="openSection() === 'social'">
+        <button class="footer__section-toggle" (click)="toggleSection('social')" [attr.aria-expanded]="openSection() === 'social'" aria-controls="footer-social">
+          <span>{{ i18n.currentLang() === 'es' ? 'Redes Sociales' : 'Social Media' }}</span>
+          <span class="footer__toggle-icon">+</span>
+        </button>
+        <div class="footer__section-content" id="footer-social">
+          <h3 class="footer__section-title footer__section-title--desktop">{{ i18n.currentLang() === 'es' ? 'Redes Sociales' : 'Social Media' }}</h3>
+          <div class="footer__social-links">
+            <a href="https://facebook.com/hesacr" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="footer__social-link">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            </a>
+            <a href="https://instagram.com/hesacr" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="footer__social-link">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Separator + Copyright -->
+  <div class="footer__bottom">
+    <div class="container footer__bottom-inner">
+      <p class="footer__copyright">&copy; HESA {{ currentYear }}. {{ i18n.currentLang() === 'es' ? 'Todos los derechos reservados.' : 'All rights reserved.' }}</p>
+      <app-language-selector variant="footer" />
+    </div>
+  </div>
+</footer>

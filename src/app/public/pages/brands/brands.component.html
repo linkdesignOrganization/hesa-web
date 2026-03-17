@@ -1,0 +1,35 @@
+<!-- BRANDS LIST PAGE -->
+<section class="brands-page">
+  <div class="container">
+    <app-breadcrumb [items]="breadcrumbs" />
+
+    <div class="brands-page__header">
+      <h1 class="text-h2">{{ i18n.currentLang() === 'es' ? 'Nuestras Marcas' : 'Our Brands' }}</h1>
+      <p class="brands-page__intro">{{ i18n.currentLang() === 'es' ? 'Distribuimos exclusivamente las mejores marcas internacionales de la industria veterinaria. Cada marca ha sido cuidadosamente seleccionada por su calidad, respaldo cientifico y trayectoria.' : 'We exclusively distribute the best international brands in the veterinary industry. Each brand has been carefully selected for its quality, scientific backing and track record.' }}</p>
+    </div>
+
+    @if (loading()) {
+      <div class="brands-page__grid">
+        @for (i of [1,2,3,4,5,6]; track i) {
+          <div class="skeleton-card" style="height: 220px; border-radius: 12px;"></div>
+        }
+      </div>
+    } @else if (error()) {
+      <!-- Error State -->
+      <div class="brands-page__state" role="alert">
+        <div class="brands-page__state-icon" aria-hidden="true">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--semantic-danger)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <h2 class="brands-page__state-title">{{ i18n.currentLang() === 'es' ? 'No pudimos cargar las marcas' : 'Could not load brands' }}</h2>
+        <p class="brands-page__state-desc">{{ i18n.currentLang() === 'es' ? 'Hubo un problema al cargar las marcas. Intenta de nuevo.' : 'There was a problem loading brands. Please try again.' }}</p>
+        <button class="btn btn-outline" (click)="loadBrands()">{{ i18n.currentLang() === 'es' ? 'Reintentar' : 'Retry' }}</button>
+      </div>
+    } @else {
+      <div class="brands-page__grid">
+        @for (brand of brands(); track brand.id) {
+          <app-brand-card [brand]="brand" />
+        }
+      </div>
+    }
+  </div>
+</section>

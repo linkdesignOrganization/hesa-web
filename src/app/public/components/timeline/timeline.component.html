@@ -1,0 +1,15 @@
+<!-- DC-144: Timeline starts in pre-animation state; IntersectionObserver in step 4b adds .timeline--animated -->
+<div class="timeline timeline--pre-animation" role="list">
+  @for (step of steps; track step.number; let i = $index) {
+    <div class="timeline__step" role="listitem" [attr.aria-label]="'Paso ' + step.number + ': ' + step.title" [style.--step-delay]="(i * 200) + 'ms'">
+      <div class="timeline__node">
+        <span class="timeline__number">{{ step.number }}</span>
+      </div>
+      <div class="timeline__line"></div>
+      <div class="timeline__text">
+        <h4 class="timeline__title">{{ step.title }}</h4>
+        <p class="timeline__desc">{{ step.description }}</p>
+      </div>
+    </div>
+  }
+</div>

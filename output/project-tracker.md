@@ -5,7 +5,7 @@
 > Codigo/bugs → Developer | Testing → QA | Deploy → DevOps | Requirements → BA | Arquitectura → Architect | Visual Research → Design Researcher | UI/UX → Design Orchestrator
 
 ## Estado Actual
-**FASE 3.5 — Setup de Deploy para Demo** (en progreso)
+**FASE 4 — Construccion Visual** (en progreso)
 
 ## Design Briefs
 - Detectados: `input/design-briefs/HESA_Brief_Agentes.md` (sitio publico) + `HESA_Brief_Panel_Administracion.md` (panel admin)
@@ -39,15 +39,15 @@
 - [x] 3d: Plan-verifier APROBADO + cliente APROBADO ✓
 
 ### FASE 3.5 — Setup de Deploy para Demo
-- [ ] DevOps: git init + Azure SWA + CI/CD
+- [x] DevOps: git init + Azure SWA + CI/CD (URL: gray-field-02ba8410f.2.azurestaticapps.net)
 
 ### FASE 4 — Construccion Visual
-- [ ] 4a: UI Developer — cascara visual
-- [ ] 4a-verify: Verificacion post-UI Developer
-- [ ] 4b: Developer — funcionalidad de demo
-- [ ] 4b-verify: Verificacion post-Developer
-- [ ] 4c: Simplify
-- [ ] 4d: Security Review
+- [x] 4a: UI Developer — cascara visual
+- [x] 4a-verify: Verificacion post-UI Developer (PASA, 14 gaps corregidos en R2)
+- [x] 4b: Developer — funcionalidad de demo
+- [x] 4b-verify: Verificacion post-Developer (PASA, 18 gaps corregidos en R2)
+- [x] 4c: Simplify (9 mejoras aplicadas)
+- [x] 4d: Security Review (auth guard, input sanitization, CSP, 0 vulns)
 - [ ] 4e: Pre-QA Deploy
 - [ ] 4e-regress: Regresion automatizada pre-QA
 - [ ] 4f-plan: QA Orchestrator genera plan

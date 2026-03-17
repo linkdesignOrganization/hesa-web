@@ -1,0 +1,148 @@
+<!-- ADMIN LAYOUT -->
+<div class="admin" [class.admin--sidebar-collapsed]="isSidebarCollapsed()">
+  <!-- Sidebar -->
+  <aside class="admin__sidebar" [class.admin__sidebar--mobile-open]="isMobileSidebarOpen()">
+    <div class="admin__sidebar-header">
+      <span class="admin__sidebar-logo">HESA</span>
+      <span class="admin__sidebar-subtitle">Admin</span>
+    </div>
+    <nav class="admin__sidebar-nav" aria-label="Panel de administracion">
+      <a routerLink="/admin/dashboard" routerLinkActive="admin__sidebar-link--active" class="admin__sidebar-link">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+        <span class="admin__sidebar-label">Dashboard</span>
+      </a>
+
+      <!-- Productos with submenu -->
+      <div class="admin__sidebar-group">
+        <button class="admin__sidebar-link admin__sidebar-link--parent" (click)="toggleMenu('productos')" [class.admin__sidebar-link--active]="false">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
+          <span class="admin__sidebar-label">Productos</span>
+          <svg class="admin__sidebar-chevron" [class.admin__sidebar-chevron--open]="isMenuExpanded('productos')" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        @if (isMenuExpanded('productos')) {
+          <div class="admin__sidebar-submenu">
+            <a routerLink="/admin/productos" routerLinkActive="admin__sidebar-sublink--active" [routerLinkActiveOptions]="{exact: true}" class="admin__sidebar-sublink">Todos</a>
+            <a routerLink="/admin/productos" [queryParams]="{categoria: 'farmacos'}" class="admin__sidebar-sublink">Farmacos</a>
+            <a routerLink="/admin/productos" [queryParams]="{categoria: 'alimentos'}" class="admin__sidebar-sublink">Alimentos</a>
+            <a routerLink="/admin/productos" [queryParams]="{categoria: 'equipos'}" class="admin__sidebar-sublink">Equipos</a>
+          </div>
+        }
+      </div>
+
+      <a routerLink="/admin/marcas" routerLinkActive="admin__sidebar-link--active" class="admin__sidebar-link">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+        <span class="admin__sidebar-label">Marcas</span>
+      </a>
+      <a routerLink="/admin/categorias" routerLinkActive="admin__sidebar-link--active" class="admin__sidebar-link">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/></svg>
+        <span class="admin__sidebar-label">Categorias</span>
+      </a>
+
+      <!-- Home submenu -->
+      <div class="admin__sidebar-group">
+        <button class="admin__sidebar-link admin__sidebar-link--parent" (click)="toggleMenu('home')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <span class="admin__sidebar-label">Home</span>
+          <svg class="admin__sidebar-chevron" [class.admin__sidebar-chevron--open]="isMenuExpanded('home')" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        @if (isMenuExpanded('home')) {
+          <div class="admin__sidebar-submenu">
+            <a routerLink="/admin/home/hero" routerLinkActive="admin__sidebar-sublink--active" class="admin__sidebar-sublink">Hero</a>
+            <a routerLink="/admin/home/productos-destacados" routerLinkActive="admin__sidebar-sublink--active" class="admin__sidebar-sublink">Productos destacados</a>
+            <a routerLink="/admin/home/marcas-destacadas" routerLinkActive="admin__sidebar-sublink--active" class="admin__sidebar-sublink">Marcas destacadas</a>
+          </div>
+        }
+      </div>
+
+      <!-- Contenido submenu -->
+      <div class="admin__sidebar-group">
+        <button class="admin__sidebar-link admin__sidebar-link--parent" (click)="toggleMenu('contenido')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+          <span class="admin__sidebar-label">Contenido</span>
+          <svg class="admin__sidebar-chevron" [class.admin__sidebar-chevron--open]="isMenuExpanded('contenido')" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        @if (isMenuExpanded('contenido')) {
+          <div class="admin__sidebar-submenu">
+            <a routerLink="/admin/contenido/nosotros" routerLinkActive="admin__sidebar-sublink--active" class="admin__sidebar-sublink">Nosotros</a>
+            <a routerLink="/admin/contenido/equipo" routerLinkActive="admin__sidebar-sublink--active" class="admin__sidebar-sublink">Equipo de Liderazgo</a>
+            <a routerLink="/admin/contenido/distribuidores" routerLinkActive="admin__sidebar-sublink--active" class="admin__sidebar-sublink">Distribuidores</a>
+            <a routerLink="/admin/contenido/contacto" routerLinkActive="admin__sidebar-sublink--active" class="admin__sidebar-sublink">Contacto</a>
+            <a routerLink="/admin/contenido/politicas" routerLinkActive="admin__sidebar-sublink--active" class="admin__sidebar-sublink">Politicas</a>
+          </div>
+        }
+      </div>
+
+      <a routerLink="/admin/mensajes" routerLinkActive="admin__sidebar-link--active" class="admin__sidebar-link">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <span class="admin__sidebar-label">Mensajes</span>
+        @if (newMessagesCount > 0) {
+          <span class="admin__sidebar-badge">{{ newMessagesCount }}</span>
+        }
+      </a>
+
+      <!-- Configuracion submenu -->
+      <div class="admin__sidebar-group">
+        <button class="admin__sidebar-link admin__sidebar-link--parent" (click)="toggleMenu('config')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+          <span class="admin__sidebar-label">Configuracion</span>
+          <svg class="admin__sidebar-chevron" [class.admin__sidebar-chevron--open]="isMenuExpanded('config')" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        @if (isMenuExpanded('config')) {
+          <div class="admin__sidebar-submenu">
+            <a routerLink="/admin/configuracion/general" routerLinkActive="admin__sidebar-sublink--active" class="admin__sidebar-sublink">General</a>
+            <a routerLink="/admin/configuracion/contacto" routerLinkActive="admin__sidebar-sublink--active" class="admin__sidebar-sublink">Contacto</a>
+            <a routerLink="/admin/configuracion/redes" routerLinkActive="admin__sidebar-sublink--active" class="admin__sidebar-sublink">Redes sociales</a>
+            <a routerLink="/admin/configuracion/seo" routerLinkActive="admin__sidebar-sublink--active" class="admin__sidebar-sublink">SEO</a>
+          </div>
+        }
+      </div>
+    </nav>
+  </aside>
+
+  <!-- Mobile backdrop -->
+  <div class="admin__backdrop" [class.admin__backdrop--visible]="isMobileSidebarOpen()" (click)="toggleMobileSidebar()"></div>
+
+  <!-- Main Area -->
+  <div class="admin__main">
+    <!-- Header -->
+    <header class="admin__header">
+      <button class="admin__hamburger" (click)="toggleMobileSidebar()" aria-label="Abrir menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <div class="admin__header-search">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--neutral-400)" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <input type="text" placeholder="Buscar..." class="admin__header-search-input" maxlength="100">
+      </div>
+      <div class="admin__header-actions">
+        <button class="admin__header-notification" aria-label="Notificaciones">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+          @if (newMessagesCount > 0) {
+            <span class="admin__header-notification-badge">{{ newMessagesCount }}</span>
+          }
+        </button>
+        <div class="admin__header-user" (click)="toggleUserDropdown()">
+          <div class="admin__header-avatar">A</div>
+          <span class="admin__header-name">Admin</span>
+          <svg class="admin__header-user-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          @if (userDropdownOpen()) {
+            <div class="admin__header-dropdown">
+              <a routerLink="/admin/configuracion/general" class="admin__header-dropdown-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+                Configuracion
+              </a>
+              <button class="admin__header-dropdown-item admin__header-dropdown-item--danger" (click)="logout()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                Cerrar sesion
+              </button>
+            </div>
+          }
+        </div>
+      </div>
+    </header>
+
+    <!-- Content Area -->
+    <div class="admin__content">
+      <router-outlet />
+    </div>
+  </div>
+</div>
