@@ -32,4 +32,80 @@
       gap: 28px;
     }
   }
+
+  &__state {
+    padding: 64px 0;
+    text-align: center;
+
+    &--empty {
+      color: var(--neutral-400);
+    }
+  }
+
+  &__state-title {
+    font-size: 18px;
+    font-weight: var(--weight-medium);
+  }
+}
+
+// =============================================================================
+// Pagination (NFR-026: min 44x44px touch targets)
+// =============================================================================
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px solid var(--neutral-200);
+
+  &__info {
+    font-size: 14px;
+    color: var(--neutral-400);
+  }
+
+  &__controls {
+    display: flex;
+    gap: 4px;
+  }
+
+  &__btn {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--neutral-200);
+    border-radius: 8px;
+    background-color: var(--neutral-white);
+    font-size: 14px;
+    font-weight: var(--weight-medium);
+    color: var(--neutral-900);
+    cursor: pointer;
+    transition: all 0.2s ease-out;
+
+    &:hover:not(:disabled) {
+      border-color: var(--brand-primary);
+      color: var(--brand-primary);
+    }
+
+    &:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    &--active {
+      background-color: var(--brand-primary);
+      border-color: var(--brand-primary);
+      color: var(--neutral-white);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--brand-primary);
+      outline-offset: 2px;
+    }
+  }
 }
