@@ -2,6 +2,7 @@ import { Component, inject, AfterViewInit, OnDestroy, ElementRef } from '@angula
 import { TimelineComponent } from '../../components/timeline/timeline.component';
 import { ContactFormComponent } from '../../components/contact-form/contact-form.component';
 import { BrandLogosRowComponent } from '../../components/brand-logos-row/brand-logos-row.component';
+import { I18nService } from '../../../shared/services/i18n.service';
 import { initFadeInObserver } from '../../../shared/utils/fade-in-observer';
 
 @Component({
@@ -13,16 +14,17 @@ import { initFadeInObserver } from '../../../shared/utils/fade-in-observer';
 })
 export class DistributorsComponent implements AfterViewInit, OnDestroy {
   private el = inject(ElementRef);
+  i18n = inject(I18nService);
   private fadeObserver: IntersectionObserver | null = null;
   private timelineObserver: IntersectionObserver | null = null;
 
   benefits = [
-    { icon: 'globe', title: 'Cobertura Nacional', desc: 'Red de distribucion propia en todo Costa Rica' },
-    { icon: 'truck', title: 'Flotilla Propia', desc: '18-20 agentes de ventas con visitas quincenales' },
-    { icon: 'shield', title: 'Cadena de Frio', desc: 'Almacenamiento y transporte con control de temperatura' },
-    { icon: 'users', title: 'Equipo Comercial', desc: '50+ colaboradores especializados en salud animal' },
-    { icon: 'award', title: '37 Anos de Experiencia', desc: 'Empresa familiar con trayectoria comprobada' },
-    { icon: 'trending-up', title: 'Mercado en Crecimiento', desc: 'Costa Rica, puerta de entrada a Centroamerica' }
+    { icon: 'globe', title: { es: 'Cobertura Nacional', en: 'National Coverage' }, desc: { es: 'Red de distribucion propia en todo Costa Rica', en: 'Own distribution network throughout Costa Rica' } },
+    { icon: 'truck', title: { es: 'Flotilla Propia', en: 'Own Fleet' }, desc: { es: '18-20 agentes de ventas con visitas quincenales', en: '18-20 sales agents with biweekly visits' } },
+    { icon: 'shield', title: { es: 'Cadena de Frio', en: 'Cold Chain' }, desc: { es: 'Almacenamiento y transporte con control de temperatura', en: 'Storage and transport with temperature control' } },
+    { icon: 'users', title: { es: 'Equipo Comercial', en: 'Commercial Team' }, desc: { es: '50+ colaboradores especializados en salud animal', en: '50+ collaborators specialized in animal health' } },
+    { icon: 'award', title: { es: '37 Anos de Experiencia', en: '37 Years of Experience' }, desc: { es: 'Empresa familiar con trayectoria comprobada', en: 'Family business with a proven track record' } },
+    { icon: 'trending-up', title: { es: 'Mercado en Crecimiento', en: 'Growing Market' }, desc: { es: 'Costa Rica, puerta de entrada a Centroamerica', en: 'Costa Rica, gateway to Central America' } }
   ];
 
   ngAfterViewInit(): void {

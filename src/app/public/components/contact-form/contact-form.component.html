@@ -9,7 +9,7 @@
     <p class="contact-form__success-desc">{{ i18n.currentLang() === 'es' ? 'Nos pondremos en contacto pronto. Gracias por escribirnos.' : 'We will get in touch soon. Thank you for writing to us.' }}</p>
   </div>
 } @else {
-  <form class="contact-form" (submit)="$event.preventDefault(); submit()">
+  <form class="contact-form" (submit)="$event.preventDefault(); submit()" action="javascript:void(0)" method="post">
     <!-- Honeypot -->
     <div style="position: absolute; left: -9999px;">
       <input type="text" name="website" [(ngModel)]="honeypot" tabindex="-1" autocomplete="off">
@@ -102,9 +102,9 @@
       <button type="submit" class="btn btn-primary btn-lg" [disabled]="formState() === 'submitting'">
         @if (formState() === 'submitting') {
           <span class="spinner-sm"></span>
-          {{ variant() === 'general' ? (i18n.currentLang() === 'es' ? 'Enviando...' : 'Sending...') : 'Sending...' }}
+          {{ i18n.currentLang() === 'es' ? 'Enviando...' : 'Sending...' }}
         } @else {
-          {{ variant() === 'general' ? (i18n.currentLang() === 'es' ? 'Enviar mensaje' : 'Send message') : 'Send Inquiry' }}
+          {{ variant() === 'general' ? (i18n.currentLang() === 'es' ? 'Enviar mensaje' : 'Send message') : (i18n.currentLang() === 'es' ? 'Enviar consulta' : 'Send Inquiry') }}
         }
       </button>
     </div>

@@ -115,12 +115,14 @@
     overflow: hidden;
     cursor: zoom-in;
 
+    &:hover .product-detail__image-visual,
     &:hover .product-detail__image-placeholder {
       transform: scale(1.05);
     }
   }
 
-  &__image-placeholder {
+  &__image-placeholder,
+  &__image-visual {
     width: 100%;
     aspect-ratio: 1 / 1;
     background-color: var(--neutral-50);

@@ -1,5 +1,6 @@
 import { Injectable, signal } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs';
 
 export type Lang = 'es' | 'en';
 
@@ -30,6 +31,18 @@ export class I18nService {
 
   constructor(private router: Router) {
     this.detectLanguage();
+
+    // Keep language in sync with router navigation
+    this.router.events.pipe(
+      filter((e): e is NavigationEnd => e instanceof NavigationEnd)
+    ).subscribe(event => {
+      const url = event.urlAfterRedirects || event.url;
+      if (url.startsWith('/en/') || url === '/en') {
+        this.currentLang.set('en');
+      } else if (url.startsWith('/es/') || url === '/es') {
+        this.currentLang.set('es');
+      }
+    });
   }
 
   private detectLanguage(): void {

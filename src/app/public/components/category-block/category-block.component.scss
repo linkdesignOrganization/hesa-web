@@ -99,7 +99,7 @@
     justify-content: center;
   }
 
-  &__image-placeholder {
+  &__image-visual {
     width: 100%;
     aspect-ratio: 4/3;
     background-color: rgba(255, 255, 255, 0.5);
@@ -108,5 +108,11 @@
     align-items: center;
     justify-content: center;
     max-height: 400px;
+
+    svg {
+      width: 80%;
+      height: auto;
+      max-width: 320px;
+    }
   }
 }

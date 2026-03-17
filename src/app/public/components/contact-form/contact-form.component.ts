@@ -190,7 +190,9 @@ export class ContactFormComponent {
 
     this.formState.set('submitting');
     this.lastSubmitTime = Date.now();
-    this.crmTracking.trackCTA(this.variant() === 'general' ? 'Enviar consulta' : 'Send Inquiry');
+    try {
+      this.crmTracking.trackCTA(this.variant() === 'general' ? 'Enviar consulta' : 'Send Inquiry');
+    } catch { /* silently ignore tracking errors */ }
 
     await new Promise(resolve => setTimeout(resolve, 1500));
     this.formState.set('success');

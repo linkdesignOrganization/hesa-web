@@ -87,6 +87,11 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     return this.featuredProducts().slice(start, start + 4);
   }
 
+  get carouselDots(): number[] {
+    const maxSlides = Math.ceil(this.featuredProducts().length / 4);
+    return Array.from({ length: maxSlides }, (_, i) => i);
+  }
+
   ngAfterViewInit(): void {
     if (typeof window === 'undefined') return;
     setTimeout(() => {

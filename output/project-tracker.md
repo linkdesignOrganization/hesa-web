@@ -48,11 +48,11 @@
 - [x] 4b-verify: Verificacion post-Developer (PASA, 18 gaps corregidos en R2)
 - [x] 4c: Simplify (9 mejoras aplicadas)
 - [x] 4d: Security Review (auth guard, input sanitization, CSP, 0 vulns)
-- [ ] 4e: Pre-QA Deploy
-- [ ] 4e-regress: Regresion automatizada pre-QA
-- [ ] 4f-plan: QA Orchestrator genera plan
-- [ ] 4f-sub: Sub-testers en paralelo
-- [ ] 4f-consolidate: QA consolida qa-report.md
+- [x] 4e: Pre-QA Deploy (sitio desplegado, HTTP 200)
+- [x] 4e-regress: Skip (no hay tests previos, primera ronda)
+- [x] 4f-plan: QA Orchestrator genera plan (317 criterios)
+- [x] 4f-sub: Sub-testers en paralelo (33 specs, 3 resultados)
+- [x] 4f-consolidate: QA consolida qa-report.md (R1: 13 bugs, 101 bloqueados)
 - [ ] 4f-verify: Verificacion post-QA
 - [ ] 4g: Demo para el cliente
 - [ ] 4h: Feedback del cliente

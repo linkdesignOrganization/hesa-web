@@ -109,7 +109,11 @@ export class CatalogComponent implements OnInit {
   }
 
   get uniqueBrands(): string[] {
-    return [...new Set(this.allProducts().map(p => p.brand))].sort();
+    let products = this.allProducts().filter(p => p.isActive);
+    if (this.selectedCategory()) {
+      products = products.filter(p => p.category === this.selectedCategory());
+    }
+    return [...new Set(products.map(p => p.brand))].sort();
   }
 
   async ngOnInit(): Promise<void> {
@@ -164,6 +168,13 @@ export class CatalogComponent implements OnInit {
         this.selectedEquipmentType.set('');
         if (!value || value === 'equipos') {
           this.selectedSpecies.set('');
+        }
+        // Clear brand if it no longer exists in the filtered category
+        if (this.selectedBrand()) {
+          const availableBrands = this.uniqueBrands;
+          if (!availableBrands.includes(this.selectedBrand())) {
+            this.selectedBrand.set('');
+          }
         }
         break;
       case 'brand': this.selectedBrand.set(value); break;

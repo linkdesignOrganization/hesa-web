@@ -2,8 +2,12 @@
 // Manufacturer CTA Banner (DC-035, DC-064)
 // =============================================================================
 
+:host {
+  display: block;
+}
+
 .mfr-cta {
-  background-color: var(--brand-primary);
+  background-color: var(--brand-primary, #008DC9);
   padding: 48px 20px;
   text-align: center;
 

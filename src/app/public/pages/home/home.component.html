@@ -28,6 +28,19 @@
   }
 </section>
 
+<!-- BRAND LOGOS (between hero and category blocks per DC-032) -->
+@if (!brandsLoading() && featuredBrands().length > 0) {
+  <app-brand-logos-row />
+} @else if (brandsError()) {
+  <div class="section-error" role="alert">
+    <div class="section-error__icon" aria-hidden="true">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--semantic-danger)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    </div>
+    <p class="section-error__text">{{ i18n.currentLang() === 'es' ? 'No pudimos cargar esta seccion' : 'We could not load this section' }}</p>
+    <button class="btn btn-outline btn-sm">{{ i18n.currentLang() === 'es' ? 'Reintentar' : 'Retry' }}</button>
+  </div>
+}
+
 <!-- CATEGORY BLOCKS -->
 <section class="section-spacing">
   <div class="container">
@@ -61,19 +74,6 @@
     </div>
   </div>
 </section>
-
-<!-- BRAND LOGOS -->
-@if (!brandsLoading() && featuredBrands().length > 0) {
-  <app-brand-logos-row />
-} @else if (brandsError()) {
-  <div class="section-error" role="alert">
-    <div class="section-error__icon" aria-hidden="true">
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--semantic-danger)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-    </div>
-    <p class="section-error__text">{{ i18n.currentLang() === 'es' ? 'No pudimos cargar esta seccion' : 'We could not load this section' }}</p>
-    <button class="btn btn-outline btn-sm">{{ i18n.currentLang() === 'es' ? 'Reintentar' : 'Retry' }}</button>
-  </div>
-}
 
 <!-- VALUE PROPOSITION -->
 <section class="value-section fade-in-section">
@@ -121,7 +121,7 @@
         </button>
       </div>
       <div class="carousel-dots">
-        @for (dot of [0, 1]; track dot) {
+        @for (dot of carouselDots; track dot) {
           <span class="carousel-dots__dot" [class.carousel-dots__dot--active]="currentSlide() === dot" (click)="currentSlide.set(dot)"></span>
         }
       </div>

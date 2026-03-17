@@ -275,3 +275,64 @@
 - Las dependencias tenian 6 vulnerabilidades high severity (serialize-javascript RCE + tar path traversal). Aunque son dev-only dependencies, un atacante con acceso al CI/CD podria explotarlas. Se resolvieron con npm overrides
 - El architecture.md deberia incluir una seccion explicita de "Security Requirements" para cada iteracion, especificando que guards, validaciones y headers son obligatorios desde el inicio
 - Los requirements no especifican politica de rate limiting para el formulario de contacto. Este es un edge case comun que deberia estar documentado para evitar que se implemente de formas inconsistentes
+
+### Feedback de: qa-orchestrator
+- El volumen de criterios visuales es muy alto (149 DC + 40 BVC = 189 criterios solo para Visual Checker) lo cual puede generar reportes superficiales si el sub-tester no prioriza correctamente. Se establecio estrategia de priorizacion: tokens primero (automatizables via browser_evaluate), luego layouts, luego componentes, luego BVC
+- Los design-criteria.md mezclan criterios verificables por computed-style (colores exactos, font-size, spacing) con criterios subjetivos (BVC-001 "se siente premium", BVC-010 "supera competencia"). Los subjetivos requieren criterio humano del Visual Checker y son mas propensos a discrepancia entre rondas
+- Los UX-criteria dividen los flujos en 3 niveles (CRITICO, IMPORTANTE, COMPLEMENTARIO) pero no hay priorizacion equivalente para los DC-xxx — todos tienen el mismo peso. Esto dificulta decidir que re-testear primero si hay regresiones
+- Los mock data requirements (UX-060 a UX-074b) son 16 criterios separados pero todos son verificables en una sola sesion de exploracion. Seria mas eficiente si estuvieran agrupados como un unico criterio con sub-items
+- No hay definicion clara de que constituye "equivalente visual a Tuft & Paw" (BVC-007) — el sub-tester deberia tener acceso a capturas de referencia en output/design/references/ para comparar
+- Los NFR de performance (NFR-001, NFR-003, NFR-005) son dificiles de testear contra una demo con mock data porque no hay backend real — los tiempos de carga reflejan solo el bundle Angular, no la carga real de datos. Resultados seran optimistas respecto a produccion
+
+### Feedback de: edge-case-tester
+- La interaccion con formularios (contacto, distribuidores) presenta navegacion inesperada al usar selectOption en comboboxes o hacer click en submit — posiblemente un bug de routing en Angular donde el evento del form trigger un cambio de ruta
+- La pagina /es/distribuidores mezcla idiomas: headings en ingles y contenido de cards en espanol, indicando que la internacionalizacion no esta completamente implementada para esta pagina
+- La API de CRM tracking (crm-api.linkdesign.cr) retorna ERR_NAME_NOT_RESOLVED en todas las paginas, generando errores de consola constantes que podrian afectar performance y confundir debugging
+- La session del panel admin se pierde al navegar directamente por URL (ej: escribir /admin/productos en la barra de direcciones). Solo funciona navegando via clicks en el sidebar. Esto indica que la persistencia de session via Angular routing no esta implementada correctamente
+- El filtro de Marca en el catalogo no se adapta al seleccionar una categoria — sigue mostrando todas las marcas incluyendo las que no aplican a la categoria seleccionada (ej: Heine/IMV/Welch Allyn aparecen al filtrar por Farmacos)
+- Los headers de seguridad estan excelentemente configurados: CSP, X-Frame-Options DENY, HSTS con preload, Permissions-Policy, Referrer-Policy strict-origin-when-cross-origin
+- Los formularios incluyen campos honeypot para anti-spam, lo cual es buena practica
+- La sanitizacion XSS funciona correctamente tanto en search overlay como en campos de formulario — no se ejecutan scripts inyectados
+
+### Feedback de: visual-checker
+- CRITICO: El script CRM tracking (crm-api.linkdesign.cr/api/tracking) causa ERR_NAME_NOT_RESOLVED en cada pagina y parece provocar navegacion erratica del router Angular. El SPA cambia de ruta automaticamente cada pocos segundos sin interaccion del usuario, lo que impide testing estable. Deshabilitar o corregir urgentemente.
+- Las imagenes de productos estan ausentes en TODA la aplicacion: hero sin foto de fondo, bloques de categoria sin imagenes, product cards sin fotos, product detail sin galeria. Solo se muestran placeholders de imagen rota. Esto afecta severamente la percepcion visual del sitio.
+- La seccion de "Marcas Destacadas" (brand logos row con grayscale + hover color) NO existe en el home. El fullpage muestra salto directo del hero a bloques de categoria sin logos de marcas.
+- El CTA de fabricantes en home tiene fondo oscuro en lugar del azul #008DC9 prescrito en design-criteria.md
+- El design token system esta COMPLETAMENTE implementado: 40+ CSS custom properties en :root, todos con valores exactos al design-criteria.md. Esto es excelente calidad de implementacion.
+- El panel dashboard tiene 96% similitud visual con la referencia Dashly — match excepcional.
+- El submenu de "Productos" en el sidebar del panel se desborda horizontalmente sobre el area de contenido del dashboard.
+- Los tokens de tipografia, spacing, radius, sombras, z-index y transiciones estan perfectamente definidos. La base del design system es solida.
+- El footer cumple al 100%: fondo #005A85, texto blanco, 4 columnas desktop, acordeones mobile con "+", copyright, selector idioma
+- La ausencia de imagenes hace que el home parezca incompleto y no premium — una vez se agreguen imagenes reales el sitio mejorara drasticamente en percepcion visual
+
+### Feedback de: flow-tester
+- El SPA routing en Angular tiene un problema critico de deep linking: las rutas /es/catalogo/farmacos, /es/marcas, /es/nosotros, /es/catalogo/[cat]/[slug] y la mayoria de rutas publicas no funcionan cuando se accede via URL directa (refresh o deep link). Solo funcionan mediante navegacion interna del SPA (click en links). Esto afecta SEO, compartir URLs, y bookmarks. Probable causa: configuracion de fallback routing en Azure Static Web Apps (staticwebapp.config.json) o falta de wildcard rewrite rules para el SPA.
+- Las rutas del panel admin (excepto /admin y /admin/login) tambien fallan via deep link directo, redirigiendo al home publico o a una ruta publica incorrecta.
+- La pagina de Distribuidores (/es/distribuidores) mezcla idiomas: el hero y formulario estan en ingles ("Become Our Distribution Partner", "Start Your Partnership") mientras los beneficios y footer estan en espanol. Parece que las traducciones del componente de distribuidores no estan conectadas al sistema de i18n.
+- El dashboard del admin panel muestra "48 Productos" pero el catalogo publico dice "47 productos". La discrepancia se debe a 1 producto inactivo (Flunixin Meglumine). Esto es probablemente comportamiento intencional pero deberia documentarse.
+- El carrusel de productos destacados en home muestra 4 productos pero el dashboard dice "6 Destacados". Los 2 productos adicionales no son visibles (posiblemente estan fuera del viewport y requieren scroll/swipe pero los botones prev/next no los revelan).
+- El resize de viewport mientras se esta en el panel admin causa una redireccion a una ruta publica (/es/contacto), perdiendo el contexto del admin panel. Esto indica un conflicto entre el routing del sitio publico y el routing del panel admin cuando el layout cambia.
+- Los productos en el catalogo publico usan imagenes placeholder (iconos de imagen) en lugar de imagenes reales, lo cual dificulta la evaluacion del flujo visual de navegacion de catalogo.
+- El formulario de contacto incluye un honeypot field (textbox oculto sin label) antes del formulario visible, implementando correctamente la proteccion anti-spam.
+- La navegacion del header publico tiene un submenu desplegable para Catalogo con las 3 subcategorias, lo cual es una buena implementacion del UX requerido.
+- El CRM tracking endpoint (crm-api.linkdesign.cr/api/tracking) falla con ERR_NAME_NOT_RESOLVED en cada pagina, generando errores en consola. Este endpoint deberia configurarse correctamente o deshabilitarse en el entorno de demo.
+
+### Feedback de: qa-orchestrator (consolidacion ronda 1)
+- El deep linking roto en Azure SWA es el bloqueador principal: 101 de 317 criterios (32%) quedaron BLOQUEADOS porque no se pueden navegar las rutas por URL directa. El architecture.md o devops deberian haber especificado la configuracion de navigationFallback en staticwebapp.config.json como requisito critico del deploy
+- El script CRM tracking (crm-api.linkdesign.cr) causa navegacion erratica del router Angular, multiplicando el impacto del problema de routing. El architecture deberia especificar que scripts de terceros deben tener manejo de errores que no afecte la estabilidad del router
+- Las imagenes mock de productos, hero y bloques de categoria estan rotas/faltantes. El developer deberia verificar que las URLs de imagenes en los mock data apuntan a assets reales incluidos en el build, o usar un servicio de placeholder como picsum.photos
+- La pagina de Distribuidores tiene traducciones incompletas: hero y formulario en ingles hardcoded, beneficios en espanol. El sistema de i18n no esta conectado a todos los componentes de la pagina
+- Los sub-testers no grabaron GIFs en esta ronda, solo screenshots. Para Ronda 2 es obligatorio que graben GIFs de los flujos principales
+- El 17% de criterios (55) son N/A porque corresponden a estados de loading, error y vacio que requieren condiciones especificas no reproducibles en demo con mock data. El plan de testing deberia anticipar que estos estados solo pueden verificarse con herramientas de intercepcion de red (ej: Playwright route interception)
+- El panel admin tiene 13 criterios de interacciones avanzadas (drag-drop, formularios, modales) BLOQUEADOS porque la session se pierde al navegar por URL. Esto es efecto del BUG-001 (routing) pero tambien indica que el panel no tiene persistencia de session robusta
+- El submenu de Productos en el sidebar del panel desborda horizontalmente sobre el area de contenido. Esto indica un problema de CSS overflow en el componente sidebar
+
+### Feedback de: developer
+- El UI Developer dejo la pagina de Distribuidores con textos hardcoded en ingles (hero, titulos de seccion, timeline, formulario) mientras que las cards de beneficios estaban en espanol. Esto causaba BUG-008. Todo contenido visible debe pasar por el servicio i18n desde el inicio
+- El CrmTrackingService original no tenia manejo de errores robusto: sendBeacon y fetch fallaban con ERR_NAME_NOT_RESOLVED y los errores se propagaban al router Angular, causando navegacion erratica (BUG-002 y BUG-012). Servicios de terceros deben siempre ejecutarse fuera de NgZone y con circuit breaker
+- Las imagenes de productos, categorias y hero usaban nombres de archivo placeholder ('placeholder-1', 'placeholder-hero.jpg') que no existian en el directorio public/. En la fase de construccion visual, todos los assets referenciados deben existir o usar SVG inline como fallback
+- El sidebar del panel admin no tenia estilos CSS para submenu, sublinks ni chevrons (BUG-010) — los selectores estaban en el HTML pero faltaban las reglas SCSS correspondientes
+- El orden de secciones en home.component.html no coincidia con el design-criteria: Brand Logos estaba despues de Category Blocks en lugar de entre Hero y Category Blocks (BUG-005)
+- El staticwebapp.config.json tenia un patron de exclusion demasiado amplio ("/*.js") en navigationFallback que potencialmente excluia archivos JS necesarios para el SPA routing. Cambiado a "/assets/*" que es mas seguro
+- La propiedad uniqueBrands del catalogo no filtraba marcas por categoria seleccionada (BUG-011), mostrando marcas de equipos cuando se filtraba por farmacos. Los filtros cruzados deben implementarse desde la primera version funcional

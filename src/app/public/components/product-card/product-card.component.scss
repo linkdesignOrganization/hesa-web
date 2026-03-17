@@ -42,10 +42,12 @@
     padding: 16px;
   }
 
-  &__image-placeholder {
+  &__image-visual {
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%;
+    height: 100%;
   }
 
   &__info {

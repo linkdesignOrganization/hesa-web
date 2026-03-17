@@ -4,24 +4,24 @@
 <section class="dist-hero">
   <div class="dist-hero__overlay"></div>
   <div class="container dist-hero__content">
-    <h1 class="dist-hero__title">Become Our Distribution Partner in Costa Rica</h1>
-    <p class="dist-hero__subtitle">37 years of proven track record in veterinary product distribution. Nationwide coverage, own fleet, and specialized sales team.</p>
-    <a href="#contact-form" class="btn btn-primary btn-lg">Contact Us</a>
+    <h1 class="dist-hero__title">{{ i18n.currentLang() === 'es' ? 'Conviertase en Nuestro Socio de Distribucion en Costa Rica' : 'Become Our Distribution Partner in Costa Rica' }}</h1>
+    <p class="dist-hero__subtitle">{{ i18n.currentLang() === 'es' ? '37 anos de trayectoria comprobada en distribucion de productos veterinarios. Cobertura nacional, flotilla propia y equipo de ventas especializado.' : '37 years of proven track record in veterinary product distribution. Nationwide coverage, own fleet, and specialized sales team.' }}</p>
+    <a href="#contact-form" class="btn btn-primary btn-lg">{{ i18n.currentLang() === 'es' ? 'Contactenos' : 'Contact Us' }}</a>
   </div>
 </section>
 
 <!-- Benefits Grid -->
 <section class="section-spacing">
   <div class="container">
-    <h2 class="text-h2" style="text-align: center; margin-bottom: 48px;">Why Choose HESA</h2>
+    <h2 class="text-h2" style="text-align: center; margin-bottom: 48px;">{{ i18n.currentLang() === 'es' ? 'Por que Elegir HESA' : 'Why Choose HESA' }}</h2>
     <div class="dist-benefits__grid">
-      @for (benefit of benefits; track benefit.title) {
+      @for (benefit of benefits; track benefit.title.es) {
         <div class="dist-benefits__card fade-in-section">
           <div class="dist-benefits__icon">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--brand-primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="16 12 12 8 8 12"/><line x1="12" y1="16" x2="12" y2="8"/></svg>
           </div>
-          <h3 class="dist-benefits__title">{{ benefit.title }}</h3>
-          <p class="dist-benefits__desc">{{ benefit.desc }}</p>
+          <h3 class="dist-benefits__title">{{ i18n.t(benefit.title) }}</h3>
+          <p class="dist-benefits__desc">{{ i18n.t(benefit.desc) }}</p>
         </div>
       }
     </div>
@@ -34,7 +34,7 @@
 <!-- Timeline (DC-066, DC-095) -->
 <section class="section-spacing">
   <div class="container">
-    <h2 class="text-h2" style="text-align: center; margin-bottom: 48px;">How It Works</h2>
+    <h2 class="text-h2" style="text-align: center; margin-bottom: 48px;">{{ i18n.currentLang() === 'es' ? 'Como Funciona' : 'How It Works' }}</h2>
     <app-timeline />
   </div>
 </section>
@@ -44,8 +44,8 @@
   <div class="container">
     <div class="dist-form__layout">
       <div class="dist-form__info">
-        <h2 class="text-h2">Start Your Partnership</h2>
-        <p>Fill out the form and our commercial team will get in touch within 48 hours to discuss distribution opportunities.</p>
+        <h2 class="text-h2">{{ i18n.currentLang() === 'es' ? 'Inicie su Alianza' : 'Start Your Partnership' }}</h2>
+        <p>{{ i18n.currentLang() === 'es' ? 'Complete el formulario y nuestro equipo comercial se comunicara con usted en un plazo de 48 horas para discutir oportunidades de distribucion.' : 'Fill out the form and our commercial team will get in touch within 48 hours to discuss distribution opportunities.' }}</p>
       </div>
       <div class="dist-form__form">
         <app-contact-form variant="manufacturer" />

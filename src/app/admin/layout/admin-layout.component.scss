@@ -88,6 +88,8 @@
     gap: 4px;
     padding: 16px 12px;
     flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 
   &__sidebar-link {
@@ -133,6 +135,68 @@
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  &__sidebar-group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__sidebar-link--parent {
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    font-family: inherit;
+  }
+
+  &__sidebar-chevron {
+    margin-left: auto;
+    transition: transform 0.2s ease-out;
+    flex-shrink: 0;
+
+    &--open {
+      transform: rotate(180deg);
+    }
+  }
+
+  &__sidebar-submenu {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding-left: 44px;
+    padding-bottom: 4px;
+    overflow: hidden;
+
+    // Tablet collapsed: hide submenu completely
+    @media (min-width: 1024px) and (max-width: 1279px) {
+      display: none;
+    }
+  }
+
+  &__sidebar-sublink {
+    display: block;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: var(--weight-medium);
+    color: var(--neutral-400);
+    text-decoration: none;
+    transition: all 0.15s ease-out;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    &:hover {
+      background-color: var(--neutral-50);
+      color: var(--neutral-900);
+    }
+
+    &--active {
+      background-color: var(--semantic-info-soft);
+      color: var(--brand-primary);
+    }
   }
 
   // ---- Mobile Backdrop ----

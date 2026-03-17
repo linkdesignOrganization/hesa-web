@@ -37,4 +37,9 @@ export class ProductCardComponent {
     const lang = this.i18n.currentLang();
     return buildProductUrl(p.category, p.slug[lang], lang);
   }
+
+  get productCategory(): string {
+    const p = this.product();
+    return p?.category ?? 'farmacos';
+  }
 }
