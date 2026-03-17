@@ -19,6 +19,10 @@ export class AdminProductsListComponent implements OnInit {
   loading = signal(true);
   openMenuId = signal<string | null>(null);
 
+  // Delete confirmation state (UX-046)
+  showDeleteModal = signal(false);
+  productToDelete = signal<Product | null>(null);
+
   async ngOnInit(): Promise<void> {
     const data = await this.mockData.getProducts();
     this.products.set(data);
@@ -59,6 +63,22 @@ export class AdminProductsListComponent implements OnInit {
   deleteProduct(product: Product, event: Event): void {
     this.stopEvent(event);
     this.closeMenu();
-    this.toast.warning('Producto eliminado (mock)');
+    this.productToDelete.set(product);
+    this.showDeleteModal.set(true);
+  }
+
+  confirmDelete(): void {
+    const product = this.productToDelete();
+    if (product) {
+      this.products.update(list => list.filter(p => p.id !== product.id));
+      this.toast.success(`"${product.name.es}" eliminado (mock)`);
+    }
+    this.showDeleteModal.set(false);
+    this.productToDelete.set(null);
+  }
+
+  cancelDelete(): void {
+    this.showDeleteModal.set(false);
+    this.productToDelete.set(null);
   }
 }

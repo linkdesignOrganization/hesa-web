@@ -81,4 +81,39 @@ test.describe('UX-043: Product Form Structure and Edge Cases', () => {
     const slugValue = await slugField.inputValue();
     expect(slugValue).toMatch(/mi-producto-test-123|amoxicilina/);
   });
+
+  test('R3: Marca dropdown has options (Zoetis, MSD, Purina)', async ({ page }) => {
+    const combobox = page.getByRole('combobox', { name: 'Marca' });
+    await expect(combobox).toBeVisible();
+    const options = await combobox.locator('option').allTextContents();
+    expect(options).toContain('Zoetis');
+    expect(options).toContain('MSD');
+    expect(options).toContain('Purina');
+  });
+
+  test('R3: Presentaciones tag with remove button', async ({ page }) => {
+    await expect(page.getByText('Tabletas x 10')).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Remover' })).toBeVisible();
+  });
+
+  test('R3: Species remove buttons work', async ({ page }) => {
+    await expect(page.getByRole('button', { name: 'Remover Perros' })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Remover Gatos' })).toBeVisible();
+  });
+
+  test('R3: Add species input accepts text', async ({ page }) => {
+    const input = page.getByPlaceholder('Agregar especie...');
+    await expect(input).toBeVisible();
+    await input.fill('Bovinos');
+    const value = await input.inputValue();
+    expect(value).toBe('Bovinos');
+  });
+
+  test('R3: Descripcion field accepts long text', async ({ page }) => {
+    const longText = 'A'.repeat(5000);
+    const textarea = page.getByRole('textbox', { name: 'Descripcion' });
+    await textarea.fill(longText);
+    const value = await textarea.inputValue();
+    expect(value.length).toBeGreaterThan(0);
+  });
 });

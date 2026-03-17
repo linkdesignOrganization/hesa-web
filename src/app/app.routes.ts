@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { authGuard } from './shared/guards/auth.guard';
+import { unsavedChangesGuard } from './shared/guards/unsaved-changes.guard';
 
 export const routes: Routes = [
   // Root redirect to /es/ (default) — actual language detection happens in AppComponent
@@ -42,9 +43,9 @@ export const routes: Routes = [
     children: [
       { path: 'dashboard', loadComponent: () => import('./admin/pages/dashboard/dashboard.component').then(m => m.AdminDashboardComponent) },
       { path: 'productos', loadComponent: () => import('./admin/pages/products-list/products-list.component').then(m => m.AdminProductsListComponent) },
-      { path: 'productos/crear', loadComponent: () => import('./admin/pages/product-form/product-form.component').then(m => m.AdminProductFormComponent) },
+      { path: 'productos/crear', loadComponent: () => import('./admin/pages/product-form/product-form.component').then(m => m.AdminProductFormComponent), canDeactivate: [unsavedChangesGuard] },
       { path: 'productos/:id', loadComponent: () => import('./admin/pages/product-detail/product-detail.component').then(m => m.AdminProductDetailComponent) },
-      { path: 'productos/:id/editar', loadComponent: () => import('./admin/pages/product-form/product-form.component').then(m => m.AdminProductFormComponent) },
+      { path: 'productos/:id/editar', loadComponent: () => import('./admin/pages/product-form/product-form.component').then(m => m.AdminProductFormComponent), canDeactivate: [unsavedChangesGuard] },
       { path: 'marcas', loadComponent: () => import('./admin/pages/brands-list/brands-list.component').then(m => m.AdminBrandsListComponent) },
       { path: 'marcas/crear', loadComponent: () => import('./admin/pages/brand-form/brand-form.component').then(m => m.AdminBrandFormComponent) },
       { path: 'marcas/:id/editar', loadComponent: () => import('./admin/pages/brand-form/brand-form.component').then(m => m.AdminBrandFormComponent) },

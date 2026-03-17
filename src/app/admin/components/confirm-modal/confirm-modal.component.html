@@ -1,6 +1,6 @@
 <!-- Confirm Modal (DC-079, DC-133, DC-134, DC-135) -->
 @if (isOpen()) {
-  <div class="modal-backdrop" (click)="isOpen.set(false)">
+  <div class="modal-backdrop" (click)="close()">
     <div class="modal" (click)="$event.stopPropagation()" role="dialog" aria-modal="true" aria-labelledby="modal-title">
       <div class="modal__icon" [class.modal__icon--danger]="variant() === 'danger'" [class.modal__icon--warning]="variant() === 'warning'">
         @if (variant() === 'danger') {
@@ -9,11 +9,11 @@
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--semantic-warning)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
         }
       </div>
-      <h2 id="modal-title" class="modal__title">Estas seguro?</h2>
-      <p class="modal__desc">Esta accion no se puede deshacer. El producto sera eliminado permanentemente.</p>
+      <h2 id="modal-title" class="modal__title">{{ title() }}</h2>
+      <p class="modal__desc">{{ description() }}</p>
       <div class="modal__actions">
-        <button class="btn btn-outline-gray" (click)="isOpen.set(false)" autofocus>Cancelar</button>
-        <button class="btn btn-danger">Eliminar</button>
+        <button class="btn btn-outline-gray" (click)="close()" autofocus>{{ cancelLabel() }}</button>
+        <button class="btn" [class.btn-danger]="variant() === 'danger'" [class.btn-warning]="variant() === 'warning'" (click)="confirm()">{{ confirmLabel() }}</button>
       </div>
     </div>
   </div>

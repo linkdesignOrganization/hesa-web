@@ -299,6 +299,79 @@
   }
 }
 
+// ---- Delete Confirmation Modal (UX-046, DC-079) ----
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.modal-dialog {
+  background-color: var(--neutral-white);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  padding: 32px;
+  max-width: 420px;
+  width: 100%;
+  text-align: center;
+  animation: modalIn 0.2s ease-out;
+
+  &__icon {
+    margin-bottom: 16px;
+  }
+
+  &__title {
+    font-size: 20px;
+    font-weight: var(--weight-bold);
+    color: var(--neutral-900);
+    margin-bottom: 8px;
+  }
+
+  &__desc {
+    font-size: 14px;
+    color: var(--neutral-400);
+    line-height: 1.5;
+    margin-bottom: 24px;
+
+    strong {
+      color: var(--neutral-900);
+      font-weight: var(--weight-semibold);
+    }
+  }
+
+  &__actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+
+    @media (max-width: 480px) {
+      flex-direction: column;
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 .data-table {
   width: 100%;
   border-collapse: collapse;
