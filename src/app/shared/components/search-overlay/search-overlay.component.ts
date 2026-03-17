@@ -18,6 +18,7 @@ export class SearchOverlayComponent {
   productResults = signal<Product[]>([]);
   brandResults = signal<Brand[]>([]);
   selectedIndex = signal(-1);
+  isSearching = signal(false);
 
   private router = inject(Router);
   private mockData = inject(MockDataService);
@@ -33,6 +34,8 @@ export class SearchOverlayComponent {
     });
   }
 
+  private searchDebounceTimer: ReturnType<typeof setTimeout> | null = null;
+
   onInput(event: Event): void {
     const rawValue = (event.target as HTMLInputElement).value;
     // Sanitize: limit length, strip control characters
@@ -41,10 +44,22 @@ export class SearchOverlayComponent {
     this.searchTerm.set(value);
     this.selectedIndex.set(-1);
 
+    if (this.searchDebounceTimer) {
+      clearTimeout(this.searchDebounceTimer);
+    }
+
     if (value.length >= 3) {
-      this.productResults.set(this.mockData.searchProducts(value));
-      this.brandResults.set(this.mockData.searchBrands(value));
+      this.isSearching.set(true);
+      this.productResults.set([]);
+      this.brandResults.set([]);
+      // Simulate search delay for loading state feedback
+      this.searchDebounceTimer = setTimeout(() => {
+        this.productResults.set(this.mockData.searchProducts(value));
+        this.brandResults.set(this.mockData.searchBrands(value));
+        this.isSearching.set(false);
+      }, 400);
     } else {
+      this.isSearching.set(false);
       this.productResults.set([]);
       this.brandResults.set([]);
     }
@@ -100,10 +115,15 @@ export class SearchOverlayComponent {
   }
 
   close(): void {
+    if (this.searchDebounceTimer) {
+      clearTimeout(this.searchDebounceTimer);
+      this.searchDebounceTimer = null;
+    }
     this.searchTerm.set('');
     this.productResults.set([]);
     this.brandResults.set([]);
     this.selectedIndex.set(-1);
+    this.isSearching.set(false);
     this.closeOverlay.emit();
   }
 
@@ -116,7 +136,7 @@ export class SearchOverlayComponent {
   }
 
   get showNoResults(): boolean {
-    return this.searchTerm().length >= 3 && !this.hasResults;
+    return this.searchTerm().length >= 3 && !this.hasResults && !this.isSearching();
   }
 
   get showHint(): boolean {

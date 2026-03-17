@@ -7,7 +7,6 @@ import { BrandLogosRowComponent } from '../../components/brand-logos-row/brand-l
 import { ManufacturerCtaComponent } from '../../components/manufacturer-cta/manufacturer-cta.component';
 import { MockDataService, Product, Brand } from '../../../shared/services/mock-data.service';
 import { I18nService } from '../../../shared/services/i18n.service';
-import { CrmTrackingService } from '../../../shared/services/crm-tracking.service';
 import { initFadeInObserver } from '../../../shared/utils/fade-in-observer';
 
 @Component({
@@ -27,7 +26,6 @@ import { initFadeInObserver } from '../../../shared/utils/fade-in-observer';
 export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   private mockData = inject(MockDataService);
   i18n = inject(I18nService);
-  private crmTracking = inject(CrmTrackingService);
   private el = inject(ElementRef);
   private fadeObserver: IntersectionObserver | null = null;
 
@@ -72,23 +70,19 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     this.brandsLoading.set(false);
   }
 
+  private readonly PRODUCTS_PER_SLIDE = 6;
+
   nextSlide(): void {
-    const maxSlides = Math.ceil(this.featuredProducts().length / 4);
-    this.currentSlide.update(c => (c + 1) % maxSlides);
+    const maxSlides = Math.ceil(this.featuredProducts().length / this.PRODUCTS_PER_SLIDE);
+    this.currentSlide.update(c => Math.min(c + 1, maxSlides - 1));
   }
 
   prevSlide(): void {
-    const maxSlides = Math.ceil(this.featuredProducts().length / 4);
-    this.currentSlide.update(c => (c - 1 + maxSlides) % maxSlides);
-  }
-
-  getVisibleProducts(): Product[] {
-    const start = this.currentSlide() * 4;
-    return this.featuredProducts().slice(start, start + 4);
+    this.currentSlide.update(c => Math.max(c - 1, 0));
   }
 
   get carouselDots(): number[] {
-    const maxSlides = Math.ceil(this.featuredProducts().length / 4);
+    const maxSlides = Math.ceil(this.featuredProducts().length / this.PRODUCTS_PER_SLIDE);
     return Array.from({ length: maxSlides }, (_, i) => i);
   }
 
@@ -101,9 +95,5 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.fadeObserver?.disconnect();
-  }
-
-  trackCTA(label: string): void {
-    this.crmTracking.trackCTA(label);
   }
 }

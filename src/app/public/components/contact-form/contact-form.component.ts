@@ -1,7 +1,6 @@
 import { Component, input, signal, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { I18nService } from '../../../shared/services/i18n.service';
-import { CrmTrackingService } from '../../../shared/services/crm-tracking.service';
 
 @Component({
   selector: 'app-contact-form',
@@ -15,7 +14,6 @@ export class ContactFormComponent {
   prefilledProduct = input('');
 
   i18n = inject(I18nService);
-  private crmTracking = inject(CrmTrackingService);
 
   private static readonly EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   private static readonly PHONE_REGEX = /^[+]?[\d\s\-()]{7,20}$/;
@@ -190,9 +188,6 @@ export class ContactFormComponent {
 
     this.formState.set('submitting');
     this.lastSubmitTime = Date.now();
-    try {
-      this.crmTracking.trackCTA(this.variant() === 'general' ? 'Enviar consulta' : 'Send Inquiry');
-    } catch { /* silently ignore tracking errors */ }
 
     await new Promise(resolve => setTimeout(resolve, 1500));
     this.formState.set('success');

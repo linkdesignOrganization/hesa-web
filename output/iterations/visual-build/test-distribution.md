@@ -2,164 +2,143 @@
 
 ## Contexto de Testing
 - Iteracion: Fase 4 (Construccion Visual)
-- Ronda: 1
+- Ronda: 2
 - URL del sitio desplegado: https://gray-field-02ba8410f.2.azurestaticapps.net
 - URL del backend (si aplica): N/A (demo con mock data, sin backend)
-- Total criterios esta iteracion: 306 (149 DC + 40 BVC + 117 UX)
-- Criterios nuevos a testear: 306 (primera ronda)
-- Criterios a re-testear (fallaron en ronda anterior): 0
-- NFR aplicables a fase visual: NFR-014, NFR-020, NFR-021 a NFR-026, NFR-031, NFR-032 (11 NFR)
-- Total criterios con NFR: 317
+- Total criterios esta iteracion: 317 (149 DC + 40 BVC + 117 UX + 11 NFR)
+- Criterios que PASARON en Ronda 1 (se mantienen como PASA): 153
+- Criterios N/A en Ronda 1 (se mantienen): 27
+- Criterios a re-testear (FALLARON en Ronda 1): 19
+- Criterios DESBLOQUEADOS (BLOQUEADOS en Ronda 1, ahora testeables): 101
+- Criterios PASA (parcial) a re-verificar: 5
+- Total criterios que requieren sub-testers esta ronda: 125
+- No hay regression-results.md — primera ejecucion de regresion se hara post-Ronda 2
+
+## Resumen de Bugs Corregidos (13 bugs de Ronda 1)
+Los 13 bugs reportados en Ronda 1 fueron corregidos por el Developer:
+1. **BUG-001** (CRITICO) — Deep linking / SPA routing roto → CORREGIDO (navigationFallback configurado)
+2. **BUG-002** (CRITICO) — CRM tracking script causa navegacion erratica → CORREGIDO
+3. **BUG-003** (ALTA) — Hero sin imagen de fondo → CORREGIDO
+4. **BUG-004** (ALTA) — Imagenes rotas en bloques de categoria → CORREGIDO
+5. **BUG-005** (ALTA) — Seccion marcas destacadas ausente → CORREGIDO
+6. **BUG-006** (MEDIA) — Imagenes productos faltantes en carrusel/catalogo → CORREGIDO
+7. **BUG-007** (MEDIA) — CTA fabricantes color fondo incorrecto → CORREGIDO
+8. **BUG-008** (MEDIA) — Mezcla idiomas en distribuidores → CORREGIDO
+9. **BUG-009** (BAJA) — Carrusel 4 vs 6 productos → CORREGIDO
+10. **BUG-010** (MEDIA) — Submenu desborda sidebar → CORREGIDO
+11. **BUG-011** (BAJA) — Filtro marca no adaptivo → CORREGIDO
+12. **BUG-012** (ALTA) — Formulario contacto navega inesperadamente → CORREGIDO
+13. **BUG-013** (BAJA) — Discrepancia 48 vs 47 productos → CORREGIDO
+
+## Pre-flight Check (OBLIGATORIO antes de testear)
+Leccion de Ronda 1: BUG-001 (SPA routing) bloqueo 32% de criterios. Antes de testear cualquier criterio, cada sub-tester DEBE verificar:
+1. Deep link a `/es/catalogo/farmacos` — debe renderizar la pagina de catalogo de farmacos, NO el home
+2. Deep link a `/es/nosotros` — debe renderizar la pagina Nosotros
+3. Deep link a `/admin/productos` — debe renderizar la pagina de listado de productos del panel
+4. Consola del navegador: NO debe haber ERR_NAME_NOT_RESOLVED de crm-api.linkdesign.cr
+
+**Si alguno falla: DETENER testing y reportar BLOQUEADO al PM inmediatamente.**
 
 ## Notas Importantes para Todos los Sub-testers
 - Testing EXCLUSIVAMENTE contra el sitio desplegado: https://gray-field-02ba8410f.2.azurestaticapps.net
 - NUNCA testear contra localhost
 - El sitio es una SPA Angular con routing `/es/`, `/en/`, y `/admin/`
 - La fase visual usa datos mock — no hay backend real
-- Grabar GIFs de todos los flujos principales
-- Generar archivos `.spec.ts` para cada criterio verificado
+- **Ronda 2**: los bugs criticos de routing y CRM tracking fueron corregidos. TODOS los criterios bloqueados en Ronda 1 ahora deben ser verificables
+- **Grabar GIFs de todos los flujos principales** — en Ronda 1 no se grabaron GIFs. En Ronda 2 es OBLIGATORIO
+- **Generar archivos `.spec.ts`** para TODOS los criterios DESBLOQUEADOS verificados en esta ronda (101 criterios necesitan .spec.ts nuevos)
 - Para rutas bilingues probar con prefijo `/es/` por defecto, y `/en/` donde el criterio lo requiera
 - Breakpoints clave: mobile 375px, tablet 768px, desktop 1024px, desktop-lg 1280px, desktop-xl 1440px
+- **Verificar via deep link Y via SPA click** — reportar si un metodo funciona y el otro no
 
 ---
 
 ## Asignacion: Visual Checker -> e2e/tests/visual/
 
-### Criterios asignados (149 DC + 40 BVC + 4 NFR = 193 criterios)
+### Criterios asignados (78 criterios: 9 FALLA re-verificar + 64 DESBLOQUEADOS + 5 NFR desbloqueados)
 
-#### Tokens de Diseno (DC-001 a DC-029)
-- DC-001: Paleta primaria `--brand-primary: #008DC9` para CTAs, enlaces, header activo
-- DC-002: Paleta secundaria `--brand-secondary: #50B92A` para iconografia beneficios, acentos
-- DC-003: Paleta oscura `--brand-dark: #005A85` para footer, hover botones, barra sticky
-- DC-004: Neutros definidos (#FFFFFF, #F5F7FA, #F7F8FA, #E5E7EB, #6B7280, #1F2937)
-- DC-005: Colores superficie por categoria (pharma #E8F4FD, food #EDF7E8, equipment #F0F2F5)
-- DC-006: Colores semanticos (success, danger, warning, info) con fondos suaves
-- DC-007: Texto badges semanticos con variantes oscuras accesibles (ratio WCAG >= 4.5:1)
-- DC-008: Color morado para mensajes tipo Fabricante (#5B21B6 sobre #EDE9FE, 7.57:1)
-- DC-009: Colores especiales (WhatsApp #25D366, overlay rgba(0,0,0,0.5))
-- DC-010: Tipografia principal Inter de Google Fonts, pesos 400/500/600/700/800
-- DC-011: Fallback tipografico completo (Inter, -apple-system, BlinkMacSystemFont...)
-- DC-012: Escala tipografica sitio publico (display 56px/800, h1 48px/700, h2 42px/700, etc.)
-- DC-013: Escala tipografica mobile (display 32px/700, h1 32px/700, h2 28px/700, h3 24px/700)
-- DC-014: Escala tipografica panel (titulo 24px/700, subtitulo 20px/700, etc.)
-- DC-015: Hero headline letter-spacing -0.02em (tracking tight)
-- DC-016: Spacing escala base 4px (space-1 a space-24)
-- DC-017: Spacing entre secciones home (96px desktop, 80px tablet, 64px mobile)
-- DC-018: Spacing bloques color (padding 72px desktop, 60px tablet, 48px mobile)
-- DC-019: Contenedor max-width 1280px, padding-inline 40px desktop / 20px mobile
-- DC-020: Panel spacing (area contenido padding 32px desktop / 16px mobile, gap cards 24px)
-- DC-021: Sombras sm/md/lg
-- DC-022: Border-radius (botones 8px, inputs 10px, cards publico 12px, cards panel 16px, bloques 24px, pills 9999px)
-- DC-023: Transicion hover botones (background-color 0.2s ease-out)
-- DC-024: Transicion hover cards producto (box-shadow 0.3s, transform 0.3s con scale(1.02))
-- DC-025: Transicion scroll fade-in (opacity+transform 0.5s cubic-bezier)
-- DC-026: Breakpoints (375px, 768px, 1024px, 1280px, 1440px)
-- DC-027: Z-index escala (dropdown 100, sticky 200, sidebar 300, overlay 400, modal 500, toast 600, whatsapp 700)
-- DC-028: Iconografia Lucide Icons, trazo 1.5-2px, tamanos 16-28px segun contexto
-- DC-029: Circulos decorativos iconos (48px diametro, fondo opacity 10-15%)
+El Visual Checker tiene 10 archivos .spec.ts de Ronda 1 que cubren criterios que PASARON. En Ronda 2, se enfoca en:
+- (A) Re-verificar 9 criterios que FALLARON por bugs visuales ya corregidos
+- (B) Testear por primera vez 64 criterios DC/BVC que estaban BLOQUEADOS
+- (C) Testear 5 NFR que estaban BLOQUEADOS
 
-#### Layouts por Pantalla (DC-030 a DC-049)
-- DC-030: Home Hero — full viewport, overlay gradient, tag "DESDE 1989", headline 56px, 2 CTAs
-- DC-031: Home Bloques categorias — 3 bloques full-width, fondos diferenciados, border-radius 24px
-- DC-032: Home Marcas destacadas — logos grayscale, hover a color, 6-8 logos
-- DC-033: Home Propuesta de valor — 4 bloques en fila, icono verde, numero 48px, count-up
-- DC-034: Home Productos destacados — carrusel 4 cards desktop, flechas + dots
-- DC-035: Home CTA fabricantes — full-width fondo #008DC9, titulo blanco
-- DC-036: Catalogo general — max-width 1280px, breadcrumb, filtros, grid 3 cols
-- DC-037: Catalogo por categoria — breadcrumb extendido, filtros especificos
-- DC-038: Detalle producto — 2 columnas 55/45, galeria + info
-- DC-039: Listado marcas — grid 3-4 cols, cards con logo/nombre/pais/badges
-- DC-040: Pagina individual marca — logo grande, grid productos
-- DC-041: Nosotros — hero, historia, numeros clave, mapa SVG, equipo, politicas
-- DC-042: Distribuidores — hero B2B, beneficios grid, logo wall, timeline, formulario
-- DC-043: Contacto — 2 columnas info + formulario
-- DC-044: Resultados busqueda — titulo, resultados agrupados
-- DC-045: Panel Login — card centrada 420px, fondo #F7F8FA
-- DC-046: Panel Dashboard — sidebar 272px + header 68px + area #F7F8FA
-- DC-047: Panel Productos listado — toolbar, filtros, toggle Card/Table
-- DC-048: Panel Producto crear/editar — formulario pantalla completa, 5 secciones
-- DC-049: Panel Mensajes — toggle Kanban/Tabla, 3 columnas
+#### (A) Criterios FALLA en Ronda 1 — Re-verificar fix (9 criterios)
 
-#### Componentes (DC-050 a DC-079)
-- DC-050: Header (Navbar) — fondo blanco 70px, scrolled shadow, mobile menu slide-in
-- DC-051: Footer — fondo #005A85, 4 columnas, mobile acordeon
-- DC-052: WhatsApp FAB — circular 56px, fondo #25D366, z-index 700
+| Criterio | Bug corregido | Que verificar |
+|----------|--------------|---------------|
+| DC-030 | BUG-003 | Hero AHORA debe tener imagen de fondo visible con overlay gradient (no fondo oscuro uniforme) |
+| DC-031 | BUG-004 | Bloques categoria AHORA deben tener imagenes visibles en layout 50/50 (no espacios vacios) |
+| DC-032 | BUG-005 | Seccion "Marcas Destacadas" AHORA debe ser visible en home en posicion correcta: logos grayscale, hover a color |
+| DC-034 | BUG-006 | Carrusel productos destacados AHORA debe mostrar imagenes reales (no placeholders rotos) |
+| DC-035 | BUG-007 | CTA fabricantes AHORA debe tener fondo #008DC9 azul primario (no fondo oscuro) |
+| DC-061 | BUG-004 | Category Block AHORA debe tener imagenes en la mitad correspondiente |
+| DC-097 | BUG-005 | Brand logos row responsive: verificar layout en 3 breakpoints ahora que la seccion esta presente |
+| DC-101 | BUG-004/005 | Home exito: TODAS las secciones visibles con contenido real (marcas + imagenes en bloques) |
+| DC-140 | BUG-005 | Logos grayscale->color transition 0.3s: verificar ahora que seccion de marcas esta visible |
+
+#### (B) Criterios DESBLOQUEADOS — Primera vez (64 criterios DC + BVC)
+
+**Tokens mobile (1 criterio):**
+- DC-013: Escala tipografica mobile (display 32px/700, h1 32px/700, h2 28px/700, h3 24px/700) — verificar en viewport 375px
+
+**Layouts ahora navegables via deep link (7 criterios):**
+- DC-037: Catalogo por categoria — breadcrumb extendido, filtros especificos por tipo
+- DC-040: Pagina individual marca — logo grande 160x160px + nombre 36px Bold + grid productos
+- DC-041: Nosotros — hero 50-60vh, historia, numeros clave, mapa SVG, equipo grid 3 cols, politicas
+- DC-044: Resultados busqueda — titulo "Resultados para '[termino]'" 36px Bold, agrupados
+- DC-047: Panel Productos listado — toolbar, filtros, toggle Card/Table, grid 3 cols, badges
+- DC-048: Panel Producto crear/editar — formulario 5 secciones, campos condicionales, tabs ES/EN
+- DC-049: Panel Mensajes — toggle Kanban/Tabla, 3 columnas, drag-drop
+
+**Componentes ahora verificables (14 criterios):**
 - DC-053: Search Overlay — full-screen, input centrado 720px, resultados agrupados
-- DC-054: Product Card publico — fondo blanco, radius 12px, imagen 1:1, sin precio
-- DC-055: Carousel — 4 items desktop, flechas circulares 44px, dots pill
-- DC-056: Filter Bar — dropdowns barra horizontal, pills activos
-- DC-057: Pagination — centrada, pagina activa #008DC9, texto "Mostrando X-Y de Z"
-- DC-058: Product Gallery — thumbnails 60x60, zoom, lightbox
-- DC-059: Contact Form — labels 14px, inputs radius 10px, height 44px
-- DC-060: Brand Card — logo 120x80, nombre 18px Bold, badges categoria
-- DC-061: Category Block — full-width, radius 24px, padding 72px, layout 50/50
-- DC-062: Value Stat — icono outline, numero 42px Bold, count-up animation
-- DC-063: Sticky Bar — desktop top fondo #005A85, mobile bottom fondo blanco
-- DC-064: Manufacturer CTA Banner — full-width #008DC9, titulo 36px blanco
-- DC-065: Team Member Card — foto circular 160px, borde 4px blanco
-- DC-066: Timeline — 4 nodos circulares 56px, animacion secuencial
-- DC-067: Breadcrumb — Inter 14px gris, separadores ">"
-- DC-068: Language Selector — dropdown compacto, bandera circular 20px
-- DC-069: Species Badges — fila horizontal, fondo #F5F7FA, icono 18px
-- DC-070: Presentation Pills — radius pill, selected fondo #E8F4FD
-- DC-071: Product CTAs — stack vertical 3 botones (informacion, WhatsApp, ficha PDF)
-- DC-072: Summary Card panel — fondo blanco, radius 16px, icono circulo 48px, valor 28px
-- DC-073: Category Card Admin — barra progreso 6px, label 16px Semibold
-- DC-074: View Toggle — pills activo #008DC9, inactivo blanco
-- DC-075: Product Card Admin — radius 16px, badges categoria y estado
-- DC-076: Data Table — headers UPPERCASE 12px, filas 52px, separadores
+- DC-058: Product Gallery — thumbnails 60x60, zoom hover, lightbox, crossfade
+- DC-063: Sticky Bar — desktop top fondo #005A85 + mobile bottom fondo blanco
+- DC-065: Team Member Card — foto circular 160px, borde 4px, nombre 18px Bold
+- DC-066: Timeline — 4 nodos circulares 56px #008DC9, linea conectora, animacion
+- DC-069: Species Badges — fila horizontal fondo #F5F7FA, icono 18px, label 13px
+- DC-070: Presentation Pills — radius pill, selected fondo #E8F4FD borde #008DC9
+- DC-074: View Toggle — pills activo #008DC9, inactivo blanco, radius 24px
+- DC-075: Product Card Admin — radius 16px, badges categoria y estado, menu 3 puntos
+- DC-076: Data Table — headers UPPERCASE 12px, filas 52px, separadores, mobile stacked
 - DC-077: Form Field panel — label 14px, input radius 10px, height 44px, toggle switch
 - DC-078: Image Uploader — zona drag-drop dashed, grid previews 120x120
-- DC-079: Confirm Modal — backdrop, modal centrado 440px, icono circulo 48px
+- DC-079: Confirm Modal — backdrop, modal centrado 440px, icono circulo 48px, animacion
 
-#### Responsive (DC-080 a DC-099)
-- DC-080: Header colapsa a hamburger < 1024px
-- DC-081: Grid product cards: 3 cols >= 1280px, 2 cols 768-1279px, 1-2 cols < 768px
-- DC-082: Hero headline: 56px >= 1280px, 42px 768-1279px, 32px < 768px
-- DC-083: Bloques categoria: 2 cols >= 1024px, stack vertical < 1024px
-- DC-084: Propuesta de valor: 4 cols >= 1280px, 2x2 768-1279px, 2x2 o 1 col < 768px
-- DC-085: Detalle producto: 2 cols >= 1024px, stack vertical < 1024px
-- DC-086: Footer: 4 cols >= 1024px, 2x2 768-1023px, 1 col acordeones < 768px
-- DC-087: Filtros catalogo: dropdowns visibles >= 768px, drawer < 768px
-- DC-088: Panel sidebar: 272px >= 1280px, 72px 1024-1279px, hamburger < 768px
-- DC-089: Panel cards: 3 cols >= 1280px, 2 cols 1024-1279px, 1 col < 768px
-- DC-090: Panel tablas: clasica >= 768px, stacked cards < 768px
-- DC-091: Panel formularios: 2 cols >= 768px, 1 col < 768px
-- DC-092: Panel kanban: 3 cols >= 1024px, scroll 768-1023px, apiladas < 768px
-- DC-093: Carrusel: 4 cards >= 1280px, 2 768-1279px, 1 + swipe < 768px
-- DC-094: Paginacion: completa >= 768px, simplificada < 768px
-- DC-095: Timeline distribuidores: horizontal >= 768px, vertical < 768px
-- DC-096: Contacto: 2 cols >= 768px, 1 col < 768px
-- DC-097: Brand logos: 6-8 >= 1280px, 4 768-1279px, 3x2 < 768px
-- DC-098: Tabs pill panel: fila >= 768px, 2 filas o scroll < 768px
-- DC-099: Login panel: card 420px >= 768px, full-width < 768px
+**Responsive ahora verificable (11 criterios):**
+- DC-083: Bloques categoria responsive — 2 cols >= 1024px, stack vertical < 1024px
+- DC-087: Filtros catalogo mobile — drawer bottom sheet < 768px
+- DC-089: Panel cards responsive — 3 cols >= 1280px, 2 cols 1024-1279px, 1 col < 768px
+- DC-090: Panel tablas responsive — clasica >= 768px, stacked cards < 768px
+- DC-091: Panel formularios responsive — 2 cols >= 768px, 1 col < 768px
+- DC-092: Panel kanban responsive — 3 cols >= 1024px, scroll 768-1023px, apiladas < 768px
+- DC-093: Carrusel mobile — 1 card + swipe + flechas ocultas < 768px
+- DC-094: Paginacion responsive — simplificada con flechas + "Pagina X de Y" < 768px
+- DC-095: Timeline responsive — vertical con linea izquierda < 768px
+- DC-098: Tabs pill panel responsive — 2 filas o scroll horizontal < 768px
 
-#### Estados de UI (DC-100 a DC-119)
-- DC-100: Home carga — skeleton screens
-- DC-101: Home exito — secciones con contenido real
+**Estados de UI ahora verificables (16 criterios):**
+- DC-100: Home skeleton shimmer
 - DC-102: Home error — secciones con reintentar
 - DC-103: Home vacio parcial — secciones ocultas si vacias
 - DC-104: Catalogo carga — 12 cards skeleton
-- DC-105: Catalogo exito — grid con contenido
 - DC-106: Catalogo error — mensaje + reintentar
 - DC-107: Catalogo vacio — ilustracion SVG + mensaje
-- DC-108: Catalogo filtros sin resultados — mensaje + limpiar filtros
-- DC-109: Catalogo muchos datos — paginacion funcional
+- DC-108: Catalogo filtros sin resultados — "No se encontraron productos..."
 - DC-110: Detalle producto carga — skeleton 2 columnas
-- DC-111: Detalle producto error 404 — pagina estilizada
-- DC-112: Detalle producto sin imagen — placeholder icono categoria
-- DC-113: Detalle producto sin ficha PDF — boton no se renderiza
+- DC-111: Detalle producto 404 — pagina estilizada
+- DC-113: Sin ficha PDF — boton no se renderiza (simplemente ausente)
 - DC-114: Panel Login cargando — boton deshabilitado + spinner
-- DC-115: Panel Login error — mensaje rojo bajo boton
+- DC-115: Panel Login error — mensaje rojo
 - DC-116: Panel Dashboard carga — skeleton shimmer
 - DC-117: Panel Dashboard error parcial — borde izq rojo + reintentar
 - DC-118: Panel Productos vacio — ilustracion + CTA
 - DC-119: Panel Producto form validacion — campos invalidos borde rojo, scroll al error
 
-#### Patrones de Feedback Visual (DC-120 a DC-149)
-- DC-120: Loading skeleton screens (shimmer 1.5s)
-- DC-121: Loading acciones (spinner 18px en boton)
-- DC-122: Upload progress bar (4px, radius 2px)
+**Patrones de Feedback Visual (26 criterios):**
+- DC-120: Skeleton shimmer (1.5s gradient animado)
+- DC-121: Button spinner (18px blanco, "Guardando...")
+- DC-122: Upload progress bar (4px, radius 2px, #008DC9)
 - DC-123: Toast exito (fondo #DCFCE7, borde izq 4px #22C55E, auto-dismiss 3s)
 - DC-124: Toast error (fondo #FEE2E2, persistente)
 - DC-125: Toast warning (fondo #FEF3C7)
@@ -170,157 +149,63 @@
 - DC-130: Exito sitio publico (formulario reemplazado por confirmacion)
 - DC-131: Exito panel (toast verde + redireccion)
 - DC-132: Error envio (toast rojo, datos mantenidos)
-- DC-133: Eliminar producto/marca (modal confirm con icono danger)
+- DC-133: Modal confirm (icono danger, botones Cancelar/Eliminar)
 - DC-134: Eliminar marca con productos (warning adicional)
 - DC-135: Cambios sin guardar (modal "Deseas salir?")
-- DC-136: Hover cards producto sitio (scale 1.02 + shadow + boton aparece)
 - DC-137: Hover cards panel (shadow + borde #008DC9)
 - DC-138: Hover filas tabla (fondo #F7F8FA)
 - DC-139: Scroll fade-in secciones (opacity + translateY via IO)
-- DC-140: Logos grayscale->color (transition 0.3s)
 - DC-141: Underline links menu (::after width 0->100%)
 - DC-142: Dropdowns apertura (opacity + translateY 0.2s)
-- DC-143: Count-up numeros (0 al valor en 1.5s, no re-anima)
 - DC-144: Timeline secuencial (opacity + scale, delay 200ms)
 - DC-145: Badge pulse (scale 1->1.15->1, 0.6s)
-- DC-146: Drag-drop kanban (sombra + rotate(2deg), columna destino borde dashed)
+- DC-146: Drag-drop kanban (sombra + rotate 2deg, columna destino borde dashed)
 - DC-147: Logo header scroll (crossfade opacity 0.3s)
 - DC-148: Mobile menu slide-in (translateX 100%->0, 0.3s)
-- DC-149: Smooth scroll global (scroll-behavior: smooth)
 
-#### BVC — Brief Verification Criteria (BVC-001 a BVC-040)
+**BVC Desbloqueados (7 criterios):**
+- BVC-013: Formularios organizados en secciones con subtitulos
+- BVC-014: Campos condicionales segun categoria seleccionada
+- BVC-018: Acciones destructivas con confirmacion modal
+- BVC-019: Estados vacios disenados (ilustracion + mensaje + CTA)
+- BVC-021: Flujo navegacion: Listado > Crear/Editar > Detalle
+- BVC-022: Toggle Card/Table en listados
+- BVC-023: Toast notifications despues de guardar/eliminar
 
-##### Brief: Sitio Publico
-- BVC-001: Diseno premium, no generico (subjective)
-- BVC-002: Suficiente espacio en blanco entre elementos (visual)
-- BVC-003: Tipografia con jerarquia clara (visual)
-- BVC-004: Colores corresponden a paleta definida (computed-style)
-- BVC-005: Animaciones sutiles y profesionales (visual)
-- BVC-006: Diseno funciona en mobile (visual)
-- BVC-007: Equivalente visual Tuft & Paw copiado correctamente (visual)
-- BVC-008: No se muestran precios, inventario, carrito (negative)
-- BVC-009: Textos en espanol e ingles (visual)
-- BVC-010: Nivel visual supera Monteco, VETIM, Belina (subjective)
-
-##### Brief: Panel
-- BVC-011: Pantalla con un solo proposito claro (visual)
-- BVC-012: Productos y marcas como cards con imagen, no listas planas (visual)
-- BVC-013: Formularios organizados en secciones con subtitulos (visual)
-- BVC-014: Campos condicionales segun categoria (visual)
-- BVC-015: Suficiente espacio entre elementos (computed-style)
-- BVC-016: Todos los estados con badge con color (visual)
-- BVC-017: Iconos en navegacion, cards resumen y badges (visual)
-- BVC-018: Acciones destructivas con confirmacion modal (visual)
-- BVC-019: Estados vacios disenados con ilustracion + mensaje + CTA (visual)
-- BVC-020: Pantalla se siente como herramienta a medida, no CRUD generico (subjective)
-- BVC-021: Flujo navegacion claro: Listado > Crear/Editar > Detalle (visual)
-- BVC-022: Toggle Card/Table en listados (visual)
-- BVC-023: Toast notifications despues de guardar/eliminar/cambiar estado (visual)
-- BVC-024: Panel refleja misma calidad visual que sitio publico (subjective)
-
-##### BVC Anti-patrones
-- BVC-025: No hay precios visibles en ninguna pagina (negative)
-- BVC-026: No hay carrito, checkout ni pasarela (negative)
-- BVC-027: No hay registro/login en sitio publico (negative)
-- BVC-028: No hay ofertas, descuentos, resenas ni blog (negative)
-- BVC-029: No hay chat en vivo, solo WhatsApp flotante (negative)
-- BVC-030: No hay listas planas en panel, siempre cards (negative)
-
-##### BVC Principios Testables
-- BVC-031: Titulos hero minimo 48px desktop, 32px mobile (computed-style)
-- BVC-032: Bloques color border-radius 20-30px, padding 60-80px (computed-style)
-- BVC-033: Hover cards shadow + scale(1.02) con transicion 0.3s (computed-style)
-- BVC-034: Sidebar panel ancho ~260-280px, fondo blanco, borde derecho (computed-style)
-- BVC-035: Header panel altura ~64-72px, fondo blanco, borde inferior (computed-style)
-- BVC-036: Fondo area contenido panel #F7F8FA con padding 24-32px (computed-style)
-- BVC-037: Cards resumen panel border-radius 12-16px y sombra (computed-style)
-- BVC-038: WhatsApp flotante en todas las paginas (visual)
-- BVC-039: Selector idioma ES/EN en header y footer (visual)
-- BVC-040: Footer fondo #005A85 con texto blanco (computed-style)
-
-#### NFR de Accesibilidad (asignados a Visual Checker)
-- NFR-021: WCAG 2.1 nivel AA
-- NFR-022: Imagenes con texto alternativo
-- NFR-024: Contrastes de color ratio minimo 4.5:1 texto normal, 3:1 texto grande
-- NFR-026: Area toque minima 44x44px en mobile
-
-#### NFR de Performance (asignados a Visual Checker)
-- NFR-001: Pagina inicio carga < 3s en 3G rapida (LCP)
-- NFR-003: Core Web Vitals (LCP < 2.5s, FID < 100ms, CLS < 0.1) en desktop
+#### (C) NFR Desbloqueados (5 criterios)
+- NFR-001: LCP < 3s en 3G rapida — medir con browser_evaluate
+- NFR-003: Core Web Vitals (LCP < 2.5s, FID < 100ms, CLS < 0.1 desktop)
 - NFR-005: Panel carga < 2s
+- NFR-021: WCAG 2.1 AA — verificacion completa ahora que todas las paginas son navegables
+- NFR-026: Tap targets >= 44x44px en mobile — medir en paginas ahora accesibles
 
 ### Instrucciones especificas
 - URL base: https://gray-field-02ba8410f.2.azurestaticapps.net
 - Breakpoints: mobile (375px), tablet (768px), desktop (1024px), desktop-lg (1280px), desktop-xl (1440px)
 - **Verificacion de cumplimiento de design-criteria.md es PRIORIDAD #1**
-- Usar `browser_evaluate` para verificar computed styles (colores, font-size, spacing, border-radius, shadows)
-- Verificar CSS custom properties en :root con `getComputedStyle(document.documentElement).getPropertyValue('--nombre')`
-- Verificar Google Fonts import de Inter
-- Para tokens (DC-001 a DC-029): verificar CSS custom properties y computed styles
-- Para layouts (DC-030 a DC-049): navegar a cada pantalla y verificar layout, dimensiones, colores
-- Para componentes (DC-050 a DC-079): verificar cada componente en su contexto, incluyendo estados
-- Para responsive (DC-080 a DC-099): verificar en 3 breakpoints minimo (375px, 768px, 1280px)
-- Para estados (DC-100 a DC-119): verificar skeleton, error, vacio, etc.
-- Para feedback visual (DC-120 a DC-149): verificar animaciones, transiciones, toasts, modales
-- Para BVC: verificar cada criterio del brief del cliente con severidad ALTA para fallos
-- Para NFR accesibilidad: verificar contraste WCAG, focus visible, tap targets >= 44px, ARIA labels
-- Para NFR performance: medir tiempos de carga con `browser_evaluate` (performance.timing), verificar DOM size
-- Grabar GIFs de: (1) Home completo con scroll, (2) Catalogo desktop vs mobile, (3) Panel dashboard, (4) Animaciones hover cards
-
-### Estrategia de priorizacion
-Dado el volumen (193 criterios), priorizar asi:
-1. **Tokens y custom properties** (DC-001 a DC-029) — verificacion sistematica con browser_evaluate
-2. **Layouts de pantallas principales** (DC-030 a DC-049) — verificar que cada pantalla existe y tiene la estructura correcta
-3. **Componentes core** (DC-050 a DC-079) — verificar propiedades visuales de cada componente
-4. **BVC computed-style** (BVC-004, BVC-031 a BVC-040) — verificacion automatizable
-5. **BVC visual y negative** (BVC-001 a BVC-030 restantes) — inspeccion visual
-6. **Responsive** (DC-080 a DC-099) — verificar en 3 breakpoints
-7. **Estados y feedback** (DC-100 a DC-149) — verificar estados menos comunes
-8. **NFR accesibilidad y performance** — verificacion final
+- Usar `browser_evaluate` para verificar computed styles
+- **IMPORTANTE — Generacion de .spec.ts**: Para TODOS los 64+7+5=76 criterios desbloqueados, generar archivos .spec.ts correspondientes. Los 9 criterios FALLA ya tienen tests de Ronda 1 que deben re-ejecutarse (no crear duplicados)
+- **Prioridad de verificacion en Ronda 2:**
+  1. Pre-flight check (deep links + consola)
+  2. Re-verificar 9 criterios FALLA (confirmar que fixes funcionan)
+  3. Layouts desbloqueados (DC-037, DC-040, DC-041, DC-044, DC-047, DC-048, DC-049) — paginas antes inaccesibles
+  4. Componentes desbloqueados (DC-053 a DC-079) — verificar propiedades visuales
+  5. BVC desbloqueados (BVC-013, BVC-014, BVC-018, BVC-019, BVC-021, BVC-022, BVC-023) — cliente-criticos
+  6. Estados de UI (DC-100 a DC-119) y feedback visual (DC-120 a DC-149)
+  7. Responsive desbloqueado (DC-083 a DC-098)
+  8. NFR accesibilidad y performance
+- **Grabar GIFs de:** (1) Home completo con scroll mostrando TODAS las secciones (hero con imagen, marcas, bloques, carrusel, CTA), (2) Panel dashboard + sidebar corregido, (3) Formulario producto con campos condicionales, (4) Toast notifications, (5) Animaciones hover/scroll
 
 ### BVC-xxx asignados (Brief Verification Criteria)
-| BVC-xxx | Criterio del Cliente | Tipo de verificacion |
-|---------|---------------------|---------------------|
-| BVC-001 | Diseno premium, no generico | subjective |
-| BVC-002 | Suficiente espacio en blanco | visual |
-| BVC-003 | Tipografia con jerarquia clara | visual |
-| BVC-004 | Colores corresponden a paleta | computed-style |
-| BVC-005 | Animaciones sutiles y profesionales | visual |
-| BVC-006 | Diseno funciona en mobile | visual |
-| BVC-007 | Equivalente Tuft & Paw correcto | visual |
-| BVC-008 | No precios/inventario/carrito | negative |
-| BVC-009 | Textos en espanol e ingles | visual |
-| BVC-010 | Nivel visual supera competencia | subjective |
-| BVC-011 | Pantalla con proposito unico | visual |
-| BVC-012 | Productos/marcas como cards | visual |
-| BVC-013 | Formularios con secciones | visual |
-| BVC-014 | Campos condicionales por categoria | visual |
-| BVC-015 | Espacio suficiente en panel | computed-style |
-| BVC-016 | Estados con badges color | visual |
-| BVC-017 | Iconos en navegacion y cards | visual |
-| BVC-018 | Destructivas con confirmacion | visual |
-| BVC-019 | Estados vacios disenados | visual |
-| BVC-020 | Herramienta a medida | subjective |
-| BVC-021 | Flujo Listado>Crear>Detalle | visual |
-| BVC-022 | Toggle Card/Table | visual |
-| BVC-023 | Toast notifications | visual |
-| BVC-024 | Panel misma calidad visual | subjective |
-| BVC-025 | No precios visibles | negative |
-| BVC-026 | No carrito/checkout | negative |
-| BVC-027 | No registro/login publico | negative |
-| BVC-028 | No ofertas/descuentos/resenas/blog | negative |
-| BVC-029 | No chat en vivo | negative |
-| BVC-030 | No listas planas en panel | negative |
-| BVC-031 | Titulos hero >= 48px desktop | computed-style |
-| BVC-032 | Bloques color radius 20-30px, padding 60-80px | computed-style |
-| BVC-033 | Hover cards shadow + scale(1.02) | computed-style |
-| BVC-034 | Sidebar 260-280px, fondo blanco | computed-style |
-| BVC-035 | Header panel 64-72px, fondo blanco | computed-style |
-| BVC-036 | Fondo contenido panel #F7F8FA | computed-style |
-| BVC-037 | Cards resumen radius 12-16px | computed-style |
-| BVC-038 | WhatsApp en todas las paginas | visual |
-| BVC-039 | Selector idioma en header y footer | visual |
-| BVC-040 | Footer fondo #005A85 texto blanco | computed-style |
+| BVC-xxx | Criterio del Cliente | Tipo de verificacion | Estado Ronda 1 |
+|---------|---------------------|---------------------|----------------|
+| BVC-013 | Formularios con secciones | visual | BLOQUEADO -> DESBLOQUEADO |
+| BVC-014 | Campos condicionales por categoria | visual | BLOQUEADO -> DESBLOQUEADO |
+| BVC-018 | Acciones destructivas con confirmacion | visual | BLOQUEADO -> DESBLOQUEADO |
+| BVC-019 | Estados vacios disenados | visual | BLOQUEADO -> DESBLOQUEADO |
+| BVC-021 | Flujo Listado>Crear>Detalle | visual | BLOQUEADO -> DESBLOQUEADO |
+| BVC-022 | Toggle Card/Table | visual | BLOQUEADO -> DESBLOQUEADO |
+| BVC-023 | Toast notifications | visual | BLOQUEADO -> DESBLOQUEADO |
 
 Brief compliance es QA gate CLIENT-SPECIFIED — severidad ALTA para fallos en cualquier BVC.
 
@@ -328,209 +213,193 @@ Brief compliance es QA gate CLIENT-SPECIFIED — severidad ALTA para fallos en c
 
 ## Asignacion: Flow Tester -> e2e/tests/flow/
 
-### Criterios asignados (78 UX criterios)
+### Criterios asignados (22 criterios: 10 FALLA re-verificar + 6 DESBLOQUEADOS + 6 PASA parcial/N/A re-evaluar)
 
-#### Navegacion y Routing (UX-001 a UX-012)
-- UX-001: Ruta raiz `/` redirige a `/es/` o `/en/` segun idioma navegador
-- UX-002: Todas las rutas publicas `/es/` navegables (home, catalogo, catalogo/farmacos, catalogo/alimentos, catalogo/equipos, catalogo/[cat]/[slug], marcas, marcas/[slug], nosotros, distribuidores, contacto, busqueda)
-- UX-003: Todas las rutas publicas `/en/` navegables (equivalentes en ingles)
-- UX-004: Todas las rutas del panel navegables (/admin/login, /admin/dashboard, /admin/productos, etc.)
-- UX-005: Header publico — logo enlazado, links navegacion, submenu Catalogo
-- UX-006: Header publico — busqueda + selector idioma funcional
-- UX-007: Header sticky, sin carrito/cuenta, mobile hamburger
-- UX-008: Footer completo — logo, nav, contacto, redes, idioma, copyright, mobile acordeon
-- UX-009: WhatsApp flotante en todas las paginas, contextual
-- UX-010: Sidebar panel — logo, modulos, submenus, item activo, badge mensajes
-- UX-011: Header panel — nombre seccion, busqueda, notificaciones, avatar dropdown
-- UX-012: 404 bilingue con ilustracion y botones
+El Flow Tester tiene 7 archivos .spec.ts de Ronda 1. En Ronda 2, se enfoca en:
+- (A) Re-verificar 10 criterios que FALLARON
+- (B) Testear 6 criterios BLOQUEADOS ahora desbloqueados
+- (C) Re-evaluar 6 criterios PASA (parcial) o N/A que ahora pueden verificarse completamente
 
-#### Flujos de Usuario (UX-013 a UX-020)
-- UX-013: Flujo CRITICO — Busqueda y solicitud de informacion (Home > lupa > buscar > seleccionar resultado > detalle producto > CTA solicitar info > contacto con pre-fill)
-- UX-014: Flujo CRITICO — Fabricante evalua HESA (Home EN > CTA Partner > Distribuidores > formulario)
-- UX-015: Flujo CRITICO shell — Admin crea producto (login > dashboard > sidebar Productos > crear > formulario 5 secciones > validacion > toast)
-- UX-016: Flujo IMPORTANTE — Navegacion catalogo con filtros (Home > bloque categoria > catalogo filtrado > filtros > detalle)
-- UX-017: Flujo IMPORTANTE shell — Admin mensajes kanban (dashboard > mensajes > kanban > detalle)
-- UX-018: Flujo COMPLEMENTARIO — Catalogo general con filtros adaptativos
-- UX-019: Flujo COMPLEMENTARIO shell — Admin gestiona Home (hero, productos destacados, marcas destacadas)
-- UX-020: Flujo COMPLEMENTARIO shell — Admin edita producto existente
+#### (A) Criterios FALLA en Ronda 1 — Re-verificar fix (10 criterios)
 
-#### Logica de Estados — Sitio Publico (UX-021 a UX-039)
-- UX-021: Home skeleton shimmer durante carga
-- UX-022: Home carrusel vacio — seccion oculta
-- UX-023: Home marcas vacias — seccion oculta
-- UX-024: Home error parcial — secciones independientes
-- UX-025: Catalogo general — skeleton, vacio, filtros sin resultados
-- UX-026: Catalogo por categoria — skeleton, vacio contextualizado
-- UX-027: Detalle producto — skeleton, error 404
-- UX-028: Detalle sin imagen — placeholder
-- UX-029: Detalle imagen unica — sin thumbnails
-- UX-030: Detalle sin ficha PDF — boton no renderizado
-- UX-031: Detalle campos vacios — secciones no renderizadas
-- UX-031b: Detalle storytelling — bloques opcionales, bilingue
-- UX-032: Detalle sin traduccion EN — badge "Traduccion no disponible"
-- UX-033: Listado marcas — skeleton, error
-- UX-034: Marca individual — skeleton, 404, sin productos
-- UX-035: Nosotros — skeleton, equipo sin miembros
-- UX-036: Distribuidores — skeleton, formulario enviado/error
-- UX-037: Contacto — skeleton, pre-fill, enviado/error
-- UX-038: Busqueda sin resultados — sugerencias
-- UX-039: Busqueda cargando — spinner
+| Criterio | Bug corregido | Que verificar |
+|----------|--------------|---------------|
+| UX-002 | BUG-001 | Deep linking rutas ES: /es/catalogo/farmacos, /es/marcas, /es/nosotros, etc. DEBEN renderizar la pagina correcta |
+| UX-003 | BUG-001 | Deep linking rutas EN: /en/catalog/pharmaceuticals, /en/brands, /en/about, etc. DEBEN funcionar |
+| UX-004 | BUG-001 | Deep linking rutas panel: /admin/productos, /admin/marcas, /admin/categorias, /admin/mensajes, etc. |
+| UX-013 | BUG-001 | Flujo CRITICO busqueda-contacto: ahora debe ser completable E2E (Home > lupa > buscar > resultado > detalle > CTA > contacto con pre-fill) |
+| UX-014 | BUG-008 | Flujo CRITICO fabricante: /es/distribuidores AHORA debe tener contenido 100% en espanol (no mezcla ES/EN) |
+| UX-016 | BUG-001 | Flujo catalogo filtrado: CTA bloque categoria AHORA debe navegar a /es/catalogo/farmacos correctamente |
+| UX-018 | BUG-001 | Catalogo filtros adaptativos: navegar a /es/catalogo, seleccionar categorias, verificar filtros cambian |
+| UX-012 | BUG-001 | 404 page: navegar a URL invalida (ej: /es/pagina-inexistente). AHORA debe mostrar pagina 404 estilizada (no home). Nota: en Ronda 1 era N/A por BUG-001, ahora debe ser verificable |
 
-#### Logica de Estados — Panel (UX-040 a UX-059)
-- UX-040: Login — default, cargando, error acceso, error red
-- UX-041: Dashboard — skeleton, error parcial
-- UX-042: Listado productos — skeleton, vacio, filtros sin resultados
-- UX-043: Formulario producto — vacio/cargado, validacion, guardando, exito, error
-- UX-044: Formulario producto — campos condicionales (fade al cambiar categoria)
-- UX-045: Formulario producto — cambios sin guardar (modal)
-- UX-046: Formulario producto — eliminar (modal confirmacion)
-- UX-047: Detalle producto solo lectura — skeleton, datos, sin PDF, sin imagen
-- UX-048: Listado marcas — skeleton, vacio
-- UX-049: Formulario marca — eliminar con advertencia productos asociados
-- UX-050: Categorias — skeleton, eliminar tag con/sin productos
-- UX-051: Gestion Hero — skeleton, subiendo imagen, guardado
-- UX-052: Productos destacados — skeleton, vacio, modal seleccion, reordenando
-- UX-053: Marcas destacadas — mismos estados que productos destacados
-- UX-054: Contenido estatico — skeleton, cargado, guardado
-- UX-055: Equipo liderazgo — skeleton, vacio, eliminar, reordenando
-- UX-056: Mensajes listado — skeleton kanban, vacio, drag-drop
-- UX-057: Detalle mensaje — skeleton, cambio estado, nota, eliminar
-- UX-058: Configuracion — skeleton, guardado, error
-- UX-059: Sesion expirada — modal no-dismissable
+**Nota sobre UX-012**: En Ronda 1 fue marcado N/A porque rutas invalidas redirigian a home por BUG-001. Ahora que el routing esta corregido, la pagina 404 debe ser verificable. Re-clasificar de N/A a testeable.
 
-#### Mock Data (UX-060 a UX-074b)
-- UX-060: 48+ productos mock en 3 categorias (~28 farmacos, ~14 alimentos, ~6 equipos)
-- UX-061: Cada producto con nombre ES/EN, marca, categoria, especie(s), presentaciones, etc.
-- UX-062: 12+ marcas mock con nombres realistas
-- UX-063: 6 productos destacados para carrusel
-- UX-064: 6-8 marcas destacadas para logos home
-- UX-065: 12+ mensajes mock en 3 estados y 5 tipos
-- UX-066: 6 miembros equipo liderazgo mock
-- UX-067: Dashboard mock con datos coherentes (47 productos, 3 mensajes nuevos, 12 marcas, 6 destacados)
-- UX-068: Home hero mock con imagen, textos ES/EN, CTAs
-- UX-069: Propuesta valor mock (37+ anos, 100% cobertura, 50+ colaboradores, 20+ marcas)
-- UX-070: Categorias mock con subcategorias editables
-- UX-071: Nosotros mock (historia, numeros, cobertura, politicas)
-- UX-072: Distribuidores mock (hero, beneficios, timeline, formulario)
-- UX-073: Contacto mock (telefono, correo, direccion, redes)
-- UX-074: Configuracion sitio mock
-- UX-074b: Storytelling mock (2+ productos con bloques)
+#### (B) Criterios DESBLOQUEADOS — Primera vez (6 criterios)
+
+| Criterio | Bloqueado por | Que testear ahora |
+|----------|--------------|-------------------|
+| UX-026 | BUG-001 | Catalogo por categoria: navegar a /es/catalogo/farmacos via deep link, verificar skeleton, vacio contextualizado, filtros sin resultados |
+| UX-034 | BUG-001 | Marca individual: navegar a /es/marcas/[slug], verificar skeleton, 404, sin productos. Nota: era N/A en Ronda 1, ahora es testeable |
+| UX-038 | BUG-001 | Busqueda sin resultados: navegar a /es/busqueda?q=zzzzz, verificar mensaje + sugerencias. Nota: era N/A en Ronda 1, ahora es testeable |
+| UX-039 | BUG-001 | Busqueda cargando: spinner centrado + "Buscando...". Nota: era N/A en Ronda 1, ahora es testeable |
+| UX-070 | BUG-001 | Categorias mock con subcategorias: navegar a panel /admin/categorias, verificar 3 categorias con subcategorias editables. Nota: era N/A en Ronda 1, ahora es testeable |
+
+**Nota**: UX-034, UX-038, UX-039 y UX-070 fueron N/A en Ronda 1 pero su N/A status was caused by BUG-001. Ahora que routing funciona, deben re-evaluarse.
+
+#### (C) Criterios PASA (parcial) a re-verificar completamente (6 criterios)
+
+| Criterio | Que faltaba en Ronda 1 | Que verificar ahora |
+|----------|----------------------|---------------------|
+| UX-015 | Admin crear producto: formulario no testeado E2E | Flujo COMPLETO: login > dashboard > sidebar Productos > crear > formulario 5 secciones > validacion > toast exito |
+| UX-025 | Catalogo: skeleton y paginacion parciales | Verificar skeleton completo (12 cards shimmer + filtros shimmer), estado vacio, filtros sin resultados |
+| UX-027 | Detalle producto: error 404 no verificable | Navegar a /es/catalogo/farmacos/producto-inexistente -> verificar 404 estilizada |
+| UX-063 | Carrusel muestra 4 en vez de 6 (BUG-009 corregido) | Verificar que AHORA muestra 6 productos destacados (puede ser 4 por slide + 2 en slide siguiente) |
+| UX-009 | WhatsApp: no verificado en paginas antes inaccesibles | Verificar en /es/nosotros, /es/marcas y paginas ahora accesibles |
+
+**Nota sobre UX-076**: Era PASA (parcial) en Ronda 1 pero fue asignado al Edge Case Tester, no al Flow Tester.
 
 ### Instrucciones especificas
 - URL base: https://gray-field-02ba8410f.2.azurestaticapps.net
+- **PRIORIDAD #1**: Pre-flight check de deep links antes de todo
 - **Flujos E2E prioritarios (GRABAR GIF OBLIGATORIO):**
-  1. UX-013: Busqueda y solicitud de informacion — flujo completo desde home hasta formulario contacto con pre-fill
-  2. UX-014: Fabricante evalua HESA — flujo completo en ingles desde home hasta envio formulario
-  3. UX-015: Admin crea producto — flujo completo desde login hasta toast de exito
-  4. UX-016: Navegacion catalogo con filtros — desde bloque categoria hasta detalle producto
-  5. UX-001 a UX-004: Verificar que TODAS las rutas son navegables (no 404, no pantalla en blanco)
-- **Verificacion de mock data:** contar productos en catalogo (>= 48), contar marcas (>= 12), verificar que datos son realistas (no Lorem ipsum)
-- **Verificacion de estados:** para cada pantalla, verificar que los estados de carga, vacio y error estan implementados
-- **Navegacion completa:** recorrer TODAS las rutas del mapa de navegacion, tanto sitio publico como panel
-- **Para el panel:** navegar directamente a /admin/ — en la demo puede no haber auth real
-- **Idioma:** verificar que las paginas tienen contenido en ES y EN al cambiar selector
+  1. UX-013 AHORA COMPLETABLE: Home > lupa > buscar "Amoxicilina" > seleccionar resultado > detalle > CTA "Solicitar informacion" > contacto con pre-fill. GIF del flujo completo
+  2. UX-014 AHORA EN ESPANOL: /es/distribuidores — verificar que TODO el contenido esta en espanol (headings, cards, formulario)
+  3. UX-015 COMPLETO: login > dashboard > Productos > crear > llenar formulario > validacion > toast
+  4. UX-016 AHORA FUNCIONAL: Home > bloque Farmacos > /es/catalogo/farmacos > filtros > detalle
+  5. UX-002/003/004: Recorrer TODAS las rutas del mapa de navegacion via deep link — capturar screenshot de cada pagina
+- **Generar .spec.ts** para los 6 criterios desbloqueados (UX-026, UX-034, UX-038, UX-039, UX-070, UX-012 re-eval)
+- **Verificar estados N/A de Ronda 1**: Muchos UX-040 a UX-059 fueron N/A en Ronda 1. Re-evaluar cuales son ahora testeables con routing corregido. Si un criterio que era N/A ahora es verificable, testearlo y reportar resultado (no dejar N/A si ahora se puede testear)
+- **Mock data coherencia**: Re-verificar UX-063 (carrusel 6 productos) y UX-060 (conteo 48 productos consistente entre panel y catalogo tras fix de BUG-013)
 
 ---
 
 ## Asignacion: Edge Case Tester -> e2e/tests/edge-case/
 
-### Criterios asignados (39 UX interacciones + 7 NFR = 46 criterios)
+### Criterios asignados (26 criterios: 3 FALLA re-verificar + 1 PASA parcial re-verificar + 13 DESBLOQUEADOS panel + 9 N/A re-evaluar)
 
-#### Interacciones Sitio Publico (UX-075 a UX-097)
-- UX-075: Search overlay — abrir con lupa, auto-focus, predicciones 3+ chars, keyboard nav, cierre Escape/clic fuera, mobile full-screen
-- UX-076: Filtros catalogo — actualizacion inmediata, pills "X", limpiar filtros, filtros adaptivos por categoria, paginacion resetea, URL query params
-- UX-077: Filtros mobile — drawer bottom sheet
-- UX-078: Paginacion — numeros + flechas, "Mostrando X de Y", scroll inicio, mantiene filtros, URL params
-- UX-079: Galeria producto — thumbnails click, zoom hover, lightbox click, swipe mobile
-- UX-080: Barra sticky — aparece al scroll via Intersection Observer, desktop top / mobile bottom, sin layout shift
-- UX-081: CTA "Solicitar informacion" — navega a /es/contacto?producto=[slug], pre-fill campo
-- UX-082: CTA WhatsApp — abre WhatsApp con mensaje contextual
-- UX-083: CTA "Descargar ficha tecnica" — solo visible si hay PDF
-- UX-084: Bloques categoria Home — CTA navega a catalogo filtrado
-- UX-085: Carrusel productos destacados — flechas, dots, clic card navega, swipe mobile
-- UX-086: Logos marcas Home — clic navega a marca, hover grayscale->color
-- UX-087: Propuesta valor — count-up animation al viewport
-- UX-088: Bloques categoria — fade-in al scroll
-- UX-089: CTA fabricantes Home — navega a distribuidores
-- UX-090: Formulario contacto — validacion inline blur, errores, submit disable+spinner, exito/error, honeypot
-- UX-091: Formulario fabricantes — validacion y envio identico contacto, campos especificos, checkbox terminos
-- UX-092: Selector idioma — cambia prefijo URL y slugs, sin recarga, permanece en pagina
-- UX-093: Timeline distribuidores — animacion secuencial scroll, horizontal/vertical
-- UX-094: Distribuidores CTA "Start the Conversation" — scroll suave al formulario
-- UX-095: Product cards hover — scale(1.02), sombra, boton "Ver producto" aparece, clic navega
-- UX-096: Brand cards hover — scale(1.02), sombra, clic navega
-- UX-097: Productos relacionados — 3-4 cards misma categoria, seccion oculta si unico, mobile carrusel
+El Edge Case Tester tiene 16 archivos .spec.ts de Ronda 1. En Ronda 2, se enfoca en:
+- (A) Re-verificar 3 criterios FALLA + 1 PASA parcial
+- (B) Testear 13 criterios de interacciones panel que estaban BLOQUEADOS
+- (C) Re-evaluar criterios N/A del panel que ahora pueden ser testeables
 
-#### Interacciones Panel (UX-098 a UX-113)
-- UX-098: Toggle Card/Table view productos — ambas vistas funcionales, mobile tabla stacked
-- UX-099: Menu 3 puntos cards producto — dropdown Editar/Ver en sitio/Duplicar/Desactivar/Eliminar
-- UX-100: Imagen drag-drop — zona dashed, drag-over, preview, reordenar, max 6
-- UX-101: PDF drag-drop — zona compacta, nombre, descargar, eliminar
-- UX-102: Tabs bilingues ES/EN — tabs pill en descripcion
-- UX-103: Seleccion categoria — 3 cards mini, borde 2px seleccionada, campos condicionales fade
-- UX-104: Formulario marca — logo drag-drop, pais dropdown, categorias multi-select
-- UX-105: Categorias tags — input inline, confirmar, eliminar, colapsables, toast
-- UX-106: Hero cambiar imagen — selector archivo, progress bar, preview actualiza
-- UX-107: Productos/Marcas destacados agregar — modal seleccion con busqueda y checkboxes
-- UX-108: Productos/Marcas destacados reordenar — drag-drop con handles, guardar orden, "X" remover
-- UX-109: Mensajes kanban drag-drop — cambio estado, card elevada, columna destino, conteos, toast
-- UX-110: Mensajes toggle kanban/tabla — filtros ambas vistas, CSV mock
-- UX-111: Detalle mensaje — notas internas, marcar atendido, eliminar con confirmacion
-- UX-112: Equipo liderazgo — drag-drop reorden, agregar, eliminar con confirmacion
-- UX-113: Dashboard cards clickables — navega a listado filtrado, link "Ver todos" mensajes
+#### (A) Criterios FALLA / PASA parcial en Ronda 1 — Re-verificar fix (4 criterios)
 
-#### CRM Tracking (UX-114, UX-115)
-- UX-114: CRM tracking sitio publico — evento open, page-view, scroll umbrales, heartbeat, CTA clicks, batching, sendBeacon
-- UX-115: CRM tracking NO en panel
+| Criterio | Bug corregido | Que verificar |
+|----------|--------------|---------------|
+| UX-090 | BUG-012 | Formulario contacto: AHORA al interactuar con combobox y submit, la pagina NO debe navegar inesperadamente. Validacion inline completa, envio funcional |
+| UX-091 | BUG-008 | Formulario fabricantes: /es/distribuidores AHORA debe tener formulario 100% en espanol (no mezcla EN/ES). Validacion completa |
+| UX-114 | BUG-002 | CRM tracking: AHORA la API no debe causar ERR_NAME_NOT_RESOLVED. Verificar que eventos se disparan sin errores en consola |
+| UX-076 | BUG-011 | Filtros catalogo: AHORA al seleccionar categoria "Farmacos", dropdown Marca debe filtrar mostrando solo marcas con productos en Farmacos (adaptativo). Verificar filtros cruzados |
 
-#### NFR de Seguridad (asignados a Edge Case Tester)
-- NFR-014: HTTPS en todas las comunicaciones
-- NFR-016: Formularios con proteccion anti-spam (honeypot)
-- NFR-017: Inputs sanitizados contra XSS e inyeccion
-- NFR-020: Headers de seguridad (CSP, X-Frame-Options, X-Content-Type-Options)
+#### (B) Criterios DESBLOQUEADOS — Interacciones Panel (13 criterios)
 
-#### NFR Responsive (asignados a Edge Case Tester)
-- NFR-031: Sitio publico mobile-first, impecable en todos los breakpoints
-- NFR-032: Panel desktop-first, funcional en tablet y mobile
+| Criterio | Bloqueado por | Que testear ahora |
+|----------|--------------|-------------------|
+| UX-100 | BUG-001/002 | Imagen drag-drop en formulario producto: zona dashed, drag-over, preview 120x120, reordenar, max 6 |
+| UX-101 | BUG-001/002 | PDF drag-drop: zona compacta, nombre archivo, descargar, eliminar |
+| UX-102 | BUG-001/002 | Tabs bilingues ES/EN: tabs pill en seccion descripcion, cambio entre ES/EN |
+| UX-103 | BUG-001/002 | Seleccion categoria: 3 cards mini, borde 2px en seleccionada, campos condicionales con fade |
+| UX-104 | BUG-001/002 | Formulario marca: logo drag-drop, pais dropdown con busqueda, categorias multi-select |
+| UX-105 | BUG-001/002 | Categorias tags: input inline + confirmar, eliminar tag, cards colapsables, toast |
+| UX-106 | BUG-001/002 | Hero cambiar imagen: selector archivo, progress bar mock, preview actualiza |
+| UX-107 | BUG-001/002 | Productos/Marcas destacados agregar: modal seleccion, busqueda, checkboxes |
+| UX-108 | BUG-001/002 | Productos/Marcas destacados reordenar: drag-handles, card elevada, guardar orden, "X" remover |
+| UX-109 | BUG-001/002 | Mensajes kanban drag-drop: cambio estado, card elevada, columna destino resaltada, conteos, toast |
+| UX-110 | BUG-001/002 | Mensajes toggle kanban/tabla: ambas vistas, filtros, CSV mock |
+| UX-111 | BUG-001/002 | Detalle mensaje: notas internas, marcar atendido, eliminar con confirmacion |
+| UX-112 | BUG-001/002 | Equipo liderazgo: drag-drop reorden, agregar formulario, eliminar con modal |
 
-#### NFR SEO (verificacion basica)
-- NFR-009: URLs semanticas y legibles
+#### (C) Criterios N/A de Ronda 1 a re-evaluar (9 criterios)
+
+Estos criterios fueron N/A en Ronda 1 porque dependian de interacciones del panel que no eran accesibles. Ahora que el routing funciona, re-evaluar si son testeables:
+
+| Criterio | Descripcion | Verificar si es testeable |
+|----------|------------|--------------------------|
+| UX-043 | Formulario producto E2E (crear/editar estados) | Navegar a /admin/productos/crear |
+| UX-044 | Campos condicionales (fade al cambiar categoria) | Interactuar con selector categoria |
+| UX-045 | Modal cambios sin guardar | Editar campo + intentar navegar |
+| UX-046 | Modal eliminar producto | Clic en eliminar desde listado |
+| UX-047 | Detalle producto solo lectura | Navegar a /admin/productos/:id |
+| UX-048 | Listado marcas panel | Navegar a /admin/marcas |
+| UX-049 | Formulario marca eliminar con advertencia | Intentar eliminar marca con productos |
+| UX-050 | Categorias panel (tags, eliminar con/sin productos) | Navegar a /admin/categorias |
+| UX-051 a UX-058 | Gestion Home, Contenido, Equipo, Configuracion | Navegar a rutas /admin/home/*, /admin/contenido/*, /admin/configuracion/* |
+
+**Nota**: Los criterios UX-043 a UX-058 fueron asignados al Flow Tester en Ronda 1 (marcados N/A). Para Ronda 2, los criterios de interaccion del panel que requieren drag-drop, modales y estados complejos se asignan al Edge Case Tester por especialidad. El Flow Tester re-evalua los de navegacion y estados basicos; el Edge Case Tester toma los que involucran interacciones complejas.
+
+**Criterios UX del panel para Edge Case Tester (subset de los N/A):**
+- UX-043: Formulario producto estados
+- UX-044: Campos condicionales
+- UX-045: Modal cambios sin guardar
+- UX-046: Modal eliminar producto
+- UX-049: Formulario marca eliminar con advertencia
 
 ### Instrucciones especificas
 - URL base: https://gray-field-02ba8410f.2.azurestaticapps.net
-- **Edge cases anticipados:**
-  1. **Search overlay**: buscar con 0, 1, 2 chars (no debe mostrar resultados), buscar con 3+ chars, buscar termino sin resultados, navegar resultados con teclado, cerrar con Escape
-  2. **Filtros**: aplicar multiples filtros simultaneos, limpiar uno a uno vs limpiar todos, cambiar pagina y verificar que filtros persisten, cambiar categoria y verificar filtros adaptativos
-  3. **Formularios**: enviar vacio, enviar con email invalido, enviar con campos obligatorios faltantes, verificar validacion inline post-blur, verificar honeypot fields presentes pero ocultos
-  4. **Responsive extremos**: verificar en 320px (dispositivo muy pequeno), 375px, 768px, 1024px, 1440px, 1920px
-  5. **Galeria producto**: navegar imagenes, zoom, lightbox, swipe en viewport mobile
-  6. **Sticky bar**: scroll lento y rapido, verificar sin layout shift
-  7. **Drag-drop panel**: intentar drag en kanban, reordenar productos destacados, subir imagenes
-  8. **Idioma**: cambiar idioma en cada pagina, verificar URL cambia, contenido cambia
-  9. **XSS en inputs**: inyectar `<script>alert('xss')</script>` en campos de formulario, verificar sanitizacion
-  10. **Headers seguridad**: verificar HTTPS, headers CSP/X-Frame-Options con curl o browser_evaluate
-  11. **CRM tracking**: verificar en consola del navegador que eventos se disparan (open, page-view)
-  12. **Links rotos**: verificar que todos los links internos navegan a paginas validas
-  13. **Boton atras navegador**: navegar catalogo > detalle > atras, filtros > detalle > atras
-- **Grabar GIFs de:** (1) filtros catalogo con pills, (2) galeria producto con zoom/lightbox, (3) formulario contacto con validacion, (4) kanban drag-drop, (5) search overlay
+- **PRIORIDAD #1**: Pre-flight check de deep links antes de todo
+- **PRIORIDAD #2**: Re-verificar BUG-012 fix (formulario contacto ya no navega inesperadamente)
+- **Generar .spec.ts** para TODOS los 13 criterios DESBLOQUEADOS del panel + 5 criterios N/A re-evaluados como testeables
+- **Verificar consola del navegador**: Confirmar que CRM tracking (BUG-002) ya no genera errores ERR_NAME_NOT_RESOLVED ni causa navegacion erratica
+- **Edge cases para criterios desbloqueados:**
+  1. **Drag-drop kanban (UX-109)**: arrastrar card entre las 3 columnas, verificar conteos se actualizan, toast con nombre
+  2. **Formulario producto (UX-100-103)**: subir imagenes, PDF, cambiar categoria y verificar campos condicionales fade
+  3. **Modales confirmacion (UX-045, UX-046, UX-049)**: verificar focus trap, animacion, botones funcionan
+  4. **Tags categorias (UX-105)**: agregar tag, eliminar tag sin productos (inmediato) vs con productos (modal)
+  5. **Reorden drag-drop (UX-108, UX-112)**: productos destacados, equipo liderazgo
+  6. **Formulario contacto fix (UX-090)**: llenar TODOS los campos, seleccionar opcion en combobox, click submit — NO debe navegar inesperadamente
+  7. **Filtros adaptivos fix (UX-076)**: seleccionar "Farmacos" -> dropdown Marca SOLO debe mostrar marcas de farmacos
+- **Grabar GIFs de:** (1) Formulario contacto completo sin navegacion erratica, (2) Kanban drag-drop, (3) Formulario producto con drag-drop imagenes, (4) Filtros adaptivos funcionando, (5) Modal de confirmacion de eliminacion
 
 ---
 
-## Regresion Automatizada (primera ronda — no aplica)
-- Resultado de `npx playwright test e2e/tests/`: N/A (primera ronda, no hay tests previos)
-- Criterios verificados por automatizacion: ninguno
-- Criterios con regresion detectada: ninguno
+## Regresion Automatizada
+- No hay regression-results.md para Ronda 2 (PM indica que no hay regresion automatizada en esta ronda)
+- Los 33 archivos .spec.ts generados en Ronda 1 serviran como baseline
+- Resultado de `npx playwright test e2e/tests/`: pendiente de ejecucion post-Ronda 2
+- Criterios verificados por automatizacion (PASA automatizado): 0 esta ronda
+- Criterios con regresion detectada: pendiente
 
-## Criterios Pendientes de Testing Manual
-- Total criterios que requieren sub-testers esta ronda: 317 (149 DC + 40 BVC + 117 UX + 11 NFR)
-- Criterios FALLARON en ronda anterior: 0 (primera ronda)
-- Criterios DESBLOQUEADOS: 0 (primera ronda)
-- Criterios nuevos sin test automatizado: todos (317)
+## Criterios que se mantienen de Ronda 1 (NO re-testear)
 
-### Distribucion resumen
+### PASA en Ronda 1 — 153 criterios (se mantienen)
+**Visual Checker (120):**
+DC-001 a DC-012, DC-014 a DC-029 (28), DC-033, DC-036, DC-038, DC-039, DC-042, DC-043, DC-045, DC-046 (8), DC-050, DC-051, DC-052, DC-054, DC-055, DC-056, DC-057, DC-059, DC-060, DC-062, DC-064, DC-067, DC-068, DC-071, DC-072, DC-073 (16), DC-080, DC-081, DC-082, DC-084, DC-085, DC-086, DC-088, DC-096, DC-099 (9), DC-105, DC-109, DC-112 (3), DC-136, DC-143, DC-149 (3), BVC-001 a BVC-012, BVC-015 a BVC-017, BVC-020, BVC-024 a BVC-040 (33), NFR-022, NFR-024 (2)
+
+**Flow Tester (50):**
+UX-001, UX-005 a UX-011 (7), UX-017 (1), UX-022 a UX-025*, UX-027*, UX-028, UX-030, UX-031b, UX-033, UX-035, UX-036, UX-037 (11), UX-040, UX-041, UX-042, UX-056 (4), UX-060 a UX-062, UX-063*, UX-064 a UX-069, UX-071 a UX-073, UX-074b (14)
+(*UX-025, UX-027, UX-063 eran PASA parcial -- se re-verifican en Ronda 2)
+
+**Edge Case Tester (28):**
+UX-075, UX-077 a UX-089, UX-092 a UX-097, UX-098, UX-099, UX-113, UX-115 (22), NFR-009, NFR-014, NFR-016, NFR-017, NFR-020, NFR-031, NFR-032 (7) -- Nota: UX-076 era PASA parcial, se re-verifica
+
+### N/A en Ronda 1 — 27 criterios
+Criterios que eran genuinamente N/A (estados no verificables en demo, funcionalidades que requieren backend real):
+UX-019, UX-020, UX-021, UX-024, UX-029, UX-031, UX-032, UX-047, UX-048, UX-050, UX-051, UX-052, UX-053, UX-054, UX-055, UX-057, UX-058, UX-059, UX-074
+
+**IMPORTANTE**: De estos 27 N/A, algunos DEBEN re-evaluarse ahora que el routing funciona:
+- UX-012 (404 page) -> ahora testeable, asignado al Flow Tester
+- UX-034 (marca individual) -> ahora testeable, asignado al Flow Tester
+- UX-038 (busqueda sin resultados) -> ahora testeable, asignado al Flow Tester
+- UX-039 (busqueda cargando) -> ahora testeable, asignado al Flow Tester
+- UX-070 (categorias panel) -> ahora testeable, asignado al Flow Tester
+- UX-043 a UX-046, UX-049 -> re-evaluar, asignados al Edge Case Tester
+- Los demas N/A (UX-019, UX-020, UX-021, UX-024, UX-029, UX-031, UX-032, UX-047, UX-048, UX-050 a UX-055, UX-057, UX-058, UX-059, UX-074) se mantienen N/A si siguen siendo estados no reproducibles en demo
+
+## Criterios Pendientes de Testing Manual (Ronda 2)
+- Total criterios que requieren sub-testers esta ronda: **125**
+- Criterios FALLARON en Ronda 1 (re-verificar fix): **22** (9 Visual + 10 Flow + 3 Edge Case)
+- Criterios DESBLOQUEADOS (antes bloqueados, ahora testeables — generar .spec.ts): **83** (64 DC/BVC Visual + 6 Flow + 13 Edge Case)
+- Criterios PASA parcial (re-verificar completo): **6** (5 Flow + 1 Edge Case)
+- Criterios N/A re-evaluados como testeables: **14** (5 Flow + 5 Edge Case + parcialmente del Visual via paginas ahora accesibles)
+- NFR desbloqueados: **5** (Visual Checker)
+
+### Distribucion resumen Ronda 2
 | Sub-tester | Criterios asignados | Categorias |
 |---|---|---|
-| Visual Checker | 193 | 149 DC + 40 BVC + 4 NFR accesibilidad/performance |
-| Flow Tester | 78 | UX-001 a UX-074b (navegacion, flujos, estados, mock data) |
-| Edge Case Tester | 46 | UX-075 a UX-115 (interacciones, edge cases) + 7 NFR seguridad/responsive/SEO |
-| **Total** | **317** | |
+| Visual Checker | 78 | 9 FALLA + 64 DC/BVC desbloqueados + 5 NFR desbloqueados |
+| Flow Tester | 22 | 10 FALLA + 5 PASA parcial + 1 N/A reclasificado + 6 DESBLOQUEADOS |
+| Edge Case Tester | 26 | 3 FALLA + 1 PASA parcial + 13 DESBLOQUEADOS + 9 N/A re-evaluar |
+| **Total** | **126** | |
+
+**Nota**: La diferencia de 125 vs 126 es porque UX-012 estaba contado como N/A pero se reclasifica como testeable.

@@ -5,7 +5,6 @@ import { HeaderComponent } from './shared/components/header/header.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { WhatsappFabComponent } from './shared/components/whatsapp-fab/whatsapp-fab.component';
 import { ToastContainerComponent } from './shared/components/toast/toast.component';
-import { CrmTrackingService } from './shared/services/crm-tracking.service';
 import { I18nService } from './shared/services/i18n.service';
 
 @Component({
@@ -18,7 +17,6 @@ import { I18nService } from './shared/services/i18n.service';
 export class AppComponent implements OnInit {
   isAdminRoute = false;
   private router = inject(Router);
-  private crmTracking = inject(CrmTrackingService);
   private i18n = inject(I18nService);
 
   ngOnInit(): void {
@@ -37,8 +35,5 @@ export class AppComponent implements OnInit {
     ).subscribe(event => {
       this.isAdminRoute = event.url.startsWith('/admin');
     });
-
-    // Initialize CRM tracking only for public site
-    this.crmTracking.initialize();
   }
 }

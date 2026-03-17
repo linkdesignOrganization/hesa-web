@@ -41,6 +41,31 @@ test.describe('UX-076: Catalog Filters Edge Cases', () => {
     await expect(page.locator('select').filter({ hasText: 'Familia' })).toBeVisible();
   });
 
+  test('Brand dropdown filters adaptively when Farmacos selected (BUG-011 fix)', async ({ page }) => {
+    await page.goto(`${BASE_URL}/es/catalogo`);
+    await page.getByText('Catalogo de Productos').waitFor({ state: 'visible' });
+
+    // Initially Marca dropdown should have all 13 brands
+    const marcaDropdown = page.locator('select').nth(1);
+    const allBrandOptions = await marcaDropdown.locator('option').allTextContents();
+    expect(allBrandOptions.length).toBeGreaterThanOrEqual(12); // 13 brands + "Marca" header
+
+    // Select Farmacos category
+    await page.getByRole('combobox').first().selectOption('Farmacos');
+
+    // Now Marca dropdown should show only pharma brands (5 brands + header)
+    const filteredBrandOptions = await marcaDropdown.locator('option').allTextContents();
+    expect(filteredBrandOptions).toContain('Zoetis');
+    expect(filteredBrandOptions).toContain('Virbac');
+    expect(filteredBrandOptions).toContain('Bayer Animal Health');
+    expect(filteredBrandOptions).toContain('Boehringer Ingelheim');
+    expect(filteredBrandOptions).toContain('MSD Animal Health');
+    // Equipment-only brands should NOT be present
+    expect(filteredBrandOptions).not.toContain('Heine');
+    expect(filteredBrandOptions).not.toContain('IMV Technologies');
+    expect(filteredBrandOptions).not.toContain('Welch Allyn');
+  });
+
   test('Pagination updates with filters', async ({ page }) => {
     await page.goto(`${BASE_URL}/es/catalogo`);
     await expect(page.getByText('Mostrando 1-12 de 47 productos')).toBeVisible();

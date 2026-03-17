@@ -154,4 +154,79 @@
     font-size: 14px;
     color: var(--neutral-400);
   }
+
+  // Loading state (UX-039)
+  &__loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 40px 20px;
+    color: var(--neutral-400);
+    font-size: 15px;
+    font-weight: var(--weight-medium);
+  }
+
+  &__spinner {
+    width: 28px;
+    height: 28px;
+    border: 3px solid var(--neutral-200);
+    border-top-color: var(--brand-primary);
+    border-radius: 50%;
+    animation: search-spin 0.7s linear infinite;
+  }
+
+  @keyframes search-spin {
+    to { transform: rotate(360deg); }
+  }
+
+  // No results state (UX-038)
+  &__no-results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 8px;
+    padding: 40px 20px;
+    background-color: var(--neutral-white);
+    border-radius: 12px;
+    box-shadow: var(--shadow-lg);
+    margin-top: 8px;
+  }
+
+  &__no-results-icon {
+    margin-bottom: 4px;
+  }
+
+  &__no-results-text {
+    font-size: 16px;
+    font-weight: var(--weight-semibold);
+    color: var(--neutral-900);
+  }
+
+  &__no-results-suggestion {
+    font-size: 14px;
+    color: var(--neutral-400);
+    margin-bottom: 8px;
+  }
+
+  &__catalog-link {
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  &__item--selected {
+    background-color: var(--neutral-50);
+  }
+
+  &__item-thumb--brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: var(--weight-bold);
+    color: var(--brand-primary);
+    background-color: rgba(0, 141, 201, 0.08);
+    border-radius: 8px;
+  }
 }

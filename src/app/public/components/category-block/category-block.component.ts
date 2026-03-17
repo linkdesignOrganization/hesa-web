@@ -1,6 +1,5 @@
-import { Component, input, inject } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { CrmTrackingService } from '../../../shared/services/crm-tracking.service';
 
 @Component({
   selector: 'app-category-block',
@@ -17,10 +16,4 @@ export class CategoryBlockComponent {
   benefits = input<string[]>([]);
   ctaText = input('');
   ctaLink = input('');
-
-  private crmTracking = inject(CrmTrackingService);
-
-  trackCTA(): void {
-    this.crmTracking.trackCTA(this.ctaText());
-  }
 }

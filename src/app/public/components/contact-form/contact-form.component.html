@@ -55,45 +55,53 @@
     } @else {
       <div class="form-grid">
         <div class="form-group">
-          <label class="form-label" for="company">Company Name <span class="required">*</span></label>
-          <input type="text" id="company" class="form-control" [class.form-control--error]="errors()['company']" placeholder="Your company name" [(ngModel)]="companyName" name="companyName" (blur)="validateField('company', companyName)" aria-required="true" maxlength="200">
+          <label class="form-label" for="company">{{ i18n.currentLang() === 'es' ? 'Nombre de la empresa' : 'Company Name' }} <span class="required">*</span></label>
+          <input type="text" id="company" class="form-control" [class.form-control--error]="errors()['company']" [placeholder]="i18n.currentLang() === 'es' ? 'Nombre de su empresa' : 'Your company name'" [(ngModel)]="companyName" name="companyName" (blur)="validateField('company', companyName)" aria-required="true" maxlength="200">
           @if (errors()['company']) { <span class="form-error">{{ errors()['company'] }}</span> }
         </div>
         <div class="form-group">
-          <label class="form-label" for="country">Country of Origin <span class="required">*</span></label>
+          <label class="form-label" for="country">{{ i18n.currentLang() === 'es' ? 'Pais de origen' : 'Country of Origin' }} <span class="required">*</span></label>
           <select id="country" class="form-select" [class.form-control--error]="errors()['country']" [(ngModel)]="country" name="country" (blur)="validateField('country', country)" aria-required="true">
-            <option value="" disabled>Select a country</option>
-            <option>United States</option><option>Mexico</option><option>Brazil</option><option>Germany</option><option>France</option><option>China</option><option>Japan</option><option>India</option><option>Other</option>
+            <option value="" disabled>{{ i18n.currentLang() === 'es' ? 'Seleccione un pais' : 'Select a country' }}</option>
+            <option value="United States">{{ i18n.currentLang() === 'es' ? 'Estados Unidos' : 'United States' }}</option>
+            <option value="Mexico">{{ i18n.currentLang() === 'es' ? 'Mexico' : 'Mexico' }}</option>
+            <option value="Brazil">{{ i18n.currentLang() === 'es' ? 'Brasil' : 'Brazil' }}</option>
+            <option value="Germany">{{ i18n.currentLang() === 'es' ? 'Alemania' : 'Germany' }}</option>
+            <option value="France">{{ i18n.currentLang() === 'es' ? 'Francia' : 'France' }}</option>
+            <option value="China">{{ i18n.currentLang() === 'es' ? 'China' : 'China' }}</option>
+            <option value="Japan">{{ i18n.currentLang() === 'es' ? 'Japon' : 'Japan' }}</option>
+            <option value="India">{{ i18n.currentLang() === 'es' ? 'India' : 'India' }}</option>
+            <option value="Other">{{ i18n.currentLang() === 'es' ? 'Otro' : 'Other' }}</option>
           </select>
           @if (errors()['country']) { <span class="form-error">{{ errors()['country'] }}</span> }
         </div>
         <div class="form-group">
-          <label class="form-label" for="contact-name">Contact Name <span class="required">*</span></label>
-          <input type="text" id="contact-name" class="form-control" [class.form-control--error]="errors()['contactName']" placeholder="Your full name" [(ngModel)]="contactName" name="contactName" (blur)="validateField('contactName', contactName)" aria-required="true" maxlength="100">
+          <label class="form-label" for="contact-name">{{ i18n.currentLang() === 'es' ? 'Nombre de contacto' : 'Contact Name' }} <span class="required">*</span></label>
+          <input type="text" id="contact-name" class="form-control" [class.form-control--error]="errors()['contactName']" [placeholder]="i18n.currentLang() === 'es' ? 'Su nombre completo' : 'Your full name'" [(ngModel)]="contactName" name="contactName" (blur)="validateField('contactName', contactName)" aria-required="true" maxlength="100">
           @if (errors()['contactName']) { <span class="form-error">{{ errors()['contactName'] }}</span> }
         </div>
         <div class="form-group">
-          <label class="form-label" for="contact-email">Email <span class="required">*</span></label>
-          <input type="email" id="contact-email" class="form-control" [class.form-control--error]="errors()['contactEmail']" placeholder="email@company.com" [(ngModel)]="contactEmail" name="contactEmail" (blur)="validateField('contactEmail', contactEmail)" aria-required="true" maxlength="254">
+          <label class="form-label" for="contact-email">{{ i18n.currentLang() === 'es' ? 'Correo electronico' : 'Email' }} <span class="required">*</span></label>
+          <input type="email" id="contact-email" class="form-control" [class.form-control--error]="errors()['contactEmail']" placeholder="email@empresa.com" [(ngModel)]="contactEmail" name="contactEmail" (blur)="validateField('contactEmail', contactEmail)" aria-required="true" maxlength="254">
           @if (errors()['contactEmail']) { <span class="form-error">{{ errors()['contactEmail'] }}</span> }
         </div>
         <div class="form-group">
-          <label class="form-label" for="contact-phone">Phone</label>
+          <label class="form-label" for="contact-phone">{{ i18n.currentLang() === 'es' ? 'Telefono' : 'Phone' }}</label>
           <input type="tel" id="contact-phone" class="form-control" placeholder="+1 000-000-0000" [(ngModel)]="contactPhone" name="contactPhone" maxlength="20">
         </div>
         <div class="form-group">
-          <label class="form-label" for="product-types">Product Types</label>
-          <input type="text" id="product-types" class="form-control" placeholder="Pharmaceuticals, food, equipment..." [(ngModel)]="productTypes" name="productTypes" maxlength="200">
+          <label class="form-label" for="product-types">{{ i18n.currentLang() === 'es' ? 'Tipos de producto' : 'Product Types' }}</label>
+          <input type="text" id="product-types" class="form-control" [placeholder]="i18n.currentLang() === 'es' ? 'Farmacos, alimentos, equipos...' : 'Pharmaceuticals, food, equipment...'" [(ngModel)]="productTypes" name="productTypes" maxlength="200">
         </div>
         <div class="form-group form-group-full">
-          <label class="form-label" for="mfr-message">Message <span class="required">*</span></label>
-          <textarea id="mfr-message" class="form-control" [class.form-control--error]="errors()['mfrMessage']" placeholder="Tell us about your company and products..." [(ngModel)]="mfrMessage" name="mfrMessage" (blur)="validateField('mfrMessage', mfrMessage)" aria-required="true" maxlength="2000"></textarea>
+          <label class="form-label" for="mfr-message">{{ i18n.currentLang() === 'es' ? 'Mensaje' : 'Message' }} <span class="required">*</span></label>
+          <textarea id="mfr-message" class="form-control" [class.form-control--error]="errors()['mfrMessage']" [placeholder]="i18n.currentLang() === 'es' ? 'Cuentenos sobre su empresa y productos...' : 'Tell us about your company and products...'" [(ngModel)]="mfrMessage" name="mfrMessage" (blur)="validateField('mfrMessage', mfrMessage)" aria-required="true" maxlength="2000"></textarea>
           @if (errors()['mfrMessage']) { <span class="form-error">{{ errors()['mfrMessage'] }}</span> }
         </div>
         <div class="form-group form-group-full">
           <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
             <input type="checkbox" [(ngModel)]="termsAccepted" name="termsAccepted">
-            <span style="font-size: 13px;">I accept the terms and conditions</span>
+            <span style="font-size: 13px;">{{ i18n.currentLang() === 'es' ? 'Acepto los terminos y condiciones' : 'I accept the terms and conditions' }}</span>
           </label>
         </div>
       </div>

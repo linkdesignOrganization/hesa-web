@@ -21,8 +21,8 @@
       <h1 class="hero__title">{{ i18n.t(hero.headline) }}</h1>
       <p class="hero__subtitle">{{ i18n.t(hero.subtitle) }}</p>
       <div class="hero__ctas">
-        <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo' : 'catalog')" class="btn btn-primary btn-lg" (click)="trackCTA('Explorar catalogo')">{{ i18n.t(hero.ctaPrimary) }}</a>
-        <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'distribuidores' : 'distributors')" class="btn btn-outline-white btn-lg" (click)="trackCTA('Distribuya con nosotros')">{{ i18n.t(hero.ctaSecondary) }}</a>
+        <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo' : 'catalog')" class="btn btn-primary btn-lg">{{ i18n.t(hero.ctaPrimary) }}</a>
+        <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'distribuidores' : 'distributors')" class="btn btn-outline-white btn-lg">{{ i18n.t(hero.ctaSecondary) }}</a>
       </div>
     </div>
   }
@@ -108,15 +108,15 @@
         <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo' : 'catalog')" class="featured-header__link">{{ i18n.currentLang() === 'es' ? 'Ver todos' : 'View all' }}</a>
       </div>
       <div class="carousel-wrapper">
-        <button class="carousel-arrow carousel-arrow--prev" (click)="prevSlide()" aria-label="Productos anteriores">
+        <button class="carousel-arrow carousel-arrow--prev" [class.carousel-arrow--disabled]="currentSlide() === 0" (click)="prevSlide()" aria-label="Productos anteriores">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
         </button>
-        <div class="featured-grid">
-          @for (product of getVisibleProducts(); track product.id) {
+        <div class="featured-grid featured-grid--carousel">
+          @for (product of featuredProducts(); track product.id) {
             <app-product-card [product]="product" variant="carousel" />
           }
         </div>
-        <button class="carousel-arrow carousel-arrow--next" (click)="nextSlide()" aria-label="Productos siguientes">
+        <button class="carousel-arrow carousel-arrow--next" [class.carousel-arrow--disabled]="currentSlide() >= carouselDots.length - 1" (click)="nextSlide()" aria-label="Productos siguientes">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
         </button>
       </div>

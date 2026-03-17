@@ -4,7 +4,6 @@ import { BreadcrumbComponent } from '../../../shared/components/breadcrumb/bread
 import { ProductCardComponent } from '../../components/product-card/product-card.component';
 import { MockDataService, Product } from '../../../shared/services/mock-data.service';
 import { I18nService } from '../../../shared/services/i18n.service';
-import { CrmTrackingService } from '../../../shared/services/crm-tracking.service';
 import { getCategorySlug, getCategoryLabel, getCatalogSegment, getHomeLabel, getContactSegment } from '../../../shared/utils/route-helpers';
 
 @Component({
@@ -18,7 +17,6 @@ export class ProductDetailComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private mockData = inject(MockDataService);
   i18n = inject(I18nService);
-  private crmTracking = inject(CrmTrackingService);
 
   product = signal<Product | null>(null);
   relatedProducts = signal<Product[]>([]);
@@ -87,7 +85,4 @@ export class ProductDetailComponent implements OnInit {
     }
   }
 
-  trackCTA(label: string): void {
-    this.crmTracking.trackCTA(label);
-  }
 }
