@@ -1,0 +1,81 @@
+<!-- ADMIN ACTIVITY LOG — Dashly X -->
+<div class="activity-page">
+  <div class="adm-page-header">
+    <div class="adm-page-header__left">
+      <h1 class="adm-page-header__title">Historial de Actividad</h1>
+      <p class="adm-page-header__subtitle">Registro completo de acciones realizadas en el panel</p>
+    </div>
+    <a routerLink="/admin/dashboard" class="adm-btn adm-btn--secondary adm-btn--sm">
+      <span class="material-symbols-outlined">arrow_back</span>
+      Volver al dashboard
+    </a>
+  </div>
+
+  @if (loading()) {
+    <div class="adm-card activity-page__card">
+      @for (i of [1,2,3,4,5,6,7]; track i) {
+        <div class="activity-page__item-skeleton">
+          <div class="adm-skeleton" style="width: 8px; height: 8px; border-radius: 50%;"></div>
+          <div class="adm-skeleton" style="flex: 1; height: 14px;"></div>
+          <div class="adm-skeleton" style="width: 80px; height: 12px;"></div>
+        </div>
+      }
+    </div>
+  } @else if (error()) {
+    <div class="adm-card activity-page__error" role="alert">
+      <div class="adm-empty">
+        <div class="adm-empty__icon adm-empty__icon--danger">
+          <span class="material-symbols-outlined">error</span>
+        </div>
+        <p class="adm-empty__title">Error al cargar el historial</p>
+        <button class="adm-btn adm-btn--secondary" (click)="loadActivity()">
+          <span class="material-symbols-outlined">refresh</span>
+          Reintentar
+        </button>
+      </div>
+    </div>
+  } @else if (activities().length === 0) {
+    <div class="adm-card activity-page__empty">
+      <div class="adm-empty">
+        <div class="adm-empty__icon">
+          <span class="material-symbols-outlined">schedule</span>
+        </div>
+        <p class="adm-empty__title">No hay actividad registrada</p>
+      </div>
+    </div>
+  } @else {
+    <div class="adm-card activity-page__card">
+      @for (activity of activities(); track activity._id) {
+        <div class="activity-page__item">
+          <div class="activity-page__dot"
+            [class.activity-page__dot--create]="activity.action === 'create'"
+            [class.activity-page__dot--delete]="activity.action === 'delete'"
+            [class.activity-page__dot--update]="activity.action === 'update'">
+          </div>
+          <div class="activity-page__item-content">
+            <p class="activity-page__item-text">{{ getActivityText(activity) }}</p>
+            @if (activity.user) {
+              <span class="activity-page__item-user">por {{ activity.user }}</span>
+            }
+          </div>
+          <span class="activity-page__item-date">{{ getRelativeDate(activity.createdAt) }}</span>
+        </div>
+      }
+    </div>
+
+    <!-- Pagination -->
+    @if (totalPages() > 1) {
+      <div class="adm-pagination">
+        <button class="adm-btn adm-btn--secondary adm-btn--sm" [disabled]="currentPage() <= 1" (click)="goToPage(currentPage() - 1)">
+          <span class="material-symbols-outlined">chevron_left</span>
+          Anterior
+        </button>
+        <span class="adm-pagination__info">Pagina {{ currentPage() }} de {{ totalPages() }}</span>
+        <button class="adm-btn adm-btn--secondary adm-btn--sm" [disabled]="currentPage() >= totalPages()" (click)="goToPage(currentPage() + 1)">
+          Siguiente
+          <span class="material-symbols-outlined">chevron_right</span>
+        </button>
+      </div>
+    }
+  }
+</div>

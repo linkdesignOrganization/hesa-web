@@ -1,0 +1,93 @@
+// ============================================================
+// Admin Skeleton — Dashly X loading states
+// ============================================================
+
+@keyframes adm-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes adm-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes adm-fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes adm-modalIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes adm-slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes adm-badgePulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+// ── Skeleton block ──
+.adm-skeleton {
+  background: linear-gradient(90deg, #F0F1F5 25%, #E4E6ED 37%, #F0F1F5 63%);
+  background-size: 200% 100%;
+  animation: adm-shimmer 1.5s ease infinite;
+  border-radius: var(--adm-radius-sm);
+
+  &--circle {
+    border-radius: 50%;
+  }
+
+  &--pill {
+    border-radius: var(--adm-radius-pill);
+  }
+
+  &--card {
+    border-radius: var(--adm-radius-card);
+  }
+}
+
+// ── Spinner ──
+.adm-spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--adm-border);
+  border-top-color: var(--adm-primary);
+  border-radius: 50%;
+  animation: adm-spin 0.7s linear infinite;
+
+  &--sm {
+    width: 16px;
+    height: 16px;
+    border-width: 2px;
+  }
+
+  &--lg {
+    width: 32px;
+    height: 32px;
+    border-width: 3px;
+  }
+
+  &--white {
+    border-color: rgba(255, 255, 255, 0.3);
+    border-top-color: #fff;
+  }
+}

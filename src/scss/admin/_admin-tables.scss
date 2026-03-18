@@ -1,0 +1,161 @@
+// ============================================================
+// Admin Tables — Dashly X clean data tables
+// ============================================================
+
+.adm-table-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.adm-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--adm-font);
+
+  th {
+    text-align: left;
+    font-size: var(--adm-badge-size);
+    font-weight: 600;
+    color: var(--adm-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--adm-divider);
+    white-space: nowrap;
+  }
+
+  td {
+    padding: 14px 16px;
+    font-size: var(--adm-body-size);
+    color: var(--adm-text-heading);
+    border-bottom: 1px solid var(--adm-divider);
+    vertical-align: middle;
+  }
+
+  tbody tr {
+    transition: background var(--adm-transition-fast);
+
+    &:hover {
+      background: var(--adm-bg-page);
+    }
+
+    &:last-child td {
+      border-bottom: none;
+    }
+  }
+
+  // Cell with product/brand info
+  &__product-cell {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  &__thumb {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--adm-radius-sm);
+    object-fit: cover;
+    flex-shrink: 0;
+    background: var(--adm-bg-page);
+  }
+
+  &__name {
+    font-weight: 500;
+    color: var(--adm-text-heading);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
+  }
+
+  &__subtitle {
+    font-size: var(--adm-small-size);
+    color: var(--adm-text-body);
+  }
+
+  // Actions cell
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    justify-content: flex-end;
+  }
+
+  &__action-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: var(--adm-radius-sm);
+    border: none;
+    background: transparent;
+    color: var(--adm-text-body);
+    cursor: pointer;
+    transition: all var(--adm-transition-fast);
+
+    &:hover {
+      background: var(--adm-bg-page);
+      color: var(--adm-text-heading);
+    }
+
+    &--danger:hover {
+      background: var(--adm-danger-soft);
+      color: var(--adm-danger);
+    }
+
+    .material-symbols-outlined {
+      font-size: 18px;
+    }
+  }
+}
+
+// ── Mobile stacked card alternative ──
+.adm-table-mobile {
+  display: none;
+
+  @media (max-width: 767px) {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  &__item {
+    background: var(--adm-bg-card);
+    border: 1px solid var(--adm-border);
+    border-radius: var(--adm-radius-card);
+    padding: 16px;
+  }
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 0;
+
+    &:not(:last-child) {
+      border-bottom: 1px solid var(--adm-divider);
+      padding-bottom: 8px;
+      margin-bottom: 8px;
+    }
+  }
+
+  &__label {
+    font-size: var(--adm-small-size);
+    color: var(--adm-text-muted);
+  }
+
+  &__value {
+    font-size: var(--adm-body-size);
+    color: var(--adm-text-heading);
+    font-weight: 500;
+  }
+}
+
+// Desktop table hidden on mobile
+.adm-table-desktop {
+  @media (max-width: 767px) {
+    display: none;
+  }
+}

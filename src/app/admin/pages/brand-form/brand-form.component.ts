@@ -1,5 +1,5 @@
 import { Component, signal, inject, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, RouterLink } from '@angular/router';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HasUnsavedChanges } from '../../../shared/guards/unsaved-changes.guard';
 import { ApiService, ApiBrand } from '../../../shared/services/api.service';
@@ -8,146 +8,9 @@ import { ToastService } from '../../../shared/services/toast.service';
 @Component({
   selector: 'app-admin-brand-form',
   standalone: true,
-  imports: [ReactiveFormsModule],
-  template: `
-    <div class="product-form-page">
-      <div class="product-form-page__header">
-        <h1>{{ isEditing() ? 'Editar Marca' : 'Crear Marca' }}</h1>
-        <div class="product-form-page__actions">
-          <button class="btn btn-outline-gray" (click)="onCancel()">Cancelar</button>
-          <button class="btn btn-primary" [disabled]="saving()" (click)="onSubmit()">
-            {{ saving() ? 'Guardando...' : (isEditing() ? 'Guardar cambios' : 'Guardar marca') }}
-          </button>
-        </div>
-      </div>
-
-      <form class="product-form" [formGroup]="brandForm" (ngSubmit)="onSubmit()">
-        <div class="product-form__section">
-          <h2 class="product-form__section-title">Informacion de la Marca</h2>
-          <div class="form-grid">
-            <div class="form-group">
-              <label class="form-label" for="brand-name">Nombre <span class="required">*</span></label>
-              <input type="text" id="brand-name" class="form-control" [class.is-invalid]="isFieldInvalid('name')" formControlName="name" placeholder="Nombre de la marca" (blur)="onFieldBlur('name')">
-              @if (isFieldInvalid('name')) {
-                <div class="form-error" role="alert">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                  {{ getFieldError('name') }}
-                </div>
-              }
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="brand-country">Pais de origen <span class="required">*</span></label>
-              <select id="brand-country" class="form-select" [class.is-invalid]="isFieldInvalid('country')" formControlName="country" (blur)="onFieldBlur('country')">
-                <option value="" disabled>Seleccionar pais</option>
-                <option value="Estados Unidos">Estados Unidos</option>
-                <option value="Canada">Canada</option>
-                <option value="Alemania">Alemania</option>
-                <option value="Francia">Francia</option>
-                <option value="Suiza">Suiza</option>
-                <option value="Holanda">Holanda</option>
-                <option value="Italia">Italia</option>
-                <option value="Espana">Espana</option>
-                <option value="Reino Unido">Reino Unido</option>
-                <option value="Brasil">Brasil</option>
-                <option value="Argentina">Argentina</option>
-                <option value="Mexico">Mexico</option>
-                <option value="Colombia">Colombia</option>
-                <option value="Costa Rica">Costa Rica</option>
-                <option value="China">China</option>
-                <option value="India">India</option>
-                <option value="Corea del Sur">Corea del Sur</option>
-                <option value="Japon">Japon</option>
-                <option value="Australia">Australia</option>
-                <option value="Otro">Otro</option>
-              </select>
-              @if (isFieldInvalid('country')) {
-                <div class="form-error" role="alert">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                  {{ getFieldError('country') }}
-                </div>
-              }
-            </div>
-            <div class="form-group form-group-full">
-              <label class="form-label">Categorias</label>
-              <div style="display: flex; gap: 16px;">
-                <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
-                  <input type="checkbox" [checked]="categoryChecked('farmacos')" (change)="toggleCategory('farmacos')"> Farmacos
-                </label>
-                <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
-                  <input type="checkbox" [checked]="categoryChecked('alimentos')" (change)="toggleCategory('alimentos')"> Alimentos
-                </label>
-                <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
-                  <input type="checkbox" [checked]="categoryChecked('equipos')" (change)="toggleCategory('equipos')"> Equipos
-                </label>
-              </div>
-            </div>
-            <div class="form-group form-group-full">
-              <label class="form-label" for="brand-desc-es">Descripcion (ES)</label>
-              <textarea id="brand-desc-es" class="form-control" formControlName="descriptionEs" placeholder="Descripcion de la marca..." rows="3"></textarea>
-            </div>
-            <div class="form-group form-group-full">
-              <label class="form-label" for="brand-desc-en">Descripcion (EN)</label>
-              <textarea id="brand-desc-en" class="form-control" formControlName="descriptionEn" placeholder="Brand description..." rows="3"></textarea>
-            </div>
-          </div>
-        </div>
-
-        <hr class="product-form__divider">
-
-        <div class="product-form__section">
-          <h2 class="product-form__section-title">Logo</h2>
-          <div class="image-uploader">
-            @if (logoPreview()) {
-              <div class="image-uploader__preview">
-                <img [src]="logoPreview()!" alt="Logo preview" style="max-width: 200px; max-height: 200px; object-fit: contain; border-radius: 8px; border: 1px solid var(--neutral-200);">
-                <div class="image-uploader__preview-actions" style="margin-top: 12px; display: flex; gap: 8px;">
-                  <button type="button" class="btn btn-outline-gray btn-sm" (click)="logoInput.click()">Cambiar logo</button>
-                  <button type="button" class="btn btn-outline-gray btn-sm" style="color: var(--semantic-danger);" (click)="removeLogo()">Eliminar</button>
-                </div>
-              </div>
-            } @else {
-              <div class="image-uploader__dropzone" (click)="logoInput.click()" (dragover)="$event.preventDefault()" (drop)="onLogoDrop($event)">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--neutral-400)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-                <p>Arrastra el logo aqui o <span>selecciona archivo</span></p>
-                <span class="image-uploader__hint">PNG, JPG hasta 5MB</span>
-              </div>
-            }
-            <input #logoInput type="file" accept="image/png,image/jpeg,image/webp" style="display: none;" (change)="onLogoSelected($event)">
-            @if (uploadingLogo()) {
-              <div class="image-uploader__progress">
-                <div class="image-uploader__progress-bar"><div class="image-uploader__progress-fill" style="width: 100%;"></div></div>
-                <span class="image-uploader__progress-text">Subiendo logo...</span>
-              </div>
-            }
-          </div>
-        </div>
-      </form>
-
-      <!-- Mobile sticky actions -->
-      <div class="product-form-page__sticky-actions">
-        <button class="btn btn-outline-gray btn-block" (click)="onCancel()">Cancelar</button>
-        <button class="btn btn-primary btn-block" [disabled]="saving()" (click)="onSubmit()">{{ saving() ? 'Guardando...' : 'Guardar' }}</button>
-      </div>
-    </div>
-
-    <!-- Unsaved Changes Modal -->
-    @if (showUnsavedModal()) {
-      <div class="modal-backdrop" (click)="stayEditing()">
-        <div class="modal-dialog" (click)="$event.stopPropagation()">
-          <div class="modal-dialog__icon" aria-hidden="true">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--semantic-warning)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-          </div>
-          <h3 class="modal-dialog__title">Tienes cambios sin guardar</h3>
-          <p class="modal-dialog__desc">Si sales ahora, perderas los cambios realizados en esta marca.</p>
-          <div class="modal-dialog__actions">
-            <button class="btn btn-outline-gray" (click)="confirmLeave()">Salir sin guardar</button>
-            <button class="btn btn-primary" (click)="stayEditing()">Seguir editando</button>
-          </div>
-        </div>
-      </div>
-    }
-  `,
-  styleUrl: '../product-form/product-form.component.scss'
+  imports: [ReactiveFormsModule, RouterLink],
+  templateUrl: './brand-form.component.html',
+  styleUrl: './brand-form.component.scss'
 })
 export class AdminBrandFormComponent implements HasUnsavedChanges, OnInit {
   private router = inject(Router);

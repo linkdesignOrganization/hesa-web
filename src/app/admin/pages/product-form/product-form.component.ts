@@ -1,5 +1,5 @@
 import { Component, signal, inject, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, RouterLink } from '@angular/router';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HasUnsavedChanges } from '../../../shared/guards/unsaved-changes.guard';
 import { ApiService, ApiProduct, ApiBrand } from '../../../shared/services/api.service';
@@ -8,7 +8,7 @@ import { ToastService } from '../../../shared/services/toast.service';
 @Component({
   selector: 'app-admin-product-form',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './product-form.component.html',
   styleUrl: './product-form.component.scss'
 })

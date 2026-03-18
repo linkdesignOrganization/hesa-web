@@ -1,0 +1,169 @@
+<!-- ADMIN BRAND FORM — Dashly X restyled -->
+<div class="bf-page">
+
+  <!-- Page Header -->
+  <div class="adm-page-header">
+    <div class="adm-page-header__left">
+      <a routerLink="/admin/marcas" class="adm-back-link">
+        <span class="material-symbols-outlined">arrow_back</span> Marcas
+      </a>
+      <h1 class="adm-page-header__title">{{ isEditing() ? 'Editar Marca' : 'Crear Marca' }}</h1>
+    </div>
+    <div class="bf-page__actions">
+      <button type="button" class="adm-btn adm-btn--secondary" (click)="onCancel()">Cancelar</button>
+      <button type="button" class="adm-btn adm-btn--primary" [disabled]="saving()" (click)="onSubmit()">
+        <span class="material-symbols-outlined">save</span>
+        {{ saving() ? 'Guardando...' : (isEditing() ? 'Guardar cambios' : 'Guardar marca') }}
+      </button>
+    </div>
+  </div>
+
+  <form class="adm-card bf-form" [formGroup]="brandForm" (ngSubmit)="onSubmit()">
+
+    <!-- Section: Informacion de la Marca -->
+    <div class="adm-form-section">
+      <h2 class="adm-form-section__title">Informacion de la Marca</h2>
+
+      <div class="adm-form-grid">
+        <div class="adm-form-group">
+          <label class="adm-form-label" for="brand-name">Nombre <span class="required">*</span></label>
+          <input type="text" id="brand-name" class="adm-form-control" [class.is-invalid]="isFieldInvalid('name')" formControlName="name" placeholder="Nombre de la marca" (blur)="onFieldBlur('name')">
+          @if (isFieldInvalid('name')) {
+            <div class="adm-form-error" role="alert">
+              <span class="material-symbols-outlined">error</span>
+              {{ getFieldError('name') }}
+            </div>
+          }
+        </div>
+
+        <div class="adm-form-group">
+          <label class="adm-form-label" for="brand-country">Pais de origen <span class="required">*</span></label>
+          <select id="brand-country" class="adm-form-select" [class.is-invalid]="isFieldInvalid('country')" formControlName="country" (blur)="onFieldBlur('country')">
+            <option value="" disabled>Seleccionar pais</option>
+            <option value="Estados Unidos">Estados Unidos</option>
+            <option value="Canada">Canada</option>
+            <option value="Alemania">Alemania</option>
+            <option value="Francia">Francia</option>
+            <option value="Suiza">Suiza</option>
+            <option value="Holanda">Holanda</option>
+            <option value="Italia">Italia</option>
+            <option value="Espana">Espana</option>
+            <option value="Reino Unido">Reino Unido</option>
+            <option value="Brasil">Brasil</option>
+            <option value="Argentina">Argentina</option>
+            <option value="Mexico">Mexico</option>
+            <option value="Colombia">Colombia</option>
+            <option value="Costa Rica">Costa Rica</option>
+            <option value="China">China</option>
+            <option value="India">India</option>
+            <option value="Corea del Sur">Corea del Sur</option>
+            <option value="Japon">Japon</option>
+            <option value="Australia">Australia</option>
+            <option value="Otro">Otro</option>
+          </select>
+          @if (isFieldInvalid('country')) {
+            <div class="adm-form-error" role="alert">
+              <span class="material-symbols-outlined">error</span>
+              {{ getFieldError('country') }}
+            </div>
+          }
+        </div>
+
+        <!-- Category checkboxes -->
+        <div class="adm-form-group adm-form-group--full">
+          <label class="adm-form-label">Categorias</label>
+          <div class="bf-categories">
+            <label class="adm-form-check">
+              <input type="checkbox" [checked]="categoryChecked('farmacos')" (change)="toggleCategory('farmacos')">
+              <span class="material-symbols-outlined" style="font-size: 18px; color: var(--adm-pharma-color);">medication</span>
+              Farmacos
+            </label>
+            <label class="adm-form-check">
+              <input type="checkbox" [checked]="categoryChecked('alimentos')" (change)="toggleCategory('alimentos')">
+              <span class="material-symbols-outlined" style="font-size: 18px; color: var(--adm-food-color);">restaurant</span>
+              Alimentos
+            </label>
+            <label class="adm-form-check">
+              <input type="checkbox" [checked]="categoryChecked('equipos')" (change)="toggleCategory('equipos')">
+              <span class="material-symbols-outlined" style="font-size: 18px; color: var(--adm-equipment-color);">construction</span>
+              Equipos
+            </label>
+          </div>
+        </div>
+
+        <!-- Description ES -->
+        <div class="adm-form-group adm-form-group--full">
+          <label class="adm-form-label" for="brand-desc-es">Descripcion (ES)</label>
+          <textarea id="brand-desc-es" class="adm-form-control" formControlName="descriptionEs" placeholder="Descripcion de la marca..." rows="3"></textarea>
+        </div>
+
+        <!-- Description EN -->
+        <div class="adm-form-group adm-form-group--full">
+          <label class="adm-form-label" for="brand-desc-en">Descripcion (EN)</label>
+          <textarea id="brand-desc-en" class="adm-form-control" formControlName="descriptionEn" placeholder="Brand description..." rows="3"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <hr class="adm-form-divider">
+
+    <!-- Section: Logo -->
+    <div class="adm-form-section">
+      <h2 class="adm-form-section__title">Logo</h2>
+
+      @if (logoPreview()) {
+        <div class="bf-logo-preview">
+          <img [src]="logoPreview()!" alt="Logo preview">
+          <div class="bf-logo-preview__actions">
+            <button type="button" class="adm-btn adm-btn--secondary adm-btn--sm" (click)="logoInput.click()">
+              <span class="material-symbols-outlined">edit</span> Cambiar logo
+            </button>
+            <button type="button" class="adm-btn adm-btn--danger-ghost adm-btn--sm" (click)="removeLogo()">
+              <span class="material-symbols-outlined">delete</span> Eliminar
+            </button>
+          </div>
+        </div>
+      } @else {
+        <div class="adm-uploader" (click)="logoInput.click()" (dragover)="$event.preventDefault()" (drop)="onLogoDrop($event)">
+          <div class="adm-uploader__icon">
+            <span class="material-symbols-outlined">add_photo_alternate</span>
+          </div>
+          <p class="adm-uploader__text">Arrastra el logo aqui o <strong>selecciona archivo</strong></p>
+          <span class="adm-uploader__hint">PNG, JPG hasta 5MB</span>
+        </div>
+      }
+      <input #logoInput type="file" accept="image/png,image/jpeg,image/webp" style="display: none;" (change)="onLogoSelected($event)">
+      @if (uploadingLogo()) {
+        <div class="bf-upload-progress">
+          <div class="adm-progress"><div class="adm-progress__bar" style="width: 100%;"></div></div>
+          <span class="bf-upload-progress__text">Subiendo logo...</span>
+        </div>
+      }
+    </div>
+  </form>
+
+  <!-- Mobile sticky actions -->
+  <div class="bf-page__sticky-actions">
+    <button type="button" class="adm-btn adm-btn--secondary adm-btn--block" (click)="onCancel()">Cancelar</button>
+    <button type="button" class="adm-btn adm-btn--primary adm-btn--block" [disabled]="saving()" (click)="onSubmit()">{{ saving() ? 'Guardando...' : 'Guardar' }}</button>
+  </div>
+</div>
+
+<!-- Unsaved Changes Modal -->
+@if (showUnsavedModal()) {
+  <div class="adm-modal-backdrop" (click)="stayEditing()">
+    <div class="adm-modal adm-modal--confirm" (click)="$event.stopPropagation()">
+      <div class="adm-modal__body">
+        <div class="adm-modal__icon adm-modal__icon--warning" aria-hidden="true">
+          <span class="material-symbols-outlined">warning</span>
+        </div>
+        <h3 class="adm-modal__title">Tienes cambios sin guardar</h3>
+        <p class="adm-modal__desc">Si sales ahora, perderas los cambios realizados en esta marca.</p>
+      </div>
+      <div class="adm-modal__footer">
+        <button class="adm-btn adm-btn--secondary" (click)="confirmLeave()">Salir sin guardar</button>
+        <button class="adm-btn adm-btn--primary" (click)="stayEditing()">Seguir editando</button>
+      </div>
+    </div>
+  </div>
+}

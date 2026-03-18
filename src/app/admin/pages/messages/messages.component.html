@@ -1,27 +1,31 @@
 <!-- ADMIN MESSAGES -->
 <div class="messages-page">
-  <div class="messages-page__toolbar">
-    <h1>Mensajes</h1>
+  <!-- Page Header -->
+  <div class="adm-page-header">
+    <div class="adm-page-header__left">
+      <h1 class="adm-page-header__title">Mensajes</h1>
+      <p class="adm-page-header__subtitle">Gestiona los mensajes de contacto y distribuidores</p>
+    </div>
     <div class="messages-page__actions">
-      <button class="btn btn-outline btn-sm" (click)="exportCsv()" title="Exportar CSV">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      <button class="adm-btn adm-btn--secondary adm-btn--sm" (click)="exportCsv()" title="Exportar CSV">
+        <span class="material-symbols-outlined">download</span>
         Exportar CSV
       </button>
-      <div class="view-toggle">
-        <button class="view-toggle__btn" [class.view-toggle__btn--active]="viewMode() === 'kanban'" (click)="viewMode.set('kanban')" aria-label="Vista Kanban">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="6" height="14" x="2" y="5" rx="1"/><rect width="6" height="10" x="9" y="7" rx="1"/><rect width="6" height="16" x="16" y="4" rx="1"/></svg>
+      <div class="adm-view-toggle">
+        <button class="adm-view-toggle__btn" [class.adm-view-toggle__btn--active]="viewMode() === 'kanban'" (click)="viewMode.set('kanban')" aria-label="Vista Kanban">
+          <span class="material-symbols-outlined">view_kanban</span>
         </button>
-        <button class="view-toggle__btn" [class.view-toggle__btn--active]="viewMode() === 'table'" (click)="viewMode.set('table')" aria-label="Vista Tabla">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+        <button class="adm-view-toggle__btn" [class.adm-view-toggle__btn--active]="viewMode() === 'table'" (click)="viewMode.set('table')" aria-label="Vista Tabla">
+          <span class="material-symbols-outlined">view_list</span>
         </button>
       </div>
     </div>
   </div>
 
-  <!-- Filters (REQ-294) -->
-  <div class="messages-page__filters">
-    <div class="messages-page__filter-group">
-      <select class="form-select form-select--sm" [(ngModel)]="filterType" (ngModelChange)="loadMessages()">
+  <!-- Filters -->
+  <div class="adm-toolbar">
+    <div class="adm-toolbar__filter">
+      <select [(ngModel)]="filterType" (ngModelChange)="loadMessages()">
         <option value="">Todos los tipos</option>
         <option value="info">Informacion</option>
         <option value="comercial">Comercial</option>
@@ -29,210 +33,219 @@
         <option value="fabricante">Fabricante</option>
         <option value="otro">Otro</option>
       </select>
-      <select class="form-select form-select--sm" [(ngModel)]="filterStatus">
+    </div>
+    <div class="adm-toolbar__filter">
+      <select [(ngModel)]="filterStatus">
         <option value="">Todos los estados</option>
         <option value="nuevo">Nuevo</option>
         <option value="en-proceso">En Proceso</option>
         <option value="atendido">Atendido</option>
       </select>
-      <div class="messages-page__search">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--neutral-400)" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-        <input type="text" class="form-control form-control--sm" placeholder="Buscar por nombre o correo..." [(ngModel)]="filterSearch" maxlength="100">
-      </div>
     </div>
+    <div class="adm-toolbar__search">
+      <span class="material-symbols-outlined">search</span>
+      <input type="text" placeholder="Buscar por nombre o correo..." [(ngModel)]="filterSearch" maxlength="100">
+    </div>
+    <div class="adm-toolbar__spacer"></div>
     @if (filterType || filterStatus || filterSearch) {
-      <button class="btn btn-text btn-sm" style="color: var(--semantic-danger);" (click)="clearFilters()">Limpiar filtros</button>
+      <button class="adm-btn adm-btn--danger-ghost adm-btn--sm" (click)="clearFilters()">Limpiar filtros</button>
     }
   </div>
 
+  <!-- Loading skeleton -->
   @if (loading()) {
-    <div class="kanban">
+    <div class="adm-kanban">
       @for (col of [1,2,3]; track col) {
-        <div class="kanban__col">
-          <div class="skeleton-block" style="height: 24px; width: 100px; margin-bottom: 16px; border-radius: 4px;"></div>
+        <div class="adm-kanban__col">
+          <div class="adm-skeleton" style="height: 24px; width: 120px; margin-bottom: 16px;"></div>
           @for (card of [1,2]; track card) {
-            <div class="skeleton-block" style="height: 120px; border-radius: 8px; margin-bottom: 12px;"></div>
+            <div class="adm-skeleton adm-skeleton--card" style="height: 140px; margin-bottom: 12px;"></div>
           }
         </div>
       }
     </div>
   } @else if (messages().length === 0 && !filterType && !filterStatus && !filterSearch) {
     <!-- Empty state: no messages at all -->
-    <div class="messages-page__empty-state">
-      <div aria-hidden="true" style="margin-bottom: 16px; opacity: 0.8;">
-        <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="20" y="30" width="80" height="55" rx="8" fill="var(--neutral-50)" stroke="var(--neutral-200)" stroke-width="2"/>
-          <path d="M20 38 L60 60 L100 38" stroke="var(--neutral-200)" stroke-width="2" fill="none"/>
-          <circle cx="85" cy="32" r="10" fill="var(--semantic-info-soft)" stroke="var(--brand-primary)" stroke-width="2"/>
-          <text x="85" y="36" text-anchor="middle" font-size="12" fill="var(--brand-primary)" font-weight="700">0</text>
-        </svg>
+    <div class="adm-empty">
+      <div class="adm-empty__icon">
+        <span class="material-symbols-outlined">chat_bubble</span>
       </div>
-      <h2 style="font-size: 20px; font-weight: 700; color: var(--neutral-900); margin-bottom: 8px;">No hay mensajes aun</h2>
-      <p style="font-size: 14px; color: var(--neutral-400); max-width: 360px; line-height: 1.5;">Los mensajes del formulario de contacto y de distribuidores apareceran aqui cuando los visitantes del sitio los envien.</p>
+      <h2 class="adm-empty__title">No hay mensajes aun</h2>
+      <p class="adm-empty__desc">Los mensajes del formulario de contacto y de distribuidores apareceran aqui cuando los visitantes del sitio los envien.</p>
     </div>
   } @else if (viewMode() === 'kanban') {
-    <div class="kanban">
+    <!-- Kanban View -->
+    <div class="adm-kanban">
       <!-- Column: Nuevos -->
-      <div class="kanban__col"
-           [class.kanban__col--drop-target]="dropTargetCol() === 'nuevo'"
+      <div class="adm-kanban__col"
+           [class.adm-kanban__col--drop-target]="dropTargetCol() === 'nuevo'"
            (dragover)="onDragOver($event, 'nuevo')"
            (dragleave)="onDragLeave('nuevo')"
            (drop)="onDrop($event, 'nuevo')">
-        <div class="kanban__col-header">
-          <span class="kanban__col-title">NUEVOS</span>
-          <span class="kanban__col-count">{{ newMessages.length }}</span>
+        <div class="adm-kanban__col-header">
+          <span class="adm-kanban__col-title">Nuevos</span>
+          <span class="adm-kanban__col-count">{{ newMessages.length }}</span>
         </div>
-        <div class="kanban__cards">
-          @for (msg of newMessages; track msg._id) {
-            <a [routerLink]="'/admin/mensajes/' + msg._id"
-               class="kanban__card"
-               draggable="true"
-               [class.kanban__card--dragging]="draggedMessageId() === msg._id"
-               (dragstart)="onDragStart(msg._id)"
-               (dragend)="onDragEnd()">
-              <span class="badge"
-                [class.badge-general]="msg.type === 'info'"
-                [class.badge-commercial]="msg.type === 'comercial'"
-                [class.badge-manufacturer]="msg.type === 'fabricante'"
-                [class.badge-support]="msg.type === 'soporte'"
-                [class.badge-other]="msg.type === 'otro'">{{ getTypeLabel(msg.type) }}</span>
-              <h4 class="kanban__card-title">{{ msg.name }}</h4>
-              <p class="kanban__card-email">{{ msg.email }}</p>
-              <p class="kanban__card-preview">{{ msg.message | slice:0:80 }}{{ msg.message.length > 80 ? '...' : '' }}</p>
+        @for (msg of newMessages; track msg._id) {
+          <a [routerLink]="'/admin/mensajes/' + msg._id"
+             class="adm-kanban__card"
+             draggable="true"
+             [class.adm-kanban__card--dragging]="draggedMessageId() === msg._id"
+             (dragstart)="onDragStart(msg._id)"
+             (dragend)="onDragEnd()">
+            <div class="adm-kanban__card__header">
+              <span class="adm-badge"
+                [class.adm-badge--general]="msg.type === 'info'"
+                [class.adm-badge--commercial]="msg.type === 'comercial'"
+                [class.adm-badge--manufacturer]="msg.type === 'fabricante'"
+                [class.adm-badge--support]="msg.type === 'soporte'"
+                [class.adm-badge--other]="msg.type === 'otro'">{{ getTypeLabel(msg.type) }}</span>
+            </div>
+            <h4 class="adm-kanban__card__title">{{ msg.name }}</h4>
+            <p class="adm-kanban__card__preview">{{ msg.message | slice:0:80 }}{{ msg.message.length > 80 ? '...' : '' }}</p>
+            <div class="adm-kanban__card__footer">
+              <span class="adm-kanban__card__date">{{ getRelativeDate(msg.createdAt) }}</span>
               @if (msg.productOfInterest) {
-                <span class="kanban__card-product">{{ msg.productOfInterest }}</span>
+                <span class="adm-badge adm-badge--primary" style="font-size: 11px;">{{ msg.productOfInterest }}</span>
               }
-              <span class="kanban__card-date">{{ getRelativeDate(msg.createdAt) }}</span>
-            </a>
-          }
-          @if (newMessages.length === 0) {
-            <p class="kanban__empty">Sin mensajes</p>
-          }
-        </div>
+            </div>
+          </a>
+        }
+        @if (newMessages.length === 0) {
+          <p class="messages-page__kanban-empty">Sin mensajes</p>
+        }
       </div>
 
       <!-- Column: En Proceso -->
-      <div class="kanban__col"
-           [class.kanban__col--drop-target]="dropTargetCol() === 'en-proceso'"
+      <div class="adm-kanban__col"
+           [class.adm-kanban__col--drop-target]="dropTargetCol() === 'en-proceso'"
            (dragover)="onDragOver($event, 'en-proceso')"
            (dragleave)="onDragLeave('en-proceso')"
            (drop)="onDrop($event, 'en-proceso')">
-        <div class="kanban__col-header">
-          <span class="kanban__col-title">EN PROCESO</span>
-          <span class="kanban__col-count">{{ inProgressMessages.length }}</span>
+        <div class="adm-kanban__col-header">
+          <span class="adm-kanban__col-title">En Proceso</span>
+          <span class="adm-kanban__col-count">{{ inProgressMessages.length }}</span>
         </div>
-        <div class="kanban__cards">
-          @for (msg of inProgressMessages; track msg._id) {
-            <a [routerLink]="'/admin/mensajes/' + msg._id"
-               class="kanban__card"
-               draggable="true"
-               [class.kanban__card--dragging]="draggedMessageId() === msg._id"
-               (dragstart)="onDragStart(msg._id)"
-               (dragend)="onDragEnd()">
-              <span class="badge"
-                [class.badge-general]="msg.type === 'info'"
-                [class.badge-commercial]="msg.type === 'comercial'"
-                [class.badge-manufacturer]="msg.type === 'fabricante'"
-                [class.badge-support]="msg.type === 'soporte'"
-                [class.badge-other]="msg.type === 'otro'">{{ getTypeLabel(msg.type) }}</span>
-              <h4 class="kanban__card-title">{{ msg.name }}</h4>
-              <p class="kanban__card-email">{{ msg.email }}</p>
-              <p class="kanban__card-preview">{{ msg.message | slice:0:80 }}{{ msg.message.length > 80 ? '...' : '' }}</p>
-              <span class="kanban__card-date">{{ getRelativeDate(msg.createdAt) }}</span>
-            </a>
-          }
-          @if (inProgressMessages.length === 0) {
-            <p class="kanban__empty">Sin mensajes</p>
-          }
-        </div>
+        @for (msg of inProgressMessages; track msg._id) {
+          <a [routerLink]="'/admin/mensajes/' + msg._id"
+             class="adm-kanban__card"
+             draggable="true"
+             [class.adm-kanban__card--dragging]="draggedMessageId() === msg._id"
+             (dragstart)="onDragStart(msg._id)"
+             (dragend)="onDragEnd()">
+            <div class="adm-kanban__card__header">
+              <span class="adm-badge"
+                [class.adm-badge--general]="msg.type === 'info'"
+                [class.adm-badge--commercial]="msg.type === 'comercial'"
+                [class.adm-badge--manufacturer]="msg.type === 'fabricante'"
+                [class.adm-badge--support]="msg.type === 'soporte'"
+                [class.adm-badge--other]="msg.type === 'otro'">{{ getTypeLabel(msg.type) }}</span>
+            </div>
+            <h4 class="adm-kanban__card__title">{{ msg.name }}</h4>
+            <p class="adm-kanban__card__preview">{{ msg.message | slice:0:80 }}{{ msg.message.length > 80 ? '...' : '' }}</p>
+            <div class="adm-kanban__card__footer">
+              <span class="adm-kanban__card__date">{{ getRelativeDate(msg.createdAt) }}</span>
+            </div>
+          </a>
+        }
+        @if (inProgressMessages.length === 0) {
+          <p class="messages-page__kanban-empty">Sin mensajes</p>
+        }
       </div>
 
       <!-- Column: Atendidos -->
-      <div class="kanban__col"
-           [class.kanban__col--drop-target]="dropTargetCol() === 'atendido'"
+      <div class="adm-kanban__col"
+           [class.adm-kanban__col--drop-target]="dropTargetCol() === 'atendido'"
            (dragover)="onDragOver($event, 'atendido')"
            (dragleave)="onDragLeave('atendido')"
            (drop)="onDrop($event, 'atendido')">
-        <div class="kanban__col-header">
-          <span class="kanban__col-title">ATENDIDOS</span>
-          <span class="kanban__col-count">{{ attendedMessages.length }}</span>
+        <div class="adm-kanban__col-header">
+          <span class="adm-kanban__col-title">Atendidos</span>
+          <span class="adm-kanban__col-count">{{ attendedMessages.length }}</span>
         </div>
-        <div class="kanban__cards">
-          @for (msg of attendedMessages; track msg._id) {
-            <a [routerLink]="'/admin/mensajes/' + msg._id"
-               class="kanban__card kanban__card--completed"
-               draggable="true"
-               [class.kanban__card--dragging]="draggedMessageId() === msg._id"
-               (dragstart)="onDragStart(msg._id)"
-               (dragend)="onDragEnd()">
-              <span class="badge"
-                [class.badge-general]="msg.type === 'info'"
-                [class.badge-commercial]="msg.type === 'comercial'"
-                [class.badge-manufacturer]="msg.type === 'fabricante'"
-                [class.badge-support]="msg.type === 'soporte'"
-                [class.badge-other]="msg.type === 'otro'">{{ getTypeLabel(msg.type) }}</span>
-              <h4 class="kanban__card-title">{{ msg.name }}</h4>
-              <p class="kanban__card-preview">{{ msg.message | slice:0:80 }}{{ msg.message.length > 80 ? '...' : '' }}</p>
-              <span class="kanban__card-date">{{ getRelativeDate(msg.createdAt) }}</span>
-            </a>
-          }
-        </div>
+        @for (msg of attendedMessages; track msg._id) {
+          <a [routerLink]="'/admin/mensajes/' + msg._id"
+             class="adm-kanban__card messages-page__card--completed"
+             draggable="true"
+             [class.adm-kanban__card--dragging]="draggedMessageId() === msg._id"
+             (dragstart)="onDragStart(msg._id)"
+             (dragend)="onDragEnd()">
+            <div class="adm-kanban__card__header">
+              <span class="adm-badge"
+                [class.adm-badge--general]="msg.type === 'info'"
+                [class.adm-badge--commercial]="msg.type === 'comercial'"
+                [class.adm-badge--manufacturer]="msg.type === 'fabricante'"
+                [class.adm-badge--support]="msg.type === 'soporte'"
+                [class.adm-badge--other]="msg.type === 'otro'">{{ getTypeLabel(msg.type) }}</span>
+            </div>
+            <h4 class="adm-kanban__card__title">{{ msg.name }}</h4>
+            <p class="adm-kanban__card__preview">{{ msg.message | slice:0:80 }}{{ msg.message.length > 80 ? '...' : '' }}</p>
+            <div class="adm-kanban__card__footer">
+              <span class="adm-kanban__card__date">{{ getRelativeDate(msg.createdAt) }}</span>
+            </div>
+          </a>
+        }
       </div>
     </div>
   } @else {
-    <!-- Table View (REQ-293) -->
-    <div class="data-table-wrapper">
-      <table class="data-table">
-        <thead>
-          <tr>
-            <th class="data-table__th">NOMBRE</th>
-            <th class="data-table__th">CORREO</th>
-            <th class="data-table__th">TELEFONO</th>
-            <th class="data-table__th">TIPO</th>
-            <th class="data-table__th">PRODUCTO</th>
-            <th class="data-table__th">ESTADO</th>
-            <th class="data-table__th">FECHA</th>
-            <th class="data-table__th">ACCIONES</th>
-          </tr>
-        </thead>
-        <tbody>
-          @for (msg of filteredMessages; track msg._id) {
-            <tr class="data-table__row">
-              <td class="data-table__td">{{ msg.name }}</td>
-              <td class="data-table__td">{{ msg.email }}</td>
-              <td class="data-table__td">{{ msg.phone || '-' }}</td>
-              <td class="data-table__td">
-                <span class="badge"
-                  [class.badge-general]="msg.type === 'info'"
-                  [class.badge-commercial]="msg.type === 'comercial'"
-                  [class.badge-manufacturer]="msg.type === 'fabricante'"
-                  [class.badge-support]="msg.type === 'soporte'"
-                  [class.badge-other]="msg.type === 'otro'">{{ getTypeLabel(msg.type) }}</span>
-              </td>
-              <td class="data-table__td">{{ msg.productOfInterest || '-' }}</td>
-              <td class="data-table__td">
-                <span class="badge" [class.badge-active]="msg.status === 'atendido'" [class.badge-inactive]="msg.status === 'nuevo'" [class.badge-warning]="msg.status === 'en-proceso'">{{ getStatusLabel(msg.status) }}</span>
-              </td>
-              <td class="data-table__td">{{ getRelativeDate(msg.createdAt) }}</td>
-              <td class="data-table__td data-table__td--actions">
-                <a [routerLink]="'/admin/mensajes/' + msg._id" class="data-table__action" aria-label="Ver mensaje">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--neutral-400)" stroke-width="1.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                </a>
-                <button class="data-table__action data-table__action--danger" (click)="confirmDelete(msg)" aria-label="Eliminar mensaje">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--semantic-danger)" stroke-width="1.5"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
-                </button>
-              </td>
-            </tr>
-          }
-          @if (filteredMessages.length === 0) {
+    <!-- Table View -->
+    <div class="adm-card adm-card--no-padding">
+      <div class="adm-table-wrapper">
+        <table class="adm-table">
+          <thead>
             <tr>
-              <td colspan="8" class="data-table__td data-table__td--empty">
-                No se encontraron mensajes con estos filtros
-              </td>
+              <th>Nombre</th>
+              <th>Email</th>
+              <th>Tipo</th>
+              <th>Estado</th>
+              <th>Fecha</th>
+              <th style="text-align: right;">Acciones</th>
             </tr>
-          }
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            @for (msg of filteredMessages; track msg._id) {
+              <tr>
+                <td>
+                  <span class="adm-table__name">{{ msg.name }}</span>
+                </td>
+                <td>{{ msg.email }}</td>
+                <td>
+                  <span class="adm-badge"
+                    [class.adm-badge--general]="msg.type === 'info'"
+                    [class.adm-badge--commercial]="msg.type === 'comercial'"
+                    [class.adm-badge--manufacturer]="msg.type === 'fabricante'"
+                    [class.adm-badge--support]="msg.type === 'soporte'"
+                    [class.adm-badge--other]="msg.type === 'otro'">{{ getTypeLabel(msg.type) }}</span>
+                </td>
+                <td>
+                  <span class="adm-badge"
+                    [class.adm-badge--nuevo]="msg.status === 'nuevo'"
+                    [class.adm-badge--en-proceso]="msg.status === 'en-proceso'"
+                    [class.adm-badge--atendido]="msg.status === 'atendido'">{{ getStatusLabel(msg.status) }}</span>
+                </td>
+                <td>{{ getRelativeDate(msg.createdAt) }}</td>
+                <td>
+                  <div class="adm-table__actions">
+                    <a [routerLink]="'/admin/mensajes/' + msg._id" class="adm-table__action-btn" aria-label="Ver mensaje">
+                      <span class="material-symbols-outlined">visibility</span>
+                    </a>
+                    <button class="adm-table__action-btn adm-table__action-btn--danger" (click)="confirmDelete(msg)" aria-label="Eliminar mensaje">
+                      <span class="material-symbols-outlined">delete</span>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            }
+            @if (filteredMessages.length === 0) {
+              <tr>
+                <td colspan="6" class="messages-page__table-empty">
+                  No se encontraron mensajes con estos filtros
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
     </div>
   }
 </div>

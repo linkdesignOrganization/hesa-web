@@ -1,164 +1,189 @@
 <!-- ADMIN DASHBOARD -->
 <div class="dashboard">
-  <h1 class="dashboard__title">Dashboard</h1>
-  <p class="dashboard__welcome">Bienvenido al panel de administracion de HESA</p>
+  <!-- Page Header -->
+  <div class="adm-page-header">
+    <div class="adm-page-header__left">
+      <h1 class="adm-page-header__title">Dashboard</h1>
+      <p class="adm-page-header__subtitle">Bienvenido al panel de administracion de HESA</p>
+    </div>
+  </div>
 
   @if (loading()) {
     <!-- Skeleton State -->
-    <div class="dashboard__summary">
+    <div class="dashboard__stats">
       @for (i of [1,2,3,4]; track i) {
-        <div class="summary-card">
-          <div class="skeleton-block" style="width: 48px; height: 48px; border-radius: 12px;"></div>
-          <div class="summary-card__data">
-            <div class="skeleton-block" style="height: 28px; width: 60px; margin-bottom: 4px;"></div>
-            <div class="skeleton-block" style="height: 14px; width: 80px;"></div>
+        <div class="adm-stat-card">
+          <div class="adm-skeleton adm-skeleton--circle" style="width: 48px; height: 48px;"></div>
+          <div class="adm-stat-card__data">
+            <div class="adm-skeleton" style="height: 14px; width: 80px; margin-bottom: 8px;"></div>
+            <div class="adm-skeleton" style="height: 28px; width: 60px;"></div>
           </div>
         </div>
       }
     </div>
     <div class="dashboard__categories">
       @for (i of [1,2,3]; track i) {
-        <div class="skeleton-block" style="height: 120px; border-radius: 12px;"></div>
+        <div class="adm-skeleton adm-skeleton--card" style="height: 140px;"></div>
       }
     </div>
-    <div class="dashboard__row3">
-      <div class="skeleton-block" style="height: 300px; border-radius: 12px;"></div>
-      <div class="skeleton-block" style="height: 300px; border-radius: 12px;"></div>
+    <div class="dashboard__bottom">
+      <div class="adm-skeleton adm-skeleton--card" style="height: 320px;"></div>
+      <div class="adm-skeleton adm-skeleton--card" style="height: 320px;"></div>
     </div>
   } @else if (error()) {
     <!-- Error State -->
-    <div class="dashboard__error" role="alert">
-      <div class="dashboard__error-icon" aria-hidden="true">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--semantic-danger)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    <div class="adm-card dashboard__error-card" role="alert">
+      <div class="adm-empty">
+        <div class="adm-empty__icon">
+          <span class="material-symbols-outlined" aria-hidden="true">error</span>
+        </div>
+        <p class="adm-empty__title">Error al cargar el dashboard</p>
+        <p class="adm-empty__desc">No se pudieron obtener los datos. Intenta de nuevo.</p>
+        <button class="adm-btn adm-btn--secondary" (click)="loadDashboard()">
+          <span class="material-symbols-outlined">refresh</span>
+          Reintentar
+        </button>
       </div>
-      <p>Error al cargar el dashboard</p>
-      <button class="btn btn-outline" (click)="loadDashboard()">Reintentar</button>
     </div>
   } @else if (data()) {
-    <!-- Row 1: Summary Cards (REQ-206) -->
-    <div class="dashboard__summary">
-      <div class="summary-card">
-        <div class="summary-card__icon summary-card__icon--blue">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--brand-primary)" stroke-width="1.5"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
+    <!-- Row 1: Stat Cards -->
+    <div class="dashboard__stats">
+      <div class="adm-stat-card">
+        <div class="adm-stat-card__icon adm-stat-card__icon--blue">
+          <span class="material-symbols-outlined">inventory_2</span>
         </div>
-        <div class="summary-card__data">
-          <span class="summary-card__value">{{ data()!.totalProducts }}</span>
-          <span class="summary-card__label">Productos</span>
+        <div class="adm-stat-card__data">
+          <span class="adm-stat-card__label">Productos</span>
+          <span class="adm-stat-card__value">{{ data()!.totalProducts }}</span>
         </div>
         @if (data()!.activeProducts > 0) {
-          <span class="summary-card__badge summary-card__badge--success">{{ data()!.activeProducts }} activos</span>
+          <span class="adm-badge adm-badge--active">{{ data()!.activeProducts }} activos</span>
         }
       </div>
-      <div class="summary-card">
-        <div class="summary-card__icon summary-card__icon--purple">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--semantic-purple)" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      <div class="adm-stat-card">
+        <div class="adm-stat-card__icon adm-stat-card__icon--purple">
+          <span class="material-symbols-outlined">chat_bubble</span>
         </div>
-        <div class="summary-card__data">
-          <span class="summary-card__value">{{ data()!.newMessages }}</span>
-          <span class="summary-card__label">Mensajes Nuevos</span>
+        <div class="adm-stat-card__data">
+          <span class="adm-stat-card__label">Mensajes Nuevos</span>
+          <span class="adm-stat-card__value">{{ data()!.newMessages }}</span>
         </div>
         @if (data()!.newMessages > 0) {
-          <span class="summary-card__badge summary-card__badge--warning">{{ data()!.newMessages }} pendientes</span>
+          <span class="adm-badge adm-badge--pending">{{ data()!.newMessages }} pendientes</span>
         }
       </div>
-      <div class="summary-card">
-        <div class="summary-card__icon summary-card__icon--green">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--semantic-success)" stroke-width="1.5"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+      <div class="adm-stat-card">
+        <div class="adm-stat-card__icon adm-stat-card__icon--green">
+          <span class="material-symbols-outlined">flag</span>
         </div>
-        <div class="summary-card__data">
-          <span class="summary-card__value">{{ data()!.totalBrands }}</span>
-          <span class="summary-card__label">Marcas</span>
+        <div class="adm-stat-card__data">
+          <span class="adm-stat-card__label">Marcas</span>
+          <span class="adm-stat-card__value">{{ data()!.totalBrands }}</span>
         </div>
       </div>
-      <div class="summary-card">
-        <div class="summary-card__icon summary-card__icon--orange">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--semantic-warning)" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      <div class="adm-stat-card">
+        <div class="adm-stat-card__icon adm-stat-card__icon--orange">
+          <span class="material-symbols-outlined">star</span>
         </div>
-        <div class="summary-card__data">
-          <span class="summary-card__value">{{ data()!.featuredProducts }}</span>
-          <span class="summary-card__label">Destacados</span>
+        <div class="adm-stat-card__data">
+          <span class="adm-stat-card__label">Destacados</span>
+          <span class="adm-stat-card__value">{{ data()!.featuredProducts }}</span>
         </div>
       </div>
     </div>
 
-    <!-- Row 2: Category Cards (REQ-207, REQ-208) -->
+    <!-- Row 2: Category Cards -->
     <div class="dashboard__categories">
-      <a routerLink="/admin/productos" [queryParams]="{categoria: 'farmacos'}" class="category-card">
-        <div class="category-card__icon category-card__icon--pharma">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--brand-primary)" stroke-width="1.5"><path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"/><path d="m8.5 8.5 7 7"/></svg>
+      <a routerLink="/admin/productos" [queryParams]="{categoria: 'farmacos'}" class="adm-card adm-card--hover dashboard__category-card">
+        <div class="dashboard__category-icon dashboard__category-icon--pharma">
+          <span class="material-symbols-outlined">medication</span>
         </div>
-        <span class="category-card__label">Farmacos</span>
-        <div class="category-card__progress">
-          <div class="category-card__bar category-card__bar--pharma" [style.width.%]="data()!.pharmaCount > 0 ? (data()!.pharmaActive / data()!.pharmaCount) * 100 : 0"></div>
+        <span class="dashboard__category-label">Farmacos</span>
+        <div class="adm-progress">
+          <div class="adm-progress__bar dashboard__bar--pharma" [style.width.%]="data()!.pharmaCount > 0 ? (data()!.pharmaActive / data()!.pharmaCount) * 100 : 0"></div>
         </div>
-        <span class="category-card__count">{{ data()!.pharmaActive }} de {{ data()!.pharmaCount }} activos</span>
+        <span class="dashboard__category-count">{{ data()!.pharmaActive }} de {{ data()!.pharmaCount }} activos</span>
       </a>
-      <a routerLink="/admin/productos" [queryParams]="{categoria: 'alimentos'}" class="category-card">
-        <div class="category-card__icon category-card__icon--food">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--semantic-success)" stroke-width="1.5"><path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5"/></svg>
+      <a routerLink="/admin/productos" [queryParams]="{categoria: 'alimentos'}" class="adm-card adm-card--hover dashboard__category-card">
+        <div class="dashboard__category-icon dashboard__category-icon--food">
+          <span class="material-symbols-outlined">restaurant</span>
         </div>
-        <span class="category-card__label">Alimentos</span>
-        <div class="category-card__progress">
-          <div class="category-card__bar category-card__bar--food" [style.width.%]="data()!.foodCount > 0 ? (data()!.foodActive / data()!.foodCount) * 100 : 0"></div>
+        <span class="dashboard__category-label">Alimentos</span>
+        <div class="adm-progress">
+          <div class="adm-progress__bar dashboard__bar--food" [style.width.%]="data()!.foodCount > 0 ? (data()!.foodActive / data()!.foodCount) * 100 : 0"></div>
         </div>
-        <span class="category-card__count">{{ data()!.foodActive }} de {{ data()!.foodCount }} activos</span>
+        <span class="dashboard__category-count">{{ data()!.foodActive }} de {{ data()!.foodCount }} activos</span>
       </a>
-      <a routerLink="/admin/productos" [queryParams]="{categoria: 'equipos'}" class="category-card">
-        <div class="category-card__icon category-card__icon--equipment">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--neutral-400)" stroke-width="1.5"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76Z"/></svg>
+      <a routerLink="/admin/productos" [queryParams]="{categoria: 'equipos'}" class="adm-card adm-card--hover dashboard__category-card">
+        <div class="dashboard__category-icon dashboard__category-icon--equipment">
+          <span class="material-symbols-outlined">construction</span>
         </div>
-        <span class="category-card__label">Equipos</span>
-        <div class="category-card__progress">
-          <div class="category-card__bar category-card__bar--equipment" [style.width.%]="data()!.equipmentCount > 0 ? (data()!.equipmentActive / data()!.equipmentCount) * 100 : 0"></div>
+        <span class="dashboard__category-label">Equipos</span>
+        <div class="adm-progress">
+          <div class="adm-progress__bar dashboard__bar--equipment" [style.width.%]="data()!.equipmentCount > 0 ? (data()!.equipmentActive / data()!.equipmentCount) * 100 : 0"></div>
         </div>
-        <span class="category-card__count">{{ data()!.equipmentActive }} de {{ data()!.equipmentCount }} activos</span>
+        <span class="dashboard__category-count">{{ data()!.equipmentActive }} de {{ data()!.equipmentCount }} activos</span>
       </a>
     </div>
 
-    <!-- Row 3: Messages + Activity (REQ-209, REQ-210) -->
-    <div class="dashboard__row3">
-      <div class="dashboard__messages-card">
+    <!-- Row 3: Messages + Activity -->
+    <div class="dashboard__bottom">
+      <div class="adm-card dashboard__messages-card">
         <div class="dashboard__card-header">
-          <h2>Mensajes Recientes</h2>
-          <a routerLink="/admin/mensajes" class="dashboard__card-link">Ver todos</a>
+          <h2 class="adm-card__title">Mensajes Recientes</h2>
+          <a routerLink="/admin/mensajes" class="dashboard__card-link">
+            Ver todos
+            <span class="material-symbols-outlined">chevron_right</span>
+          </a>
         </div>
         @if (data()!.recentMessages.length === 0) {
-          <div class="dashboard__empty-block">
-            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--neutral-200)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-            <p>Los mensajes del sitio apareceran aqui</p>
+          <div class="adm-empty">
+            <div class="adm-empty__icon">
+              <span class="material-symbols-outlined" aria-hidden="true">chat_bubble</span>
+            </div>
+            <p class="adm-empty__desc">Los mensajes del sitio apareceran aqui</p>
           </div>
         }
         @for (msg of data()!.recentMessages; track msg._id) {
           <a [routerLink]="'/admin/mensajes/' + msg._id" class="dashboard__message-item">
-            <span class="badge"
-              [class.badge-general]="msg.type === 'info'"
-              [class.badge-commercial]="msg.type === 'comercial'"
-              [class.badge-manufacturer]="msg.type === 'fabricante'"
-              [class.badge-support]="msg.type === 'soporte'"
-              [class.badge-other]="msg.type === 'otro'">{{ getTypeLabel(msg.type) }}</span>
+            <span class="adm-badge"
+              [class.adm-badge--general]="msg.type === 'info'"
+              [class.adm-badge--commercial]="msg.type === 'comercial'"
+              [class.adm-badge--manufacturer]="msg.type === 'fabricante'"
+              [class.adm-badge--support]="msg.type === 'soporte'"
+              [class.adm-badge--equipment]="msg.type === 'otro'">{{ getTypeLabel(msg.type) }}</span>
             <p class="dashboard__message-preview">{{ msg.message | slice:0:60 }}{{ msg.message.length > 60 ? '...' : '' }}</p>
             <span class="dashboard__message-date">{{ getRelativeDate(msg.createdAt) }}</span>
           </a>
         }
       </div>
-      <div class="dashboard__activity-card">
+      <div class="adm-card dashboard__activity-card">
         <div class="dashboard__card-header">
-          <h2>Actividad Reciente</h2>
+          <h2 class="adm-card__title">Actividad Reciente</h2>
           @if (data()!.recentActivity.length > 0) {
-            <a routerLink="/admin/actividad" class="dashboard__card-link">Ver mas</a>
+            <a routerLink="/admin/actividad" class="dashboard__card-link">
+              Ver mas
+              <span class="material-symbols-outlined">chevron_right</span>
+            </a>
           }
         </div>
         @if (data()!.recentActivity.length === 0) {
-          <div class="dashboard__empty-block">
-            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--neutral-200)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            <p>La actividad del panel se registrara aqui</p>
+          <div class="adm-empty">
+            <div class="adm-empty__icon">
+              <span class="material-symbols-outlined" aria-hidden="true">schedule</span>
+            </div>
+            <p class="adm-empty__desc">La actividad del panel se registrara aqui</p>
           </div>
         }
         @for (activity of data()!.recentActivity | slice:0:7; track activity._id) {
           <div class="dashboard__activity-item">
-            <div class="dashboard__activity-dot"></div>
-            <p>{{ getActivityText(activity) }}</p>
-            <span>{{ getRelativeDate(activity.createdAt) }}</span>
+            <div class="dashboard__activity-dot"
+              [class.dashboard__activity-dot--create]="activity.action === 'create' || activity.action === 'activate'"
+              [class.dashboard__activity-dot--update]="activity.action === 'update'"
+              [class.dashboard__activity-dot--delete]="activity.action === 'delete' || activity.action === 'deactivate'">
+            </div>
+            <p class="dashboard__activity-text">{{ getActivityText(activity) }}</p>
+            <span class="dashboard__activity-date">{{ getRelativeDate(activity.createdAt) }}</span>
           </div>
         }
       </div>

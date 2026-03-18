@@ -1,0 +1,42 @@
+// =============================================================================
+// Settings Page — Dashly X restyled (adm-* tokens)
+// =============================================================================
+
+.settings-page {
+  // Page layout handled by global styles
+}
+
+// ── Form card ──
+.settings-form {
+  max-width: 800px;
+  padding: var(--adm-sp-8);
+
+  @media (max-width: 767px) {
+    padding: var(--adm-sp-5);
+  }
+}
+
+// ── OG image preview ──
+.settings-og-preview {
+  margin: 12px 0;
+
+  img {
+    max-width: 400px;
+    width: 100%;
+    border-radius: var(--adm-radius-input);
+    border: 1px solid var(--adm-border);
+  }
+}
+
+// ── OG uploader (smaller variant) ──
+.settings-og-uploader {
+  padding: 20px;
+  margin-top: 8px;
+}
+
+// ── Save actions ──
+.settings-actions {
+  margin-top: var(--adm-sp-8);
+  padding-top: var(--adm-sp-6);
+  border-top: 1px solid var(--adm-divider);
+}

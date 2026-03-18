@@ -1,69 +1,81 @@
-<!-- ADMIN PRODUCT FORM (DC-048, DC-077, DC-078, DC-091, DC-098, DC-119, DC-128) -->
-<div class="product-form-page">
-  <div class="product-form-page__header">
-    <h1>{{ isEditing() ? 'Editar Producto' : 'Crear Producto' }}</h1>
-    <div class="product-form-page__actions">
-      <button class="btn btn-outline-gray" (click)="onCancel()">Cancelar</button>
-      <button class="btn btn-primary" [disabled]="saving()" (click)="onSubmit()">
+<!-- ADMIN PRODUCT FORM — Dashly X restyled -->
+<div class="pf-page">
+
+  <!-- Page Header -->
+  <div class="adm-page-header">
+    <div class="adm-page-header__left">
+      <a routerLink="/admin/productos" class="adm-back-link">
+        <span class="material-symbols-outlined">arrow_back</span> Productos
+      </a>
+      <h1 class="adm-page-header__title">{{ isEditing() ? 'Editar: ' + (existingProduct()?.name?.es || 'Producto') : 'Crear Producto' }}</h1>
+    </div>
+    <div class="pf-page__actions">
+      <button type="button" class="adm-btn adm-btn--secondary" (click)="onCancel()">Cancelar</button>
+      <button type="button" class="adm-btn adm-btn--primary" [disabled]="saving()" (click)="onSubmit()">
+        <span class="material-symbols-outlined">save</span>
         {{ saving() ? 'Guardando...' : (isEditing() ? 'Guardar cambios' : 'Guardar producto') }}
       </button>
     </div>
   </div>
 
-  <form class="product-form" [formGroup]="productForm" (ngSubmit)="onSubmit()">
+  <form class="adm-card pf-form" [formGroup]="productForm" (ngSubmit)="onSubmit()">
+
     <!-- Section 1: Informacion Basica -->
-    <div class="product-form__section">
-      <h2 class="product-form__section-title">Informacion Basica</h2>
-      <p class="product-form__section-desc">Datos principales del producto visibles en el catalogo</p>
-      <div class="form-grid">
-        <div class="form-group">
-          <label class="form-label" for="prod-name-es">Nombre del producto (ES) <span class="required">*</span></label>
-          <input type="text" id="prod-name-es" class="form-control" [class.is-invalid]="isFieldInvalid('nameEs')" formControlName="nameEs" placeholder="Ej: Amoxicilina Veterinaria 500mg" aria-required="true" (blur)="onFieldBlur('nameEs')">
+    <div class="adm-form-section">
+      <h2 class="adm-form-section__title">Informacion Basica</h2>
+      <p class="adm-form-section__desc">Datos principales del producto visibles en el catalogo</p>
+
+      <div class="adm-form-grid">
+        <div class="adm-form-group">
+          <label class="adm-form-label" for="prod-name-es">Nombre del producto (ES) <span class="required">*</span></label>
+          <input type="text" id="prod-name-es" class="adm-form-control" [class.is-invalid]="isFieldInvalid('nameEs')" formControlName="nameEs" placeholder="Ej: Amoxicilina Veterinaria 500mg" aria-required="true" (blur)="onFieldBlur('nameEs')">
           @if (isFieldInvalid('nameEs')) {
-            <div class="form-error" role="alert">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <div class="adm-form-error" role="alert">
+              <span class="material-symbols-outlined">error</span>
               {{ getFieldError('nameEs') }}
             </div>
           }
         </div>
-        <div class="form-group">
-          <label class="form-label" for="prod-name-en">Nombre del producto (EN)</label>
-          <input type="text" id="prod-name-en" class="form-control" formControlName="nameEn" placeholder="Ej: Veterinary Amoxicillin 500mg">
+        <div class="adm-form-group">
+          <label class="adm-form-label" for="prod-name-en">Nombre del producto (EN)</label>
+          <input type="text" id="prod-name-en" class="adm-form-control" formControlName="nameEn" placeholder="Ej: Veterinary Amoxicillin 500mg">
         </div>
-        <div class="form-group">
-          <label class="form-label" for="prod-brand">Marca</label>
-          <select id="prod-brand" class="form-select" formControlName="brand">
+        <div class="adm-form-group">
+          <label class="adm-form-label" for="prod-brand">Marca</label>
+          <select id="prod-brand" class="adm-form-select" formControlName="brand">
             <option value="">Sin marca</option>
             @for (b of brands(); track b._id) {
               <option [value]="b._id">{{ b.name }}</option>
             }
           </select>
         </div>
-        <div class="form-group form-group-full">
-          <label class="form-label">Categoria <span class="required">*</span></label>
-          <div class="product-form__category-cards">
-            <button type="button" class="product-form__category-card" [class.product-form__category-card--active]="selectedCategory() === 'farmacos'" [class.product-form__category-card--error]="isFieldInvalid('category')" (click)="selectCategory('farmacos')">
-              <div class="product-form__category-icon product-form__category-icon--pharma">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"/><path d="m8.5 8.5 7 7"/></svg>
+
+        <!-- Category selector cards -->
+        <div class="adm-form-group adm-form-group--full">
+          <label class="adm-form-label">Categoria <span class="required">*</span></label>
+          <div class="pf-category-cards">
+            <button type="button" class="pf-category-card" [class.pf-category-card--active]="selectedCategory() === 'farmacos'" [class.pf-category-card--error]="isFieldInvalid('category')" (click)="selectCategory('farmacos')">
+              <div class="pf-category-card__icon pf-category-card__icon--pharma">
+                <span class="material-symbols-outlined">medication</span>
               </div>
-              <span class="product-form__category-label">Farmacos</span>
+              <span class="pf-category-card__label">Farmacos</span>
             </button>
-            <button type="button" class="product-form__category-card" [class.product-form__category-card--active]="selectedCategory() === 'alimentos'" [class.product-form__category-card--error]="isFieldInvalid('category')" (click)="selectCategory('alimentos')">
-              <div class="product-form__category-icon product-form__category-icon--food">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5"/></svg>
+            <button type="button" class="pf-category-card" [class.pf-category-card--active]="selectedCategory() === 'alimentos'" [class.pf-category-card--error]="isFieldInvalid('category')" (click)="selectCategory('alimentos')">
+              <div class="pf-category-card__icon pf-category-card__icon--food">
+                <span class="material-symbols-outlined">restaurant</span>
               </div>
-              <span class="product-form__category-label">Alimentos</span>
+              <span class="pf-category-card__label">Alimentos</span>
             </button>
-            <button type="button" class="product-form__category-card" [class.product-form__category-card--active]="selectedCategory() === 'equipos'" [class.product-form__category-card--error]="isFieldInvalid('category')" (click)="selectCategory('equipos')">
-              <div class="product-form__category-icon product-form__category-icon--equipment">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76Z"/></svg>
+            <button type="button" class="pf-category-card" [class.pf-category-card--active]="selectedCategory() === 'equipos'" [class.pf-category-card--error]="isFieldInvalid('category')" (click)="selectCategory('equipos')">
+              <div class="pf-category-card__icon pf-category-card__icon--equipment">
+                <span class="material-symbols-outlined">construction</span>
               </div>
-              <span class="product-form__category-label">Equipos</span>
+              <span class="pf-category-card__label">Equipos</span>
             </button>
           </div>
           @if (isFieldInvalid('category')) {
-            <div class="form-error" role="alert">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <div class="adm-form-error" role="alert">
+              <span class="material-symbols-outlined">error</span>
               {{ getFieldError('category') }}
             </div>
           }
@@ -71,27 +83,37 @@
       </div>
     </div>
 
-    <hr class="product-form__divider">
+    <hr class="adm-form-divider">
 
-    <!-- Section 2: Especies y Clasificacion (conditional fields UX-044) -->
-    <div class="product-form__section">
-      <h2 class="product-form__section-title">Especies y Clasificacion</h2>
-      <p class="product-form__section-desc">Define las especies de destino y clasificacion segun categoria</p>
-      <div class="form-grid">
-        <div class="form-group form-group-full">
-          <label class="form-label">Especies</label>
-          <div class="product-form__chips">
-            @for (sp of speciesList(); track sp; let i = $index) {
-              <span class="product-form__chip">{{ sp }} <button type="button" [attr.aria-label]="'Remover ' + sp" (click)="removeSpecies(i)">&times;</button></span>
-            }
-            <input type="text" class="product-form__chip-input" placeholder="Agregar especie..." (keydown.enter)="addSpecies($event)" #speciesInput>
+    <!-- Section 2: Especies y Clasificacion -->
+    <div class="adm-form-section">
+      <h2 class="adm-form-section__title">Especies y Clasificacion</h2>
+      <p class="adm-form-section__desc">Define las especies de destino y clasificacion segun categoria</p>
+
+      <div class="adm-form-grid">
+        <!-- Species chips -->
+        <div class="adm-form-group adm-form-group--full">
+          <label class="adm-form-label">Especies</label>
+          <div class="pf-chips-input">
+            <div class="adm-chips">
+              @for (sp of speciesList(); track sp; let i = $index) {
+                <span class="adm-chip">
+                  {{ sp }}
+                  <button type="button" class="adm-chip__remove" [attr.aria-label]="'Remover ' + sp" (click)="removeSpecies(i)">
+                    <span class="material-symbols-outlined">close</span>
+                  </button>
+                </span>
+              }
+            </div>
+            <input type="text" class="pf-chips-input__field" placeholder="Agregar especie y presionar Enter..." (keydown.enter)="addSpecies($event)" #speciesInput>
           </div>
         </div>
 
+        <!-- Conditional: Familia Farmaceutica -->
         @if (selectedCategory() === 'farmacos') {
-          <div class="form-group product-form__conditional-field">
-            <label class="form-label" for="prod-family">Familia Farmaceutica</label>
-            <select id="prod-family" class="form-select" formControlName="family">
+          <div class="adm-form-group pf-conditional-field">
+            <label class="adm-form-label" for="prod-family">Familia Farmaceutica</label>
+            <select id="prod-family" class="adm-form-select" formControlName="family">
               <option value="">Seleccionar familia</option>
               <option>Antibioticos</option>
               <option>Desparasitantes</option>
@@ -102,10 +124,11 @@
           </div>
         }
 
+        <!-- Conditional: Etapa de Vida -->
         @if (selectedCategory() === 'alimentos') {
-          <div class="form-group product-form__conditional-field">
-            <label class="form-label" for="prod-lifestage">Etapa de Vida</label>
-            <select id="prod-lifestage" class="form-select" formControlName="lifeStage">
+          <div class="adm-form-group pf-conditional-field">
+            <label class="adm-form-label" for="prod-lifestage">Etapa de Vida</label>
+            <select id="prod-lifestage" class="adm-form-select" formControlName="lifeStage">
               <option value="">Seleccionar etapa</option>
               <option>Cachorro/Kitten</option>
               <option>Adulto</option>
@@ -115,10 +138,11 @@
           </div>
         }
 
+        <!-- Conditional: Tipo de Equipo -->
         @if (selectedCategory() === 'equipos') {
-          <div class="form-group product-form__conditional-field">
-            <label class="form-label" for="prod-eqtype">Tipo de Equipo</label>
-            <select id="prod-eqtype" class="form-select" formControlName="equipmentType">
+          <div class="adm-form-group pf-conditional-field">
+            <label class="adm-form-label" for="prod-eqtype">Tipo de Equipo</label>
+            <select id="prod-eqtype" class="adm-form-select" formControlName="equipmentType">
               <option value="">Seleccionar tipo</option>
               <option>Diagnostico</option>
               <option>Quirurgico</option>
@@ -128,263 +152,278 @@
           </div>
         }
 
-        <div class="form-group form-group-full">
-          <label class="form-label">Presentaciones</label>
-          <div class="product-form__chips">
-            @for (pres of presentationsList(); track pres; let i = $index) {
-              <span class="product-form__chip">{{ pres }} <button type="button" aria-label="Remover" (click)="removePresentation(i)">&times;</button></span>
-            }
-            <input type="text" class="product-form__chip-input" placeholder="Agregar presentacion..." (keydown.enter)="addPresentation($event)">
+        <!-- Presentations chips -->
+        <div class="adm-form-group adm-form-group--full">
+          <label class="adm-form-label">Presentaciones</label>
+          <div class="pf-chips-input">
+            <div class="adm-chips">
+              @for (pres of presentationsList(); track pres; let i = $index) {
+                <span class="adm-chip">
+                  {{ pres }}
+                  <button type="button" class="adm-chip__remove" aria-label="Remover" (click)="removePresentation(i)">
+                    <span class="material-symbols-outlined">close</span>
+                  </button>
+                </span>
+              }
+            </div>
+            <input type="text" class="pf-chips-input__field" placeholder="Agregar presentacion y presionar Enter..." (keydown.enter)="addPresentation($event)">
           </div>
         </div>
       </div>
     </div>
 
-    <hr class="product-form__divider">
+    <hr class="adm-form-divider">
 
     <!-- Section 3: Descripcion y Contenido -->
-    <div class="product-form__section">
-      <h2 class="product-form__section-title">Descripcion y Contenido</h2>
-      <p class="product-form__section-desc">Informacion detallada del producto</p>
+    <div class="adm-form-section">
+      <h2 class="adm-form-section__title">Descripcion y Contenido</h2>
+      <p class="adm-form-section__desc">Informacion detallada del producto</p>
 
-      <!-- Tabs Pill ES/EN (DC-098) -->
-      <div class="tabs-pill">
-        <button type="button" class="tabs-pill__btn" [class.tabs-pill__btn--active]="activeTab() === 'es'" (click)="switchTab('es')">Espanol</button>
-        <button type="button" class="tabs-pill__btn" [class.tabs-pill__btn--active]="activeTab() === 'en'" (click)="switchTab('en')">English</button>
+      <!-- Language Tabs -->
+      <div class="adm-tabs" style="margin-bottom: 20px;">
+        <button type="button" class="adm-tab" [class.adm-tab--active]="activeTab() === 'es'" (click)="switchTab('es')">Espanol</button>
+        <button type="button" class="adm-tab" [class.adm-tab--active]="activeTab() === 'en'" (click)="switchTab('en')">English</button>
       </div>
 
       @if (activeTab() === 'es') {
-        <div class="form-grid">
-          <div class="form-group form-group-full">
-            <label class="form-label" for="prod-desc-es">Descripcion</label>
-            <textarea id="prod-desc-es" class="form-control" formControlName="descriptionEs" placeholder="Describe el producto en espanol..." rows="4"></textarea>
+        <div class="adm-form-grid">
+          <div class="adm-form-group adm-form-group--full">
+            <label class="adm-form-label" for="prod-desc-es">Descripcion</label>
+            <textarea id="prod-desc-es" class="adm-form-control" formControlName="descriptionEs" placeholder="Describe el producto en espanol..." rows="4"></textarea>
           </div>
 
-          <!-- Category-specific fields: Farmacos ES (REQ-242) -->
           @if (selectedCategory() === 'farmacos') {
-            <div class="form-group form-group-full product-form__conditional-field">
-              <label class="form-label" for="prod-composition-es">Composicion</label>
-              <textarea id="prod-composition-es" class="form-control" formControlName="compositionEs" placeholder="Composicion del producto..." rows="3"></textarea>
+            <div class="adm-form-group adm-form-group--full pf-conditional-field">
+              <label class="adm-form-label" for="prod-composition-es">Composicion</label>
+              <textarea id="prod-composition-es" class="adm-form-control" formControlName="compositionEs" placeholder="Composicion del producto..." rows="3"></textarea>
             </div>
           }
 
-          <!-- Category-specific fields: Alimentos ES (REQ-242) -->
           @if (selectedCategory() === 'alimentos') {
-            <div class="form-group form-group-full product-form__conditional-field">
-              <label class="form-label" for="prod-ingredients-es">Ingredientes principales</label>
-              <textarea id="prod-ingredients-es" class="form-control" formControlName="ingredientsEs" placeholder="Ingredientes principales del alimento..." rows="3"></textarea>
+            <div class="adm-form-group adm-form-group--full pf-conditional-field">
+              <label class="adm-form-label" for="prod-ingredients-es">Ingredientes principales</label>
+              <textarea id="prod-ingredients-es" class="adm-form-control" formControlName="ingredientsEs" placeholder="Ingredientes principales del alimento..." rows="3"></textarea>
             </div>
-            <div class="form-group form-group-full product-form__conditional-field">
-              <label class="form-label" for="prod-nutritional-es">Informacion nutricional</label>
-              <textarea id="prod-nutritional-es" class="form-control" formControlName="nutritionalInfoEs" placeholder="Informacion nutricional..." rows="3"></textarea>
+            <div class="adm-form-group adm-form-group--full pf-conditional-field">
+              <label class="adm-form-label" for="prod-nutritional-es">Informacion nutricional</label>
+              <textarea id="prod-nutritional-es" class="adm-form-control" formControlName="nutritionalInfoEs" placeholder="Informacion nutricional..." rows="3"></textarea>
             </div>
           }
 
-          <!-- Category-specific fields: Equipos ES (REQ-242) -->
           @if (selectedCategory() === 'equipos') {
-            <div class="form-group form-group-full product-form__conditional-field">
-              <label class="form-label" for="prod-specs-es">Especificaciones tecnicas</label>
-              <textarea id="prod-specs-es" class="form-control" formControlName="specificationsEs" placeholder="Especificaciones tecnicas del equipo..." rows="3"></textarea>
+            <div class="adm-form-group adm-form-group--full pf-conditional-field">
+              <label class="adm-form-label" for="prod-specs-es">Especificaciones tecnicas</label>
+              <textarea id="prod-specs-es" class="adm-form-control" formControlName="specificationsEs" placeholder="Especificaciones tecnicas del equipo..." rows="3"></textarea>
             </div>
-            <div class="form-group form-group-full product-form__conditional-field">
-              <label class="form-label" for="prod-uses-es">Usos recomendados</label>
-              <textarea id="prod-uses-es" class="form-control" formControlName="recommendedUsesEs" placeholder="Usos recomendados..." rows="3"></textarea>
+            <div class="adm-form-group adm-form-group--full pf-conditional-field">
+              <label class="adm-form-label" for="prod-uses-es">Usos recomendados</label>
+              <textarea id="prod-uses-es" class="adm-form-control" formControlName="recommendedUsesEs" placeholder="Usos recomendados..." rows="3"></textarea>
             </div>
-            <div class="form-group form-group-full product-form__conditional-field">
-              <label class="form-label" for="prod-warranty-es">Garantia</label>
-              <textarea id="prod-warranty-es" class="form-control" formControlName="warrantyEs" placeholder="Informacion de garantia..." rows="2"></textarea>
+            <div class="adm-form-group adm-form-group--full pf-conditional-field">
+              <label class="adm-form-label" for="prod-warranty-es">Garantia</label>
+              <textarea id="prod-warranty-es" class="adm-form-control" formControlName="warrantyEs" placeholder="Informacion de garantia..." rows="2"></textarea>
             </div>
           }
         </div>
       } @else {
-        <div class="form-grid">
-          <div class="form-group form-group-full">
-            <label class="form-label" for="prod-desc-en">Description</label>
-            <textarea id="prod-desc-en" class="form-control" formControlName="descriptionEn" placeholder="Describe the product in English..." rows="4"></textarea>
+        <div class="adm-form-grid">
+          <div class="adm-form-group adm-form-group--full">
+            <label class="adm-form-label" for="prod-desc-en">Description</label>
+            <textarea id="prod-desc-en" class="adm-form-control" formControlName="descriptionEn" placeholder="Describe the product in English..." rows="4"></textarea>
           </div>
 
-          <!-- Category-specific fields: Farmacos EN (REQ-242) -->
           @if (selectedCategory() === 'farmacos') {
-            <div class="form-group form-group-full product-form__conditional-field">
-              <label class="form-label" for="prod-composition-en">Composition</label>
-              <textarea id="prod-composition-en" class="form-control" formControlName="compositionEn" placeholder="Product composition..." rows="3"></textarea>
+            <div class="adm-form-group adm-form-group--full pf-conditional-field">
+              <label class="adm-form-label" for="prod-composition-en">Composition</label>
+              <textarea id="prod-composition-en" class="adm-form-control" formControlName="compositionEn" placeholder="Product composition..." rows="3"></textarea>
             </div>
           }
 
-          <!-- Category-specific fields: Alimentos EN (REQ-242) -->
           @if (selectedCategory() === 'alimentos') {
-            <div class="form-group form-group-full product-form__conditional-field">
-              <label class="form-label" for="prod-ingredients-en">Main ingredients</label>
-              <textarea id="prod-ingredients-en" class="form-control" formControlName="ingredientsEn" placeholder="Main ingredients..." rows="3"></textarea>
+            <div class="adm-form-group adm-form-group--full pf-conditional-field">
+              <label class="adm-form-label" for="prod-ingredients-en">Main ingredients</label>
+              <textarea id="prod-ingredients-en" class="adm-form-control" formControlName="ingredientsEn" placeholder="Main ingredients..." rows="3"></textarea>
             </div>
-            <div class="form-group form-group-full product-form__conditional-field">
-              <label class="form-label" for="prod-nutritional-en">Nutritional information</label>
-              <textarea id="prod-nutritional-en" class="form-control" formControlName="nutritionalInfoEn" placeholder="Nutritional information..." rows="3"></textarea>
+            <div class="adm-form-group adm-form-group--full pf-conditional-field">
+              <label class="adm-form-label" for="prod-nutritional-en">Nutritional information</label>
+              <textarea id="prod-nutritional-en" class="adm-form-control" formControlName="nutritionalInfoEn" placeholder="Nutritional information..." rows="3"></textarea>
             </div>
           }
 
-          <!-- Category-specific fields: Equipos EN (REQ-242) -->
           @if (selectedCategory() === 'equipos') {
-            <div class="form-group form-group-full product-form__conditional-field">
-              <label class="form-label" for="prod-specs-en">Technical specifications</label>
-              <textarea id="prod-specs-en" class="form-control" formControlName="specificationsEn" placeholder="Technical specifications..." rows="3"></textarea>
+            <div class="adm-form-group adm-form-group--full pf-conditional-field">
+              <label class="adm-form-label" for="prod-specs-en">Technical specifications</label>
+              <textarea id="prod-specs-en" class="adm-form-control" formControlName="specificationsEn" placeholder="Technical specifications..." rows="3"></textarea>
             </div>
-            <div class="form-group form-group-full product-form__conditional-field">
-              <label class="form-label" for="prod-uses-en">Recommended uses</label>
-              <textarea id="prod-uses-en" class="form-control" formControlName="recommendedUsesEn" placeholder="Recommended uses..." rows="3"></textarea>
+            <div class="adm-form-group adm-form-group--full pf-conditional-field">
+              <label class="adm-form-label" for="prod-uses-en">Recommended uses</label>
+              <textarea id="prod-uses-en" class="adm-form-control" formControlName="recommendedUsesEn" placeholder="Recommended uses..." rows="3"></textarea>
             </div>
-            <div class="form-group form-group-full product-form__conditional-field">
-              <label class="form-label" for="prod-warranty-en">Warranty</label>
-              <textarea id="prod-warranty-en" class="form-control" formControlName="warrantyEn" placeholder="Warranty information..." rows="2"></textarea>
+            <div class="adm-form-group adm-form-group--full pf-conditional-field">
+              <label class="adm-form-label" for="prod-warranty-en">Warranty</label>
+              <textarea id="prod-warranty-en" class="adm-form-control" formControlName="warrantyEn" placeholder="Warranty information..." rows="2"></textarea>
             </div>
           }
         </div>
       }
     </div>
 
-    <hr class="product-form__divider">
+    <hr class="adm-form-divider">
 
-    <!-- Section 4: Imagenes (DC-078, DC-122) — REQ-243, REQ-244, REQ-254 -->
-    <div class="product-form__section">
-      <h2 class="product-form__section-title">Imagenes</h2>
-      <p class="product-form__section-desc">Sube las fotos del producto (maximo 6). La primera sera la imagen principal.</p>
+    <!-- Section 4: Imagenes -->
+    <div class="adm-form-section">
+      <h2 class="adm-form-section__title">Imagenes</h2>
+      <p class="adm-form-section__desc">Sube las fotos del producto (maximo 6). La primera sera la imagen principal.</p>
 
-      <!-- Existing images preview (REQ-244) -->
+      <!-- Existing images gallery -->
       @if (existingImages().length > 0) {
-        <div class="image-uploader__gallery" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 12px; margin-bottom: 16px;">
+        <div class="pf-image-grid">
           @for (img of existingImages(); track img; let i = $index) {
-            <div class="image-uploader__preview-item" style="position: relative; aspect-ratio: 1; border-radius: 8px; overflow: hidden; border: 1px solid var(--neutral-200);">
-              <img [src]="img" alt="Imagen del producto" style="width: 100%; height: 100%; object-fit: cover;">
-              <div style="position: absolute; bottom: 0; left: 0; right: 0; display: flex; gap: 4px; padding: 4px; background: rgba(0,0,0,0.5);">
-                <button type="button" class="btn btn-sm" style="flex:1; font-size: 11px; color: white; background: transparent; border: 1px solid rgba(255,255,255,0.4);" (click)="imageInput.click()">Cambiar</button>
-                <button type="button" class="btn btn-sm" style="flex:1; font-size: 11px; color: var(--semantic-danger); background: transparent; border: 1px solid rgba(255,255,255,0.4);" (click)="deleteImage(i)">Eliminar</button>
+            <div class="pf-image-grid__item">
+              <img [src]="img" alt="Imagen del producto">
+              <div class="pf-image-grid__overlay">
+                <button type="button" class="adm-btn adm-btn--sm adm-btn--danger-ghost" (click)="deleteImage(i)">
+                  <span class="material-symbols-outlined">delete</span>
+                </button>
               </div>
+              @if (i === 0) {
+                <span class="pf-image-grid__badge">Principal</span>
+              }
             </div>
           }
         </div>
       }
 
       @if (existingImages().length < 6) {
-        <div class="image-uploader">
-          <div class="image-uploader__dropzone" (click)="imageInput.click()" (dragover)="$event.preventDefault()" (drop)="onImageDrop($event)">
-            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--neutral-400)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-            <p>Arrastra imagenes aqui o <span>selecciona archivos</span></p>
-            <span class="image-uploader__hint">PNG, JPG hasta 5MB ({{ 6 - existingImages().length }} restantes)</span>
+        <div class="adm-uploader" (click)="imageInput.click()" (dragover)="$event.preventDefault()" (drop)="onImageDrop($event)">
+          <div class="adm-uploader__icon">
+            <span class="material-symbols-outlined">add_photo_alternate</span>
           </div>
+          <p class="adm-uploader__text">Arrastra imagenes aqui o <strong>selecciona archivos</strong></p>
+          <span class="adm-uploader__hint">PNG, JPG hasta 5MB ({{ 6 - existingImages().length }} restantes)</span>
         </div>
       }
       <input #imageInput type="file" accept="image/png,image/jpeg,image/webp" multiple style="display: none;" (change)="onImagesSelected($event)">
       @if (uploadingImages()) {
-        <div class="image-uploader__progress" style="margin-top: 12px;">
-          <div class="image-uploader__progress-bar"><div class="image-uploader__progress-fill" style="width: 100%;"></div></div>
-          <span class="image-uploader__progress-text">Subiendo imagenes...</span>
+        <div class="pf-upload-progress">
+          <div class="adm-progress"><div class="adm-progress__bar" style="width: 100%;"></div></div>
+          <span class="pf-upload-progress__text">Subiendo imagenes...</span>
         </div>
       }
     </div>
 
-    <hr class="product-form__divider">
+    <hr class="adm-form-divider">
 
-    <!-- Section 5: Ficha Tecnica — REQ-245 -->
-    <div class="product-form__section">
-      <h2 class="product-form__section-title">Ficha Tecnica (PDF)</h2>
-      <p class="product-form__section-desc">Sube la ficha tecnica del producto en formato PDF (opcional)</p>
+    <!-- Section 5: Ficha Tecnica (PDF) -->
+    <div class="adm-form-section">
+      <h2 class="adm-form-section__title">Ficha Tecnica (PDF)</h2>
+      <p class="adm-form-section__desc">Sube la ficha tecnica del producto en formato PDF (opcional)</p>
 
       @if (existingPdfUrl()) {
-        <div style="display: flex; align-items: center; gap: 12px; padding: 16px; border: 1px solid var(--neutral-200); border-radius: 8px; background: var(--neutral-50);">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--semantic-danger)" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><polyline points="14 2 14 8 20 8"/></svg>
-          <div style="flex: 1; min-width: 0;">
-            <p style="font-size: 14px; font-weight: 500; margin: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Ficha tecnica</p>
-            <p style="font-size: 12px; color: var(--neutral-400); margin: 0;">PDF cargado</p>
+        <div class="pf-pdf-preview">
+          <span class="material-symbols-outlined pf-pdf-preview__icon">picture_as_pdf</span>
+          <div class="pf-pdf-preview__info">
+            <p class="pf-pdf-preview__name">Ficha tecnica</p>
+            <p class="pf-pdf-preview__meta">PDF cargado</p>
           </div>
-          <a [href]="existingPdfUrl()!" target="_blank" rel="noopener" class="btn btn-outline-gray btn-sm">Descargar</a>
-          <button type="button" class="btn btn-outline-gray btn-sm" style="color: var(--semantic-danger);" (click)="deletePdf()">Eliminar</button>
+          <a [href]="existingPdfUrl()!" target="_blank" rel="noopener" class="adm-btn adm-btn--secondary adm-btn--sm">Descargar</a>
+          <button type="button" class="adm-btn adm-btn--danger-ghost adm-btn--sm" (click)="deletePdf()">
+            <span class="material-symbols-outlined">delete</span>
+          </button>
         </div>
       } @else {
-        <div class="image-uploader">
-          <div class="image-uploader__dropzone" (click)="pdfInput.click()" (dragover)="$event.preventDefault()" (drop)="onPdfDrop($event)">
-            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--neutral-400)" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><polyline points="14 2 14 8 20 8"/></svg>
-            <p>Arrastra el PDF aqui o <span>selecciona archivo</span></p>
-            <span class="image-uploader__hint">PDF hasta 10MB</span>
+        <div class="adm-uploader" (click)="pdfInput.click()" (dragover)="$event.preventDefault()" (drop)="onPdfDrop($event)">
+          <div class="adm-uploader__icon">
+            <span class="material-symbols-outlined">picture_as_pdf</span>
           </div>
+          <p class="adm-uploader__text">Arrastra el PDF aqui o <strong>selecciona archivo</strong></p>
+          <span class="adm-uploader__hint">PDF hasta 10MB</span>
         </div>
       }
       <input #pdfInput type="file" accept="application/pdf" style="display: none;" (change)="onPdfSelected($event)">
       @if (uploadingPdf()) {
-        <div class="image-uploader__progress" style="margin-top: 12px;">
-          <div class="image-uploader__progress-bar"><div class="image-uploader__progress-fill" style="width: 100%;"></div></div>
-          <span class="image-uploader__progress-text">Subiendo PDF...</span>
+        <div class="pf-upload-progress">
+          <div class="adm-progress"><div class="adm-progress__bar" style="width: 100%;"></div></div>
+          <span class="pf-upload-progress__text">Subiendo PDF...</span>
         </div>
       }
     </div>
 
-    <hr class="product-form__divider">
+    <hr class="adm-form-divider">
 
-    <!-- Section 6: Estado -->
-    <div class="product-form__section">
-      <h2 class="product-form__section-title">Configuracion</h2>
-      <p class="product-form__section-desc">Estado y visibilidad del producto</p>
-      <div class="product-form__toggle-row">
+    <!-- Section 6: Configuracion -->
+    <div class="adm-form-section">
+      <h2 class="adm-form-section__title">Configuracion</h2>
+      <p class="adm-form-section__desc">Estado y visibilidad del producto</p>
+
+      <div class="pf-toggle-row">
         <div>
-          <span class="form-label">Producto activo</span>
-          <p class="product-form__toggle-hint">El producto sera visible en el catalogo publico</p>
+          <span class="adm-form-label">Producto activo</span>
+          <p class="adm-form-hint">El producto sera visible en el catalogo publico</p>
         </div>
-        <label class="form-switch">
+        <label class="adm-form-switch">
           <input type="checkbox" formControlName="isActive">
-          <span class="switch-slider"></span>
+          <span class="adm-form-switch__track">
+            <span class="adm-form-switch__thumb"></span>
+          </span>
         </label>
       </div>
     </div>
 
-    <!-- REQ-250: Delete button in edit mode -->
+    <!-- Danger zone: Delete (edit mode only) -->
     @if (isEditing()) {
-      <hr class="product-form__divider">
-      <div class="product-form__section">
-        <h2 class="product-form__section-title" style="color: var(--semantic-danger);">Zona de peligro</h2>
-        <p class="product-form__section-desc">Esta accion es irreversible</p>
-        <button type="button" class="btn" style="background-color: var(--semantic-danger); color: white; border: none;" (click)="requestDeleteProduct()">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+      <hr class="adm-form-divider">
+      <div class="adm-form-section">
+        <h2 class="adm-form-section__title" style="color: var(--adm-danger);">Zona de peligro</h2>
+        <p class="adm-form-section__desc">Esta accion es irreversible</p>
+        <button type="button" class="adm-btn adm-btn--danger" (click)="requestDeleteProduct()">
+          <span class="material-symbols-outlined">delete</span>
           Eliminar producto
         </button>
       </div>
     }
   </form>
 
-  <!-- Mobile sticky actions (DC-091) -->
-  <div class="product-form-page__sticky-actions">
-    <button class="btn btn-outline-gray btn-block" (click)="onCancel()">Cancelar</button>
-    <button class="btn btn-primary btn-block" [disabled]="saving()" (click)="onSubmit()">{{ saving() ? 'Guardando...' : 'Guardar' }}</button>
+  <!-- Mobile sticky actions -->
+  <div class="pf-page__sticky-actions">
+    <button type="button" class="adm-btn adm-btn--secondary adm-btn--block" (click)="onCancel()">Cancelar</button>
+    <button type="button" class="adm-btn adm-btn--primary adm-btn--block" [disabled]="saving()" (click)="onSubmit()">{{ saving() ? 'Guardando...' : 'Guardar' }}</button>
   </div>
 </div>
 
-<!-- Unsaved Changes Modal (UX-045) -->
+<!-- Unsaved Changes Modal -->
 @if (showUnsavedModal()) {
-  <div class="modal-backdrop" (click)="stayEditing()">
-    <div class="modal-dialog" (click)="$event.stopPropagation()">
-      <div class="modal-dialog__icon" aria-hidden="true">
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--semantic-warning)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  <div class="adm-modal-backdrop" (click)="stayEditing()">
+    <div class="adm-modal adm-modal--confirm" (click)="$event.stopPropagation()">
+      <div class="adm-modal__body">
+        <div class="adm-modal__icon adm-modal__icon--warning" aria-hidden="true">
+          <span class="material-symbols-outlined">warning</span>
+        </div>
+        <h3 class="adm-modal__title">Tienes cambios sin guardar</h3>
+        <p class="adm-modal__desc">Si sales ahora, perderas los cambios realizados en este producto.</p>
       </div>
-      <h3 class="modal-dialog__title">Tienes cambios sin guardar</h3>
-      <p class="modal-dialog__desc">Si sales ahora, perderas los cambios realizados en este producto.</p>
-      <div class="modal-dialog__actions">
-        <button class="btn btn-outline-gray" (click)="confirmLeave()">Salir sin guardar</button>
-        <button class="btn btn-primary" (click)="stayEditing()">Seguir editando</button>
+      <div class="adm-modal__footer">
+        <button class="adm-btn adm-btn--secondary" (click)="confirmLeave()">Salir sin guardar</button>
+        <button class="adm-btn adm-btn--primary" (click)="stayEditing()">Seguir editando</button>
       </div>
     </div>
   </div>
 }
 
-<!-- Delete Confirmation Modal (REQ-250) -->
+<!-- Delete Confirmation Modal -->
 @if (showDeleteModal()) {
-  <div class="modal-backdrop" (click)="cancelDelete()">
-    <div class="modal-dialog" (click)="$event.stopPropagation()">
-      <div class="modal-dialog__icon" aria-hidden="true">
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--semantic-danger)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+  <div class="adm-modal-backdrop" (click)="cancelDelete()">
+    <div class="adm-modal adm-modal--confirm" (click)="$event.stopPropagation()">
+      <div class="adm-modal__body">
+        <div class="adm-modal__icon adm-modal__icon--danger" aria-hidden="true">
+          <span class="material-symbols-outlined">delete</span>
+        </div>
+        <h3 class="adm-modal__title">Eliminar producto</h3>
+        <p class="adm-modal__desc">Esta accion eliminara el producto de forma permanente. No se puede deshacer.</p>
       </div>
-      <h3 class="modal-dialog__title">Eliminar producto</h3>
-      <p class="modal-dialog__desc">Esta accion eliminara el producto de forma permanente. No se puede deshacer.</p>
-      <div class="modal-dialog__actions">
-        <button class="btn btn-outline-gray" (click)="cancelDelete()">Cancelar</button>
-        <button class="btn" style="background-color: var(--semantic-danger); color: white; border: none;" (click)="confirmDeleteProduct()">Eliminar</button>
+      <div class="adm-modal__footer">
+        <button class="adm-btn adm-btn--secondary" (click)="cancelDelete()">Cancelar</button>
+        <button class="adm-btn adm-btn--danger" (click)="confirmDeleteProduct()">Eliminar</button>
       </div>
     </div>
   </div>

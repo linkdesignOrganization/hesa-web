@@ -1,0 +1,150 @@
+// ============================================================
+// HESA Admin Panel — Dashly X Design Tokens
+// These tokens are ADMIN-ONLY and do NOT affect the public site.
+// ============================================================
+
+:root {
+  // ── Brand / Primary ──
+  --adm-primary: #1476FF;
+  --adm-primary-hover: #0E5FD9;
+  --adm-primary-active: #0B4FBB;
+  --adm-primary-soft: #EAF4FF;
+  --adm-primary-soft-hover: #D6EAFF;
+  --adm-primary-shadow: rgba(2, 87, 251, 0.2);
+
+  // ── Backgrounds ──
+  --adm-bg-page: #F7F9FC;
+  --adm-bg-card: #FFFFFF;
+  --adm-bg-sidebar: #FFFFFF;
+  --adm-bg-input: #FFFFFF;
+
+  // ── Borders & Dividers ──
+  --adm-border: #E9EAF3;
+  --adm-border-hover: #D1D3E0;
+  --adm-divider: #E9EAF3;
+
+  // ── Text ──
+  --adm-text-heading: #0B0E2C;
+  --adm-text-body: #6F7182;
+  --adm-text-paragraph: #666977;
+  --adm-text-dark: #333333;
+  --adm-text-muted: #9496A1;
+  --adm-text-placeholder: #A0A3B1;
+
+  // ── Sidebar ──
+  --adm-sidebar-link: #333333;
+  --adm-sidebar-link-hover: #0B0E2C;
+  --adm-sidebar-active-bg: #F4F7FF;
+  --adm-sidebar-active-color: #1476FF;
+  --adm-sidebar-submenu: #6F7182;
+
+  // ── Semantic Colors ──
+  --adm-success: #22C55E;
+  --adm-success-soft: #DCFCE7;
+  --adm-success-text: #166534;
+  --adm-danger: #EF4444;
+  --adm-danger-soft: #FEE2E2;
+  --adm-danger-text: #991B1B;
+  --adm-danger-hover: #DC2626;
+  --adm-warning: #F59E0B;
+  --adm-warning-soft: #FEF3C7;
+  --adm-warning-text: #92400E;
+  --adm-info: #1476FF;
+  --adm-info-soft: #EAF4FF;
+  --adm-info-text: #0B4FBB;
+
+  // ── Category Colors (for badges) ──
+  --adm-pharma-bg: #EAF4FF;
+  --adm-pharma-color: #1476FF;
+  --adm-food-bg: #DCFCE7;
+  --adm-food-color: #166534;
+  --adm-equipment-bg: #F3F4F6;
+  --adm-equipment-color: #4B5563;
+
+  // ── Purple (manufacturer) ──
+  --adm-purple: #7C3AED;
+  --adm-purple-soft: #EDE9FE;
+  --adm-purple-text: #5B21B6;
+
+  // ── Shadows ──
+  --adm-shadow-xs: 0 1px 2px rgba(11, 22, 44, 0.04);
+  --adm-shadow-sm: 0 2px 8px rgba(11, 22, 44, 0.06);
+  --adm-shadow-md: 0 2px 12px rgba(11, 22, 44, 0.05);
+  --adm-shadow-lg: 0 8px 24px rgba(11, 22, 44, 0.08);
+  --adm-shadow-btn: 0 4px 10px rgba(2, 87, 251, 0.2);
+  --adm-shadow-sidebar: 0 2px 12px rgba(11, 22, 44, 0.05);
+
+  // ── Typography ──
+  --adm-font: 'Inter', sans-serif;
+  --adm-h1-size: 22px;
+  --adm-h1-weight: 700;
+  --adm-h1-lh: 28px;
+  --adm-h2-size: 18px;
+  --adm-h2-weight: 700;
+  --adm-h2-lh: 24px;
+  --adm-h3-size: 16px;
+  --adm-h3-weight: 600;
+  --adm-h3-lh: 20px;
+  --adm-body-size: 14px;
+  --adm-body-weight: 400;
+  --adm-body-lh: 24px;
+  --adm-small-size: 13px;
+  --adm-small-lh: 18px;
+  --adm-label-size: 14px;
+  --adm-label-weight: 500;
+  --adm-badge-size: 12px;
+  --adm-badge-weight: 500;
+  --adm-stat-size: 28px;
+  --adm-stat-weight: 700;
+
+  // ── Border Radius ──
+  --adm-radius-btn: 44px;
+  --adm-radius-input: 12px;
+  --adm-radius-search: 52px;
+  --adm-radius-card: 16px;
+  --adm-radius-sidebar-link: 48px;
+  --adm-radius-badge: 40px;
+  --adm-radius-pill: 9999px;
+  --adm-radius-dropdown: 12px;
+  --adm-radius-modal: 20px;
+  --adm-radius-sm: 8px;
+
+  // ── Sizing ──
+  --adm-sidebar-width: 300px;
+  --adm-sidebar-collapsed: 80px;
+  --adm-topbar-height: 68px;
+  --adm-input-height: 48px;
+  --adm-search-height: 44px;
+  --adm-avatar-sm: 36px;
+  --adm-avatar-md: 40px;
+  --adm-avatar-lg: 56px;
+
+  // ── Spacing ──
+  --adm-sp-1: 4px;
+  --adm-sp-2: 8px;
+  --adm-sp-3: 12px;
+  --adm-sp-4: 16px;
+  --adm-sp-5: 20px;
+  --adm-sp-6: 24px;
+  --adm-sp-8: 32px;
+  --adm-sp-10: 40px;
+  --adm-sp-12: 48px;
+  --adm-content-padding: 32px;
+  --adm-card-padding: 24px;
+
+  // ── Z-Index ──
+  --adm-z-dropdown: 100;
+  --adm-z-sticky: 200;
+  --adm-z-sidebar: 300;
+  --adm-z-overlay: 400;
+  --adm-z-modal: 500;
+  --adm-z-toast: 600;
+
+  // ── Transitions ──
+  --adm-transition-fast: 0.15s ease;
+  --adm-transition-base: 0.2s ease;
+  --adm-transition-slow: 0.3s ease;
+
+  // ── Overlay ──
+  --adm-overlay: rgba(11, 22, 44, 0.4);
+}

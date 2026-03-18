@@ -1,0 +1,76 @@
+<!-- ADMIN HOME HERO EDITOR — Dashly X -->
+<div class="hero-editor">
+  <div class="adm-page-header">
+    <div class="adm-page-header__left">
+      <h1 class="adm-page-header__title">Editor del Hero</h1>
+    </div>
+  </div>
+
+  @if (loading()) {
+    <div class="hero-editor__skeletons">
+      <div class="adm-skeleton adm-skeleton--card" style="height: 200px;"></div>
+      <div class="adm-skeleton" style="height: 44px;"></div>
+      <div class="adm-skeleton" style="height: 80px;"></div>
+    </div>
+  } @else if (error()) {
+    <div class="adm-card hero-editor__error">
+      <div class="adm-empty">
+        <p class="adm-empty__title">Error al cargar la configuracion del hero.</p>
+        <button class="adm-btn adm-btn--primary" (click)="loadConfig()">Reintentar</button>
+      </div>
+    </div>
+  } @else {
+    <div class="hero-editor__layout">
+      <!-- Image Preview -->
+      <div class="hero-editor__preview">
+        @if (heroImage()) {
+          <div class="hero-editor__preview-image" [style.background-image]="'url(' + heroImage() + ')'">
+            <button class="adm-btn adm-btn--secondary adm-btn--sm hero-editor__change-btn" (click)="fileInput.click()">Cambiar imagen</button>
+          </div>
+        } @else {
+          <div class="adm-uploader hero-editor__uploader" (click)="fileInput.click()">
+            <span class="material-symbols-outlined">add_photo_alternate</span>
+            <p class="adm-uploader__text">Haz clic para subir imagen del hero</p>
+            <span class="adm-uploader__hint">Recomendado: 1920x1080px, JPG o WebP</span>
+          </div>
+        }
+        <input #fileInput type="file" accept="image/jpeg,image/png,image/webp" style="display: none;" (change)="onImageSelected($event)">
+        @if (uploadingImage()) {
+          <div class="hero-editor__upload-progress">
+            <div class="hero-editor__upload-bar"></div>
+          </div>
+        }
+      </div>
+
+      <!-- Form Fields -->
+      <div class="hero-editor__form">
+        <div class="adm-tabs">
+          <button class="adm-tab" [class.adm-tab--active]="activeLang() === 'es'" (click)="activeLang.set('es')">Espanol</button>
+          <button class="adm-tab" [class.adm-tab--active]="activeLang() === 'en'" (click)="activeLang.set('en')">English</button>
+        </div>
+
+        @if (activeLang() === 'es') {
+          <div class="adm-form-group"><label class="adm-form-label">Tag superior</label><input type="text" class="adm-form-control" [(ngModel)]="tag.es"></div>
+          <div class="adm-form-group"><label class="adm-form-label">Headline</label><textarea class="adm-form-control" rows="2" [(ngModel)]="headline.es"></textarea></div>
+          <div class="adm-form-group"><label class="adm-form-label">Subtitulo</label><textarea class="adm-form-control" rows="2" [(ngModel)]="subtitle.es"></textarea></div>
+          <div class="adm-form-group"><label class="adm-form-label">CTA Primario</label><input type="text" class="adm-form-control" [(ngModel)]="ctaPrimary.es"></div>
+          <div class="adm-form-group"><label class="adm-form-label">CTA Secundario</label><input type="text" class="adm-form-control" [(ngModel)]="ctaSecondary.es"></div>
+        } @else {
+          <div class="adm-form-group"><label class="adm-form-label">Top Tag</label><input type="text" class="adm-form-control" [(ngModel)]="tag.en"></div>
+          <div class="adm-form-group"><label class="adm-form-label">Headline</label><textarea class="adm-form-control" rows="2" [(ngModel)]="headline.en"></textarea></div>
+          <div class="adm-form-group"><label class="adm-form-label">Subtitle</label><textarea class="adm-form-control" rows="2" [(ngModel)]="subtitle.en"></textarea></div>
+          <div class="adm-form-group"><label class="adm-form-label">Primary CTA</label><input type="text" class="adm-form-control" [(ngModel)]="ctaPrimary.en"></div>
+          <div class="adm-form-group"><label class="adm-form-label">Secondary CTA</label><input type="text" class="adm-form-control" [(ngModel)]="ctaSecondary.en"></div>
+        }
+
+        <button class="adm-btn adm-btn--primary" [disabled]="saving()" (click)="save()">
+          @if (saving()) {
+            <span class="adm-spinner"></span> Guardando...
+          } @else {
+            <span class="material-symbols-outlined">save</span> Guardar cambios
+          }
+        </button>
+      </div>
+    </div>
+  }
+</div>

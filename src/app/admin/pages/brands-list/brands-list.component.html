@@ -1,0 +1,210 @@
+<!-- ADMIN BRANDS LIST — Dashly X -->
+<div class="brands-page">
+  <div class="adm-page-header">
+    <div class="adm-page-header__left">
+      <h1 class="adm-page-header__title">Marcas</h1>
+    </div>
+    <div class="brands-page__actions">
+      <div class="adm-view-toggle">
+        <button class="adm-view-toggle__btn" [class.adm-view-toggle__btn--active]="viewMode() === 'card'" (click)="viewMode.set('card')" aria-label="Vista de tarjetas">
+          <span class="material-symbols-outlined">grid_view</span>
+        </button>
+        <button class="adm-view-toggle__btn" [class.adm-view-toggle__btn--active]="viewMode() === 'table'" (click)="viewMode.set('table')" aria-label="Vista de tabla">
+          <span class="material-symbols-outlined">view_list</span>
+        </button>
+      </div>
+      <a routerLink="/admin/marcas/crear" class="adm-btn adm-btn--primary">
+        <span class="material-symbols-outlined">add</span>
+        Crear marca
+      </a>
+    </div>
+  </div>
+
+  <!-- Loading skeleton -->
+  @if (loading()) {
+    <div class="brands-grid">
+      @for (i of [1,2,3,4,5,6]; track i) {
+        <div class="adm-card brand-skeleton">
+          <div class="adm-skeleton adm-skeleton--circle" style="width: 56px; height: 56px; margin-bottom: 12px;"></div>
+          <div class="adm-skeleton" style="height: 14px; width: 70%; margin-bottom: 8px;"></div>
+          <div class="adm-skeleton" style="height: 12px; width: 45%;"></div>
+        </div>
+      }
+    </div>
+
+  <!-- Empty state -->
+  } @else if (brands().length === 0) {
+    <div class="adm-card adm-card--no-padding">
+      <div class="adm-empty">
+        <div class="adm-empty__icon">
+          <span class="material-symbols-outlined">image</span>
+        </div>
+        <h2 class="adm-empty__title">No hay marcas registradas</h2>
+        <p class="adm-empty__desc">Agrega las marcas que distribuyes para organizar tus productos.</p>
+        <a routerLink="/admin/marcas/crear" class="adm-btn adm-btn--primary">
+          <span class="material-symbols-outlined">add</span>
+          Crear tu primera marca
+        </a>
+      </div>
+    </div>
+
+  <!-- Card view -->
+  } @else if (viewMode() === 'card') {
+    <div class="brands-grid">
+      @for (brand of brands(); track brand._id) {
+        <div class="adm-card adm-card--hover brand-card">
+          <div class="brand-card__header">
+            @if (brand.logo) {
+              <img [src]="brand.logo" [alt]="brand.name" class="brand-card__logo-img">
+            } @else {
+              <div class="brand-card__logo">{{ brand.name.charAt(0) }}</div>
+            }
+            <div class="brand-card__menu-wrapper">
+              <button class="brand-card__menu-btn" (click)="toggleMenu(brand._id, $event)" [attr.aria-label]="'Opciones para ' + brand.name" aria-haspopup="true" [attr.aria-expanded]="openMenuId() === brand._id">
+                <span class="material-symbols-outlined">more_vert</span>
+              </button>
+              @if (openMenuId() === brand._id) {
+                <div class="adm-dropdown" role="menu">
+                  <a [routerLink]="'/admin/marcas/' + brand._id + '/editar'" class="adm-dropdown__item" role="menuitem" (click)="closeMenu()">
+                    <span class="material-symbols-outlined">edit</span>
+                    Editar
+                  </a>
+                  <a [routerLink]="'/admin/productos'" [queryParams]="{ brand: brand._id }" class="adm-dropdown__item" role="menuitem" (click)="closeMenu()">
+                    <span class="material-symbols-outlined">visibility</span>
+                    Ver productos
+                  </a>
+                  <div class="adm-dropdown__divider"></div>
+                  <button class="adm-dropdown__item adm-dropdown__item--danger" role="menuitem" (click)="requestDelete(brand)">
+                    <span class="material-symbols-outlined">delete</span>
+                    Eliminar
+                  </button>
+                </div>
+              }
+            </div>
+          </div>
+          <h3 class="brand-card__name">{{ brand.name }}</h3>
+          <p class="brand-card__country">{{ brand.country }}</p>
+          <div class="brand-card__meta">
+            @if (brand.productCount !== undefined) {
+              <span class="brand-card__count">{{ brand.productCount }} productos</span>
+            }
+          </div>
+          <div class="brand-card__badges">
+            @for (cat of brand.categories; track cat) {
+              <span class="adm-badge" [class.adm-badge--pharma]="cat === 'farmacos'" [class.adm-badge--food]="cat === 'alimentos'" [class.adm-badge--equipment]="cat === 'equipos'">{{ cat }}</span>
+            }
+          </div>
+        </div>
+      }
+    </div>
+
+  <!-- Table view -->
+  } @else {
+    <!-- Desktop table -->
+    <div class="adm-card adm-card--no-padding adm-table-desktop">
+      <div class="adm-table-wrapper">
+        <table class="adm-table">
+          <thead>
+            <tr>
+              <th>Logo</th>
+              <th>Nombre</th>
+              <th>Pais</th>
+              <th>Categorias</th>
+              <th>Productos</th>
+              <th style="text-align: right;">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (brand of brands(); track brand._id) {
+              <tr>
+                <td>
+                  @if (brand.logo) {
+                    <img [src]="brand.logo" [alt]="brand.name" class="brand-table__logo-img">
+                  } @else {
+                    <div class="brand-table__logo-placeholder">{{ brand.name.charAt(0) }}</div>
+                  }
+                </td>
+                <td>
+                  <span class="adm-table__name">{{ brand.name }}</span>
+                </td>
+                <td style="color: var(--adm-text-body);">{{ brand.country }}</td>
+                <td>
+                  <div class="brand-table__categories">
+                    @for (cat of brand.categories; track cat) {
+                      <span class="adm-badge" [class.adm-badge--pharma]="cat === 'farmacos'" [class.adm-badge--food]="cat === 'alimentos'" [class.adm-badge--equipment]="cat === 'equipos'">{{ cat }}</span>
+                    }
+                  </div>
+                </td>
+                <td>{{ brand.productCount ?? '-' }}</td>
+                <td>
+                  <div class="adm-table__actions">
+                    <a [routerLink]="'/admin/marcas/' + brand._id + '/editar'" class="adm-table__action-btn" aria-label="Editar marca">
+                      <span class="material-symbols-outlined">edit</span>
+                    </a>
+                    <button class="adm-table__action-btn adm-table__action-btn--danger" (click)="requestDelete(brand)" aria-label="Eliminar marca">
+                      <span class="material-symbols-outlined">delete</span>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Mobile stacked cards -->
+    <div class="adm-table-mobile">
+      @for (brand of brands(); track brand._id) {
+        <div class="adm-table-mobile__item">
+          <div class="adm-table-mobile__row">
+            <span class="adm-table-mobile__label">Nombre</span>
+            <span class="adm-table-mobile__value">{{ brand.name }}</span>
+          </div>
+          <div class="adm-table-mobile__row">
+            <span class="adm-table-mobile__label">Pais</span>
+            <span class="adm-table-mobile__value">{{ brand.country }}</span>
+          </div>
+          <div class="adm-table-mobile__row">
+            <span class="adm-table-mobile__label">Categorias</span>
+            <span class="adm-table-mobile__value">
+              <div class="brand-table__categories">
+                @for (cat of brand.categories; track cat) {
+                  <span class="adm-badge" [class.adm-badge--pharma]="cat === 'farmacos'" [class.adm-badge--food]="cat === 'alimentos'" [class.adm-badge--equipment]="cat === 'equipos'">{{ cat }}</span>
+                }
+              </div>
+            </span>
+          </div>
+          <div class="adm-table-mobile__row">
+            <span class="adm-table-mobile__label">Productos</span>
+            <span class="adm-table-mobile__value">{{ brand.productCount ?? '-' }}</span>
+          </div>
+          <div class="adm-table-mobile__row">
+            <span class="adm-table-mobile__label">Acciones</span>
+            <span class="adm-table-mobile__value">
+              <div class="adm-table__actions">
+                <a [routerLink]="'/admin/marcas/' + brand._id + '/editar'" class="adm-table__action-btn" aria-label="Editar marca">
+                  <span class="material-symbols-outlined">edit</span>
+                </a>
+                <button class="adm-table__action-btn adm-table__action-btn--danger" (click)="requestDelete(brand)" aria-label="Eliminar marca">
+                  <span class="material-symbols-outlined">delete</span>
+                </button>
+              </div>
+            </span>
+          </div>
+        </div>
+      }
+    </div>
+  }
+</div>
+
+<app-confirm-modal
+  #deleteModal
+  variant="danger"
+  title="Eliminar marca"
+  [description]="deleteModalDescription()"
+  confirmLabel="Eliminar"
+  cancelLabel="Cancelar"
+  (confirmed)="onDeleteConfirmed()"
+  (cancelled)="brandToDelete.set(null)"
+/>

@@ -1,0 +1,67 @@
+<!-- ADMIN CONTENT EDITOR — Dashly X -->
+<div class="content-editor">
+  <div class="adm-page-header">
+    <div class="adm-page-header__left">
+      <h1 class="adm-page-header__title">Editor de Contenido — {{ pageLabel() }}</h1>
+    </div>
+  </div>
+
+  @if (loading()) {
+    <div class="content-editor__skeletons">
+      <div class="adm-skeleton" style="height: 40px;"></div>
+      <div class="adm-skeleton" style="height: 120px;"></div>
+      <div class="adm-skeleton" style="height: 120px;"></div>
+    </div>
+  } @else if (error()) {
+    <div class="adm-card content-editor__error">
+      <div class="adm-empty">
+        <p class="adm-empty__title">Error al cargar el contenido.</p>
+        <button class="adm-btn adm-btn--primary" (click)="loadContent()">Reintentar</button>
+      </div>
+    </div>
+  } @else {
+    <!-- Hero Image (for nosotros, distribuidores) -->
+    @if (pageKey() === 'nosotros' || pageKey() === 'distribuidores') {
+      <div class="content-editor__image-section">
+        <label class="adm-form-label">Imagen Hero</label>
+        @if (heroImage()) {
+          <div class="content-editor__image-preview" [style.background-image]="'url(' + heroImage() + ')'">
+            <button class="adm-btn adm-btn--secondary adm-btn--sm" (click)="imageInput.click()">Cambiar imagen</button>
+          </div>
+        } @else {
+          <div class="adm-uploader" (click)="imageInput.click()">
+            <span class="material-symbols-outlined">add_photo_alternate</span>
+            <p class="adm-uploader__text">Haz clic para subir imagen</p>
+          </div>
+        }
+        <input #imageInput type="file" accept="image/jpeg,image/png,image/webp" style="display: none;" (change)="onImageSelected($event)">
+      </div>
+    }
+
+    <!-- Language Tabs -->
+    <div class="adm-tabs">
+      <button class="adm-tab" [class.adm-tab--active]="activeLang() === 'es'" (click)="activeLang.set('es')">Espanol</button>
+      <button class="adm-tab" [class.adm-tab--active]="activeLang() === 'en'" (click)="activeLang.set('en')">English</button>
+    </div>
+
+    <!-- Sections -->
+    @for (section of sections(); track section.key) {
+      <div class="adm-form-group">
+        <label class="adm-form-label">{{ activeLang() === 'es' ? section.label.es : section.label.en }}</label>
+        @if (section.type === 'text') {
+          <input type="text" class="adm-form-control" [ngModel]="activeLang() === 'es' ? section.value.es : section.value.en" (ngModelChange)="updateSectionValue(section.key, $event)">
+        } @else {
+          <textarea class="adm-form-control" rows="4" [ngModel]="activeLang() === 'es' ? section.value.es : section.value.en" (ngModelChange)="updateSectionValue(section.key, $event)"></textarea>
+        }
+      </div>
+    }
+
+    <button class="adm-btn adm-btn--primary" [disabled]="saving()" (click)="save()">
+      @if (saving()) {
+        <span class="adm-spinner"></span> Guardando...
+      } @else {
+        <span class="material-symbols-outlined">save</span> Guardar cambios
+      }
+    </button>
+  }
+</div>

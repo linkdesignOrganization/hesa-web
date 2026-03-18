@@ -1,0 +1,118 @@
+<!-- ADMIN FEATURED PRODUCTS — Dashly X -->
+<div class="featured-products">
+  <div class="adm-page-header">
+    <div class="adm-page-header__left">
+      <h1 class="adm-page-header__title">Productos Destacados</h1>
+    </div>
+    <button class="adm-btn adm-btn--primary" (click)="showModal.set(true)">
+      <span class="material-symbols-outlined">add</span>
+      Agregar producto
+    </button>
+  </div>
+
+  @if (loading()) {
+    <div class="featured-products__skeletons">
+      @for (i of [1,2,3,4]; track i) {
+        <div class="adm-skeleton" style="height: 64px;"></div>
+      }
+    </div>
+  } @else if (products().length === 0) {
+    <div class="adm-card featured-products__empty-card">
+      <div class="adm-empty">
+        <div class="adm-empty__icon">
+          <span class="material-symbols-outlined">image</span>
+        </div>
+        <p class="adm-empty__title">No hay productos destacados</p>
+        <p class="adm-empty__desc">La seccion no se mostrara en el home.</p>
+        <button class="adm-btn adm-btn--primary" (click)="showModal.set(true)">
+          <span class="material-symbols-outlined">add</span>
+          Agregar productos
+        </button>
+      </div>
+    </div>
+  } @else {
+    <div class="featured-products__list" cdkDropList (cdkDropListDropped)="onDrop($event)">
+      @for (product of products(); track product._id) {
+        <div class="featured-item adm-card" cdkDrag>
+          <span class="featured-item__drag" cdkDragHandle>
+            <span class="material-symbols-outlined">drag_indicator</span>
+          </span>
+          <div class="featured-item__thumb">
+            @if (product.images.length > 0) {
+              <img [src]="product.images[0]" [alt]="product.name.es" class="featured-item__img">
+            } @else {
+              <span class="material-symbols-outlined featured-item__placeholder-icon">image</span>
+            }
+          </div>
+          <div class="featured-item__info">
+            <span class="featured-item__name">{{ product.name.es }}</span>
+            <span class="featured-item__brand">{{ product.brand ? product.brand.name : '-' }}</span>
+          </div>
+          <button class="adm-btn adm-btn--icon featured-item__remove" aria-label="Remover" (click)="removeProduct(product._id)">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+      }
+    </div>
+    <button class="adm-btn adm-btn--primary featured-products__save" [disabled]="saving()" (click)="save()">
+      @if (saving()) {
+        <span class="adm-spinner"></span> Guardando...
+      } @else {
+        <span class="material-symbols-outlined">save</span> Guardar orden
+      }
+    </button>
+  }
+</div>
+
+<!-- Selection Modal -->
+@if (showModal()) {
+  <div class="adm-modal-backdrop" (click)="showModal.set(false)">
+    <div class="adm-modal" (click)="$event.stopPropagation()">
+      <div class="adm-modal__header">
+        <h2 class="adm-modal__title">Seleccionar Productos</h2>
+        <button class="adm-modal__close" (click)="showModal.set(false)">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+      <div class="adm-modal__body">
+        <div class="featured-products__search">
+          <span class="material-symbols-outlined">search</span>
+          <input type="text" class="adm-form-control" placeholder="Buscar por nombre..." [(ngModel)]="searchTerm" (input)="filterAvailable()">
+        </div>
+        <div class="featured-products__filters">
+          <button class="adm-tab" [class.adm-tab--active]="filterCategory() === ''" (click)="filterCategory.set(''); filterAvailable()">Todos</button>
+          <button class="adm-tab" [class.adm-tab--active]="filterCategory() === 'farmacos'" (click)="filterCategory.set('farmacos'); filterAvailable()">Farmacos</button>
+          <button class="adm-tab" [class.adm-tab--active]="filterCategory() === 'alimentos'" (click)="filterCategory.set('alimentos'); filterAvailable()">Alimentos</button>
+          <button class="adm-tab" [class.adm-tab--active]="filterCategory() === 'equipos'" (click)="filterCategory.set('equipos'); filterAvailable()">Equipos</button>
+        </div>
+        @if (loadingAll()) {
+          <div class="featured-products__modal-loading">Cargando productos...</div>
+        } @else {
+          <div class="featured-products__modal-list">
+            @for (product of filteredAll(); track product._id) {
+              <label class="modal-item">
+                <input type="checkbox" [checked]="isSelected(product._id)" (change)="toggleSelect(product._id)">
+                <div class="modal-item__thumb">
+                  @if (product.images.length > 0) {
+                    <img [src]="product.images[0]" [alt]="product.name.es" class="modal-item__img">
+                  }
+                </div>
+                <div class="modal-item__info">
+                  <span class="modal-item__name">{{ product.name.es }}</span>
+                  <span class="modal-item__meta">{{ product.brand ? product.brand.name : '-' }} | {{ product.category }}</span>
+                </div>
+              </label>
+            }
+            @if (filteredAll().length === 0) {
+              <p class="featured-products__no-results">No se encontraron productos.</p>
+            }
+          </div>
+        }
+      </div>
+      <div class="adm-modal__footer">
+        <button class="adm-btn adm-btn--secondary" (click)="showModal.set(false)">Cancelar</button>
+        <button class="adm-btn adm-btn--primary" (click)="applySelection()">Aplicar seleccion</button>
+      </div>
+    </div>
+  </div>
+}

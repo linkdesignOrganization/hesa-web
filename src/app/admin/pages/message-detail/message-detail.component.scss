@@ -1,0 +1,126 @@
+// =============================================================================
+// Admin Message Detail — Component-specific styles (Dashly X)
+// Global classes used: adm-back-link, adm-card, adm-badge, adm-form-*,
+// adm-btn, adm-empty, adm-skeleton, adm-divider, adm-spinner
+// =============================================================================
+
+// ── Two-column layout ──
+.detail-layout {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: var(--adm-sp-6);
+  align-items: start;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+
+  &__sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--adm-sp-4);
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--adm-sp-4);
+  }
+}
+
+// ── Contact card ──
+.detail-contact {
+  &__heading {
+    font-size: var(--adm-badge-size);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--adm-text-muted);
+    margin-bottom: var(--adm-sp-4);
+  }
+
+  &__field {
+    display: flex;
+    align-items: center;
+    gap: var(--adm-sp-2);
+    font-size: var(--adm-body-size);
+    color: var(--adm-text-heading);
+    margin-bottom: var(--adm-sp-2);
+    line-height: 1.6;
+  }
+
+  &__icon {
+    font-size: 18px;
+    color: var(--adm-text-muted);
+    flex-shrink: 0;
+  }
+
+  &__link {
+    color: var(--adm-primary);
+    text-decoration: none;
+    transition: color var(--adm-transition-fast);
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__badges {
+    display: flex;
+    gap: var(--adm-sp-2);
+    flex-wrap: wrap;
+  }
+}
+
+// ── Status card ──
+.detail-status {
+  // inherits adm-card padding
+}
+
+// ── Message card ──
+.detail-message {
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--adm-sp-4);
+  }
+
+  &__date {
+    font-size: var(--adm-small-size);
+    color: var(--adm-text-muted);
+  }
+
+  &__text {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--adm-text-heading);
+    white-space: pre-wrap;
+  }
+}
+
+// ── Notes section ──
+.detail-notes {
+  &__heading {
+    font-size: var(--adm-badge-size);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--adm-text-muted);
+    margin-bottom: var(--adm-sp-3);
+  }
+}
+
+// ── Action buttons ──
+.detail-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--adm-sp-3);
+  flex-wrap: wrap;
+}
+
+// ── Badge variant for "otro" type (if not already global) ──
+.adm-badge--other {
+  background: var(--adm-bg-page);
+  color: var(--adm-text-body);
+}

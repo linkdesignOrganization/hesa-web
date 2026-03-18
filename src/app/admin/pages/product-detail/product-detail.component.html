@@ -1,0 +1,105 @@
+<!-- ADMIN PRODUCT DETAIL — Dashly X -->
+<div class="product-detail">
+  <!-- Header -->
+  <div class="product-detail__header">
+    <a routerLink="/admin/productos" class="adm-back-link">
+      <span class="material-symbols-outlined">arrow_back</span>
+      Volver a productos
+    </a>
+    @if (product()) {
+      <div class="product-detail__header-actions">
+        <a [href]="publicProductUrl()" target="_blank" class="adm-btn adm-btn--secondary adm-btn--sm">
+          <span class="material-symbols-outlined">open_in_new</span>
+          Ver en el sitio web
+        </a>
+        <a [routerLink]="'/admin/productos/' + product()!._id + '/editar'" class="adm-btn adm-btn--primary adm-btn--sm">
+          <span class="material-symbols-outlined">edit</span>
+          Editar producto
+        </a>
+      </div>
+    }
+  </div>
+
+  @if (loading()) {
+    <div class="adm-skeleton adm-skeleton--card" style="height: 400px;"></div>
+  } @else if (product()) {
+    <div class="product-detail__layout">
+      <!-- Image Column -->
+      <div class="product-detail__image-col">
+        @if (product()!.images && product()!.images.length > 0) {
+          <img class="product-detail__image" [src]="product()!.images[0]" [alt]="product()!.name.es">
+        } @else {
+          <div class="product-detail__image-placeholder">
+            <span class="material-symbols-outlined">image</span>
+          </div>
+        }
+      </div>
+
+      <!-- Info Column -->
+      <div class="product-detail__info">
+        <h1 class="product-detail__name">{{ product()!.name.es }}</h1>
+        @if (product()!.name.en) {
+          <p class="product-detail__name-en">EN: {{ product()!.name.en }}</p>
+        }
+        <p class="product-detail__brand">{{ brandName() }}</p>
+
+        <div class="product-detail__badges">
+          <span class="adm-badge"
+            [class.adm-badge--pharma]="product()!.category === 'farmacos'"
+            [class.adm-badge--food]="product()!.category === 'alimentos'"
+            [class.adm-badge--equipment]="product()!.category === 'equipos'">
+            @switch (product()!.category) {
+              @case ('farmacos') { <span class="material-symbols-outlined">medication</span> }
+              @case ('alimentos') { <span class="material-symbols-outlined">restaurant</span> }
+              @case ('equipos') { <span class="material-symbols-outlined">construction</span> }
+            }
+            {{ product()!.category }}
+          </span>
+          <span class="adm-badge" [class.adm-badge--active]="product()!.isActive" [class.adm-badge--inactive]="!product()!.isActive">
+            {{ product()!.isActive ? 'Activo' : 'Inactivo' }}
+          </span>
+        </div>
+
+        @if (product()!.description && product()!.description.es) {
+          <div class="product-detail__section">
+            <h3 class="product-detail__section-title">Descripcion</h3>
+            <p class="product-detail__section-text">{{ product()!.description.es }}</p>
+          </div>
+        }
+
+        @if (product()!.presentations && product()!.presentations.length > 0) {
+          <div class="product-detail__section">
+            <h3 class="product-detail__section-title">Presentaciones</h3>
+            <div class="adm-chips">
+              @for (pres of product()!.presentations; track pres) {
+                <span class="adm-chip">{{ pres }}</span>
+              }
+            </div>
+          </div>
+        }
+
+        @if (product()!.species && product()!.species.length > 0) {
+          <div class="product-detail__section">
+            <h3 class="product-detail__section-title">Especies</h3>
+            <div class="adm-chips">
+              @for (sp of product()!.species; track sp) {
+                <span class="adm-chip">{{ sp }}</span>
+              }
+            </div>
+          </div>
+        }
+
+        <!-- PDF link -->
+        @if (product()!.pdfUrl) {
+          <div class="product-detail__section">
+            <h3 class="product-detail__section-title">Ficha Tecnica</h3>
+            <a [href]="product()!.pdfUrl" target="_blank" rel="noopener" class="product-detail__pdf-link">
+              <span class="material-symbols-outlined">picture_as_pdf</span>
+              Descargar ficha tecnica (PDF)
+            </a>
+          </div>
+        }
+      </div>
+    </div>
+  }
+</div>

@@ -1,0 +1,88 @@
+// =============================================================================
+// Brand Form — Dashly X restyled (adm-* tokens)
+// =============================================================================
+
+.bf-page {
+  &__actions {
+    display: flex;
+    gap: 12px;
+
+    @media (max-width: 767px) {
+      display: none;
+    }
+  }
+
+  &__sticky-actions {
+    display: none;
+
+    @media (max-width: 767px) {
+      display: flex;
+      gap: 12px;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 16px;
+      background: var(--adm-bg-card);
+      border-top: 1px solid var(--adm-border);
+      box-shadow: 0 -2px 8px rgba(11, 22, 44, 0.06);
+      z-index: var(--adm-z-sticky);
+    }
+  }
+}
+
+// ── Form card ──
+.bf-form {
+  padding: var(--adm-sp-8);
+
+  @media (max-width: 767px) {
+    padding: var(--adm-sp-5);
+    margin-bottom: 80px;
+  }
+}
+
+// ── Category checkboxes row ──
+.bf-categories {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+// ── Logo preview ──
+.bf-logo-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  img {
+    max-width: 200px;
+    max-height: 200px;
+    object-fit: contain;
+    border-radius: var(--adm-radius-input);
+    border: 1px solid var(--adm-border);
+  }
+
+  &__actions {
+    display: flex;
+    gap: 8px;
+  }
+}
+
+// ── Upload progress ──
+.bf-upload-progress {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  &__text {
+    font-size: var(--adm-small-size);
+    color: var(--adm-text-muted);
+    white-space: nowrap;
+    font-weight: 500;
+  }
+
+  .adm-progress {
+    flex: 1;
+  }
+}

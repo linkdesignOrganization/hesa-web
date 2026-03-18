@@ -1,0 +1,108 @@
+<!-- ADMIN FEATURED BRANDS — Dashly X -->
+<div class="featured-brands">
+  <div class="adm-page-header">
+    <div class="adm-page-header__left">
+      <h1 class="adm-page-header__title">Marcas Destacadas</h1>
+    </div>
+    <button class="adm-btn adm-btn--primary" (click)="openModal()">
+      <span class="material-symbols-outlined">add</span>
+      Agregar marca
+    </button>
+  </div>
+
+  @if (loading()) {
+    <div class="featured-brands__skeletons">
+      @for (i of [1,2,3,4]; track i) {
+        <div class="adm-skeleton" style="height: 64px;"></div>
+      }
+    </div>
+  } @else if (brands().length === 0) {
+    <div class="adm-card featured-brands__empty-card">
+      <div class="adm-empty">
+        <p class="adm-empty__title">No hay marcas destacadas</p>
+        <p class="adm-empty__desc">La seccion no se mostrara en el home.</p>
+        <button class="adm-btn adm-btn--primary" (click)="openModal()">
+          <span class="material-symbols-outlined">add</span>
+          Agregar marcas
+        </button>
+      </div>
+    </div>
+  } @else {
+    <div class="featured-brands__list" cdkDropList (cdkDropListDropped)="onDrop($event)">
+      @for (brand of brands(); track brand._id) {
+        <div class="featured-item adm-card" cdkDrag>
+          <span class="featured-item__drag" cdkDragHandle>
+            <span class="material-symbols-outlined">drag_indicator</span>
+          </span>
+          <div class="featured-item__logo">
+            @if (brand.logo) {
+              <img [src]="brand.logo" [alt]="brand.name" class="featured-item__logo-img">
+            } @else {
+              {{ brand.name.charAt(0) }}
+            }
+          </div>
+          <div class="featured-item__info">
+            <span class="featured-item__name">{{ brand.name }}</span>
+            <span class="featured-item__meta">{{ brand.country }}</span>
+          </div>
+          <button class="adm-btn adm-btn--icon featured-item__remove" aria-label="Remover" (click)="removeBrand(brand._id)">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+      }
+    </div>
+    <button class="adm-btn adm-btn--primary featured-brands__save" [disabled]="saving()" (click)="save()">
+      @if (saving()) {
+        <span class="adm-spinner"></span> Guardando...
+      } @else {
+        <span class="material-symbols-outlined">save</span> Guardar orden
+      }
+    </button>
+  }
+</div>
+
+<!-- Selection Modal -->
+@if (showModal()) {
+  <div class="adm-modal-backdrop" (click)="showModal.set(false)">
+    <div class="adm-modal" (click)="$event.stopPropagation()">
+      <div class="adm-modal__header">
+        <h2 class="adm-modal__title">Seleccionar Marcas</h2>
+        <button class="adm-modal__close" (click)="showModal.set(false)">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+      <div class="adm-modal__body">
+        <div class="featured-brands__search">
+          <span class="material-symbols-outlined">search</span>
+          <input type="text" class="adm-form-control" placeholder="Buscar por nombre..." [(ngModel)]="searchTerm" (input)="filterAll()">
+        </div>
+        @if (loadingAll()) {
+          <div class="featured-brands__modal-loading">Cargando marcas...</div>
+        } @else {
+          <div class="featured-brands__modal-list">
+            @for (brand of filteredAll(); track brand._id) {
+              <label class="modal-item">
+                <input type="checkbox" [checked]="isSelected(brand._id)" (change)="toggleSelect(brand._id)">
+                <div class="modal-item__logo">
+                  @if (brand.logo) {
+                    <img [src]="brand.logo" [alt]="brand.name" class="modal-item__logo-img">
+                  } @else {
+                    {{ brand.name.charAt(0) }}
+                  }
+                </div>
+                <div class="modal-item__info">
+                  <span class="modal-item__name">{{ brand.name }}</span>
+                  <span class="modal-item__meta">{{ brand.country }}</span>
+                </div>
+              </label>
+            }
+          </div>
+        }
+      </div>
+      <div class="adm-modal__footer">
+        <button class="adm-btn adm-btn--secondary" (click)="showModal.set(false)">Cancelar</button>
+        <button class="adm-btn adm-btn--primary" (click)="applySelection()">Aplicar seleccion</button>
+      </div>
+    </div>
+  </div>
+}

@@ -1,0 +1,74 @@
+// =============================================================================
+// Categories Page — Dashly X restyled (adm-* tokens)
+// =============================================================================
+
+.cat-page {
+  // Page layout handled by global styles
+}
+
+// ── Category card ──
+.cat-card {
+  margin-bottom: 20px;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  &__title {
+    font-size: var(--adm-h2-size);
+    font-weight: var(--adm-h2-weight);
+    color: var(--adm-text-heading);
+  }
+
+  &__group {
+    margin-bottom: 20px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__group-title {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: var(--adm-small-size);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    color: var(--adm-text-muted);
+    margin-bottom: 10px;
+
+    .material-symbols-outlined {
+      font-size: 16px;
+    }
+  }
+
+  // ── Add button (dashed circle) ──
+  &__add-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px dashed var(--adm-border);
+    background: transparent;
+    color: var(--adm-text-muted);
+    cursor: pointer;
+    transition: all var(--adm-transition-fast);
+
+    .material-symbols-outlined {
+      font-size: 18px;
+    }
+
+    &:hover {
+      border-color: var(--adm-primary);
+      color: var(--adm-primary);
+      background: var(--adm-primary-soft);
+    }
+  }
+}

@@ -1,0 +1,87 @@
+// =============================================================================
+// Admin Activity Log — Dashly X Restyle
+// Uses global adm-* classes; only page-specific overrides here.
+// =============================================================================
+
+.activity-page {
+
+  // ── Card container ──
+  &__card {
+    overflow: hidden;
+  }
+
+  // ── Activity item row ──
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: var(--adm-sp-3);
+    padding: 14px var(--adm-sp-5);
+    border-bottom: 1px solid var(--adm-border);
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  // ── Skeleton item row ──
+  &__item-skeleton {
+    display: flex;
+    align-items: center;
+    gap: var(--adm-sp-3);
+    padding: 14px var(--adm-sp-5);
+    border-bottom: 1px solid var(--adm-border);
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  // ── Item content ──
+  &__item-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__item-text {
+    font-size: var(--adm-body-size);
+    color: var(--adm-text-heading);
+  }
+
+  &__item-user {
+    font-size: var(--adm-badge-size);
+    color: var(--adm-text-muted);
+  }
+
+  &__item-date {
+    font-size: var(--adm-badge-size);
+    color: var(--adm-text-muted);
+    white-space: nowrap;
+  }
+
+  // ── Timeline dot ──
+  &__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--adm-primary);
+    flex-shrink: 0;
+
+    &--create {
+      background-color: var(--adm-success);
+    }
+
+    &--delete {
+      background-color: var(--adm-danger);
+    }
+
+    &--update {
+      background-color: var(--adm-primary);
+    }
+  }
+
+  // ── Error & empty states ──
+  &__error,
+  &__empty {
+    padding: var(--adm-sp-12) var(--adm-sp-5);
+  }
+}

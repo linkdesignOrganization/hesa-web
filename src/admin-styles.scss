@@ -1,0 +1,18 @@
+// ============================================================
+// HESA Admin Panel — Dashly X Theme
+// Entry point for all admin-specific styles.
+// This file is loaded globally via angular.json but all classes
+// are namespaced with adm-* to avoid conflicts with the public site.
+// ============================================================
+
+@use 'scss/admin/admin-tokens';
+@use 'scss/admin/admin-base';
+@use 'scss/admin/admin-buttons';
+@use 'scss/admin/admin-forms';
+@use 'scss/admin/admin-badges';
+@use 'scss/admin/admin-cards';
+@use 'scss/admin/admin-tables';
+@use 'scss/admin/admin-modals';
+@use 'scss/admin/admin-kanban';
+@use 'scss/admin/admin-skeleton';
+@use 'scss/admin/admin-utilities';

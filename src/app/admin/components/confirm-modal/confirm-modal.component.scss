@@ -1,80 +1,15 @@
 // =============================================================================
-// Confirm Modal (DC-079, DC-133)
+// Confirm Modal — Dashly X style (DC-079, DC-133)
+// Uses global adm-modal classes from _admin-modals.scss
+// Component-level overrides only (minimal)
 // =============================================================================
 
-.modal-backdrop {
-  position: fixed;
-  inset: 0;
-  background-color: var(--overlay);
-  z-index: var(--z-modal);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  animation: fadeIn 0.2s ease-out;
-}
-
-.modal {
-  background-color: var(--neutral-white);
-  border-radius: var(--radius-card-panel);
-  max-width: 440px;
-  width: 100%;
-  padding: 32px;
-  box-shadow: var(--shadow-lg);
-  text-align: center;
-  animation: modalIn 0.2s ease-out;
-
-  &__icon {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 16px;
-
-    &--danger {
-      background-color: var(--semantic-danger-soft);
-    }
-
-    &--warning {
-      background-color: var(--semantic-warning-soft);
-    }
-  }
-
-  &__title {
-    font-size: 18px;
-    font-weight: var(--weight-bold);
-    color: var(--neutral-900);
-    margin-bottom: 8px;
-  }
-
-  &__desc {
-    font-size: 14px;
-    color: var(--neutral-400);
-    line-height: 1.5;
-    margin-bottom: 24px;
-  }
-
-  &__actions {
-    display: flex;
-    gap: 12px;
-    justify-content: center;
-  }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes modalIn {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
+// No component-level styles needed — all styling comes from:
+//   .adm-modal-backdrop  (global)
+//   .adm-modal           (global)
+//   .adm-modal--confirm  (global)
+//   .adm-modal__icon     (global)
+//   .adm-modal__title    (global)
+//   .adm-modal__desc     (global)
+//   .adm-modal__footer   (global)
+//   .adm-btn variants    (global)

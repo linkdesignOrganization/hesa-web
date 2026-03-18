@@ -1,0 +1,122 @@
+// ============================================================
+// Admin Cards — Dashly X card base
+// ============================================================
+
+.adm-card {
+  background: var(--adm-bg-card);
+  border: 1px solid var(--adm-border);
+  border-radius: var(--adm-radius-card);
+  padding: var(--adm-card-padding);
+  transition: box-shadow var(--adm-transition-base);
+}
+
+.adm-card--hover {
+  &:hover {
+    box-shadow: var(--adm-shadow-md);
+  }
+}
+
+.adm-card--shadow {
+  box-shadow: var(--adm-shadow-sm);
+  border-color: transparent;
+}
+
+.adm-card--no-padding {
+  padding: 0;
+}
+
+// ── Card header ──
+.adm-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--adm-divider);
+}
+
+.adm-card__title {
+  font-size: var(--adm-h3-size);
+  font-weight: var(--adm-h3-weight);
+  color: var(--adm-text-heading);
+}
+
+// ── Stat card (dashboard) ──
+.adm-stat-card {
+  @extend .adm-card;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px;
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    flex-shrink: 0;
+
+    .material-symbols-outlined {
+      font-size: 24px;
+    }
+
+    &--blue {
+      background: var(--adm-primary-soft);
+      color: var(--adm-primary);
+    }
+
+    &--green {
+      background: var(--adm-success-soft);
+      color: var(--adm-success);
+    }
+
+    &--purple {
+      background: var(--adm-purple-soft);
+      color: var(--adm-purple);
+    }
+
+    &--orange {
+      background: var(--adm-warning-soft);
+      color: var(--adm-warning);
+    }
+
+    &--gray {
+      background: var(--adm-equipment-bg);
+      color: var(--adm-equipment-color);
+    }
+  }
+
+  &__data {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__label {
+    font-size: var(--adm-small-size);
+    color: var(--adm-text-body);
+    margin-bottom: 4px;
+  }
+
+  &__value {
+    font-size: var(--adm-stat-size);
+    font-weight: var(--adm-stat-weight);
+    color: var(--adm-text-heading);
+    line-height: 1.2;
+  }
+
+  &__change {
+    font-size: var(--adm-badge-size);
+    font-weight: 500;
+    margin-left: 8px;
+
+    &--up {
+      color: var(--adm-success);
+    }
+
+    &--down {
+      color: var(--adm-danger);
+    }
+  }
+}

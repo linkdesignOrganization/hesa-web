@@ -1,0 +1,107 @@
+// ============================================================
+// Admin Badges — Dashly X pill badges
+// ============================================================
+
+.adm-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 10px;
+  font-family: var(--adm-font);
+  font-size: var(--adm-badge-size);
+  font-weight: var(--adm-badge-weight);
+  line-height: 1.2;
+  border-radius: var(--adm-radius-badge);
+  white-space: nowrap;
+  border: 1px solid transparent;
+
+  .material-symbols-outlined {
+    font-size: 14px;
+  }
+}
+
+// ── Category badges ──
+.adm-badge--pharma {
+  background: var(--adm-pharma-bg);
+  color: var(--adm-pharma-color);
+}
+
+.adm-badge--food {
+  background: var(--adm-food-bg);
+  color: var(--adm-food-color);
+}
+
+.adm-badge--equipment {
+  background: var(--adm-equipment-bg);
+  color: var(--adm-equipment-color);
+}
+
+// ── Status badges ──
+.adm-badge--active {
+  background: var(--adm-success-soft);
+  color: var(--adm-success-text);
+}
+
+.adm-badge--inactive {
+  background: var(--adm-danger-soft);
+  color: var(--adm-danger-text);
+}
+
+.adm-badge--pending,
+.adm-badge--nuevo {
+  background: var(--adm-warning-soft);
+  color: var(--adm-warning-text);
+}
+
+.adm-badge--info,
+.adm-badge--en-proceso {
+  background: var(--adm-info-soft);
+  color: var(--adm-info-text);
+}
+
+.adm-badge--atendido {
+  background: var(--adm-success-soft);
+  color: var(--adm-success-text);
+}
+
+// ── Message type badges ──
+.adm-badge--general {
+  background: var(--adm-info-soft);
+  color: var(--adm-info-text);
+}
+
+.adm-badge--commercial {
+  background: var(--adm-success-soft);
+  color: var(--adm-success-text);
+}
+
+.adm-badge--support {
+  background: var(--adm-warning-soft);
+  color: var(--adm-warning-text);
+}
+
+.adm-badge--manufacturer {
+  background: var(--adm-purple-soft);
+  color: var(--adm-purple-text);
+}
+
+// ── Counter badge (small circular) ──
+.adm-badge--count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 10px;
+  background: var(--adm-danger);
+  color: #fff;
+}
+
+// ── Primary badge ──
+.adm-badge--primary {
+  background: var(--adm-primary-soft);
+  color: var(--adm-primary);
+}

@@ -1,0 +1,162 @@
+// ============================================================
+// Admin Buttons — Dashly X pill-shaped buttons
+// ============================================================
+
+.adm-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--adm-font);
+  font-size: var(--adm-body-size);
+  font-weight: 600;
+  line-height: 1;
+  padding: 12px 20px;
+  border: 1px solid transparent;
+  border-radius: var(--adm-radius-btn);
+  cursor: pointer;
+  transition: all var(--adm-transition-fast);
+  white-space: nowrap;
+  text-decoration: none;
+  outline: none;
+
+  &:focus-visible {
+    box-shadow: 0 0 0 3px var(--adm-primary-soft);
+  }
+
+  &:disabled,
+  &.adm-btn--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  .material-symbols-outlined {
+    font-size: 18px;
+  }
+}
+
+// ── Primary (filled blue pill) ──
+.adm-btn--primary {
+  background: var(--adm-primary);
+  color: #fff;
+  box-shadow: var(--adm-shadow-btn);
+
+  &:hover {
+    background: var(--adm-primary-hover);
+  }
+
+  &:active {
+    background: var(--adm-primary-active);
+  }
+}
+
+// ── Secondary (outline pill) ──
+.adm-btn--secondary {
+  background: var(--adm-bg-card);
+  color: var(--adm-text-dark);
+  border-color: var(--adm-border);
+
+  &:hover {
+    background: var(--adm-bg-page);
+    border-color: var(--adm-border-hover);
+  }
+}
+
+// ── Ghost (text-only) ──
+.adm-btn--ghost {
+  background: transparent;
+  color: var(--adm-text-body);
+  padding: 8px 12px;
+
+  &:hover {
+    background: var(--adm-bg-page);
+    color: var(--adm-text-heading);
+  }
+}
+
+// ── Danger ──
+.adm-btn--danger {
+  background: var(--adm-danger);
+  color: #fff;
+
+  &:hover {
+    background: var(--adm-danger-hover);
+  }
+}
+
+// ── Danger Ghost (text danger) ──
+.adm-btn--danger-ghost {
+  background: transparent;
+  color: var(--adm-danger);
+
+  &:hover {
+    background: var(--adm-danger-soft);
+  }
+}
+
+// ── Sizes ──
+.adm-btn--sm {
+  font-size: 13px;
+  padding: 8px 16px;
+
+  .material-symbols-outlined {
+    font-size: 16px;
+  }
+}
+
+.adm-btn--lg {
+  font-size: 15px;
+  font-weight: 700;
+  padding: 16px 24px;
+
+  .material-symbols-outlined {
+    font-size: 20px;
+  }
+}
+
+.adm-btn--xl {
+  font-size: 15px;
+  font-weight: 700;
+  padding: 18px 28px;
+
+  .material-symbols-outlined {
+    font-size: 20px;
+  }
+}
+
+// ── Block (full width) ──
+.adm-btn--block {
+  width: 100%;
+}
+
+// ── Icon-only (circle) ──
+.adm-btn--icon {
+  padding: 8px;
+  border-radius: 50%;
+  min-width: 36px;
+  min-height: 36px;
+}
+
+// ── Loading state ──
+.adm-btn--loading {
+  position: relative;
+  color: transparent !important;
+  pointer-events: none;
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: adm-spin 0.6s linear infinite;
+  }
+}
+
+.adm-btn--secondary.adm-btn--loading::after {
+  border-color: rgba(0, 0, 0, 0.15);
+  border-top-color: var(--adm-text-dark);
+}

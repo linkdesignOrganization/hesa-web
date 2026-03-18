@@ -1,0 +1,146 @@
+// ============================================================
+// Admin Modals — Dashly X modal/dialog styles
+// ============================================================
+
+.adm-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: var(--adm-overlay);
+  z-index: var(--adm-z-modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: adm-fadeIn 0.2s ease;
+}
+
+.adm-modal {
+  background: var(--adm-bg-card);
+  border-radius: var(--adm-radius-modal);
+  box-shadow: var(--adm-shadow-lg);
+  width: 100%;
+  max-width: 480px;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: adm-modalIn 0.25s ease;
+
+  &--sm {
+    max-width: 400px;
+  }
+
+  &--lg {
+    max-width: 640px;
+  }
+
+  &--xl {
+    max-width: 800px;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px 24px 0;
+  }
+
+  &__title {
+    font-size: var(--adm-h2-size);
+    font-weight: var(--adm-h2-weight);
+    color: var(--adm-text-heading);
+  }
+
+  &__close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: transparent;
+    color: var(--adm-text-body);
+    border-radius: var(--adm-radius-sm);
+    cursor: pointer;
+    transition: all var(--adm-transition-fast);
+
+    &:hover {
+      background: var(--adm-bg-page);
+      color: var(--adm-text-heading);
+    }
+
+    .material-symbols-outlined {
+      font-size: 20px;
+    }
+  }
+
+  &__body {
+    padding: 20px 24px;
+  }
+
+  &__footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+    padding: 16px 24px 24px;
+  }
+
+  // ── Confirm modal icon ──
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    margin: 0 auto 16px;
+
+    .material-symbols-outlined {
+      font-size: 28px;
+    }
+
+    &--danger {
+      background: var(--adm-danger-soft);
+      color: var(--adm-danger);
+    }
+
+    &--warning {
+      background: var(--adm-warning-soft);
+      color: var(--adm-warning);
+    }
+
+    &--info {
+      background: var(--adm-info-soft);
+      color: var(--adm-primary);
+    }
+  }
+
+  &__desc {
+    font-size: var(--adm-body-size);
+    color: var(--adm-text-body);
+    line-height: 1.6;
+    text-align: center;
+  }
+
+  // ── Centered confirm layout ──
+  &--confirm {
+    text-align: center;
+    max-width: 420px;
+
+    .adm-modal__header {
+      display: none;
+    }
+
+    .adm-modal__body {
+      padding: 32px 32px 8px;
+    }
+
+    .adm-modal__title {
+      margin-bottom: 8px;
+    }
+
+    .adm-modal__footer {
+      justify-content: center;
+      padding: 16px 32px 32px;
+    }
+  }
+}

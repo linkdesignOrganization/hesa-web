@@ -1,0 +1,140 @@
+<!-- ADMIN TEAM EDITOR — Dashly X -->
+<div class="team-editor">
+  <div class="adm-page-header">
+    <div class="adm-page-header__left">
+      <h1 class="adm-page-header__title">Equipo de Liderazgo</h1>
+    </div>
+    <button class="adm-btn adm-btn--primary" (click)="openAddModal()">
+      <span class="material-symbols-outlined">add</span>
+      Agregar miembro
+    </button>
+  </div>
+
+  @if (loading()) {
+    <div class="team-grid">
+      @for (i of [1,2,3,4,5,6]; track i) {
+        <div class="adm-skeleton adm-skeleton--card" style="height: 120px;"></div>
+      }
+    </div>
+  } @else if (team().length === 0) {
+    <div class="adm-card team-editor__empty-card">
+      <div class="adm-empty">
+        <div class="adm-empty__icon">
+          <span class="material-symbols-outlined">person</span>
+        </div>
+        <p class="adm-empty__title">No hay miembros del equipo</p>
+        <p class="adm-empty__desc">La seccion de Equipo de Liderazgo no se mostrara en el sitio publico hasta que agregues miembros.</p>
+        <button class="adm-btn adm-btn--primary" (click)="openAddModal()">
+          <span class="material-symbols-outlined">add</span>
+          Agregar primer miembro
+        </button>
+      </div>
+    </div>
+  } @else {
+    <div class="team-grid" cdkDropList (cdkDropListDropped)="onDrop($event)">
+      @for (member of team(); track member._id) {
+        <div class="team-card adm-card" cdkDrag>
+          <span class="team-card__drag" cdkDragHandle>
+            <span class="material-symbols-outlined">drag_indicator</span>
+          </span>
+          <div class="team-card__avatar">
+            @if (member.photo) {
+              <img [src]="member.photo" [alt]="member.name.es" class="team-card__avatar-img">
+            } @else {
+              {{ member.name.es.charAt(0) }}
+            }
+          </div>
+          <div class="team-card__info">
+            <span class="team-card__name">{{ member.name.es }}</span>
+            <span class="team-card__title">{{ member.title.es }}</span>
+          </div>
+          <div class="team-card__actions">
+            <button class="adm-btn adm-btn--icon team-card__edit" aria-label="Editar" (click)="openEditModal(member)">
+              <span class="material-symbols-outlined">edit</span>
+            </button>
+            <button class="adm-btn adm-btn--icon team-card__delete" aria-label="Eliminar" (click)="confirmDelete(member)">
+              <span class="material-symbols-outlined">delete</span>
+            </button>
+          </div>
+        </div>
+      }
+    </div>
+  }
+</div>
+
+<!-- Add/Edit Modal -->
+@if (showForm()) {
+  <div class="adm-modal-backdrop" (click)="showForm.set(false)">
+    <div class="adm-modal" (click)="$event.stopPropagation()">
+      <div class="adm-modal__header">
+        <h2 class="adm-modal__title">{{ editingMember() ? 'Editar Miembro' : 'Agregar Miembro' }}</h2>
+        <button class="adm-modal__close" (click)="showForm.set(false)">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+      <div class="adm-modal__body">
+        <div class="adm-tabs team-editor__modal-tabs">
+          <button class="adm-tab" [class.adm-tab--active]="formLang() === 'es'" (click)="formLang.set('es')">Espanol</button>
+          <button class="adm-tab" [class.adm-tab--active]="formLang() === 'en'" (click)="formLang.set('en')">English</button>
+        </div>
+
+        @if (formLang() === 'es') {
+          <div class="adm-form-group">
+            <label class="adm-form-label">Nombre <span class="team-editor__required">*</span></label>
+            <input type="text" class="adm-form-control" [(ngModel)]="formName.es" placeholder="Nombre completo">
+          </div>
+          <div class="adm-form-group">
+            <label class="adm-form-label">Cargo <span class="team-editor__required">*</span></label>
+            <input type="text" class="adm-form-control" [(ngModel)]="formTitle.es" placeholder="Cargo o posicion">
+          </div>
+        } @else {
+          <div class="adm-form-group">
+            <label class="adm-form-label">Name</label>
+            <input type="text" class="adm-form-control" [(ngModel)]="formName.en" placeholder="Full name">
+          </div>
+          <div class="adm-form-group">
+            <label class="adm-form-label">Title</label>
+            <input type="text" class="adm-form-control" [(ngModel)]="formTitle.en" placeholder="Position or title">
+          </div>
+        }
+
+        <!-- Photo upload -->
+        <div class="adm-form-group">
+          <label class="adm-form-label">Foto</label>
+          @if (photoPreviewUrl()) {
+            <div class="team-editor__photo-preview">
+              <img [src]="photoPreviewUrl()!" class="team-editor__photo-img">
+              <button class="adm-btn adm-btn--secondary adm-btn--sm" (click)="photoInput.click()">Cambiar foto</button>
+              @if (!editingMember() && pendingPhotoFile()) {
+                <button class="adm-btn adm-btn--danger-ghost adm-btn--sm" (click)="removePendingPhoto()">Quitar</button>
+              }
+            </div>
+          } @else {
+            <div class="adm-uploader" (click)="photoInput.click()" (dragover)="onPhotoDragOver($event)" (drop)="onPhotoDrop($event)">
+              <span class="material-symbols-outlined">add_photo_alternate</span>
+              <p class="adm-uploader__text">Arrastra una imagen o <span class="adm-uploader__link">selecciona archivo</span></p>
+              <span class="adm-uploader__hint">JPG, PNG o WebP hasta 5MB</span>
+            </div>
+          }
+          <input #photoInput type="file" accept="image/jpeg,image/png,image/webp" style="display: none;" (change)="onPhotoSelected($event)">
+        </div>
+      </div>
+      <div class="adm-modal__footer">
+        <button class="adm-btn adm-btn--secondary" (click)="showForm.set(false)">Cancelar</button>
+        <button class="adm-btn adm-btn--primary" [disabled]="savingMember()" (click)="saveMember()">
+          @if (savingMember()) {
+            <span class="adm-spinner"></span> Guardando...
+          } @else {
+            Guardar
+          }
+        </button>
+      </div>
+    </div>
+  </div>
+}
+
+<!-- Confirm Delete Modal -->
+<app-confirm-modal #deleteModal
+  [title]="'Eliminar miembro'"
+  [description]="'Estas seguro de eliminar a ' + (deletingMember()?.name?.es || '') + '?'"
+  (confirmed)="executeDelete()" />
