@@ -89,87 +89,87 @@
       - generic [ref=e49]:
         - link "Ver Monitor de Signos Vitales Veterinario" [ref=e51] [cursor=pointer]:
           - /url: /es/catalogo/equipos/monitor-signos-vitales-vet
-          - img "Monitor de Signos Vitales Veterinario" [ref=e53]
-          - generic [ref=e54]:
-            - heading "Monitor de Signos Vitales Veterinario" [level=3] [ref=e55]
-            - paragraph [ref=e56]: Mindray
-            - generic [ref=e57]: Ver producto
-        - link "Ver Royal Canin Kitten" [ref=e59] [cursor=pointer]:
+          - img "Monitor de Signos Vitales Veterinario" [ref=e54]
+          - generic [ref=e55]:
+            - heading "Monitor de Signos Vitales Veterinario" [level=3] [ref=e56]
+            - paragraph [ref=e57]: Mindray
+            - generic [ref=e58]: Ver producto
+        - link "Ver Royal Canin Kitten" [ref=e60] [cursor=pointer]:
           - /url: /es/catalogo/alimentos/royal-canin-kitten
-          - img [ref=e62]
-          - generic [ref=e84]:
-            - heading "Royal Canin Kitten" [level=3] [ref=e85]
-            - paragraph [ref=e86]: Royal Canin
-            - generic [ref=e87]: Ver producto
-        - link "Ver Royal Canin Maxi Adulto" [ref=e89] [cursor=pointer]:
+          - img [ref=e63]
+          - generic [ref=e85]:
+            - heading "Royal Canin Kitten" [level=3] [ref=e86]
+            - paragraph [ref=e87]: Royal Canin
+            - generic [ref=e88]: Ver producto
+        - link "Ver Royal Canin Maxi Adulto" [ref=e90] [cursor=pointer]:
           - /url: /es/catalogo/alimentos/royal-canin-maxi-adulto
-          - img "Royal Canin Maxi Adulto" [ref=e91]
-          - generic [ref=e92]:
-            - heading "Royal Canin Maxi Adulto" [level=3] [ref=e93]
-            - paragraph [ref=e94]: Royal Canin
-            - generic [ref=e95]: Ver producto
-        - link "Ver Meloxicam Inyectable" [ref=e97] [cursor=pointer]:
+          - img "Royal Canin Maxi Adulto" [ref=e93]
+          - generic [ref=e94]:
+            - heading "Royal Canin Maxi Adulto" [level=3] [ref=e95]
+            - paragraph [ref=e96]: Royal Canin
+            - generic [ref=e97]: Ver producto
+        - link "Ver Meloxicam Inyectable" [ref=e99] [cursor=pointer]:
           - /url: /es/catalogo/farmacos/meloxicam-inyectable
-          - img "Meloxicam Inyectable" [ref=e99]
-          - generic [ref=e100]:
-            - heading "Meloxicam Inyectable" [level=3] [ref=e101]
-            - paragraph [ref=e102]: Zoetis
-            - generic [ref=e103]: Ver producto
-        - link "Ver Amoxicilina Veterinaria" [ref=e105] [cursor=pointer]:
+          - img "Meloxicam Inyectable" [ref=e102]
+          - generic [ref=e103]:
+            - heading "Meloxicam Inyectable" [level=3] [ref=e104]
+            - paragraph [ref=e105]: Zoetis
+            - generic [ref=e106]: Ver producto
+        - link "Ver Amoxicilina Veterinaria" [ref=e108] [cursor=pointer]:
           - /url: /es/catalogo/farmacos/amoxicilina-veterinaria
-          - img "Amoxicilina Veterinaria" [ref=e107]
-          - generic [ref=e108]:
-            - heading "Amoxicilina Veterinaria" [level=3] [ref=e109]
-            - paragraph [ref=e110]: Zoetis
-            - generic [ref=e111]: Ver producto
-  - contentinfo "Pie de pagina" [ref=e113]:
-    - generic [ref=e115]:
-      - generic [ref=e116]:
-        - generic [ref=e117]: HESA
-        - paragraph [ref=e118]: 37 anos distribuyendo salud animal en Costa Rica
+          - img "Amoxicilina Veterinaria" [ref=e111]
+          - generic [ref=e112]:
+            - heading "Amoxicilina Veterinaria" [level=3] [ref=e113]
+            - paragraph [ref=e114]: Zoetis
+            - generic [ref=e115]: Ver producto
+  - contentinfo "Pie de pagina" [ref=e117]:
+    - generic [ref=e119]:
       - generic [ref=e120]:
-        - heading "Navegacion" [level=3] [ref=e121]
-        - navigation [ref=e122]:
-          - link "Inicio" [ref=e123] [cursor=pointer]:
+        - generic [ref=e121]: HESA
+        - paragraph [ref=e122]: 37 anos distribuyendo salud animal en Costa Rica
+      - generic [ref=e124]:
+        - heading "Navegacion" [level=3] [ref=e125]
+        - navigation [ref=e126]:
+          - link "Inicio" [ref=e127] [cursor=pointer]:
             - /url: /es
-          - link "Catalogo" [ref=e124] [cursor=pointer]:
+          - link "Catalogo" [ref=e128] [cursor=pointer]:
             - /url: /es/catalogo
-          - link "Marcas" [ref=e125] [cursor=pointer]:
+          - link "Marcas" [ref=e129] [cursor=pointer]:
             - /url: /es/marcas
-          - link "Nosotros" [ref=e126] [cursor=pointer]:
+          - link "Nosotros" [ref=e130] [cursor=pointer]:
             - /url: /es/nosotros
-          - link "Distribuidores" [ref=e127] [cursor=pointer]:
+          - link "Distribuidores" [ref=e131] [cursor=pointer]:
             - /url: /es/distribuidores
-          - link "Contacto" [ref=e128] [cursor=pointer]:
+          - link "Contacto" [ref=e132] [cursor=pointer]:
             - /url: /es/contacto
-      - generic [ref=e130]:
-        - heading "Contacto" [level=3] [ref=e131]
-        - generic [ref=e132]:
-          - paragraph [ref=e133]:
-            - img [ref=e134]
+      - generic [ref=e134]:
+        - heading "Contacto" [level=3] [ref=e135]
+        - generic [ref=e136]:
+          - paragraph [ref=e137]:
+            - img [ref=e138]
             - text: +506 2260-9020
-          - paragraph [ref=e136]:
-            - img [ref=e137]
-            - text: info@hesa.co.cr
           - paragraph [ref=e140]:
             - img [ref=e141]
-            - text: Calle 2, av 12. Heredia, Costa Rica
+            - text: info@hesa.co.cr
           - paragraph [ref=e144]:
             - img [ref=e145]
+            - text: Calle 2, av 12. Heredia, Costa Rica
+          - paragraph [ref=e148]:
+            - img [ref=e149]
             - text: "Lun - Vie: 8:00 - 17:00"
-      - generic [ref=e149]:
-        - heading "Redes Sociales" [level=3] [ref=e150]
-        - generic [ref=e151]:
-          - link "Facebook" [ref=e152] [cursor=pointer]:
+      - generic [ref=e153]:
+        - heading "Redes Sociales" [level=3] [ref=e154]
+        - generic [ref=e155]:
+          - link "Facebook" [ref=e156] [cursor=pointer]:
             - /url: https://facebook.com/hesacr
-            - img [ref=e153]
-          - link "Instagram" [ref=e155] [cursor=pointer]:
+            - img [ref=e157]
+          - link "Instagram" [ref=e159] [cursor=pointer]:
             - /url: https://instagram.com/hesacr
-            - img [ref=e156]
-    - generic [ref=e160]:
-      - paragraph [ref=e161]: © HESA 2026. Todos los derechos reservados.
-      - button "English" [ref=e163] [cursor=pointer]
-  - button "Contactar por WhatsApp" [ref=e164] [cursor=pointer]:
-    - img [ref=e165]
+            - img [ref=e160]
+    - generic [ref=e164]:
+      - paragraph [ref=e165]: © HESA 2026. Todos los derechos reservados.
+      - button "English" [ref=e167] [cursor=pointer]
+  - button "Contactar por WhatsApp" [ref=e168] [cursor=pointer]:
+    - img [ref=e169]
     - generic: Escribenos por WhatsApp
 ```

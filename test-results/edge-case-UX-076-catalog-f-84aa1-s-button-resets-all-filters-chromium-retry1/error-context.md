@@ -100,66 +100,66 @@
       - generic [ref=e57]:
         - link "Ver Meloxicam Inyectable" [ref=e59] [cursor=pointer]:
           - /url: /es/catalogo/farmacos/meloxicam-inyectable
-          - img "Meloxicam Inyectable" [ref=e61]
-          - generic [ref=e62]:
-            - heading "Meloxicam Inyectable" [level=3] [ref=e63]
-            - paragraph [ref=e64]: Zoetis
-            - generic [ref=e65]: Ver producto
-        - link "Ver Amoxicilina Veterinaria" [ref=e67] [cursor=pointer]:
+          - img "Meloxicam Inyectable" [ref=e62]
+          - generic [ref=e63]:
+            - heading "Meloxicam Inyectable" [level=3] [ref=e64]
+            - paragraph [ref=e65]: Zoetis
+            - generic [ref=e66]: Ver producto
+        - link "Ver Amoxicilina Veterinaria" [ref=e68] [cursor=pointer]:
           - /url: /es/catalogo/farmacos/amoxicilina-veterinaria
-          - img "Amoxicilina Veterinaria" [ref=e69]
-          - generic [ref=e70]:
-            - heading "Amoxicilina Veterinaria" [level=3] [ref=e71]
-            - paragraph [ref=e72]: Zoetis
-            - generic [ref=e73]: Ver producto
-  - contentinfo "Pie de pagina" [ref=e75]:
-    - generic [ref=e77]:
-      - generic [ref=e78]:
-        - generic [ref=e79]: HESA
-        - paragraph [ref=e80]: 37 anos distribuyendo salud animal en Costa Rica
-      - generic [ref=e82]:
-        - heading "Navegacion" [level=3] [ref=e83]
-        - navigation [ref=e84]:
-          - link "Inicio" [ref=e85] [cursor=pointer]:
+          - img "Amoxicilina Veterinaria" [ref=e71]
+          - generic [ref=e72]:
+            - heading "Amoxicilina Veterinaria" [level=3] [ref=e73]
+            - paragraph [ref=e74]: Zoetis
+            - generic [ref=e75]: Ver producto
+  - contentinfo "Pie de pagina" [ref=e77]:
+    - generic [ref=e79]:
+      - generic [ref=e80]:
+        - generic [ref=e81]: HESA
+        - paragraph [ref=e82]: 37 anos distribuyendo salud animal en Costa Rica
+      - generic [ref=e84]:
+        - heading "Navegacion" [level=3] [ref=e85]
+        - navigation [ref=e86]:
+          - link "Inicio" [ref=e87] [cursor=pointer]:
             - /url: /es
-          - link "Catalogo" [ref=e86] [cursor=pointer]:
+          - link "Catalogo" [ref=e88] [cursor=pointer]:
             - /url: /es/catalogo
-          - link "Marcas" [ref=e87] [cursor=pointer]:
+          - link "Marcas" [ref=e89] [cursor=pointer]:
             - /url: /es/marcas
-          - link "Nosotros" [ref=e88] [cursor=pointer]:
+          - link "Nosotros" [ref=e90] [cursor=pointer]:
             - /url: /es/nosotros
-          - link "Distribuidores" [ref=e89] [cursor=pointer]:
+          - link "Distribuidores" [ref=e91] [cursor=pointer]:
             - /url: /es/distribuidores
-          - link "Contacto" [ref=e90] [cursor=pointer]:
+          - link "Contacto" [ref=e92] [cursor=pointer]:
             - /url: /es/contacto
-      - generic [ref=e92]:
-        - heading "Contacto" [level=3] [ref=e93]
-        - generic [ref=e94]:
-          - paragraph [ref=e95]:
-            - img [ref=e96]
+      - generic [ref=e94]:
+        - heading "Contacto" [level=3] [ref=e95]
+        - generic [ref=e96]:
+          - paragraph [ref=e97]:
+            - img [ref=e98]
             - text: +506 2260-9020
-          - paragraph [ref=e98]:
-            - img [ref=e99]
+          - paragraph [ref=e100]:
+            - img [ref=e101]
             - text: info@hesa.co.cr
-          - paragraph [ref=e102]:
-            - img [ref=e103]
+          - paragraph [ref=e104]:
+            - img [ref=e105]
             - text: Calle 2, av 12. Heredia, Costa Rica
-          - paragraph [ref=e106]:
-            - img [ref=e107]
+          - paragraph [ref=e108]:
+            - img [ref=e109]
             - text: "Lun - Vie: 8:00 - 17:00"
-      - generic [ref=e111]:
-        - heading "Redes Sociales" [level=3] [ref=e112]
-        - generic [ref=e113]:
-          - link "Facebook" [ref=e114] [cursor=pointer]:
+      - generic [ref=e113]:
+        - heading "Redes Sociales" [level=3] [ref=e114]
+        - generic [ref=e115]:
+          - link "Facebook" [ref=e116] [cursor=pointer]:
             - /url: https://facebook.com/hesacr
-            - img [ref=e115]
-          - link "Instagram" [ref=e117] [cursor=pointer]:
+            - img [ref=e117]
+          - link "Instagram" [ref=e119] [cursor=pointer]:
             - /url: https://instagram.com/hesacr
-            - img [ref=e118]
-    - generic [ref=e122]:
-      - paragraph [ref=e123]: © HESA 2026. Todos los derechos reservados.
-      - button "English" [ref=e125] [cursor=pointer]
-  - button "Contactar por WhatsApp" [ref=e126] [cursor=pointer]:
-    - img [ref=e127]
+            - img [ref=e120]
+    - generic [ref=e124]:
+      - paragraph [ref=e125]: © HESA 2026. Todos los derechos reservados.
+      - button "English" [ref=e127] [cursor=pointer]
+  - button "Contactar por WhatsApp" [ref=e128] [cursor=pointer]:
+    - img [ref=e129]
     - generic: Escribenos por WhatsApp
 ```

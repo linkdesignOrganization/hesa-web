@@ -130,27 +130,33 @@
         - heading "Equipo de Liderazgo" [level=2] [ref=e145]
         - generic [ref=e146]:
           - generic [ref=e148]:
-            - img "Carlos Herrera" [ref=e150]
-            - heading "Carlos Herrera" [level=3] [ref=e151]
-            - paragraph [ref=e152]: Director General
-          - generic [ref=e154]:
-            - img "Ana Elizondo" [ref=e156]
-            - heading "Ana Elizondo" [level=3] [ref=e157]
-            - paragraph [ref=e158]: Directora Comercial
-          - generic [ref=e160]:
-            - img "Roberto Vargas" [ref=e162]
-            - heading "Roberto Vargas" [level=3] [ref=e163]
-            - paragraph [ref=e164]: Gerente de Operaciones
-          - generic [ref=e166]:
-            - img "Maria Fernanda Lopez" [ref=e168]
-            - heading "Maria Fernanda Lopez" [level=3] [ref=e169]
-            - paragraph [ref=e170]: Gerente de Ventas
-          - generic [ref=e172]:
-            - img "Jorge Castillo" [ref=e174]
-            - heading "Jorge Castillo" [level=3] [ref=e175]
-            - paragraph [ref=e176]: Director Financiero
-          - generic [ref=e178]:
-            - img "Laura Sanchez" [ref=e180]
+            - img "Carlos Herrera" [ref=e151]
+            - heading "Carlos Herrera" [level=3] [ref=e152]
+            - paragraph [ref=e153]: Director General
+          - generic [ref=e155]:
+            - img "Ana Elizondo" [ref=e158]
+            - heading "Ana Elizondo" [level=3] [ref=e159]
+            - paragraph [ref=e160]: Directora Comercial
+          - generic [ref=e162]:
+            - img "Roberto Vargas" [ref=e165]
+            - heading "Roberto Vargas" [level=3] [ref=e166]
+            - paragraph [ref=e167]: Gerente de Operaciones
+          - generic [ref=e169]:
+            - generic [ref=e170]:
+              - generic:
+                - img "Maria Fernanda Lopez"
+            - heading "Maria Fernanda Lopez" [level=3] [ref=e171]
+            - paragraph [ref=e172]: Gerente de Ventas
+          - generic [ref=e174]:
+            - generic [ref=e175]:
+              - generic:
+                - img "Jorge Castillo"
+            - heading "Jorge Castillo" [level=3] [ref=e176]
+            - paragraph [ref=e177]: Director Financiero
+          - generic [ref=e179]:
+            - generic [ref=e180]:
+              - generic:
+                - img "Laura Sanchez"
             - heading "Laura Sanchez" [level=3] [ref=e181]
             - paragraph [ref=e182]: Gerente de Logistica
   - contentinfo "Pie de pagina" [ref=e184]:

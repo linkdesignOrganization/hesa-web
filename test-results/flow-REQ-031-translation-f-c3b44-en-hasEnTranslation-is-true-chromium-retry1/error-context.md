@@ -1,0 +1,185 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e2]:
+  - link "Saltar al contenido principal" [ref=e3] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic:
+    - navigation "Main navigation" [ref=e4]:
+      - generic [ref=e5]:
+        - link "HESA - Ir al inicio" [ref=e6] [cursor=pointer]:
+          - /url: /en
+          - generic [ref=e7]: HESA
+          - generic [ref=e8]: H
+        - navigation [ref=e9]:
+          - generic [ref=e10]:
+            - button "Catalog" [ref=e11] [cursor=pointer]:
+              - text: Catalog
+              - img [ref=e12]
+            - generic:
+              - link "Veterinary Pharmaceuticals":
+                - /url: /en/catalog/pharmaceuticals
+                - img
+                - text: Veterinary Pharmaceuticals
+              - link "Animal Food":
+                - /url: /en/catalog/food
+                - img
+                - text: Animal Food
+              - link "Veterinary Equipment":
+                - /url: /en/catalog/equipment
+                - img
+                - text: Veterinary Equipment
+          - link "Brands" [ref=e14] [cursor=pointer]:
+            - /url: /en/brands
+          - link "About" [ref=e15] [cursor=pointer]:
+            - /url: /en/about
+          - link "Distributors" [ref=e16] [cursor=pointer]:
+            - /url: /en/distributors
+          - link "Contact" [ref=e17] [cursor=pointer]:
+            - /url: /en/contact
+        - generic [ref=e18]:
+          - button "Search products and brands" [ref=e19] [cursor=pointer]:
+            - img [ref=e20]
+          - listbox "Seleccionar idioma" [ref=e24]:
+            - button "EN" [ref=e25] [cursor=pointer]:
+              - generic [ref=e26]: EN
+              - img [ref=e27]
+    - generic:
+      - search "Global search":
+        - generic:
+          - button "Close search":
+            - img
+          - generic:
+            - img
+            - textbox "Search products, brands..."
+          - paragraph: Type at least 3 characters
+  - main [ref=e29]:
+    - generic [ref=e30]:
+      - generic [ref=e32]:
+        - navigation "Breadcrumb" [ref=e34]:
+          - list [ref=e35]:
+            - listitem [ref=e36]:
+              - link "Home" [ref=e37] [cursor=pointer]:
+                - /url: /en
+              - generic [ref=e38]: ">"
+            - listitem [ref=e39]:
+              - link "Catalog" [ref=e40] [cursor=pointer]:
+                - /url: /en/catalog
+              - generic [ref=e41]: ">"
+            - listitem [ref=e42]:
+              - link "Pharmaceuticals" [ref=e43] [cursor=pointer]:
+                - /url: /en/catalog/pharmaceuticals
+              - generic [ref=e44]: ">"
+            - listitem [ref=e45]:
+              - generic [ref=e46]: Veterinary Amoxicillin
+        - generic [ref=e47]:
+          - generic [ref=e48]:
+            - generic [ref=e49]:
+              - button "View image 1" [ref=e50] [cursor=pointer]:
+                - img "Veterinary Amoxicillin - imagen 1" [ref=e52]
+              - button "View image 2" [ref=e53] [cursor=pointer]:
+                - img "Veterinary Amoxicillin - imagen 2" [ref=e55]
+              - button "View image 3" [ref=e56] [cursor=pointer]:
+                - img "Veterinary Amoxicillin - imagen 3" [ref=e58]
+            - img "Veterinary Amoxicillin" [ref=e61]
+          - generic [ref=e62]:
+            - heading "Veterinary Amoxicillin" [level=1] [ref=e63]
+            - link "Zoetis" [ref=e64] [cursor=pointer]:
+              - /url: /en/brands/zoetis
+            - generic [ref=e65]:
+              - generic [ref=e66]:
+                - img [ref=e67]
+                - text: Caninos
+              - generic [ref=e69]:
+                - img [ref=e70]
+                - text: Felinos
+              - generic [ref=e72]:
+                - img [ref=e73]
+                - text: Bovinos
+            - generic [ref=e75]:
+              - paragraph [ref=e76]: Presentations
+              - generic [ref=e77]:
+                - button "Tabletas 250mg" [ref=e78] [cursor=pointer]
+                - button "Tabletas 500mg" [ref=e79] [cursor=pointer]
+                - button "Suspension oral 100ml" [ref=e80] [cursor=pointer]
+            - paragraph [ref=e81]: Broad-spectrum antibiotic for the treatment of bacterial infections in canines, felines, and bovines. Veterinary formula with high bioavailability and excellent tolerance.
+            - generic [ref=e82]:
+              - paragraph [ref=e83]: Composition
+              - paragraph [ref=e84]: "Each tablet contains: Amoxicillin trihydrate equivalent to 500mg amoxicillin. Excipients q.s."
+            - generic [ref=e85]:
+              - paragraph [ref=e86]: Sanitary registry
+              - paragraph [ref=e87]: SENASA-VET-2024-0847
+            - generic [ref=e88]:
+              - paragraph [ref=e89]: Indications
+              - paragraph [ref=e90]: Indicated for the treatment of respiratory tract, urinary, skin, and soft tissue infections caused by bacteria sensitive to amoxicillin.
+            - generic [ref=e91]:
+              - link "Request information" [ref=e92] [cursor=pointer]:
+                - /url: /en/contact?producto=veterinary-amoxicillin
+              - link "Ask via WhatsApp" [ref=e93] [cursor=pointer]:
+                - /url: https://wa.me/50622609020?text=Hello%2C%20I%20am%20interested%20in%20the%20product%20Veterinary%20Amoxicillin%20by%20Zoetis.%20I%20would%20like%20to%20receive%20information.
+                - img [ref=e94]
+                - text: Ask via WhatsApp
+              - link "Download datasheet" [ref=e96] [cursor=pointer]:
+                - /url: https://hesastorage.blob.core.windows.net/seed/amoxicilina-ficha.pdf
+                - img [ref=e97]
+                - text: Download datasheet
+        - generic [ref=e100]:
+          - paragraph [ref=e103]: With over 70 years of experience, Zoetis develops high-quality veterinary formulations that ensure the health and well-being of animals.
+          - paragraph [ref=e106]: Zoetis Veterinary Amoxicillin has been tested in thousands of clinical cases, demonstrating superior efficacy in the treatment of common bacterial infections.
+      - generic [ref=e108]:
+        - generic [ref=e111]:
+          - generic [ref=e112]: Veterinary Amoxicillin
+          - text: Zoetis
+        - link "Request info" [ref=e113] [cursor=pointer]:
+          - /url: /en/contact?producto=veterinary-amoxicillin
+  - contentinfo "Pie de pagina" [ref=e115]:
+    - generic [ref=e117]:
+      - generic [ref=e118]:
+        - generic [ref=e119]: HESA
+        - paragraph [ref=e120]: 37 years distributing animal health in Costa Rica
+      - generic [ref=e122]:
+        - heading "Navigation" [level=3] [ref=e123]
+        - navigation [ref=e124]:
+          - link "Home" [ref=e125] [cursor=pointer]:
+            - /url: /en
+          - link "Catalog" [ref=e126] [cursor=pointer]:
+            - /url: /en/catalog
+          - link "Brands" [ref=e127] [cursor=pointer]:
+            - /url: /en/brands
+          - link "About" [ref=e128] [cursor=pointer]:
+            - /url: /en/about
+          - link "Distributors" [ref=e129] [cursor=pointer]:
+            - /url: /en/distributors
+          - link "Contact" [ref=e130] [cursor=pointer]:
+            - /url: /en/contact
+      - generic [ref=e132]:
+        - heading "Contact" [level=3] [ref=e133]
+        - generic [ref=e134]:
+          - paragraph [ref=e135]:
+            - img [ref=e136]
+            - text: +506 2260-9020
+          - paragraph [ref=e138]:
+            - img [ref=e139]
+            - text: info@hesa.co.cr
+          - paragraph [ref=e142]:
+            - img [ref=e143]
+            - text: Calle 2, av 12. Heredia, Costa Rica
+          - paragraph [ref=e146]:
+            - img [ref=e147]
+            - text: "Mon - Fri: 8:00 - 17:00"
+      - generic [ref=e151]:
+        - heading "Social Media" [level=3] [ref=e152]
+        - generic [ref=e153]:
+          - link "Facebook" [ref=e154] [cursor=pointer]:
+            - /url: https://facebook.com/hesacr
+            - img [ref=e155]
+          - link "Instagram" [ref=e157] [cursor=pointer]:
+            - /url: https://instagram.com/hesacr
+            - img [ref=e158]
+    - generic [ref=e162]:
+      - paragraph [ref=e163]: © HESA 2026. All rights reserved.
+      - button "Espanol" [ref=e165] [cursor=pointer]
+  - button "Contactar por WhatsApp" [ref=e166] [cursor=pointer]:
+    - img [ref=e167]
+    - generic: Escribenos por WhatsApp
+```

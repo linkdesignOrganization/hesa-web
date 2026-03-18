@@ -73,89 +73,89 @@
             - listitem [ref=e45]:
               - generic [ref=e46]: Veterinary Vital Signs Monitor
         - generic [ref=e47]:
-          - img "Veterinary Vital Signs Monitor" [ref=e50]
-          - generic [ref=e51]:
-            - heading "Veterinary Vital Signs Monitor" [level=1] [ref=e52]
-            - link "Mindray" [ref=e53] [cursor=pointer]:
+          - img "Veterinary Vital Signs Monitor" [ref=e51]
+          - generic [ref=e52]:
+            - heading "Veterinary Vital Signs Monitor" [level=1] [ref=e53]
+            - link "Mindray" [ref=e54] [cursor=pointer]:
               - /url: /en/brands/mindray
-            - generic [ref=e54]:
-              - paragraph [ref=e55]: Presentations
-              - button "Unidad completa" [ref=e57] [cursor=pointer]
-            - paragraph [ref=e58]: Multiparameter veterinary monitor for clinics and hospitals. 12-inch color touchscreen with ECG, SpO2, NIBP, temperature, and capnography measurement.
-            - generic [ref=e59]:
-              - paragraph [ref=e60]: Technical specifications
-              - paragraph [ref=e61]: "Display: 12.1\" TFT LCD touch. Parameters: ECG (7 leads), SpO2, NIBP, Temperature, CO2. Battery: 4 hours. Weight: 4.5 kg. Interfaces: WiFi, USB, LAN."
-            - generic [ref=e62]:
-              - paragraph [ref=e63]: Recommended uses
-              - paragraph [ref=e64]: Continuous monitoring during surgeries, post-operative recovery, hospitalization, and veterinary emergencies.
-            - generic [ref=e65]:
-              - paragraph [ref=e66]: Warranty
-              - paragraph [ref=e67]: 2-year manufacturer warranty. Local technical support included.
-            - generic [ref=e68]:
-              - link "Request information" [ref=e69] [cursor=pointer]:
+            - generic [ref=e55]:
+              - paragraph [ref=e56]: Presentations
+              - button "Unidad completa" [ref=e58] [cursor=pointer]
+            - paragraph [ref=e59]: Multiparameter veterinary monitor for clinics and hospitals. 12-inch color touchscreen with ECG, SpO2, NIBP, temperature, and capnography measurement.
+            - generic [ref=e60]:
+              - paragraph [ref=e61]: Technical specifications
+              - paragraph [ref=e62]: "Display: 12.1\" TFT LCD touch. Parameters: ECG (7 leads), SpO2, NIBP, Temperature, CO2. Battery: 4 hours. Weight: 4.5 kg. Interfaces: WiFi, USB, LAN."
+            - generic [ref=e63]:
+              - paragraph [ref=e64]: Recommended uses
+              - paragraph [ref=e65]: Continuous monitoring during surgeries, post-operative recovery, hospitalization, and veterinary emergencies.
+            - generic [ref=e66]:
+              - paragraph [ref=e67]: Warranty
+              - paragraph [ref=e68]: 2-year manufacturer warranty. Local technical support included.
+            - generic [ref=e69]:
+              - link "Request information" [ref=e70] [cursor=pointer]:
                 - /url: /en/contact?producto=vet-vital-signs-monitor
-              - link "Ask via WhatsApp" [ref=e70] [cursor=pointer]:
+              - link "Ask via WhatsApp" [ref=e71] [cursor=pointer]:
                 - /url: https://wa.me/50622609020?text=Hello%2C%20I%20am%20interested%20in%20the%20product%20Veterinary%20Vital%20Signs%20Monitor%20by%20Mindray.%20I%20would%20like%20to%20receive%20information.
-                - img [ref=e71]
+                - img [ref=e72]
                 - text: Ask via WhatsApp
-              - link "Download datasheet" [ref=e73] [cursor=pointer]:
+              - link "Download datasheet" [ref=e74] [cursor=pointer]:
                 - /url: https://hesastorage.blob.core.windows.net/seed/mindray-monitor-ficha.pdf
-                - img [ref=e74]
+                - img [ref=e75]
                 - text: Download datasheet
-      - generic [ref=e78]:
-        - generic [ref=e81]:
-          - generic [ref=e82]: Veterinary Vital Signs Monitor
+      - generic [ref=e79]:
+        - generic [ref=e82]:
+          - generic [ref=e83]: Veterinary Vital Signs Monitor
           - text: Mindray
-        - link "Request info" [ref=e83] [cursor=pointer]:
+        - link "Request info" [ref=e84] [cursor=pointer]:
           - /url: /en/contact?producto=vet-vital-signs-monitor
-  - contentinfo "Pie de pagina" [ref=e85]:
-    - generic [ref=e87]:
-      - generic [ref=e88]:
-        - generic [ref=e89]: HESA
-        - paragraph [ref=e90]: 37 years distributing animal health in Costa Rica
-      - generic [ref=e92]:
-        - heading "Navigation" [level=3] [ref=e93]
-        - navigation [ref=e94]:
-          - link "Home" [ref=e95] [cursor=pointer]:
+  - contentinfo "Pie de pagina" [ref=e86]:
+    - generic [ref=e88]:
+      - generic [ref=e89]:
+        - generic [ref=e90]: HESA
+        - paragraph [ref=e91]: 37 years distributing animal health in Costa Rica
+      - generic [ref=e93]:
+        - heading "Navigation" [level=3] [ref=e94]
+        - navigation [ref=e95]:
+          - link "Home" [ref=e96] [cursor=pointer]:
             - /url: /en
-          - link "Catalog" [ref=e96] [cursor=pointer]:
+          - link "Catalog" [ref=e97] [cursor=pointer]:
             - /url: /en/catalog
-          - link "Brands" [ref=e97] [cursor=pointer]:
+          - link "Brands" [ref=e98] [cursor=pointer]:
             - /url: /en/brands
-          - link "About" [ref=e98] [cursor=pointer]:
+          - link "About" [ref=e99] [cursor=pointer]:
             - /url: /en/about
-          - link "Distributors" [ref=e99] [cursor=pointer]:
+          - link "Distributors" [ref=e100] [cursor=pointer]:
             - /url: /en/distributors
-          - link "Contact" [ref=e100] [cursor=pointer]:
+          - link "Contact" [ref=e101] [cursor=pointer]:
             - /url: /en/contact
-      - generic [ref=e102]:
-        - heading "Contact" [level=3] [ref=e103]
-        - generic [ref=e104]:
-          - paragraph [ref=e105]:
-            - img [ref=e106]
+      - generic [ref=e103]:
+        - heading "Contact" [level=3] [ref=e104]
+        - generic [ref=e105]:
+          - paragraph [ref=e106]:
+            - img [ref=e107]
             - text: +506 2260-9020
-          - paragraph [ref=e108]:
-            - img [ref=e109]
+          - paragraph [ref=e109]:
+            - img [ref=e110]
             - text: info@hesa.co.cr
-          - paragraph [ref=e112]:
-            - img [ref=e113]
+          - paragraph [ref=e113]:
+            - img [ref=e114]
             - text: Calle 2, av 12. Heredia, Costa Rica
-          - paragraph [ref=e116]:
-            - img [ref=e117]
+          - paragraph [ref=e117]:
+            - img [ref=e118]
             - text: "Mon - Fri: 8:00 - 17:00"
-      - generic [ref=e121]:
-        - heading "Social Media" [level=3] [ref=e122]
-        - generic [ref=e123]:
-          - link "Facebook" [ref=e124] [cursor=pointer]:
+      - generic [ref=e122]:
+        - heading "Social Media" [level=3] [ref=e123]
+        - generic [ref=e124]:
+          - link "Facebook" [ref=e125] [cursor=pointer]:
             - /url: https://facebook.com/hesacr
-            - img [ref=e125]
-          - link "Instagram" [ref=e127] [cursor=pointer]:
+            - img [ref=e126]
+          - link "Instagram" [ref=e128] [cursor=pointer]:
             - /url: https://instagram.com/hesacr
-            - img [ref=e128]
-    - generic [ref=e132]:
-      - paragraph [ref=e133]: © HESA 2026. All rights reserved.
-      - button "Espanol" [ref=e135] [cursor=pointer]
-  - button "Contactar por WhatsApp" [ref=e136] [cursor=pointer]:
-    - img [ref=e137]
+            - img [ref=e129]
+    - generic [ref=e133]:
+      - paragraph [ref=e134]: © HESA 2026. All rights reserved.
+      - button "Espanol" [ref=e136] [cursor=pointer]
+  - button "Contactar por WhatsApp" [ref=e137] [cursor=pointer]:
+    - img [ref=e138]
     - generic: Escribenos por WhatsApp
 ```

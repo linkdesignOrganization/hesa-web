@@ -1,0 +1,154 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e2]:
+  - link "Saltar al contenido principal" [ref=e3] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic:
+    - navigation "Navegacion principal" [ref=e4]:
+      - generic [ref=e5]:
+        - link "HESA - Ir al inicio" [ref=e6] [cursor=pointer]:
+          - /url: /es
+          - generic [ref=e7]: HESA
+          - generic [ref=e8]: H
+        - navigation [ref=e9]:
+          - generic [ref=e10]:
+            - button "Catalogo" [ref=e11] [cursor=pointer]:
+              - text: Catalogo
+              - img [ref=e12]
+            - generic:
+              - link "Farmacos Veterinarios":
+                - /url: /es/catalogo/farmacos
+                - img
+                - text: Farmacos Veterinarios
+              - link "Alimentos para Animales":
+                - /url: /es/catalogo/alimentos
+                - img
+                - text: Alimentos para Animales
+              - link "Equipos Veterinarios":
+                - /url: /es/catalogo/equipos
+                - img
+                - text: Equipos Veterinarios
+          - link "Marcas" [ref=e14] [cursor=pointer]:
+            - /url: /es/marcas
+          - link "Nosotros" [ref=e15] [cursor=pointer]:
+            - /url: /es/nosotros
+          - link "Distribuidores" [ref=e16] [cursor=pointer]:
+            - /url: /es/distribuidores
+          - link "Contacto" [ref=e17] [cursor=pointer]:
+            - /url: /es/contacto
+        - generic [ref=e18]:
+          - button "Buscar productos y marcas" [ref=e19] [cursor=pointer]:
+            - img [ref=e20]
+          - listbox "Seleccionar idioma" [ref=e24]:
+            - button "ES" [ref=e25] [cursor=pointer]:
+              - generic [ref=e26]: ES
+              - img [ref=e27]
+    - generic:
+      - search "Busqueda global":
+        - generic:
+          - button "Cerrar busqueda":
+            - img
+          - generic:
+            - img
+            - textbox "Buscar productos, marcas..."
+          - paragraph: Escribe al menos 3 caracteres
+  - main [ref=e29]:
+    - generic [ref=e32]:
+      - navigation "Breadcrumb" [ref=e34]:
+        - list [ref=e35]:
+          - listitem [ref=e36]:
+            - link "Inicio" [ref=e37] [cursor=pointer]:
+              - /url: /es
+            - generic [ref=e38]: ">"
+          - listitem [ref=e39]:
+            - generic [ref=e40]: Catalogo
+      - generic [ref=e41]:
+        - heading "Catalogo de Productos" [level=1] [ref=e42]
+        - generic [ref=e43]: 0 productos
+      - group "Filtros del catalogo" [ref=e44]:
+        - generic [ref=e45]:
+          - combobox "Filtrar por categoria" [ref=e46] [cursor=pointer]:
+            - option "Categoria" [selected]
+            - option "Farmacos"
+            - option "Alimentos"
+            - option "Equipos"
+          - combobox "Filtrar por marca" [ref=e47] [cursor=pointer]:
+            - option "Marca" [selected]
+            - option "Mindray"
+            - option "Royal Canin"
+            - option "Zoetis"
+          - combobox "Filtrar por especie" [ref=e48] [cursor=pointer]:
+            - option "Especie"
+            - option "Caninos"
+            - option "Felinos"
+            - option "Bovinos"
+            - option "Equinos"
+            - option "Porcinos" [selected]
+            - option "Aves"
+      - generic [ref=e49]:
+        - generic [ref=e50]:
+          - text: Mindray
+          - 'button "Remover filtro: Mindray" [ref=e51] [cursor=pointer]':
+            - img [ref=e52]
+        - generic [ref=e55]:
+          - text: Porcinos
+          - 'button "Remover filtro: Porcinos" [ref=e56] [cursor=pointer]':
+            - img [ref=e57]
+        - button "Limpiar filtros" [ref=e60] [cursor=pointer]
+      - generic [ref=e61]:
+        - img [ref=e63]
+        - heading "No se encontraron productos con estos filtros" [level=2] [ref=e66]
+        - paragraph [ref=e67]: Intenta limpiar algunos filtros para ver mas resultados.
+        - button "Limpiar filtros" [ref=e68] [cursor=pointer]
+  - contentinfo "Pie de pagina" [ref=e70]:
+    - generic [ref=e72]:
+      - generic [ref=e73]:
+        - generic [ref=e74]: HESA
+        - paragraph [ref=e75]: 37 anos distribuyendo salud animal en Costa Rica
+      - generic [ref=e77]:
+        - heading "Navegacion" [level=3] [ref=e78]
+        - navigation [ref=e79]:
+          - link "Inicio" [ref=e80] [cursor=pointer]:
+            - /url: /es
+          - link "Catalogo" [ref=e81] [cursor=pointer]:
+            - /url: /es/catalogo
+          - link "Marcas" [ref=e82] [cursor=pointer]:
+            - /url: /es/marcas
+          - link "Nosotros" [ref=e83] [cursor=pointer]:
+            - /url: /es/nosotros
+          - link "Distribuidores" [ref=e84] [cursor=pointer]:
+            - /url: /es/distribuidores
+          - link "Contacto" [ref=e85] [cursor=pointer]:
+            - /url: /es/contacto
+      - generic [ref=e87]:
+        - heading "Contacto" [level=3] [ref=e88]
+        - generic [ref=e89]:
+          - paragraph [ref=e90]:
+            - img [ref=e91]
+            - text: +506 2260-9020
+          - paragraph [ref=e93]:
+            - img [ref=e94]
+            - text: info@hesa.co.cr
+          - paragraph [ref=e97]:
+            - img [ref=e98]
+            - text: Calle 2, av 12. Heredia, Costa Rica
+          - paragraph [ref=e101]:
+            - img [ref=e102]
+            - text: "Lun - Vie: 8:00 - 17:00"
+      - generic [ref=e106]:
+        - heading "Redes Sociales" [level=3] [ref=e107]
+        - generic [ref=e108]:
+          - link "Facebook" [ref=e109] [cursor=pointer]:
+            - /url: https://facebook.com/hesacr
+            - img [ref=e110]
+          - link "Instagram" [ref=e112] [cursor=pointer]:
+            - /url: https://instagram.com/hesacr
+            - img [ref=e113]
+    - generic [ref=e117]:
+      - paragraph [ref=e118]: © HESA 2026. Todos los derechos reservados.
+      - button "English" [ref=e120] [cursor=pointer]
+  - button "Contactar por WhatsApp" [ref=e121] [cursor=pointer]:
+    - img [ref=e122]
+    - generic: Escribenos por WhatsApp
+```

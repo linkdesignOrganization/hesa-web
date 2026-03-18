@@ -1,6 +1,12 @@
 # Pending Feedback
 > Los agentes appendan su feedback aqui. El Feedback Curator lo procesa en paso 4j/5i/R5.
 
+### Feedback de: qa-orchestrator
+- Iteracion 4 cerrada en 2 rondas con 5/5 bugs corregidos. Todos los bugs eran de performance/accesibilidad (CSS/HTML), no funcionales. Patron: las iteraciones de pulido final tienden a generar bugs de menor impacto arquitectural que se corrigen rapido
+- La regresion consolidada crece a 645 tests sin fallos, confirmando estabilidad acumulativa del proyecto completo (Fase 4 + 4 iteraciones)
+- Los 5 bugs de Iter 4 eran todos del dominio Visual Checker. En proyectos futuros, cuando la ultima iteracion es "pulido y accesibilidad", considerar asignar solo Visual Checker en R1 y omitir Flow/Edge Case si los criterios son puramente visuales
+- El Developer reporto que BUG-004 (labels) ya existia en codigo pero no se veia en deploy. Posible cache de SWA. Para evitar falsos positivos, el QA deberia verificar que el build ID o timestamp del deploy coincide con el ultimo push antes de testear
+
 ### Feedback de: developer
 - BUG-004 (NFR-025) reporto que los formularios usan `<div>` en vez de `<label for>` y 0 elementos role="alert", pero el codigo ya tenia `<label class="form-label" for="name">` y `role="alert"` correctamente implementados. Es posible que el QA teste contra una version deployada anterior al ultimo push, o que el build cache de SWA no se haya invalidado. Sugiero que el QA valide tambien contra el codigo fuente cuando hay discrepancias entre lo deployado y lo esperado
 - Para NFR-002 (WebP), la solucion frontend con `<picture><source type="image/webp">` asume que los archivos .webp existen en Azure Blob Storage. El backend/DevOps deberia configurar un pipeline para generar automaticamente versiones .webp de cada imagen subida, o usar Azure CDN con transformacion de imagenes automatica

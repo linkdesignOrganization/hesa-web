@@ -5,7 +5,7 @@
 > Codigo/bugs → Developer | Testing → QA | Deploy → DevOps | Requirements → BA | Arquitectura → Architect | Visual Research → Design Researcher | UI/UX → Design Orchestrator
 
 ## Estado Actual
-**FASE 5 — Iteracion 4: Performance, Accesibilidad y Pulido Final** (en progreso)
+**FASE 6 — Deployment** (en progreso)
 
 ## Design Briefs
 - Detectados: `input/design-briefs/HESA_Brief_Agentes.md` (sitio publico) + `HESA_Brief_Panel_Administracion.md` (panel admin)
@@ -97,21 +97,10 @@
 - [x] 5f-5j: Demo + commit
 
 ### FASE 5 — Iteracion 4: Performance, Accesibilidad y Pulido Final
-- [ ] 5a: Developer implementa
-- [ ] 5a-verify: Verificacion post-Developer
-- [ ] 5b: Simplify
-- [ ] 5c: Security Review
-- [ ] 5d: Pre-QA Deploy
-- [ ] 5d-regress: Regresion automatizada pre-QA
-- [ ] 5e-plan: QA genera plan
-- [ ] 5e-sub: Sub-testers en paralelo
-- [ ] 5e-consolidate: QA consolida
-- [ ] 5e-verify: Verificacion post-QA
-- [ ] 5f: Demo para el cliente
-- [ ] 5g: Feedback del cliente
-- [ ] 5h: Recopilar feedback
-- [ ] 5i: Distribucion y mantenimiento de feedback
-- [ ] 5j: Commit de iteracion
+- [x] 5a-5c: Implementacion + verify + simplify + security
+- [x] 5d-regress: Regresion (645 passed, 0 failed)
+- [x] 5e: QA (2 rondas, 36/36, 0 bugs, LISTO)
+- [x] 5f-5j: Commit
 
 ### FASE 6 — Deployment
 - [ ] 6a: Deploy a produccion

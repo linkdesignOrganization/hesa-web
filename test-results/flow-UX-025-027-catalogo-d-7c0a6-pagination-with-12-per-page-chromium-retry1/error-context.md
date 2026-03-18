@@ -75,6 +75,9 @@
             - option "Equipos"
           - combobox "Filtrar por marca" [ref=e47] [cursor=pointer]:
             - option "Marca" [selected]
+            - option "Mindray"
+            - option "Royal Canin"
+            - option "Zoetis"
           - combobox "Filtrar por especie" [ref=e48] [cursor=pointer]:
             - option "Especie" [selected]
             - option "Caninos"

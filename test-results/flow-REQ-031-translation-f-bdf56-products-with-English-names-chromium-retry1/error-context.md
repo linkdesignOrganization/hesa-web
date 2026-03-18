@@ -1,0 +1,107 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e2]:
+  - link "Saltar al contenido principal" [ref=e3] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic:
+    - navigation "Main navigation" [ref=e4]:
+      - generic [ref=e5]:
+        - link "HESA - Ir al inicio" [ref=e6] [cursor=pointer]:
+          - /url: /en
+          - generic [ref=e7]: HESA
+          - generic [ref=e8]: H
+        - navigation [ref=e9]:
+          - generic [ref=e10]:
+            - button "Catalog" [ref=e11] [cursor=pointer]:
+              - text: Catalog
+              - img [ref=e12]
+            - generic:
+              - link "Veterinary Pharmaceuticals":
+                - /url: /en/catalog/pharmaceuticals
+                - img
+                - text: Veterinary Pharmaceuticals
+              - link "Animal Food":
+                - /url: /en/catalog/food
+                - img
+                - text: Animal Food
+              - link "Veterinary Equipment":
+                - /url: /en/catalog/equipment
+                - img
+                - text: Veterinary Equipment
+          - link "Brands" [ref=e14] [cursor=pointer]:
+            - /url: /en/brands
+          - link "About" [ref=e15] [cursor=pointer]:
+            - /url: /en/about
+          - link "Distributors" [ref=e16] [cursor=pointer]:
+            - /url: /en/distributors
+          - link "Contact" [ref=e17] [cursor=pointer]:
+            - /url: /en/contact
+        - generic [ref=e18]:
+          - button "Search products and brands" [ref=e19] [cursor=pointer]:
+            - img [ref=e20]
+          - listbox "Seleccionar idioma" [ref=e24]:
+            - button "EN" [ref=e25] [cursor=pointer]:
+              - generic [ref=e26]: EN
+              - img [ref=e27]
+    - generic:
+      - search "Global search":
+        - generic:
+          - button "Close search":
+            - img
+          - generic:
+            - img
+            - textbox "Search products, brands..."
+          - paragraph: Type at least 3 characters
+  - main
+  - contentinfo "Pie de pagina" [ref=e30]:
+    - generic [ref=e32]:
+      - generic [ref=e33]:
+        - generic [ref=e34]: HESA
+        - paragraph [ref=e35]: 37 years distributing animal health in Costa Rica
+      - generic [ref=e37]:
+        - heading "Navigation" [level=3] [ref=e38]
+        - navigation [ref=e39]:
+          - link "Home" [ref=e40] [cursor=pointer]:
+            - /url: /en
+          - link "Catalog" [ref=e41] [cursor=pointer]:
+            - /url: /en/catalog
+          - link "Brands" [ref=e42] [cursor=pointer]:
+            - /url: /en/brands
+          - link "About" [ref=e43] [cursor=pointer]:
+            - /url: /en/about
+          - link "Distributors" [ref=e44] [cursor=pointer]:
+            - /url: /en/distributors
+          - link "Contact" [ref=e45] [cursor=pointer]:
+            - /url: /en/contact
+      - generic [ref=e47]:
+        - heading "Contact" [level=3] [ref=e48]
+        - generic [ref=e49]:
+          - paragraph [ref=e50]:
+            - img [ref=e51]
+            - text: +506 2260-9020
+          - paragraph [ref=e53]:
+            - img [ref=e54]
+            - text: info@hesa.co.cr
+          - paragraph [ref=e57]:
+            - img [ref=e58]
+            - text: Calle 2, av 12. Heredia, Costa Rica
+          - paragraph [ref=e61]:
+            - img [ref=e62]
+            - text: "Mon - Fri: 8:00 - 17:00"
+      - generic [ref=e66]:
+        - heading "Social Media" [level=3] [ref=e67]
+        - generic [ref=e68]:
+          - link "Facebook" [ref=e69] [cursor=pointer]:
+            - /url: https://facebook.com/hesacr
+            - img [ref=e70]
+          - link "Instagram" [ref=e72] [cursor=pointer]:
+            - /url: https://instagram.com/hesacr
+            - img [ref=e73]
+    - generic [ref=e77]:
+      - paragraph [ref=e78]: © HESA 2026. All rights reserved.
+      - button "Espanol" [ref=e80] [cursor=pointer]
+  - button "Contactar por WhatsApp" [ref=e81] [cursor=pointer]:
+    - img [ref=e82]
+    - generic: Escribenos por WhatsApp
+```

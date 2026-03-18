@@ -1,0 +1,107 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e2]:
+  - link "Saltar al contenido principal" [ref=e3] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic:
+    - navigation "Navegacion principal" [ref=e4]:
+      - generic [ref=e5]:
+        - link "HESA - Ir al inicio" [ref=e6] [cursor=pointer]:
+          - /url: /es
+          - generic [ref=e7]: HESA
+          - generic [ref=e8]: H
+        - navigation [ref=e9]:
+          - generic [ref=e10]:
+            - button "Catalogo" [ref=e11] [cursor=pointer]:
+              - text: Catalogo
+              - img [ref=e12]
+            - generic:
+              - link "Farmacos Veterinarios":
+                - /url: /es/catalogo/farmacos
+                - img
+                - text: Farmacos Veterinarios
+              - link "Alimentos para Animales":
+                - /url: /es/catalogo/alimentos
+                - img
+                - text: Alimentos para Animales
+              - link "Equipos Veterinarios":
+                - /url: /es/catalogo/equipos
+                - img
+                - text: Equipos Veterinarios
+          - link "Marcas" [ref=e14] [cursor=pointer]:
+            - /url: /es/marcas
+          - link "Nosotros" [ref=e15] [cursor=pointer]:
+            - /url: /es/nosotros
+          - link "Distribuidores" [ref=e16] [cursor=pointer]:
+            - /url: /es/distribuidores
+          - link "Contacto" [ref=e17] [cursor=pointer]:
+            - /url: /es/contacto
+        - generic [ref=e18]:
+          - button "Buscar productos y marcas" [ref=e19] [cursor=pointer]:
+            - img [ref=e20]
+          - listbox "Seleccionar idioma" [ref=e24]:
+            - button "ES" [ref=e25] [cursor=pointer]:
+              - generic [ref=e26]: ES
+              - img [ref=e27]
+    - generic:
+      - search "Busqueda global":
+        - generic:
+          - button "Cerrar busqueda":
+            - img
+          - generic:
+            - img
+            - textbox "Buscar productos, marcas..."
+          - paragraph: Escribe al menos 3 caracteres
+  - main
+  - contentinfo "Pie de pagina" [ref=e30]:
+    - generic [ref=e32]:
+      - generic [ref=e33]:
+        - generic [ref=e34]: HESA
+        - paragraph [ref=e35]: 37 anos distribuyendo salud animal en Costa Rica
+      - generic [ref=e37]:
+        - heading "Navegacion" [level=3] [ref=e38]
+        - navigation [ref=e39]:
+          - link "Inicio" [ref=e40] [cursor=pointer]:
+            - /url: /es
+          - link "Catalogo" [ref=e41] [cursor=pointer]:
+            - /url: /es/catalogo
+          - link "Marcas" [ref=e42] [cursor=pointer]:
+            - /url: /es/marcas
+          - link "Nosotros" [ref=e43] [cursor=pointer]:
+            - /url: /es/nosotros
+          - link "Distribuidores" [ref=e44] [cursor=pointer]:
+            - /url: /es/distribuidores
+          - link "Contacto" [active] [ref=e45] [cursor=pointer]:
+            - /url: /es/contacto
+      - generic [ref=e47]:
+        - heading "Contacto" [level=3] [ref=e48]
+        - generic [ref=e49]:
+          - paragraph [ref=e50]:
+            - img [ref=e51]
+            - text: +506 2260-9020
+          - paragraph [ref=e53]:
+            - img [ref=e54]
+            - text: info@hesa.co.cr
+          - paragraph [ref=e57]:
+            - img [ref=e58]
+            - text: Calle 2, av 12. Heredia, Costa Rica
+          - paragraph [ref=e61]:
+            - img [ref=e62]
+            - text: "Lun - Vie: 8:00 - 17:00"
+      - generic [ref=e66]:
+        - heading "Redes Sociales" [level=3] [ref=e67]
+        - generic [ref=e68]:
+          - link "Facebook" [ref=e69] [cursor=pointer]:
+            - /url: https://facebook.com/hesacr
+            - img [ref=e70]
+          - link "Instagram" [ref=e72] [cursor=pointer]:
+            - /url: https://instagram.com/hesacr
+            - img [ref=e73]
+    - generic [ref=e77]:
+      - paragraph [ref=e78]: © HESA 2026. Todos los derechos reservados.
+      - button "English" [ref=e80] [cursor=pointer]
+  - button "Contactar por WhatsApp" [ref=e81] [cursor=pointer]:
+    - img [ref=e82]
+    - generic: Escribenos por WhatsApp
+```
