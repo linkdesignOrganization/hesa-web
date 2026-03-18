@@ -53,7 +53,7 @@ export async function authMiddleware(
 
     const payload = jwt.verify(token, signingKey, {
       audience: [authConfig.audience, `api://${authConfig.audience}`],
-      issuer: authConfig.issuer,
+      issuer: authConfig.issuers,
       algorithms: ['RS256'],
     }) as jwt.JwtPayload;
 
@@ -65,25 +65,7 @@ export async function authMiddleware(
 
     next();
   } catch (error: any) {
-    const decoded = jwt.decode(token, { complete: true });
-    const payload = decoded?.payload as any;
-    console.error('Auth middleware error:', {
-      message: error.message,
-      tokenAud: payload?.aud,
-      tokenIss: payload?.iss,
-      expectedAud: [authConfig.audience, `api://${authConfig.audience}`],
-      expectedIss: authConfig.issuer,
-      clientId: authConfig.clientId,
-      tenantId: authConfig.tenantId,
-    });
-    res.status(401).json({
-      error: 'Invalid or expired token',
-      debug: {
-        tokenAud: payload?.aud,
-        tokenIss: payload?.iss,
-        expectedAud: [authConfig.audience, `api://${authConfig.audience}`],
-        expectedIss: authConfig.issuer,
-      }
-    });
+    console.error('Auth middleware error:', error.message);
+    res.status(401).json({ error: 'Invalid or expired token' });
   }
 }

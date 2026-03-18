@@ -8,7 +8,10 @@ export const authConfig = {
   clientId,
   authority: `https://login.microsoftonline.com/${tenantId}`,
   jwksUri: `https://login.microsoftonline.com/${tenantId}/discovery/v2.0/keys`,
-  issuer: `https://login.microsoftonline.com/${tenantId}/v2.0`,
+  issuers: [
+    `https://login.microsoftonline.com/${tenantId}/v2.0`,
+    `https://sts.windows.net/${tenantId}/`,
+  ],
   audience: clientId,
 };
 
