@@ -56,8 +56,7 @@
     - generic [ref=e31]:
       - heading "Conviertase en Nuestro Socio de Distribucion en Costa Rica" [level=1] [ref=e32]
       - paragraph [ref=e33]: 37 anos de trayectoria comprobada en distribucion de productos veterinarios. Cobertura nacional, flotilla propia y equipo de ventas especializado.
-      - link "Contactenos" [ref=e34] [cursor=pointer]:
-        - /url: "#contact-form"
+      - button "Contactenos" [ref=e34] [cursor=pointer]
     - generic [ref=e36]:
       - heading "Por que Elegir HESA" [level=2] [ref=e37]
       - generic [ref=e38]:

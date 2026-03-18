@@ -53,152 +53,152 @@
             - textbox "Buscar productos, marcas..."
           - paragraph: Escribe al menos 3 caracteres
   - generic [ref=e28]:
-    - generic [ref=e31]:
-      - heading "Herrera y Elizondo S.A." [level=1] [ref=e32]
-      - paragraph [ref=e33]: Desde 1989, conectando la industria veterinaria costarricense con las mejores marcas del mundo
-    - generic [ref=e36]:
-      - generic [ref=e37]:
-        - generic [ref=e38]:
-          - heading "Nuestra Historia" [level=2] [ref=e39]
-          - paragraph [ref=e40]: HESA nacio en 1989 como una empresa familiar costarricense dedicada a la importacion y distribucion de productos para la salud animal. Fundada por la familia Herrera y Elizondo, la empresa ha crecido durante dos generaciones hasta convertirse en uno de los distribuidores mas importantes del sector veterinario en Costa Rica.
-        - img [ref=e43]
-      - generic [ref=e47]:
-        - generic [ref=e48]:
-          - heading "Nuestra Mision" [level=2] [ref=e49]
-          - paragraph [ref=e50]: Distribuir productos veterinarios de la mas alta calidad, garantizando disponibilidad, servicio tecnico y cobertura nacional. Somos el puente entre los fabricantes internacionales y los profesionales veterinarios costarricenses.
-        - img [ref=e53]
-    - generic [ref=e58]:
-      - heading "HESA en Numeros" [level=2] [ref=e59]
-      - generic [ref=e60]:
-        - generic "37+ Anos de trayectoria" [ref=e62]:
-          - img [ref=e64]
-          - generic [ref=e66]:
+    - generic [ref=e32]:
+      - heading "Herrera y Elizondo S.A." [level=1] [ref=e33]
+      - paragraph [ref=e34]: Desde 1989, conectando la industria veterinaria costarricense con las mejores marcas del mundo
+    - generic [ref=e37]:
+      - generic [ref=e38]:
+        - generic [ref=e39]:
+          - heading "Nuestra Historia" [level=2] [ref=e40]
+          - paragraph [ref=e41]: HESA nacio en 1989 como una empresa familiar costarricense dedicada a la importacion y distribucion de productos para la salud animal. Fundada por la familia Herrera y Elizondo, la empresa ha crecido durante dos generaciones hasta convertirse en uno de los distribuidores mas importantes del sector veterinario en Costa Rica.
+        - img [ref=e44]
+      - generic [ref=e48]:
+        - generic [ref=e49]:
+          - heading "Nuestra Mision" [level=2] [ref=e50]
+          - paragraph [ref=e51]: Distribuir productos veterinarios de la mas alta calidad, garantizando disponibilidad, servicio tecnico y cobertura nacional. Somos el puente entre los fabricantes internacionales y los profesionales veterinarios costarricenses.
+        - img [ref=e54]
+    - generic [ref=e59]:
+      - heading "HESA en Numeros" [level=2] [ref=e60]
+      - generic [ref=e61]:
+        - generic "37+ Anos de trayectoria" [ref=e63]:
+          - img [ref=e65]
+          - generic [ref=e67]:
             - text: 0+
-            - generic [ref=e67]: 37+
-          - generic [ref=e68]: Anos de trayectoria
-        - generic "50+ Colaboradores" [ref=e70]:
-          - img [ref=e72]
-          - generic [ref=e74]:
+            - generic [ref=e68]: 37+
+          - generic [ref=e69]: Anos de trayectoria
+        - generic "50+ Colaboradores" [ref=e71]:
+          - img [ref=e73]
+          - generic [ref=e75]:
             - text: 0+
-            - generic [ref=e75]: 50+
-          - generic [ref=e76]: Colaboradores
-        - generic "100% Cobertura nacional" [ref=e78]:
-          - img [ref=e80]
-          - generic [ref=e82]:
+            - generic [ref=e76]: 50+
+          - generic [ref=e77]: Colaboradores
+        - generic "100% Cobertura nacional" [ref=e79]:
+          - img [ref=e81]
+          - generic [ref=e83]:
             - text: 0%
-            - generic [ref=e83]: 100%
-          - generic [ref=e84]: Cobertura nacional
-        - generic "4 Empresas del grupo" [ref=e86]:
-          - img [ref=e88]
-          - generic [ref=e90]:
+            - generic [ref=e84]: 100%
+          - generic [ref=e85]: Cobertura nacional
+        - generic "4 Empresas del grupo" [ref=e87]:
+          - img [ref=e89]
+          - generic [ref=e91]:
             - text: "0"
-            - generic [ref=e91]: "4"
-          - generic [ref=e92]: Empresas del grupo
-    - generic [ref=e94]:
-      - heading "Cobertura Nacional" [level=2] [ref=e95]
-      - paragraph [ref=e96]: Llegamos a todo Costa Rica con visitas quincenales y flotilla propia de entrega
-      - generic [ref=e98]:
-        - img [ref=e99]
-        - paragraph [ref=e102]: Mapa de Costa Rica
-      - generic [ref=e103]:
-        - generic [ref=e104]: Gran Area Metropolitana
-        - generic [ref=e106]: Zonas Rurales
-        - generic [ref=e108]: Encomiendas
-    - generic [ref=e111]:
-      - heading "Politicas Comerciales" [level=2] [ref=e112]
-      - paragraph [ref=e113]: Conozca nuestras condiciones de credito, tiempos de entrega y cobertura para ofrecer el mejor servicio a nuestros clientes.
-      - generic [ref=e114]:
-        - generic [ref=e115]:
-          - img [ref=e117]
-          - heading "Politicas de Credito" [level=3] [ref=e119]
-          - paragraph [ref=e120]: Ofrecemos condiciones de credito flexibles para nuestros clientes. Los plazos de pago se definen segun el historial comercial y el volumen de compra. Consulte con su agente de ventas para conocer las condiciones personalizadas.
-        - generic [ref=e121]:
-          - img [ref=e123]
-          - heading "Tiempos de Entrega" [level=3] [ref=e126]
-          - paragraph [ref=e127]: "Gran Area Metropolitana: 24-48 horas. Zonas rurales: 2-3 dias habiles. Zonas muy alejadas: servicio de encomienda disponible. Nuestros agentes de ventas realizan visitas quincenales a todos los clientes."
-        - generic [ref=e128]:
-          - img [ref=e130]
-          - heading "Cobertura de Entrega" [level=3] [ref=e135]
-          - paragraph [ref=e136]: Contamos con flotilla propia de entrega, agentes en todas las zonas del pais y servicio de encomienda para zonas muy alejadas. Nuestros 18-20 agentes de ventas propios cubren todo el territorio nacional con visitas quincenales.
-      - generic [ref=e137]:
-        - paragraph [ref=e138]: Solicite condiciones comerciales personalizadas para su negocio
-        - link "Solicitar Condiciones" [ref=e139] [cursor=pointer]:
+            - generic [ref=e92]: "4"
+          - generic [ref=e93]: Empresas del grupo
+    - generic [ref=e95]:
+      - heading "Cobertura Nacional" [level=2] [ref=e96]
+      - paragraph [ref=e97]: Llegamos a todo Costa Rica con visitas quincenales y flotilla propia de entrega
+      - generic [ref=e99]:
+        - img [ref=e100]
+        - paragraph [ref=e103]: Mapa de Costa Rica
+      - generic [ref=e104]:
+        - generic [ref=e105]: Gran Area Metropolitana
+        - generic [ref=e107]: Zonas Rurales
+        - generic [ref=e109]: Encomiendas
+    - generic [ref=e112]:
+      - heading "Politicas Comerciales" [level=2] [ref=e113]
+      - paragraph [ref=e114]: Conozca nuestras condiciones de credito, tiempos de entrega y cobertura para ofrecer el mejor servicio a nuestros clientes.
+      - generic [ref=e115]:
+        - generic [ref=e116]:
+          - img [ref=e118]
+          - heading "Politicas de Credito" [level=3] [ref=e120]
+          - paragraph [ref=e121]: Ofrecemos condiciones de credito flexibles para nuestros clientes. Los plazos de pago se definen segun el historial comercial y el volumen de compra. Consulte con su agente de ventas para conocer las condiciones personalizadas.
+        - generic [ref=e122]:
+          - img [ref=e124]
+          - heading "Tiempos de Entrega" [level=3] [ref=e127]
+          - paragraph [ref=e128]: "Gran Area Metropolitana: 24-48 horas. Zonas rurales: 2-3 dias habiles. Zonas muy alejadas: servicio de encomienda disponible. Nuestros agentes de ventas realizan visitas quincenales a todos los clientes."
+        - generic [ref=e129]:
+          - img [ref=e131]
+          - heading "Cobertura de Entrega" [level=3] [ref=e136]
+          - paragraph [ref=e137]: Contamos con flotilla propia de entrega, agentes en todas las zonas del pais y servicio de encomienda para zonas muy alejadas. Nuestros 18-20 agentes de ventas propios cubren todo el territorio nacional con visitas quincenales.
+      - generic [ref=e138]:
+        - paragraph [ref=e139]: Solicite condiciones comerciales personalizadas para su negocio
+        - link "Solicitar Condiciones" [ref=e140] [cursor=pointer]:
           - /url: /es/contacto
-    - generic [ref=e141]:
-      - heading "Equipo de Liderazgo" [level=2] [ref=e142]
-      - generic [ref=e143]:
-        - generic [ref=e145]:
-          - img "Carlos Herrera" [ref=e147]
-          - heading "Carlos Herrera" [level=3] [ref=e148]
-          - paragraph [ref=e149]: Director General
-        - generic [ref=e151]:
-          - img "Ana Elizondo" [ref=e153]
-          - heading "Ana Elizondo" [level=3] [ref=e154]
-          - paragraph [ref=e155]: Directora Comercial
-        - generic [ref=e157]:
-          - img "Roberto Vargas" [ref=e159]
-          - heading "Roberto Vargas" [level=3] [ref=e160]
-          - paragraph [ref=e161]: Gerente de Operaciones
-        - generic [ref=e163]:
-          - img "Maria Fernanda Lopez" [ref=e165]
-          - heading "Maria Fernanda Lopez" [level=3] [ref=e166]
-          - paragraph [ref=e167]: Gerente de Ventas
-        - generic [ref=e169]:
-          - img "Jorge Castillo" [ref=e171]
-          - heading "Jorge Castillo" [level=3] [ref=e172]
-          - paragraph [ref=e173]: Director Financiero
-        - generic [ref=e175]:
-          - img "Laura Sanchez" [ref=e177]
-          - heading "Laura Sanchez" [level=3] [ref=e178]
-          - paragraph [ref=e179]: Gerente de Logistica
-  - contentinfo "Pie de pagina" [ref=e181]:
-    - generic [ref=e183]:
-      - generic [ref=e184]:
-        - generic [ref=e185]: HESA
-        - paragraph [ref=e186]: 37 anos distribuyendo salud animal en Costa Rica
-      - generic [ref=e188]:
-        - heading "Navegacion" [level=3] [ref=e189]
-        - navigation [ref=e190]:
-          - link "Inicio" [ref=e191] [cursor=pointer]:
+    - generic [ref=e142]:
+      - heading "Equipo de Liderazgo" [level=2] [ref=e143]
+      - generic [ref=e144]:
+        - generic [ref=e146]:
+          - img "Carlos Herrera" [ref=e148]
+          - heading "Carlos Herrera" [level=3] [ref=e149]
+          - paragraph [ref=e150]: Director General
+        - generic [ref=e152]:
+          - img "Ana Elizondo" [ref=e154]
+          - heading "Ana Elizondo" [level=3] [ref=e155]
+          - paragraph [ref=e156]: Directora Comercial
+        - generic [ref=e158]:
+          - img "Roberto Vargas" [ref=e160]
+          - heading "Roberto Vargas" [level=3] [ref=e161]
+          - paragraph [ref=e162]: Gerente de Operaciones
+        - generic [ref=e164]:
+          - img "Maria Fernanda Lopez" [ref=e166]
+          - heading "Maria Fernanda Lopez" [level=3] [ref=e167]
+          - paragraph [ref=e168]: Gerente de Ventas
+        - generic [ref=e170]:
+          - img "Jorge Castillo" [ref=e172]
+          - heading "Jorge Castillo" [level=3] [ref=e173]
+          - paragraph [ref=e174]: Director Financiero
+        - generic [ref=e176]:
+          - img "Laura Sanchez" [ref=e178]
+          - heading "Laura Sanchez" [level=3] [ref=e179]
+          - paragraph [ref=e180]: Gerente de Logistica
+  - contentinfo "Pie de pagina" [ref=e182]:
+    - generic [ref=e184]:
+      - generic [ref=e185]:
+        - generic [ref=e186]: HESA
+        - paragraph [ref=e187]: 37 anos distribuyendo salud animal en Costa Rica
+      - generic [ref=e189]:
+        - heading "Navegacion" [level=3] [ref=e190]
+        - navigation [ref=e191]:
+          - link "Inicio" [ref=e192] [cursor=pointer]:
             - /url: /es
-          - link "Catalogo" [ref=e192] [cursor=pointer]:
+          - link "Catalogo" [ref=e193] [cursor=pointer]:
             - /url: /es/catalogo
-          - link "Marcas" [ref=e193] [cursor=pointer]:
+          - link "Marcas" [ref=e194] [cursor=pointer]:
             - /url: /es/marcas
-          - link "Nosotros" [ref=e194] [cursor=pointer]:
+          - link "Nosotros" [ref=e195] [cursor=pointer]:
             - /url: /es/nosotros
-          - link "Distribuidores" [ref=e195] [cursor=pointer]:
+          - link "Distribuidores" [ref=e196] [cursor=pointer]:
             - /url: /es/distribuidores
-          - link "Contacto" [ref=e196] [cursor=pointer]:
+          - link "Contacto" [ref=e197] [cursor=pointer]:
             - /url: /es/contacto
-      - generic [ref=e198]:
-        - heading "Contacto" [level=3] [ref=e199]
-        - generic [ref=e200]:
-          - paragraph [ref=e201]:
-            - img [ref=e202]
+      - generic [ref=e199]:
+        - heading "Contacto" [level=3] [ref=e200]
+        - generic [ref=e201]:
+          - paragraph [ref=e202]:
+            - img [ref=e203]
             - text: +506 2260-9020
-          - paragraph [ref=e204]:
-            - img [ref=e205]
+          - paragraph [ref=e205]:
+            - img [ref=e206]
             - text: info@hesa.co.cr
-          - paragraph [ref=e208]:
-            - img [ref=e209]
+          - paragraph [ref=e209]:
+            - img [ref=e210]
             - text: Calle 2, av 12. Heredia, Costa Rica
-          - paragraph [ref=e212]:
-            - img [ref=e213]
+          - paragraph [ref=e213]:
+            - img [ref=e214]
             - text: "Lun - Vie: 8:00 - 17:00"
-      - generic [ref=e217]:
-        - heading "Redes Sociales" [level=3] [ref=e218]
-        - generic [ref=e219]:
-          - link "Facebook" [ref=e220] [cursor=pointer]:
+      - generic [ref=e218]:
+        - heading "Redes Sociales" [level=3] [ref=e219]
+        - generic [ref=e220]:
+          - link "Facebook" [ref=e221] [cursor=pointer]:
             - /url: https://facebook.com/hesacr
-            - img [ref=e221]
-          - link "Instagram" [ref=e223] [cursor=pointer]:
+            - img [ref=e222]
+          - link "Instagram" [ref=e224] [cursor=pointer]:
             - /url: https://instagram.com/hesacr
-            - img [ref=e224]
-    - generic [ref=e228]:
-      - paragraph [ref=e229]: © HESA 2026. Todos los derechos reservados.
-      - button "English" [ref=e231] [cursor=pointer]
-  - button "Contactar por WhatsApp" [ref=e232] [cursor=pointer]:
-    - img [ref=e233]
+            - img [ref=e225]
+    - generic [ref=e229]:
+      - paragraph [ref=e230]: © HESA 2026. Todos los derechos reservados.
+      - button "English" [ref=e232] [cursor=pointer]
+  - button "Contactar por WhatsApp" [ref=e233] [cursor=pointer]:
+    - img [ref=e234]
     - generic: Escribenos por WhatsApp
 ```

@@ -64,6 +64,12 @@
 - La navegacion Angular SPA funciona correctamente entre todas las paginas (Home, Catalogo, Marcas, Nosotros, Distribuidores, Contacto) y los CTAs del home llevan a las rutas correctas con filtros aplicados (catalogo por categoria)
 - El cambio de idioma ES/EN via el selector del navbar navega a la pagina correspondiente en el otro idioma, pero cuando se usa desde el home puede redirigir a una pagina diferente (ej: /en/distributors en vez de /en/) dependiendo del timing. La navegacion directa por URL funciona correctamente
 
+### Feedback de: qa-orchestrator
+- Iteracion 2 se cerro en 2 rondas (R1 detecto 7 bugs, R2 verifico 7/7 corregidos). Esto es una mejora significativa sobre visual-build (4 rondas) e Iteracion 1 (4 rondas). La madurez del proceso plan-verifier -> developer -> QA reduce rondas
+- 5 de 7 bugs en Iteracion 2 fueron por seed data sin assets reales (fotos Unsplash, logos Clearbit). El architect deberia especificar URLs de assets reales en la definicion de seed data para evitar que el developer use SVG placeholder genericos. Esto es un patron sistematico que se repite
+- El BUG-002 (API home no incluye featured items) afecto 9 criterios por si solo (15.8% de la iteracion). Un solo bug en un endpoint agregador puede causar cascada de fallos. El plan-verifier deberia verificar que los endpoints agregadores (como /api/public/home) retornan datos reales, no solo que existen
+- La consolidacion rapida sin sub-testers en R2 (usando solo regresion automatizada) es viable cuando: (a) todos los bugs son claros y acotados, (b) la suite de tests es robusta, (c) el developer confirma las correcciones. Este patron ahorra tiempo significativo en rondas de re-verificacion
+
 ### Feedback de: visual-checker
 - El sitio presenta AUTO-NAVEGACION INVOLUNTARIA: al hacer scroll o ejecutar JavaScript en la pagina del Home, el router de Angular navega automaticamente a otras paginas (/es/nosotros, /es/distribuidores, /es/contacto, /en) sin interaccion del usuario. Esto dificulta severamente el testing automatizado y es un bug critico de UX. El developer deberia investigar si hay un IntersectionObserver o scroll listener que esta disparando navegaciones accidentales
 - Las secciones de Marcas Destacadas y Productos Destacados no se renderizan en el Home porque el API retorna featuredBrands: [] y featuredProducts: [] vacios. Esto bloquea la verificacion visual de REQ-061, DC-032 (logos grayscale con hover a color), y DC-034 (carrusel horizontal con flechas y dots)

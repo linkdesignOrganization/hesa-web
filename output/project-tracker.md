@@ -85,10 +85,10 @@
 - [x] 5b: Simplify (dedup multer/schema, unused imports)
 - [x] 5c: Security (pageKey whitelist, ObjectId validation, XSS gaps, 0 vulns)
 - [x] 5d: Pre-QA Deploy
-- [x] 5d-regress: Regresion (405 passed, 0 failed)
-- [ ] 5e: QA
-- [ ] 5e-verify: Verificacion post-QA
-- [ ] 5f-5j: Demo + feedback + commit
+- [x] 5d-regress: Regresion (483 passed, 0 failed)
+- [x] 5e: QA completado (2 rondas, 80/80, 0 bugs, LISTO_PARA_DEMO)
+- [x] 5e-verify: PASA
+- [x] 5f-5j: Demo (sin feedback) + commit
 
 ### FASE 5 — Iteracion 3: Formularios + Mensajes + Configuracion + Dashboard
 - [ ] 5a: Developer implementa

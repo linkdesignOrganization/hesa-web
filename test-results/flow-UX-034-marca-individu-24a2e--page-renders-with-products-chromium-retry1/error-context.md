@@ -66,7 +66,7 @@
         - listitem [ref=e40]:
           - generic [ref=e41]: Zoetis
     - generic [ref=e42]:
-      - generic [ref=e44]: Z
+      - img "Zoetis" [ref=e44]
       - generic [ref=e45]:
         - heading "Zoetis" [level=1] [ref=e46]
         - paragraph [ref=e47]:
