@@ -52,7 +52,7 @@ export async function authMiddleware(
     const signingKey = await getSigningKey(decoded.header);
 
     const payload = jwt.verify(token, signingKey, {
-      audience: authConfig.audience,
+      audience: [authConfig.audience, `api://${authConfig.audience}`],
       issuer: authConfig.issuer,
       algorithms: ['RS256'],
     }) as jwt.JwtPayload;

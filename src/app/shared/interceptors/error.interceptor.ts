@@ -5,10 +5,8 @@ import { Router } from '@angular/router';
 import { ToastService } from '../services/toast.service';
 import { I18nService } from '../services/i18n.service';
 
-/**
- * HTTP interceptor for global error handling.
- * BUG-011: Toast messages are now translated to the active language.
- */
+let handlingAuthRedirect = false;
+
 export const errorInterceptor: HttpInterceptorFn = (req, next) => {
   const router = inject(Router);
   const toast = inject(ToastService);
@@ -19,11 +17,14 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
       const lang = i18n.currentLang();
 
       if (error.status === 401 && req.url.includes('/api/admin/')) {
-        // Unauthorized — redirect to login
-        router.navigate(['/admin/login']);
-        toast.error(lang === 'es'
-          ? 'Tu sesion ha expirado. Inicia sesion de nuevo.'
-          : 'Your session has expired. Please log in again.');
+        if (!handlingAuthRedirect) {
+          handlingAuthRedirect = true;
+          toast.error(lang === 'es'
+            ? 'Tu sesion ha expirado. Inicia sesion de nuevo.'
+            : 'Your session has expired. Please log in again.');
+          router.navigate(['/admin/login']);
+          setTimeout(() => { handlingAuthRedirect = false; }, 3000);
+        }
       } else if (error.status === 0) {
         toast.error(lang === 'es'
           ? 'No se pudo conectar con el servidor. Verifica tu conexion.'
