@@ -39,12 +39,16 @@ export class AdminLayoutComponent implements OnInit, OnDestroy {
     // Load new messages count on init
     this.loadNewMessagesCount();
 
+    // Auto-expand sidebar submenu for current route
+    this.autoExpandActiveMenu();
+
     // Refresh count on every navigation, close search dropdown
     this.routerSub = this.router.events.pipe(
       filter((e): e is NavigationEnd => e instanceof NavigationEnd)
     ).subscribe(() => {
       this.loadNewMessagesCount();
       this.closeSearch();
+      this.autoExpandActiveMenu();
     });
   }
 
@@ -80,6 +84,29 @@ export class AdminLayoutComponent implements OnInit, OnDestroy {
 
   isMenuExpanded(menu: string): boolean {
     return this.expandedMenus().has(menu);
+  }
+
+  isRouteActive(prefix: string): boolean {
+    return this.router.url.startsWith(prefix);
+  }
+
+  private autoExpandActiveMenu(): void {
+    const url = this.router.url;
+    const menuRoutes: Record<string, string> = {
+      'productos': '/admin/productos',
+      'home': '/admin/home/',
+      'contenido': '/admin/contenido/',
+      'config': '/admin/configuracion/',
+    };
+    this.expandedMenus.update(set => {
+      const newSet = new Set(set);
+      for (const [menu, prefix] of Object.entries(menuRoutes)) {
+        if (url.startsWith(prefix)) {
+          newSet.add(menu);
+        }
+      }
+      return newSet;
+    });
   }
 
   toggleUserDropdown(): void {

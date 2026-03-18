@@ -43,11 +43,18 @@
 
 // ── Stat card (dashboard) ──
 .adm-stat-card {
-  @extend .adm-card;
+  background: var(--adm-bg-card);
+  border: 1px solid var(--adm-border);
+  border-radius: var(--adm-radius-card);
+  padding: 24px;
   display: flex;
-  align-items: center;
+  flex-direction: column;
   gap: 16px;
-  padding: 20px 24px;
+  transition: box-shadow var(--adm-transition-base);
+
+  &:hover {
+    box-shadow: var(--adm-shadow-md);
+  }
 
   &__icon {
     display: flex;
@@ -89,27 +96,34 @@
   }
 
   &__data {
-    flex: 1;
-    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
   }
 
   &__label {
     font-size: var(--adm-small-size);
     color: var(--adm-text-body);
-    margin-bottom: 4px;
+    line-height: 1.4;
+  }
+
+  &__row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
   }
 
   &__value {
     font-size: var(--adm-stat-size);
     font-weight: var(--adm-stat-weight);
     color: var(--adm-text-heading);
-    line-height: 1.2;
+    line-height: 1;
   }
 
   &__change {
     font-size: var(--adm-badge-size);
     font-weight: 500;
-    margin-left: 8px;
+    margin-left: 4px;
 
     &--up {
       color: var(--adm-success);

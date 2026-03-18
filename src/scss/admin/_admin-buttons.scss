@@ -44,10 +44,16 @@
 
   &:hover {
     background: var(--adm-primary-hover);
+    color: #fff;
   }
 
   &:active {
     background: var(--adm-primary-active);
+    color: #fff;
+  }
+
+  .material-symbols-outlined {
+    color: inherit;
   }
 }
 
@@ -82,6 +88,7 @@
 
   &:hover {
     background: var(--adm-danger-hover);
+    color: #fff;
   }
 }
 

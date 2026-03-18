@@ -15,22 +15,10 @@
           <span class="admin__sidebar-label">Dashboard</span>
         </a>
 
-        <!-- Productos with submenu -->
-        <div class="admin__sidebar-group">
-          <button class="admin__sidebar-link admin__sidebar-link--parent" (click)="toggleMenu('productos')" [class.admin__sidebar-link--active]="false">
-            <span class="material-symbols-outlined admin__sidebar-icon">inventory_2</span>
-            <span class="admin__sidebar-label">Productos</span>
-            <span class="material-symbols-outlined admin__sidebar-chevron" [class.admin__sidebar-chevron--open]="isMenuExpanded('productos')">expand_more</span>
-          </button>
-          @if (isMenuExpanded('productos')) {
-            <div class="admin__sidebar-submenu">
-              <a routerLink="/admin/productos" routerLinkActive="admin__sidebar-sublink--active" [routerLinkActiveOptions]="{exact: true}" class="admin__sidebar-sublink">Todos</a>
-              <a routerLink="/admin/productos" [queryParams]="{categoria: 'farmacos'}" class="admin__sidebar-sublink">Farmacos</a>
-              <a routerLink="/admin/productos" [queryParams]="{categoria: 'alimentos'}" class="admin__sidebar-sublink">Alimentos</a>
-              <a routerLink="/admin/productos" [queryParams]="{categoria: 'equipos'}" class="admin__sidebar-sublink">Equipos</a>
-            </div>
-          }
-        </div>
+        <a routerLink="/admin/productos" routerLinkActive="admin__sidebar-link--active" class="admin__sidebar-link">
+          <span class="material-symbols-outlined admin__sidebar-icon">inventory_2</span>
+          <span class="admin__sidebar-label">Productos</span>
+        </a>
 
         <a routerLink="/admin/marcas" routerLinkActive="admin__sidebar-link--active" class="admin__sidebar-link">
           <span class="material-symbols-outlined admin__sidebar-icon">flag</span>
@@ -44,7 +32,7 @@
 
         <!-- Home submenu -->
         <div class="admin__sidebar-group">
-          <button class="admin__sidebar-link admin__sidebar-link--parent" (click)="toggleMenu('home')">
+          <button class="admin__sidebar-link admin__sidebar-link--parent" (click)="toggleMenu('home')" [class.admin__sidebar-link--active]="isRouteActive('/admin/home/')">
             <span class="material-symbols-outlined admin__sidebar-icon">home</span>
             <span class="admin__sidebar-label">Home</span>
             <span class="material-symbols-outlined admin__sidebar-chevron" [class.admin__sidebar-chevron--open]="isMenuExpanded('home')">expand_more</span>
@@ -60,7 +48,7 @@
 
         <!-- Contenido submenu -->
         <div class="admin__sidebar-group">
-          <button class="admin__sidebar-link admin__sidebar-link--parent" (click)="toggleMenu('contenido')">
+          <button class="admin__sidebar-link admin__sidebar-link--parent" (click)="toggleMenu('contenido')" [class.admin__sidebar-link--active]="isRouteActive('/admin/contenido/')">
             <span class="material-symbols-outlined admin__sidebar-icon">description</span>
             <span class="admin__sidebar-label">Contenido</span>
             <span class="material-symbols-outlined admin__sidebar-chevron" [class.admin__sidebar-chevron--open]="isMenuExpanded('contenido')">expand_more</span>
@@ -91,7 +79,7 @@
       <div class="admin__sidebar-section">
         <!-- Configuracion submenu -->
         <div class="admin__sidebar-group">
-          <button class="admin__sidebar-link admin__sidebar-link--parent" (click)="toggleMenu('config')">
+          <button class="admin__sidebar-link admin__sidebar-link--parent" (click)="toggleMenu('config')" [class.admin__sidebar-link--active]="isRouteActive('/admin/configuracion/')">
             <span class="material-symbols-outlined admin__sidebar-icon">settings</span>
             <span class="admin__sidebar-label">Configuracion</span>
             <span class="material-symbols-outlined admin__sidebar-chevron" [class.admin__sidebar-chevron--open]="isMenuExpanded('config')">expand_more</span>
