@@ -56,23 +56,16 @@
     object-fit: contain;
   }
 
-  &__menu-wrapper {
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    z-index: 1;
+  &__name-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
   }
 
-  &__menu-btn {
-    background: var(--adm-bg-card);
-    border: 1px solid var(--adm-border);
-    box-shadow: var(--adm-shadow-xs);
-
-    &:hover {
-      background: var(--adm-bg-card);
-      border-color: var(--adm-border-hover);
-      box-shadow: var(--adm-shadow-sm);
-    }
+  &__menu-wrapper {
+    position: relative;
+    flex-shrink: 0;
   }
 
   &__menu-btn {
