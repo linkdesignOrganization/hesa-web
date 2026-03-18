@@ -154,11 +154,11 @@
           </div>
         }
 
-        <!-- Presentations chips -->
+        <!-- Presentations -->
         <div class="adm-form-group adm-form-group--full">
           <label class="adm-form-label">Presentaciones</label>
-          <div class="pf-chips-input">
-            <div class="adm-chips">
+          @if (presentationsList().length > 0) {
+            <div class="adm-chips" style="margin-bottom: 12px;">
               @for (pres of presentationsList(); track pres; let i = $index) {
                 <span class="adm-chip">
                   {{ pres }}
@@ -168,7 +168,12 @@
                 </span>
               }
             </div>
-            <input type="text" class="pf-chips-input__field" placeholder="Agregar presentacion y presionar Enter..." (keydown.enter)="addPresentation($event)">
+          }
+          <div class="pf-add-row">
+            <input type="text" class="adm-form-control" placeholder="Ej: Tableta 500mg, Inyectable 50ml..." #presentationInput (keydown.enter)="addPresentation($event); $event.preventDefault()">
+            <button type="button" class="adm-btn adm-btn--secondary adm-btn--sm" (click)="addPresentationFromButton(presentationInput)">
+              <span class="material-symbols-outlined">add</span> Agregar
+            </button>
           </div>
         </div>
       </div>
@@ -278,7 +283,7 @@
       <p class="adm-form-section__desc">Sube las fotos del producto (maximo 6). La primera sera la imagen principal.</p>
 
       <!-- Existing images gallery -->
-      @if (existingImages().length > 0) {
+      @if (existingImages().length > 0 || pendingImagePreviews().length > 0) {
         <div class="pf-image-grid">
           @for (img of existingImages(); track img; let i = $index) {
             <div class="pf-image-grid__item">
@@ -291,6 +296,13 @@
               @if (i === 0) {
                 <span class="pf-image-grid__badge">Principal</span>
               }
+            </div>
+          }
+          <!-- Pending local previews (not yet uploaded) -->
+          @for (preview of pendingImagePreviews(); track $index) {
+            <div class="pf-image-grid__item pf-image-grid__item--pending">
+              <img [src]="preview" alt="Preview pendiente">
+              <span class="pf-image-grid__badge pf-image-grid__badge--pending">Subiendo...</span>
             </div>
           }
         </div>
@@ -322,15 +334,16 @@
       <p class="adm-form-section__desc">Sube la ficha tecnica del producto en formato PDF (opcional)</p>
 
       @if (existingPdfUrl()) {
-        <div class="pf-pdf-preview">
-          <span class="material-symbols-outlined pf-pdf-preview__icon">picture_as_pdf</span>
-          <div class="pf-pdf-preview__info">
-            <p class="pf-pdf-preview__name">Ficha tecnica</p>
-            <p class="pf-pdf-preview__meta">PDF cargado</p>
+        <div class="pf-pdf-card">
+          <div class="pf-pdf-card__icon-wrap">
+            <span class="material-symbols-outlined">picture_as_pdf</span>
           </div>
-          <a [href]="existingPdfUrl()!" target="_blank" rel="noopener" class="adm-btn adm-btn--secondary adm-btn--sm">Descargar</a>
-          <button type="button" class="adm-btn adm-btn--danger-ghost adm-btn--sm" (click)="deletePdf()">
-            <span class="material-symbols-outlined">delete</span>
+          <div class="pf-pdf-card__info">
+            <p class="pf-pdf-card__name">{{ existingPdfName() }}</p>
+            <a [href]="existingPdfUrl()!" target="_blank" rel="noopener" class="pf-pdf-card__link">Ver archivo</a>
+          </div>
+          <button type="button" class="pf-pdf-card__remove" aria-label="Eliminar PDF" (click)="deletePdf()">
+            <span class="material-symbols-outlined">close</span>
           </button>
         </div>
       } @else {

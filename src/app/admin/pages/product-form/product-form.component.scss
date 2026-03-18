@@ -118,6 +118,22 @@
   }
 }
 
+// ── Add row (input + button) ──
+.pf-add-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+
+  .adm-form-control {
+    flex: 1;
+  }
+
+  .adm-btn {
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+}
+
 // ── Species checkbox grid ──
 .pf-species-grid {
   display: flex;
@@ -261,22 +277,42 @@
     color: #fff;
     background: var(--adm-primary);
     border-radius: var(--adm-radius-pill);
+
+    &--pending {
+      background: var(--adm-warning);
+    }
+  }
+
+  &__item--pending {
+    opacity: 0.6;
+    border-style: dashed;
   }
 }
 
-// ── PDF preview row ──
-.pf-pdf-preview {
+// ── PDF card ──
+.pf-pdf-card {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 16px;
+  gap: 14px;
+  padding: 14px 16px;
   border: 1px solid var(--adm-border);
-  border-radius: var(--adm-radius-input);
-  background: var(--adm-bg-page);
+  border-radius: var(--adm-radius-card);
+  background: var(--adm-bg-card);
 
-  &__icon {
-    font-size: 28px;
-    color: var(--adm-danger);
+  &__icon-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: var(--adm-danger-soft);
+    border-radius: var(--adm-radius-sm);
+    flex-shrink: 0;
+
+    .material-symbols-outlined {
+      font-size: 22px;
+      color: var(--adm-danger);
+    }
   }
 
   &__info {
@@ -294,10 +330,37 @@
     white-space: nowrap;
   }
 
-  &__meta {
+  &__link {
     font-size: var(--adm-small-size);
+    color: var(--adm-primary);
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__remove {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: transparent;
     color: var(--adm-text-muted);
-    margin: 0;
+    border-radius: var(--adm-radius-sm);
+    cursor: pointer;
+    transition: all var(--adm-transition-fast);
+
+    &:hover {
+      background: var(--adm-danger-soft);
+      color: var(--adm-danger);
+    }
+
+    .material-symbols-outlined {
+      font-size: 18px;
+    }
   }
 }
 

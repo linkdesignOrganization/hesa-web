@@ -39,7 +39,9 @@ export class AdminProductFormComponent implements HasUnsavedChanges, OnInit {
 
   // Image & PDF upload state
   existingImages = signal<string[]>([]);
+  pendingImagePreviews = signal<string[]>([]);
   existingPdfUrl = signal<string | null>(null);
+  existingPdfName = signal<string>('Ficha tecnica');
   uploadingImages = signal(false);
   uploadingPdf = signal(false);
 
@@ -177,7 +179,7 @@ export class AdminProductFormComponent implements HasUnsavedChanges, OnInit {
 
   // Species selection is now handled by toggleSpecies() above
 
-  // --- Presentation chips ---
+  // --- Presentation management ---
   addPresentation(event: Event): void {
     event.preventDefault();
     const input = event.target as HTMLInputElement;
@@ -187,6 +189,16 @@ export class AdminProductFormComponent implements HasUnsavedChanges, OnInit {
       this._hasChanges.set(true);
     }
     input.value = '';
+  }
+
+  addPresentationFromButton(input: HTMLInputElement): void {
+    const value = input.value.trim();
+    if (value && !this.presentationsList().includes(value)) {
+      this.presentationsList.update(list => [...list, value]);
+      this._hasChanges.set(true);
+    }
+    input.value = '';
+    input.focus();
   }
 
   removePresentation(index: number): void {
@@ -199,6 +211,7 @@ export class AdminProductFormComponent implements HasUnsavedChanges, OnInit {
     const input = event.target as HTMLInputElement;
     if (!input.files || input.files.length === 0) return;
     const files = Array.from(input.files);
+    this.showLocalPreviews(files);
     await this.uploadImages(files);
     input.value = '';
   }
@@ -212,7 +225,18 @@ export class AdminProductFormComponent implements HasUnsavedChanges, OnInit {
       this.toast.error('Solo se permiten imagenes PNG, JPG o WebP');
       return;
     }
+    this.showLocalPreviews(imageFiles);
     this.uploadImages(imageFiles);
+  }
+
+  private showLocalPreviews(files: File[]): void {
+    for (const file of files) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.pendingImagePreviews.update(list => [...list, reader.result as string]);
+      };
+      reader.readAsDataURL(file);
+    }
   }
 
   private async uploadImages(files: File[]): Promise<void> {
@@ -239,6 +263,7 @@ export class AdminProductFormComponent implements HasUnsavedChanges, OnInit {
     try {
       const updatedProduct = await this.api.adminUploadProductImages(this.productId()!, filesToUpload);
       this.existingImages.set(updatedProduct.images || []);
+      this.pendingImagePreviews.set([]);
       this.toast.success('Imagenes subidas correctamente');
     } catch {
       this.toast.error('Error al subir las imagenes');
@@ -290,6 +315,7 @@ export class AdminProductFormComponent implements HasUnsavedChanges, OnInit {
     try {
       const updatedProduct = await this.api.adminUploadProductPdf(this.productId()!, file);
       this.existingPdfUrl.set(updatedProduct.pdfUrl || null);
+      this.existingPdfName.set(file.name);
       this.toast.success('Ficha tecnica subida correctamente');
     } catch {
       this.toast.error('Error al subir la ficha tecnica');
