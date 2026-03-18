@@ -74,7 +74,7 @@ export class AdminProductFormComponent implements HasUnsavedChanges, OnInit {
       recommendedUsesEn: [''],
       warrantyEs: [''],
       warrantyEn: [''],
-      isActive: [true],
+      isActive: [false],
     });
 
     this.productForm.valueChanges.subscribe(() => {

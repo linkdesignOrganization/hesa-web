@@ -262,8 +262,14 @@
     }
 
     .adm-btn {
+      background: var(--adm-danger);
       color: #fff;
-      border-color: rgba(255, 255, 255, 0.5);
+      border: none;
+
+      &:hover {
+        background: var(--adm-danger-hover);
+        color: #fff;
+      }
     }
   }
 
