@@ -64,8 +64,26 @@ export async function authMiddleware(
     };
 
     next();
-  } catch (error) {
-    console.error('Auth middleware error:', error);
-    res.status(401).json({ error: 'Invalid or expired token' });
+  } catch (error: any) {
+    const decoded = jwt.decode(token, { complete: true });
+    const payload = decoded?.payload as any;
+    console.error('Auth middleware error:', {
+      message: error.message,
+      tokenAud: payload?.aud,
+      tokenIss: payload?.iss,
+      expectedAud: [authConfig.audience, `api://${authConfig.audience}`],
+      expectedIss: authConfig.issuer,
+      clientId: authConfig.clientId,
+      tenantId: authConfig.tenantId,
+    });
+    res.status(401).json({
+      error: 'Invalid or expired token',
+      debug: {
+        tokenAud: payload?.aud,
+        tokenIss: payload?.iss,
+        expectedAud: [authConfig.audience, `api://${authConfig.audience}`],
+        expectedIss: authConfig.issuer,
+      }
+    });
   }
 }
