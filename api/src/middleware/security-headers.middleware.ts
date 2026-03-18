@@ -13,6 +13,11 @@ export function securityHeaders(_req: Request, res: Response, next: NextFunction
     'Permissions-Policy',
     'camera=(), microphone=(), geolocation=()'
   );
+  // NFR-014: Enforce HTTPS via HSTS
+  res.setHeader(
+    'Strict-Transport-Security',
+    'max-age=31536000; includeSubDomains; preload'
+  );
   // NFR-020: Content-Security-Policy for the API
   res.setHeader(
     'Content-Security-Policy',

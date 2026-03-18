@@ -11,7 +11,6 @@ import { connectDatabase } from './config/database';
 import { securityHeaders } from './middleware/security-headers.middleware';
 import { authMiddleware } from './middleware/auth.middleware';
 import { seedCategories } from './services/category.service';
-import { seedBrandsAndProducts } from './services/seed.service';
 import { seedSiteConfig } from './services/site-config.service';
 
 // Public routes
@@ -105,8 +104,6 @@ async function start(): Promise<void> {
     console.log('Database connected successfully');
     await seedCategories();
     console.log('Categories seeded successfully');
-    await seedBrandsAndProducts();
-    console.log('Brands and products seeded successfully');
     await seedSiteConfig();
     console.log('Site config seeded successfully');
   } catch (error) {

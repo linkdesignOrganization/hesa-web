@@ -1,4 +1,4 @@
-import { Component, signal, inject, OnDestroy } from '@angular/core';
+import { Component, signal, inject, OnDestroy, HostListener } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { LanguageSelectorComponent } from '../language-selector/language-selector.component';
 import { SearchOverlayComponent } from '../search-overlay/search-overlay.component';
@@ -58,5 +58,26 @@ export class HeaderComponent implements OnDestroy {
 
   closeSearch(): void {
     this.isSearchOpen.set(false);
+  }
+
+  /** NFR-023: Keyboard navigation for submenu */
+  onSubmenuKeydown(event: KeyboardEvent): void {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      this.isSubmenuOpen.update(v => !v);
+    } else if (event.key === 'Escape') {
+      this.isSubmenuOpen.set(false);
+    }
+  }
+
+  /** NFR-023: Keyboard support for mobile menu */
+  @HostListener('document:keydown.escape')
+  onEscapeKey(): void {
+    if (this.isMobileMenuOpen()) {
+      this.closeMobileMenu();
+    }
+    if (this.isSearchOpen()) {
+      this.closeSearch();
+    }
   }
 }

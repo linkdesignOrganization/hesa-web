@@ -21,9 +21,21 @@ import { ConfirmModalComponent } from '../../components/confirm-modal/confirm-mo
           @for (i of [1,2,3,4,5,6]; track i) { <div class="skeleton-card" style="height: 120px;"></div> }
         </div>
       } @else if (team().length === 0) {
-        <div style="text-align: center; padding: 60px 0; color: var(--neutral-400);">
-          <p>No hay miembros del equipo. La seccion no se mostrara en el sitio publico.</p>
-          <button class="btn btn-primary" style="margin-top: 16px;" (click)="openAddModal()">+ Agregar miembro</button>
+        <div style="text-align: center; padding: 80px 20px; display: flex; flex-direction: column; align-items: center; background: var(--neutral-white); border: 2px dashed var(--neutral-200); border-radius: 12px;">
+          <div aria-hidden="true" style="margin-bottom: 16px; opacity: 0.8;">
+            <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="40" cy="45" r="14" fill="var(--neutral-50)" stroke="var(--neutral-200)" stroke-width="2"/>
+              <circle cx="60" cy="40" r="16" fill="var(--neutral-50)" stroke="var(--neutral-200)" stroke-width="2"/>
+              <circle cx="80" cy="45" r="14" fill="var(--neutral-50)" stroke="var(--neutral-200)" stroke-width="2"/>
+              <path d="M25 90 C25 75 55 70 60 70 S95 75 95 90" fill="var(--neutral-50)" stroke="var(--neutral-200)" stroke-width="2"/>
+            </svg>
+          </div>
+          <h2 style="font-size: 20px; font-weight: 700; color: var(--neutral-900); margin-bottom: 8px;">No hay miembros del equipo</h2>
+          <p style="font-size: 14px; color: var(--neutral-400); max-width: 340px; line-height: 1.5; margin-bottom: 16px;">La seccion de Equipo de Liderazgo no se mostrara en el sitio publico hasta que agregues miembros.</p>
+          <button class="btn btn-primary" (click)="openAddModal()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Agregar primer miembro
+          </button>
         </div>
       } @else {
         <div class="team-grid" cdkDropList (cdkDropListDropped)="onDrop($event)">

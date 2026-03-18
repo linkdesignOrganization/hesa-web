@@ -56,6 +56,20 @@
         </div>
       }
     </div>
+  } @else if (messages().length === 0 && !filterType && !filterStatus && !filterSearch) {
+    <!-- Empty state: no messages at all -->
+    <div class="messages-page__empty-state">
+      <div aria-hidden="true" style="margin-bottom: 16px; opacity: 0.8;">
+        <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="30" width="80" height="55" rx="8" fill="var(--neutral-50)" stroke="var(--neutral-200)" stroke-width="2"/>
+          <path d="M20 38 L60 60 L100 38" stroke="var(--neutral-200)" stroke-width="2" fill="none"/>
+          <circle cx="85" cy="32" r="10" fill="var(--semantic-info-soft)" stroke="var(--brand-primary)" stroke-width="2"/>
+          <text x="85" y="36" text-anchor="middle" font-size="12" fill="var(--brand-primary)" font-weight="700">0</text>
+        </svg>
+      </div>
+      <h2 style="font-size: 20px; font-weight: 700; color: var(--neutral-900); margin-bottom: 8px;">No hay mensajes aun</h2>
+      <p style="font-size: 14px; color: var(--neutral-400); max-width: 360px; line-height: 1.5;">Los mensajes del formulario de contacto y de distribuidores apareceran aqui cuando los visitantes del sitio los envien.</p>
+    </div>
   } @else if (viewMode() === 'kanban') {
     <div class="kanban">
       <!-- Column: Nuevos -->

@@ -179,6 +179,20 @@
     text-align: center;
     padding: 24px 0;
   }
+
+  &__empty-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 32px 16px;
+    text-align: center;
+
+    p {
+      font-size: 13px;
+      color: var(--neutral-400);
+    }
+  }
 }
 
 // ---- Summary Card Component (DC-072, BVC-037) ----

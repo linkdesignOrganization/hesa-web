@@ -18,6 +18,8 @@ function safeQueryString(value: unknown, maxLen = 100): string | undefined {
 router.get('/', async (_req: Request, res: Response) => {
   try {
     const brands = await brandService.getBrandsWithProductCount();
+    // NFR-001/ADR-11: Cache brands list for 10 minutes
+    res.setHeader('Cache-Control', 'public, max-age=600, stale-while-revalidate=60');
     res.json(brands);
   } catch (error) {
     console.error('Error fetching brands:', error);
@@ -33,6 +35,8 @@ router.get('/', async (_req: Request, res: Response) => {
 router.get('/featured', async (_req: Request, res: Response) => {
   try {
     const brands = await brandService.getFeaturedBrands();
+    // NFR-001/ADR-11: Cache featured brands for 10 minutes
+    res.setHeader('Cache-Control', 'public, max-age=600, stale-while-revalidate=60');
     res.json(brands);
   } catch (error) {
     console.error('Error fetching featured brands:', error);

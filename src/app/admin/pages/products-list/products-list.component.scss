@@ -198,19 +198,23 @@
   }
 }
 
-// ---- Empty State (DC-118, BVC-019) ----
+// ---- Empty State (REQ-232) ----
 .products-list {
-  &__empty {
+  &__empty-state {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     padding: 80px 20px;
-    gap: 16px;
+    gap: 12px;
+    background-color: var(--neutral-white);
+    border-radius: var(--radius-card-panel);
+    border: 2px dashed var(--neutral-200);
   }
 
   &__empty-illustration {
-    margin-bottom: 8px;
+    margin-bottom: 12px;
+    opacity: 0.8;
   }
 
   &__empty-title {

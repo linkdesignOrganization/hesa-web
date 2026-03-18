@@ -1,4 +1,27 @@
-// App root — no additional styles needed, everything is in components
+// App root
 :host {
   display: block;
+}
+
+// NFR-023: Skip to main content link — visible only on focus for keyboard users
+.skip-to-content {
+  position: absolute;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--brand-primary);
+  color: var(--neutral-white);
+  padding: 12px 24px;
+  border-radius: 0 0 8px 8px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  z-index: 10000;
+  transition: top 0.2s ease-out;
+
+  &:focus {
+    top: 0;
+    outline: 2px solid var(--neutral-white);
+    outline-offset: 2px;
+  }
 }

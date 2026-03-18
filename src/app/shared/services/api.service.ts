@@ -200,6 +200,12 @@ export interface ApiDashboardData {
   }>;
 }
 
+export interface AdminSearchResult {
+  products: { id: string; name: string; category: string; isActive: boolean }[];
+  brands: { id: string; name: string; country: string }[];
+  messages: { id: string; name: string; email: string; status: string; type: string }[];
+}
+
 export interface FilterValues {
   brands: { id: string; name: string; slug: string }[];
   species: string[];
@@ -663,6 +669,15 @@ export class ApiService {
   async adminGetDashboard(): Promise<ApiDashboardData> {
     return firstValueFrom(
       this.http.get<ApiDashboardData>(`${this.baseUrl}/admin/dashboard`)
+    );
+  }
+
+  /** REQ-220, REQ-221: Admin global search across products, brands, messages */
+  async adminSearch(term: string): Promise<AdminSearchResult> {
+    return firstValueFrom(
+      this.http.get<AdminSearchResult>(`${this.baseUrl}/admin/dashboard/search`, {
+        params: { q: term },
+      })
     );
   }
 

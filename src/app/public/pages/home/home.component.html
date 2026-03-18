@@ -123,9 +123,9 @@
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
         </button>
       </div>
-      <div class="carousel-dots">
+      <div class="carousel-dots" role="tablist" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Paginas del carrusel' : 'Carousel pages'">
         @for (dot of carouselDots; track dot) {
-          <span class="carousel-dots__dot" [class.carousel-dots__dot--active]="currentSlide() === dot" (click)="currentSlide.set(dot)"></span>
+          <button class="carousel-dots__dot" [class.carousel-dots__dot--active]="currentSlide() === dot" (click)="currentSlide.set(dot)" role="tab" [attr.aria-selected]="currentSlide() === dot" [attr.aria-label]="(i18n.currentLang() === 'es' ? 'Pagina ' : 'Page ') + (dot + 1)"></button>
         }
       </div>
     </div>

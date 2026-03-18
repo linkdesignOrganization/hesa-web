@@ -1,5 +1,6 @@
 import { Product } from '../models/product.model';
 import { Brand } from '../models/brand.model';
+import { Message } from '../models/message.model';
 
 interface SearchResult {
   products: {
@@ -105,5 +106,105 @@ async function searchBrands(regex: RegExp, limit: number) {
     slug: b.slug,
     logo: b.logo,
     country: b.country,
+  }));
+}
+
+/**
+ * Admin global search across products, brands, and messages.
+ * REQ-220, REQ-221: Search bar in admin header.
+ * Searches products by name, brands by name, messages by name/content.
+ */
+export interface AdminSearchResult {
+  products: {
+    id: string;
+    name: string;
+    category: string;
+    isActive: boolean;
+  }[];
+  brands: {
+    id: string;
+    name: string;
+    country: string;
+  }[];
+  messages: {
+    id: string;
+    name: string;
+    email: string;
+    status: string;
+    type: string;
+  }[];
+}
+
+export async function adminSearch(
+  term: string,
+  limit: number = 5
+): Promise<AdminSearchResult> {
+  if (!term || term.length < 2) {
+    return { products: [], brands: [], messages: [] };
+  }
+
+  const safeLimit = Math.min(Math.max(1, limit), 10);
+  const regex = buildAccentTolerantRegex(term);
+
+  const [products, brands, messages] = await Promise.all([
+    adminSearchProducts(regex, safeLimit),
+    adminSearchBrands(regex, safeLimit),
+    adminSearchMessages(regex, safeLimit),
+  ]);
+
+  return { products, brands, messages };
+}
+
+async function adminSearchProducts(regex: RegExp, limit: number) {
+  const products = await Product.find({
+    $or: [
+      { 'name.es': regex },
+      { 'name.en': regex },
+    ],
+  })
+    .select('name category isActive')
+    .limit(limit)
+    .lean();
+
+  return products.map((p) => ({
+    id: String(p._id),
+    name: p.name.es,
+    category: p.category,
+    isActive: p.isActive,
+  }));
+}
+
+async function adminSearchBrands(regex: RegExp, limit: number) {
+  const brands = await Brand.find({ name: regex })
+    .select('name country')
+    .limit(limit)
+    .lean();
+
+  return brands.map((b) => ({
+    id: String(b._id),
+    name: b.name,
+    country: b.country,
+  }));
+}
+
+async function adminSearchMessages(regex: RegExp, limit: number) {
+  const messages = await Message.find({
+    $or: [
+      { name: regex },
+      { email: regex },
+      { message: regex },
+    ],
+  })
+    .select('name email status type')
+    .sort({ createdAt: -1 })
+    .limit(limit)
+    .lean();
+
+  return messages.map((m) => ({
+    id: String(m._id),
+    name: m.name,
+    email: m.email,
+    status: m.status,
+    type: m.type,
   }));
 }

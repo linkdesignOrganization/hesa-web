@@ -123,7 +123,10 @@
           <a routerLink="/admin/mensajes" class="dashboard__card-link">Ver todos</a>
         </div>
         @if (data()!.recentMessages.length === 0) {
-          <p class="dashboard__empty-text">No hay mensajes aun</p>
+          <div class="dashboard__empty-block">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--neutral-200)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            <p>Los mensajes del sitio apareceran aqui</p>
+          </div>
         }
         @for (msg of data()!.recentMessages; track msg._id) {
           <a [routerLink]="'/admin/mensajes/' + msg._id" class="dashboard__message-item">
@@ -143,7 +146,10 @@
           <h2>Actividad Reciente</h2>
         </div>
         @if (data()!.recentActivity.length === 0) {
-          <p class="dashboard__empty-text">No hay actividad reciente</p>
+          <div class="dashboard__empty-block">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--neutral-200)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <p>La actividad del panel se registrara aqui</p>
+          </div>
         }
         @for (activity of data()!.recentActivity; track activity._id) {
           <div class="dashboard__activity-item">

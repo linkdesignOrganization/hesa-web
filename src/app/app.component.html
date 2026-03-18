@@ -1,7 +1,12 @@
+<!-- NFR-023: Skip to main content link for keyboard/screen reader users -->
+<a class="skip-to-content" href="#main-content">Saltar al contenido principal</a>
+
 @if (!isAdminRoute) {
   <app-header />
 }
-<router-outlet />
+<main id="main-content">
+  <router-outlet />
+</main>
 @if (!isAdminRoute) {
   <app-footer />
   <app-whatsapp-fab />

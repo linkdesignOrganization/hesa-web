@@ -63,8 +63,8 @@
           @if (product()!.images.length > 1) {
             <div class="product-detail__thumbs">
               @for (img of product()!.images; track img; let i = $index) {
-                <button class="product-detail__thumb" [class.product-detail__thumb--active]="selectedImage() === i" (click)="selectedImage.set(i)" [attr.aria-label]="'Ver imagen ' + (i + 1)">
-                  <img [src]="img" [alt]="i18n.t(product()!.name) + ' - imagen ' + (i + 1)" style="width: 100%; height: 100%; object-fit: cover;">
+                <button class="product-detail__thumb" [class.product-detail__thumb--active]="selectedImage() === i" (click)="selectedImage.set(i)" [attr.aria-label]="(i18n.currentLang() === 'es' ? 'Ver imagen ' : 'View image ') + (i + 1)">
+                  <img [src]="img" [alt]="i18n.t(product()!.name) + ' - imagen ' + (i + 1)" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
                 </button>
               }
             </div>
@@ -261,10 +261,10 @@
     </div>
   </section>
 
-  <!-- REQ-109: Lightbox -->
+  <!-- REQ-109: Lightbox (NFR-023: Escape key closes lightbox) -->
   @if (lightboxOpen() && product()!.images && product()!.images.length > 0) {
-    <div class="lightbox" (click)="lightboxOpen.set(false)">
-      <button class="lightbox__close" (click)="lightboxOpen.set(false)" aria-label="Cerrar">
+    <div class="lightbox" (click)="lightboxOpen.set(false)" (keydown.escape)="lightboxOpen.set(false)" role="dialog" aria-modal="true" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Galeria de imagenes' : 'Image gallery'" tabindex="-1">
+      <button class="lightbox__close" (click)="lightboxOpen.set(false)" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Cerrar galeria' : 'Close gallery'">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
       <img [src]="product()!.images[selectedImage()]" [alt]="i18n.t(product()!.name)" class="lightbox__img" (click)="$event.stopPropagation()">

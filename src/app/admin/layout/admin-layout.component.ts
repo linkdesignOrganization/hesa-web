@@ -1,9 +1,9 @@
-import { Component, signal, inject, OnInit, OnDestroy } from '@angular/core';
+import { Component, signal, inject, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { RouterOutlet, RouterLink, RouterLinkActive, Router, NavigationEnd } from '@angular/router';
 import { Meta } from '@angular/platform-browser';
 import { filter, Subscription } from 'rxjs';
 import { AuthService } from '../../shared/services/auth.service';
-import { ApiService } from '../../shared/services/api.service';
+import { ApiService, AdminSearchResult } from '../../shared/services/api.service';
 
 @Component({
   selector: 'app-admin-layout',
@@ -25,6 +25,13 @@ export class AdminLayoutComponent implements OnInit, OnDestroy {
 
   newMessagesCount = 0;
 
+  // REQ-220/REQ-221: Admin global search state
+  searchQuery = signal('');
+  searchResults = signal<AdminSearchResult | null>(null);
+  searchOpen = signal(false);
+  searchLoading = signal(false);
+  private searchTimer: ReturnType<typeof setTimeout> | null = null;
+
   ngOnInit(): void {
     // BUG-010/NFR-013: Prevent search engines from indexing admin panel
     this.meta.updateTag({ name: 'robots', content: 'noindex, nofollow' });
@@ -32,16 +39,18 @@ export class AdminLayoutComponent implements OnInit, OnDestroy {
     // Load new messages count on init
     this.loadNewMessagesCount();
 
-    // Refresh count on every navigation
+    // Refresh count on every navigation, close search dropdown
     this.routerSub = this.router.events.pipe(
       filter((e): e is NavigationEnd => e instanceof NavigationEnd)
     ).subscribe(() => {
       this.loadNewMessagesCount();
+      this.closeSearch();
     });
   }
 
   ngOnDestroy(): void {
     this.routerSub?.unsubscribe();
+    if (this.searchTimer) clearTimeout(this.searchTimer);
   }
 
   private async loadNewMessagesCount(): Promise<void> {
@@ -49,7 +58,7 @@ export class AdminLayoutComponent implements OnInit, OnDestroy {
       const result = await this.api.adminGetNewMessagesCount();
       this.newMessagesCount = result.count;
     } catch {
-      // Silent fail — badge just won't show
+      // Silent fail -- badge just won't show
     }
   }
 
@@ -80,5 +89,87 @@ export class AdminLayoutComponent implements OnInit, OnDestroy {
   async logout(): Promise<void> {
     this.userDropdownOpen.set(false);
     await this.auth.logout();
+  }
+
+  // REQ-220/REQ-221: Admin global search
+  onSearchInput(event: Event): void {
+    const value = (event.target as HTMLInputElement).value.substring(0, 100);
+    this.searchQuery.set(value);
+
+    if (this.searchTimer) clearTimeout(this.searchTimer);
+
+    if (value.length >= 2) {
+      this.searchLoading.set(true);
+      this.searchOpen.set(true);
+      this.searchTimer = setTimeout(async () => {
+        try {
+          const results = await this.api.adminSearch(value);
+          this.searchResults.set(results);
+        } catch {
+          this.searchResults.set(null);
+        } finally {
+          this.searchLoading.set(false);
+        }
+      }, 300);
+    } else {
+      this.searchOpen.set(false);
+      this.searchResults.set(null);
+      this.searchLoading.set(false);
+    }
+  }
+
+  onSearchKeydown(event: KeyboardEvent): void {
+    if (event.key === 'Escape') {
+      this.closeSearch();
+    }
+  }
+
+  closeSearch(): void {
+    this.searchOpen.set(false);
+    this.searchQuery.set('');
+    this.searchResults.set(null);
+    this.searchLoading.set(false);
+  }
+
+  navigateToSearchResult(type: string, id: string): void {
+    this.closeSearch();
+    switch (type) {
+      case 'product':
+        this.router.navigate(['/admin/productos', id]);
+        break;
+      case 'brand':
+        this.router.navigate(['/admin/marcas', id, 'editar']);
+        break;
+      case 'message':
+        this.router.navigate(['/admin/mensajes', id]);
+        break;
+    }
+  }
+
+  get hasSearchResults(): boolean {
+    const r = this.searchResults();
+    return r !== null && (r.products.length > 0 || r.brands.length > 0 || r.messages.length > 0);
+  }
+
+  get showNoSearchResults(): boolean {
+    const r = this.searchResults();
+    return this.searchQuery().length >= 2 && !this.searchLoading() && r !== null
+      && r.products.length === 0 && r.brands.length === 0 && r.messages.length === 0;
+  }
+
+  // REQ-222: Notification bell navigates to messages
+  goToMessages(): void {
+    this.router.navigate(['/admin/mensajes']);
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: Event): void {
+    const target = event.target as HTMLElement;
+    if (!target.closest('.admin__header-search')) {
+      this.searchOpen.set(false);
+    }
+    if (!target.closest('.admin__header-user')) {
+      this.userDropdownOpen.set(false);
+    }
   }
 }

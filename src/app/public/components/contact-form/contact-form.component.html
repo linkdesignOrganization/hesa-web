@@ -20,12 +20,12 @@
         <div class="form-group">
           <label class="form-label" for="name">{{ i18n.currentLang() === 'es' ? 'Nombre' : 'Name' }} <span class="required">*</span></label>
           <input type="text" id="name" class="form-control" [class.form-control--error]="errors()['name']" [placeholder]="i18n.currentLang() === 'es' ? 'Tu nombre completo' : 'Your full name'" [(ngModel)]="name" name="name" (blur)="validateField('name', name)" aria-required="true" maxlength="100">
-          @if (errors()['name']) { <span class="form-error">{{ errors()['name'] }}</span> }
+          @if (errors()['name']) { <span class="form-error" role="alert">{{ errors()['name'] }}</span> }
         </div>
         <div class="form-group">
           <label class="form-label" for="email">{{ i18n.currentLang() === 'es' ? 'Correo electronico' : 'Email' }} <span class="required">*</span></label>
           <input type="email" id="email" class="form-control" [class.form-control--error]="errors()['email']" placeholder="correo@ejemplo.com" [(ngModel)]="email" name="email" (blur)="validateField('email', email)" aria-required="true" maxlength="254">
-          @if (errors()['email']) { <span class="form-error">{{ errors()['email'] }}</span> }
+          @if (errors()['email']) { <span class="form-error" role="alert">{{ errors()['email'] }}</span> }
         </div>
         <div class="form-group">
           <label class="form-label" for="phone">{{ i18n.currentLang() === 'es' ? 'Telefono' : 'Phone' }}</label>
@@ -40,7 +40,7 @@
             <option value="soporte">{{ i18n.currentLang() === 'es' ? 'Soporte' : 'Support' }}</option>
             <option value="otro">{{ i18n.currentLang() === 'es' ? 'Otro' : 'Other' }}</option>
           </select>
-          @if (errors()['type']) { <span class="form-error">{{ errors()['type'] }}</span> }
+          @if (errors()['type']) { <span class="form-error" role="alert">{{ errors()['type'] }}</span> }
         </div>
         <div class="form-group form-group-full">
           <label class="form-label" for="product">{{ i18n.currentLang() === 'es' ? 'Producto de interes' : 'Product of interest' }}</label>
@@ -49,7 +49,7 @@
         <div class="form-group form-group-full">
           <label class="form-label" for="message">{{ i18n.currentLang() === 'es' ? 'Mensaje' : 'Message' }} <span class="required">*</span></label>
           <textarea id="message" class="form-control" [class.form-control--error]="errors()['message']" [placeholder]="i18n.currentLang() === 'es' ? 'Describe tu consulta...' : 'Describe your inquiry...'" [(ngModel)]="message" name="message" (blur)="validateField('message', message)" aria-required="true" maxlength="2000"></textarea>
-          @if (errors()['message']) { <span class="form-error">{{ errors()['message'] }}</span> }
+          @if (errors()['message']) { <span class="form-error" role="alert">{{ errors()['message'] }}</span> }
         </div>
       </div>
     } @else {
@@ -57,7 +57,7 @@
         <div class="form-group">
           <label class="form-label" for="company">{{ i18n.currentLang() === 'es' ? 'Nombre de la empresa' : 'Company Name' }} <span class="required">*</span></label>
           <input type="text" id="company" class="form-control" [class.form-control--error]="errors()['company']" [placeholder]="i18n.currentLang() === 'es' ? 'Nombre de su empresa' : 'Your company name'" [(ngModel)]="companyName" name="companyName" (blur)="validateField('company', companyName)" aria-required="true" maxlength="200">
-          @if (errors()['company']) { <span class="form-error">{{ errors()['company'] }}</span> }
+          @if (errors()['company']) { <span class="form-error" role="alert">{{ errors()['company'] }}</span> }
         </div>
         <div class="form-group">
           <label class="form-label" for="country">{{ i18n.currentLang() === 'es' ? 'Pais de origen' : 'Country of Origin' }} <span class="required">*</span></label>
@@ -73,17 +73,17 @@
             <option value="India">{{ i18n.currentLang() === 'es' ? 'India' : 'India' }}</option>
             <option value="Other">{{ i18n.currentLang() === 'es' ? 'Otro' : 'Other' }}</option>
           </select>
-          @if (errors()['country']) { <span class="form-error">{{ errors()['country'] }}</span> }
+          @if (errors()['country']) { <span class="form-error" role="alert">{{ errors()['country'] }}</span> }
         </div>
         <div class="form-group">
           <label class="form-label" for="contact-name">{{ i18n.currentLang() === 'es' ? 'Nombre de contacto' : 'Contact Name' }} <span class="required">*</span></label>
           <input type="text" id="contact-name" class="form-control" [class.form-control--error]="errors()['contactName']" [placeholder]="i18n.currentLang() === 'es' ? 'Su nombre completo' : 'Your full name'" [(ngModel)]="contactName" name="contactName" (blur)="validateField('contactName', contactName)" aria-required="true" maxlength="100">
-          @if (errors()['contactName']) { <span class="form-error">{{ errors()['contactName'] }}</span> }
+          @if (errors()['contactName']) { <span class="form-error" role="alert">{{ errors()['contactName'] }}</span> }
         </div>
         <div class="form-group">
           <label class="form-label" for="contact-email">{{ i18n.currentLang() === 'es' ? 'Correo electronico' : 'Email' }} <span class="required">*</span></label>
           <input type="email" id="contact-email" class="form-control" [class.form-control--error]="errors()['contactEmail']" placeholder="email@empresa.com" [(ngModel)]="contactEmail" name="contactEmail" (blur)="validateField('contactEmail', contactEmail)" aria-required="true" maxlength="254">
-          @if (errors()['contactEmail']) { <span class="form-error">{{ errors()['contactEmail'] }}</span> }
+          @if (errors()['contactEmail']) { <span class="form-error" role="alert">{{ errors()['contactEmail'] }}</span> }
         </div>
         <div class="form-group">
           <label class="form-label" for="contact-phone">{{ i18n.currentLang() === 'es' ? 'Telefono' : 'Phone' }}</label>
@@ -96,7 +96,7 @@
         <div class="form-group form-group-full">
           <label class="form-label" for="mfr-message">{{ i18n.currentLang() === 'es' ? 'Mensaje' : 'Message' }} <span class="required">*</span></label>
           <textarea id="mfr-message" class="form-control" [class.form-control--error]="errors()['mfrMessage']" [placeholder]="i18n.currentLang() === 'es' ? 'Cuentenos sobre su empresa y productos...' : 'Tell us about your company and products...'" [(ngModel)]="mfrMessage" name="mfrMessage" (blur)="validateField('mfrMessage', mfrMessage)" aria-required="true" maxlength="2000"></textarea>
-          @if (errors()['mfrMessage']) { <span class="form-error">{{ errors()['mfrMessage'] }}</span> }
+          @if (errors()['mfrMessage']) { <span class="form-error" role="alert">{{ errors()['mfrMessage'] }}</span> }
         </div>
         <div class="form-group form-group-full">
           <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">

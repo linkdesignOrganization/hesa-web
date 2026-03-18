@@ -33,6 +33,8 @@ router.get('/', async (req: Request, res: Response) => {
       limit,
     });
 
+    // NFR-001/ADR-11: Cache public catalog for 5 minutes
+    res.setHeader('Cache-Control', 'public, max-age=300, stale-while-revalidate=60');
     res.json(result);
   } catch (error) {
     console.error('Error fetching products:', error);
@@ -49,6 +51,8 @@ router.get('/filters', async (req: Request, res: Response) => {
   try {
     const category = req.query.category as string | undefined;
     const filters = await categoryService.getDynamicFilterValues(category);
+    // NFR-001/ADR-11: Cache filter values for 10 minutes
+    res.setHeader('Cache-Control', 'public, max-age=600, stale-while-revalidate=60');
     res.json(filters);
   } catch (error) {
     console.error('Error fetching filters:', error);
@@ -64,6 +68,8 @@ router.get('/filters', async (req: Request, res: Response) => {
 router.get('/featured', async (_req: Request, res: Response) => {
   try {
     const products = await productService.getFeaturedProducts();
+    // NFR-001/ADR-11: Cache featured products for 10 minutes
+    res.setHeader('Cache-Control', 'public, max-age=600, stale-while-revalidate=60');
     res.json(products);
   } catch (error) {
     console.error('Error fetching featured products:', error);
@@ -87,6 +93,8 @@ router.get('/by-slug/:slug', async (req: Request, res: Response) => {
       return;
     }
 
+    // NFR-001/ADR-11: Cache product detail for 5 minutes
+    res.setHeader('Cache-Control', 'public, max-age=300, stale-while-revalidate=60');
     res.json(product);
   } catch (error) {
     console.error('Error fetching product:', error);

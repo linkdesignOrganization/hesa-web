@@ -6,7 +6,7 @@
       @for (brand of featuredBrands(); track brand._id) {
         <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'marcas' : 'brands') + '/' + brand.slug" class="logos-section__logo" role="listitem" [attr.aria-label]="(i18n.currentLang() === 'es' ? 'Ver productos de ' : 'View products by ') + brand.name">
           @if (brand.logo) {
-            <img [src]="brand.logo" [alt]="brand.name" class="logos-section__logo-img">
+            <img [src]="brand.logo" [alt]="brand.name" class="logos-section__logo-img" loading="lazy">
           } @else {
             <span class="logos-section__logo-initial">{{ brand.name.charAt(0) }}</span>
           }

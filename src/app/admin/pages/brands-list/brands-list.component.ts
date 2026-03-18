@@ -36,8 +36,20 @@ import { ConfirmModalComponent } from '../../components/confirm-modal/confirm-mo
         </div>
       } @else if (brands().length === 0) {
         <div class="brands-list__empty">
-          <h2>No hay marcas registradas</h2>
-          <a routerLink="/admin/marcas/crear" class="btn btn-primary">+ Crear marca</a>
+          <div aria-hidden="true" style="margin-bottom: 16px; opacity: 0.8;">
+            <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="60" cy="50" r="30" fill="var(--neutral-50)" stroke="var(--neutral-200)" stroke-width="2"/>
+              <rect x="40" y="40" width="40" height="10" rx="5" fill="var(--neutral-200)"/>
+              <rect x="35" y="80" width="50" height="6" rx="3" fill="var(--neutral-200)" opacity="0.5"/>
+              <rect x="42" y="90" width="36" height="4" rx="2" fill="var(--neutral-200)" opacity="0.3"/>
+            </svg>
+          </div>
+          <h2 style="font-size: 20px; font-weight: 700; color: var(--neutral-900); margin-bottom: 8px;">No hay marcas registradas</h2>
+          <p style="font-size: 14px; color: var(--neutral-400); max-width: 320px; line-height: 1.5; margin-bottom: 16px;">Agrega las marcas que distribuyes para organizar tus productos.</p>
+          <a routerLink="/admin/marcas/crear" class="btn btn-primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Crear tu primera marca
+          </a>
         </div>
       } @else if (viewMode() === 'card') {
         <div class="brands-list__grid">
@@ -188,7 +200,7 @@ import { ConfirmModalComponent } from '../../components/confirm-modal/confirm-mo
     .admin-brand-card__meta { font-size: 12px; color: var(--neutral-400); margin-bottom: 8px; }
     .admin-brand-card__count { font-weight: 500; }
     .admin-brand-card__badges { display: flex; gap: 6px; flex-wrap: wrap; }
-    .brands-list__empty { text-align: center; padding: 80px 0; h2 { margin-bottom: 16px; color: var(--neutral-400); } }
+    .brands-list__empty { text-align: center; padding: 80px 20px; display: flex; flex-direction: column; align-items: center; background: var(--neutral-white); border: 2px dashed var(--neutral-200); border-radius: 12px; }
     .skeleton-card { padding: 24px; background: white; border: 1px solid var(--neutral-200); border-radius: 12px; }
     .skeleton-circle { width: 56px; height: 56px; border-radius: 50%; background: var(--neutral-100); margin-bottom: 12px; }
     .skeleton-line { height: 14px; background: var(--neutral-100); border-radius: 4px; margin-bottom: 8px; }

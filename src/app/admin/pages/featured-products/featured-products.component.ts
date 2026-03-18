@@ -45,7 +45,7 @@ interface FeaturedProduct {
               </div>
               <div class="featured-item__info">
                 <span class="featured-item__name">{{ product.name.es }}</span>
-                <span class="featured-item__brand">{{ product.brand?.name || '-' }}</span>
+                <span class="featured-item__brand">{{ product.brand ? product.brand.name : '-' }}</span>
               </div>
               <button class="featured-item__remove" aria-label="Remover" (click)="removeProduct(product._id)">&times;</button>
             </div>
@@ -87,7 +87,7 @@ interface FeaturedProduct {
                     </div>
                     <div class="modal-item__info">
                       <span class="modal-item__name">{{ product.name.es }}</span>
-                      <span class="modal-item__brand">{{ product.brand?.name || '-' }} | {{ product.category }}</span>
+                      <span class="modal-item__brand">{{ product.brand ? product.brand.name : '-' }} | {{ product.category }}</span>
                     </div>
                   </label>
                 }

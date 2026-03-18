@@ -21,6 +21,8 @@ router.get('/', async (_req: Request, res: Response) => {
       homeService.getFeaturedBrandsPopulated(),
     ]);
 
+    // NFR-001/ADR-11: Cache home data for 10 minutes
+    res.setHeader('Cache-Control', 'public, max-age=600, stale-while-revalidate=60');
     res.json({
       hero: config.hero,
       featuredProducts,

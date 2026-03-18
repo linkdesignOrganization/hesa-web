@@ -8,6 +8,30 @@
       "route": "/sitemap.xml",
       "redirect": "https://hesa-api.azurewebsites.net/api/public/sitemap.xml",
       "statusCode": 301
+    },
+    {
+      "route": "/*.js",
+      "headers": {
+        "Cache-Control": "public, max-age=31536000, immutable"
+      }
+    },
+    {
+      "route": "/*.css",
+      "headers": {
+        "Cache-Control": "public, max-age=31536000, immutable"
+      }
+    },
+    {
+      "route": "/*.woff2",
+      "headers": {
+        "Cache-Control": "public, max-age=31536000, immutable"
+      }
+    },
+    {
+      "route": "/index.html",
+      "headers": {
+        "Cache-Control": "no-cache"
+      }
     }
   ],
   "responseOverrides": {

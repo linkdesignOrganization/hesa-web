@@ -5,7 +5,7 @@
 
     <div class="catalog-page__header">
       <h1 class="text-h2">{{ i18n.currentLang() === 'es' ? 'Catalogo de Productos' : 'Product Catalog' }}</h1>
-      <span class="catalog-page__count">{{ totalProducts() }} {{ i18n.currentLang() === 'es' ? 'productos' : 'products' }}</span>
+      <span class="catalog-page__count" aria-live="polite" aria-atomic="true">{{ totalProducts() }} {{ i18n.currentLang() === 'es' ? 'productos' : 'products' }}</span>
     </div>
 
     <!-- Mobile Filter Button (< 768px) -->
@@ -18,22 +18,22 @@
     </button>
 
     <!-- Desktop Filter Bar (>= 768px) -->
-    <div class="filter-bar filter-bar--desktop">
+    <div class="filter-bar filter-bar--desktop" role="group" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Filtros del catalogo' : 'Catalog filters'">
       <div class="filter-bar__dropdowns">
-        <select class="filter-bar__dropdown" [value]="selectedCategory()" (change)="applyFilter('category', $any($event.target).value)">
+        <select class="filter-bar__dropdown" [value]="selectedCategory()" (change)="applyFilter('category', $any($event.target).value)" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Filtrar por categoria' : 'Filter by category'">
           <option value="">{{ i18n.currentLang() === 'es' ? 'Categoria' : 'Category' }}</option>
           <option value="farmacos">{{ i18n.currentLang() === 'es' ? 'Farmacos' : 'Pharmaceuticals' }}</option>
           <option value="alimentos">{{ i18n.currentLang() === 'es' ? 'Alimentos' : 'Food' }}</option>
           <option value="equipos">{{ i18n.currentLang() === 'es' ? 'Equipos' : 'Equipment' }}</option>
         </select>
-        <select class="filter-bar__dropdown" [value]="selectedBrand()" (change)="applyFilter('brand', $any($event.target).value)">
+        <select class="filter-bar__dropdown" [value]="selectedBrand()" (change)="applyFilter('brand', $any($event.target).value)" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Filtrar por marca' : 'Filter by brand'">
           <option value="">{{ i18n.currentLang() === 'es' ? 'Marca' : 'Brand' }}</option>
           @for (brand of filterValues().brands; track brand.id) {
             <option [value]="brand.id">{{ brand.name }}</option>
           }
         </select>
         @if (showSpeciesFilter()) {
-          <select class="filter-bar__dropdown" [value]="selectedSpecies()" (change)="applyFilter('species', $any($event.target).value)">
+          <select class="filter-bar__dropdown" [value]="selectedSpecies()" (change)="applyFilter('species', $any($event.target).value)" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Filtrar por especie' : 'Filter by species'">
             <option value="">{{ i18n.currentLang() === 'es' ? 'Especie' : 'Species' }}</option>
             <option value="Caninos">{{ i18n.currentLang() === 'es' ? 'Caninos' : 'Canine' }}</option>
             <option value="Felinos">{{ i18n.currentLang() === 'es' ? 'Felinos' : 'Feline' }}</option>
@@ -44,7 +44,7 @@
           </select>
         }
         @if (showFamilyFilter()) {
-          <select class="filter-bar__dropdown" [value]="selectedFamily()" (change)="applyFilter('family', $any($event.target).value)">
+          <select class="filter-bar__dropdown" [value]="selectedFamily()" (change)="applyFilter('family', $any($event.target).value)" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Filtrar por familia' : 'Filter by family'">
             <option value="">{{ i18n.currentLang() === 'es' ? 'Familia' : 'Family' }}</option>
             <option value="Antibioticos">{{ i18n.currentLang() === 'es' ? 'Antibioticos' : 'Antibiotics' }}</option>
             <option value="Desparasitantes">{{ i18n.currentLang() === 'es' ? 'Desparasitantes' : 'Dewormers' }}</option>
@@ -54,7 +54,7 @@
           </select>
         }
         @if (showLifeStageFilter()) {
-          <select class="filter-bar__dropdown" [value]="selectedLifeStage()" (change)="applyFilter('lifeStage', $any($event.target).value)">
+          <select class="filter-bar__dropdown" [value]="selectedLifeStage()" (change)="applyFilter('lifeStage', $any($event.target).value)" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Filtrar por etapa de vida' : 'Filter by life stage'">
             <option value="">{{ i18n.currentLang() === 'es' ? 'Etapa de vida' : 'Life Stage' }}</option>
             <option value="Cachorro/Kitten">{{ i18n.currentLang() === 'es' ? 'Cachorro/Kitten' : 'Puppy/Kitten' }}</option>
             <option value="Adulto">{{ i18n.currentLang() === 'es' ? 'Adulto' : 'Adult' }}</option>
@@ -63,7 +63,7 @@
           </select>
         }
         @if (showEquipmentTypeFilter()) {
-          <select class="filter-bar__dropdown" [value]="selectedEquipmentType()" (change)="applyFilter('equipmentType', $any($event.target).value)">
+          <select class="filter-bar__dropdown" [value]="selectedEquipmentType()" (change)="applyFilter('equipmentType', $any($event.target).value)" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Filtrar por tipo de equipo' : 'Filter by equipment type'">
             <option value="">{{ i18n.currentLang() === 'es' ? 'Tipo' : 'Type' }}</option>
             <option value="Diagnostico">{{ i18n.currentLang() === 'es' ? 'Diagnostico' : 'Diagnostic' }}</option>
             <option value="Quirurgico">{{ i18n.currentLang() === 'es' ? 'Quirurgico' : 'Surgical' }}</option>
@@ -230,25 +230,25 @@
 
       <!-- Pagination -->
       @if (totalPages() > 1) {
-        <div class="pagination">
+        <nav class="pagination" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Paginacion del catalogo' : 'Catalog pagination'" role="navigation">
           <span class="pagination__info">
             {{ i18n.currentLang() === 'es' ? 'Mostrando' : 'Showing' }}
             {{ (currentPage() - 1) * pageSize + 1 }}-{{ Math.min(currentPage() * pageSize, totalProducts()) }}
             {{ i18n.currentLang() === 'es' ? 'de' : 'of' }} {{ totalProducts() }}
             {{ i18n.currentLang() === 'es' ? 'productos' : 'products' }}
           </span>
-          <div class="pagination__controls">
-            <button class="pagination__btn" [disabled]="currentPage() === 1" (click)="goToPage(currentPage() - 1)" aria-label="Pagina anterior">
+          <div class="pagination__controls" role="group" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Controles de pagina' : 'Page controls'">
+            <button class="pagination__btn" [disabled]="currentPage() === 1" (click)="goToPage(currentPage() - 1)" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Pagina anterior' : 'Previous page'">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
             </button>
             @for (page of pagesArray; track page) {
-              <button class="pagination__btn" [class.pagination__btn--active]="page === currentPage()" (click)="goToPage(page)">{{ page }}</button>
+              <button class="pagination__btn" [class.pagination__btn--active]="page === currentPage()" (click)="goToPage(page)" [attr.aria-label]="(i18n.currentLang() === 'es' ? 'Pagina ' : 'Page ') + page" [attr.aria-current]="page === currentPage() ? 'page' : null">{{ page }}</button>
             }
-            <button class="pagination__btn" [disabled]="currentPage() === totalPages()" (click)="goToPage(currentPage() + 1)" aria-label="Pagina siguiente">
+            <button class="pagination__btn" [disabled]="currentPage() === totalPages()" (click)="goToPage(currentPage() + 1)" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Pagina siguiente' : 'Next page'">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
             </button>
           </div>
-        </div>
+        </nav>
       }
     }
   </div>

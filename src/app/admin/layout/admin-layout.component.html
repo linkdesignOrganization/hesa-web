@@ -111,10 +111,79 @@
       </button>
       <div class="admin__header-search">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--neutral-400)" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-        <input type="text" placeholder="Buscar..." class="admin__header-search-input" maxlength="100">
+        <input type="text"
+          placeholder="Buscar productos, marcas, mensajes..."
+          class="admin__header-search-input"
+          maxlength="100"
+          [value]="searchQuery()"
+          (input)="onSearchInput($event)"
+          (keydown)="onSearchKeydown($event)"
+          autocomplete="off"
+          role="combobox"
+          aria-autocomplete="list"
+          aria-controls="admin-search-results"
+          [attr.aria-expanded]="searchOpen()"
+          aria-label="Busqueda global del panel">
+        @if (searchOpen()) {
+          <div class="admin__search-dropdown" id="admin-search-results" role="listbox">
+            @if (searchLoading()) {
+              <div class="admin__search-loading">
+                <div class="admin__search-spinner"></div>
+                <span>Buscando...</span>
+              </div>
+            } @else if (hasSearchResults) {
+              @if (searchResults()!.products.length > 0) {
+                <div class="admin__search-group">
+                  <span class="admin__search-group-label">PRODUCTOS ({{ searchResults()!.products.length }})</span>
+                  @for (p of searchResults()!.products; track p.id) {
+                    <button class="admin__search-item" role="option" (click)="navigateToSearchResult('product', p.id)">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--neutral-400)" stroke-width="1.5"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
+                      <div class="admin__search-item-info">
+                        <span class="admin__search-item-name">{{ p.name }}</span>
+                        <span class="admin__search-item-meta">{{ p.category }}</span>
+                      </div>
+                    </button>
+                  }
+                </div>
+              }
+              @if (searchResults()!.brands.length > 0) {
+                <div class="admin__search-group">
+                  <span class="admin__search-group-label">MARCAS ({{ searchResults()!.brands.length }})</span>
+                  @for (b of searchResults()!.brands; track b.id) {
+                    <button class="admin__search-item" role="option" (click)="navigateToSearchResult('brand', b.id)">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--neutral-400)" stroke-width="1.5"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+                      <div class="admin__search-item-info">
+                        <span class="admin__search-item-name">{{ b.name }}</span>
+                        <span class="admin__search-item-meta">{{ b.country }}</span>
+                      </div>
+                    </button>
+                  }
+                </div>
+              }
+              @if (searchResults()!.messages.length > 0) {
+                <div class="admin__search-group">
+                  <span class="admin__search-group-label">MENSAJES ({{ searchResults()!.messages.length }})</span>
+                  @for (m of searchResults()!.messages; track m.id) {
+                    <button class="admin__search-item" role="option" (click)="navigateToSearchResult('message', m.id)">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--neutral-400)" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                      <div class="admin__search-item-info">
+                        <span class="admin__search-item-name">{{ m.name }}</span>
+                        <span class="admin__search-item-meta">{{ m.email }}</span>
+                      </div>
+                    </button>
+                  }
+                </div>
+              }
+            } @else if (showNoSearchResults) {
+              <div class="admin__search-empty">
+                <p>No se encontraron resultados para "{{ searchQuery() }}"</p>
+              </div>
+            }
+          </div>
+        }
       </div>
       <div class="admin__header-actions">
-        <button class="admin__header-notification" aria-label="Notificaciones">
+        <button class="admin__header-notification" aria-label="Ver mensajes" (click)="goToMessages()">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
           @if (newMessagesCount > 0) {
             <span class="admin__header-notification-badge">{{ newMessagesCount }}</span>

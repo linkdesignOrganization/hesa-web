@@ -1,4 +1,4 @@
-import { Component, inject, signal, effect, OnInit, OnDestroy, PLATFORM_ID } from '@angular/core';
+import { Component, inject, signal, effect, OnInit, OnDestroy, PLATFORM_ID, HostListener } from '@angular/core';
 import { isPlatformBrowser, DOCUMENT } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -184,6 +184,30 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   async retry(): Promise<void> {
     if (this.currentSlug) {
       await this.loadProduct(this.currentSlug);
+    }
+  }
+
+  /** NFR-023: Keyboard navigation for lightbox */
+  @HostListener('document:keydown', ['$event'])
+  onKeydown(event: KeyboardEvent): void {
+    if (!this.lightboxOpen()) return;
+    const p = this.product();
+    if (!p || !p.images || p.images.length === 0) return;
+
+    switch (event.key) {
+      case 'Escape':
+        this.lightboxOpen.set(false);
+        break;
+      case 'ArrowLeft':
+        this.selectedImage.set(
+          (this.selectedImage() - 1 + p.images.length) % p.images.length
+        );
+        break;
+      case 'ArrowRight':
+        this.selectedImage.set(
+          (this.selectedImage() + 1) % p.images.length
+        );
+        break;
     }
   }
 

@@ -7,9 +7,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="HESA - Importacion y distribucion de farmacos veterinarios, alimentos para animales y equipos veterinarios en Costa Rica">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+  <!-- NFR-001/NFR-003: Preconnect to critical origins for faster resource loading -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://hesa-api.azurewebsites.net">
+  <link rel="preconnect" href="https://hesastorage.blob.core.windows.net">
+  <link rel="dns-prefetch" href="https://login.microsoftonline.com">
+
+  <!-- NFR-001: Preload critical font to reduce LCP -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" as="style">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- NFR-003: Theme color for mobile browsers -->
+  <meta name="theme-color" content="#008DC9">
 </head>
 <body>
   <app-root></app-root>

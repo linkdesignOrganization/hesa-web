@@ -15,13 +15,15 @@
       <div
         class="header__nav-item header__nav-item--dropdown"
         (mouseenter)="isSubmenuOpen.set(true)"
-        (mouseleave)="isSubmenuOpen.set(false)">
+        (mouseleave)="isSubmenuOpen.set(false)"
+        (keydown)="onSubmenuKeydown($event)">
         <a
           [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo' : 'catalog')"
           routerLinkActive="header__nav-link--active"
           class="header__nav-link"
           aria-haspopup="true"
-          [attr.aria-expanded]="isSubmenuOpen()">
+          [attr.aria-expanded]="isSubmenuOpen()"
+          role="button">
           {{ i18n.currentLang() === 'es' ? 'Catalogo' : 'Catalog' }}
           <svg class="header__chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
         </a>
