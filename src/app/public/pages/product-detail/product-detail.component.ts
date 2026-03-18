@@ -1,4 +1,5 @@
-import { Component, inject, signal, OnInit, OnDestroy } from '@angular/core';
+import { Component, inject, signal, effect, OnInit, OnDestroy, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser, DOCUMENT } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { BreadcrumbComponent } from '../../../shared/components/breadcrumb/breadcrumb.component';
@@ -19,6 +20,8 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   private route = inject(ActivatedRoute);
   private api = inject(ApiService);
   private seo = inject(SeoService);
+  private platformId = inject(PLATFORM_ID);
+  private document = inject(DOCUMENT);
   i18n = inject(I18nService);
 
   product = signal<ApiProduct | null>(null);
@@ -30,6 +33,18 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   stickyVisible = signal(false);
   lightboxOpen = signal(false);
   private currentSlug = '';
+
+  // REQ-026 fix: Toggle body class so WhatsApp FAB repositions above sticky bar on mobile
+  private stickyBodyClassEffect = isPlatformBrowser(this.platformId)
+    ? effect(() => {
+        const visible = this.stickyVisible();
+        if (visible) {
+          this.document.body.classList.add('has-sticky-bottom-bar');
+        } else {
+          this.document.body.classList.remove('has-sticky-bottom-bar');
+        }
+      })
+    : null;
 
   get breadcrumbs() {
     const p = this.product();
@@ -174,5 +189,9 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.seo.clearDynamicTags();
+    // REQ-026 fix: Clean up body class when leaving product detail page
+    if (isPlatformBrowser(this.platformId)) {
+      this.document.body.classList.remove('has-sticky-bottom-bar');
+    }
   }
 }

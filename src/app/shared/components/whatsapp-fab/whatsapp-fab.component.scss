@@ -25,6 +25,17 @@
     right: 20px;
   }
 
+  // REQ-026 fix: Reposition FAB above sticky bottom bar on mobile (< 1024px)
+  // The sticky bar is 64px tall + some spacing = 80px bottom offset
+  @media (max-width: 1023px) {
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out,
+      background-color 0.2s ease-out, bottom 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+    :host-context(body.has-sticky-bottom-bar) & {
+      bottom: 80px;
+    }
+  }
+
   &:hover {
     transform: scale(1.1);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);

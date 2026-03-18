@@ -65,7 +65,7 @@
           - heading "Correo" [level=3] [ref=e40]:
             - img [ref=e41]
             - text: Correo
-          - paragraph [ref=e44]: info@hesa.co.cr
+          - paragraph [ref=e44]: hola@linkdesign.cr
         - generic [ref=e45]:
           - heading "Direccion" [level=3] [ref=e46]:
             - img [ref=e47]
