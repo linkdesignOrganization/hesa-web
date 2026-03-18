@@ -35,7 +35,7 @@
       <button class="btn btn-outline" (click)="loadDashboard()">Reintentar</button>
     </div>
   } @else if (data()) {
-    <!-- Row 1: Summary Cards -->
+    <!-- Row 1: Summary Cards (REQ-206) -->
     <div class="dashboard__summary">
       <div class="summary-card">
         <div class="summary-card__icon summary-card__icon--blue">
@@ -45,6 +45,9 @@
           <span class="summary-card__value">{{ data()!.totalProducts }}</span>
           <span class="summary-card__label">Productos</span>
         </div>
+        @if (data()!.activeProducts > 0) {
+          <span class="summary-card__badge summary-card__badge--success">{{ data()!.activeProducts }} activos</span>
+        }
       </div>
       <div class="summary-card">
         <div class="summary-card__icon summary-card__icon--purple">
@@ -54,6 +57,9 @@
           <span class="summary-card__value">{{ data()!.newMessages }}</span>
           <span class="summary-card__label">Mensajes Nuevos</span>
         </div>
+        @if (data()!.newMessages > 0) {
+          <span class="summary-card__badge summary-card__badge--warning">{{ data()!.newMessages }} pendientes</span>
+        }
       </div>
       <div class="summary-card">
         <div class="summary-card__icon summary-card__icon--green">
@@ -75,7 +81,7 @@
       </div>
     </div>
 
-    <!-- Row 2: Category Cards -->
+    <!-- Row 2: Category Cards (REQ-207, REQ-208) -->
     <div class="dashboard__categories">
       <a routerLink="/admin/productos" [queryParams]="{categoria: 'farmacos'}" class="category-card">
         <div class="category-card__icon category-card__icon--pharma">
@@ -83,7 +89,7 @@
         </div>
         <span class="category-card__label">Farmacos</span>
         <div class="category-card__progress">
-          <div class="category-card__bar category-card__bar--pharma" [style.width.%]="(data()!.pharmaActive / data()!.pharmaCount) * 100"></div>
+          <div class="category-card__bar category-card__bar--pharma" [style.width.%]="data()!.pharmaCount > 0 ? (data()!.pharmaActive / data()!.pharmaCount) * 100 : 0"></div>
         </div>
         <span class="category-card__count">{{ data()!.pharmaActive }} de {{ data()!.pharmaCount }} activos</span>
       </a>
@@ -93,7 +99,7 @@
         </div>
         <span class="category-card__label">Alimentos</span>
         <div class="category-card__progress">
-          <div class="category-card__bar category-card__bar--food" [style.width.%]="(data()!.foodActive / data()!.foodCount) * 100"></div>
+          <div class="category-card__bar category-card__bar--food" [style.width.%]="data()!.foodCount > 0 ? (data()!.foodActive / data()!.foodCount) * 100 : 0"></div>
         </div>
         <span class="category-card__count">{{ data()!.foodActive }} de {{ data()!.foodCount }} activos</span>
       </a>
@@ -103,24 +109,32 @@
         </div>
         <span class="category-card__label">Equipos</span>
         <div class="category-card__progress">
-          <div class="category-card__bar category-card__bar--equipment" [style.width.%]="(data()!.equipmentActive / data()!.equipmentCount) * 100"></div>
+          <div class="category-card__bar category-card__bar--equipment" [style.width.%]="data()!.equipmentCount > 0 ? (data()!.equipmentActive / data()!.equipmentCount) * 100 : 0"></div>
         </div>
         <span class="category-card__count">{{ data()!.equipmentActive }} de {{ data()!.equipmentCount }} activos</span>
       </a>
     </div>
 
-    <!-- Row 3: Messages + Activity -->
+    <!-- Row 3: Messages + Activity (REQ-209, REQ-210) -->
     <div class="dashboard__row3">
       <div class="dashboard__messages-card">
         <div class="dashboard__card-header">
           <h2>Mensajes Recientes</h2>
           <a routerLink="/admin/mensajes" class="dashboard__card-link">Ver todos</a>
         </div>
-        @for (msg of data()!.recentMessages; track msg.id) {
-          <a [routerLink]="'/admin/mensajes/' + msg.id" class="dashboard__message-item">
-            <span class="badge" [class.badge-general]="msg.type === 'Informacion'" [class.badge-commercial]="msg.type === 'Comercial'" [class.badge-manufacturer]="msg.type === 'Fabricante'" [class.badge-support]="msg.type === 'Soporte'">{{ msg.type }}</span>
-            <p class="dashboard__message-preview">{{ msg.message | slice:0:60 }}...</p>
-            <span class="dashboard__message-date">{{ msg.relativeDate }}</span>
+        @if (data()!.recentMessages.length === 0) {
+          <p class="dashboard__empty-text">No hay mensajes aun</p>
+        }
+        @for (msg of data()!.recentMessages; track msg._id) {
+          <a [routerLink]="'/admin/mensajes/' + msg._id" class="dashboard__message-item">
+            <span class="badge"
+              [class.badge-general]="msg.type === 'info'"
+              [class.badge-commercial]="msg.type === 'comercial'"
+              [class.badge-manufacturer]="msg.type === 'fabricante'"
+              [class.badge-support]="msg.type === 'soporte'"
+              [class.badge-other]="msg.type === 'otro'">{{ getTypeLabel(msg.type) }}</span>
+            <p class="dashboard__message-preview">{{ msg.message | slice:0:60 }}{{ msg.message.length > 60 ? '...' : '' }}</p>
+            <span class="dashboard__message-date">{{ getRelativeDate(msg.createdAt) }}</span>
           </a>
         }
       </div>
@@ -128,26 +142,16 @@
         <div class="dashboard__card-header">
           <h2>Actividad Reciente</h2>
         </div>
-        <div class="dashboard__activity-item">
-          <div class="dashboard__activity-dot"></div>
-          <p>Producto "Pro Plan Adulto" actualizado</p>
-          <span>Hace 1 hora</span>
-        </div>
-        <div class="dashboard__activity-item">
-          <div class="dashboard__activity-dot"></div>
-          <p>Nueva marca "Virbac" creada</p>
-          <span>Hace 3 horas</span>
-        </div>
-        <div class="dashboard__activity-item">
-          <div class="dashboard__activity-dot"></div>
-          <p>Mensaje de contacto atendido</p>
-          <span>Ayer</span>
-        </div>
-        <div class="dashboard__activity-item">
-          <div class="dashboard__activity-dot"></div>
-          <p>Hero del sitio actualizado</p>
-          <span>Hace 2 dias</span>
-        </div>
+        @if (data()!.recentActivity.length === 0) {
+          <p class="dashboard__empty-text">No hay actividad reciente</p>
+        }
+        @for (activity of data()!.recentActivity; track activity._id) {
+          <div class="dashboard__activity-item">
+            <div class="dashboard__activity-dot"></div>
+            <p>{{ getActivityText(activity) }}</p>
+            <span>{{ getRelativeDate(activity.createdAt) }}</span>
+          </div>
+        }
       </div>
     </div>
   }

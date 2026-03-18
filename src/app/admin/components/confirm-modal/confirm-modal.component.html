@@ -10,10 +10,10 @@
         }
       </div>
       <h2 id="modal-title" class="modal__title">{{ title() }}</h2>
-      <p class="modal__desc">{{ description() }}</p>
+      <p class="modal__desc">{{ getDescription() }}</p>
       <div class="modal__actions">
         <button class="btn btn-outline-gray" (click)="close()" autofocus>{{ cancelLabel() }}</button>
-        <button class="btn" [class.btn-danger]="variant() === 'danger'" [class.btn-warning]="variant() === 'warning'" (click)="confirm()">{{ confirmLabel() }}</button>
+        <button class="btn" [class.btn-danger]="variant() === 'danger'" [class.btn-warning]="variant() === 'warning'" (click)="confirm()">{{ getConfirmText() }}</button>
       </div>
     </div>
   </div>

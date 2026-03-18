@@ -27,6 +27,8 @@ function sanitizeObject(obj: Record<string, unknown>): Record<string, unknown> {
   for (const [key, value] of Object.entries(obj)) {
     // Block MongoDB operators (e.g. $gt, $ne, $regex, $where)
     if (key.startsWith('$')) continue;
+    // Block prototype pollution vectors
+    if (key === '__proto__' || key === 'constructor' || key === 'prototype') continue;
 
     if (typeof value === 'string') {
       sanitized[key] = sanitizeString(value);

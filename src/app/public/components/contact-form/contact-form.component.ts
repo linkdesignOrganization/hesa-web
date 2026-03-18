@@ -1,6 +1,7 @@
-import { Component, input, signal, inject } from '@angular/core';
+import { Component, input, signal, inject, ElementRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { I18nService } from '../../../shared/services/i18n.service';
+import { ApiService } from '../../../shared/services/api.service';
 
 @Component({
   selector: 'app-contact-form',
@@ -14,6 +15,8 @@ export class ContactFormComponent {
   prefilledProduct = input('');
 
   i18n = inject(I18nService);
+  private api = inject(ApiService);
+  private el = inject(ElementRef);
 
   private static readonly EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   private static readonly PHONE_REGEX = /^[+]?[\d\s\-()]{7,20}$/;
@@ -93,6 +96,10 @@ export class ContactFormComponent {
   }
 
   validateField(field: string, value: string): void {
+    // REQ-204: Reset error state when user interacts, allowing retry without losing data
+    if (this.formState() === 'error') {
+      this.formState.set('idle');
+    }
     const errs = { ...this.errors() };
     const maxLengthMap: Record<string, number> = {
       name: ContactFormComponent.MAX_NAME_LENGTH,
@@ -142,6 +149,17 @@ export class ContactFormComponent {
     }
   }
 
+  /** Scroll to the first error field */
+  private scrollToFirstError(): void {
+    setTimeout(() => {
+      const firstError = this.el.nativeElement.querySelector('.form-control--error');
+      if (firstError) {
+        firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        firstError.focus();
+      }
+    }, 100);
+  }
+
   async submit(): Promise<void> {
     // Anti-bot: honeypot check
     if (this.honeypot) return;
@@ -184,12 +202,41 @@ export class ContactFormComponent {
     }
 
     this.errors.set(errs);
-    if (Object.keys(errs).length > 0) return;
+    if (Object.keys(errs).length > 0) {
+      this.scrollToFirstError();
+      return;
+    }
 
     this.formState.set('submitting');
     this.lastSubmitTime = Date.now();
 
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    this.formState.set('success');
+    try {
+      if (this.variant() === 'general') {
+        await this.api.submitContactGeneral({
+          name: this.name,
+          email: this.email,
+          phone: this.phone || undefined,
+          consultationType: this.consultationType,
+          productOfInterest: this.productOfInterest || undefined,
+          message: this.message,
+          website: this.honeypot, // honeypot field sent to backend
+        });
+      } else {
+        await this.api.submitContactManufacturer({
+          companyName: this.companyName,
+          country: this.country,
+          contactName: this.contactName,
+          contactEmail: this.contactEmail,
+          contactPhone: this.contactPhone || undefined,
+          productTypes: this.productTypes || undefined,
+          message: this.mfrMessage,
+          website: this.honeypot,
+        });
+      }
+      this.formState.set('success');
+    } catch (error: unknown) {
+      console.error('Contact form submission failed:', error);
+      this.formState.set('error');
+    }
   }
 }

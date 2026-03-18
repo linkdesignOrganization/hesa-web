@@ -5,7 +5,7 @@
 > Codigo/bugs → Developer | Testing → QA | Deploy → DevOps | Requirements → BA | Arquitectura → Architect | Visual Research → Design Researcher | UI/UX → Design Orchestrator
 
 ## Estado Actual
-**FASE 5 — Iteracion 2: Home Administrable + Contenido Estatico + Equipo** (en progreso)
+**FASE 5 — Iteracion 3: Formularios + Mensajes + Configuracion + Dashboard** (en progreso)
 
 ## Design Briefs
 - Detectados: `input/design-briefs/HESA_Brief_Agentes.md` (sitio publico) + `HESA_Brief_Panel_Administracion.md` (panel admin)

@@ -13,8 +13,19 @@ export class SeoService {
   private siteName = 'HESA - Herrera y Elizondo S.A.';
   private baseUrl = 'https://www.hesa.cr';
 
+  /** Store global OG image from site config (NFR-029) */
+  private globalOgImage = '';
+
+  /**
+   * NFR-029: Set global OG image from site config for fallback
+   */
+  setGlobalOgImage(imageUrl: string): void {
+    this.globalOgImage = imageUrl;
+  }
+
   /**
    * NFR-006: Set dynamic meta title and description
+   * NFR-029: Open Graph tags for social sharing (Facebook, LinkedIn)
    */
   setMetaTags(config: {
     title: string;
@@ -28,18 +39,32 @@ export class SeoService {
 
     this.meta.updateTag({ name: 'description', content: config.description });
 
-    // Open Graph
+    // Open Graph (NFR-029)
     this.meta.updateTag({ property: 'og:title', content: fullTitle });
     this.meta.updateTag({ property: 'og:description', content: config.description });
     this.meta.updateTag({ property: 'og:type', content: config.type || 'website' });
+    this.meta.updateTag({ property: 'og:site_name', content: this.siteName });
 
     if (config.url) {
-      this.meta.updateTag({ property: 'og:url', content: config.url });
+      const fullUrl = config.url.startsWith('http') ? config.url : `${this.baseUrl}${config.url}`;
+      this.meta.updateTag({ property: 'og:url', content: fullUrl });
       this.meta.updateTag({ rel: 'canonical', href: config.url } as Record<string, string>);
     }
 
-    if (config.image) {
-      this.meta.updateTag({ property: 'og:image', content: config.image });
+    // Use provided image, fall back to global OG image
+    const ogImage = config.image || this.globalOgImage;
+    if (ogImage) {
+      this.meta.updateTag({ property: 'og:image', content: ogImage });
+      this.meta.updateTag({ property: 'og:image:width', content: '1200' });
+      this.meta.updateTag({ property: 'og:image:height', content: '630' });
+    }
+
+    // Twitter Card tags
+    this.meta.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
+    this.meta.updateTag({ name: 'twitter:title', content: fullTitle });
+    this.meta.updateTag({ name: 'twitter:description', content: config.description });
+    if (ogImage) {
+      this.meta.updateTag({ name: 'twitter:image', content: ogImage });
     }
   }
 

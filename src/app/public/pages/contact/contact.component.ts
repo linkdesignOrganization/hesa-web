@@ -1,7 +1,7 @@
 import { Component, inject, signal, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ContactFormComponent } from '../../components/contact-form/contact-form.component';
-import { ApiService, ApiPageContent } from '../../../shared/services/api.service';
+import { ApiService, ApiPageContent, ApiSiteConfig } from '../../../shared/services/api.service';
 import { I18nService } from '../../../shared/services/i18n.service';
 import { SeoService } from '../../../shared/services/seo.service';
 
@@ -20,6 +20,7 @@ export class ContactComponent implements OnInit, OnDestroy {
 
   prefilledProduct = '';
   content = signal<ApiPageContent | null>(null);
+  siteConfig = signal<ApiSiteConfig | null>(null);
 
   async ngOnInit(): Promise<void> {
     const producto = this.route.snapshot.queryParamMap.get('producto');
@@ -38,10 +39,14 @@ export class ContactComponent implements OnInit, OnDestroy {
     });
     this.seo.setHreflang('/es/contacto', '/en/contact');
 
-    // Load contact page content
+    // Load contact page content and site config in parallel
     try {
-      const pageContent = await this.api.getPageContent('contacto');
-      this.content.set(pageContent);
+      const [pageContent, config] = await Promise.all([
+        this.api.getPageContent('contacto').catch(() => null),
+        this.api.getSiteConfig().catch(() => null),
+      ]);
+      if (pageContent) this.content.set(pageContent);
+      if (config) this.siteConfig.set(config);
     } catch {
       // Silent fallback — use hardcoded defaults
     }
@@ -52,6 +57,18 @@ export class ContactComponent implements OnInit, OnDestroy {
     const section = this.content()?.sections?.find(s => s.key === key);
     if (!section) return '';
     return this.i18n.t(section.value) || '';
+  }
+
+  /** Get config value or fallback */
+  getConfigValue(key: keyof ApiSiteConfig): string {
+    const config = this.siteConfig();
+    if (!config) return '';
+    const val = config[key];
+    if (typeof val === 'string') return val;
+    if (val && typeof val === 'object' && 'es' in val) {
+      return this.i18n.t(val as { es: string; en: string });
+    }
+    return '';
   }
 
   ngOnDestroy(): void {

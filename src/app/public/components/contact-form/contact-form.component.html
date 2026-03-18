@@ -116,6 +116,11 @@
         }
       </button>
     </div>
+    @if (errors()['_form']) {
+      <div class="contact-form__error-msg" role="alert">
+        {{ errors()['_form'] }}
+      </div>
+    }
     @if (formState() === 'error') {
       <div class="contact-form__error-msg" role="alert">
         {{ i18n.currentLang() === 'es' ? 'No pudimos enviar tu mensaje. Intenta de nuevo.' : 'We could not send your message. Please try again.' }}

@@ -12,6 +12,7 @@ import { securityHeaders } from './middleware/security-headers.middleware';
 import { authMiddleware } from './middleware/auth.middleware';
 import { seedCategories } from './services/category.service';
 import { seedBrandsAndProducts } from './services/seed.service';
+import { seedSiteConfig } from './services/site-config.service';
 
 // Public routes
 import publicProductsRoutes from './routes/public/products.routes';
@@ -22,6 +23,8 @@ import publicSitemapRoutes from './routes/public/sitemap.routes';
 import publicHomeRoutes from './routes/public/home.routes';
 import publicContentRoutes from './routes/public/content.routes';
 import publicTeamRoutes from './routes/public/team.routes';
+import publicContactRoutes from './routes/public/contact.routes';
+import publicSiteConfigRoutes from './routes/public/site-config.routes';
 
 // Admin routes
 import adminProductsRoutes from './routes/admin/products.routes';
@@ -30,6 +33,9 @@ import adminCategoriesRoutes from './routes/admin/categories.routes';
 import adminHomeRoutes from './routes/admin/home.routes';
 import adminContentRoutes from './routes/admin/content.routes';
 import adminTeamRoutes from './routes/admin/team.routes';
+import adminMessagesRoutes from './routes/admin/messages.routes';
+import adminSettingsRoutes from './routes/admin/settings.routes';
+import adminDashboardRoutes from './routes/admin/dashboard.routes';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -66,6 +72,8 @@ app.use('/api/public/sitemap.xml', publicSitemapRoutes);
 app.use('/api/public/home', publicHomeRoutes);
 app.use('/api/public/content', publicContentRoutes);
 app.use('/api/public/team', publicTeamRoutes);
+app.use('/api/public/contact', publicContactRoutes);
+app.use('/api/public/config', publicSiteConfigRoutes);
 
 // Admin API routes (auth required)
 app.use('/api/admin/products', authMiddleware, adminProductsRoutes);
@@ -74,6 +82,9 @@ app.use('/api/admin/categories', authMiddleware, adminCategoriesRoutes);
 app.use('/api/admin/home', authMiddleware, adminHomeRoutes);
 app.use('/api/admin/content', authMiddleware, adminContentRoutes);
 app.use('/api/admin/team', authMiddleware, adminTeamRoutes);
+app.use('/api/admin/messages', authMiddleware, adminMessagesRoutes);
+app.use('/api/admin/settings', authMiddleware, adminSettingsRoutes);
+app.use('/api/admin/dashboard', authMiddleware, adminDashboardRoutes);
 
 // Error handling middleware
 app.use((err: Error, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
@@ -96,6 +107,8 @@ async function start(): Promise<void> {
     console.log('Categories seeded successfully');
     await seedBrandsAndProducts();
     console.log('Brands and products seeded successfully');
+    await seedSiteConfig();
+    console.log('Site config seeded successfully');
   } catch (error) {
     console.error('Database initialization failed (API will run with degraded functionality):', error);
     // Don't exit — let the API serve what it can. Individual route handlers will return

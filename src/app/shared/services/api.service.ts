@@ -124,6 +124,82 @@ export interface ApiTeamMember {
   order: number;
 }
 
+export interface ApiMessage {
+  _id: string;
+  name: string;
+  email: string;
+  phone?: string;
+  type: 'info' | 'comercial' | 'soporte' | 'fabricante' | 'otro';
+  productOfInterest?: string;
+  message: string;
+  status: 'nuevo' | 'en-proceso' | 'atendido';
+  notes?: string;
+  companyName?: string;
+  country?: string;
+  contactName?: string;
+  contactEmail?: string;
+  contactPhone?: string;
+  productTypes?: string;
+  source: 'general' | 'manufacturer';
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface ApiSiteConfig {
+  siteName?: string;
+  defaultLang?: string;
+  logoUrl?: string;
+  phone?: string;
+  email?: string;
+  address?: { es: string; en: string };
+  hours?: { es: string; en: string };
+  whatsapp?: string;
+  facebook?: string;
+  instagram?: string;
+  linkedin?: string;
+  youtube?: string;
+  metaTitle?: { es: string; en: string };
+  metaDescription?: { es: string; en: string };
+  ogImage?: string;
+  ga4Id?: string;
+  ga4Enabled?: boolean;
+  fbPixelId?: string;
+  fbPixelEnabled?: boolean;
+}
+
+export interface ApiDashboardData {
+  totalProducts: number;
+  activeProducts: number;
+  newMessages: number;
+  totalBrands: number;
+  featuredProducts: number;
+  pharmaCount: number;
+  pharmaActive: number;
+  foodCount: number;
+  foodActive: number;
+  equipmentCount: number;
+  equipmentActive: number;
+  recentMessages: Array<{
+    _id: string;
+    name: string;
+    email: string;
+    type: string;
+    status: string;
+    message: string;
+    productOfInterest?: string;
+    createdAt: string;
+  }>;
+  recentActivity: Array<{
+    _id: string;
+    action: string;
+    entity: string;
+    entityName?: string;
+    user?: string;
+    details?: string;
+    createdAt: string;
+  }>;
+}
+
 export interface FilterValues {
   brands: { id: string; name: string; slug: string }[];
   species: string[];
@@ -477,6 +553,116 @@ export class ApiService {
   async adminReorderTeam(orderedIds: string[]): Promise<ApiTeamMember[]> {
     return firstValueFrom(
       this.http.put<ApiTeamMember[]>(`${this.baseUrl}/admin/team/reorder`, { orderedIds })
+    );
+  }
+
+  // ==================== PUBLIC CONTACT ====================
+
+  async submitContactGeneral(data: Record<string, unknown>): Promise<{ success: boolean; id?: string }> {
+    return firstValueFrom(
+      this.http.post<{ success: boolean; id?: string }>(`${this.baseUrl}/public/contact/general`, data)
+    );
+  }
+
+  async submitContactManufacturer(data: Record<string, unknown>): Promise<{ success: boolean; id?: string }> {
+    return firstValueFrom(
+      this.http.post<{ success: boolean; id?: string }>(`${this.baseUrl}/public/contact/manufacturer`, data)
+    );
+  }
+
+  // ==================== PUBLIC SITE CONFIG ====================
+
+  async getSiteConfig(): Promise<ApiSiteConfig> {
+    return firstValueFrom(
+      this.http.get<ApiSiteConfig>(`${this.baseUrl}/public/config`)
+    );
+  }
+
+  // ==================== ADMIN MESSAGES ====================
+
+  async adminGetMessages(params: Record<string, string | number | undefined> = {}): Promise<PaginatedResponse<ApiMessage>> {
+    const httpParams = this.buildParams(params);
+    return firstValueFrom(
+      this.http.get<PaginatedResponse<ApiMessage>>(`${this.baseUrl}/admin/messages`, { params: httpParams })
+    );
+  }
+
+  async adminGetMessage(id: string): Promise<ApiMessage> {
+    return firstValueFrom(
+      this.http.get<ApiMessage>(`${this.baseUrl}/admin/messages/${id}`)
+    );
+  }
+
+  async adminGetNewMessagesCount(): Promise<{ count: number }> {
+    return firstValueFrom(
+      this.http.get<{ count: number }>(`${this.baseUrl}/admin/messages/count-new`)
+    );
+  }
+
+  async adminUpdateMessageStatus(id: string, status: string): Promise<ApiMessage> {
+    return firstValueFrom(
+      this.http.patch<ApiMessage>(`${this.baseUrl}/admin/messages/${id}/status`, { status })
+    );
+  }
+
+  async adminUpdateMessageNotes(id: string, notes: string): Promise<ApiMessage> {
+    return firstValueFrom(
+      this.http.patch<ApiMessage>(`${this.baseUrl}/admin/messages/${id}/notes`, { notes })
+    );
+  }
+
+  async adminDeleteMessage(id: string): Promise<void> {
+    await firstValueFrom(
+      this.http.delete(`${this.baseUrl}/admin/messages/${id}`)
+    );
+  }
+
+  getExportMessagesUrl(params: Record<string, string> = {}): string {
+    const httpParams = this.buildParams(params);
+    return `${this.baseUrl}/admin/messages/export?${httpParams.toString()}`;
+  }
+
+  // ==================== ADMIN SETTINGS ====================
+
+  async adminGetSettings(): Promise<ApiSiteConfig> {
+    return firstValueFrom(
+      this.http.get<ApiSiteConfig>(`${this.baseUrl}/admin/settings`)
+    );
+  }
+
+  async adminGetSettingsByKey(key: string): Promise<ApiSiteConfig> {
+    return firstValueFrom(
+      this.http.get<ApiSiteConfig>(`${this.baseUrl}/admin/settings/${key}`)
+    );
+  }
+
+  async adminUpdateSettings(key: string, data: Record<string, unknown>): Promise<ApiSiteConfig> {
+    return firstValueFrom(
+      this.http.put<ApiSiteConfig>(`${this.baseUrl}/admin/settings/${key}`, data)
+    );
+  }
+
+  async adminUploadLogo(file: File): Promise<{ logoUrl: string }> {
+    const formData = new FormData();
+    formData.append('image', file);
+    return firstValueFrom(
+      this.http.post<{ logoUrl: string }>(`${this.baseUrl}/admin/settings/logo`, formData)
+    );
+  }
+
+  async adminUploadOgImage(file: File): Promise<{ ogImage: string }> {
+    const formData = new FormData();
+    formData.append('image', file);
+    return firstValueFrom(
+      this.http.post<{ ogImage: string }>(`${this.baseUrl}/admin/settings/og-image`, formData)
+    );
+  }
+
+  // ==================== ADMIN DASHBOARD ====================
+
+  async adminGetDashboard(): Promise<ApiDashboardData> {
+    return firstValueFrom(
+      this.http.get<ApiDashboardData>(`${this.baseUrl}/admin/dashboard`)
     );
   }
 
