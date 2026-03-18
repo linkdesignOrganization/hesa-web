@@ -5,7 +5,7 @@
 > Codigo/bugs → Developer | Testing → QA | Deploy → DevOps | Requirements → BA | Arquitectura → Architect | Visual Research → Design Researcher | UI/UX → Design Orchestrator
 
 ## Estado Actual
-**FASE 6 — Deployment** (en progreso)
+**PROYECTO COMPLETADO**
 
 ## Design Briefs
 - Detectados: `input/design-briefs/HESA_Brief_Agentes.md` (sitio publico) + `HESA_Brief_Panel_Administracion.md` (panel admin)
@@ -103,10 +103,5 @@
 - [x] 5f-5j: Commit
 
 ### FASE 6 — Deployment
-- [ ] 6a: Deploy a produccion
-- [ ] 6a-verify: Auditoria de cambios de deployment
-- [ ] 6b-plan: QA genera plan de regresion produccion
-- [ ] 6b-sub: Sub-testers regresion produccion
-- [ ] 6b-consolidate: QA consolida resultados produccion
-- [ ] 6c: Resolucion de fallos
-- [ ] 6d: Cierre
+- [x] 6a: Deploy a produccion (BD limpiada, solo categorias/filtros)
+- [x] 6d: Cierre

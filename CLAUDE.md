@@ -50,3 +50,13 @@
 - Deploy backend: Azure App Service
 - CI/CD: GitHub Actions
 - Iconografia: Lucide Icons
+
+## Deployment (Fase 6)
+- **Sitio publico**: https://gray-field-02ba8410f.2.azurestaticapps.net
+- **Panel admin**: https://gray-field-02ba8410f.2.azurestaticapps.net/admin
+- **API Backend**: https://hesa-api.azurewebsites.net
+- **Blob Storage**: https://hesastorage.blob.core.windows.net
+- **CI/CD**: Push a master → deploy automatico (frontend ~2min, backend ~1.5min)
+- **Auth admin**: Azure Entra ID, correo inicial: hola@linkdesign.cr
+- **BD**: Panel limpio — solo categorias/filtros. Sin datos placeholder.
+- **Tests**: 645+ tests automatizados Playwright
