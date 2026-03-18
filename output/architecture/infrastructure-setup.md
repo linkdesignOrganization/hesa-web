@@ -137,6 +137,33 @@ Todas las variables de entorno estan configuradas en App Service > Configuration
 | `EMAIL_CONNECTION_STRING` | (connection string de Communication Services) |
 | `EMAIL_SENDER` | DoNotReply@hesa-comm.unitedstates.communication.azure.com |
 | `EMAIL_NOTIFICATION_TO` | hola@linkdesign.cr |
+| `CORS_ORIGINS` | http://localhost:4200,https://gray-field-02ba8410f.2.azurestaticapps.net |
+
+### Startup Command
+```
+node dist/app.js
+```
+
+---
+
+## Cosmos DB — Indexes (Importante)
+
+Cosmos DB MongoDB API **NO indexa automaticamente** todos los campos como MongoDB nativo. Cualquier campo usado en `.sort()` DEBE tener un indice explicito, de lo contrario Cosmos retorna error `BadValue: The index path corresponding to the specified order-by item is excluded`.
+
+### Indexes creados manualmente (ademas de los definidos en Mongoose schemas)
+
+| Collection | Index | Proposito |
+|---|---|---|
+| `products` | `{ "$**": 1 }` (wildcard) | Cobertura general para queries futuras |
+| `products` | `{ createdAt: -1 }` | Sort en listados de productos |
+| `brands` | `{ "$**": 1 }` (wildcard) | Cobertura general para queries futuras |
+| `brands` | `{ name: 1 }` | Sort en listado de marcas |
+| `brands` | `{ createdAt: -1 }` | Sort por fecha |
+| `categories` | `{ "$**": 1 }` (wildcard) | Cobertura general |
+| `activity_logs` | `{ createdAt: -1 }` | Sort en log de actividades |
+| `activity_logs` | `{ "$**": 1 }` (wildcard) | Cobertura general |
+
+**Regla para desarrolladores:** Al agregar un nuevo `.sort()` o `.find()` con campos no indexados, verificar que existe un indice en Cosmos DB. Los wildcard indexes cubren la mayoria de casos pero puede haber edge cases.
 
 ---
 
@@ -222,11 +249,15 @@ Para desarrollo se usa el dominio integrado (`*.communication.azure.com`). Para 
 | Secret requerido | `AZURE_API_PUBLISH_PROFILE` |
 
 **Pipeline:**
-1. Push a `master` con cambios en `api/` dispara el workflow (tambien se puede lanzar manualmente)
+1. Push a `master` con cambios en `api/` dispara el workflow (tambien se puede lanzar manualmente con `gh workflow run azure-api-deploy.yml`)
 2. Checkout del codigo + setup Node.js 20 con cache de npm
-3. `npm ci --production` instala solo dependencias de produccion
-4. `npm run build` (si existe script de build para TypeScript)
-5. `azure/webapps-deploy@v3` despliega la carpeta `api/` al App Service
+3. `npm ci` instala TODAS las dependencias (incluyendo devDeps para TypeScript build)
+4. `npm run build` compila TypeScript a `dist/`
+5. Se crea un paquete de deploy limpio con `dist/`, `package.json`, `package-lock.json` y solo `node_modules` de produccion
+6. `azure/webapps-deploy@v3` despliega el paquete al App Service
+7. App Service ejecuta `node dist/app.js` (startup command configurado)
+
+**IMPORTANTE:** El App Service requiere SCM basic auth habilitado para que el publish profile funcione. Si se deshabilita, el deploy fallara con "Publish profile is invalid".
 
 ### GitHub Secrets configurados
 

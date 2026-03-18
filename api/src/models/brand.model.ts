@@ -41,5 +41,8 @@ const brandSchema = new Schema<IBrand>(
 brandSchema.index({ name: 'text' }, { name: 'brand_text_search' });
 brandSchema.index({ slug: 1 });
 brandSchema.index({ isFeatured: 1, featuredOrder: 1 });
+// Cosmos DB MongoDB API requires explicit indexes on sort fields
+brandSchema.index({ name: 1 });
+brandSchema.index({ createdAt: -1 });
 
 export const Brand = mongoose.model<IBrand>('Brand', brandSchema);

@@ -105,5 +105,7 @@ productSchema.index({ brand: 1, isActive: 1 });
 productSchema.index({ 'slug.es': 1 });
 productSchema.index({ 'slug.en': 1 });
 productSchema.index({ isFeatured: 1, featuredOrder: 1 });
+// Cosmos DB MongoDB API requires explicit indexes on sort fields
+productSchema.index({ createdAt: -1 });
 
 export const Product = mongoose.model<IProduct>('Product', productSchema);
