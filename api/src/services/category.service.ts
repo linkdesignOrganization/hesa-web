@@ -43,44 +43,59 @@ export async function getCategoriesWithCounts(): Promise<(ICategory & { activeCo
  */
 export async function getDynamicFilterValues(category?: string): Promise<{
   brands: { id: string; name: string; slug: string }[];
-  species: string[];
-  families: string[];
-  lifeStages: string[];
-  equipmentTypes: string[];
+  species: { es: string; en: string }[];
+  families: { es: string; en: string }[];
+  lifeStages: { es: string; en: string }[];
+  equipmentTypes: { es: string; en: string }[];
 }> {
   const filter: Record<string, unknown> = { isActive: true };
   if (category) filter.category = category;
 
+  // Get brands from actual products
   const products = await Product.find(filter)
     .populate('brand', 'name slug')
-    .select('brand species family lifeStage equipmentType')
+    .select('brand')
     .lean();
 
   const brandsMap = new Map<string, { id: string; name: string; slug: string }>();
-  const speciesSet = new Set<string>();
-  const familiesSet = new Set<string>();
-  const lifeStagesSet = new Set<string>();
-  const equipmentTypesSet = new Set<string>();
-
   for (const product of products) {
     const brand = product.brand as unknown as { _id: string; name: string; slug: string };
     if (brand) {
       brandsMap.set(String(brand._id), { id: String(brand._id), name: brand.name, slug: brand.slug });
     }
-    if (product.species) {
-      for (const s of product.species) speciesSet.add(s);
+  }
+
+  // Get species, families, lifeStages, equipmentTypes from CATEGORIES (source of truth)
+  const categoryFilter: Record<string, unknown> = {};
+  if (category) categoryFilter.key = category;
+  const categories = await Category.find(categoryFilter).lean();
+
+  const speciesMap = new Map<string, { es: string; en: string }>();
+  const familiesMap = new Map<string, { es: string; en: string }>();
+  const lifeStagesMap = new Map<string, { es: string; en: string }>();
+  const equipmentTypesMap = new Map<string, { es: string; en: string }>();
+
+  for (const cat of categories) {
+    if (cat.species) {
+      for (const s of cat.species) speciesMap.set(s.es, s);
     }
-    if (product.family) familiesSet.add(product.family);
-    if (product.lifeStage) lifeStagesSet.add(product.lifeStage);
-    if (product.equipmentType) equipmentTypesSet.add(product.equipmentType);
+    if (cat.families) {
+      for (const f of cat.families) familiesMap.set(f.es, f);
+    }
+    if (cat.lifeStages) {
+      for (const l of cat.lifeStages) lifeStagesMap.set(l.es, l);
+    }
+    if (cat.equipmentTypes) {
+      for (const e of cat.equipmentTypes) equipmentTypesMap.set(e.es, e);
+    }
   }
 
   return {
     brands: Array.from(brandsMap.values()).sort((a, b) => a.name.localeCompare(b.name)),
-    species: Array.from(speciesSet).sort(),
-    families: Array.from(familiesSet).sort(),
-    lifeStages: Array.from(lifeStagesSet).sort(),
-    equipmentTypes: Array.from(equipmentTypesSet).sort(),
+    species: Array.from(speciesMap.values()).sort((a, b) => a.es.localeCompare(b.es)),
+    families: Array.from(familiesMap.values()).sort((a, b) => a.es.localeCompare(b.es)),
+    lifeStages: Array.from(lifeStagesMap.values()).sort((a, b) => a.es.localeCompare(b.es)),
+    equipmentTypes: Array.from(equipmentTypesMap.values()).sort((a, b) => a.es.localeCompare(b.es)),
   };
 }
 

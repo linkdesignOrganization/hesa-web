@@ -32,43 +32,36 @@
             <option [value]="brand.id">{{ brand.name }}</option>
           }
         </select>
-        @if (showSpeciesFilter()) {
+        @if (showSpeciesFilter() && filterValues().species.length > 0) {
           <select class="filter-bar__dropdown" [value]="selectedSpecies()" (change)="applyFilter('species', $any($event.target).value)" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Filtrar por especie' : 'Filter by species'">
             <option value="">{{ i18n.currentLang() === 'es' ? 'Especie' : 'Species' }}</option>
-            <option value="Caninos">{{ i18n.currentLang() === 'es' ? 'Caninos' : 'Canine' }}</option>
-            <option value="Felinos">{{ i18n.currentLang() === 'es' ? 'Felinos' : 'Feline' }}</option>
-            <option value="Bovinos">{{ i18n.currentLang() === 'es' ? 'Bovinos' : 'Bovine' }}</option>
-            <option value="Equinos">{{ i18n.currentLang() === 'es' ? 'Equinos' : 'Equine' }}</option>
-            <option value="Porcinos">{{ i18n.currentLang() === 'es' ? 'Porcinos' : 'Porcine' }}</option>
-            <option value="Aves">{{ i18n.currentLang() === 'es' ? 'Aves' : 'Poultry' }}</option>
+            @for (sp of filterValues().species; track sp.es) {
+              <option [value]="sp.es">{{ i18n.currentLang() === 'es' ? sp.es : (sp.en || sp.es) }}</option>
+            }
           </select>
         }
-        @if (showFamilyFilter()) {
+        @if (showFamilyFilter() && filterValues().families.length > 0) {
           <select class="filter-bar__dropdown" [value]="selectedFamily()" (change)="applyFilter('family', $any($event.target).value)" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Filtrar por familia' : 'Filter by family'">
             <option value="">{{ i18n.currentLang() === 'es' ? 'Familia' : 'Family' }}</option>
-            <option value="Antibioticos">{{ i18n.currentLang() === 'es' ? 'Antibioticos' : 'Antibiotics' }}</option>
-            <option value="Desparasitantes">{{ i18n.currentLang() === 'es' ? 'Desparasitantes' : 'Dewormers' }}</option>
-            <option value="Vitaminas">{{ i18n.currentLang() === 'es' ? 'Vitaminas' : 'Vitamins' }}</option>
-            <option value="Analgosicos">{{ i18n.currentLang() === 'es' ? 'Analgosicos' : 'Analgesics' }}</option>
-            <option value="Antiinflamatorios">{{ i18n.currentLang() === 'es' ? 'Antiinflamatorios' : 'Anti-inflammatories' }}</option>
+            @for (fam of filterValues().families; track fam.es) {
+              <option [value]="fam.es">{{ i18n.currentLang() === 'es' ? fam.es : (fam.en || fam.es) }}</option>
+            }
           </select>
         }
-        @if (showLifeStageFilter()) {
+        @if (showLifeStageFilter() && filterValues().lifeStages.length > 0) {
           <select class="filter-bar__dropdown" [value]="selectedLifeStage()" (change)="applyFilter('lifeStage', $any($event.target).value)" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Filtrar por etapa de vida' : 'Filter by life stage'">
             <option value="">{{ i18n.currentLang() === 'es' ? 'Etapa de vida' : 'Life Stage' }}</option>
-            <option value="Cachorro/Kitten">{{ i18n.currentLang() === 'es' ? 'Cachorro/Kitten' : 'Puppy/Kitten' }}</option>
-            <option value="Adulto">{{ i18n.currentLang() === 'es' ? 'Adulto' : 'Adult' }}</option>
-            <option value="Senior">{{ i18n.currentLang() === 'es' ? 'Senior' : 'Senior' }}</option>
-            <option value="Todas las etapas">{{ i18n.currentLang() === 'es' ? 'Todas las etapas' : 'All life stages' }}</option>
+            @for (ls of filterValues().lifeStages; track ls.es) {
+              <option [value]="ls.es">{{ i18n.currentLang() === 'es' ? ls.es : (ls.en || ls.es) }}</option>
+            }
           </select>
         }
-        @if (showEquipmentTypeFilter()) {
+        @if (showEquipmentTypeFilter() && filterValues().equipmentTypes.length > 0) {
           <select class="filter-bar__dropdown" [value]="selectedEquipmentType()" (change)="applyFilter('equipmentType', $any($event.target).value)" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Filtrar por tipo de equipo' : 'Filter by equipment type'">
             <option value="">{{ i18n.currentLang() === 'es' ? 'Tipo' : 'Type' }}</option>
-            <option value="Diagnostico">{{ i18n.currentLang() === 'es' ? 'Diagnostico' : 'Diagnostic' }}</option>
-            <option value="Quirurgico">{{ i18n.currentLang() === 'es' ? 'Quirurgico' : 'Surgical' }}</option>
-            <option value="Laboratorio">{{ i18n.currentLang() === 'es' ? 'Laboratorio' : 'Laboratory' }}</option>
-            <option value="Instrumental">{{ i18n.currentLang() === 'es' ? 'Instrumental' : 'Instruments' }}</option>
+            @for (et of filterValues().equipmentTypes; track et.es) {
+              <option [value]="et.es">{{ i18n.currentLang() === 'es' ? et.es : (et.en || et.es) }}</option>
+            }
           </select>
         }
       </div>
@@ -103,54 +96,47 @@
               }
             </select>
           </div>
-          @if (showSpeciesFilter()) {
+          @if (showSpeciesFilter() && filterValues().species.length > 0) {
             <div class="filter-drawer__group">
               <label class="filter-drawer__label">{{ i18n.currentLang() === 'es' ? 'Especie' : 'Species' }}</label>
               <select class="filter-bar__dropdown" [value]="selectedSpecies()" (change)="applyFilter('species', $any($event.target).value)">
                 <option value="">{{ i18n.currentLang() === 'es' ? 'Todas' : 'All' }}</option>
-                <option value="Caninos">{{ i18n.currentLang() === 'es' ? 'Caninos' : 'Canine' }}</option>
-                <option value="Felinos">{{ i18n.currentLang() === 'es' ? 'Felinos' : 'Feline' }}</option>
-                <option value="Bovinos">{{ i18n.currentLang() === 'es' ? 'Bovinos' : 'Bovine' }}</option>
-                <option value="Equinos">{{ i18n.currentLang() === 'es' ? 'Equinos' : 'Equine' }}</option>
-                <option value="Porcinos">{{ i18n.currentLang() === 'es' ? 'Porcinos' : 'Porcine' }}</option>
-                <option value="Aves">{{ i18n.currentLang() === 'es' ? 'Aves' : 'Poultry' }}</option>
+                @for (sp of filterValues().species; track sp.es) {
+                  <option [value]="sp.es">{{ i18n.currentLang() === 'es' ? sp.es : (sp.en || sp.es) }}</option>
+                }
               </select>
             </div>
           }
-          @if (showFamilyFilter()) {
+          @if (showFamilyFilter() && filterValues().families.length > 0) {
             <div class="filter-drawer__group">
               <label class="filter-drawer__label">{{ i18n.currentLang() === 'es' ? 'Familia' : 'Family' }}</label>
               <select class="filter-bar__dropdown" [value]="selectedFamily()" (change)="applyFilter('family', $any($event.target).value)">
                 <option value="">{{ i18n.currentLang() === 'es' ? 'Todas' : 'All' }}</option>
-                <option value="Antibioticos">{{ i18n.currentLang() === 'es' ? 'Antibioticos' : 'Antibiotics' }}</option>
-                <option value="Desparasitantes">{{ i18n.currentLang() === 'es' ? 'Desparasitantes' : 'Dewormers' }}</option>
-                <option value="Vitaminas">{{ i18n.currentLang() === 'es' ? 'Vitaminas' : 'Vitamins' }}</option>
-                <option value="Analgosicos">{{ i18n.currentLang() === 'es' ? 'Analgosicos' : 'Analgesics' }}</option>
-                <option value="Antiinflamatorios">{{ i18n.currentLang() === 'es' ? 'Antiinflamatorios' : 'Anti-inflammatories' }}</option>
+                @for (fam of filterValues().families; track fam.es) {
+                  <option [value]="fam.es">{{ i18n.currentLang() === 'es' ? fam.es : (fam.en || fam.es) }}</option>
+                }
               </select>
             </div>
           }
-          @if (showLifeStageFilter()) {
+          @if (showLifeStageFilter() && filterValues().lifeStages.length > 0) {
             <div class="filter-drawer__group">
               <label class="filter-drawer__label">{{ i18n.currentLang() === 'es' ? 'Etapa de vida' : 'Life Stage' }}</label>
               <select class="filter-bar__dropdown" [value]="selectedLifeStage()" (change)="applyFilter('lifeStage', $any($event.target).value)">
                 <option value="">{{ i18n.currentLang() === 'es' ? 'Todas' : 'All' }}</option>
-                <option value="Cachorro/Kitten">{{ i18n.currentLang() === 'es' ? 'Cachorro/Kitten' : 'Puppy/Kitten' }}</option>
-                <option value="Adulto">{{ i18n.currentLang() === 'es' ? 'Adulto' : 'Adult' }}</option>
-                <option value="Senior">{{ i18n.currentLang() === 'es' ? 'Senior' : 'Senior' }}</option>
-                <option value="Todas las etapas">{{ i18n.currentLang() === 'es' ? 'Todas las etapas' : 'All life stages' }}</option>
+                @for (ls of filterValues().lifeStages; track ls.es) {
+                  <option [value]="ls.es">{{ i18n.currentLang() === 'es' ? ls.es : (ls.en || ls.es) }}</option>
+                }
               </select>
             </div>
           }
-          @if (showEquipmentTypeFilter()) {
+          @if (showEquipmentTypeFilter() && filterValues().equipmentTypes.length > 0) {
             <div class="filter-drawer__group">
               <label class="filter-drawer__label">{{ i18n.currentLang() === 'es' ? 'Tipo' : 'Type' }}</label>
               <select class="filter-bar__dropdown" [value]="selectedEquipmentType()" (change)="applyFilter('equipmentType', $any($event.target).value)">
                 <option value="">{{ i18n.currentLang() === 'es' ? 'Todos' : 'All' }}</option>
-                <option value="Diagnostico">{{ i18n.currentLang() === 'es' ? 'Diagnostico' : 'Diagnostic' }}</option>
-                <option value="Quirurgico">{{ i18n.currentLang() === 'es' ? 'Quirurgico' : 'Surgical' }}</option>
-                <option value="Laboratorio">{{ i18n.currentLang() === 'es' ? 'Laboratorio' : 'Laboratory' }}</option>
-                <option value="Instrumental">{{ i18n.currentLang() === 'es' ? 'Instrumental' : 'Instruments' }}</option>
+                @for (et of filterValues().equipmentTypes; track et.es) {
+                  <option [value]="et.es">{{ i18n.currentLang() === 'es' ? et.es : (et.en || et.es) }}</option>
+                }
               </select>
             </div>
           }

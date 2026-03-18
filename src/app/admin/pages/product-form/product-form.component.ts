@@ -2,7 +2,7 @@ import { Component, signal, inject, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, RouterLink } from '@angular/router';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HasUnsavedChanges } from '../../../shared/guards/unsaved-changes.guard';
-import { ApiService, ApiProduct, ApiBrand } from '../../../shared/services/api.service';
+import { ApiService, ApiProduct, ApiBrand, ApiCategory } from '../../../shared/services/api.service';
 import { ToastService } from '../../../shared/services/toast.service';
 
 @Component({
@@ -29,9 +29,11 @@ export class AdminProductFormComponent implements HasUnsavedChanges, OnInit {
   isEditing = signal(false);
   productId = signal<string | null>(null);
   brands = signal<ApiBrand[]>([]);
+  categories = signal<ApiCategory[]>([]);
   existingProduct = signal<ApiProduct | null>(null);
 
-  // Species & presentations chips
+  // Species from category (available options) & selected species
+  availableSpecies = signal<{ es: string; en: string }[]>([]);
   speciesList = signal<string[]>([]);
   presentationsList = signal<string[]>([]);
 
@@ -74,11 +76,16 @@ export class AdminProductFormComponent implements HasUnsavedChanges, OnInit {
       this._hasChanges.set(true);
     });
 
-    // Load brands
+    // Load brands and categories
     try {
-      this.brands.set(await this.api.adminGetBrands());
+      const [brands, categories] = await Promise.all([
+        this.api.adminGetBrands(),
+        this.api.adminGetCategories(),
+      ]);
+      this.brands.set(brands);
+      this.categories.set(categories);
     } catch {
-      this.toast.error('Error al cargar las marcas');
+      this.toast.error('Error al cargar los datos');
     }
 
     // Check if editing
@@ -123,6 +130,9 @@ export class AdminProductFormComponent implements HasUnsavedChanges, OnInit {
 
       this.speciesList.set(product.species || []);
       this.presentationsList.set(product.presentations || []);
+      if (product.category) {
+        this.updateAvailableSpecies(product.category);
+      }
       this.existingImages.set(product.images || []);
       this.existingPdfUrl.set(product.pdfUrl || null);
 
@@ -138,6 +148,23 @@ export class AdminProductFormComponent implements HasUnsavedChanges, OnInit {
     this.productForm.get('category')!.setValue(cat);
     this.productForm.get('category')!.markAsTouched();
     this._hasChanges.set(true);
+    this.updateAvailableSpecies(cat);
+  }
+
+  private updateAvailableSpecies(cat: string): void {
+    const category = this.categories().find(c => c.key === cat);
+    this.availableSpecies.set(category?.species || []);
+  }
+
+  toggleSpecies(speciesEs: string): void {
+    this.speciesList.update(list => {
+      if (list.includes(speciesEs)) {
+        return list.filter(s => s !== speciesEs);
+      } else {
+        return [...list, speciesEs];
+      }
+    });
+    this._hasChanges.set(true);
   }
 
   switchTab(tab: 'es' | 'en'): void {
@@ -148,22 +175,7 @@ export class AdminProductFormComponent implements HasUnsavedChanges, OnInit {
     this._hasChanges.set(true);
   }
 
-  // --- Species chips ---
-  addSpecies(event: Event): void {
-    event.preventDefault();
-    const input = event.target as HTMLInputElement;
-    const value = input.value.trim();
-    if (value && !this.speciesList().includes(value)) {
-      this.speciesList.update(list => [...list, value]);
-      this._hasChanges.set(true);
-    }
-    input.value = '';
-  }
-
-  removeSpecies(index: number): void {
-    this.speciesList.update(list => list.filter((_, i) => i !== index));
-    this._hasChanges.set(true);
-  }
+  // Species selection is now handled by toggleSpecies() above
 
   // --- Presentation chips ---
   addPresentation(event: Event): void {

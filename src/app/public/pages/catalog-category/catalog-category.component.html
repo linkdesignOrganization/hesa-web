@@ -23,29 +23,29 @@
         @if (categoryType === 'farmacos') {
           <select class="filter-bar__dropdown" [value]="selectedSpecies()" (change)="applyFilter('species', $any($event.target).value)">
             <option value="">{{ i18n.currentLang() === 'es' ? 'Especie' : 'Species' }}</option>
-            @for (sp of filterValues().species; track sp) { <option [value]="sp">{{ sp }}</option> }
+            @for (sp of filterValues().species; track sp.es) { <option [value]="sp.es">{{ i18n.currentLang() === 'es' ? sp.es : (sp.en || sp.es) }}</option> }
           </select>
           <select class="filter-bar__dropdown" [value]="selectedFamily()" (change)="applyFilter('family', $any($event.target).value)">
             <option value="">{{ i18n.currentLang() === 'es' ? 'Familia' : 'Family' }}</option>
-            @for (fam of filterValues().families; track fam) { <option [value]="fam">{{ fam }}</option> }
+            @for (fam of filterValues().families; track fam.es) { <option [value]="fam.es">{{ i18n.currentLang() === 'es' ? fam.es : (fam.en || fam.es) }}</option> }
           </select>
         }
 
         @if (categoryType === 'alimentos') {
           <select class="filter-bar__dropdown" [value]="selectedSpecies()" (change)="applyFilter('species', $any($event.target).value)">
             <option value="">{{ i18n.currentLang() === 'es' ? 'Especie' : 'Species' }}</option>
-            @for (sp of filterValues().species; track sp) { <option [value]="sp">{{ sp }}</option> }
+            @for (sp of filterValues().species; track sp.es) { <option [value]="sp.es">{{ i18n.currentLang() === 'es' ? sp.es : (sp.en || sp.es) }}</option> }
           </select>
           <select class="filter-bar__dropdown" [value]="selectedLifeStage()" (change)="applyFilter('lifeStage', $any($event.target).value)">
             <option value="">{{ i18n.currentLang() === 'es' ? 'Etapa de vida' : 'Life stage' }}</option>
-            @for (ls of filterValues().lifeStages; track ls) { <option [value]="ls">{{ ls }}</option> }
+            @for (ls of filterValues().lifeStages; track ls.es) { <option [value]="ls.es">{{ i18n.currentLang() === 'es' ? ls.es : (ls.en || ls.es) }}</option> }
           </select>
         }
 
         @if (categoryType === 'equipos') {
           <select class="filter-bar__dropdown" [value]="selectedEquipmentType()" (change)="applyFilter('equipmentType', $any($event.target).value)">
             <option value="">{{ i18n.currentLang() === 'es' ? 'Tipo' : 'Type' }}</option>
-            @for (et of filterValues().equipmentTypes; track et) { <option [value]="et">{{ et }}</option> }
+            @for (et of filterValues().equipmentTypes; track et.es) { <option [value]="et.es">{{ i18n.currentLang() === 'es' ? et.es : (et.en || et.es) }}</option> }
           </select>
         }
       </div>

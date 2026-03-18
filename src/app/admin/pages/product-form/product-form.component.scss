@@ -118,6 +118,43 @@
   }
 }
 
+// ── Species checkbox grid ──
+.pf-species-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.pf-species-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border: 1px solid var(--adm-border);
+  border-radius: var(--adm-radius-pill);
+  cursor: pointer;
+  transition: all var(--adm-transition-fast);
+  font-size: var(--adm-body-size);
+  color: var(--adm-text-heading);
+  background: var(--adm-bg-card);
+
+  input[type="checkbox"] {
+    display: none;
+  }
+
+  &:hover {
+    border-color: var(--adm-primary);
+    background: var(--adm-primary-soft);
+  }
+
+  &--selected {
+    background: var(--adm-primary-soft);
+    border-color: var(--adm-primary);
+    color: var(--adm-primary);
+    font-weight: 500;
+  }
+}
+
 // ── Chips input wrapper ──
 .pf-chips-input {
   display: flex;

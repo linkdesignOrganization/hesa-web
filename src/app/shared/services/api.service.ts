@@ -208,10 +208,10 @@ export interface AdminSearchResult {
 
 export interface FilterValues {
   brands: { id: string; name: string; slug: string }[];
-  species: string[];
-  families: string[];
-  lifeStages: string[];
-  equipmentTypes: string[];
+  species: { es: string; en: string }[];
+  families: { es: string; en: string }[];
+  lifeStages: { es: string; en: string }[];
+  equipmentTypes: { es: string; en: string }[];
 }
 
 export interface SearchResults {

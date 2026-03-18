@@ -91,23 +91,25 @@
       <p class="adm-form-section__desc">Define las especies de destino y clasificacion segun categoria</p>
 
       <div class="adm-form-grid">
-        <!-- Species chips -->
-        <div class="adm-form-group adm-form-group--full">
-          <label class="adm-form-label">Especies</label>
-          <div class="pf-chips-input">
-            <div class="adm-chips">
-              @for (sp of speciesList(); track sp; let i = $index) {
-                <span class="adm-chip">
-                  {{ sp }}
-                  <button type="button" class="adm-chip__remove" [attr.aria-label]="'Remover ' + sp" (click)="removeSpecies(i)">
-                    <span class="material-symbols-outlined">close</span>
-                  </button>
-                </span>
+        <!-- Species checkboxes (from category) -->
+        @if (availableSpecies().length > 0) {
+          <div class="adm-form-group adm-form-group--full">
+            <label class="adm-form-label">Especies</label>
+            <div class="pf-species-grid">
+              @for (sp of availableSpecies(); track sp.es) {
+                <label class="pf-species-option" [class.pf-species-option--selected]="speciesList().includes(sp.es)">
+                  <input type="checkbox" [checked]="speciesList().includes(sp.es)" (change)="toggleSpecies(sp.es)">
+                  <span class="pf-species-option__label">{{ sp.es }}</span>
+                </label>
               }
             </div>
-            <input type="text" class="pf-chips-input__field" placeholder="Agregar especie y presionar Enter..." (keydown.enter)="addSpecies($event)" #speciesInput>
           </div>
-        </div>
+        } @else if (selectedCategory() && selectedCategory() !== 'equipos') {
+          <div class="adm-form-group adm-form-group--full">
+            <label class="adm-form-label">Especies</label>
+            <p class="adm-form-hint">No hay especies configuradas para esta categoria. Agregalas en Categorias.</p>
+          </div>
+        }
 
         <!-- Conditional: Familia Farmaceutica -->
         @if (selectedCategory() === 'farmacos') {
