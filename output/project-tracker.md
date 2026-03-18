@@ -70,11 +70,9 @@
 - [x] 5b: Simplify (N+1 queries, dedup uploads, extracted helpers)
 - [x] 5c: Security Review (NoSQL injection, XSS, rate limiting, file validation, 0 vulns)
 - [x] 5d: Pre-QA Deploy (desplegado)
-- [x] 5d-regress: Regresion automatizada (259 passed, 0 failed, 12.9m)
-- [ ] 5e-plan: QA genera plan
-- [ ] 5e-sub: Sub-testers en paralelo
-- [ ] 5e-consolidate: QA consolida
-- [ ] 5e-verify: Verificacion post-QA
+- [x] 5d-regress: Regresion automatizada (434 passed, 0 failed)
+- [x] 5e: QA completado (4 rondas, 170/170 criterios, 0 bugs, LISTO_PARA_DEMO)
+- [x] 5e-verify: Verificacion post-QA (PASA)
 - [ ] 5f: Demo para el cliente
 - [ ] 5g: Feedback del cliente
 - [ ] 5h: Recopilar feedback

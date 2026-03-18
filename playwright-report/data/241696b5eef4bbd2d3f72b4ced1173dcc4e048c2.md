@@ -1,0 +1,153 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e2]:
+  - generic:
+    - navigation "Navegacion principal" [ref=e3]:
+      - generic [ref=e4]:
+        - link "HESA - Ir al inicio" [ref=e5] [cursor=pointer]:
+          - /url: /es
+          - generic [ref=e6]: HESA
+          - generic [ref=e7]: H
+        - navigation [ref=e8]:
+          - generic [ref=e9]:
+            - link "Catalogo" [ref=e10] [cursor=pointer]:
+              - /url: /es/catalogo
+              - text: Catalogo
+              - img [ref=e11]
+            - generic:
+              - link "Farmacos Veterinarios":
+                - /url: /es/catalogo/farmacos
+                - img
+                - text: Farmacos Veterinarios
+              - link "Alimentos para Animales":
+                - /url: /es/catalogo/alimentos
+                - img
+                - text: Alimentos para Animales
+              - link "Equipos Veterinarios":
+                - /url: /es/catalogo/equipos
+                - img
+                - text: Equipos Veterinarios
+          - link "Marcas" [ref=e13] [cursor=pointer]:
+            - /url: /es/marcas
+          - link "Nosotros" [ref=e14] [cursor=pointer]:
+            - /url: /es/nosotros
+          - link "Distribuidores" [ref=e15] [cursor=pointer]:
+            - /url: /es/distribuidores
+          - link "Contacto" [ref=e16] [cursor=pointer]:
+            - /url: /es/contacto
+        - generic [ref=e17]:
+          - button "Buscar productos y marcas" [ref=e18] [cursor=pointer]:
+            - img [ref=e19]
+          - listbox "Seleccionar idioma" [ref=e23]:
+            - button "ES" [ref=e24] [cursor=pointer]:
+              - generic [ref=e25]: ES
+              - img [ref=e26]
+    - generic:
+      - search "Busqueda global":
+        - generic:
+          - button "Cerrar busqueda":
+            - img
+          - generic:
+            - img
+            - textbox "Buscar productos, marcas..."
+          - paragraph: Escribe al menos 3 caracteres
+  - generic [ref=e30]:
+    - navigation "Breadcrumb" [ref=e32]:
+      - list [ref=e33]:
+        - listitem [ref=e34]:
+          - link "Inicio" [ref=e35] [cursor=pointer]:
+            - /url: /es
+          - generic [ref=e36]: ">"
+        - listitem [ref=e37]:
+          - link "Catalogo" [ref=e38] [cursor=pointer]:
+            - /url: /es/catalogo
+          - generic [ref=e39]: ">"
+        - listitem [ref=e40]:
+          - generic [ref=e41]: Farmacos
+    - generic [ref=e42]:
+      - heading "Farmacos" [level=1] [ref=e43]
+      - generic [ref=e44]: 1 productos
+    - paragraph [ref=e45]: Medicamentos veterinarios de las mejores marcas internacionales
+    - generic [ref=e47]:
+      - combobox [ref=e48]:
+        - option "Marca" [selected]
+        - option "Zoetis"
+      - combobox [ref=e49]:
+        - option "Especie" [selected]
+        - option "Bovinos"
+        - option "Caninos"
+        - option "Equinos"
+        - option "Felinos"
+      - combobox [ref=e50]:
+        - option "Familia" [selected]
+        - option "Antibioticos"
+        - option "Antiinflamatorios"
+    - generic [ref=e51]:
+      - generic [ref=e52]:
+        - text: Caninos
+        - button [ref=e53] [cursor=pointer]:
+          - img [ref=e54]
+      - generic [ref=e57]:
+        - text: Antibioticos
+        - button [ref=e58] [cursor=pointer]:
+          - img [ref=e59]
+      - button "Limpiar filtros" [ref=e62] [cursor=pointer]
+    - link "Ver Amoxicilina Veterinaria" [ref=e65] [cursor=pointer]:
+      - /url: /es/catalogo/farmacos/amoxicilina-veterinaria
+      - img "Amoxicilina Veterinaria" [ref=e67]
+      - generic [ref=e68]:
+        - heading "Amoxicilina Veterinaria" [level=3] [ref=e69]
+        - paragraph [ref=e70]: Zoetis
+        - generic [ref=e71]: Ver producto
+  - contentinfo "Pie de pagina" [ref=e73]:
+    - generic [ref=e75]:
+      - generic [ref=e76]:
+        - generic [ref=e77]: HESA
+        - paragraph [ref=e78]: 37 anos distribuyendo salud animal en Costa Rica
+      - generic [ref=e80]:
+        - heading "Navegacion" [level=3] [ref=e81]
+        - navigation [ref=e82]:
+          - link "Inicio" [ref=e83] [cursor=pointer]:
+            - /url: /es
+          - link "Catalogo" [ref=e84] [cursor=pointer]:
+            - /url: /es/catalogo
+          - link "Marcas" [ref=e85] [cursor=pointer]:
+            - /url: /es/marcas
+          - link "Nosotros" [ref=e86] [cursor=pointer]:
+            - /url: /es/nosotros
+          - link "Distribuidores" [ref=e87] [cursor=pointer]:
+            - /url: /es/distribuidores
+          - link "Contacto" [ref=e88] [cursor=pointer]:
+            - /url: /es/contacto
+      - generic [ref=e90]:
+        - heading "Contacto" [level=3] [ref=e91]
+        - generic [ref=e92]:
+          - paragraph [ref=e93]:
+            - img [ref=e94]
+            - text: +506 2260-9020
+          - paragraph [ref=e96]:
+            - img [ref=e97]
+            - text: info@hesa.co.cr
+          - paragraph [ref=e100]:
+            - img [ref=e101]
+            - text: Calle 2, av 12. Heredia, Costa Rica
+          - paragraph [ref=e104]:
+            - img [ref=e105]
+            - text: "Lun - Vie: 8:00 - 17:00"
+      - generic [ref=e109]:
+        - heading "Redes Sociales" [level=3] [ref=e110]
+        - generic [ref=e111]:
+          - link "Facebook" [ref=e112] [cursor=pointer]:
+            - /url: https://facebook.com/hesacr
+            - img [ref=e113]
+          - link "Instagram" [ref=e115] [cursor=pointer]:
+            - /url: https://instagram.com/hesacr
+            - img [ref=e116]
+    - generic [ref=e120]:
+      - paragraph [ref=e121]: © HESA 2026. Todos los derechos reservados.
+      - button "English" [ref=e123] [cursor=pointer]
+  - button "Contactar por WhatsApp" [ref=e124] [cursor=pointer]:
+    - img [ref=e125]
+    - generic: Escribenos por WhatsApp
+```

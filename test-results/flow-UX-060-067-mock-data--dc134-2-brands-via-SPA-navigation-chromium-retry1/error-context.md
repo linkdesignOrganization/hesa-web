@@ -64,54 +64,79 @@
     - generic [ref=e39]:
       - heading "Nuestras Marcas" [level=1] [ref=e40]
       - paragraph [ref=e41]: Distribuimos exclusivamente las mejores marcas internacionales de la industria veterinaria. Cada marca ha sido cuidadosamente seleccionada por su calidad, respaldo cientifico y trayectoria.
-  - contentinfo "Pie de pagina" [ref=e43]:
-    - generic [ref=e45]:
-      - generic [ref=e46]:
-        - generic [ref=e47]: HESA
-        - paragraph [ref=e48]: 37 anos distribuyendo salud animal en Costa Rica
-      - generic [ref=e50]:
-        - heading "Navegacion" [level=3] [ref=e51]
-        - navigation [ref=e52]:
-          - link "Inicio" [ref=e53] [cursor=pointer]:
+    - generic [ref=e42]:
+      - link "Ver marca Mindray" [ref=e44] [cursor=pointer]:
+        - /url: /es/marcas/mindray
+        - generic [ref=e46]: M
+        - heading "Mindray" [level=3] [ref=e47]
+        - paragraph [ref=e48]:
+          - img [ref=e49]
+          - text: China
+        - generic [ref=e53]: equipos
+      - link "Ver marca Royal Canin" [ref=e55] [cursor=pointer]:
+        - /url: /es/marcas/royal-canin
+        - generic [ref=e57]: R
+        - heading "Royal Canin" [level=3] [ref=e58]
+        - paragraph [ref=e59]:
+          - img [ref=e60]
+          - text: Francia
+        - generic [ref=e64]: alimentos
+      - link "Ver marca Zoetis" [ref=e66] [cursor=pointer]:
+        - /url: /es/marcas/zoetis
+        - generic [ref=e68]: Z
+        - heading "Zoetis" [level=3] [ref=e69]
+        - paragraph [ref=e70]:
+          - img [ref=e71]
+          - text: Estados Unidos
+        - generic [ref=e75]: farmacos
+  - contentinfo "Pie de pagina" [ref=e77]:
+    - generic [ref=e79]:
+      - generic [ref=e80]:
+        - generic [ref=e81]: HESA
+        - paragraph [ref=e82]: 37 anos distribuyendo salud animal en Costa Rica
+      - generic [ref=e84]:
+        - heading "Navegacion" [level=3] [ref=e85]
+        - navigation [ref=e86]:
+          - link "Inicio" [ref=e87] [cursor=pointer]:
             - /url: /es
-          - link "Catalogo" [ref=e54] [cursor=pointer]:
+          - link "Catalogo" [ref=e88] [cursor=pointer]:
             - /url: /es/catalogo
-          - link "Marcas" [ref=e55] [cursor=pointer]:
+          - link "Marcas" [ref=e89] [cursor=pointer]:
             - /url: /es/marcas
-          - link "Nosotros" [ref=e56] [cursor=pointer]:
+          - link "Nosotros" [ref=e90] [cursor=pointer]:
             - /url: /es/nosotros
-          - link "Distribuidores" [ref=e57] [cursor=pointer]:
+          - link "Distribuidores" [ref=e91] [cursor=pointer]:
             - /url: /es/distribuidores
-          - link "Contacto" [ref=e58] [cursor=pointer]:
+          - link "Contacto" [ref=e92] [cursor=pointer]:
             - /url: /es/contacto
-      - generic [ref=e60]:
-        - heading "Contacto" [level=3] [ref=e61]
-        - generic [ref=e62]:
-          - paragraph [ref=e63]:
-            - img [ref=e64]
+      - generic [ref=e94]:
+        - heading "Contacto" [level=3] [ref=e95]
+        - generic [ref=e96]:
+          - paragraph [ref=e97]:
+            - img [ref=e98]
             - text: +506 2260-9020
-          - paragraph [ref=e66]:
-            - img [ref=e67]
+          - paragraph [ref=e100]:
+            - img [ref=e101]
             - text: info@hesa.co.cr
-          - paragraph [ref=e70]:
-            - img [ref=e71]
+          - paragraph [ref=e104]:
+            - img [ref=e105]
             - text: Calle 2, av 12. Heredia, Costa Rica
-          - paragraph [ref=e74]:
-            - img [ref=e75]
+          - paragraph [ref=e108]:
+            - img [ref=e109]
             - text: "Lun - Vie: 8:00 - 17:00"
-      - generic [ref=e79]:
-        - heading "Redes Sociales" [level=3] [ref=e80]
-        - generic [ref=e81]:
-          - link "Facebook" [ref=e82] [cursor=pointer]:
+      - generic [ref=e113]:
+        - heading "Redes Sociales" [level=3] [ref=e114]
+        - generic [ref=e115]:
+          - link "Facebook" [ref=e116] [cursor=pointer]:
             - /url: https://facebook.com/hesacr
-            - img [ref=e83]
-          - link "Instagram" [ref=e85] [cursor=pointer]:
+            - img [ref=e117]
+          - link "Instagram" [ref=e119] [cursor=pointer]:
             - /url: https://instagram.com/hesacr
-            - img [ref=e86]
-    - generic [ref=e90]:
-      - paragraph [ref=e91]: © HESA 2026. Todos los derechos reservados.
-      - button "English" [ref=e93] [cursor=pointer]
-  - button "Contactar por WhatsApp" [ref=e94] [cursor=pointer]:
-    - img [ref=e95]
+            - img [ref=e120]
+    - generic [ref=e124]:
+      - paragraph [ref=e125]: © HESA 2026. Todos los derechos reservados.
+      - button "English" [ref=e127] [cursor=pointer]
+  - button "Contactar por WhatsApp" [ref=e128] [cursor=pointer]:
+    - img [ref=e129]
     - generic: Escribenos por WhatsApp
 ```

@@ -67,64 +67,83 @@
           - generic [ref=e41]: Alimentos
     - generic [ref=e42]:
       - heading "Alimentos" [level=1] [ref=e43]
-      - generic [ref=e44]: 0 productos
+      - generic [ref=e44]: 2 productos
     - paragraph [ref=e45]: Alimentos premium para mascotas y animales de produccion
     - generic [ref=e47]:
       - combobox [ref=e48]:
         - option "Marca" [selected]
+        - option "Royal Canin"
       - combobox [ref=e49]:
         - option "Especie" [selected]
+        - option "Caninos"
+        - option "Felinos"
       - combobox [ref=e50]:
         - option "Etapa de vida" [selected]
-    - heading "No hay productos disponibles actualmente" [level=2] [ref=e52]
-  - contentinfo "Pie de pagina" [ref=e54]:
-    - generic [ref=e56]:
-      - generic [ref=e57]:
-        - generic [ref=e58]: HESA
-        - paragraph [ref=e59]: 37 anos distribuyendo salud animal en Costa Rica
-      - generic [ref=e61]:
-        - heading "Navegacion" [level=3] [ref=e62]
-        - navigation [ref=e63]:
-          - link "Inicio" [ref=e64] [cursor=pointer]:
+        - option "Adulto"
+        - option "Cachorro/Kitten"
+    - generic [ref=e51]:
+      - link "Ver Royal Canin Kitten" [ref=e53] [cursor=pointer]:
+        - /url: /es/catalogo/alimentos/royal-canin-kitten
+        - img [ref=e56]
+        - generic [ref=e78]:
+          - heading "Royal Canin Kitten" [level=3] [ref=e79]
+          - paragraph [ref=e80]: Royal Canin
+          - generic [ref=e81]: Ver producto
+      - link "Ver Royal Canin Maxi Adulto" [ref=e83] [cursor=pointer]:
+        - /url: /es/catalogo/alimentos/royal-canin-maxi-adulto
+        - img "Royal Canin Maxi Adulto" [ref=e85]
+        - generic [ref=e86]:
+          - heading "Royal Canin Maxi Adulto" [level=3] [ref=e87]
+          - paragraph [ref=e88]: Royal Canin
+          - generic [ref=e89]: Ver producto
+  - contentinfo "Pie de pagina" [ref=e91]:
+    - generic [ref=e93]:
+      - generic [ref=e94]:
+        - generic [ref=e95]: HESA
+        - paragraph [ref=e96]: 37 anos distribuyendo salud animal en Costa Rica
+      - generic [ref=e98]:
+        - heading "Navegacion" [level=3] [ref=e99]
+        - navigation [ref=e100]:
+          - link "Inicio" [ref=e101] [cursor=pointer]:
             - /url: /es
-          - link "Catalogo" [ref=e65] [cursor=pointer]:
+          - link "Catalogo" [ref=e102] [cursor=pointer]:
             - /url: /es/catalogo
-          - link "Marcas" [ref=e66] [cursor=pointer]:
+          - link "Marcas" [ref=e103] [cursor=pointer]:
             - /url: /es/marcas
-          - link "Nosotros" [ref=e67] [cursor=pointer]:
+          - link "Nosotros" [ref=e104] [cursor=pointer]:
             - /url: /es/nosotros
-          - link "Distribuidores" [ref=e68] [cursor=pointer]:
+          - link "Distribuidores" [ref=e105] [cursor=pointer]:
             - /url: /es/distribuidores
-          - link "Contacto" [ref=e69] [cursor=pointer]:
+          - link "Contacto" [ref=e106] [cursor=pointer]:
             - /url: /es/contacto
-      - generic [ref=e71]:
-        - heading "Contacto" [level=3] [ref=e72]
-        - generic [ref=e73]:
-          - paragraph [ref=e74]:
-            - img [ref=e75]
+      - generic [ref=e108]:
+        - heading "Contacto" [level=3] [ref=e109]
+        - generic [ref=e110]:
+          - paragraph [ref=e111]:
+            - img [ref=e112]
             - text: +506 2260-9020
-          - paragraph [ref=e77]:
-            - img [ref=e78]
+          - paragraph [ref=e114]:
+            - img [ref=e115]
             - text: info@hesa.co.cr
-          - paragraph [ref=e81]:
-            - img [ref=e82]
+          - paragraph [ref=e118]:
+            - img [ref=e119]
             - text: Calle 2, av 12. Heredia, Costa Rica
-          - paragraph [ref=e85]:
-            - img [ref=e86]
+          - paragraph [ref=e122]:
+            - img [ref=e123]
             - text: "Lun - Vie: 8:00 - 17:00"
-      - generic [ref=e90]:
-        - heading "Redes Sociales" [level=3] [ref=e91]
-        - generic [ref=e92]:
-          - link "Facebook" [ref=e93] [cursor=pointer]:
+      - generic [ref=e127]:
+        - heading "Redes Sociales" [level=3] [ref=e128]
+        - generic [ref=e129]:
+          - link "Facebook" [ref=e130] [cursor=pointer]:
             - /url: https://facebook.com/hesacr
-            - img [ref=e94]
-          - link "Instagram" [ref=e96] [cursor=pointer]:
+            - img [ref=e131]
+          - link "Instagram" [ref=e133] [cursor=pointer]:
             - /url: https://instagram.com/hesacr
-            - img [ref=e97]
-    - generic [ref=e101]:
-      - paragraph [ref=e102]: © HESA 2026. Todos los derechos reservados.
-      - button "English" [ref=e104] [cursor=pointer]
-  - button "Contactar por WhatsApp" [ref=e105] [cursor=pointer]:
-    - img [ref=e106]
+            - img [ref=e134]
+    - generic [ref=e138]:
+      - paragraph [ref=e139]: © HESA 2026. Todos los derechos reservados.
+      - button "English" [ref=e141] [cursor=pointer]
+  - button "Contactar por WhatsApp" [ref=e142] [cursor=pointer]:
+    - img [ref=e143]
     - generic: Escribenos por WhatsApp
 ```

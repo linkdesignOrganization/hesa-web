@@ -1,0 +1,161 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e2]:
+  - generic:
+    - navigation "Navegacion principal" [ref=e3]:
+      - generic [ref=e4]:
+        - link "HESA - Ir al inicio" [ref=e5] [cursor=pointer]:
+          - /url: /es
+          - generic [ref=e6]: HESA
+          - generic [ref=e7]: H
+        - generic [ref=e8]:
+          - button "Buscar productos y marcas" [ref=e9] [cursor=pointer]:
+            - img [ref=e10]
+          - listbox "Seleccionar idioma" [ref=e14]:
+            - button "ES" [ref=e15] [cursor=pointer]:
+              - generic [ref=e16]: ES
+              - img [ref=e17]
+          - button "Abrir menu" [ref=e19] [cursor=pointer]
+      - dialog "Menu de navegacion" [ref=e23]:
+        - button "Cerrar menu" [ref=e24] [cursor=pointer]:
+          - img [ref=e25]
+        - navigation [ref=e28]:
+          - link "Catalogo" [ref=e29] [cursor=pointer]:
+            - /url: /es/catalogo
+          - generic [ref=e30]:
+            - link "Farmacos Veterinarios" [ref=e31] [cursor=pointer]:
+              - /url: /es/catalogo/farmacos
+            - link "Alimentos para Animales" [ref=e32] [cursor=pointer]:
+              - /url: /es/catalogo/alimentos
+            - link "Equipos Veterinarios" [ref=e33] [cursor=pointer]:
+              - /url: /es/catalogo/equipos
+          - link "Marcas" [ref=e34] [cursor=pointer]:
+            - /url: /es/marcas
+          - link "Nosotros" [ref=e35] [cursor=pointer]:
+            - /url: /es/nosotros
+          - link "Distribuidores" [ref=e36] [cursor=pointer]:
+            - /url: /es/distribuidores
+          - link "Contacto" [ref=e37] [cursor=pointer]:
+            - /url: /es/contacto
+        - listbox "Seleccionar idioma" [ref=e40]:
+          - button "ES" [ref=e41] [cursor=pointer]:
+            - generic [ref=e42]: ES
+            - img [ref=e43]
+    - generic:
+      - search "Busqueda global":
+        - generic:
+          - button "Cerrar busqueda":
+            - img
+          - generic:
+            - img
+            - textbox "Buscar productos, marcas..."
+          - paragraph: Escribe al menos 3 caracteres
+  - generic [ref=e45]:
+    - generic [ref=e47]:
+      - navigation "Breadcrumb" [ref=e49]:
+        - list [ref=e50]:
+          - listitem [ref=e51]:
+            - link "Inicio" [ref=e52] [cursor=pointer]:
+              - /url: /es
+            - generic [ref=e53]: ">"
+          - listitem [ref=e54]:
+            - link "Catalogo" [ref=e55] [cursor=pointer]:
+              - /url: /es/catalogo
+            - generic [ref=e56]: ">"
+          - listitem [ref=e57]:
+            - link "Equipos" [ref=e58] [cursor=pointer]:
+              - /url: /es/catalogo/equipos
+            - generic [ref=e59]: ">"
+          - listitem [ref=e60]:
+            - generic [ref=e61]: Monitor de Signos Vitales Veterinario
+      - generic [ref=e62]:
+        - img "Monitor de Signos Vitales Veterinario" [ref=e65]
+        - generic [ref=e66]:
+          - heading "Monitor de Signos Vitales Veterinario" [level=1] [ref=e67]
+          - link "Mindray" [ref=e68] [cursor=pointer]:
+            - /url: /es/marcas/mindray
+          - generic [ref=e69]:
+            - paragraph [ref=e70]: Presentaciones
+            - button "Unidad completa" [ref=e72] [cursor=pointer]
+          - paragraph [ref=e73]: Monitor multiparametrico veterinario para clinicas y hospitales. Pantalla tactil a color de 12 pulgadas con medicion de ECG, SpO2, NIBP, temperatura y capnografia.
+          - generic [ref=e74]:
+            - paragraph [ref=e75]: Especificaciones tecnicas
+            - paragraph [ref=e76]: "Pantalla: 12.1\" TFT LCD tactil. Parametros: ECG (7 derivaciones), SpO2, NIBP, Temperatura, CO2. Bateria: 4 horas. Peso: 4.5 kg. Interfaces: WiFi, USB, LAN."
+          - generic [ref=e77]:
+            - paragraph [ref=e78]: Usos recomendados
+            - paragraph [ref=e79]: Monitoreo continuo durante cirugias, recuperacion post-operatoria, hospitalizacion y urgencias veterinarias.
+          - generic [ref=e80]:
+            - paragraph [ref=e81]: Garantia
+            - paragraph [ref=e82]: 2 anos de garantia del fabricante. Soporte tecnico local incluido.
+          - generic [ref=e83]:
+            - link "Solicitar informacion" [ref=e84] [cursor=pointer]:
+              - /url: /es/contacto?producto=monitor-signos-vitales-vet
+            - link "Consultar por WhatsApp" [ref=e85] [cursor=pointer]:
+              - /url: https://wa.me/50622609020?text=Hola%2C%20me%20interesa%20el%20producto%20Monitor%20de%20Signos%20Vitales%20Veterinario%20de%20Mindray.%20Me%20gustaria%20recibir%20informacion.
+              - img [ref=e86]
+              - text: Consultar por WhatsApp
+            - link "Descargar ficha tecnica" [ref=e88] [cursor=pointer]:
+              - /url: https://hesastorage.blob.core.windows.net/seed/mindray-monitor-ficha.pdf
+              - img [ref=e89]
+              - text: Descargar ficha tecnica
+    - generic [ref=e94]:
+      - generic [ref=e95]: Monitor de Signos Vitales Veterinario
+      - link "Solicitar informacion" [ref=e96] [cursor=pointer]:
+        - /url: /es/contacto?producto=monitor-signos-vitales-vet
+  - contentinfo "Pie de pagina" [ref=e98]:
+    - generic [ref=e100]:
+      - generic [ref=e101]:
+        - generic [ref=e102]: HESA
+        - paragraph [ref=e103]: 37 anos distribuyendo salud animal en Costa Rica
+      - generic [ref=e104]:
+        - button "Navegacion +" [ref=e105] [cursor=pointer]:
+          - generic [ref=e106]: Navegacion
+          - generic [ref=e107]: +
+        - navigation [ref=e108]:
+          - link "Inicio" [ref=e109] [cursor=pointer]:
+            - /url: /es
+          - link "Catalogo" [ref=e110] [cursor=pointer]:
+            - /url: /es/catalogo
+          - link "Marcas" [ref=e111] [cursor=pointer]:
+            - /url: /es/marcas
+          - link "Nosotros" [ref=e112] [cursor=pointer]:
+            - /url: /es/nosotros
+          - link "Distribuidores" [ref=e113] [cursor=pointer]:
+            - /url: /es/distribuidores
+          - link "Contacto" [ref=e114] [cursor=pointer]:
+            - /url: /es/contacto
+      - generic [ref=e115]:
+        - button "Contacto +" [ref=e116] [cursor=pointer]:
+          - generic [ref=e117]: Contacto
+          - generic [ref=e118]: +
+        - generic [ref=e119]:
+          - paragraph [ref=e120]:
+            - img [ref=e121]
+            - text: +506 2260-9020
+          - paragraph [ref=e123]:
+            - img [ref=e124]
+            - text: info@hesa.co.cr
+          - paragraph [ref=e127]:
+            - img [ref=e128]
+            - text: Calle 2, av 12. Heredia, Costa Rica
+          - paragraph [ref=e131]:
+            - img [ref=e132]
+            - text: "Lun - Vie: 8:00 - 17:00"
+      - generic [ref=e135]:
+        - button "Redes Sociales +" [ref=e136] [cursor=pointer]:
+          - generic [ref=e137]: Redes Sociales
+          - generic [ref=e138]: +
+        - generic [ref=e139]:
+          - link "Facebook" [ref=e140] [cursor=pointer]:
+            - /url: https://facebook.com/hesacr
+            - img [ref=e141]
+          - link "Instagram" [ref=e143] [cursor=pointer]:
+            - /url: https://instagram.com/hesacr
+            - img [ref=e144]
+    - generic [ref=e148]:
+      - paragraph [ref=e149]: © HESA 2026. Todos los derechos reservados.
+      - button "English" [ref=e151] [cursor=pointer]
+  - button "Contactar por WhatsApp" [ref=e152] [cursor=pointer]:
+    - img [ref=e153]
+```

@@ -53,57 +53,95 @@
             - textbox "Buscar productos, marcas..."
           - paragraph: Escribe al menos 3 caracteres
   - generic [ref=e30]:
-    - heading "Esta marca no esta disponible" [level=1] [ref=e31]
-    - link "Ver todas las marcas" [ref=e32] [cursor=pointer]:
-      - /url: /es/marcas
-  - contentinfo "Pie de pagina" [ref=e34]:
-    - generic [ref=e36]:
-      - generic [ref=e37]:
-        - generic [ref=e38]: HESA
-        - paragraph [ref=e39]: 37 anos distribuyendo salud animal en Costa Rica
-      - generic [ref=e41]:
-        - heading "Navegacion" [level=3] [ref=e42]
-        - navigation [ref=e43]:
-          - link "Inicio" [ref=e44] [cursor=pointer]:
+    - navigation "Breadcrumb" [ref=e32]:
+      - list [ref=e33]:
+        - listitem [ref=e34]:
+          - link "Inicio" [ref=e35] [cursor=pointer]:
             - /url: /es
-          - link "Catalogo" [ref=e45] [cursor=pointer]:
-            - /url: /es/catalogo
-          - link "Marcas" [ref=e46] [cursor=pointer]:
+          - generic [ref=e36]: ">"
+        - listitem [ref=e37]:
+          - link "Marcas" [ref=e38] [cursor=pointer]:
             - /url: /es/marcas
-          - link "Nosotros" [ref=e47] [cursor=pointer]:
+          - generic [ref=e39]: ">"
+        - listitem [ref=e40]:
+          - generic [ref=e41]: Zoetis
+    - generic [ref=e42]:
+      - generic [ref=e44]: Z
+      - generic [ref=e45]:
+        - heading "Zoetis" [level=1] [ref=e46]
+        - paragraph [ref=e47]:
+          - img [ref=e48]
+          - text: Estados Unidos
+        - generic [ref=e52]: farmacos
+        - paragraph [ref=e53]: Zoetis es lider mundial en salud animal, con un compromiso de mas de 70 anos con la ciencia y la innovacion para desarrollar medicamentos, vacunas y herramientas de diagnostico veterinario.
+    - separator [ref=e54]
+    - heading "Productos de Zoetis" [level=2] [ref=e55]
+    - combobox [ref=e57]:
+      - option "Todas las categorias" [selected]
+      - option "farmacos"
+    - generic [ref=e58]:
+      - link "Ver Meloxicam Inyectable" [ref=e60] [cursor=pointer]:
+        - /url: /es/catalogo/farmacos/meloxicam-inyectable
+        - img "Meloxicam Inyectable" [ref=e62]
+        - generic [ref=e63]:
+          - heading "Meloxicam Inyectable" [level=3] [ref=e64]
+          - paragraph [ref=e65]: Zoetis
+          - generic [ref=e66]: Ver producto
+      - link "Ver Amoxicilina Veterinaria" [ref=e68] [cursor=pointer]:
+        - /url: /es/catalogo/farmacos/amoxicilina-veterinaria
+        - img "Amoxicilina Veterinaria" [ref=e70]
+        - generic [ref=e71]:
+          - heading "Amoxicilina Veterinaria" [level=3] [ref=e72]
+          - paragraph [ref=e73]: Zoetis
+          - generic [ref=e74]: Ver producto
+  - contentinfo "Pie de pagina" [ref=e76]:
+    - generic [ref=e78]:
+      - generic [ref=e79]:
+        - generic [ref=e80]: HESA
+        - paragraph [ref=e81]: 37 anos distribuyendo salud animal en Costa Rica
+      - generic [ref=e83]:
+        - heading "Navegacion" [level=3] [ref=e84]
+        - navigation [ref=e85]:
+          - link "Inicio" [ref=e86] [cursor=pointer]:
+            - /url: /es
+          - link "Catalogo" [ref=e87] [cursor=pointer]:
+            - /url: /es/catalogo
+          - link "Marcas" [ref=e88] [cursor=pointer]:
+            - /url: /es/marcas
+          - link "Nosotros" [ref=e89] [cursor=pointer]:
             - /url: /es/nosotros
-          - link "Distribuidores" [ref=e48] [cursor=pointer]:
+          - link "Distribuidores" [ref=e90] [cursor=pointer]:
             - /url: /es/distribuidores
-          - link "Contacto" [ref=e49] [cursor=pointer]:
+          - link "Contacto" [ref=e91] [cursor=pointer]:
             - /url: /es/contacto
-      - generic [ref=e51]:
-        - heading "Contacto" [level=3] [ref=e52]
-        - generic [ref=e53]:
-          - paragraph [ref=e54]:
-            - img [ref=e55]
+      - generic [ref=e93]:
+        - heading "Contacto" [level=3] [ref=e94]
+        - generic [ref=e95]:
+          - paragraph [ref=e96]:
+            - img [ref=e97]
             - text: +506 2260-9020
-          - paragraph [ref=e57]:
-            - img [ref=e58]
+          - paragraph [ref=e99]:
+            - img [ref=e100]
             - text: info@hesa.co.cr
-          - paragraph [ref=e61]:
-            - img [ref=e62]
+          - paragraph [ref=e103]:
+            - img [ref=e104]
             - text: Calle 2, av 12. Heredia, Costa Rica
-          - paragraph [ref=e65]:
-            - img [ref=e66]
+          - paragraph [ref=e107]:
+            - img [ref=e108]
             - text: "Lun - Vie: 8:00 - 17:00"
-      - generic [ref=e70]:
-        - heading "Redes Sociales" [level=3] [ref=e71]
-        - generic [ref=e72]:
-          - link "Facebook" [ref=e73] [cursor=pointer]:
+      - generic [ref=e112]:
+        - heading "Redes Sociales" [level=3] [ref=e113]
+        - generic [ref=e114]:
+          - link "Facebook" [ref=e115] [cursor=pointer]:
             - /url: https://facebook.com/hesacr
-            - img [ref=e74]
-          - link "Instagram" [ref=e76] [cursor=pointer]:
+            - img [ref=e116]
+          - link "Instagram" [ref=e118] [cursor=pointer]:
             - /url: https://instagram.com/hesacr
-            - img [ref=e77]
-    - generic [ref=e81]:
-      - paragraph [ref=e82]: © HESA 2026. Todos los derechos reservados.
-      - button "English" [ref=e84] [cursor=pointer]
-  - button "Contactar por WhatsApp" [ref=e85] [cursor=pointer]:
-    - img [ref=e86]
+            - img [ref=e119]
+    - generic [ref=e123]:
+      - paragraph [ref=e124]: © HESA 2026. Todos los derechos reservados.
+      - button "English" [ref=e126] [cursor=pointer]
+  - button "Contactar por WhatsApp" [ref=e127] [cursor=pointer]:
+    - img [ref=e128]
     - generic: Escribenos por WhatsApp
 ```

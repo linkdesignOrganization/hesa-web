@@ -63,7 +63,7 @@
           - generic [ref=e38]: Catalogo
     - generic [ref=e39]:
       - heading "Catalogo de Productos" [level=1] [ref=e40]
-      - generic [ref=e41]: 0 productos
+      - generic [ref=e41]: 2 productos
     - generic [ref=e43]:
       - combobox [ref=e44] [cursor=pointer]:
         - option "Categoria"
@@ -72,6 +72,7 @@
         - option "Equipos"
       - combobox [ref=e45] [cursor=pointer]:
         - option "Marca" [selected]
+        - option "Zoetis"
       - combobox [ref=e46] [cursor=pointer]:
         - option "Especie" [selected]
         - option "Caninos"
@@ -94,58 +95,68 @@
           - img [ref=e51]
       - button "Limpiar filtros" [ref=e54] [cursor=pointer]
     - generic [ref=e55]:
-      - img [ref=e57]
-      - heading "No se encontraron productos con estos filtros" [level=2] [ref=e60]
-      - paragraph [ref=e61]: Intenta limpiar algunos filtros para ver mas resultados.
-      - button "Limpiar filtros" [ref=e62] [cursor=pointer]
-  - contentinfo "Pie de pagina" [ref=e64]:
-    - generic [ref=e66]:
-      - generic [ref=e67]:
-        - generic [ref=e68]: HESA
-        - paragraph [ref=e69]: 37 anos distribuyendo salud animal en Costa Rica
-      - generic [ref=e71]:
-        - heading "Navegacion" [level=3] [ref=e72]
-        - navigation [ref=e73]:
-          - link "Inicio" [ref=e74] [cursor=pointer]:
+      - link "Ver Meloxicam Inyectable" [ref=e57] [cursor=pointer]:
+        - /url: /es/catalogo/farmacos/meloxicam-inyectable
+        - img "Meloxicam Inyectable" [ref=e59]
+        - generic [ref=e60]:
+          - heading "Meloxicam Inyectable" [level=3] [ref=e61]
+          - paragraph [ref=e62]: Zoetis
+          - generic [ref=e63]: Ver producto
+      - link "Ver Amoxicilina Veterinaria" [ref=e65] [cursor=pointer]:
+        - /url: /es/catalogo/farmacos/amoxicilina-veterinaria
+        - img "Amoxicilina Veterinaria" [ref=e67]
+        - generic [ref=e68]:
+          - heading "Amoxicilina Veterinaria" [level=3] [ref=e69]
+          - paragraph [ref=e70]: Zoetis
+          - generic [ref=e71]: Ver producto
+  - contentinfo "Pie de pagina" [ref=e73]:
+    - generic [ref=e75]:
+      - generic [ref=e76]:
+        - generic [ref=e77]: HESA
+        - paragraph [ref=e78]: 37 anos distribuyendo salud animal en Costa Rica
+      - generic [ref=e80]:
+        - heading "Navegacion" [level=3] [ref=e81]
+        - navigation [ref=e82]:
+          - link "Inicio" [ref=e83] [cursor=pointer]:
             - /url: /es
-          - link "Catalogo" [ref=e75] [cursor=pointer]:
+          - link "Catalogo" [ref=e84] [cursor=pointer]:
             - /url: /es/catalogo
-          - link "Marcas" [ref=e76] [cursor=pointer]:
+          - link "Marcas" [ref=e85] [cursor=pointer]:
             - /url: /es/marcas
-          - link "Nosotros" [ref=e77] [cursor=pointer]:
+          - link "Nosotros" [ref=e86] [cursor=pointer]:
             - /url: /es/nosotros
-          - link "Distribuidores" [ref=e78] [cursor=pointer]:
+          - link "Distribuidores" [ref=e87] [cursor=pointer]:
             - /url: /es/distribuidores
-          - link "Contacto" [ref=e79] [cursor=pointer]:
+          - link "Contacto" [ref=e88] [cursor=pointer]:
             - /url: /es/contacto
-      - generic [ref=e81]:
-        - heading "Contacto" [level=3] [ref=e82]
-        - generic [ref=e83]:
-          - paragraph [ref=e84]:
-            - img [ref=e85]
+      - generic [ref=e90]:
+        - heading "Contacto" [level=3] [ref=e91]
+        - generic [ref=e92]:
+          - paragraph [ref=e93]:
+            - img [ref=e94]
             - text: +506 2260-9020
-          - paragraph [ref=e87]:
-            - img [ref=e88]
+          - paragraph [ref=e96]:
+            - img [ref=e97]
             - text: info@hesa.co.cr
-          - paragraph [ref=e91]:
-            - img [ref=e92]
+          - paragraph [ref=e100]:
+            - img [ref=e101]
             - text: Calle 2, av 12. Heredia, Costa Rica
-          - paragraph [ref=e95]:
-            - img [ref=e96]
+          - paragraph [ref=e104]:
+            - img [ref=e105]
             - text: "Lun - Vie: 8:00 - 17:00"
-      - generic [ref=e100]:
-        - heading "Redes Sociales" [level=3] [ref=e101]
-        - generic [ref=e102]:
-          - link "Facebook" [ref=e103] [cursor=pointer]:
+      - generic [ref=e109]:
+        - heading "Redes Sociales" [level=3] [ref=e110]
+        - generic [ref=e111]:
+          - link "Facebook" [ref=e112] [cursor=pointer]:
             - /url: https://facebook.com/hesacr
-            - img [ref=e104]
-          - link "Instagram" [ref=e106] [cursor=pointer]:
+            - img [ref=e113]
+          - link "Instagram" [ref=e115] [cursor=pointer]:
             - /url: https://instagram.com/hesacr
-            - img [ref=e107]
-    - generic [ref=e111]:
-      - paragraph [ref=e112]: © HESA 2026. Todos los derechos reservados.
-      - button "English" [ref=e114] [cursor=pointer]
-  - button "Contactar por WhatsApp" [ref=e115] [cursor=pointer]:
-    - img [ref=e116]
+            - img [ref=e116]
+    - generic [ref=e120]:
+      - paragraph [ref=e121]: © HESA 2026. Todos los derechos reservados.
+      - button "English" [ref=e123] [cursor=pointer]
+  - button "Contactar por WhatsApp" [ref=e124] [cursor=pointer]:
+    - img [ref=e125]
     - generic: Escribenos por WhatsApp
 ```

@@ -3,7 +3,7 @@
 ```yaml
 - generic [ref=e2]:
   - generic:
-    - navigation "Navegacion principal" [ref=e3]:
+    - navigation "Main navigation" [ref=e3]:
       - generic [ref=e4]:
         - link "HESA - Ir al inicio" [ref=e5] [cursor=pointer]:
           - /url: /en
@@ -37,16 +37,16 @@
           - link "Contact" [ref=e16] [cursor=pointer]:
             - /url: /en/contact
         - generic [ref=e17]:
-          - button "Buscar productos y marcas" [ref=e18] [cursor=pointer]:
+          - button "Search products and brands" [ref=e18] [cursor=pointer]:
             - img [ref=e19]
           - listbox "Seleccionar idioma" [ref=e23]:
             - button "EN" [ref=e24] [cursor=pointer]:
               - generic [ref=e25]: EN
               - img [ref=e26]
     - generic:
-      - search "Busqueda global":
+      - search "Global search":
         - generic:
-          - button "Cerrar busqueda":
+          - button "Close search":
             - img
           - generic:
             - img
@@ -67,64 +67,85 @@
           - generic [ref=e41]: Pharmaceuticals
     - generic [ref=e42]:
       - heading "Pharmaceuticals" [level=1] [ref=e43]
-      - generic [ref=e44]: 0 products
+      - generic [ref=e44]: 2 products
     - paragraph [ref=e45]: Veterinary pharmaceuticals from the best international brands
     - generic [ref=e47]:
       - combobox [ref=e48]:
         - option "Brand" [selected]
+        - option "Zoetis"
       - combobox [ref=e49]:
         - option "Species" [selected]
+        - option "Bovinos"
+        - option "Caninos"
+        - option "Equinos"
+        - option "Felinos"
       - combobox [ref=e50]:
         - option "Family" [selected]
-    - heading "No products currently available" [level=2] [ref=e52]
-  - contentinfo "Pie de pagina" [ref=e54]:
-    - generic [ref=e56]:
-      - generic [ref=e57]:
-        - generic [ref=e58]: HESA
-        - paragraph [ref=e59]: 37 years distributing animal health in Costa Rica
-      - generic [ref=e61]:
-        - heading "Navigation" [level=3] [ref=e62]
-        - navigation [ref=e63]:
-          - link "Home" [ref=e64] [cursor=pointer]:
+        - option "Antibioticos"
+        - option "Antiinflamatorios"
+    - generic [ref=e51]:
+      - link "Ver Meloxicam Injectable" [ref=e53] [cursor=pointer]:
+        - /url: /en/catalog/pharmaceuticals/meloxicam-injectable
+        - img "Meloxicam Injectable" [ref=e55]
+        - generic [ref=e56]:
+          - heading "Meloxicam Injectable" [level=3] [ref=e57]
+          - paragraph [ref=e58]: Zoetis
+          - generic [ref=e59]: View product
+      - link "Ver Veterinary Amoxicillin" [ref=e61] [cursor=pointer]:
+        - /url: /en/catalog/pharmaceuticals/veterinary-amoxicillin
+        - img "Veterinary Amoxicillin" [ref=e63]
+        - generic [ref=e64]:
+          - heading "Veterinary Amoxicillin" [level=3] [ref=e65]
+          - paragraph [ref=e66]: Zoetis
+          - generic [ref=e67]: View product
+  - contentinfo "Pie de pagina" [ref=e69]:
+    - generic [ref=e71]:
+      - generic [ref=e72]:
+        - generic [ref=e73]: HESA
+        - paragraph [ref=e74]: 37 years distributing animal health in Costa Rica
+      - generic [ref=e76]:
+        - heading "Navigation" [level=3] [ref=e77]
+        - navigation [ref=e78]:
+          - link "Home" [ref=e79] [cursor=pointer]:
             - /url: /en
-          - link "Catalog" [ref=e65] [cursor=pointer]:
+          - link "Catalog" [ref=e80] [cursor=pointer]:
             - /url: /en/catalog
-          - link "Brands" [ref=e66] [cursor=pointer]:
+          - link "Brands" [ref=e81] [cursor=pointer]:
             - /url: /en/brands
-          - link "About" [ref=e67] [cursor=pointer]:
+          - link "About" [ref=e82] [cursor=pointer]:
             - /url: /en/about
-          - link "Distributors" [ref=e68] [cursor=pointer]:
+          - link "Distributors" [ref=e83] [cursor=pointer]:
             - /url: /en/distributors
-          - link "Contact" [ref=e69] [cursor=pointer]:
+          - link "Contact" [ref=e84] [cursor=pointer]:
             - /url: /en/contact
-      - generic [ref=e71]:
-        - heading "Contact" [level=3] [ref=e72]
-        - generic [ref=e73]:
-          - paragraph [ref=e74]:
-            - img [ref=e75]
+      - generic [ref=e86]:
+        - heading "Contact" [level=3] [ref=e87]
+        - generic [ref=e88]:
+          - paragraph [ref=e89]:
+            - img [ref=e90]
             - text: +506 2260-9020
-          - paragraph [ref=e77]:
-            - img [ref=e78]
+          - paragraph [ref=e92]:
+            - img [ref=e93]
             - text: info@hesa.co.cr
-          - paragraph [ref=e81]:
-            - img [ref=e82]
-            - text: Calle 2, av 12. Heredia, Costa Rica
-          - paragraph [ref=e85]:
-            - img [ref=e86]
-            - text: "Mon - Fri: 8:00 - 17:00"
-      - generic [ref=e90]:
-        - heading "Social Media" [level=3] [ref=e91]
-        - generic [ref=e92]:
-          - link "Facebook" [ref=e93] [cursor=pointer]:
-            - /url: https://facebook.com/hesacr
-            - img [ref=e94]
-          - link "Instagram" [ref=e96] [cursor=pointer]:
-            - /url: https://instagram.com/hesacr
+          - paragraph [ref=e96]:
             - img [ref=e97]
-    - generic [ref=e101]:
-      - paragraph [ref=e102]: © HESA 2026. All rights reserved.
-      - button "Espanol" [ref=e104] [cursor=pointer]
-  - button "Contactar por WhatsApp" [ref=e105] [cursor=pointer]:
-    - img [ref=e106]
+            - text: Calle 2, av 12. Heredia, Costa Rica
+          - paragraph [ref=e100]:
+            - img [ref=e101]
+            - text: "Mon - Fri: 8:00 - 17:00"
+      - generic [ref=e105]:
+        - heading "Social Media" [level=3] [ref=e106]
+        - generic [ref=e107]:
+          - link "Facebook" [ref=e108] [cursor=pointer]:
+            - /url: https://facebook.com/hesacr
+            - img [ref=e109]
+          - link "Instagram" [ref=e111] [cursor=pointer]:
+            - /url: https://instagram.com/hesacr
+            - img [ref=e112]
+    - generic [ref=e116]:
+      - paragraph [ref=e117]: © HESA 2026. All rights reserved.
+      - button "Espanol" [ref=e119] [cursor=pointer]
+  - button "Contactar por WhatsApp" [ref=e120] [cursor=pointer]:
+    - img [ref=e121]
     - generic: Escribenos por WhatsApp
 ```
