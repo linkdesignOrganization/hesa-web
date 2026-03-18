@@ -11,7 +11,7 @@ export const authConfig = {
   issuers: [
     `https://login.microsoftonline.com/${tenantId}/v2.0`,
     `https://sts.windows.net/${tenantId}/`,
-  ],
+  ] as [string, ...string[]],
   audience: clientId,
 };
 
