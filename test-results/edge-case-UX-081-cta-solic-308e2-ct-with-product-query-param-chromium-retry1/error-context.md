@@ -1,0 +1,117 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e2]:
+  - generic:
+    - navigation "Navegacion principal" [ref=e3]:
+      - generic [ref=e4]:
+        - link "HESA - Ir al inicio" [ref=e5] [cursor=pointer]:
+          - /url: /es
+          - generic [ref=e6]: HESA
+          - generic [ref=e7]: H
+        - navigation [ref=e8]:
+          - generic [ref=e9]:
+            - link "Catalogo" [ref=e10] [cursor=pointer]:
+              - /url: /es/catalogo
+              - text: Catalogo
+              - img [ref=e11]
+            - generic:
+              - link "Farmacos Veterinarios":
+                - /url: /es/catalogo/farmacos
+                - img
+                - text: Farmacos Veterinarios
+              - link "Alimentos para Animales":
+                - /url: /es/catalogo/alimentos
+                - img
+                - text: Alimentos para Animales
+              - link "Equipos Veterinarios":
+                - /url: /es/catalogo/equipos
+                - img
+                - text: Equipos Veterinarios
+          - link "Marcas" [ref=e13] [cursor=pointer]:
+            - /url: /es/marcas
+          - link "Nosotros" [ref=e14] [cursor=pointer]:
+            - /url: /es/nosotros
+          - link "Distribuidores" [ref=e15] [cursor=pointer]:
+            - /url: /es/distribuidores
+          - link "Contacto" [ref=e16] [cursor=pointer]:
+            - /url: /es/contacto
+        - generic [ref=e17]:
+          - button "Buscar productos y marcas" [ref=e18] [cursor=pointer]:
+            - img [ref=e19]
+          - listbox "Seleccionar idioma" [ref=e23]:
+            - button "ES" [ref=e24] [cursor=pointer]:
+              - generic [ref=e25]: ES
+              - img [ref=e26]
+    - generic:
+      - search "Busqueda global":
+        - generic:
+          - button "Cerrar busqueda":
+            - img
+          - generic:
+            - img
+            - textbox "Buscar productos, marcas..."
+          - paragraph: Escribe al menos 3 caracteres
+  - generic [ref=e31]:
+    - img [ref=e33]:
+      - generic [ref=e35]: "404"
+    - heading "Este producto no esta disponible" [level=1] [ref=e36]
+    - paragraph [ref=e37]: El producto que buscas no existe o fue removido del catalogo.
+    - link "Volver al catalogo" [ref=e38] [cursor=pointer]:
+      - /url: /es/catalogo
+  - contentinfo "Pie de pagina" [ref=e40]:
+    - generic [ref=e42]:
+      - generic [ref=e43]:
+        - generic [ref=e44]: HESA
+        - paragraph [ref=e45]: 37 anos distribuyendo salud animal en Costa Rica
+      - generic [ref=e47]:
+        - heading "Navegacion" [level=3] [ref=e48]
+        - navigation [ref=e49]:
+          - link "Inicio" [ref=e50] [cursor=pointer]:
+            - /url: /es
+          - link "Catalogo" [ref=e51] [cursor=pointer]:
+            - /url: /es/catalogo
+          - link "Marcas" [ref=e52] [cursor=pointer]:
+            - /url: /es/marcas
+          - link "Nosotros" [ref=e53] [cursor=pointer]:
+            - /url: /es/nosotros
+          - link "Distribuidores" [ref=e54] [cursor=pointer]:
+            - /url: /es/distribuidores
+          - link "Contacto" [ref=e55] [cursor=pointer]:
+            - /url: /es/contacto
+      - generic [ref=e57]:
+        - heading "Contacto" [level=3] [ref=e58]
+        - generic [ref=e59]:
+          - paragraph [ref=e60]:
+            - img [ref=e61]
+            - text: +506 2260-9020
+          - paragraph [ref=e63]:
+            - img [ref=e64]
+            - text: info@hesa.co.cr
+          - paragraph [ref=e67]:
+            - img [ref=e68]
+            - text: Calle 2, av 12. Heredia, Costa Rica
+          - paragraph [ref=e71]:
+            - img [ref=e72]
+            - text: "Lun - Vie: 8:00 - 17:00"
+      - generic [ref=e76]:
+        - heading "Redes Sociales" [level=3] [ref=e77]
+        - generic [ref=e78]:
+          - link "Facebook" [ref=e79] [cursor=pointer]:
+            - /url: https://facebook.com/hesacr
+            - img [ref=e80]
+          - link "Instagram" [ref=e82] [cursor=pointer]:
+            - /url: https://instagram.com/hesacr
+            - img [ref=e83]
+    - generic [ref=e87]:
+      - paragraph [ref=e88]: © HESA 2026. Todos los derechos reservados.
+      - button "English" [ref=e90] [cursor=pointer]
+  - button "Contactar por WhatsApp" [ref=e91] [cursor=pointer]:
+    - img [ref=e92]
+    - generic: Escribenos por WhatsApp
+  - alert [ref=e95]:
+    - img [ref=e96]
+    - generic [ref=e100]: No se pudo conectar con el servidor. Verifica tu conexion.
+    - button "Cerrar notificacion" [ref=e101] [cursor=pointer]:
+      - img [ref=e102]
+```

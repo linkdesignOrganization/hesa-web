@@ -53,127 +53,57 @@
             - textbox "Buscar productos, marcas..."
           - paragraph: Escribe al menos 3 caracteres
   - generic [ref=e30]:
-    - navigation "Breadcrumb" [ref=e32]:
-      - list [ref=e33]:
-        - listitem [ref=e34]:
-          - link "Inicio" [ref=e35] [cursor=pointer]:
+    - heading "Esta marca no esta disponible" [level=1] [ref=e31]
+    - link "Ver todas las marcas" [ref=e32] [cursor=pointer]:
+      - /url: /es/marcas
+  - contentinfo "Pie de pagina" [ref=e34]:
+    - generic [ref=e36]:
+      - generic [ref=e37]:
+        - generic [ref=e38]: HESA
+        - paragraph [ref=e39]: 37 anos distribuyendo salud animal en Costa Rica
+      - generic [ref=e41]:
+        - heading "Navegacion" [level=3] [ref=e42]
+        - navigation [ref=e43]:
+          - link "Inicio" [ref=e44] [cursor=pointer]:
             - /url: /es
-          - generic [ref=e36]: ">"
-        - listitem [ref=e37]:
-          - link "Marcas" [ref=e38] [cursor=pointer]:
-            - /url: /es/marcas
-          - generic [ref=e39]: ">"
-        - listitem [ref=e40]:
-          - generic [ref=e41]: Zoetis
-    - generic [ref=e42]:
-      - generic [ref=e44]: Z
-      - generic [ref=e45]:
-        - heading "Zoetis" [level=1] [ref=e46]
-        - paragraph [ref=e47]:
-          - img [ref=e48]
-          - text: Estados Unidos
-        - generic [ref=e52]: Farmacos
-        - paragraph [ref=e53]: Lider global en salud animal con mas de 70 anos de experiencia. Zoetis desarrolla, manufactura y comercializa medicamentos, vacunas y diagnosticos veterinarios.
-    - separator [ref=e54]
-    - heading "Productos de Zoetis" [level=2] [ref=e55]
-    - generic [ref=e56]:
-      - link "Ver Amoxicilina 250ml" [ref=e58] [cursor=pointer]:
-        - /url: /es/catalogo/farmacos/amoxicilina-250ml
-        - img [ref=e61]
-        - generic [ref=e77]:
-          - heading "Amoxicilina 250ml" [level=3] [ref=e78]
-          - paragraph [ref=e79]: Zoetis
-          - generic [ref=e80]: Ver producto
-      - link "Ver Dexametasona Inyectable" [ref=e82] [cursor=pointer]:
-        - /url: /es/catalogo/farmacos/dexametasona-inyectable
-        - img [ref=e85]
-        - generic [ref=e101]:
-          - heading "Dexametasona Inyectable" [level=3] [ref=e102]
-          - paragraph [ref=e103]: Zoetis
-          - generic [ref=e104]: Ver producto
-      - link "Ver Ceftiofur Cristalino" [ref=e106] [cursor=pointer]:
-        - /url: /es/catalogo/farmacos/ceftiofur-cristalino
-        - img [ref=e109]
-        - generic [ref=e125]:
-          - heading "Ceftiofur Cristalino" [level=3] [ref=e126]
-          - paragraph [ref=e127]: Zoetis
-          - generic [ref=e128]: Ver producto
-      - link "Ver Vitamina B12 Inyectable" [ref=e130] [cursor=pointer]:
-        - /url: /es/catalogo/farmacos/vitamina-b12-inyectable
-        - img [ref=e133]
-        - generic [ref=e149]:
-          - heading "Vitamina B12 Inyectable" [level=3] [ref=e150]
-          - paragraph [ref=e151]: Zoetis
-          - generic [ref=e152]: Ver producto
-      - link "Ver Complejo B Inyectable" [ref=e154] [cursor=pointer]:
-        - /url: /es/catalogo/farmacos/complejo-b-inyectable
-        - img [ref=e157]
-        - generic [ref=e173]:
-          - heading "Complejo B Inyectable" [level=3] [ref=e174]
-          - paragraph [ref=e175]: Zoetis
-          - generic [ref=e176]: Ver producto
-      - link "Ver Carprofeno Masticable" [ref=e178] [cursor=pointer]:
-        - /url: /es/catalogo/farmacos/carprofeno-masticable
-        - img [ref=e181]
-        - generic [ref=e197]:
-          - heading "Carprofeno Masticable" [level=3] [ref=e198]
-          - paragraph [ref=e199]: Zoetis
-          - generic [ref=e200]: Ver producto
-      - link "Ver Hierro Dextrano Inyectable" [ref=e202] [cursor=pointer]:
-        - /url: /es/catalogo/farmacos/hierro-dextrano-inyectable
-        - img [ref=e205]
-        - generic [ref=e221]:
-          - heading "Hierro Dextrano Inyectable" [level=3] [ref=e222]
-          - paragraph [ref=e223]: Zoetis
-          - generic [ref=e224]: Ver producto
-  - contentinfo "Pie de pagina" [ref=e226]:
-    - generic [ref=e228]:
-      - generic [ref=e229]:
-        - generic [ref=e230]: HESA
-        - paragraph [ref=e231]: 37 anos distribuyendo salud animal en Costa Rica
-      - generic [ref=e233]:
-        - heading "Navegacion" [level=3] [ref=e234]
-        - navigation [ref=e235]:
-          - link "Inicio" [ref=e236] [cursor=pointer]:
-            - /url: /es
-          - link "Catalogo" [ref=e237] [cursor=pointer]:
+          - link "Catalogo" [ref=e45] [cursor=pointer]:
             - /url: /es/catalogo
-          - link "Marcas" [ref=e238] [cursor=pointer]:
+          - link "Marcas" [ref=e46] [cursor=pointer]:
             - /url: /es/marcas
-          - link "Nosotros" [ref=e239] [cursor=pointer]:
+          - link "Nosotros" [ref=e47] [cursor=pointer]:
             - /url: /es/nosotros
-          - link "Distribuidores" [ref=e240] [cursor=pointer]:
+          - link "Distribuidores" [ref=e48] [cursor=pointer]:
             - /url: /es/distribuidores
-          - link "Contacto" [ref=e241] [cursor=pointer]:
+          - link "Contacto" [ref=e49] [cursor=pointer]:
             - /url: /es/contacto
-      - generic [ref=e243]:
-        - heading "Contacto" [level=3] [ref=e244]
-        - generic [ref=e245]:
-          - paragraph [ref=e246]:
-            - img [ref=e247]
+      - generic [ref=e51]:
+        - heading "Contacto" [level=3] [ref=e52]
+        - generic [ref=e53]:
+          - paragraph [ref=e54]:
+            - img [ref=e55]
             - text: +506 2260-9020
-          - paragraph [ref=e249]:
-            - img [ref=e250]
+          - paragraph [ref=e57]:
+            - img [ref=e58]
             - text: info@hesa.co.cr
-          - paragraph [ref=e253]:
-            - img [ref=e254]
+          - paragraph [ref=e61]:
+            - img [ref=e62]
             - text: Calle 2, av 12. Heredia, Costa Rica
-          - paragraph [ref=e257]:
-            - img [ref=e258]
+          - paragraph [ref=e65]:
+            - img [ref=e66]
             - text: "Lun - Vie: 8:00 - 17:00"
-      - generic [ref=e262]:
-        - heading "Redes Sociales" [level=3] [ref=e263]
-        - generic [ref=e264]:
-          - link "Facebook" [ref=e265] [cursor=pointer]:
+      - generic [ref=e70]:
+        - heading "Redes Sociales" [level=3] [ref=e71]
+        - generic [ref=e72]:
+          - link "Facebook" [ref=e73] [cursor=pointer]:
             - /url: https://facebook.com/hesacr
-            - img [ref=e266]
-          - link "Instagram" [ref=e268] [cursor=pointer]:
+            - img [ref=e74]
+          - link "Instagram" [ref=e76] [cursor=pointer]:
             - /url: https://instagram.com/hesacr
-            - img [ref=e269]
-    - generic [ref=e273]:
-      - paragraph [ref=e274]: © HESA 2026. Todos los derechos reservados.
-      - button "English" [ref=e276] [cursor=pointer]
-  - button "Contactar por WhatsApp" [ref=e277] [cursor=pointer]:
-    - img [ref=e278]
+            - img [ref=e77]
+    - generic [ref=e81]:
+      - paragraph [ref=e82]: © HESA 2026. Todos los derechos reservados.
+      - button "English" [ref=e84] [cursor=pointer]
+  - button "Contactar por WhatsApp" [ref=e85] [cursor=pointer]:
+    - img [ref=e86]
     - generic: Escribenos por WhatsApp
 ```

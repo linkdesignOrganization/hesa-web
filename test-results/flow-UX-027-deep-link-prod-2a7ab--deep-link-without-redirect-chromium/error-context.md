@@ -52,161 +52,61 @@
             - img
             - textbox "Buscar productos, marcas..."
           - paragraph: Escribe al menos 3 caracteres
-  - generic [ref=e28]:
-    - generic [ref=e30]:
-      - navigation "Breadcrumb" [ref=e32]:
-        - list [ref=e33]:
-          - listitem [ref=e34]:
-            - link "Inicio" [ref=e35] [cursor=pointer]:
-              - /url: /es
-            - generic [ref=e36]: ">"
-          - listitem [ref=e37]:
-            - link "Catalogo" [ref=e38] [cursor=pointer]:
-              - /url: /es/catalogo
-            - generic [ref=e39]: ">"
-          - listitem [ref=e40]:
-            - link "Farmacos" [ref=e41] [cursor=pointer]:
-              - /url: /es/catalogo/farmacos
-            - generic [ref=e42]: ">"
-          - listitem [ref=e43]:
-            - generic [ref=e44]: Amoxicilina 250ml
-      - generic [ref=e45]:
-        - generic [ref=e46]:
-          - generic [ref=e47]:
-            - button "Ver imagen 1" [ref=e48] [cursor=pointer]
-            - button "Ver imagen 2" [ref=e50] [cursor=pointer]
-            - button "Ver imagen 3" [ref=e52] [cursor=pointer]
-          - img [ref=e56]
-        - generic [ref=e63]:
-          - heading "Amoxicilina 250ml" [level=1] [ref=e64]
-          - link "Zoetis" [ref=e65] [cursor=pointer]:
-            - /url: /es/marcas/zoetis
-          - generic [ref=e66]:
-            - generic [ref=e67]:
-              - img [ref=e68]
-              - text: Caninos
-            - generic [ref=e70]:
-              - img [ref=e71]
-              - text: Felinos
-            - generic [ref=e73]:
-              - img [ref=e74]
-              - text: Bovinos
-          - generic [ref=e76]:
-            - paragraph [ref=e77]: Presentaciones
-            - generic [ref=e78]:
-              - button "100ml" [ref=e79] [cursor=pointer]
-              - button "250ml" [ref=e80] [cursor=pointer]
-              - button "500ml" [ref=e81] [cursor=pointer]
-          - paragraph [ref=e82]: Antibiotico de amplio espectro para uso veterinario. Indicado para el tratamiento de infecciones bacterianas en multiples especies.
-          - generic [ref=e83]:
-            - paragraph [ref=e84]: Composicion
-            - paragraph [ref=e85]: Amoxicilina trihidratada equivalente a 150mg de amoxicilina por ml
-          - generic [ref=e86]:
-            - paragraph [ref=e87]: Registro sanitario
-            - paragraph [ref=e88]: MAG-VET-2023-001
-          - generic [ref=e89]:
-            - paragraph [ref=e90]: Indicaciones
-            - paragraph [ref=e91]: Infecciones respiratorias, urinarias, gastrointestinales y de piel causadas por bacterias sensibles a la amoxicilina.
-          - generic [ref=e92]:
-            - link "Solicitar informacion" [ref=e93] [cursor=pointer]:
-              - /url: /es/contacto?producto=amoxicilina-250ml
-            - link "Consultar por WhatsApp" [ref=e94] [cursor=pointer]:
-              - /url: https://wa.me/50622609020?text=Hola%2C%20me%20interesa%20el%20producto%20Amoxicilina%20250ml%20de%20Zoetis.%20Me%20gustaria%20recibir%20informacion.
-              - img [ref=e95]
-              - text: Consultar por WhatsApp
-            - button "Descargar ficha tecnica" [ref=e97] [cursor=pointer]:
-              - img [ref=e98]
-              - text: Descargar ficha tecnica
-      - generic [ref=e101]:
-        - generic [ref=e102]:
-          - img [ref=e105]
-          - paragraph [ref=e108]: La amoxicilina es uno de los antibioticos mas prescritos en medicina veterinaria. Su amplio espectro de accion la convierte en una herramienta indispensable.
-        - paragraph [ref=e111]: En HESA, trabajamos directamente con Zoetis para garantizar la cadena de frio y la calidad de cada lote.
-      - generic [ref=e112]:
-        - heading "Tambien te puede interesar" [level=2] [ref=e113]
-        - generic [ref=e114]:
-          - link "Ver Meloxicam Inyectable 20ml" [ref=e116] [cursor=pointer]:
-            - /url: /es/catalogo/farmacos/meloxicam-inyectable-20ml
-            - img [ref=e119]
-            - generic [ref=e135]:
-              - heading "Meloxicam Inyectable 20ml" [level=3] [ref=e136]
-              - paragraph [ref=e137]: Boehringer Ingelheim
-              - generic [ref=e138]: Ver producto
-          - link "Ver Ivermectina Pour-On 1L" [ref=e140] [cursor=pointer]:
-            - /url: /es/catalogo/farmacos/ivermectina-pour-on-1l
-            - img [ref=e143]
-            - generic [ref=e159]:
-              - heading "Ivermectina Pour-On 1L" [level=3] [ref=e160]
-              - paragraph [ref=e161]: MSD Animal Health
-              - generic [ref=e162]: Ver producto
-          - link "Ver Fipronil Topico Antipulgas" [ref=e164] [cursor=pointer]:
-            - /url: /es/catalogo/farmacos/fipronil-topico-antipulgas
-            - img [ref=e167]
-            - generic [ref=e183]:
-              - heading "Fipronil Topico Antipulgas" [level=3] [ref=e184]
-              - paragraph [ref=e185]: MSD Animal Health
-              - generic [ref=e186]: Ver producto
-          - link "Ver Enrofloxacina 10% Solucion" [ref=e188] [cursor=pointer]:
-            - /url: /es/catalogo/farmacos/enrofloxacina-10-solucion
-            - img [ref=e191]
-            - generic [ref=e207]:
-              - heading "Enrofloxacina 10% Solucion" [level=3] [ref=e208]
-              - paragraph [ref=e209]: Bayer Animal Health
-              - generic [ref=e210]: Ver producto
-    - generic [ref=e212]:
-      - generic [ref=e215]:
-        - generic [ref=e216]: Amoxicilina 250ml
-        - text: Zoetis
-      - link "Solicitar informacion" [ref=e217] [cursor=pointer]:
-        - /url: /es/contacto?producto=amoxicilina-250ml
-  - contentinfo "Pie de pagina" [ref=e219]:
-    - generic [ref=e221]:
-      - generic [ref=e222]:
-        - generic [ref=e223]: HESA
-        - paragraph [ref=e224]: 37 anos distribuyendo salud animal en Costa Rica
-      - generic [ref=e226]:
-        - heading "Navegacion" [level=3] [ref=e227]
-        - navigation [ref=e228]:
-          - link "Inicio" [ref=e229] [cursor=pointer]:
+  - generic [ref=e31]:
+    - img [ref=e33]:
+      - generic [ref=e35]: "404"
+    - heading "Este producto no esta disponible" [level=1] [ref=e36]
+    - paragraph [ref=e37]: El producto que buscas no existe o fue removido del catalogo.
+    - link "Volver al catalogo" [ref=e38] [cursor=pointer]:
+      - /url: /es/catalogo
+  - contentinfo "Pie de pagina" [ref=e40]:
+    - generic [ref=e42]:
+      - generic [ref=e43]:
+        - generic [ref=e44]: HESA
+        - paragraph [ref=e45]: 37 anos distribuyendo salud animal en Costa Rica
+      - generic [ref=e47]:
+        - heading "Navegacion" [level=3] [ref=e48]
+        - navigation [ref=e49]:
+          - link "Inicio" [ref=e50] [cursor=pointer]:
             - /url: /es
-          - link "Catalogo" [ref=e230] [cursor=pointer]:
+          - link "Catalogo" [ref=e51] [cursor=pointer]:
             - /url: /es/catalogo
-          - link "Marcas" [ref=e231] [cursor=pointer]:
+          - link "Marcas" [ref=e52] [cursor=pointer]:
             - /url: /es/marcas
-          - link "Nosotros" [ref=e232] [cursor=pointer]:
+          - link "Nosotros" [ref=e53] [cursor=pointer]:
             - /url: /es/nosotros
-          - link "Distribuidores" [ref=e233] [cursor=pointer]:
+          - link "Distribuidores" [ref=e54] [cursor=pointer]:
             - /url: /es/distribuidores
-          - link "Contacto" [ref=e234] [cursor=pointer]:
+          - link "Contacto" [ref=e55] [cursor=pointer]:
             - /url: /es/contacto
-      - generic [ref=e236]:
-        - heading "Contacto" [level=3] [ref=e237]
-        - generic [ref=e238]:
-          - paragraph [ref=e239]:
-            - img [ref=e240]
+      - generic [ref=e57]:
+        - heading "Contacto" [level=3] [ref=e58]
+        - generic [ref=e59]:
+          - paragraph [ref=e60]:
+            - img [ref=e61]
             - text: +506 2260-9020
-          - paragraph [ref=e242]:
-            - img [ref=e243]
+          - paragraph [ref=e63]:
+            - img [ref=e64]
             - text: info@hesa.co.cr
-          - paragraph [ref=e246]:
-            - img [ref=e247]
+          - paragraph [ref=e67]:
+            - img [ref=e68]
             - text: Calle 2, av 12. Heredia, Costa Rica
-          - paragraph [ref=e250]:
-            - img [ref=e251]
+          - paragraph [ref=e71]:
+            - img [ref=e72]
             - text: "Lun - Vie: 8:00 - 17:00"
-      - generic [ref=e255]:
-        - heading "Redes Sociales" [level=3] [ref=e256]
-        - generic [ref=e257]:
-          - link "Facebook" [ref=e258] [cursor=pointer]:
+      - generic [ref=e76]:
+        - heading "Redes Sociales" [level=3] [ref=e77]
+        - generic [ref=e78]:
+          - link "Facebook" [ref=e79] [cursor=pointer]:
             - /url: https://facebook.com/hesacr
-            - img [ref=e259]
-          - link "Instagram" [ref=e261] [cursor=pointer]:
+            - img [ref=e80]
+          - link "Instagram" [ref=e82] [cursor=pointer]:
             - /url: https://instagram.com/hesacr
-            - img [ref=e262]
-    - generic [ref=e266]:
-      - paragraph [ref=e267]: © HESA 2026. Todos los derechos reservados.
-      - button "English" [ref=e269] [cursor=pointer]
-  - button "Contactar por WhatsApp" [ref=e270] [cursor=pointer]:
-    - img [ref=e271]
+            - img [ref=e83]
+    - generic [ref=e87]:
+      - paragraph [ref=e88]: © HESA 2026. Todos los derechos reservados.
+      - button "English" [ref=e90] [cursor=pointer]
+  - button "Contactar por WhatsApp" [ref=e91] [cursor=pointer]:
+    - img [ref=e92]
     - generic: Escribenos por WhatsApp
 ```

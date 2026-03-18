@@ -180,101 +180,101 @@
         - generic [ref=e290]:
           - link "Ver Amoxicilina 250ml" [ref=e292] [cursor=pointer]:
             - /url: /es/catalogo/farmacos/amoxicilina-250ml
-            - img [ref=e295]
-            - generic [ref=e311]:
-              - heading "Amoxicilina 250ml" [level=3] [ref=e312]
-              - paragraph [ref=e313]: Zoetis
-              - generic [ref=e314]: Ver producto
-          - link "Ver Meloxicam Inyectable 20ml" [ref=e316] [cursor=pointer]:
+            - img "Amoxicilina 250ml" [ref=e294]
+            - generic [ref=e295]:
+              - heading "Amoxicilina 250ml" [level=3] [ref=e296]
+              - paragraph [ref=e297]: Zoetis
+              - generic [ref=e298]: Ver producto
+          - link "Ver Meloxicam Inyectable 20ml" [ref=e300] [cursor=pointer]:
             - /url: /es/catalogo/farmacos/meloxicam-inyectable-20ml
-            - img [ref=e319]
-            - generic [ref=e335]:
-              - heading "Meloxicam Inyectable 20ml" [level=3] [ref=e336]
-              - paragraph [ref=e337]: Boehringer Ingelheim
-              - generic [ref=e338]: Ver producto
-          - link "Ver Fipronil Topico Antipulgas" [ref=e340] [cursor=pointer]:
+            - img "Meloxicam Inyectable 20ml" [ref=e302]
+            - generic [ref=e303]:
+              - heading "Meloxicam Inyectable 20ml" [level=3] [ref=e304]
+              - paragraph [ref=e305]: Boehringer Ingelheim
+              - generic [ref=e306]: Ver producto
+          - link "Ver Fipronil Topico Antipulgas" [ref=e308] [cursor=pointer]:
             - /url: /es/catalogo/farmacos/fipronil-topico-antipulgas
-            - img [ref=e343]
-            - generic [ref=e359]:
-              - heading "Fipronil Topico Antipulgas" [level=3] [ref=e360]
-              - paragraph [ref=e361]: MSD Animal Health
-              - generic [ref=e362]: Ver producto
-          - link "Ver Pro Plan Adulto Raza Mediana" [ref=e364] [cursor=pointer]:
+            - img "Fipronil Topico Antipulgas" [ref=e310]
+            - generic [ref=e311]:
+              - heading "Fipronil Topico Antipulgas" [level=3] [ref=e312]
+              - paragraph [ref=e313]: MSD Animal Health
+              - generic [ref=e314]: Ver producto
+          - link "Ver Pro Plan Adulto Raza Mediana" [ref=e316] [cursor=pointer]:
             - /url: /es/catalogo/alimentos/pro-plan-adulto-raza-mediana
-            - img [ref=e367]
-            - generic [ref=e389]:
-              - heading "Pro Plan Adulto Raza Mediana" [level=3] [ref=e390]
-              - paragraph [ref=e391]: Purina Pro Plan
-              - generic [ref=e392]: Ver producto
-          - link "Ver Royal Canin Renal Support" [ref=e394] [cursor=pointer]:
+            - img "Pro Plan Adulto Raza Mediana" [ref=e318]
+            - generic [ref=e319]:
+              - heading "Pro Plan Adulto Raza Mediana" [level=3] [ref=e320]
+              - paragraph [ref=e321]: Purina Pro Plan
+              - generic [ref=e322]: Ver producto
+          - link "Ver Royal Canin Renal Support" [ref=e324] [cursor=pointer]:
             - /url: /es/catalogo/alimentos/royal-canin-renal-support
-            - img [ref=e397]
-            - generic [ref=e419]:
-              - heading "Royal Canin Renal Support" [level=3] [ref=e420]
-              - paragraph [ref=e421]: Royal Canin
-              - generic [ref=e422]: Ver producto
-          - link "Ver Otoscopio Veterinario Digital" [ref=e424] [cursor=pointer]:
+            - img "Royal Canin Renal Support" [ref=e326]
+            - generic [ref=e327]:
+              - heading "Royal Canin Renal Support" [level=3] [ref=e328]
+              - paragraph [ref=e329]: Royal Canin
+              - generic [ref=e330]: Ver producto
+          - link "Ver Otoscopio Veterinario Digital" [ref=e332] [cursor=pointer]:
             - /url: /es/catalogo/equipos/otoscopio-veterinario-digital
-            - img [ref=e427]
-            - generic [ref=e440]:
-              - heading "Otoscopio Veterinario Digital" [level=3] [ref=e441]
-              - paragraph [ref=e442]: Welch Allyn
-              - generic [ref=e443]: Ver producto
+            - img "Otoscopio Veterinario Digital" [ref=e334]
+            - generic [ref=e335]:
+              - heading "Otoscopio Veterinario Digital" [level=3] [ref=e336]
+              - paragraph [ref=e337]: Welch Allyn
+              - generic [ref=e338]: Ver producto
         - button "Productos siguientes":
           - img
-    - generic [ref=e448]:
-      - heading "Somos su socio de distribucion en Costa Rica" [level=2] [ref=e449]
-      - paragraph [ref=e450]: Con 37 anos de experiencia y cobertura nacional, conectamos fabricantes internacionales con el mercado veterinario costarricense.
-      - link "Conocer mas" [ref=e451] [cursor=pointer]:
+    - generic [ref=e343]:
+      - heading "Somos su socio de distribucion en Costa Rica" [level=2] [ref=e344]
+      - paragraph [ref=e345]: Con 37 anos de experiencia y cobertura nacional, conectamos fabricantes internacionales con el mercado veterinario costarricense.
+      - link "Conocer mas" [ref=e346] [cursor=pointer]:
         - /url: /es/distribuidores
-  - contentinfo "Pie de pagina" [ref=e453]:
-    - generic [ref=e455]:
-      - generic [ref=e456]:
-        - generic [ref=e457]: HESA
-        - paragraph [ref=e458]: 37 anos distribuyendo salud animal en Costa Rica
-      - generic [ref=e460]:
-        - heading "Navegacion" [level=3] [ref=e461]
-        - navigation [ref=e462]:
-          - link "Inicio" [ref=e463] [cursor=pointer]:
+  - contentinfo "Pie de pagina" [ref=e348]:
+    - generic [ref=e350]:
+      - generic [ref=e351]:
+        - generic [ref=e352]: HESA
+        - paragraph [ref=e353]: 37 anos distribuyendo salud animal en Costa Rica
+      - generic [ref=e355]:
+        - heading "Navegacion" [level=3] [ref=e356]
+        - navigation [ref=e357]:
+          - link "Inicio" [ref=e358] [cursor=pointer]:
             - /url: /es
-          - link "Catalogo" [ref=e464] [cursor=pointer]:
+          - link "Catalogo" [ref=e359] [cursor=pointer]:
             - /url: /es/catalogo
-          - link "Marcas" [ref=e465] [cursor=pointer]:
+          - link "Marcas" [ref=e360] [cursor=pointer]:
             - /url: /es/marcas
-          - link "Nosotros" [ref=e466] [cursor=pointer]:
+          - link "Nosotros" [ref=e361] [cursor=pointer]:
             - /url: /es/nosotros
-          - link "Distribuidores" [ref=e467] [cursor=pointer]:
+          - link "Distribuidores" [ref=e362] [cursor=pointer]:
             - /url: /es/distribuidores
-          - link "Contacto" [ref=e468] [cursor=pointer]:
+          - link "Contacto" [ref=e363] [cursor=pointer]:
             - /url: /es/contacto
-      - generic [ref=e470]:
-        - heading "Contacto" [level=3] [ref=e471]
-        - generic [ref=e472]:
-          - paragraph [ref=e473]:
-            - img [ref=e474]
+      - generic [ref=e365]:
+        - heading "Contacto" [level=3] [ref=e366]
+        - generic [ref=e367]:
+          - paragraph [ref=e368]:
+            - img [ref=e369]
             - text: +506 2260-9020
-          - paragraph [ref=e476]:
-            - img [ref=e477]
+          - paragraph [ref=e371]:
+            - img [ref=e372]
             - text: info@hesa.co.cr
-          - paragraph [ref=e480]:
-            - img [ref=e481]
+          - paragraph [ref=e375]:
+            - img [ref=e376]
             - text: Calle 2, av 12. Heredia, Costa Rica
-          - paragraph [ref=e484]:
-            - img [ref=e485]
+          - paragraph [ref=e379]:
+            - img [ref=e380]
             - text: "Lun - Vie: 8:00 - 17:00"
-      - generic [ref=e489]:
-        - heading "Redes Sociales" [level=3] [ref=e490]
-        - generic [ref=e491]:
-          - link "Facebook" [ref=e492] [cursor=pointer]:
+      - generic [ref=e384]:
+        - heading "Redes Sociales" [level=3] [ref=e385]
+        - generic [ref=e386]:
+          - link "Facebook" [ref=e387] [cursor=pointer]:
             - /url: https://facebook.com/hesacr
-            - img [ref=e493]
-          - link "Instagram" [ref=e495] [cursor=pointer]:
+            - img [ref=e388]
+          - link "Instagram" [ref=e390] [cursor=pointer]:
             - /url: https://instagram.com/hesacr
-            - img [ref=e496]
-    - generic [ref=e500]:
-      - paragraph [ref=e501]: © HESA 2026. Todos los derechos reservados.
-      - button "English" [ref=e503] [cursor=pointer]
-  - button "Contactar por WhatsApp" [ref=e504] [cursor=pointer]:
-    - img [ref=e505]
+            - img [ref=e391]
+    - generic [ref=e395]:
+      - paragraph [ref=e396]: © HESA 2026. Todos los derechos reservados.
+      - button "English" [ref=e398] [cursor=pointer]
+  - button "Contactar por WhatsApp" [ref=e399] [cursor=pointer]:
+    - img [ref=e400]
     - generic: Escribenos por WhatsApp
 ```

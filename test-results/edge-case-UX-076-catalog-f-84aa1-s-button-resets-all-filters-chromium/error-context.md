@@ -63,7 +63,7 @@
           - generic [ref=e38]: Catalogo
     - generic [ref=e39]:
       - heading "Catalogo de Productos" [level=1] [ref=e40]
-      - generic [ref=e41]: 27 productos
+      - generic [ref=e41]: 0 productos
     - generic [ref=e43]:
       - combobox [ref=e44] [cursor=pointer]:
         - option "Categoria"
@@ -72,11 +72,6 @@
         - option "Equipos"
       - combobox [ref=e45] [cursor=pointer]:
         - option "Marca" [selected]
-        - option "Bayer Animal Health"
-        - option "Boehringer Ingelheim"
-        - option "MSD Animal Health"
-        - option "Virbac"
-        - option "Zoetis"
       - combobox [ref=e46] [cursor=pointer]:
         - option "Especie" [selected]
         - option "Caninos"
@@ -99,148 +94,58 @@
           - img [ref=e51]
       - button "Limpiar filtros" [ref=e54] [cursor=pointer]
     - generic [ref=e55]:
-      - link "Ver Amoxicilina 250ml" [ref=e57] [cursor=pointer]:
-        - /url: /es/catalogo/farmacos/amoxicilina-250ml
-        - img [ref=e60]
-        - generic [ref=e76]:
-          - heading "Amoxicilina 250ml" [level=3] [ref=e77]
-          - paragraph [ref=e78]: Zoetis
-          - generic [ref=e79]: Ver producto
-      - link "Ver Meloxicam Inyectable 20ml" [ref=e81] [cursor=pointer]:
-        - /url: /es/catalogo/farmacos/meloxicam-inyectable-20ml
-        - img [ref=e84]
-        - generic [ref=e100]:
-          - heading "Meloxicam Inyectable 20ml" [level=3] [ref=e101]
-          - paragraph [ref=e102]: Boehringer Ingelheim
-          - generic [ref=e103]: Ver producto
-      - link "Ver Ivermectina Pour-On 1L" [ref=e105] [cursor=pointer]:
-        - /url: /es/catalogo/farmacos/ivermectina-pour-on-1l
-        - img [ref=e108]
-        - generic [ref=e124]:
-          - heading "Ivermectina Pour-On 1L" [level=3] [ref=e125]
-          - paragraph [ref=e126]: MSD Animal Health
-          - generic [ref=e127]: Ver producto
-      - link "Ver Fipronil Topico Antipulgas" [ref=e129] [cursor=pointer]:
-        - /url: /es/catalogo/farmacos/fipronil-topico-antipulgas
-        - img [ref=e132]
-        - generic [ref=e148]:
-          - heading "Fipronil Topico Antipulgas" [level=3] [ref=e149]
-          - paragraph [ref=e150]: MSD Animal Health
-          - generic [ref=e151]: Ver producto
-      - link "Ver Enrofloxacina 10% Solucion" [ref=e153] [cursor=pointer]:
-        - /url: /es/catalogo/farmacos/enrofloxacina-10-solucion
-        - img [ref=e156]
-        - generic [ref=e172]:
-          - heading "Enrofloxacina 10% Solucion" [level=3] [ref=e173]
-          - paragraph [ref=e174]: Bayer Animal Health
-          - generic [ref=e175]: Ver producto
-      - link "Ver Dexametasona Inyectable" [ref=e177] [cursor=pointer]:
-        - /url: /es/catalogo/farmacos/dexametasona-inyectable
-        - img [ref=e180]
-        - generic [ref=e196]:
-          - heading "Dexametasona Inyectable" [level=3] [ref=e197]
-          - paragraph [ref=e198]: Zoetis
-          - generic [ref=e199]: Ver producto
-      - link "Ver Ceftiofur Cristalino" [ref=e201] [cursor=pointer]:
-        - /url: /es/catalogo/farmacos/ceftiofur-cristalino
-        - img [ref=e204]
-        - generic [ref=e220]:
-          - heading "Ceftiofur Cristalino" [level=3] [ref=e221]
-          - paragraph [ref=e222]: Zoetis
-          - generic [ref=e223]: Ver producto
-      - link "Ver Albendazol Suspension Oral" [ref=e225] [cursor=pointer]:
-        - /url: /es/catalogo/farmacos/albendazol-suspension-oral
-        - img [ref=e228]
-        - generic [ref=e244]:
-          - heading "Albendazol Suspension Oral" [level=3] [ref=e245]
-          - paragraph [ref=e246]: Virbac
-          - generic [ref=e247]: Ver producto
-      - link "Ver Ketoprofeno Inyectable" [ref=e249] [cursor=pointer]:
-        - /url: /es/catalogo/farmacos/ketoprofeno-inyectable
-        - img [ref=e252]
-        - generic [ref=e268]:
-          - heading "Ketoprofeno Inyectable" [level=3] [ref=e269]
-          - paragraph [ref=e270]: Boehringer Ingelheim
-          - generic [ref=e271]: Ver producto
-      - link "Ver Vitamina B12 Inyectable" [ref=e273] [cursor=pointer]:
-        - /url: /es/catalogo/farmacos/vitamina-b12-inyectable
-        - img [ref=e276]
-        - generic [ref=e292]:
-          - heading "Vitamina B12 Inyectable" [level=3] [ref=e293]
-          - paragraph [ref=e294]: Zoetis
-          - generic [ref=e295]: Ver producto
-      - link "Ver Amoxicilina + Clavulanico" [ref=e297] [cursor=pointer]:
-        - /url: /es/catalogo/farmacos/amoxicilina-clavulanico
-        - img [ref=e300]
-        - generic [ref=e316]:
-          - heading "Amoxicilina + Clavulanico" [level=3] [ref=e317]
-          - paragraph [ref=e318]: MSD Animal Health
-          - generic [ref=e319]: Ver producto
-      - link "Ver Oxitetraciclina LA" [ref=e321] [cursor=pointer]:
-        - /url: /es/catalogo/farmacos/oxitetraciclina-la
-        - img [ref=e324]
-        - generic [ref=e340]:
-          - heading "Oxitetraciclina LA" [level=3] [ref=e341]
-          - paragraph [ref=e342]: Bayer Animal Health
-          - generic [ref=e343]: Ver producto
-    - generic [ref=e344]:
-      - generic [ref=e345]: Mostrando 1-12 de 27 productos
-      - generic [ref=e346]:
-        - button "Pagina anterior" [disabled] [ref=e347]:
-          - img [ref=e348]
-        - button "1" [ref=e350] [cursor=pointer]
-        - button "2" [ref=e351] [cursor=pointer]
-        - button "3" [ref=e352] [cursor=pointer]
-        - button "Pagina siguiente" [ref=e353] [cursor=pointer]:
-          - img [ref=e354]
-  - contentinfo "Pie de pagina" [ref=e357]:
-    - generic [ref=e359]:
-      - generic [ref=e360]:
-        - generic [ref=e361]: HESA
-        - paragraph [ref=e362]: 37 anos distribuyendo salud animal en Costa Rica
-      - generic [ref=e364]:
-        - heading "Navegacion" [level=3] [ref=e365]
-        - navigation [ref=e366]:
-          - link "Inicio" [ref=e367] [cursor=pointer]:
+      - img [ref=e57]
+      - heading "No pudimos cargar los productos" [level=2] [ref=e59]
+      - paragraph [ref=e60]: Intenta de nuevo.
+      - button "Reintentar" [ref=e61] [cursor=pointer]
+  - contentinfo "Pie de pagina" [ref=e63]:
+    - generic [ref=e65]:
+      - generic [ref=e66]:
+        - generic [ref=e67]: HESA
+        - paragraph [ref=e68]: 37 anos distribuyendo salud animal en Costa Rica
+      - generic [ref=e70]:
+        - heading "Navegacion" [level=3] [ref=e71]
+        - navigation [ref=e72]:
+          - link "Inicio" [ref=e73] [cursor=pointer]:
             - /url: /es
-          - link "Catalogo" [ref=e368] [cursor=pointer]:
+          - link "Catalogo" [ref=e74] [cursor=pointer]:
             - /url: /es/catalogo
-          - link "Marcas" [ref=e369] [cursor=pointer]:
+          - link "Marcas" [ref=e75] [cursor=pointer]:
             - /url: /es/marcas
-          - link "Nosotros" [ref=e370] [cursor=pointer]:
+          - link "Nosotros" [ref=e76] [cursor=pointer]:
             - /url: /es/nosotros
-          - link "Distribuidores" [ref=e371] [cursor=pointer]:
+          - link "Distribuidores" [ref=e77] [cursor=pointer]:
             - /url: /es/distribuidores
-          - link "Contacto" [ref=e372] [cursor=pointer]:
+          - link "Contacto" [ref=e78] [cursor=pointer]:
             - /url: /es/contacto
-      - generic [ref=e374]:
-        - heading "Contacto" [level=3] [ref=e375]
-        - generic [ref=e376]:
-          - paragraph [ref=e377]:
-            - img [ref=e378]
+      - generic [ref=e80]:
+        - heading "Contacto" [level=3] [ref=e81]
+        - generic [ref=e82]:
+          - paragraph [ref=e83]:
+            - img [ref=e84]
             - text: +506 2260-9020
-          - paragraph [ref=e380]:
-            - img [ref=e381]
+          - paragraph [ref=e86]:
+            - img [ref=e87]
             - text: info@hesa.co.cr
-          - paragraph [ref=e384]:
-            - img [ref=e385]
+          - paragraph [ref=e90]:
+            - img [ref=e91]
             - text: Calle 2, av 12. Heredia, Costa Rica
-          - paragraph [ref=e388]:
-            - img [ref=e389]
+          - paragraph [ref=e94]:
+            - img [ref=e95]
             - text: "Lun - Vie: 8:00 - 17:00"
-      - generic [ref=e393]:
-        - heading "Redes Sociales" [level=3] [ref=e394]
-        - generic [ref=e395]:
-          - link "Facebook" [ref=e396] [cursor=pointer]:
+      - generic [ref=e99]:
+        - heading "Redes Sociales" [level=3] [ref=e100]
+        - generic [ref=e101]:
+          - link "Facebook" [ref=e102] [cursor=pointer]:
             - /url: https://facebook.com/hesacr
-            - img [ref=e397]
-          - link "Instagram" [ref=e399] [cursor=pointer]:
+            - img [ref=e103]
+          - link "Instagram" [ref=e105] [cursor=pointer]:
             - /url: https://instagram.com/hesacr
-            - img [ref=e400]
-    - generic [ref=e404]:
-      - paragraph [ref=e405]: © HESA 2026. Todos los derechos reservados.
-      - button "English" [ref=e407] [cursor=pointer]
-  - button "Contactar por WhatsApp" [ref=e408] [cursor=pointer]:
-    - img [ref=e409]
+            - img [ref=e106]
+    - generic [ref=e110]:
+      - paragraph [ref=e111]: © HESA 2026. Todos los derechos reservados.
+      - button "English" [ref=e113] [cursor=pointer]
+  - button "Contactar por WhatsApp" [ref=e114] [cursor=pointer]:
+    - img [ref=e115]
     - generic: Escribenos por WhatsApp
 ```

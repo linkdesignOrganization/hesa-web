@@ -62,3 +62,37 @@
 - (Security) El endpoint de busqueda no tenia rate limiting, permitiendo abuse por fuerza bruta. Se agrego rate limit de 30 req/min/IP
 - (Security) La validacion de parametro lang en rutas publicas solo hacia cast as 'es' | 'en' sin verificar. Un valor inesperado se pasaba directo. Se cambio a whitelist explicita (=== 'en' ? 'en' : 'es')
 - (Security) npm audit en api/ mostro 0 vulnerabilidades - las dependencias estan limpias
+
+### Feedback de: qa-orchestrator
+- Iteracion 1 tiene ~55 criterios de panel admin que requieren autenticacion Azure Entra ID. No hay mecanismo de bypass disponible para testing automatizado (Playwright). Esto bloquea potencialmente el 32% de los criterios de esta iteracion. El PM y architect deberian planificar un mecanismo de testing para rutas protegidas por auth: mock auth middleware, test token, o sesion pre-configurada
+- La regresion automatizada de la suite visual-build tiene 254 de 513 tests fallidos. Practicamente TODOS los fallos son tests de panel admin que hacen timeout esperando elementos que requieren autenticacion. Estos tests existentes deberian adaptarse para detectar la pagina de login como estado valido en vez de fallar por timeout
+- Los criterios de SEO (NFR-006 a NFR-013) fueron incluidos en Iteracion 1 pero dependen de SSR para ser efectivos (meta tags en HTML inicial para crawlers). Si SSR no esta implementado, muchos criterios de SEO pasaran en browser pero no en crawlers reales. El architect deberia clarificar si SSR es requisito para esta iteracion
+- Los 170 criterios de Iteracion 1 no tienen ningun test automatizado previo (todos son REQ-xxx nuevos). La ronda 1 generara la primera suite de tests REQ-xxx, lo cual es critico para regresion en futuras iteraciones
+
+### Feedback de: visual-checker
+- Los 48 criterios asignados al Visual Checker son TODOS de panel admin (REQ-224 a REQ-274), haciendo que el 100% de la carga de trabajo del Visual Checker quede BLOQUEADO por autenticacion Azure Entra ID. La distribucion de criterios deberia considerar asignar criterios del sitio publico (DC-xxx, BVC-xxx del sitio publico) al Visual Checker para que tenga trabajo verificable sin auth
+- La login page del admin (DC-045) tiene un bug de max-width: la card no esta limitada a 420px como especifica el design criteria, expandiendose a 724px en desktop. Esto sugiere que la clase .login-card necesita max-width: 420px explicito
+- La login page usa texto CSS "HESA" como logo en lugar de una imagen como especifica DC-045 ("Logo HESA 120px"). Si bien el texto estilizado funciona visualmente, no es consistente con el spec ni con el logo imagen usado en el header y footer del sitio publico
+- Se detectaron errores de consola "Connecting to http://localhost:3000/api/..." en TODAS las paginas del sitio desplegado. La aplicacion Angular esta intentando conectar a localhost en vez del API backend desplegado (https://hesa-api.azurewebsites.net). Esto es un bug critico de configuracion de environment que impide que cualquier dato se cargue en el sitio desplegado
+- La pagina de login admin se muestra momentaneamente y luego la SPA redirige a una pagina publica. El auth guard funciona pero el redirect post-login-display es confuso: deberia mantener al usuario en /admin/login hasta que se autentique, no redirigir a /es/catalogo
+
+### Feedback de: flow-tester
+- El frontend desplegado usa environment.ts (desarrollo) en vez de environment.prod.ts (produccion). El apiUrl apunta a http://localhost:3000/api en vez de la URL del API desplegado. Esto hace que TODAS las llamadas al API fallen en el sitio desplegado. El build de deploy debe usar --configuration=production para seleccionar el environment correcto
+- El API backend en https://hesa-api.azurewebsites.net muestra la pagina de bienvenida de Azure App Service, indicando que el codigo del backend NO esta desplegado. Ambos problemas (frontend config + backend no desplegado) impiden verificar el 100% de los criterios de flujo E2E
+- La pagina de detalle de producto redirige silenciosamente a /es/catalogo cuando el API no puede cargar los datos del producto. Deberia mostrar un error state (similar al de catalogo y marcas) en vez de redirigir, para no perder el contexto del usuario
+- La pagina /en/brands redirige a /es (home en espanol) cuando el API falla. Pierde tanto el contexto de pagina como el de idioma. El manejo de errores en las paginas de marcas y detalle debe preservar el idioma y mostrar error state en vez de redirigir a home
+- Los toast notifications de error no se traducen al idioma activo: en la pagina /en/catalog, el toast muestra "No se pudo conectar con el servidor. Verifica tu conexion." en espanol. Los mensajes de error del sistema deben pasar por el servicio de i18n
+- Las paginas de categoria no muestran descripcion corta (REQ-080): solo aparece titulo + contador + filtros. Si la descripcion existe en el modelo de datos, no se renderiza en el template
+- Los filtros de Especie en el catalogo general tienen valores hardcodeados (Caninos, Felinos, Bovinos, Equinos, Porcinos, Aves) pero los filtros de Marca dependen del API y aparecen vacios cuando el API falla. Los valores de todos los filtros deberian tener un fallback o cargarse desde el mismo origen
+
+### Feedback de: edge-case-tester
+- El build desplegado en Azure Static Web Apps usa el environment de desarrollo (apiUrl: localhost:3000) en vez del de produccion. Esto bloquea TODA funcionalidad que depende de datos del API. El pipeline de deploy debe garantizar --configuration=production en el build de Angular
+- El API backend (Azure App Service) tiene Express corriendo pero las rutas no estan registradas (todas retornan 404 "Cannot GET"). La funcion start() que conecta a la BD y registra rutas probablemente fallo silenciosamente. El API debe tener health checks y alertas de startup failures
+- /sitemap.xml y /robots.txt retornan el HTML de la SPA Angular en vez de sus contenidos correctos. Estos archivos deben ser assets estaticos o servidos por el backend, no manejados por el SPA fallback de Azure Static Web Apps. Configurar staticwebapp.config.json para excluir estas rutas del fallback
+- No existen tags hreflang en ninguna pagina del sitio (ni SSR ni client-rendered). El SeoService deberia inyectar estos tags en todas las paginas publicas, conectando /es/... con /en/...
+- No existe JSON-LD Schema markup (Organization, Product) en ninguna pagina. Sin SSR, los meta tags puestos por JS no seran visibles para crawlers
+- El meta titulo en el HTML SSR es identico ("HESA - Herrera y Elizondo S.A.") para TODAS las paginas. Angular actualiza el titulo via JS pero el HTML inicial no lo refleja. SSR debe renderizar los titulos dinamicos
+- La meta description es identica en todas las paginas y solo en espanol. Las paginas en ingles deben tener meta descriptions en ingles con keywords como "distributor Costa Rica"
+- El endpoint de upload de imagenes y PDFs (multer) solo valida tamano (5MB) pero NO valida tipo de archivo (mimetype/extension). Se puede subir cualquier tipo de archivo. Se debe agregar fileFilter para permitir solo image/jpeg, image/png, image/webp y application/pdf
+- La API expone el header X-Powered-By: Express que revela la tecnologia del backend. Helmet deberia eliminar este header (ya esta configurado con helmet() pero quizas la opcion hidePoweredBy no esta activa)
+- Las paginas del panel admin (/admin/login) no tienen meta noindex. Aunque la auth protege contra acceso no autorizado, la pagina de login podria ser indexada por crawlers

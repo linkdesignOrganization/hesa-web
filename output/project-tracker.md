@@ -69,8 +69,8 @@
 - [x] 5a-verify: Verificacion post-Developer (PASA, 45 gaps corregidos en R2)
 - [x] 5b: Simplify (N+1 queries, dedup uploads, extracted helpers)
 - [x] 5c: Security Review (NoSQL injection, XSS, rate limiting, file validation, 0 vulns)
-- [ ] 5d: Pre-QA Deploy
-- [ ] 5d-regress: Regresion automatizada pre-QA
+- [x] 5d: Pre-QA Deploy (desplegado)
+- [x] 5d-regress: Regresion automatizada (259 passed, 0 failed, 12.9m)
 - [ ] 5e-plan: QA genera plan
 - [ ] 5e-sub: Sub-testers en paralelo
 - [ ] 5e-consolidate: QA consolida

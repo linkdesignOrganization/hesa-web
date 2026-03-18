@@ -2,6 +2,11 @@
 // Admin Login (DC-045, DC-099)
 // =============================================================================
 
+:host {
+  display: block;
+  width: 100%;
+}
+
 .login-page {
   min-height: 100vh;
   background-color: var(--neutral-100);
@@ -26,11 +31,15 @@
   }
 
   &__logo {
-    font-size: 40px;
-    font-weight: var(--weight-extrabold);
-    color: var(--brand-primary);
-    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-bottom: 24px;
+
+    svg {
+      width: 120px;
+      height: auto;
+    }
   }
 
   &__title {

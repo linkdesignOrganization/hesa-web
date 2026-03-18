@@ -1,0 +1,131 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e2]:
+  - generic:
+    - navigation "Navegacion principal" [ref=e3]:
+      - generic [ref=e4]:
+        - link "HESA - Ir al inicio" [ref=e5] [cursor=pointer]:
+          - /url: /en
+          - generic [ref=e6]: HESA
+          - generic [ref=e7]: H
+        - navigation [ref=e8]:
+          - generic [ref=e9]:
+            - link "Catalog" [ref=e10] [cursor=pointer]:
+              - /url: /en/catalog
+              - text: Catalog
+              - img [ref=e11]
+            - generic:
+              - link "Veterinary Pharmaceuticals":
+                - /url: /en/catalog/pharmaceuticals
+                - img
+                - text: Veterinary Pharmaceuticals
+              - link "Animal Food":
+                - /url: /en/catalog/food
+                - img
+                - text: Animal Food
+              - link "Veterinary Equipment":
+                - /url: /en/catalog/equipment
+                - img
+                - text: Veterinary Equipment
+          - link "Brands" [ref=e13] [cursor=pointer]:
+            - /url: /en/brands
+          - link "About" [ref=e14] [cursor=pointer]:
+            - /url: /en/about
+          - link "Distributors" [ref=e15] [cursor=pointer]:
+            - /url: /en/distributors
+          - link "Contact" [ref=e16] [cursor=pointer]:
+            - /url: /en/contact
+        - generic [ref=e17]:
+          - button "Buscar productos y marcas" [ref=e18] [cursor=pointer]:
+            - img [ref=e19]
+          - listbox "Seleccionar idioma" [ref=e23]:
+            - button "EN" [ref=e24] [cursor=pointer]:
+              - generic [ref=e25]: EN
+              - img [ref=e26]
+    - generic:
+      - search "Busqueda global":
+        - generic:
+          - button "Cerrar busqueda":
+            - img
+          - generic:
+            - img
+            - textbox "Search products, brands..."
+          - paragraph: Type at least 3 characters
+  - generic [ref=e30]:
+    - navigation "Breadcrumb" [ref=e32]:
+      - list [ref=e33]:
+        - listitem [ref=e34]:
+          - link "Home" [ref=e35] [cursor=pointer]:
+            - /url: /en
+          - generic [ref=e36]: ">"
+        - listitem [ref=e37]:
+          - link "Catalog" [ref=e38] [cursor=pointer]:
+            - /url: /en/catalog
+          - generic [ref=e39]: ">"
+        - listitem [ref=e40]:
+          - generic [ref=e41]: Pharmaceuticals
+    - generic [ref=e42]:
+      - heading "Pharmaceuticals" [level=1] [ref=e43]
+      - generic [ref=e44]: 0 products
+    - generic [ref=e46]:
+      - combobox [ref=e47]:
+        - option "Brand" [selected]
+      - combobox [ref=e48]:
+        - option "Species" [selected]
+      - combobox [ref=e49]:
+        - option "Family" [selected]
+    - generic [ref=e50]:
+      - heading "Could not load products" [level=2] [ref=e51]
+      - button "Retry" [ref=e52] [cursor=pointer]
+  - contentinfo "Pie de pagina" [ref=e54]:
+    - generic [ref=e56]:
+      - generic [ref=e57]:
+        - generic [ref=e58]: HESA
+        - paragraph [ref=e59]: 37 years distributing animal health in Costa Rica
+      - generic [ref=e61]:
+        - heading "Navigation" [level=3] [ref=e62]
+        - navigation [ref=e63]:
+          - link "Home" [ref=e64] [cursor=pointer]:
+            - /url: /en
+          - link "Catalog" [ref=e65] [cursor=pointer]:
+            - /url: /en/catalog
+          - link "Brands" [ref=e66] [cursor=pointer]:
+            - /url: /en/brands
+          - link "About" [ref=e67] [cursor=pointer]:
+            - /url: /en/about
+          - link "Distributors" [ref=e68] [cursor=pointer]:
+            - /url: /en/distributors
+          - link "Contact" [ref=e69] [cursor=pointer]:
+            - /url: /en/contact
+      - generic [ref=e71]:
+        - heading "Contact" [level=3] [ref=e72]
+        - generic [ref=e73]:
+          - paragraph [ref=e74]:
+            - img [ref=e75]
+            - text: +506 2260-9020
+          - paragraph [ref=e77]:
+            - img [ref=e78]
+            - text: info@hesa.co.cr
+          - paragraph [ref=e81]:
+            - img [ref=e82]
+            - text: Calle 2, av 12. Heredia, Costa Rica
+          - paragraph [ref=e85]:
+            - img [ref=e86]
+            - text: "Mon - Fri: 8:00 - 17:00"
+      - generic [ref=e90]:
+        - heading "Social Media" [level=3] [ref=e91]
+        - generic [ref=e92]:
+          - link "Facebook" [ref=e93] [cursor=pointer]:
+            - /url: https://facebook.com/hesacr
+            - img [ref=e94]
+          - link "Instagram" [ref=e96] [cursor=pointer]:
+            - /url: https://instagram.com/hesacr
+            - img [ref=e97]
+    - generic [ref=e101]:
+      - paragraph [ref=e102]: © HESA 2026. All rights reserved.
+      - button "Espanol" [ref=e104] [cursor=pointer]
+  - button "Contactar por WhatsApp" [ref=e105] [cursor=pointer]:
+    - img [ref=e106]
+    - generic: Escribenos por WhatsApp
+```

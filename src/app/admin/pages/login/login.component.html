@@ -1,7 +1,13 @@
 <!-- ADMIN LOGIN (DC-045, DC-099, DC-114, DC-115) -->
 <div class="login-page">
   <div class="login-card">
-    <div class="login-card__logo">HESA</div>
+    <div class="login-card__logo" aria-label="HESA">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 48" fill="var(--brand-primary)" role="img" aria-hidden="true">
+        <text x="50%" y="50%" dominant-baseline="central" text-anchor="middle"
+              font-family="Inter, system-ui, sans-serif" font-size="44" font-weight="800"
+              letter-spacing="-0.02em">HESA</text>
+      </svg>
+    </div>
     <h1 class="login-card__title">Panel de Administracion</h1>
     <p class="login-card__subtitle">Inicia sesion con tu cuenta de Microsoft</p>
     <button class="login-card__btn" (click)="onLogin()" [disabled]="isLoading()">
