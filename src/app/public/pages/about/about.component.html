@@ -121,9 +121,9 @@
   <section class="section-spacing">
     <div class="container">
       <h2 class="text-h2" style="text-align: center; margin-bottom: 48px;">{{ i18n.currentLang() === 'es' ? 'Equipo de Liderazgo' : 'Leadership Team' }}</h2>
-      <div class="about-team__grid">
+      <div class="about-team__grid" data-testid="team-grid">
         @for (member of team(); track member._id) {
-          <app-team-member-card [name]="i18n.t(member.name)" [title]="i18n.t(member.title)" [photo]="member.photo || ''" />
+          <app-team-member-card [name]="i18n.t(member.name)" [title]="i18n.t(member.title)" [photo]="member.photo || ''" data-testid="team-member" />
         }
       </div>
     </div>

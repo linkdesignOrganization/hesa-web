@@ -84,7 +84,7 @@
         - generic [ref=e74]:
           - img [ref=e76]
           - heading "Mercado en Crecimiento" [level=3] [ref=e79]
-          - paragraph [ref=e80]: Costa Rica, puerta de entrada a Centroamerica
+          - paragraph [ref=e80]: Sector veterinario en expansion con alta demanda de productos de calidad
     - generic [ref=e83]:
       - heading "Marcas Destacadas" [level=2] [ref=e84]
       - paragraph [ref=e85]: Distribuimos las mejores marcas internacionales de salud animal

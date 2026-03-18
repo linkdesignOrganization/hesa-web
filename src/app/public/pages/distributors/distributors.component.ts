@@ -54,6 +54,17 @@ export class DistributorsComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
+  /**
+   * BUG-007 FIX: Scroll to the contact form without using href="#",
+   * which Angular's router can intercept and cause unwanted navigation.
+   */
+  scrollToContactForm(): void {
+    const el = this.el.nativeElement.querySelector('#contact-form');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
   /** Helper to get section value from loaded content */
   getSection(key: string): string {
     const section = this.content()?.sections?.find(s => s.key === key);

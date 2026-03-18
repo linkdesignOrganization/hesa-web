@@ -1,6 +1,15 @@
 import { PageContent, IPageContent, IPageSection } from '../models/page-content.model';
 
 /**
+ * BUG-004 FIX: Default hero images for pages that need them.
+ * Uses professional Unsplash photos for a premium look.
+ */
+const defaultHeroImages: Record<string, string> = {
+  nosotros: 'https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?w=1920&q=80&auto=format&fit=crop',
+  distribuidores: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1920&q=80&auto=format&fit=crop',
+};
+
+/**
  * Default page content seed data for all static pages.
  * Used when a page doesn't exist yet in the database.
  */
@@ -42,13 +51,23 @@ const defaultPageSections: Record<string, IPageSection[]> = {
 
 /**
  * Get content for a specific page. Seeds defaults if not found.
+ * BUG-004 FIX: Also seeds default hero images for pages that need them.
  */
 export async function getPageContent(pageKey: string): Promise<IPageContent> {
   let content = await PageContent.findOne({ pageKey }).lean() as unknown as IPageContent | null;
   if (!content) {
     const sections = defaultPageSections[pageKey] || [];
-    const created = await PageContent.create({ pageKey, sections });
+    const heroImage = defaultHeroImages[pageKey];
+    const createData: Record<string, unknown> = { pageKey, sections };
+    if (heroImage) createData.heroImage = heroImage;
+    const created = await PageContent.create(createData);
     content = created.toObject() as unknown as IPageContent;
+  } else if (!content.heroImage && defaultHeroImages[pageKey]) {
+    // BUG-004 FIX: If page exists but has no hero image, set the default
+    await PageContent.findByIdAndUpdate(content._id, {
+      $set: { heroImage: defaultHeroImages[pageKey] },
+    });
+    content.heroImage = defaultHeroImages[pageKey];
   }
   return content;
 }

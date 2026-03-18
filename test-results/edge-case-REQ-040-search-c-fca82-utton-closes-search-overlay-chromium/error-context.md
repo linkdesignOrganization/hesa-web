@@ -55,10 +55,10 @@
   - generic [ref=e28]:
     - generic [ref=e31]:
       - generic [ref=e32]: SINCE 1989
-      - heading "Your Trusted Veterinary Partner in Costa Rica" [level=1] [ref=e33]
-      - paragraph [ref=e34]: We distribute pharmaceuticals, food and veterinary equipment for professionals who demand quality
+      - heading "Connecting the veterinary industry with the world's best brands" [level=1] [ref=e33]
+      - paragraph [ref=e34]: Import and distribution of veterinary pharmaceuticals, animal food, and veterinary equipment in Costa Rica
       - generic [ref=e35]:
-        - link "Explore Catalog" [ref=e36] [cursor=pointer]:
+        - link "Explore catalog" [ref=e36] [cursor=pointer]:
           - /url: /en/catalog
         - link "Partner with us" [ref=e37] [cursor=pointer]:
           - /url: /en/distributors
@@ -139,112 +139,59 @@
           - text: 0+
           - generic [ref=e251]: 20+
         - generic [ref=e252]: Top international brands
-    - generic [ref=e254]:
-      - generic [ref=e255]:
-        - heading "Featured Products" [level=2] [ref=e256]
-        - link "View all" [ref=e257] [cursor=pointer]:
-          - /url: /en/catalog
-      - generic [ref=e258]:
-        - button "Productos anteriores":
-          - img
-        - generic [ref=e259]:
-          - link "Ver Amoxicillin 250ml" [ref=e261] [cursor=pointer]:
-            - /url: /en/catalog/pharmaceuticals/amoxicillin-250ml
-            - img "Amoxicillin 250ml" [ref=e263]
-            - generic [ref=e264]:
-              - heading "Amoxicillin 250ml" [level=3] [ref=e265]
-              - paragraph [ref=e266]: Zoetis
-              - generic [ref=e267]: View product
-          - link "Ver Meloxicam Injectable 20ml" [ref=e269] [cursor=pointer]:
-            - /url: /en/catalog/pharmaceuticals/meloxicam-injectable-20ml
-            - img "Meloxicam Injectable 20ml" [ref=e271]
-            - generic [ref=e272]:
-              - heading "Meloxicam Injectable 20ml" [level=3] [ref=e273]
-              - paragraph [ref=e274]: Boehringer Ingelheim
-              - generic [ref=e275]: View product
-          - link "Ver Fipronil Topical Flea Treatment" [ref=e277] [cursor=pointer]:
-            - /url: /en/catalog/pharmaceuticals/fipronil-topical-flea-treatment
-            - img "Fipronil Topical Flea Treatment" [ref=e279]
-            - generic [ref=e280]:
-              - heading "Fipronil Topical Flea Treatment" [level=3] [ref=e281]
-              - paragraph [ref=e282]: MSD Animal Health
-              - generic [ref=e283]: View product
-          - link "Ver Pro Plan Adult Medium Breed" [ref=e285] [cursor=pointer]:
-            - /url: /en/catalog/food/pro-plan-adult-medium-breed
-            - img "Pro Plan Adult Medium Breed" [ref=e287]
-            - generic [ref=e288]:
-              - heading "Pro Plan Adult Medium Breed" [level=3] [ref=e289]
-              - paragraph [ref=e290]: Purina Pro Plan
-              - generic [ref=e291]: View product
-          - link "Ver Royal Canin Renal Support" [ref=e293] [cursor=pointer]:
-            - /url: /en/catalog/food/royal-canin-renal-support
-            - img "Royal Canin Renal Support" [ref=e295]
-            - generic [ref=e296]:
-              - heading "Royal Canin Renal Support" [level=3] [ref=e297]
-              - paragraph [ref=e298]: Royal Canin
-              - generic [ref=e299]: View product
-          - link "Ver Digital Veterinary Otoscope" [ref=e301] [cursor=pointer]:
-            - /url: /en/catalog/equipment/digital-veterinary-otoscope
-            - img "Digital Veterinary Otoscope" [ref=e303]
-            - generic [ref=e304]:
-              - heading "Digital Veterinary Otoscope" [level=3] [ref=e305]
-              - paragraph [ref=e306]: Welch Allyn
-              - generic [ref=e307]: View product
-        - button "Productos siguientes":
-          - img
-    - generic [ref=e312]:
-      - heading "Your Distribution Partner in Costa Rica" [level=2] [ref=e313]
-      - paragraph [ref=e314]: With 37 years of experience and national coverage, we connect international manufacturers with the Costa Rican veterinary market.
-      - link "Learn more" [ref=e315] [cursor=pointer]:
+    - generic [ref=e255]:
+      - heading "Your Distribution Partner in Costa Rica" [level=2] [ref=e256]
+      - paragraph [ref=e257]: With 37 years of experience and national coverage, we connect international manufacturers with the Costa Rican veterinary market.
+      - link "Learn more" [ref=e258] [cursor=pointer]:
         - /url: /en/distributors
-  - contentinfo "Pie de pagina" [ref=e317]:
-    - generic [ref=e319]:
-      - generic [ref=e320]:
-        - generic [ref=e321]: HESA
-        - paragraph [ref=e322]: 37 years distributing animal health in Costa Rica
-      - generic [ref=e324]:
-        - heading "Navigation" [level=3] [ref=e325]
-        - navigation [ref=e326]:
-          - link "Home" [ref=e327] [cursor=pointer]:
+  - contentinfo "Pie de pagina" [ref=e260]:
+    - generic [ref=e262]:
+      - generic [ref=e263]:
+        - generic [ref=e264]: HESA
+        - paragraph [ref=e265]: 37 years distributing animal health in Costa Rica
+      - generic [ref=e267]:
+        - heading "Navigation" [level=3] [ref=e268]
+        - navigation [ref=e269]:
+          - link "Home" [ref=e270] [cursor=pointer]:
             - /url: /en
-          - link "Catalog" [ref=e328] [cursor=pointer]:
+          - link "Catalog" [ref=e271] [cursor=pointer]:
             - /url: /en/catalog
-          - link "Brands" [ref=e329] [cursor=pointer]:
+          - link "Brands" [ref=e272] [cursor=pointer]:
             - /url: /en/brands
-          - link "About" [ref=e330] [cursor=pointer]:
+          - link "About" [ref=e273] [cursor=pointer]:
             - /url: /en/about
-          - link "Distributors" [ref=e331] [cursor=pointer]:
+          - link "Distributors" [ref=e274] [cursor=pointer]:
             - /url: /en/distributors
-          - link "Contact" [ref=e332] [cursor=pointer]:
+          - link "Contact" [ref=e275] [cursor=pointer]:
             - /url: /en/contact
-      - generic [ref=e334]:
-        - heading "Contact" [level=3] [ref=e335]
-        - generic [ref=e336]:
-          - paragraph [ref=e337]:
-            - img [ref=e338]
+      - generic [ref=e277]:
+        - heading "Contact" [level=3] [ref=e278]
+        - generic [ref=e279]:
+          - paragraph [ref=e280]:
+            - img [ref=e281]
             - text: +506 2260-9020
-          - paragraph [ref=e340]:
-            - img [ref=e341]
+          - paragraph [ref=e283]:
+            - img [ref=e284]
             - text: info@hesa.co.cr
-          - paragraph [ref=e344]:
-            - img [ref=e345]
+          - paragraph [ref=e287]:
+            - img [ref=e288]
             - text: Calle 2, av 12. Heredia, Costa Rica
-          - paragraph [ref=e348]:
-            - img [ref=e349]
+          - paragraph [ref=e291]:
+            - img [ref=e292]
             - text: "Mon - Fri: 8:00 - 17:00"
-      - generic [ref=e353]:
-        - heading "Social Media" [level=3] [ref=e354]
-        - generic [ref=e355]:
-          - link "Facebook" [ref=e356] [cursor=pointer]:
+      - generic [ref=e296]:
+        - heading "Social Media" [level=3] [ref=e297]
+        - generic [ref=e298]:
+          - link "Facebook" [ref=e299] [cursor=pointer]:
             - /url: https://facebook.com/hesacr
-            - img [ref=e357]
-          - link "Instagram" [ref=e359] [cursor=pointer]:
+            - img [ref=e300]
+          - link "Instagram" [ref=e302] [cursor=pointer]:
             - /url: https://instagram.com/hesacr
-            - img [ref=e360]
-    - generic [ref=e364]:
-      - paragraph [ref=e365]: © HESA 2026. All rights reserved.
-      - button "Espanol" [ref=e367] [cursor=pointer]
-  - button "Contactar por WhatsApp" [ref=e368] [cursor=pointer]:
-    - img [ref=e369]
+            - img [ref=e303]
+    - generic [ref=e307]:
+      - paragraph [ref=e308]: © HESA 2026. All rights reserved.
+      - button "Espanol" [ref=e310] [cursor=pointer]
+  - button "Contactar por WhatsApp" [ref=e311] [cursor=pointer]:
+    - img [ref=e312]
     - generic: Escribenos por WhatsApp
 ```

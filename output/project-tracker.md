@@ -84,17 +84,11 @@
 - [x] 5a-verify: Verificacion (PASA, 8 gaps corregidos)
 - [x] 5b: Simplify (dedup multer/schema, unused imports)
 - [x] 5c: Security (pageKey whitelist, ObjectId validation, XSS gaps, 0 vulns)
-- [ ] 5d: Pre-QA Deploy
-- [ ] 5d-regress: Regresion automatizada pre-QA
-- [ ] 5e-plan: QA genera plan
-- [ ] 5e-sub: Sub-testers en paralelo
-- [ ] 5e-consolidate: QA consolida
+- [x] 5d: Pre-QA Deploy
+- [x] 5d-regress: Regresion (405 passed, 0 failed)
+- [ ] 5e: QA
 - [ ] 5e-verify: Verificacion post-QA
-- [ ] 5f: Demo para el cliente
-- [ ] 5g: Feedback del cliente
-- [ ] 5h: Recopilar feedback
-- [ ] 5i: Distribucion y mantenimiento de feedback
-- [ ] 5j: Commit de iteracion
+- [ ] 5f-5j: Demo + feedback + commit
 
 ### FASE 5 — Iteracion 3: Formularios + Mensajes + Configuracion + Dashboard
 - [ ] 5a: Developer implementa

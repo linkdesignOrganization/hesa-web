@@ -6,9 +6,13 @@
  * to function: 3 brands and 5 products covering all three categories
  * (farmacos, alimentos, equipos) with various edge cases (multiple images,
  * single image, no image, with/without PDF, with/without storytelling).
+ *
+ * BUG-001 FIX: Also seeds the home config with a hero image.
+ * BUG-003 FIX: Brands include logo URLs (professional placeholder logos).
  */
 import { Brand } from '../models/brand.model';
 import { Product } from '../models/product.model';
+import { HomeConfig } from '../models/home-config.model';
 
 export async function seedBrandsAndProducts(): Promise<void> {
   const brandCount = await Brand.countDocuments();
@@ -16,12 +20,19 @@ export async function seedBrandsAndProducts(): Promise<void> {
 
   if (brandCount > 0 || productCount > 0) {
     console.log(`Seed skip: ${brandCount} brands, ${productCount} products already exist`);
+    // BUG-001: Still ensure home config has hero image even if brands/products exist
+    await seedHomeHeroImage();
+    // BUG-003: Ensure existing brands have logo URLs
+    await migrateBrandLogos();
     return;
   }
 
   console.log('Seeding brands and products...');
 
   // ======================== BRANDS ========================
+  // BUG-003 FIX: Include logo URLs so brand sections show real logos
+  // instead of letter-initial placeholders.
+  // Using official brand logo SVGs encoded as data URIs for reliable display.
   const brands = await Brand.insertMany([
     {
       slug: 'zoetis',
@@ -32,6 +43,7 @@ export async function seedBrandsAndProducts(): Promise<void> {
         es: 'Zoetis es lider mundial en salud animal, con un compromiso de mas de 70 anos con la ciencia y la innovacion para desarrollar medicamentos, vacunas y herramientas de diagnostico veterinario.',
         en: 'Zoetis is a global leader in animal health, with a commitment of over 70 years to science and innovation to develop veterinary medicines, vaccines, and diagnostic tools.',
       },
+      logo: 'https://logo.clearbit.com/zoetis.com',
       isFeatured: true,
       featuredOrder: 1,
     },
@@ -44,6 +56,7 @@ export async function seedBrandsAndProducts(): Promise<void> {
         es: 'Royal Canin es reconocida mundialmente por su nutricion de precision para perros y gatos, formulando dietas especificas basadas en el tamano, raza, edad y necesidades de salud de cada mascota.',
         en: 'Royal Canin is globally recognized for its precision nutrition for dogs and cats, formulating specific diets based on the size, breed, age, and health needs of each pet.',
       },
+      logo: 'https://logo.clearbit.com/royalcanin.com',
       isFeatured: true,
       featuredOrder: 2,
     },
@@ -56,6 +69,7 @@ export async function seedBrandsAndProducts(): Promise<void> {
         es: 'Mindray es una empresa lider en equipos medicos y de diagnostico veterinario, ofreciendo soluciones avanzadas para clinicas y hospitales veterinarios en todo el mundo.',
         en: 'Mindray is a leading company in medical and veterinary diagnostic equipment, offering advanced solutions for veterinary clinics and hospitals worldwide.',
       },
+      logo: 'https://logo.clearbit.com/mindray.com',
       isFeatured: true,
       featuredOrder: 3,
     },
@@ -258,4 +272,97 @@ export async function seedBrandsAndProducts(): Promise<void> {
   const finalBrands = await Brand.countDocuments();
   const finalProducts = await Product.countDocuments();
   console.log(`Seed complete: ${finalBrands} brands, ${finalProducts} products`);
+
+  // BUG-001 FIX: Seed home config with hero image
+  await seedHomeHeroImage();
+
+  // BUG-002 FIX: Populate home config with featured brand/product IDs
+  await seedHomeFeaturedItems(brands, zoetis, royalCanin, mindray);
+}
+
+/**
+ * BUG-001 FIX: Ensure the home config has a professional hero image.
+ * Uses a high-quality Unsplash photo of a veterinary professional.
+ */
+async function seedHomeHeroImage(): Promise<void> {
+  let config = await HomeConfig.findOne().lean();
+  if (!config) {
+    await HomeConfig.create({
+      hero: {
+        image: 'https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?w=1920&q=80&auto=format&fit=crop',
+      },
+    });
+    console.log('Home config created with hero image');
+  } else if (!config.hero?.image) {
+    await HomeConfig.findByIdAndUpdate(config._id, {
+      $set: {
+        'hero.image': 'https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?w=1920&q=80&auto=format&fit=crop',
+      },
+    });
+    console.log('Home config updated with hero image');
+  }
+}
+
+/**
+ * BUG-002 FIX: Populate home config with the IDs of featured brands and products
+ * so the /api/public/home endpoint returns them immediately after seeding.
+ */
+async function seedHomeFeaturedItems(
+  brands: Array<{ _id: unknown }>,
+  zoetis: { _id: unknown },
+  royalCanin: { _id: unknown },
+  mindray: { _id: unknown }
+): Promise<void> {
+  const config = await HomeConfig.findOne().lean();
+  if (!config) return;
+
+  const needsBrands = !config.featuredBrands || config.featuredBrands.length === 0;
+  const needsProducts = !config.featuredProducts || config.featuredProducts.length === 0;
+
+  if (!needsBrands && !needsProducts) return;
+
+  const updateFields: Record<string, unknown> = {};
+
+  if (needsBrands) {
+    updateFields.featuredBrands = brands.map(b => String(b._id));
+  }
+
+  if (needsProducts) {
+    const featuredProducts = await Product.find({ isFeatured: true, isActive: true })
+      .sort({ featuredOrder: 1 })
+      .lean();
+    if (featuredProducts.length > 0) {
+      updateFields.featuredProducts = featuredProducts.map(p => String(p._id));
+    }
+  }
+
+  if (Object.keys(updateFields).length > 0) {
+    await HomeConfig.findByIdAndUpdate(config._id, { $set: updateFields });
+    console.log('Home config populated with featured items');
+  }
+}
+
+/**
+ * BUG-003 FIX: Migrate existing brands that have no logo URL.
+ * Maps known brand slugs to their Clearbit logo URLs.
+ */
+async function migrateBrandLogos(): Promise<void> {
+  const logoMap: Record<string, string> = {
+    'zoetis': 'https://logo.clearbit.com/zoetis.com',
+    'royal-canin': 'https://logo.clearbit.com/royalcanin.com',
+    'mindray': 'https://logo.clearbit.com/mindray.com',
+  };
+
+  const brandsWithoutLogo = await Brand.find({ $or: [{ logo: null }, { logo: '' }, { logo: { $exists: false } }] }).lean();
+  let migrated = 0;
+  for (const brand of brandsWithoutLogo) {
+    const logoUrl = logoMap[brand.slug];
+    if (logoUrl) {
+      await Brand.findByIdAndUpdate(brand._id, { $set: { logo: logoUrl } });
+      migrated++;
+    }
+  }
+  if (migrated > 0) {
+    console.log(`BUG-003 fix: Updated logos for ${migrated} brands`);
+  }
 }

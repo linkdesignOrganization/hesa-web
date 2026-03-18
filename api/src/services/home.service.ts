@@ -17,6 +17,45 @@ export async function getHomeConfig(): Promise<IHomeConfig> {
 }
 
 /**
+ * BUG-002 FIX: Ensure home config has featured brands/products populated.
+ * When the home_config document has empty arrays, auto-populate from
+ * brands/products that have isFeatured: true in the database.
+ * This runs during the public home endpoint to guarantee data availability
+ * even before an admin explicitly sets featured items via the panel.
+ */
+export async function ensureFeaturedItemsPopulated(): Promise<void> {
+  const config = await getHomeConfig();
+  let needsUpdate = false;
+  const updateFields: Record<string, unknown> = {};
+
+  // Auto-populate featured brands from brands with isFeatured: true
+  if (!config.featuredBrands || config.featuredBrands.length === 0) {
+    const featuredBrands = await Brand.find({ isFeatured: true })
+      .sort({ featuredOrder: 1 })
+      .lean();
+    if (featuredBrands.length > 0) {
+      updateFields.featuredBrands = featuredBrands.map(b => String(b._id));
+      needsUpdate = true;
+    }
+  }
+
+  // Auto-populate featured products from products with isFeatured: true
+  if (!config.featuredProducts || config.featuredProducts.length === 0) {
+    const featuredProducts = await Product.find({ isFeatured: true, isActive: true })
+      .sort({ featuredOrder: 1 })
+      .lean();
+    if (featuredProducts.length > 0) {
+      updateFields.featuredProducts = featuredProducts.map(p => String(p._id));
+      needsUpdate = true;
+    }
+  }
+
+  if (needsUpdate) {
+    await HomeConfig.findByIdAndUpdate(config._id, { $set: updateFields });
+  }
+}
+
+/**
  * Update the hero section of the home config.
  * Flattens bilingual fields into dot-notation for partial $set updates.
  */

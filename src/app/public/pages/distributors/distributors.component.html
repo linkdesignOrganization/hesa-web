@@ -9,7 +9,7 @@
   <div class="container dist-hero__content">
     <h1 class="dist-hero__title">{{ getSection('heroTitle') || (i18n.currentLang() === 'es' ? 'Conviertase en Nuestro Socio de Distribucion en Costa Rica' : 'Become Our Distribution Partner in Costa Rica') }}</h1>
     <p class="dist-hero__subtitle">{{ getSection('heroSubtitle') || (i18n.currentLang() === 'es' ? '37 anos de trayectoria comprobada en distribucion de productos veterinarios. Cobertura nacional, flotilla propia y equipo de ventas especializado.' : '37 years of proven track record in veterinary product distribution. Nationwide coverage, own fleet, and specialized sales team.') }}</p>
-    <a href="#contact-form" class="btn btn-primary btn-lg">{{ i18n.currentLang() === 'es' ? 'Contactenos' : 'Contact Us' }}</a>
+    <button type="button" (click)="scrollToContactForm()" class="btn btn-primary btn-lg">{{ i18n.currentLang() === 'es' ? 'Contactenos' : 'Contact Us' }}</button>
   </div>
 </section>
 

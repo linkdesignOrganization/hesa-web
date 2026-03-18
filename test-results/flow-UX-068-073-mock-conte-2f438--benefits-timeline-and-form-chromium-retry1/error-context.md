@@ -84,7 +84,7 @@
         - generic [ref=e74]:
           - img [ref=e76]
           - heading "Mercado en Crecimiento" [level=3] [ref=e79]
-          - paragraph [ref=e80]: Costa Rica, puerta de entrada a Centroamerica
+          - paragraph [ref=e80]: Sector veterinario en expansion con alta demanda de productos de calidad
     - generic [ref=e83]:
       - heading "Marcas Destacadas" [level=2] [ref=e84]
       - paragraph [ref=e85]: Distribuimos las mejores marcas internacionales de salud animal
@@ -95,63 +95,48 @@
         - listitem "Ver productos de Royal Canin" [ref=e90] [cursor=pointer]:
           - generic [ref=e91]: R
           - generic [ref=e92]: Royal Canin
-        - listitem "Ver productos de MSD Animal Health" [ref=e93] [cursor=pointer]:
+        - listitem "Ver productos de Mindray" [ref=e93] [cursor=pointer]:
           - generic [ref=e94]: M
-          - generic [ref=e95]: MSD Animal Health
-        - listitem "Ver productos de Purina Pro Plan" [ref=e96] [cursor=pointer]:
-          - generic [ref=e97]: P
-          - generic [ref=e98]: Purina Pro Plan
-        - listitem "Ver productos de Boehringer Ingelheim" [ref=e99] [cursor=pointer]:
-          - generic [ref=e100]: B
-          - generic [ref=e101]: Boehringer Ingelheim
-        - listitem "Ver productos de Hills Pet Nutrition" [ref=e102] [cursor=pointer]:
-          - generic [ref=e103]: H
-          - generic [ref=e104]: Hills Pet Nutrition
-        - listitem "Ver productos de Bayer Animal Health" [ref=e105] [cursor=pointer]:
-          - generic [ref=e106]: B
-          - generic [ref=e107]: Bayer Animal Health
-        - listitem "Ver productos de Virbac" [ref=e108] [cursor=pointer]:
-          - generic [ref=e109]: V
-          - generic [ref=e110]: Virbac
-      - link "Ver todas las marcas" [ref=e111] [cursor=pointer]:
+          - generic [ref=e95]: Mindray
+      - link "Ver todas las marcas" [ref=e96] [cursor=pointer]:
         - /url: /es/marcas
-    - generic [ref=e113]:
-      - heading "Como Funciona" [level=2] [ref=e114]
-      - list [ref=e116]:
-        - 'listitem "Paso 1: Contacto Inicial" [ref=e117]':
-          - generic [ref=e119]: "1"
-          - generic [ref=e120]:
-            - heading "Contacto Inicial" [level=4] [ref=e121]
-            - paragraph [ref=e122]: Conozca nuestra propuesta y capacidades de distribucion
-        - 'listitem "Paso 2: Evaluacion" [ref=e123]':
-          - generic [ref=e125]: "2"
-          - generic [ref=e126]:
-            - heading "Evaluacion" [level=4] [ref=e127]
-            - paragraph [ref=e128]: Analizamos su catalogo y definimos la estrategia
-        - 'listitem "Paso 3: Acuerdo Comercial" [ref=e129]':
-          - generic [ref=e131]: "3"
-          - generic [ref=e132]:
-            - heading "Acuerdo Comercial" [level=4] [ref=e133]
-            - paragraph [ref=e134]: Formalizamos los terminos de la distribucion
-        - 'listitem "Paso 4: Distribucion Activa" [ref=e135]':
-          - generic [ref=e137]: "4"
+    - generic [ref=e98]:
+      - heading "Como Funciona" [level=2] [ref=e99]
+      - list [ref=e101]:
+        - 'listitem "Paso 1: Contacto Inicial" [ref=e102]':
+          - generic [ref=e104]: "1"
+          - generic [ref=e105]:
+            - heading "Contacto Inicial" [level=4] [ref=e106]
+            - paragraph [ref=e107]: Conozca nuestra propuesta y capacidades de distribucion
+        - 'listitem "Paso 2: Evaluacion" [ref=e108]':
+          - generic [ref=e110]: "2"
+          - generic [ref=e111]:
+            - heading "Evaluacion" [level=4] [ref=e112]
+            - paragraph [ref=e113]: Analizamos su catalogo y definimos la estrategia
+        - 'listitem "Paso 3: Acuerdo Comercial" [ref=e114]':
+          - generic [ref=e116]: "3"
+          - generic [ref=e117]:
+            - heading "Acuerdo Comercial" [level=4] [ref=e118]
+            - paragraph [ref=e119]: Formalizamos los terminos de la distribucion
+        - 'listitem "Paso 4: Distribucion Activa" [ref=e120]':
+          - generic [ref=e122]: "4"
+          - generic [ref=e123]:
+            - heading "Distribucion Activa" [level=4] [ref=e124]
+            - paragraph [ref=e125]: Cobertura nacional con nuestra flotilla propia
+    - generic [ref=e128]:
+      - generic [ref=e129]:
+        - heading "Inicie su Alianza" [level=2] [ref=e130]
+        - paragraph [ref=e131]: Complete el formulario y nuestro equipo comercial se comunicara con usted en un plazo de 48 horas para discutir oportunidades de distribucion.
+      - generic [ref=e134]:
+        - textbox [ref=e136]
+        - generic [ref=e137]:
           - generic [ref=e138]:
-            - heading "Distribucion Activa" [level=4] [ref=e139]
-            - paragraph [ref=e140]: Cobertura nacional con nuestra flotilla propia
-    - generic [ref=e143]:
-      - generic [ref=e144]:
-        - heading "Inicie su Alianza" [level=2] [ref=e145]
-        - paragraph [ref=e146]: Complete el formulario y nuestro equipo comercial se comunicara con usted en un plazo de 48 horas para discutir oportunidades de distribucion.
-      - generic [ref=e149]:
-        - textbox [ref=e151]
-        - generic [ref=e152]:
-          - generic [ref=e153]:
-            - generic [ref=e154]: Nombre de la empresa *
-            - textbox "Nombre de la empresa *" [ref=e155]:
+            - generic [ref=e139]: Nombre de la empresa *
+            - textbox "Nombre de la empresa *" [ref=e140]:
               - /placeholder: Nombre de su empresa
-          - generic [ref=e156]:
-            - generic [ref=e157]: Pais de origen *
-            - combobox "Pais de origen *" [ref=e158]:
+          - generic [ref=e141]:
+            - generic [ref=e142]: Pais de origen *
+            - combobox "Pais de origen *" [ref=e143]:
               - option "Seleccione un pais" [disabled] [selected]
               - option "Estados Unidos"
               - option "Mexico"
@@ -162,78 +147,78 @@
               - option "Japon"
               - option "India"
               - option "Otro"
-          - generic [ref=e159]:
-            - generic [ref=e160]: Nombre de contacto *
-            - textbox "Nombre de contacto *" [ref=e161]:
+          - generic [ref=e144]:
+            - generic [ref=e145]: Nombre de contacto *
+            - textbox "Nombre de contacto *" [ref=e146]:
               - /placeholder: Su nombre completo
-          - generic [ref=e162]:
-            - generic [ref=e163]: Correo electronico *
-            - textbox "Correo electronico *" [ref=e164]:
+          - generic [ref=e147]:
+            - generic [ref=e148]: Correo electronico *
+            - textbox "Correo electronico *" [ref=e149]:
               - /placeholder: email@empresa.com
-          - generic [ref=e165]:
-            - generic [ref=e166]: Telefono
-            - textbox "Telefono" [ref=e167]:
+          - generic [ref=e150]:
+            - generic [ref=e151]: Telefono
+            - textbox "Telefono" [ref=e152]:
               - /placeholder: +1 000-000-0000
-          - generic [ref=e168]:
-            - generic [ref=e169]: Tipos de producto
-            - textbox "Tipos de producto" [ref=e170]:
+          - generic [ref=e153]:
+            - generic [ref=e154]: Tipos de producto
+            - textbox "Tipos de producto" [ref=e155]:
               - /placeholder: Farmacos, alimentos, equipos...
-          - generic [ref=e171]:
-            - generic [ref=e172]: Mensaje *
-            - textbox "Mensaje *" [ref=e173]:
+          - generic [ref=e156]:
+            - generic [ref=e157]: Mensaje *
+            - textbox "Mensaje *" [ref=e158]:
               - /placeholder: Cuentenos sobre su empresa y productos...
-          - generic [ref=e175] [cursor=pointer]:
-            - checkbox "Acepto los terminos y condiciones" [ref=e176]
-            - generic [ref=e177]: Acepto los terminos y condiciones
-        - button "Enviar consulta" [ref=e179] [cursor=pointer]
-  - contentinfo "Pie de pagina" [ref=e181]:
-    - generic [ref=e183]:
-      - generic [ref=e184]:
-        - generic [ref=e185]: HESA
-        - paragraph [ref=e186]: 37 anos distribuyendo salud animal en Costa Rica
-      - generic [ref=e188]:
-        - heading "Navegacion" [level=3] [ref=e189]
-        - navigation [ref=e190]:
-          - link "Inicio" [ref=e191] [cursor=pointer]:
+          - generic [ref=e160] [cursor=pointer]:
+            - checkbox "Acepto los terminos y condiciones" [ref=e161]
+            - generic [ref=e162]: Acepto los terminos y condiciones
+        - button "Enviar consulta" [ref=e164] [cursor=pointer]
+  - contentinfo "Pie de pagina" [ref=e166]:
+    - generic [ref=e168]:
+      - generic [ref=e169]:
+        - generic [ref=e170]: HESA
+        - paragraph [ref=e171]: 37 anos distribuyendo salud animal en Costa Rica
+      - generic [ref=e173]:
+        - heading "Navegacion" [level=3] [ref=e174]
+        - navigation [ref=e175]:
+          - link "Inicio" [ref=e176] [cursor=pointer]:
             - /url: /es
-          - link "Catalogo" [ref=e192] [cursor=pointer]:
+          - link "Catalogo" [ref=e177] [cursor=pointer]:
             - /url: /es/catalogo
-          - link "Marcas" [ref=e193] [cursor=pointer]:
+          - link "Marcas" [ref=e178] [cursor=pointer]:
             - /url: /es/marcas
-          - link "Nosotros" [ref=e194] [cursor=pointer]:
+          - link "Nosotros" [ref=e179] [cursor=pointer]:
             - /url: /es/nosotros
-          - link "Distribuidores" [ref=e195] [cursor=pointer]:
+          - link "Distribuidores" [ref=e180] [cursor=pointer]:
             - /url: /es/distribuidores
-          - link "Contacto" [ref=e196] [cursor=pointer]:
+          - link "Contacto" [ref=e181] [cursor=pointer]:
             - /url: /es/contacto
-      - generic [ref=e198]:
-        - heading "Contacto" [level=3] [ref=e199]
-        - generic [ref=e200]:
-          - paragraph [ref=e201]:
-            - img [ref=e202]
+      - generic [ref=e183]:
+        - heading "Contacto" [level=3] [ref=e184]
+        - generic [ref=e185]:
+          - paragraph [ref=e186]:
+            - img [ref=e187]
             - text: +506 2260-9020
-          - paragraph [ref=e204]:
-            - img [ref=e205]
+          - paragraph [ref=e189]:
+            - img [ref=e190]
             - text: info@hesa.co.cr
-          - paragraph [ref=e208]:
-            - img [ref=e209]
+          - paragraph [ref=e193]:
+            - img [ref=e194]
             - text: Calle 2, av 12. Heredia, Costa Rica
-          - paragraph [ref=e212]:
-            - img [ref=e213]
+          - paragraph [ref=e197]:
+            - img [ref=e198]
             - text: "Lun - Vie: 8:00 - 17:00"
-      - generic [ref=e217]:
-        - heading "Redes Sociales" [level=3] [ref=e218]
-        - generic [ref=e219]:
-          - link "Facebook" [ref=e220] [cursor=pointer]:
+      - generic [ref=e202]:
+        - heading "Redes Sociales" [level=3] [ref=e203]
+        - generic [ref=e204]:
+          - link "Facebook" [ref=e205] [cursor=pointer]:
             - /url: https://facebook.com/hesacr
-            - img [ref=e221]
-          - link "Instagram" [ref=e223] [cursor=pointer]:
+            - img [ref=e206]
+          - link "Instagram" [ref=e208] [cursor=pointer]:
             - /url: https://instagram.com/hesacr
-            - img [ref=e224]
-    - generic [ref=e228]:
-      - paragraph [ref=e229]: © HESA 2026. Todos los derechos reservados.
-      - button "English" [ref=e231] [cursor=pointer]
-  - button "Contactar por WhatsApp" [ref=e232] [cursor=pointer]:
-    - img [ref=e233]
+            - img [ref=e209]
+    - generic [ref=e213]:
+      - paragraph [ref=e214]: © HESA 2026. Todos los derechos reservados.
+      - button "English" [ref=e216] [cursor=pointer]
+  - button "Contactar por WhatsApp" [ref=e217] [cursor=pointer]:
+    - img [ref=e218]
     - generic: Escribenos por WhatsApp
 ```

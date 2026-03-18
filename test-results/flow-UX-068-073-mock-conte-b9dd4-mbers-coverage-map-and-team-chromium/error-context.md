@@ -105,80 +105,100 @@
         - generic [ref=e106]: Zonas Rurales
         - generic [ref=e108]: Encomiendas
     - generic [ref=e111]:
-      - heading "Equipo de Liderazgo" [level=2] [ref=e112]
-      - generic [ref=e113]:
+      - heading "Politicas Comerciales" [level=2] [ref=e112]
+      - paragraph [ref=e113]: Conozca nuestras condiciones de credito, tiempos de entrega y cobertura para ofrecer el mejor servicio a nuestros clientes.
+      - generic [ref=e114]:
         - generic [ref=e115]:
           - img [ref=e117]
-          - heading "Carlos Herrera M." [level=3] [ref=e120]
-          - paragraph [ref=e121]: Director General
-        - generic [ref=e123]:
-          - img [ref=e125]
-          - heading "Ana Elizondo R." [level=3] [ref=e128]
-          - paragraph [ref=e129]: Directora Comercial
-        - generic [ref=e131]:
-          - img [ref=e133]
-          - heading "Juan Herrera E." [level=3] [ref=e136]
-          - paragraph [ref=e137]: Gerente de Operaciones
-        - generic [ref=e139]:
-          - img [ref=e141]
-          - heading "Laura Villalobos S." [level=3] [ref=e144]
-          - paragraph [ref=e145]: Gerente de Ventas
-        - generic [ref=e147]:
-          - img [ref=e149]
-          - heading "Roberto Mora C." [level=3] [ref=e152]
-          - paragraph [ref=e153]: Director Financiero
-        - generic [ref=e155]:
-          - img [ref=e157]
-          - heading "Patricia Chaves L." [level=3] [ref=e160]
-          - paragraph [ref=e161]: Gerente de Logistica
-  - contentinfo "Pie de pagina" [ref=e163]:
-    - generic [ref=e165]:
-      - generic [ref=e166]:
-        - generic [ref=e167]: HESA
-        - paragraph [ref=e168]: 37 anos distribuyendo salud animal en Costa Rica
-      - generic [ref=e170]:
-        - heading "Navegacion" [level=3] [ref=e171]
-        - navigation [ref=e172]:
-          - link "Inicio" [ref=e173] [cursor=pointer]:
+          - heading "Politicas de Credito" [level=3] [ref=e119]
+          - paragraph [ref=e120]: Ofrecemos condiciones de credito flexibles para nuestros clientes. Los plazos de pago se definen segun el historial comercial y el volumen de compra. Consulte con su agente de ventas para conocer las condiciones personalizadas.
+        - generic [ref=e121]:
+          - img [ref=e123]
+          - heading "Tiempos de Entrega" [level=3] [ref=e126]
+          - paragraph [ref=e127]: "Gran Area Metropolitana: 24-48 horas. Zonas rurales: 2-3 dias habiles. Zonas muy alejadas: servicio de encomienda disponible. Nuestros agentes de ventas realizan visitas quincenales a todos los clientes."
+        - generic [ref=e128]:
+          - img [ref=e130]
+          - heading "Cobertura de Entrega" [level=3] [ref=e135]
+          - paragraph [ref=e136]: Contamos con flotilla propia de entrega, agentes en todas las zonas del pais y servicio de encomienda para zonas muy alejadas. Nuestros 18-20 agentes de ventas propios cubren todo el territorio nacional con visitas quincenales.
+      - generic [ref=e137]:
+        - paragraph [ref=e138]: Solicite condiciones comerciales personalizadas para su negocio
+        - link "Solicitar Condiciones" [ref=e139] [cursor=pointer]:
+          - /url: /es/contacto
+    - generic [ref=e141]:
+      - heading "Equipo de Liderazgo" [level=2] [ref=e142]
+      - generic [ref=e143]:
+        - generic [ref=e145]:
+          - img "Carlos Herrera" [ref=e147]
+          - heading "Carlos Herrera" [level=3] [ref=e148]
+          - paragraph [ref=e149]: Director General
+        - generic [ref=e151]:
+          - img "Ana Elizondo" [ref=e153]
+          - heading "Ana Elizondo" [level=3] [ref=e154]
+          - paragraph [ref=e155]: Directora Comercial
+        - generic [ref=e157]:
+          - img "Roberto Vargas" [ref=e159]
+          - heading "Roberto Vargas" [level=3] [ref=e160]
+          - paragraph [ref=e161]: Gerente de Operaciones
+        - generic [ref=e163]:
+          - img "Maria Fernanda Lopez" [ref=e165]
+          - heading "Maria Fernanda Lopez" [level=3] [ref=e166]
+          - paragraph [ref=e167]: Gerente de Ventas
+        - generic [ref=e169]:
+          - img "Jorge Castillo" [ref=e171]
+          - heading "Jorge Castillo" [level=3] [ref=e172]
+          - paragraph [ref=e173]: Director Financiero
+        - generic [ref=e175]:
+          - img "Laura Sanchez" [ref=e177]
+          - heading "Laura Sanchez" [level=3] [ref=e178]
+          - paragraph [ref=e179]: Gerente de Logistica
+  - contentinfo "Pie de pagina" [ref=e181]:
+    - generic [ref=e183]:
+      - generic [ref=e184]:
+        - generic [ref=e185]: HESA
+        - paragraph [ref=e186]: 37 anos distribuyendo salud animal en Costa Rica
+      - generic [ref=e188]:
+        - heading "Navegacion" [level=3] [ref=e189]
+        - navigation [ref=e190]:
+          - link "Inicio" [ref=e191] [cursor=pointer]:
             - /url: /es
-          - link "Catalogo" [ref=e174] [cursor=pointer]:
+          - link "Catalogo" [ref=e192] [cursor=pointer]:
             - /url: /es/catalogo
-          - link "Marcas" [ref=e175] [cursor=pointer]:
+          - link "Marcas" [ref=e193] [cursor=pointer]:
             - /url: /es/marcas
-          - link "Nosotros" [ref=e176] [cursor=pointer]:
+          - link "Nosotros" [ref=e194] [cursor=pointer]:
             - /url: /es/nosotros
-          - link "Distribuidores" [ref=e177] [cursor=pointer]:
+          - link "Distribuidores" [ref=e195] [cursor=pointer]:
             - /url: /es/distribuidores
-          - link "Contacto" [ref=e178] [cursor=pointer]:
+          - link "Contacto" [ref=e196] [cursor=pointer]:
             - /url: /es/contacto
-      - generic [ref=e180]:
-        - heading "Contacto" [level=3] [ref=e181]
-        - generic [ref=e182]:
-          - paragraph [ref=e183]:
-            - img [ref=e184]
+      - generic [ref=e198]:
+        - heading "Contacto" [level=3] [ref=e199]
+        - generic [ref=e200]:
+          - paragraph [ref=e201]:
+            - img [ref=e202]
             - text: +506 2260-9020
-          - paragraph [ref=e186]:
-            - img [ref=e187]
+          - paragraph [ref=e204]:
+            - img [ref=e205]
             - text: info@hesa.co.cr
-          - paragraph [ref=e190]:
-            - img [ref=e191]
+          - paragraph [ref=e208]:
+            - img [ref=e209]
             - text: Calle 2, av 12. Heredia, Costa Rica
-          - paragraph [ref=e194]:
-            - img [ref=e195]
+          - paragraph [ref=e212]:
+            - img [ref=e213]
             - text: "Lun - Vie: 8:00 - 17:00"
-      - generic [ref=e199]:
-        - heading "Redes Sociales" [level=3] [ref=e200]
-        - generic [ref=e201]:
-          - link "Facebook" [ref=e202] [cursor=pointer]:
+      - generic [ref=e217]:
+        - heading "Redes Sociales" [level=3] [ref=e218]
+        - generic [ref=e219]:
+          - link "Facebook" [ref=e220] [cursor=pointer]:
             - /url: https://facebook.com/hesacr
-            - img [ref=e203]
-          - link "Instagram" [ref=e205] [cursor=pointer]:
+            - img [ref=e221]
+          - link "Instagram" [ref=e223] [cursor=pointer]:
             - /url: https://instagram.com/hesacr
-            - img [ref=e206]
-    - generic [ref=e210]:
-      - paragraph [ref=e211]: © HESA 2026. Todos los derechos reservados.
-      - button "English" [ref=e213] [cursor=pointer]
-  - button "Contactar por WhatsApp" [ref=e214] [cursor=pointer]:
-    - img [ref=e215]
+            - img [ref=e224]
+    - generic [ref=e228]:
+      - paragraph [ref=e229]: © HESA 2026. Todos los derechos reservados.
+      - button "English" [ref=e231] [cursor=pointer]
+  - button "Contactar por WhatsApp" [ref=e232] [cursor=pointer]:
+    - img [ref=e233]
     - generic: Escribenos por WhatsApp
 ```
