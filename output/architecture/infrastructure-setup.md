@@ -322,6 +322,59 @@ Variables clave:
 
 ---
 
+## Deployment a Produccion — Verificacion (2026-03-18)
+
+### URLs de Produccion
+
+| Servicio | URL |
+|---|---|
+| Sitio publico (frontend) | https://gray-field-02ba8410f.2.azurestaticapps.net |
+| Panel admin (frontend) | https://gray-field-02ba8410f.2.azurestaticapps.net/admin |
+| API Backend | https://hesa-api.azurewebsites.net |
+| API Health Check | https://hesa-api.azurewebsites.net/api/health |
+| Blob Storage (imagenes) | https://hesastorage.blob.core.windows.net/images/ |
+
+### Verificaciones Completadas
+
+| Verificacion | Estado | Detalle |
+|---|---|---|
+| Build frontend (production) | OK | 618.95 kB initial / 154.82 kB transfer, 1.4 MB total |
+| Build backend (TypeScript) | OK | Compila sin errores |
+| CI/CD frontend (SWA) | OK | Workflow azure-static-web-apps.yml, ~1-2 min |
+| CI/CD backend (App Service) | OK | Workflow azure-api-deploy.yml, ~2-3 min |
+| Frontend carga (HTTP 200) | OK | HTML, JS, CSS, polyfills todos retornan 200 |
+| API health endpoint | OK | Retorna {"status":"ok"} |
+| API public endpoints | OK | /api/public/categories, /products, /brands, /team, /home, /config |
+| CORS | OK | Preflight acepta origen SWA |
+| Headers de seguridad (SWA) | OK | CSP, X-Frame-Options, HSTS, X-Content-Type-Options, XSS-Protection, Permissions-Policy |
+| Headers de seguridad (API) | OK | Helmet + custom middleware, X-Powered-By removido |
+| SSL/HTTPS | OK | Ambos servicios fuerzan HTTPS con HSTS |
+| No archivos sensibles en build | OK | Solo JS, CSS, HTML, favicon, robots.txt |
+| No secrets en codigo | OK | environment.prod.ts solo tiene client ID/tenant ID (publicos) |
+| Caching de assets | OK | JS/CSS/fonts: immutable 1yr, index.html: no-cache |
+| SPA routing (fallback) | OK | staticwebapp.config.json con navigationFallback |
+| Sitemap redirect | OK | /sitemap.xml redirige a API |
+
+### Limpieza de Base de Datos (Produccion)
+
+El cliente pidio que el panel se entregue SIN datos placeholder. Se ejecuto limpieza el 2026-03-18:
+
+| Collection | Estado |
+|---|---|
+| `categories` | PRESERVADA — 3 categorias con filtros (familias, especies, etapas, tipos equipo) |
+| `site_config` | PRESERVADA — nombre del sitio, contacto, SEO |
+| `home_config` | Hero image preservada, featured products/brands vaciados |
+| `products` | VACIADA — 0 productos |
+| `brands` | VACIADA — 0 marcas |
+| `team_members` | VACIADA — 0 miembros |
+| `messages` | VACIADA — 0 mensajes |
+| `activity_logs` | VACIADA — 0 logs |
+| `page_contents` | VACIADA — 0 paginas (se auto-crean con defaults al acceder) |
+
+**Nota:** Se elimino el auto-seeding de team members del servicio `team.service.ts`. Antes, al acceder a la coleccion vacia, se re-insertaban 6 miembros placeholder. Ahora solo retorna array vacio. Script de limpieza disponible en `api/scripts/cleanup-seed-data.js`.
+
+---
+
 ## Servicios pendientes (opcionales)
 
 | Servicio | Cuando provisionarlo |
