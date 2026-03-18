@@ -35,28 +35,7 @@ const defaultTeamMembers = [
  * BUG-005 FIX: Also migrates existing SVG placeholder photos to stock photos.
  */
 export async function getTeamMembers(): Promise<ITeamMember[]> {
-  let members = await TeamMember.find().sort({ order: 1 }).lean() as unknown as ITeamMember[];
-  if (members.length === 0) {
-    await TeamMember.insertMany(defaultTeamMembers);
-    members = await TeamMember.find().sort({ order: 1 }).lean() as unknown as ITeamMember[];
-  } else {
-    // BUG-005 FIX: Migrate SVG placeholder photos to professional stock photos
-    const photoValues = Object.values(teamPhotos);
-    let migrated = false;
-    for (let i = 0; i < members.length; i++) {
-      const member = members[i];
-      if (member.photo && member.photo.startsWith('data:image/svg+xml;base64,')) {
-        const newPhoto = photoValues[i % photoValues.length];
-        await TeamMember.findByIdAndUpdate(member._id, { $set: { photo: newPhoto } });
-        migrated = true;
-      }
-    }
-    if (migrated) {
-      console.log('Team member photos migrated from SVG to stock photos (BUG-005 fix)');
-      // Re-fetch after migration to get clean data
-      members = await TeamMember.find().sort({ order: 1 }).lean() as unknown as ITeamMember[];
-    }
-  }
+  const members = await TeamMember.find().sort({ order: 1 }).lean() as unknown as ITeamMember[];
   return members;
 }
 
