@@ -15,9 +15,9 @@
           <span class="admin__sidebar-label">Dashboard</span>
         </a>
 
-        <a routerLink="/admin/productos" routerLinkActive="admin__sidebar-link--active" class="admin__sidebar-link">
-          <span class="material-symbols-outlined admin__sidebar-icon">inventory_2</span>
-          <span class="admin__sidebar-label">Productos</span>
+        <a routerLink="/admin/categorias" routerLinkActive="admin__sidebar-link--active" class="admin__sidebar-link">
+          <span class="material-symbols-outlined admin__sidebar-icon">layers</span>
+          <span class="admin__sidebar-label">Categorias</span>
         </a>
 
         <a routerLink="/admin/marcas" routerLinkActive="admin__sidebar-link--active" class="admin__sidebar-link">
@@ -25,9 +25,17 @@
           <span class="admin__sidebar-label">Marcas</span>
         </a>
 
-        <a routerLink="/admin/categorias" routerLinkActive="admin__sidebar-link--active" class="admin__sidebar-link">
-          <span class="material-symbols-outlined admin__sidebar-icon">layers</span>
-          <span class="admin__sidebar-label">Categorias</span>
+        <a routerLink="/admin/productos" routerLinkActive="admin__sidebar-link--active" class="admin__sidebar-link">
+          <span class="material-symbols-outlined admin__sidebar-icon">inventory_2</span>
+          <span class="admin__sidebar-label">Productos</span>
+        </a>
+
+        <a routerLink="/admin/mensajes" routerLinkActive="admin__sidebar-link--active" class="admin__sidebar-link">
+          <span class="material-symbols-outlined admin__sidebar-icon">chat_bubble</span>
+          <span class="admin__sidebar-label">Mensajes</span>
+          @if (newMessagesCount > 0) {
+            <span class="admin__sidebar-badge">{{ newMessagesCount }}</span>
+          }
         </a>
 
         <!-- Home submenu -->
@@ -62,14 +70,6 @@
             </div>
           }
         </div>
-
-        <a routerLink="/admin/mensajes" routerLinkActive="admin__sidebar-link--active" class="admin__sidebar-link">
-          <span class="material-symbols-outlined admin__sidebar-icon">chat_bubble</span>
-          <span class="admin__sidebar-label">Mensajes</span>
-          @if (newMessagesCount > 0) {
-            <span class="admin__sidebar-badge">{{ newMessagesCount }}</span>
-          }
-        </a>
       </div>
 
       <!-- Divider -->
@@ -77,22 +77,10 @@
 
       <!-- Secondary navigation -->
       <div class="admin__sidebar-section">
-        <!-- Configuracion submenu -->
-        <div class="admin__sidebar-group">
-          <button class="admin__sidebar-link admin__sidebar-link--parent" (click)="toggleMenu('config')" [class.admin__sidebar-link--active]="isRouteActive('/admin/configuracion/')">
-            <span class="material-symbols-outlined admin__sidebar-icon">settings</span>
-            <span class="admin__sidebar-label">Configuracion</span>
-            <span class="material-symbols-outlined admin__sidebar-chevron" [class.admin__sidebar-chevron--open]="isMenuExpanded('config')">expand_more</span>
-          </button>
-          @if (isMenuExpanded('config')) {
-            <div class="admin__sidebar-submenu">
-              <a routerLink="/admin/configuracion/general" routerLinkActive="admin__sidebar-sublink--active" class="admin__sidebar-sublink">General</a>
-              <a routerLink="/admin/configuracion/contacto" routerLinkActive="admin__sidebar-sublink--active" class="admin__sidebar-sublink">Contacto</a>
-              <a routerLink="/admin/configuracion/redes" routerLinkActive="admin__sidebar-sublink--active" class="admin__sidebar-sublink">Redes sociales</a>
-              <a routerLink="/admin/configuracion/seo" routerLinkActive="admin__sidebar-sublink--active" class="admin__sidebar-sublink">SEO</a>
-            </div>
-          }
-        </div>
+        <a routerLink="/admin/configuracion/general" routerLinkActive="admin__sidebar-link--active" class="admin__sidebar-link">
+          <span class="material-symbols-outlined admin__sidebar-icon">settings</span>
+          <span class="admin__sidebar-label">Configuracion</span>
+        </a>
       </div>
     </nav>
   </aside>
