@@ -54,12 +54,15 @@
       @for (brand of brands(); track brand._id) {
         <div class="adm-card adm-card--hover brand-card">
           <div class="brand-card__header">
-            @if (brand.logo) {
-              <img [src]="brand.logo" [alt]="brand.name" class="brand-card__logo-img">
-            } @else {
-              <div class="brand-card__logo">{{ brand.name.charAt(0) }}</div>
-            }
-            <div class="brand-card__menu-wrapper">
+            <div class="brand-card__logo">
+              @if (brand.logo) {
+                <img [src]="brand.logo" [alt]="brand.name" class="brand-card__logo-img">
+              } @else {
+                {{ brand.name.charAt(0) }}
+              }
+            </div>
+          </div>
+          <div class="brand-card__menu-wrapper">
               <button class="brand-card__menu-btn" (click)="toggleMenu(brand._id, $event)" [attr.aria-label]="'Opciones para ' + brand.name" aria-haspopup="true" [attr.aria-expanded]="openMenuId() === brand._id">
                 <span class="material-symbols-outlined">more_vert</span>
               </button>
@@ -80,7 +83,6 @@
                   </button>
                 </div>
               }
-            </div>
           </div>
           <h3 class="brand-card__name">{{ brand.name }}</h3>
           <p class="brand-card__country">{{ brand.country }}</p>
