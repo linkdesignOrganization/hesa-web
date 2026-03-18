@@ -91,21 +91,10 @@
 - [x] 5f-5j: Demo (sin feedback) + commit
 
 ### FASE 5 — Iteracion 3: Formularios + Mensajes + Configuracion + Dashboard
-- [ ] 5a: Developer implementa
-- [ ] 5a-verify: Verificacion post-Developer
-- [ ] 5b: Simplify
-- [ ] 5c: Security Review
-- [ ] 5d: Pre-QA Deploy
-- [ ] 5d-regress: Regresion automatizada pre-QA
-- [ ] 5e-plan: QA genera plan
-- [ ] 5e-sub: Sub-testers en paralelo
-- [ ] 5e-consolidate: QA consolida
-- [ ] 5e-verify: Verificacion post-QA
-- [ ] 5f: Demo para el cliente
-- [ ] 5g: Feedback del cliente
-- [ ] 5h: Recopilar feedback
-- [ ] 5i: Distribucion y mantenimiento de feedback
-- [ ] 5j: Commit de iteracion
+- [x] 5a-5c: Implementacion + verify + simplify + security
+- [x] 5d-regress: Regresion (547 passed, 0 failed)
+- [x] 5e: QA (2 rondas, 56/56, 0 bugs, LISTO)
+- [x] 5f-5j: Demo + commit
 
 ### FASE 5 — Iteracion 4: Performance, Accesibilidad y Pulido Final
 - [ ] 5a: Developer implementa
