@@ -48,7 +48,7 @@ export class AdminProductFormComponent implements HasUnsavedChanges, OnInit {
     this.productForm = this.fb.group({
       nameEs: ['', [Validators.required]],
       nameEn: [''],
-      brand: ['', [Validators.required]],
+      brand: [''],
       category: ['', [Validators.required]],
       family: [''],
       lifeStage: [''],
@@ -57,9 +57,6 @@ export class AdminProductFormComponent implements HasUnsavedChanges, OnInit {
       descriptionEn: [''],
       compositionEs: [''],
       compositionEn: [''],
-      sanitaryRegistry: [''],
-      indicationsEs: [''],
-      indicationsEn: [''],
       ingredientsEs: [''],
       ingredientsEn: [''],
       nutritionalInfoEs: [''],
@@ -102,7 +99,7 @@ export class AdminProductFormComponent implements HasUnsavedChanges, OnInit {
       this.productForm.patchValue({
         nameEs: product.name.es,
         nameEn: product.name.en,
-        brand: typeof product.brand === 'object' ? product.brand._id : product.brand,
+        brand: product.brand && typeof product.brand === 'object' ? product.brand._id : (product.brand || ''),
         category: product.category,
         family: product.family || '',
         lifeStage: product.lifeStage || '',
@@ -111,9 +108,6 @@ export class AdminProductFormComponent implements HasUnsavedChanges, OnInit {
         descriptionEn: product.description?.en || '',
         compositionEs: product.composition?.es || '',
         compositionEn: product.composition?.en || '',
-        sanitaryRegistry: product.sanitaryRegistry || '',
-        indicationsEs: product.indications?.es || '',
-        indicationsEn: product.indications?.en || '',
         ingredientsEs: product.ingredients?.es || '',
         ingredientsEn: product.ingredients?.en || '',
         nutritionalInfoEs: product.nutritionalInfo?.es || '',
@@ -323,7 +317,6 @@ export class AdminProductFormComponent implements HasUnsavedChanges, OnInit {
     if (control.errors['required']) {
       const labels: Record<string, string> = {
         nameEs: 'El nombre del producto es obligatorio',
-        brand: 'Selecciona una marca',
         category: 'Selecciona una categoria',
       };
       return labels[fieldName] || 'Este campo es obligatorio';
@@ -369,13 +362,19 @@ export class AdminProductFormComponent implements HasUnsavedChanges, OnInit {
     const v = this.productForm.value;
     const data: Record<string, unknown> = {
       name: { es: v.nameEs, en: v.nameEn || '' },
-      brand: v.brand,
       category: v.category,
       description: { es: v.descriptionEs || '', en: v.descriptionEn || '' },
       species: this.speciesList(),
       presentations: this.presentationsList(),
       isActive: v.isActive,
     };
+
+    // Brand is optional — only send if selected
+    if (v.brand) {
+      data['brand'] = v.brand;
+    } else {
+      data['brand'] = null;
+    }
 
     if (v.family) data['family'] = v.family;
     if (v.lifeStage) data['lifeStage'] = v.lifeStage;
@@ -388,8 +387,6 @@ export class AdminProductFormComponent implements HasUnsavedChanges, OnInit {
   private addCategorySpecificFields(data: Record<string, unknown>, v: Record<string, string>): void {
     if (v['category'] === 'farmacos') {
       data['composition'] = { es: v['compositionEs'] || '', en: v['compositionEn'] || '' };
-      data['sanitaryRegistry'] = v['sanitaryRegistry'] || '';
-      data['indications'] = { es: v['indicationsEs'] || '', en: v['indicationsEn'] || '' };
     } else if (v['category'] === 'alimentos') {
       data['ingredients'] = { es: v['ingredientsEs'] || '', en: v['ingredientsEn'] || '' };
       data['nutritionalInfo'] = { es: v['nutritionalInfoEs'] || '', en: v['nutritionalInfoEn'] || '' };

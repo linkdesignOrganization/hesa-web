@@ -22,7 +22,7 @@ export interface ApiProduct {
     logo?: string;
     country?: string;
     categories?: string[];
-  };
+  } | null;
   category: 'farmacos' | 'alimentos' | 'equipos';
   species: string[];
   family?: string;
@@ -669,6 +669,42 @@ export class ApiService {
   async adminGetDashboard(): Promise<ApiDashboardData> {
     return firstValueFrom(
       this.http.get<ApiDashboardData>(`${this.baseUrl}/admin/dashboard`)
+    );
+  }
+
+  async adminGetActivityLog(page: number = 1, limit: number = 20): Promise<{
+    items: Array<{
+      _id: string;
+      action: string;
+      entity: string;
+      entityName?: string;
+      user?: string;
+      details?: string;
+      createdAt: string;
+    }>;
+    total: number;
+    page: number;
+    limit: number;
+    totalPages: number;
+  }> {
+    return firstValueFrom(
+      this.http.get<{
+        items: Array<{
+          _id: string;
+          action: string;
+          entity: string;
+          entityName?: string;
+          user?: string;
+          details?: string;
+          createdAt: string;
+        }>;
+        total: number;
+        page: number;
+        limit: number;
+        totalPages: number;
+      }>(`${this.baseUrl}/admin/dashboard/activity`, {
+        params: { page: page.toString(), limit: limit.toString() }
+      })
     );
   }
 

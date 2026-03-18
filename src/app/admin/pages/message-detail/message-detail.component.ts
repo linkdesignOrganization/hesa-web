@@ -101,6 +101,7 @@ import { getTypeLabel } from '../../../shared/utils/message-helpers';
         [message]="'Estas seguro de eliminar este mensaje? Esta accion no se puede deshacer.'"
         confirmText="Eliminar"
         variant="danger"
+        [autoOpen]="true"
         (confirmed)="deleteMessage()"
         (cancelled)="showDeleteModal.set(false)" />
     }

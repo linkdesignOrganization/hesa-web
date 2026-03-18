@@ -81,7 +81,9 @@
   </div>
   <div class="product-card__info">
     <h3 class="product-card__name">{{ displayName }}</h3>
-    <p class="product-card__brand">{{ displayBrand }}</p>
+    @if (displayBrand) {
+      <p class="product-card__brand">{{ displayBrand }}</p>
+    }
     <span class="product-card__cta btn btn-outline btn-sm">{{ i18n.currentLang() === 'es' ? 'Ver producto' : 'View product' }}</span>
   </div>
 </a>

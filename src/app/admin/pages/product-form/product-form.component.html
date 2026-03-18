@@ -31,19 +31,13 @@
           <input type="text" id="prod-name-en" class="form-control" formControlName="nameEn" placeholder="Ej: Veterinary Amoxicillin 500mg">
         </div>
         <div class="form-group">
-          <label class="form-label" for="prod-brand">Marca <span class="required">*</span></label>
-          <select id="prod-brand" class="form-select" [class.is-invalid]="isFieldInvalid('brand')" formControlName="brand" aria-required="true" (blur)="onFieldBlur('brand')">
-            <option value="" disabled>Seleccionar marca</option>
+          <label class="form-label" for="prod-brand">Marca</label>
+          <select id="prod-brand" class="form-select" formControlName="brand">
+            <option value="">Sin marca</option>
             @for (b of brands(); track b._id) {
               <option [value]="b._id">{{ b.name }}</option>
             }
           </select>
-          @if (isFieldInvalid('brand')) {
-            <div class="form-error" role="alert">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-              {{ getFieldError('brand') }}
-            </div>
-          }
         </div>
         <div class="form-group form-group-full">
           <label class="form-label">Categoria <span class="required">*</span></label>
@@ -172,14 +166,6 @@
               <label class="form-label" for="prod-composition-es">Composicion</label>
               <textarea id="prod-composition-es" class="form-control" formControlName="compositionEs" placeholder="Composicion del producto..." rows="3"></textarea>
             </div>
-            <div class="form-group form-group-full product-form__conditional-field">
-              <label class="form-label" for="prod-registry">Registro sanitario</label>
-              <input type="text" id="prod-registry" class="form-control" formControlName="sanitaryRegistry" placeholder="Ej: MAG-DGG-R-0001">
-            </div>
-            <div class="form-group form-group-full product-form__conditional-field">
-              <label class="form-label" for="prod-indications-es">Indicaciones</label>
-              <textarea id="prod-indications-es" class="form-control" formControlName="indicationsEs" placeholder="Indicaciones de uso..." rows="3"></textarea>
-            </div>
           }
 
           <!-- Category-specific fields: Alimentos ES (REQ-242) -->
@@ -222,10 +208,6 @@
             <div class="form-group form-group-full product-form__conditional-field">
               <label class="form-label" for="prod-composition-en">Composition</label>
               <textarea id="prod-composition-en" class="form-control" formControlName="compositionEn" placeholder="Product composition..." rows="3"></textarea>
-            </div>
-            <div class="form-group form-group-full product-form__conditional-field">
-              <label class="form-label" for="prod-indications-en">Indications</label>
-              <textarea id="prod-indications-en" class="form-control" formControlName="indicationsEn" placeholder="Usage indications..." rows="3"></textarea>
             </div>
           }
 

@@ -144,6 +144,9 @@
       <div class="dashboard__activity-card">
         <div class="dashboard__card-header">
           <h2>Actividad Reciente</h2>
+          @if (data()!.recentActivity.length > 0) {
+            <a routerLink="/admin/actividad" class="dashboard__card-link">Ver mas</a>
+          }
         </div>
         @if (data()!.recentActivity.length === 0) {
           <div class="dashboard__empty-block">
@@ -151,7 +154,7 @@
             <p>La actividad del panel se registrara aqui</p>
           </div>
         }
-        @for (activity of data()!.recentActivity; track activity._id) {
+        @for (activity of data()!.recentActivity | slice:0:7; track activity._id) {
           <div class="dashboard__activity-item">
             <div class="dashboard__activity-dot"></div>
             <p>{{ getActivityText(activity) }}</p>

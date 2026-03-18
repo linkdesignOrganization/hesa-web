@@ -4,7 +4,7 @@ import { bilingualField } from './shared-schema';
 export interface IProduct extends Document {
   slug: { es: string; en: string };
   name: { es: string; en: string };
-  brand: mongoose.Types.ObjectId;
+  brand: mongoose.Types.ObjectId | null;
   category: 'farmacos' | 'alimentos' | 'equipos';
   species: string[];
   family?: string;
@@ -40,7 +40,7 @@ const productSchema = new Schema<IProduct>(
   {
     slug: { type: bilingualField, required: true },
     name: { type: bilingualField, required: true },
-    brand: { type: Schema.Types.ObjectId, ref: 'Brand', required: true },
+    brand: { type: Schema.Types.ObjectId, ref: 'Brand', default: null },
     category: {
       type: String,
       enum: ['farmacos', 'alimentos', 'equipos'],

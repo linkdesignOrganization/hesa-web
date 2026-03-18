@@ -119,7 +119,9 @@
             <div class="product-detail__translation-badge">Translation not available</div>
           }
           <h1 class="product-detail__name">{{ i18n.t(product()!.name) }}</h1>
-          <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'marcas' : 'brands') + '/' + brandSlug" class="product-detail__brand-link">{{ brandName }}</a>
+          @if (brandName) {
+            <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'marcas' : 'brands') + '/' + brandSlug" class="product-detail__brand-link">{{ brandName }}</a>
+          }
 
           <!-- Species Badges -->
           @if (product()!.species.length > 0) {
@@ -297,7 +299,9 @@
           <div class="sticky-bar__thumb"></div>
           <div>
             <span class="sticky-bar__name">{{ i18n.t(product()!.name) }}</span>
-            <span class="sticky-bar__brand">{{ brandName }}</span>
+            @if (brandName) {
+              <span class="sticky-bar__brand">{{ brandName }}</span>
+            }
           </div>
         </div>
         <a class="btn btn-primary btn-sm sticky-bar__desktop-content" [routerLink]="['/' + i18n.currentLang(), i18n.currentLang() === 'es' ? 'contacto' : 'contact']" [queryParams]="{producto: product()!.slug[i18n.currentLang()]}">

@@ -14,14 +14,18 @@ export class ConfirmModalComponent implements OnInit {
   confirmLabel = input<string>('Eliminar');
   confirmText = input<string>(''); // Alias for confirmLabel
   cancelLabel = input<string>('Cancelar');
+  /** When true, the modal opens automatically on render (for @if conditional pattern) */
+  autoOpen = input<boolean>(false);
   isOpen = signal(false);
 
   confirmed = output<void>();
   cancelled = output<void>();
 
   ngOnInit(): void {
-    // Auto-open when rendered (for conditional rendering pattern)
-    this.isOpen.set(true);
+    // Only auto-open when explicitly requested (conditional rendering pattern)
+    if (this.autoOpen()) {
+      this.isOpen.set(true);
+    }
   }
 
   /** Get the description text, preferring message over description */

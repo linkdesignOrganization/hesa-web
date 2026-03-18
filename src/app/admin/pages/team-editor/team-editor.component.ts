@@ -89,21 +89,26 @@ import { ConfirmModalComponent } from '../../components/confirm-modal/confirm-mo
               <div class="form-group"><label class="form-label">Title</label><input type="text" class="form-control" [(ngModel)]="formTitle.en" placeholder="Position or title"></div>
             }
 
-            <!-- Photo upload for editing existing member -->
-            @if (editingMember()) {
-              <div class="form-group">
-                <label class="form-label">Foto</label>
-                @if (editingMember()?.photo) {
-                  <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
-                    <img [src]="editingMember()!.photo" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;">
-                    <button class="btn btn-outline btn-sm" (click)="photoInput.click()">Cambiar foto</button>
-                  </div>
-                } @else {
-                  <button class="btn btn-outline btn-sm" (click)="photoInput.click()">Subir foto</button>
-                }
-                <input #photoInput type="file" accept="image/jpeg,image/png,image/webp" style="display: none;" (change)="onPhotoSelected($event)">
-              </div>
-            }
+            <!-- Photo upload — available for both Add and Edit -->
+            <div class="form-group">
+              <label class="form-label">Foto</label>
+              @if (photoPreviewUrl()) {
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+                  <img [src]="photoPreviewUrl()!" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 1px solid var(--neutral-200);">
+                  <button class="btn btn-outline btn-sm" (click)="photoInput.click()">Cambiar foto</button>
+                  @if (!editingMember() && pendingPhotoFile()) {
+                    <button class="btn btn-outline btn-sm" style="color: var(--semantic-danger);" (click)="removePendingPhoto()">Quitar</button>
+                  }
+                </div>
+              } @else {
+                <div class="photo-dropzone" (click)="photoInput.click()" (dragover)="onPhotoDragOver($event)" (drop)="onPhotoDrop($event)">
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--neutral-400)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                  <p style="font-size: 13px; color: var(--neutral-500); margin-top: 8px;">Arrastra una imagen o <span style="color: var(--brand-primary); font-weight: 500;">selecciona archivo</span></p>
+                  <span style="font-size: 11px; color: var(--neutral-400);">JPG, PNG o WebP hasta 5MB</span>
+                </div>
+              }
+              <input #photoInput type="file" accept="image/jpeg,image/png,image/webp" style="display: none;" (change)="onPhotoSelected($event)">
+            </div>
           </div>
           <div class="modal-footer">
             <button class="btn btn-outline" (click)="showForm.set(false)">Cancelar</button>
@@ -145,6 +150,12 @@ import { ConfirmModalComponent } from '../../components/confirm-modal/confirm-mo
     .modal-close { background: none; border: none; font-size: 24px; color: var(--neutral-400); cursor: pointer; }
     .modal-body { padding: 20px 24px; overflow-y: auto; flex: 1; }
     .modal-footer { display: flex; justify-content: flex-end; gap: 12px; padding: 16px 24px; border-top: 1px solid var(--neutral-200); }
+    .photo-dropzone {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 24px; border: 2px dashed var(--neutral-300); border-radius: 12px;
+      cursor: pointer; transition: border-color 0.15s, background-color 0.15s;
+      &:hover { border-color: var(--brand-primary); background: rgba(0,141,201,0.03); }
+    }
   `]
 })
 export class AdminTeamEditorComponent implements OnInit {
@@ -163,6 +174,10 @@ export class AdminTeamEditorComponent implements OnInit {
 
   formName = { es: '', en: '' };
   formTitle = { es: '', en: '' };
+
+  // Photo state for both add & edit
+  pendingPhotoFile = signal<File | null>(null);
+  photoPreviewUrl = signal<string | null>(null);
 
   async ngOnInit(): Promise<void> {
     await this.loadTeam();
@@ -183,6 +198,8 @@ export class AdminTeamEditorComponent implements OnInit {
     this.editingMember.set(null);
     this.formName = { es: '', en: '' };
     this.formTitle = { es: '', en: '' };
+    this.pendingPhotoFile.set(null);
+    this.photoPreviewUrl.set(null);
     this.formLang.set('es');
     this.showForm.set(true);
   }
@@ -191,6 +208,8 @@ export class AdminTeamEditorComponent implements OnInit {
     this.editingMember.set(member);
     this.formName = { ...member.name };
     this.formTitle = { ...member.title };
+    this.pendingPhotoFile.set(null);
+    this.photoPreviewUrl.set(member.photo || null);
     this.formLang.set('es');
     this.showForm.set(true);
   }
@@ -208,12 +227,20 @@ export class AdminTeamEditorComponent implements OnInit {
           name: this.formName,
           title: this.formTitle,
         });
+        // Upload photo if a new file was selected during edit
+        if (this.pendingPhotoFile()) {
+          await this.api.adminUploadTeamPhoto(this.editingMember()!._id, this.pendingPhotoFile()!);
+        }
         this.toast.success('Miembro actualizado');
       } else {
-        await this.api.adminCreateTeamMember({
+        // Create member first, then upload photo if one was selected
+        const created = await this.api.adminCreateTeamMember({
           name: this.formName,
           title: this.formTitle,
         });
+        if (this.pendingPhotoFile()) {
+          await this.api.adminUploadTeamPhoto(created._id, this.pendingPhotoFile()!);
+        }
         this.toast.success('Miembro agregado');
       }
       this.showForm.set(false);
@@ -255,20 +282,45 @@ export class AdminTeamEditorComponent implements OnInit {
     }
   }
 
-  async onPhotoSelected(event: Event): Promise<void> {
+  onPhotoSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     const file = input.files?.[0];
-    const member = this.editingMember();
-    if (!file || !member) return;
-
-    try {
-      const updated = await this.api.adminUploadTeamPhoto(member._id, file);
-      this.editingMember.set(updated);
-      this.toast.success('Foto actualizada');
-      await this.loadTeam();
-    } catch {
-      this.toast.error('Error al subir foto');
-    }
+    if (!file) return;
+    this.setPhotoFile(file);
     input.value = '';
+  }
+
+  onPhotoDragOver(event: DragEvent): void {
+    event.preventDefault();
+  }
+
+  onPhotoDrop(event: DragEvent): void {
+    event.preventDefault();
+    const file = event.dataTransfer?.files?.[0];
+    if (!file) return;
+    if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type)) {
+      this.toast.error('Solo se permiten imagenes JPG, PNG o WebP');
+      return;
+    }
+    this.setPhotoFile(file);
+  }
+
+  removePendingPhoto(): void {
+    this.pendingPhotoFile.set(null);
+    this.photoPreviewUrl.set(null);
+  }
+
+  private setPhotoFile(file: File): void {
+    if (file.size > 5 * 1024 * 1024) {
+      this.toast.error('La imagen no debe superar 5MB');
+      return;
+    }
+    this.pendingPhotoFile.set(file);
+    // Create preview URL
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.photoPreviewUrl.set(reader.result as string);
+    };
+    reader.readAsDataURL(file);
   }
 }

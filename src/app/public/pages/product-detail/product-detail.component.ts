@@ -69,15 +69,15 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
 
   get brandName(): string {
     const p = this.product();
-    if (!p) return '';
-    if (typeof p.brand === 'object' && p.brand) return p.brand.name;
+    if (!p || !p.brand) return '';
+    if (typeof p.brand === 'object') return p.brand.name;
     return '';
   }
 
   get brandSlug(): string {
     const p = this.product();
-    if (!p) return '';
-    if (typeof p.brand === 'object' && p.brand) return p.brand.slug;
+    if (!p || !p.brand) return '';
+    if (typeof p.brand === 'object') return p.brand.slug;
     return '';
   }
 
@@ -85,9 +85,10 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
     const p = this.product();
     if (!p) return '#';
     const lang = this.i18n.currentLang();
+    const brandPart = this.brandName ? (lang === 'es' ? ` de ${this.brandName}` : ` by ${this.brandName}`) : '';
     const msg = lang === 'es'
-      ? `Hola, me interesa el producto ${p.name.es} de ${this.brandName}. Me gustaria recibir informacion.`
-      : `Hello, I am interested in the product ${p.name.en} by ${this.brandName}. I would like to receive information.`;
+      ? `Hola, me interesa el producto ${p.name.es}${brandPart}. Me gustaria recibir informacion.`
+      : `Hello, I am interested in the product ${p.name.en}${brandPart}. I would like to receive information.`;
     return `https://wa.me/50622609020?text=${encodeURIComponent(msg)}`;
   }
 
@@ -131,8 +132,8 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
       // REQ-125: Dynamic meta tags
       const productName = this.i18n.t(product.name);
       const productDesc = this.i18n.t(product.description) || '';
-      const brandName = typeof product.brand === 'object' ? product.brand.name : '';
-      const metaTitle = product.metaTitle ? this.i18n.t(product.metaTitle) : `${productName} - ${brandName}`;
+      const brandName = typeof product.brand === 'object' && product.brand ? product.brand.name : '';
+      const metaTitle = product.metaTitle ? this.i18n.t(product.metaTitle) : (brandName ? `${productName} - ${brandName}` : productName);
       const metaDesc = product.metaDescription ? this.i18n.t(product.metaDescription) : productDesc.substring(0, 160);
 
       const catSlugEs = getCategorySlug(product.category, 'es');

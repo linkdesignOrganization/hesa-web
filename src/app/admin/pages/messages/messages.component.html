@@ -244,6 +244,7 @@
     [message]="'Estas seguro de eliminar el mensaje de ' + (deleteTarget()?.name || '') + '? Esta accion no se puede deshacer.'"
     confirmText="Eliminar"
     variant="danger"
+    [autoOpen]="true"
     (confirmed)="onDeleteConfirmed()"
     (cancelled)="onDeleteCancelled()" />
 }

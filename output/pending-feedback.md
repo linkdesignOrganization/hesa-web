@@ -244,3 +244,9 @@
 - Los collection names en Mongoose usan la opcion `collection: 'site_config'` (singular) en vez del pluralizado automatico de Mongoose (`site_configs`). Esto causo confusion durante la limpieza de BD. El developer debe documentar los collection names reales en el schema o en CLAUDE.md
 - Las imagenes seed referencian URLs en `hesastorage.blob.core.windows.net/seed/` que son un container que no existe (las URLs devolverian 404). Para proyectos futuros, los seeds deberian usar imagenes de Unsplash o placeholder services, no URLs ficticias de Blob Storage
 - El bundle size inicial de 155 kB (gzipped) es excelente para un proyecto Angular con MSAL, Bootstrap y un catalogo de productos. No se requiere optimizacion adicional
+
+### Feedback de: developer
+- El ConfirmModalComponent tenia un ngOnInit que auto-abria el modal (isOpen.set(true)). Esto funciona para el patron de renderizado condicional (@if) pero causa que modales siempre presentes en el template (via @ViewChild) aparezcan inmediatamente al cargar la pagina. Se agrego un input `autoOpen` para distinguir ambos patrones. Los componentes que usan renderizado condicional deben pasar [autoOpen]="true" explicitamente
+- Las categorias usaban window.prompt() y window.confirm() para agregar/eliminar valores. Estos dialogs del navegador estan prohibidos en el panel. Se reemplazaron por modales inline del panel con inputs, validacion y estados de carga
+- El formulario de productos tenia brand como required (Validators.required + asterisco rojo) pero segun el cliente debe ser opcional. Al hacer brand opcional, se deben actualizar en cascada: modelo backend (required -> default null), interfaz frontend (brand no-nullable -> nullable), y todas las vistas publicas que muestran brand name/link deben envolverse en @if para ocultar cuando es null
+- "Contacto" estaba duplicado en el sidebar bajo Contenido y bajo Configuracion. Debe existir solo en un lugar
