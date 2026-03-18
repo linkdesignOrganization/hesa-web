@@ -82,6 +82,48 @@ export interface ApiCategory {
   totalCount?: number;
 }
 
+export interface ApiHomeConfig {
+  _id: string;
+  hero: {
+    image?: string;
+    tag: { es: string; en: string };
+    headline: { es: string; en: string };
+    subtitle: { es: string; en: string };
+    ctaPrimary: { es: string; en: string };
+    ctaSecondary: { es: string; en: string };
+  };
+  featuredProducts: string[];
+  featuredBrands: string[];
+}
+
+export interface ApiHomePublic {
+  hero: ApiHomeConfig['hero'];
+  featuredProducts: ApiProduct[];
+  featuredBrands: ApiBrand[];
+}
+
+export interface ApiPageSection {
+  key: string;
+  label: { es: string; en: string };
+  value: { es: string; en: string };
+  type: 'text' | 'textarea' | 'image';
+}
+
+export interface ApiPageContent {
+  _id: string;
+  pageKey: string;
+  sections: ApiPageSection[];
+  heroImage?: string;
+}
+
+export interface ApiTeamMember {
+  _id: string;
+  name: { es: string; en: string };
+  title: { es: string; en: string };
+  photo?: string;
+  order: number;
+}
+
 export interface FilterValues {
   brands: { id: string; name: string; slug: string }[];
   species: string[];
@@ -313,6 +355,128 @@ export class ApiService {
   async adminUpdateCategory(key: string, data: Record<string, unknown>): Promise<ApiCategory> {
     return firstValueFrom(
       this.http.put<ApiCategory>(`${this.baseUrl}/admin/categories/${key}`, data)
+    );
+  }
+
+  // ==================== PUBLIC HOME/CONTENT/TEAM ====================
+
+  async getHomeData(): Promise<ApiHomePublic> {
+    return firstValueFrom(
+      this.http.get<ApiHomePublic>(`${this.baseUrl}/public/home`)
+    );
+  }
+
+  async getPageContent(pageKey: string): Promise<ApiPageContent> {
+    return firstValueFrom(
+      this.http.get<ApiPageContent>(`${this.baseUrl}/public/content/${pageKey}`)
+    );
+  }
+
+  async getTeamMembers(): Promise<ApiTeamMember[]> {
+    return firstValueFrom(
+      this.http.get<ApiTeamMember[]>(`${this.baseUrl}/public/team`)
+    );
+  }
+
+  // ==================== ADMIN HOME ====================
+
+  async adminGetHomeConfig(): Promise<ApiHomeConfig> {
+    return firstValueFrom(
+      this.http.get<ApiHomeConfig>(`${this.baseUrl}/admin/home`)
+    );
+  }
+
+  async adminUpdateHero(data: Record<string, unknown>): Promise<ApiHomeConfig> {
+    return firstValueFrom(
+      this.http.put<ApiHomeConfig>(`${this.baseUrl}/admin/home/hero`, data)
+    );
+  }
+
+  async adminUploadHeroImage(file: File): Promise<ApiHomeConfig> {
+    const formData = new FormData();
+    formData.append('image', file);
+    return firstValueFrom(
+      this.http.post<ApiHomeConfig>(`${this.baseUrl}/admin/home/hero/image`, formData)
+    );
+  }
+
+  async adminUpdateFeaturedProducts(productIds: string[]): Promise<ApiHomeConfig> {
+    return firstValueFrom(
+      this.http.put<ApiHomeConfig>(`${this.baseUrl}/admin/home/featured-products`, { productIds })
+    );
+  }
+
+  async adminUpdateFeaturedBrands(brandIds: string[]): Promise<ApiHomeConfig> {
+    return firstValueFrom(
+      this.http.put<ApiHomeConfig>(`${this.baseUrl}/admin/home/featured-brands`, { brandIds })
+    );
+  }
+
+  // ==================== ADMIN CONTENT ====================
+
+  async adminGetAllContent(): Promise<ApiPageContent[]> {
+    return firstValueFrom(
+      this.http.get<ApiPageContent[]>(`${this.baseUrl}/admin/content`)
+    );
+  }
+
+  async adminGetPageContent(pageKey: string): Promise<ApiPageContent> {
+    return firstValueFrom(
+      this.http.get<ApiPageContent>(`${this.baseUrl}/admin/content/${pageKey}`)
+    );
+  }
+
+  async adminUpdatePageContent(pageKey: string, data: Record<string, unknown>): Promise<ApiPageContent> {
+    return firstValueFrom(
+      this.http.put<ApiPageContent>(`${this.baseUrl}/admin/content/${pageKey}`, data)
+    );
+  }
+
+  async adminUploadContentImage(pageKey: string, file: File): Promise<ApiPageContent> {
+    const formData = new FormData();
+    formData.append('image', file);
+    return firstValueFrom(
+      this.http.post<ApiPageContent>(`${this.baseUrl}/admin/content/${pageKey}/image`, formData)
+    );
+  }
+
+  // ==================== ADMIN TEAM ====================
+
+  async adminGetTeam(): Promise<ApiTeamMember[]> {
+    return firstValueFrom(
+      this.http.get<ApiTeamMember[]>(`${this.baseUrl}/admin/team`)
+    );
+  }
+
+  async adminCreateTeamMember(data: Record<string, unknown>): Promise<ApiTeamMember> {
+    return firstValueFrom(
+      this.http.post<ApiTeamMember>(`${this.baseUrl}/admin/team`, data)
+    );
+  }
+
+  async adminUpdateTeamMember(id: string, data: Record<string, unknown>): Promise<ApiTeamMember> {
+    return firstValueFrom(
+      this.http.put<ApiTeamMember>(`${this.baseUrl}/admin/team/${id}`, data)
+    );
+  }
+
+  async adminDeleteTeamMember(id: string): Promise<void> {
+    await firstValueFrom(
+      this.http.delete(`${this.baseUrl}/admin/team/${id}`)
+    );
+  }
+
+  async adminUploadTeamPhoto(id: string, file: File): Promise<ApiTeamMember> {
+    const formData = new FormData();
+    formData.append('image', file);
+    return firstValueFrom(
+      this.http.post<ApiTeamMember>(`${this.baseUrl}/admin/team/${id}/photo`, formData)
+    );
+  }
+
+  async adminReorderTeam(orderedIds: string[]): Promise<ApiTeamMember[]> {
+    return firstValueFrom(
+      this.http.put<ApiTeamMember[]>(`${this.baseUrl}/admin/team/reorder`, { orderedIds })
     );
   }
 

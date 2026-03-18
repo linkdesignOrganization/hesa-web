@@ -9,4 +9,5 @@ import { Component, input } from '@angular/core';
 export class TeamMemberCardComponent {
   name = input('');
   title = input('');
+  photo = input('');
 }

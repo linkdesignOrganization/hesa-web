@@ -1,7 +1,8 @@
 import { Component, inject, signal, OnInit, AfterViewInit, OnDestroy, ElementRef } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { ValueStatComponent } from '../../components/value-stat/value-stat.component';
 import { TeamMemberCardComponent } from '../../components/team-member-card/team-member-card.component';
-import { MockDataService, TeamMember } from '../../../shared/services/mock-data.service';
+import { ApiService, ApiTeamMember, ApiPageContent } from '../../../shared/services/api.service';
 import { I18nService } from '../../../shared/services/i18n.service';
 import { SeoService } from '../../../shared/services/seo.service';
 import { initFadeInObserver } from '../../../shared/utils/fade-in-observer';
@@ -9,19 +10,21 @@ import { initFadeInObserver } from '../../../shared/utils/fade-in-observer';
 @Component({
   selector: 'app-about',
   standalone: true,
-  imports: [ValueStatComponent, TeamMemberCardComponent],
+  imports: [ValueStatComponent, TeamMemberCardComponent, RouterLink],
   templateUrl: './about.component.html',
   styleUrl: './about.component.scss'
 })
 export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
-  private mockData = inject(MockDataService);
+  private api = inject(ApiService);
   private seo = inject(SeoService);
   i18n = inject(I18nService);
   private el = inject(ElementRef);
   private fadeObserver: IntersectionObserver | null = null;
 
-  team = signal<TeamMember[]>([]);
+  team = signal<ApiTeamMember[]>([]);
   loading = signal(true);
+  content = signal<ApiPageContent | null>(null);
+  policiesContent = signal<ApiPageContent | null>(null);
 
   stats = [
     { number: '37', suffix: '+', label: { es: 'Anos de trayectoria', en: 'Years of experience' } },
@@ -42,9 +45,39 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
     });
     this.seo.setHreflang('/es/nosotros', '/en/about');
 
-    const data = await this.mockData.getTeam();
-    this.team.set(data);
+    // Load data from API (including politicas content for REQ-162 to REQ-166)
+    try {
+      const [teamData, contentData, policiesData] = await Promise.all([
+        this.api.getTeamMembers(),
+        this.api.getPageContent('nosotros'),
+        this.api.getPageContent('politicas'),
+      ]);
+      this.team.set(teamData);
+      this.content.set(contentData);
+      this.policiesContent.set(policiesData);
+    } catch {
+      // Graceful fallback — page still shows with hardcoded defaults
+    }
     this.loading.set(false);
+  }
+
+  /** Helper to get section value from loaded content */
+  getSectionValue(key: string): { es: string; en: string } {
+    const section = this.content()?.sections?.find(s => s.key === key);
+    return section?.value || { es: '', en: '' };
+  }
+
+  /** Get localized section value */
+  getSection(key: string): string {
+    const val = this.getSectionValue(key);
+    return this.i18n.t(val) || '';
+  }
+
+  /** Get localized section value from politicas content (REQ-162 to REQ-166) */
+  getPolicySection(key: string): string {
+    const section = this.policiesContent()?.sections?.find(s => s.key === key);
+    if (!section) return '';
+    return this.i18n.t(section.value) || '';
   }
 
   ngAfterViewInit(): void {

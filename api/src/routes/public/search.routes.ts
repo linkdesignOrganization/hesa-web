@@ -23,8 +23,9 @@ router.get('/', searchRateLimit, async (req: Request, res: Response) => {
       return;
     }
 
-    // Truncate and sanitize search term
-    const term = rawTerm.substring(0, 100).trim();
+    // Truncate and sanitize search term — strip control characters
+    // eslint-disable-next-line no-control-regex
+    const term = rawTerm.substring(0, 100).replace(/[\x00-\x1f\x7f]/g, '').trim();
 
     const results = await searchService.globalSearch(term, lang, limit);
     res.json(results);

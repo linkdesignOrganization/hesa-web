@@ -71,6 +71,18 @@
     }
   }
 
+  &__logo-img {
+    max-width: 120px;
+    max-height: 80px;
+    object-fit: contain;
+    filter: grayscale(100%) opacity(0.6);
+    transition: filter 0.3s ease-out;
+  }
+
+  &__logo:hover &__logo-img {
+    filter: grayscale(0%) opacity(1);
+  }
+
   &__logo-initial {
     display: flex;
     align-items: center;

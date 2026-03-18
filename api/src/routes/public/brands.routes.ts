@@ -4,6 +4,12 @@ import * as productService from '../../services/product.service';
 
 const router = Router();
 
+/** Safely extract a string query param, truncated to maxLen. */
+function safeQueryString(value: unknown, maxLen = 100): string | undefined {
+  if (typeof value !== 'string' || !value.trim()) return undefined;
+  return value.substring(0, maxLen).trim();
+}
+
 /**
  * GET /api/public/brands
  * Public brands listing.
@@ -75,11 +81,11 @@ router.get('/:slug/products', async (req: Request, res: Response) => {
     const result = await productService.getProducts({
       brand: String(brand._id),
       isActive: true,
-      category: (req.query.category as string)?.substring(0, 100),
-      species: (req.query.species as string)?.substring(0, 100),
-      family: (req.query.family as string)?.substring(0, 100),
-      lifeStage: (req.query.lifeStage as string)?.substring(0, 100),
-      equipmentType: (req.query.equipmentType as string)?.substring(0, 100),
+      category: safeQueryString(req.query.category),
+      species: safeQueryString(req.query.species),
+      family: safeQueryString(req.query.family),
+      lifeStage: safeQueryString(req.query.lifeStage),
+      equipmentType: safeQueryString(req.query.equipmentType),
       page,
       limit,
     });

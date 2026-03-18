@@ -2,10 +2,13 @@
 
 <!-- Hero -->
 <section class="about-hero">
+  @if (content()?.heroImage) {
+    <div class="about-hero__bg" [style.background-image]="'url(' + content()!.heroImage + ')'"></div>
+  }
   <div class="about-hero__overlay"></div>
   <div class="container about-hero__content">
-    <h1 class="about-hero__title">{{ i18n.currentLang() === 'es' ? 'Herrera y Elizondo S.A.' : 'Herrera y Elizondo S.A.' }}</h1>
-    <p class="about-hero__subtitle">{{ i18n.currentLang() === 'es' ? 'Desde 1989, conectando la industria veterinaria costarricense con las mejores marcas del mundo' : 'Since 1989, connecting the Costa Rican veterinary industry with the world\'s best brands' }}</p>
+    <h1 class="about-hero__title">{{ getSection('heroTitle') || (i18n.currentLang() === 'es' ? 'Herrera y Elizondo S.A.' : 'Herrera y Elizondo S.A.') }}</h1>
+    <p class="about-hero__subtitle">{{ getSection('heroSubtitle') || (i18n.currentLang() === 'es' ? 'Desde 1989, conectando la industria veterinaria costarricense con las mejores marcas del mundo' : 'Since 1989, connecting the Costa Rican veterinary industry with the world\'s best brands') }}</p>
   </div>
 </section>
 
@@ -15,8 +18,8 @@
     <div class="about-history">
       <div class="about-history__block fade-in-section">
         <div class="about-history__text">
-          <h2 class="text-h3">{{ i18n.currentLang() === 'es' ? 'Nuestra Historia' : 'Our History' }}</h2>
-          <p>{{ i18n.currentLang() === 'es' ? 'HESA nacio en 1989 como una empresa familiar costarricense dedicada a la importacion y distribucion de productos para la salud animal. Fundada por la familia Herrera y Elizondo, la empresa ha crecido durante dos generaciones hasta convertirse en uno de los distribuidores mas importantes del sector veterinario en Costa Rica.' : 'HESA was born in 1989 as a Costa Rican family business dedicated to the import and distribution of animal health products. Founded by the Herrera and Elizondo family, the company has grown over two generations to become one of the most important distributors in the veterinary sector in Costa Rica.' }}</p>
+          <h2 class="text-h3">{{ getSection('historyTitle') || (i18n.currentLang() === 'es' ? 'Nuestra Historia' : 'Our History') }}</h2>
+          <p>{{ getSection('historyContent') || (i18n.currentLang() === 'es' ? 'HESA nacio en 1989 como una empresa familiar costarricense dedicada a la importacion y distribucion de productos para la salud animal. Fundada por la familia Herrera y Elizondo, la empresa ha crecido durante dos generaciones hasta convertirse en uno de los distribuidores mas importantes del sector veterinario en Costa Rica.' : 'HESA was born in 1989 as a Costa Rican family business dedicated to the import and distribution of animal health products. Founded by the Herrera and Elizondo family, the company has grown over two generations to become one of the most important distributors in the veterinary sector in Costa Rica.') }}</p>
         </div>
         <div class="about-history__image">
           <div class="about-history__image-placeholder">
@@ -26,8 +29,8 @@
       </div>
       <div class="about-history__block about-history__block--reverse fade-in-section">
         <div class="about-history__text">
-          <h2 class="text-h3">{{ i18n.currentLang() === 'es' ? 'Nuestra Mision' : 'Our Mission' }}</h2>
-          <p>{{ i18n.currentLang() === 'es' ? 'Distribuir productos veterinarios de la mas alta calidad, garantizando disponibilidad, servicio tecnico y cobertura nacional. Somos el puente entre los fabricantes internacionales y los profesionales veterinarios costarricenses.' : 'To distribute veterinary products of the highest quality, guaranteeing availability, technical service and national coverage. We are the bridge between international manufacturers and Costa Rican veterinary professionals.' }}</p>
+          <h2 class="text-h3">{{ getSection('missionTitle') || (i18n.currentLang() === 'es' ? 'Nuestra Mision' : 'Our Mission') }}</h2>
+          <p>{{ getSection('missionContent') || (i18n.currentLang() === 'es' ? 'Distribuir productos veterinarios de la mas alta calidad, garantizando disponibilidad, servicio tecnico y cobertura nacional. Somos el puente entre los fabricantes internacionales y los profesionales veterinarios costarricenses.' : 'To distribute veterinary products of the highest quality, guaranteeing availability, technical service and national coverage. We are the bridge between international manufacturers and Costa Rican veterinary professionals.') }}</p>
         </div>
         <div class="about-history__image">
           <div class="about-history__image-placeholder">
@@ -54,8 +57,8 @@
 <!-- Coverage Map -->
 <section class="section-spacing">
   <div class="container about-coverage">
-    <h2 class="text-h2" style="text-align: center; margin-bottom: 16px;">{{ i18n.currentLang() === 'es' ? 'Cobertura Nacional' : 'National Coverage' }}</h2>
-    <p class="about-coverage__subtitle">{{ i18n.currentLang() === 'es' ? 'Llegamos a todo Costa Rica con visitas quincenales y flotilla propia de entrega' : 'We reach all of Costa Rica with biweekly visits and our own delivery fleet' }}</p>
+    <h2 class="text-h2" style="text-align: center; margin-bottom: 16px;">{{ getSection('coverageTitle') || (i18n.currentLang() === 'es' ? 'Cobertura Nacional' : 'National Coverage') }}</h2>
+    <p class="about-coverage__subtitle">{{ getSection('coverageSubtitle') || (i18n.currentLang() === 'es' ? 'Llegamos a todo Costa Rica con visitas quincenales y flotilla propia de entrega' : 'We reach all of Costa Rica with biweekly visits and our own delivery fleet') }}</p>
     <div class="about-coverage__map">
       <div class="about-coverage__map-placeholder">
         <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="var(--brand-primary)" stroke-width="1" opacity="0.3"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
@@ -70,14 +73,57 @@
   </div>
 </section>
 
-<!-- Team -->
+<!-- Commercial Policies — REQ-162 to REQ-166 -->
+<section class="section-spacing about-policies">
+  <div class="container">
+    <h2 class="text-h2" style="text-align: center; margin-bottom: 16px;">{{ i18n.currentLang() === 'es' ? 'Politicas Comerciales' : 'Commercial Policies' }}</h2>
+    <p class="about-policies__intro">{{ i18n.currentLang() === 'es' ? 'Conozca nuestras condiciones de credito, tiempos de entrega y cobertura para ofrecer el mejor servicio a nuestros clientes.' : 'Learn about our credit terms, delivery times, and coverage to provide the best service to our clients.' }}</p>
+
+    <div class="about-policies__grid">
+      <!-- REQ-162: Credit Terms -->
+      <div class="about-policies__card fade-in-section">
+        <div class="about-policies__icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--brand-primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+        </div>
+        <h3 class="about-policies__title">{{ getPolicySection('creditTitle') || (i18n.currentLang() === 'es' ? 'Politicas de Credito' : 'Credit Policies') }}</h3>
+        <p class="about-policies__text">{{ getPolicySection('creditContent') || (i18n.currentLang() === 'es' ? 'Ofrecemos condiciones de credito flexibles para nuestros clientes. Los plazos de pago se definen segun el historial comercial y el volumen de compra. Consulte con su agente de ventas para conocer las condiciones personalizadas.' : 'We offer flexible credit conditions for our clients. Payment terms are defined based on commercial history and purchase volume. Consult with your sales agent for personalized conditions.') }}</p>
+      </div>
+
+      <!-- REQ-163: Delivery Times -->
+      <div class="about-policies__card fade-in-section">
+        <div class="about-policies__icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--brand-primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <h3 class="about-policies__title">{{ getPolicySection('deliveryTitle') || (i18n.currentLang() === 'es' ? 'Tiempos de Entrega' : 'Delivery Times') }}</h3>
+        <p class="about-policies__text">{{ getPolicySection('deliveryContent') || (i18n.currentLang() === 'es' ? 'Gran Area Metropolitana: 24-48 horas. Zonas rurales: 2-3 dias habiles. Zonas muy alejadas: servicio de encomienda disponible. Nuestros agentes de ventas realizan visitas quincenales a todos los clientes.' : 'Greater Metropolitan Area: 24-48 hours. Rural areas: 2-3 business days. Remote areas: package delivery service available. Our sales agents make biweekly visits to all clients.') }}</p>
+      </div>
+
+      <!-- REQ-164: Delivery Coverage -->
+      <div class="about-policies__card fade-in-section">
+        <div class="about-policies__icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--brand-primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        </div>
+        <h3 class="about-policies__title">{{ getPolicySection('coverageTitle') || (i18n.currentLang() === 'es' ? 'Cobertura de Entrega' : 'Delivery Coverage') }}</h3>
+        <p class="about-policies__text">{{ getPolicySection('coverageContent') || (i18n.currentLang() === 'es' ? 'Contamos con flotilla propia de entrega, agentes en todas las zonas del pais y servicio de encomienda para zonas muy alejadas. Nuestros 18-20 agentes de ventas propios cubren todo el territorio nacional con visitas quincenales.' : 'We have our own delivery fleet, agents in all areas of the country and package delivery service for very remote areas. Our 18-20 own sales agents cover the entire national territory with biweekly visits.') }}</p>
+      </div>
+    </div>
+
+    <!-- REQ-166: CTA to contact for commercial conditions -->
+    <div class="about-policies__cta">
+      <p>{{ i18n.currentLang() === 'es' ? 'Solicite condiciones comerciales personalizadas para su negocio' : 'Request personalized commercial conditions for your business' }}</p>
+      <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'contacto' : 'contact')" class="btn btn-primary">{{ i18n.currentLang() === 'es' ? 'Solicitar Condiciones' : 'Request Conditions' }}</a>
+    </div>
+  </div>
+</section>
+
+<!-- Team — REQ-172 to REQ-173c -->
 @if (team().length > 0) {
   <section class="section-spacing">
     <div class="container">
       <h2 class="text-h2" style="text-align: center; margin-bottom: 48px;">{{ i18n.currentLang() === 'es' ? 'Equipo de Liderazgo' : 'Leadership Team' }}</h2>
       <div class="about-team__grid">
-        @for (member of team(); track member.id) {
-          <app-team-member-card [name]="member.name" [title]="i18n.t(member.title)" />
+        @for (member of team(); track member._id) {
+          <app-team-member-card [name]="i18n.t(member.name)" [title]="i18n.t(member.title)" [photo]="member.photo || ''" />
         }
       </div>
     </div>

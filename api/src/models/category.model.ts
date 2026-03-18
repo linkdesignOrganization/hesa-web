@@ -1,4 +1,5 @@
 import mongoose, { Schema, Document } from 'mongoose';
+import { bilingualField } from './shared-schema';
 
 export interface ICategory extends Document {
   key: 'farmacos' | 'alimentos' | 'equipos';
@@ -11,11 +12,6 @@ export interface ICategory extends Document {
   createdAt: Date;
   updatedAt: Date;
 }
-
-const bilingualField = {
-  es: { type: String, default: '' },
-  en: { type: String, default: '' },
-};
 
 const categorySchema = new Schema<ICategory>(
   {

@@ -2,14 +2,19 @@ import { Request, Response, NextFunction } from 'express';
 
 /**
  * Sanitize string fields to prevent XSS injection.
- * Strips all HTML tags, script content, and event handlers.
+ * Strips all HTML tags, script content, event handlers,
+ * null bytes, and encoded JavaScript URIs.
  */
 function sanitizeString(value: string): string {
   return value
+    // eslint-disable-next-line no-control-regex
+    .replace(/\x00/g, '')
     .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
     .replace(/on\w+\s*=\s*["'][^"']*["']/gi, '')
     .replace(/<[^>]*>/g, '')
     .replace(/javascript\s*:/gi, '')
+    .replace(/data\s*:\s*text\/html/gi, '')
+    .replace(/vbscript\s*:/gi, '')
     .trim();
 }
 

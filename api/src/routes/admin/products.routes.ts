@@ -1,47 +1,20 @@
 import { Router, Response } from 'express';
+import mongoose from 'mongoose';
 import { AuthRequest } from '../../middleware/auth.middleware';
 import { sanitizeBody, requireFields } from '../../middleware/validate.middleware';
+import { adminUploadImages, adminUploadPdf } from '../../middleware/admin-upload.middleware';
 import * as productService from '../../services/product.service';
 import * as storageService from '../../services/storage.service';
 import { logActivity } from '../../services/activity-log.service';
 import { generateProductSlugs } from '../../utils/slug';
 import { processImageSingle } from '../../utils/image-processor';
-import multer from 'multer';
 
 const router = Router();
 
-// NFR-019: Validate file type and size on upload (BUG-009)
-const ALLOWED_IMAGE_MIMETYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/svg+xml'];
-const ALLOWED_PDF_MIMETYPES = ['application/pdf'];
-const ALLOWED_ALL_MIMETYPES = [...ALLOWED_IMAGE_MIMETYPES, ...ALLOWED_PDF_MIMETYPES];
-
-const imageFileFilter = (_req: unknown, file: Express.Multer.File, cb: multer.FileFilterCallback) => {
-  if (ALLOWED_IMAGE_MIMETYPES.includes(file.mimetype)) {
-    cb(null, true);
-  } else {
-    cb(new Error(`Invalid file type: ${file.mimetype}. Only images are allowed (JPEG, PNG, WebP, GIF, SVG).`));
-  }
-};
-
-const pdfFileFilter = (_req: unknown, file: Express.Multer.File, cb: multer.FileFilterCallback) => {
-  if (ALLOWED_PDF_MIMETYPES.includes(file.mimetype)) {
-    cb(null, true);
-  } else {
-    cb(new Error(`Invalid file type: ${file.mimetype}. Only PDF files are allowed.`));
-  }
-};
-
-const uploadImages = multer({
-  storage: multer.memoryStorage(),
-  limits: { fileSize: 5 * 1024 * 1024 },
-  fileFilter: imageFileFilter,
-});
-
-const uploadPdf = multer({
-  storage: multer.memoryStorage(),
-  limits: { fileSize: 5 * 1024 * 1024 },
-  fileFilter: pdfFileFilter,
-});
+/** Validate that :id is a valid MongoDB ObjectId. */
+function isValidId(id: string): boolean {
+  return mongoose.isValidObjectId(id);
+}
 
 /**
  * GET /api/admin/products
@@ -75,6 +48,10 @@ router.get('/', async (req: AuthRequest, res: Response) => {
  */
 router.get('/:id', async (req: AuthRequest, res: Response) => {
   try {
+    if (!isValidId(req.params.id)) {
+      res.status(400).json({ error: 'Invalid product ID' });
+      return;
+    }
     const product = await productService.getProductById(req.params.id);
     if (!product) {
       res.status(404).json({ error: 'Product not found' });
@@ -221,7 +198,7 @@ router.delete('/:id', async (req: AuthRequest, res: Response) => {
  * Upload images for a product.
  * REQ-243, REQ-244, REQ-253, REQ-254
  */
-router.post('/:id/images', uploadImages.array('images', 6), async (req: AuthRequest, res: Response) => {
+router.post('/:id/images', adminUploadImages.array('images', 6), async (req: AuthRequest, res: Response) => {
   try {
     const product = await productService.getProductById(req.params.id);
     if (!product) {
@@ -288,7 +265,7 @@ router.delete('/:id/images/:imageIndex', async (req: AuthRequest, res: Response)
  * Upload PDF for a product.
  * REQ-243, REQ-245
  */
-router.post('/:id/pdf', uploadPdf.single('pdf'), async (req: AuthRequest, res: Response) => {
+router.post('/:id/pdf', adminUploadPdf.single('pdf'), async (req: AuthRequest, res: Response) => {
   try {
     const product = await productService.getProductById(req.params.id);
     if (!product) {

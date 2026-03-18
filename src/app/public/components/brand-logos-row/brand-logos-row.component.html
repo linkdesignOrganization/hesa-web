@@ -3,9 +3,13 @@
     <h2 class="logos-section__title">{{ i18n.currentLang() === 'es' ? 'Marcas Destacadas' : 'Featured Brands' }}</h2>
     <p class="logos-section__subtitle">{{ i18n.currentLang() === 'es' ? 'Distribuimos las mejores marcas internacionales de salud animal' : 'We distribute the best international animal health brands' }}</p>
     <div class="logos-section__grid" role="list">
-      @for (brand of featuredBrands(); track brand.id) {
+      @for (brand of featuredBrands(); track brand._id) {
         <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'marcas' : 'brands') + '/' + brand.slug" class="logos-section__logo" role="listitem" [attr.aria-label]="(i18n.currentLang() === 'es' ? 'Ver productos de ' : 'View products by ') + brand.name">
-          <span class="logos-section__logo-initial">{{ brand.logoPlaceholder }}</span>
+          @if (brand.logo) {
+            <img [src]="brand.logo" [alt]="brand.name" class="logos-section__logo-img">
+          } @else {
+            <span class="logos-section__logo-initial">{{ brand.name.charAt(0) }}</span>
+          }
           <span class="logos-section__logo-name">{{ brand.name }}</span>
         </a>
       }

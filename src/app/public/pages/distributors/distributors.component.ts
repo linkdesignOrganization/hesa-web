@@ -1,7 +1,8 @@
-import { Component, inject, AfterViewInit, OnInit, OnDestroy, ElementRef } from '@angular/core';
+import { Component, inject, signal, AfterViewInit, OnInit, OnDestroy, ElementRef } from '@angular/core';
 import { TimelineComponent } from '../../components/timeline/timeline.component';
 import { ContactFormComponent } from '../../components/contact-form/contact-form.component';
 import { BrandLogosRowComponent } from '../../components/brand-logos-row/brand-logos-row.component';
+import { ApiService, ApiPageContent } from '../../../shared/services/api.service';
 import { I18nService } from '../../../shared/services/i18n.service';
 import { SeoService } from '../../../shared/services/seo.service';
 import { initFadeInObserver } from '../../../shared/utils/fade-in-observer';
@@ -16,9 +17,12 @@ import { initFadeInObserver } from '../../../shared/utils/fade-in-observer';
 export class DistributorsComponent implements OnInit, AfterViewInit, OnDestroy {
   private el = inject(ElementRef);
   private seo = inject(SeoService);
+  private api = inject(ApiService);
   i18n = inject(I18nService);
   private fadeObserver: IntersectionObserver | null = null;
   private timelineObserver: IntersectionObserver | null = null;
+
+  content = signal<ApiPageContent | null>(null);
 
   benefits = [
     { icon: 'globe', title: { es: 'Cobertura Nacional', en: 'National Coverage' }, desc: { es: 'Red de distribucion propia en todo Costa Rica', en: 'Own distribution network throughout Costa Rica' } },
@@ -26,20 +30,35 @@ export class DistributorsComponent implements OnInit, AfterViewInit, OnDestroy {
     { icon: 'shield', title: { es: 'Cadena de Frio', en: 'Cold Chain' }, desc: { es: 'Almacenamiento y transporte con control de temperatura', en: 'Storage and transport with temperature control' } },
     { icon: 'users', title: { es: 'Equipo Comercial', en: 'Commercial Team' }, desc: { es: '50+ colaboradores especializados en salud animal', en: '50+ collaborators specialized in animal health' } },
     { icon: 'award', title: { es: '37 Anos de Experiencia', en: '37 Years of Experience' }, desc: { es: 'Empresa familiar con trayectoria comprobada', en: 'Family business with a proven track record' } },
-    { icon: 'trending-up', title: { es: 'Mercado en Crecimiento', en: 'Growing Market' }, desc: { es: 'Costa Rica, puerta de entrada a Centroamerica', en: 'Costa Rica, gateway to Central America' } }
+    { icon: 'trending-up', title: { es: 'Mercado en Crecimiento', en: 'Growing Market' }, desc: { es: 'Sector veterinario en expansion con alta demanda de productos de calidad', en: 'Expanding veterinary sector with high demand for quality products' } }
   ];
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     // REQ-181: SEO meta tags for distributors page
     const lang = this.i18n.currentLang();
     this.seo.setMetaTags({
       title: lang === 'es' ? 'Distribuidores' : 'Become a Distributor',
       description: lang === 'es'
-        ? 'HESA es su socio estrategico para la distribucion de productos veterinarios en Costa Rica y Centroamerica.'
-        : 'Partner with HESA, a leading veterinary distributor in Costa Rica. 37+ years distributing pharmaceuticals, animal food, and veterinary equipment across Central America.',
+        ? 'HESA es su socio estrategico para la distribucion de productos veterinarios en Costa Rica. 37+ anos distribuyendo farmacos, alimentos y equipos veterinarios.'
+        : 'Partner with HESA, a leading veterinary distributor in Costa Rica. 37+ years distributing pharmaceuticals, animal food, and veterinary equipment nationwide.',
       url: `/${lang}/${lang === 'es' ? 'distribuidores' : 'distributors'}`,
     });
     this.seo.setHreflang('/es/distribuidores', '/en/distributors');
+
+    // Load page content from API
+    try {
+      const pageContent = await this.api.getPageContent('distribuidores');
+      this.content.set(pageContent);
+    } catch {
+      // Silent fallback — use hardcoded defaults in template
+    }
+  }
+
+  /** Helper to get section value from loaded content */
+  getSection(key: string): string {
+    const section = this.content()?.sections?.find(s => s.key === key);
+    if (!section) return '';
+    return this.i18n.t(section.value) || '';
   }
 
   ngAfterViewInit(): void {

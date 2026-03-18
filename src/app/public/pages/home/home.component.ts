@@ -5,7 +5,7 @@ import { ProductCardComponent } from '../../components/product-card/product-card
 import { ValueStatComponent } from '../../components/value-stat/value-stat.component';
 import { BrandLogosRowComponent } from '../../components/brand-logos-row/brand-logos-row.component';
 import { ManufacturerCtaComponent } from '../../components/manufacturer-cta/manufacturer-cta.component';
-import { MockDataService, Product, Brand } from '../../../shared/services/mock-data.service';
+import { ApiService, ApiProduct, ApiBrand, ApiHomePublic } from '../../../shared/services/api.service';
 import { I18nService } from '../../../shared/services/i18n.service';
 import { SeoService } from '../../../shared/services/seo.service';
 import { initFadeInObserver } from '../../../shared/utils/fade-in-observer';
@@ -25,14 +25,14 @@ import { initFadeInObserver } from '../../../shared/utils/fade-in-observer';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
-  private mockData = inject(MockDataService);
+  private api = inject(ApiService);
   i18n = inject(I18nService);
   private seo = inject(SeoService);
   private el = inject(ElementRef);
   private fadeObserver: IntersectionObserver | null = null;
 
-  featuredProducts = signal<Product[]>([]);
-  featuredBrands = signal<Brand[]>([]);
+  featuredProducts = signal<ApiProduct[]>([]);
+  featuredBrands = signal<ApiBrand[]>([]);
   heroLoading = signal(true);
   productsLoading = signal(true);
   brandsLoading = signal(true);
@@ -40,7 +40,13 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   productsError = signal(false);
   brandsError = signal(false);
 
-  hero = this.mockData.getHero();
+  hero = signal<ApiHomePublic['hero']>({
+    tag: { es: 'DESDE 1989', en: 'SINCE 1989' },
+    headline: { es: 'Conectamos la industria veterinaria con las mejores marcas del mundo', en: 'Connecting the veterinary industry with the world\'s best brands' },
+    subtitle: { es: 'Importacion y distribucion de farmacos veterinarios, alimentos para animales y equipos veterinarios en Costa Rica', en: 'Import and distribution of veterinary pharmaceuticals, animal food, and veterinary equipment in Costa Rica' },
+    ctaPrimary: { es: 'Explorar catalogo', en: 'Explore catalog' },
+    ctaSecondary: { es: 'Distribuya con nosotros', en: 'Partner with us' },
+  });
 
   stats = [
     { number: '37', suffix: '+', label: { es: 'Anos de experiencia en el sector veterinario', en: 'Years of experience in the veterinary sector' } },
@@ -64,24 +70,29 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     this.seo.setHreflang('/es', '/en');
     this.seo.setOrganizationSchema();
 
-    // Simulate independent section loading
-    setTimeout(() => this.heroLoading.set(false), 600);
-
+    // Load all home data from API
     try {
-      const products = await this.mockData.getFeaturedProducts();
-      this.featuredProducts.set(products);
+      const homeData = await this.api.getHomeData();
+
+      // Hero
+      this.hero.set(homeData.hero);
+      this.heroLoading.set(false);
+
+      // Featured products
+      this.featuredProducts.set(homeData.featuredProducts);
+      this.productsLoading.set(false);
+
+      // Featured brands
+      this.featuredBrands.set(homeData.featuredBrands);
+      this.brandsLoading.set(false);
     } catch {
+      this.heroLoading.set(false);
+      this.heroError.set(true);
+      this.productsLoading.set(false);
       this.productsError.set(true);
-    }
-    this.productsLoading.set(false);
-
-    try {
-      const brands = await this.mockData.getFeaturedBrands();
-      this.featuredBrands.set(brands);
-    } catch {
+      this.brandsLoading.set(false);
       this.brandsError.set(true);
     }
-    this.brandsLoading.set(false);
   }
 
   private readonly PRODUCTS_PER_SLIDE = 6;

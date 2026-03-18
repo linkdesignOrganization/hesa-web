@@ -1,31 +1,15 @@
 import { Router, Response } from 'express';
+import mongoose from 'mongoose';
 import { AuthRequest } from '../../middleware/auth.middleware';
 import { sanitizeBody, requireFields } from '../../middleware/validate.middleware';
+import { adminUploadSingleImage } from '../../middleware/admin-upload.middleware';
 import * as brandService from '../../services/brand.service';
 import * as storageService from '../../services/storage.service';
 import { logActivity } from '../../services/activity-log.service';
 import { generateSlug } from '../../utils/slug';
 import { processImageSingle } from '../../utils/image-processor';
-import multer from 'multer';
 
 const router = Router();
-
-// NFR-019: Validate file type on upload (BUG-009)
-const ALLOWED_IMAGE_MIMETYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/svg+xml'];
-
-const imageFileFilter = (_req: unknown, file: Express.Multer.File, cb: multer.FileFilterCallback) => {
-  if (ALLOWED_IMAGE_MIMETYPES.includes(file.mimetype)) {
-    cb(null, true);
-  } else {
-    cb(new Error(`Invalid file type: ${file.mimetype}. Only images are allowed (JPEG, PNG, WebP, GIF, SVG).`));
-  }
-};
-
-const upload = multer({
-  storage: multer.memoryStorage(),
-  limits: { fileSize: 5 * 1024 * 1024 },
-  fileFilter: imageFileFilter,
-});
 
 /**
  * GET /api/admin/brands
@@ -48,6 +32,10 @@ router.get('/', async (_req: AuthRequest, res: Response) => {
  */
 router.get('/:id', async (req: AuthRequest, res: Response) => {
   try {
+    if (!mongoose.isValidObjectId(req.params.id)) {
+      res.status(400).json({ error: 'Invalid brand ID' });
+      return;
+    }
     const brand = await brandService.getBrandById(req.params.id);
     if (!brand) {
       res.status(404).json({ error: 'Brand not found' });
@@ -178,7 +166,7 @@ router.delete('/:id', async (req: AuthRequest, res: Response) => {
  * POST /api/admin/brands/:id/logo
  * Upload logo for a brand.
  */
-router.post('/:id/logo', upload.single('image'), async (req: AuthRequest, res: Response) => {
+router.post('/:id/logo', adminUploadSingleImage.single('image'), async (req: AuthRequest, res: Response) => {
   try {
     const brand = await brandService.getBrandById(req.params.id);
     if (!brand) {

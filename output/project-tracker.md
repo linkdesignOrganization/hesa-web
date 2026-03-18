@@ -5,7 +5,7 @@
 > Codigo/bugs → Developer | Testing → QA | Deploy → DevOps | Requirements → BA | Arquitectura → Architect | Visual Research → Design Researcher | UI/UX → Design Orchestrator
 
 ## Estado Actual
-**FASE 5 — Iteracion 1: Fundacion Backend + Catalogo Funcional** (en progreso)
+**FASE 5 — Iteracion 2: Home Administrable + Contenido Estatico + Equipo** (en progreso)
 
 ## Design Briefs
 - Detectados: `input/design-briefs/HESA_Brief_Agentes.md` (sitio publico) + `HESA_Brief_Panel_Administracion.md` (panel admin)
@@ -73,17 +73,17 @@
 - [x] 5d-regress: Regresion automatizada (434 passed, 0 failed)
 - [x] 5e: QA completado (4 rondas, 170/170 criterios, 0 bugs, LISTO_PARA_DEMO)
 - [x] 5e-verify: Verificacion post-QA (PASA)
-- [ ] 5f: Demo para el cliente
-- [ ] 5g: Feedback del cliente
-- [ ] 5h: Recopilar feedback
-- [ ] 5i: Distribucion y mantenimiento de feedback
-- [ ] 5j: Commit de iteracion
+- [x] 5f: Demo para el cliente
+- [x] 5g: Feedback (sin feedback)
+- [x] 5h: Recopilar feedback (N/A)
+- [x] 5i: Distribucion y mantenimiento de feedback (218 entradas procesadas, 4 memorias actualizadas)
+- [x] 5j: Commit de iteracion
 
 ### FASE 5 — Iteracion 2: Home Administrable + Contenido Estatico + Equipo
-- [ ] 5a: Developer implementa
-- [ ] 5a-verify: Verificacion post-Developer
-- [ ] 5b: Simplify
-- [ ] 5c: Security Review
+- [x] 5a: Developer implementa (home API, content CRUD, team CRUD, CDK drag-drop)
+- [x] 5a-verify: Verificacion (PASA, 8 gaps corregidos)
+- [x] 5b: Simplify (dedup multer/schema, unused imports)
+- [x] 5c: Security (pageKey whitelist, ObjectId validation, XSS gaps, 0 vulns)
 - [ ] 5d: Pre-QA Deploy
 - [ ] 5d-regress: Regresion automatizada pre-QA
 - [ ] 5e-plan: QA genera plan

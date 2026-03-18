@@ -1,4 +1,5 @@
 import mongoose, { Schema, Document } from 'mongoose';
+import { bilingualField } from './shared-schema';
 
 export interface IProduct extends Document {
   slug: { es: string; en: string };
@@ -34,11 +35,6 @@ export interface IProduct extends Document {
   createdAt: Date;
   updatedAt: Date;
 }
-
-const bilingualField = {
-  es: { type: String, default: '' },
-  en: { type: String, default: '' },
-};
 
 const productSchema = new Schema<IProduct>(
   {
