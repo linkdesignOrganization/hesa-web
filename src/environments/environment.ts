@@ -4,7 +4,7 @@ export const environment = {
   entra: {
     clientId: 'b18eec6f-d578-4525-bcdb-9dd6f33c0527',
     tenantId: '566e7def-c2ee-49b7-91e5-b045805f416a',
-    redirectUri: 'http://localhost:4200',
+    redirectUri: 'http://localhost:4200/admin/login',
     authority: 'https://login.microsoftonline.com/566e7def-c2ee-49b7-91e5-b045805f416a',
     scopes: ['User.Read']
   },
