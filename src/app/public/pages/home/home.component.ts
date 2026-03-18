@@ -58,7 +58,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       title: lang === 'es' ? 'Inicio' : 'Home',
       description: lang === 'es'
         ? 'HESA - Importacion y distribucion de farmacos veterinarios, alimentos para animales y equipos veterinarios en Costa Rica.'
-        : 'HESA - Import and distribution of veterinary pharmaceuticals, animal food, and veterinary equipment in Costa Rica.',
+        : 'HESA - Leading veterinary distributor in Costa Rica. Import and distribution of veterinary pharmaceuticals, animal food, and veterinary equipment. 37+ years of experience.',
       url: `/${lang}`,
     });
     this.seo.setHreflang('/es', '/en');
@@ -109,5 +109,6 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.fadeObserver?.disconnect();
+    this.seo.clearDynamicTags();
   }
 }

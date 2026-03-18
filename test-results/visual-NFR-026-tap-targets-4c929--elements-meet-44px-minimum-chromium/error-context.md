@@ -1,0 +1,255 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e2]:
+  - generic:
+    - navigation "Navegacion principal" [ref=e3]:
+      - generic [ref=e4]:
+        - link "HESA - Ir al inicio" [ref=e5] [cursor=pointer]:
+          - /url: /es
+          - generic [ref=e6]: HESA
+          - generic [ref=e7]: H
+        - generic [ref=e8]:
+          - button "Buscar productos y marcas" [ref=e9] [cursor=pointer]:
+            - img [ref=e10]
+          - listbox "Seleccionar idioma" [ref=e14]:
+            - button "ES" [ref=e15] [cursor=pointer]:
+              - generic [ref=e16]: ES
+              - img [ref=e17]
+          - button "Abrir menu" [ref=e19] [cursor=pointer]
+      - dialog "Menu de navegacion" [ref=e23]:
+        - button "Cerrar menu" [ref=e24] [cursor=pointer]:
+          - img [ref=e25]
+        - navigation [ref=e28]:
+          - link "Catalogo" [ref=e29] [cursor=pointer]:
+            - /url: /es/catalogo
+          - generic [ref=e30]:
+            - link "Farmacos Veterinarios" [ref=e31] [cursor=pointer]:
+              - /url: /es/catalogo/farmacos
+            - link "Alimentos para Animales" [ref=e32] [cursor=pointer]:
+              - /url: /es/catalogo/alimentos
+            - link "Equipos Veterinarios" [ref=e33] [cursor=pointer]:
+              - /url: /es/catalogo/equipos
+          - link "Marcas" [ref=e34] [cursor=pointer]:
+            - /url: /es/marcas
+          - link "Nosotros" [ref=e35] [cursor=pointer]:
+            - /url: /es/nosotros
+          - link "Distribuidores" [ref=e36] [cursor=pointer]:
+            - /url: /es/distribuidores
+          - link "Contacto" [ref=e37] [cursor=pointer]:
+            - /url: /es/contacto
+        - listbox "Seleccionar idioma" [ref=e40]:
+          - button "ES" [ref=e41] [cursor=pointer]:
+            - generic [ref=e42]: ES
+            - img [ref=e43]
+    - generic:
+      - search "Busqueda global":
+        - generic:
+          - button "Cerrar busqueda":
+            - img
+          - generic:
+            - img
+            - textbox "Buscar productos, marcas..."
+          - paragraph: Escribe al menos 3 caracteres
+  - generic [ref=e45]:
+    - generic [ref=e48]:
+      - generic [ref=e49]: DESDE 1989
+      - heading "Tu aliado veterinario de confianza en Costa Rica" [level=1] [ref=e50]
+      - paragraph [ref=e51]: Distribuimos farmacos, alimentos y equipos veterinarios para profesionales que exigen calidad
+      - generic [ref=e52]:
+        - link "Explorar catalogo" [ref=e53] [cursor=pointer]:
+          - /url: /es/catalogo
+        - link "Distribuya con nosotros" [ref=e54] [cursor=pointer]:
+          - /url: /es/distribuidores
+    - generic [ref=e57]:
+      - heading "Marcas Destacadas" [level=2] [ref=e58]
+      - paragraph [ref=e59]: Distribuimos las mejores marcas internacionales de salud animal
+      - list
+      - link "Ver todas las marcas" [ref=e60] [cursor=pointer]:
+        - /url: /es/marcas
+    - generic [ref=e63]:
+      - generic [ref=e65]:
+        - generic [ref=e66]:
+          - heading "Farmacos Veterinarios" [level=2] [ref=e67]
+          - paragraph [ref=e68]: Contamos con una linea completa de farmacos veterinarios de las mejores marcas internacionales para el tratamiento y prevencion de enfermedades en todas las especies.
+          - list [ref=e69]:
+            - listitem [ref=e70]:
+              - img [ref=e71]
+              - generic [ref=e73]: Antibioticos y antiparasitarios de ultima generacion
+            - listitem [ref=e74]:
+              - img [ref=e75]
+              - generic [ref=e77]: Formulas aprobadas por SENASA
+            - listitem [ref=e78]:
+              - img [ref=e79]
+              - generic [ref=e81]: Asesoramiento tecnico especializado
+          - link "Ver farmacos" [ref=e82] [cursor=pointer]:
+            - /url: /es/catalogo/farmacos
+        - img [ref=e85]
+      - generic [ref=e123]:
+        - generic [ref=e124]:
+          - heading "Alimentos para Animales" [level=2] [ref=e125]
+          - paragraph [ref=e126]: Ofrecemos las mejores marcas de nutricion animal para perros, gatos y otras especies, cubriendo todas las etapas de vida con formulas premium.
+          - list [ref=e127]:
+            - listitem [ref=e128]:
+              - img [ref=e129]
+              - generic [ref=e131]: Marcas premium internacionales
+            - listitem [ref=e132]:
+              - img [ref=e133]
+              - generic [ref=e135]: Nutricion especializada por etapa de vida
+            - listitem [ref=e136]:
+              - img [ref=e137]
+              - generic [ref=e139]: Lineas terapeuticas y de prescripcion
+          - link "Ver alimentos" [ref=e140] [cursor=pointer]:
+            - /url: /es/catalogo/alimentos
+        - img [ref=e143]
+      - generic [ref=e187]:
+        - generic [ref=e188]:
+          - heading "Equipos Veterinarios" [level=2] [ref=e189]
+          - paragraph [ref=e190]: Equipamiento profesional para clinicas y hospitales veterinarios, desde instrumental quirurgico hasta equipos de diagnostico de alta precision.
+          - list [ref=e191]:
+            - listitem [ref=e192]:
+              - img [ref=e193]
+              - generic [ref=e195]: Equipos de diagnostico avanzado
+            - listitem [ref=e196]:
+              - img [ref=e197]
+              - generic [ref=e199]: Instrumental quirurgico certificado
+            - listitem [ref=e200]:
+              - img [ref=e201]
+              - generic [ref=e203]: Soporte tecnico y capacitacion
+          - link "Ver equipos" [ref=e204] [cursor=pointer]:
+            - /url: /es/catalogo/equipos
+        - img [ref=e207]
+    - generic [ref=e243]:
+      - generic "37+ Anos de experiencia en el sector veterinario" [ref=e245]:
+        - img [ref=e247]
+        - generic [ref=e249]:
+          - text: 0+
+          - generic [ref=e250]: 37+
+        - generic [ref=e251]: Anos de experiencia en el sector veterinario
+      - generic "100% Cobertura nacional con agentes propios" [ref=e253]:
+        - img [ref=e255]
+        - generic [ref=e257]:
+          - text: 0%
+          - generic [ref=e258]: 100%
+        - generic [ref=e259]: Cobertura nacional con agentes propios
+      - generic "50+ Colaboradores dedicados al sector veterinario" [ref=e261]:
+        - img [ref=e263]
+        - generic [ref=e265]:
+          - text: 0+
+          - generic [ref=e266]: 50+
+        - generic [ref=e267]: Colaboradores dedicados al sector veterinario
+      - generic "20+ Marcas internacionales de primer nivel" [ref=e269]:
+        - img [ref=e271]
+        - generic [ref=e273]:
+          - text: 0+
+          - generic [ref=e274]: 20+
+        - generic [ref=e275]: Marcas internacionales de primer nivel
+    - generic [ref=e277]:
+      - generic [ref=e278]:
+        - heading "Productos Destacados" [level=2] [ref=e279]
+        - link "Ver todos" [ref=e280] [cursor=pointer]:
+          - /url: /es/catalogo
+      - generic [ref=e282]:
+        - link "Ver Amoxicilina 250ml" [ref=e284] [cursor=pointer]:
+          - /url: /es/catalogo/farmacos/amoxicilina-250ml
+          - img "Amoxicilina 250ml" [ref=e286]
+          - generic [ref=e287]:
+            - heading "Amoxicilina 250ml" [level=3] [ref=e288]
+            - paragraph [ref=e289]: Zoetis
+            - generic [ref=e290]: Ver producto
+        - link "Ver Meloxicam Inyectable 20ml" [ref=e292] [cursor=pointer]:
+          - /url: /es/catalogo/farmacos/meloxicam-inyectable-20ml
+          - img "Meloxicam Inyectable 20ml" [ref=e294]
+          - generic [ref=e295]:
+            - heading "Meloxicam Inyectable 20ml" [level=3] [ref=e296]
+            - paragraph [ref=e297]: Boehringer Ingelheim
+            - generic [ref=e298]: Ver producto
+        - link "Ver Fipronil Topico Antipulgas" [ref=e300] [cursor=pointer]:
+          - /url: /es/catalogo/farmacos/fipronil-topico-antipulgas
+          - img "Fipronil Topico Antipulgas" [ref=e302]
+          - generic [ref=e303]:
+            - heading "Fipronil Topico Antipulgas" [level=3] [ref=e304]
+            - paragraph [ref=e305]: MSD Animal Health
+            - generic [ref=e306]: Ver producto
+        - link "Ver Pro Plan Adulto Raza Mediana" [ref=e308] [cursor=pointer]:
+          - /url: /es/catalogo/alimentos/pro-plan-adulto-raza-mediana
+          - img "Pro Plan Adulto Raza Mediana" [ref=e310]
+          - generic [ref=e311]:
+            - heading "Pro Plan Adulto Raza Mediana" [level=3] [ref=e312]
+            - paragraph [ref=e313]: Purina Pro Plan
+            - generic [ref=e314]: Ver producto
+        - link "Ver Royal Canin Renal Support" [ref=e316] [cursor=pointer]:
+          - /url: /es/catalogo/alimentos/royal-canin-renal-support
+          - img "Royal Canin Renal Support" [ref=e318]
+          - generic [ref=e319]:
+            - heading "Royal Canin Renal Support" [level=3] [ref=e320]
+            - paragraph [ref=e321]: Royal Canin
+            - generic [ref=e322]: Ver producto
+        - link "Ver Otoscopio Veterinario Digital" [ref=e324] [cursor=pointer]:
+          - /url: /es/catalogo/equipos/otoscopio-veterinario-digital
+          - img "Otoscopio Veterinario Digital" [ref=e326]
+          - generic [ref=e327]:
+            - heading "Otoscopio Veterinario Digital" [level=3] [ref=e328]
+            - paragraph [ref=e329]: Welch Allyn
+            - generic [ref=e330]: Ver producto
+    - generic [ref=e335]:
+      - heading "Somos su socio de distribucion en Costa Rica" [level=2] [ref=e336]
+      - paragraph [ref=e337]: Con 37 anos de experiencia y cobertura nacional, conectamos fabricantes internacionales con el mercado veterinario costarricense.
+      - link "Conocer mas" [ref=e338] [cursor=pointer]:
+        - /url: /es/distribuidores
+  - contentinfo "Pie de pagina" [ref=e340]:
+    - generic [ref=e342]:
+      - generic [ref=e343]:
+        - generic [ref=e344]: HESA
+        - paragraph [ref=e345]: 37 anos distribuyendo salud animal en Costa Rica
+      - generic [ref=e346]:
+        - button "Navegacion +" [ref=e347] [cursor=pointer]:
+          - generic [ref=e348]: Navegacion
+          - generic [ref=e349]: +
+        - navigation [ref=e350]:
+          - link "Inicio" [ref=e351] [cursor=pointer]:
+            - /url: /es
+          - link "Catalogo" [ref=e352] [cursor=pointer]:
+            - /url: /es/catalogo
+          - link "Marcas" [ref=e353] [cursor=pointer]:
+            - /url: /es/marcas
+          - link "Nosotros" [ref=e354] [cursor=pointer]:
+            - /url: /es/nosotros
+          - link "Distribuidores" [ref=e355] [cursor=pointer]:
+            - /url: /es/distribuidores
+          - link "Contacto" [ref=e356] [cursor=pointer]:
+            - /url: /es/contacto
+      - generic [ref=e357]:
+        - button "Contacto +" [ref=e358] [cursor=pointer]:
+          - generic [ref=e359]: Contacto
+          - generic [ref=e360]: +
+        - generic [ref=e361]:
+          - paragraph [ref=e362]:
+            - img [ref=e363]
+            - text: +506 2260-9020
+          - paragraph [ref=e365]:
+            - img [ref=e366]
+            - text: info@hesa.co.cr
+          - paragraph [ref=e369]:
+            - img [ref=e370]
+            - text: Calle 2, av 12. Heredia, Costa Rica
+          - paragraph [ref=e373]:
+            - img [ref=e374]
+            - text: "Lun - Vie: 8:00 - 17:00"
+      - generic [ref=e377]:
+        - button "Redes Sociales +" [ref=e378] [cursor=pointer]:
+          - generic [ref=e379]: Redes Sociales
+          - generic [ref=e380]: +
+        - generic [ref=e381]:
+          - link "Facebook" [ref=e382] [cursor=pointer]:
+            - /url: https://facebook.com/hesacr
+            - img [ref=e383]
+          - link "Instagram" [ref=e385] [cursor=pointer]:
+            - /url: https://instagram.com/hesacr
+            - img [ref=e386]
+    - generic [ref=e390]:
+      - paragraph [ref=e391]: © HESA 2026. Todos los derechos reservados.
+      - button "English" [ref=e393] [cursor=pointer]
+  - button "Contactar por WhatsApp" [ref=e394] [cursor=pointer]:
+    - img [ref=e395]
+```

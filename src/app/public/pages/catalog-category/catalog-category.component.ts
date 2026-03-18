@@ -84,26 +84,30 @@ export class CatalogCategoryComponent implements OnInit, OnDestroy {
     const url = this.route.snapshot.url;
     this.categorySlug = url[url.length - 1]?.path || '';
     this.restoreFiltersFromUrl();
-    await this.loadCategoryDescription();
-    await this.loadFilters();
-    await this.loadProducts();
 
-    // REQ-087: Dynamic SEO meta tags
+    // BUG-005/BUG-006: Set SEO tags BEFORE API calls to preserve language context
     const lang = this.i18n.currentLang();
     const catName = this.categoryName;
     const catSlugEs = getCategorySlug(this.categoryType, 'es');
     const catSlugEn = getCategorySlug(this.categoryType, 'en');
 
-    this.seo.setMetaTags({
-      title: catName,
-      description: this.categoryDescription() || `${catName} - Catalogo de productos veterinarios HESA`,
-      url: `/${lang}/${getCatalogSegment(lang)}/${getCategorySlug(this.categoryType, lang)}`,
-    });
-
     this.seo.setHreflang(
       `/es/catalogo/${catSlugEs}`,
       `/en/catalog/${catSlugEn}`
     );
+
+    await this.loadCategoryDescription();
+    await this.loadFilters();
+    await this.loadProducts();
+
+    // REQ-087: Update SEO meta tags after data is loaded (description may have been fetched)
+    this.seo.setMetaTags({
+      title: catName,
+      description: this.categoryDescription() || (lang === 'es'
+        ? `${catName} - Catalogo de productos veterinarios HESA`
+        : `${catName} - HESA veterinary product catalog`),
+      url: `/${lang}/${getCatalogSegment(lang)}/${getCategorySlug(this.categoryType, lang)}`,
+    });
   }
 
   ngOnDestroy(): void {

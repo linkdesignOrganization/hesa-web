@@ -1,5 +1,6 @@
-import { Component, signal, inject } from '@angular/core';
+import { Component, signal, inject, OnInit } from '@angular/core';
 import { RouterOutlet, RouterLink, RouterLinkActive, Router } from '@angular/router';
+import { Meta } from '@angular/platform-browser';
 import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
@@ -9,9 +10,10 @@ import { AuthService } from '../../shared/services/auth.service';
   templateUrl: './admin-layout.component.html',
   styleUrl: './admin-layout.component.scss'
 })
-export class AdminLayoutComponent {
+export class AdminLayoutComponent implements OnInit {
   auth = inject(AuthService);
   private router = inject(Router);
+  private meta = inject(Meta);
   isSidebarCollapsed = signal(false);
   isMobileSidebarOpen = signal(false);
   expandedMenus = signal<Set<string>>(new Set());
@@ -19,6 +21,11 @@ export class AdminLayoutComponent {
 
   // Will be populated from API in later iterations
   newMessagesCount = 0;
+
+  ngOnInit(): void {
+    // BUG-010/NFR-013: Prevent search engines from indexing admin panel
+    this.meta.updateTag({ name: 'robots', content: 'noindex, nofollow' });
+  }
 
   toggleSidebar(): void {
     this.isSidebarCollapsed.update(v => !v);

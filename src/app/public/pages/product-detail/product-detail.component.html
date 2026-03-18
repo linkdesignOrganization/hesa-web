@@ -20,6 +20,21 @@
       </div>
     </div>
   </section>
+} @else if (error()) {
+  <!-- BUG-012: Error State (API failure — show error with retry, not redirect) -->
+  <section class="product-not-found">
+    <div class="container">
+      <div class="product-not-found__content">
+        <div class="product-not-found__illustration" aria-hidden="true">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--semantic-danger)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <h1 class="product-not-found__title">{{ i18n.currentLang() === 'es' ? 'No pudimos cargar el producto' : 'Could not load product' }}</h1>
+        <p class="product-not-found__desc">{{ i18n.currentLang() === 'es' ? 'Hubo un problema al cargar la informacion del producto. Intenta de nuevo.' : 'There was a problem loading the product information. Please try again.' }}</p>
+        <button class="btn btn-primary btn-lg" (click)="retry()">{{ i18n.currentLang() === 'es' ? 'Reintentar' : 'Retry' }}</button>
+        <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo' : 'catalog')" class="btn btn-outline btn-lg" style="margin-left: 12px;">{{ i18n.currentLang() === 'es' ? 'Volver al catalogo' : 'Back to catalog' }}</a>
+      </div>
+    </div>
+  </section>
 } @else if (notFound()) {
   <!-- 404 Product State -->
   <section class="product-not-found">

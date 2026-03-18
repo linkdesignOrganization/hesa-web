@@ -135,15 +135,4 @@
   - button "Contactar por WhatsApp" [ref=e106] [cursor=pointer]:
     - img [ref=e107]
     - generic: Escribenos por WhatsApp
-  - generic [ref=e109]:
-    - alert [ref=e110]:
-      - img [ref=e111]
-      - generic [ref=e115]: No se pudo conectar con el servidor. Verifica tu conexion.
-      - button "Cerrar notificacion" [ref=e116] [cursor=pointer]:
-        - img [ref=e117]
-    - alert [ref=e120]:
-      - img [ref=e121]
-      - generic [ref=e125]: No se pudo conectar con el servidor. Verifica tu conexion.
-      - button "Cerrar notificacion" [ref=e126] [cursor=pointer]:
-        - img [ref=e127]
 ```

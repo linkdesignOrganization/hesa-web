@@ -1,5 +1,6 @@
 import { Component, inject, signal, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 import { BreadcrumbComponent } from '../../../shared/components/breadcrumb/breadcrumb.component';
 import { ProductCardComponent } from '../../components/product-card/product-card.component';
 import { ApiService, ApiBrand, ApiProduct, FilterValues } from '../../../shared/services/api.service';
@@ -25,6 +26,7 @@ export class BrandDetailComponent implements OnInit, OnDestroy {
   products = signal<ApiProduct[]>([]);
   loading = signal(true);
   notFound = signal(false);
+  error = signal(false); // BUG-013: Separate error state from notFound
 
   // REQ-152: Filters for brand products
   selectedCategory = signal('');
@@ -46,6 +48,10 @@ export class BrandDetailComponent implements OnInit, OnDestroy {
     const slug = this.route.snapshot.paramMap.get('slug');
     if (slug) {
       this.brandSlug = slug;
+
+      // BUG-013: Set hreflang BEFORE API call to preserve language context
+      this.seo.setHreflang(`/es/marcas/${slug}`, `/en/brands/${slug}`);
+
       try {
         const brand = await this.api.getBrandBySlug(slug);
         this.brand.set(brand);
@@ -59,9 +65,13 @@ export class BrandDetailComponent implements OnInit, OnDestroy {
           url: `/${lang}/${getBrandsSegment(lang)}/${slug}`,
           image: brand.logo,
         });
-        this.seo.setHreflang(`/es/marcas/${slug}`, `/en/brands/${slug}`);
-      } catch {
-        this.notFound.set(true);
+      } catch (err) {
+        // BUG-013: Differentiate between 404 (not found) and other errors (API down)
+        if (err instanceof HttpErrorResponse && err.status === 404) {
+          this.notFound.set(true);
+        } else {
+          this.error.set(true);
+        }
       }
     }
     this.loading.set(false);
@@ -94,6 +104,34 @@ export class BrandDetailComponent implements OnInit, OnDestroy {
     this.selectedCategory.set('');
     this.selectedSpecies.set('');
     await this.loadProducts();
+  }
+
+  async retryLoad(): Promise<void> {
+    if (this.brandSlug) {
+      this.loading.set(true);
+      this.error.set(false);
+      this.notFound.set(false);
+      try {
+        const brand = await this.api.getBrandBySlug(this.brandSlug);
+        this.brand.set(brand);
+        await this.loadProducts();
+
+        const lang = this.i18n.currentLang();
+        this.seo.setMetaTags({
+          title: brand.name,
+          description: this.i18n.t(brand.description) || `${brand.name} - ${lang === 'es' ? 'Productos distribuidos por HESA' : 'Products distributed by HESA'}`,
+          url: `/${lang}/${getBrandsSegment(lang)}/${this.brandSlug}`,
+          image: brand.logo,
+        });
+      } catch (err) {
+        if (err instanceof HttpErrorResponse && err.status === 404) {
+          this.notFound.set(true);
+        } else {
+          this.error.set(true);
+        }
+      }
+      this.loading.set(false);
+    }
   }
 
   get activeFilters(): { key: string; label: string }[] {

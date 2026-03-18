@@ -80,70 +80,54 @@
         - option "Equinos"
         - option "Porcinos"
         - option "Aves"
-    - generic [ref=e47]:
-      - img [ref=e49]
-      - heading "No pudimos cargar los productos" [level=2] [ref=e51]
-      - paragraph [ref=e52]: Intenta de nuevo.
-      - button "Reintentar" [ref=e53] [cursor=pointer]
-  - contentinfo "Pie de pagina" [ref=e55]:
-    - generic [ref=e57]:
-      - generic [ref=e58]:
-        - generic [ref=e59]: HESA
-        - paragraph [ref=e60]: 37 anos distribuyendo salud animal en Costa Rica
-      - generic [ref=e62]:
-        - heading "Navegacion" [level=3] [ref=e63]
-        - navigation [ref=e64]:
-          - link "Inicio" [ref=e65] [cursor=pointer]:
+  - contentinfo "Pie de pagina" [ref=e97]:
+    - generic [ref=e99]:
+      - generic [ref=e100]:
+        - generic [ref=e101]: HESA
+        - paragraph [ref=e102]: 37 anos distribuyendo salud animal en Costa Rica
+      - generic [ref=e104]:
+        - heading "Navegacion" [level=3] [ref=e105]
+        - navigation [ref=e106]:
+          - link "Inicio" [ref=e107] [cursor=pointer]:
             - /url: /es
-          - link "Catalogo" [ref=e66] [cursor=pointer]:
+          - link "Catalogo" [ref=e108] [cursor=pointer]:
             - /url: /es/catalogo
-          - link "Marcas" [ref=e67] [cursor=pointer]:
+          - link "Marcas" [ref=e109] [cursor=pointer]:
             - /url: /es/marcas
-          - link "Nosotros" [ref=e68] [cursor=pointer]:
+          - link "Nosotros" [ref=e110] [cursor=pointer]:
             - /url: /es/nosotros
-          - link "Distribuidores" [ref=e69] [cursor=pointer]:
+          - link "Distribuidores" [ref=e111] [cursor=pointer]:
             - /url: /es/distribuidores
-          - link "Contacto" [ref=e70] [cursor=pointer]:
+          - link "Contacto" [ref=e112] [cursor=pointer]:
             - /url: /es/contacto
-      - generic [ref=e72]:
-        - heading "Contacto" [level=3] [ref=e73]
-        - generic [ref=e74]:
-          - paragraph [ref=e75]:
-            - img [ref=e76]
+      - generic [ref=e114]:
+        - heading "Contacto" [level=3] [ref=e115]
+        - generic [ref=e116]:
+          - paragraph [ref=e117]:
+            - img [ref=e118]
             - text: +506 2260-9020
-          - paragraph [ref=e78]:
-            - img [ref=e79]
+          - paragraph [ref=e120]:
+            - img [ref=e121]
             - text: info@hesa.co.cr
-          - paragraph [ref=e82]:
-            - img [ref=e83]
+          - paragraph [ref=e124]:
+            - img [ref=e125]
             - text: Calle 2, av 12. Heredia, Costa Rica
-          - paragraph [ref=e86]:
-            - img [ref=e87]
+          - paragraph [ref=e128]:
+            - img [ref=e129]
             - text: "Lun - Vie: 8:00 - 17:00"
-      - generic [ref=e91]:
-        - heading "Redes Sociales" [level=3] [ref=e92]
-        - generic [ref=e93]:
-          - link "Facebook" [ref=e94] [cursor=pointer]:
+      - generic [ref=e133]:
+        - heading "Redes Sociales" [level=3] [ref=e134]
+        - generic [ref=e135]:
+          - link "Facebook" [ref=e136] [cursor=pointer]:
             - /url: https://facebook.com/hesacr
-            - img [ref=e95]
-          - link "Instagram" [ref=e97] [cursor=pointer]:
+            - img [ref=e137]
+          - link "Instagram" [ref=e139] [cursor=pointer]:
             - /url: https://instagram.com/hesacr
-            - img [ref=e98]
-    - generic [ref=e102]:
-      - paragraph [ref=e103]: © HESA 2026. Todos los derechos reservados.
-      - button "English" [ref=e105] [cursor=pointer]
-  - button "Contactar por WhatsApp" [ref=e106] [cursor=pointer]:
-    - img [ref=e107]
+            - img [ref=e140]
+    - generic [ref=e144]:
+      - paragraph [ref=e145]: © HESA 2026. Todos los derechos reservados.
+      - button "English" [ref=e147] [cursor=pointer]
+  - button "Contactar por WhatsApp" [ref=e148] [cursor=pointer]:
+    - img [ref=e149]
     - generic: Escribenos por WhatsApp
-  - generic [ref=e109]:
-    - alert [ref=e110]:
-      - img [ref=e111]
-      - generic [ref=e115]: No se pudo conectar con el servidor. Verifica tu conexion.
-      - button "Cerrar notificacion" [ref=e116] [cursor=pointer]:
-        - img [ref=e117]
-    - alert [ref=e120]:
-      - img [ref=e121]
-      - generic [ref=e125]: No se pudo conectar con el servidor. Verifica tu conexion.
-      - button "Cerrar notificacion" [ref=e126] [cursor=pointer]:
-        - img [ref=e127]
 ```

@@ -33,10 +33,10 @@ export class DistributorsComponent implements OnInit, AfterViewInit, OnDestroy {
     // REQ-181: SEO meta tags for distributors page
     const lang = this.i18n.currentLang();
     this.seo.setMetaTags({
-      title: lang === 'es' ? 'Distribuidores' : 'Distributors',
+      title: lang === 'es' ? 'Distribuidores' : 'Become a Distributor',
       description: lang === 'es'
         ? 'HESA es su socio estrategico para la distribucion de productos veterinarios en Costa Rica y Centroamerica.'
-        : 'HESA is your strategic partner for the distribution of veterinary products in Costa Rica and Central America.',
+        : 'Partner with HESA, a leading veterinary distributor in Costa Rica. 37+ years distributing pharmaceuticals, animal food, and veterinary equipment across Central America.',
       url: `/${lang}/${lang === 'es' ? 'distribuidores' : 'distributors'}`,
     });
     this.seo.setHreflang('/es/distribuidores', '/en/distributors');

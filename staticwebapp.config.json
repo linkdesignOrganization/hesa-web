@@ -1,8 +1,15 @@
 {
   "navigationFallback": {
     "rewrite": "/index.html",
-    "exclude": ["/images/*.{png,jpg,gif,svg,webp,ico}", "/css/*", "/assets/*"]
+    "exclude": ["/images/*.{png,jpg,gif,svg,webp,ico}", "/css/*", "/assets/*", "/robots.txt", "/sitemap.xml"]
   },
+  "routes": [
+    {
+      "route": "/sitemap.xml",
+      "redirect": "https://hesa-api.azurewebsites.net/api/public/sitemap.xml",
+      "statusCode": 301
+    }
+  ],
   "responseOverrides": {
     "404": {
       "rewrite": "/index.html",
@@ -21,6 +28,7 @@
   "mimeTypes": {
     ".json": "application/json",
     ".woff2": "font/woff2",
-    ".woff": "font/woff"
+    ".woff": "font/woff",
+    ".xml": "application/xml"
   }
 }

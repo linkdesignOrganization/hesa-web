@@ -10,6 +10,19 @@
       </div>
     </div>
   </section>
+} @else if (error()) {
+  <!-- BUG-013: Error State (API failure — show error with retry, preserve language) -->
+  <section class="brand-detail-page">
+    <div class="container" style="text-align: center; padding: 80px 0;">
+      <div style="margin-bottom: 16px;">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--semantic-danger)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      <h1>{{ i18n.currentLang() === 'es' ? 'No pudimos cargar la marca' : 'Could not load brand' }}</h1>
+      <p style="color: var(--neutral-500); margin-top: 8px;">{{ i18n.currentLang() === 'es' ? 'Hubo un problema al cargar la informacion. Intenta de nuevo.' : 'There was a problem loading the information. Please try again.' }}</p>
+      <button class="btn btn-primary" style="margin-top: 24px;" (click)="retryLoad()">{{ i18n.currentLang() === 'es' ? 'Reintentar' : 'Retry' }}</button>
+      <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'marcas' : 'brands')" class="btn btn-outline" style="margin-top: 24px; margin-left: 12px;">{{ i18n.currentLang() === 'es' ? 'Ver todas las marcas' : 'View all brands' }}</a>
+    </div>
+  </section>
 } @else if (notFound()) {
   <section class="brand-detail-page">
     <div class="container" style="text-align: center; padding: 80px 0;">

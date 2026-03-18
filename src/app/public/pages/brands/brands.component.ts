@@ -30,18 +30,18 @@ export class BrandsComponent implements OnInit, OnDestroy {
   }
 
   async ngOnInit(): Promise<void> {
-    await this.loadBrands();
-
-    // REQ-147: SEO meta tags for brands page
+    // BUG-013: Set SEO tags BEFORE API call to preserve language context even on failure
     const lang = this.i18n.currentLang();
     this.seo.setMetaTags({
       title: lang === 'es' ? 'Marcas' : 'Brands',
       description: lang === 'es'
         ? 'Marcas exclusivas de farmacos veterinarios, alimentos y equipos distribuidas por HESA en Costa Rica.'
-        : 'Exclusive brands of veterinary pharmaceuticals, food, and equipment distributed by HESA in Costa Rica.',
+        : 'Exclusive international brands of veterinary pharmaceuticals, food, and equipment distributed by HESA, a trusted distributor in Costa Rica.',
       url: `/${lang}/${getBrandsSegment(lang)}`,
     });
     this.seo.setHreflang('/es/marcas', '/en/brands');
+
+    await this.loadBrands();
   }
 
   ngOnDestroy(): void {

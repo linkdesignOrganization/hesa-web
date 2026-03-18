@@ -9,7 +9,39 @@ import { processImageSingle } from '../../utils/image-processor';
 import multer from 'multer';
 
 const router = Router();
-const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 5 * 1024 * 1024 } });
+
+// NFR-019: Validate file type and size on upload (BUG-009)
+const ALLOWED_IMAGE_MIMETYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/svg+xml'];
+const ALLOWED_PDF_MIMETYPES = ['application/pdf'];
+const ALLOWED_ALL_MIMETYPES = [...ALLOWED_IMAGE_MIMETYPES, ...ALLOWED_PDF_MIMETYPES];
+
+const imageFileFilter = (_req: unknown, file: Express.Multer.File, cb: multer.FileFilterCallback) => {
+  if (ALLOWED_IMAGE_MIMETYPES.includes(file.mimetype)) {
+    cb(null, true);
+  } else {
+    cb(new Error(`Invalid file type: ${file.mimetype}. Only images are allowed (JPEG, PNG, WebP, GIF, SVG).`));
+  }
+};
+
+const pdfFileFilter = (_req: unknown, file: Express.Multer.File, cb: multer.FileFilterCallback) => {
+  if (ALLOWED_PDF_MIMETYPES.includes(file.mimetype)) {
+    cb(null, true);
+  } else {
+    cb(new Error(`Invalid file type: ${file.mimetype}. Only PDF files are allowed.`));
+  }
+};
+
+const uploadImages = multer({
+  storage: multer.memoryStorage(),
+  limits: { fileSize: 5 * 1024 * 1024 },
+  fileFilter: imageFileFilter,
+});
+
+const uploadPdf = multer({
+  storage: multer.memoryStorage(),
+  limits: { fileSize: 5 * 1024 * 1024 },
+  fileFilter: pdfFileFilter,
+});
 
 /**
  * GET /api/admin/products
@@ -189,7 +221,7 @@ router.delete('/:id', async (req: AuthRequest, res: Response) => {
  * Upload images for a product.
  * REQ-243, REQ-244, REQ-253, REQ-254
  */
-router.post('/:id/images', upload.array('images', 6), async (req: AuthRequest, res: Response) => {
+router.post('/:id/images', uploadImages.array('images', 6), async (req: AuthRequest, res: Response) => {
   try {
     const product = await productService.getProductById(req.params.id);
     if (!product) {
@@ -256,7 +288,7 @@ router.delete('/:id/images/:imageIndex', async (req: AuthRequest, res: Response)
  * Upload PDF for a product.
  * REQ-243, REQ-245
  */
-router.post('/:id/pdf', upload.single('pdf'), async (req: AuthRequest, res: Response) => {
+router.post('/:id/pdf', uploadPdf.single('pdf'), async (req: AuthRequest, res: Response) => {
   try {
     const product = await productService.getProductById(req.params.id);
     if (!product) {

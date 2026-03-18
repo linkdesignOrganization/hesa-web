@@ -280,9 +280,4 @@
   - button "Contactar por WhatsApp" [ref=e419] [cursor=pointer]:
     - img [ref=e420]
     - generic: Escribenos por WhatsApp
-  - alert [ref=e423]:
-    - img [ref=e424]
-    - generic [ref=e428]: No se pudo conectar con el servidor. Verifica tu conexion.
-    - button "Cerrar notificacion" [ref=e429] [cursor=pointer]:
-      - img [ref=e430]
 ```

@@ -36,8 +36,9 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 
-// Security
-app.use(helmet({ contentSecurityPolicy: false })); // CSP managed by SWA
+// Security — NFR-020: Remove X-Powered-By header (BUG-008)
+app.disable('x-powered-by');
+app.use(helmet({ contentSecurityPolicy: false })); // CSP managed by SWA; helmet also disables X-Powered-By
 app.use(securityHeaders);
 
 // Body parsing
@@ -69,17 +70,21 @@ app.use((err: Error, _req: express.Request, res: express.Response, _next: expres
 
 // Start server
 async function start(): Promise<void> {
+  // Always start listening — even if DB connection fails, health check and static routes should work
+  app.listen(PORT, () => {
+    console.log(`HESA API running on port ${PORT}`);
+    console.log(`Health check: http://localhost:${PORT}/api/health`);
+  });
+
   try {
     await connectDatabase();
+    console.log('Database connected successfully');
     await seedCategories();
-
-    app.listen(PORT, () => {
-      console.log(`HESA API running on port ${PORT}`);
-      console.log(`Health check: http://localhost:${PORT}/api/health`);
-    });
+    console.log('Categories seeded successfully');
   } catch (error) {
-    console.error('Failed to start server:', error);
-    process.exit(1);
+    console.error('Database initialization failed (API will run with degraded functionality):', error);
+    // Don't exit — let the API serve what it can. Individual route handlers will return
+    // appropriate errors when they can't reach the database.
   }
 }
 

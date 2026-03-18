@@ -91,20 +91,21 @@ export class CatalogComponent implements OnInit, OnDestroy {
 
   async ngOnInit(): Promise<void> {
     this.restoreFiltersFromUrl();
-    await this.loadFilters();
-    await this.loadProducts();
 
-    // REQ-264f: SEO meta tags for general catalog
+    // BUG-005/BUG-006: Set SEO tags BEFORE API calls to preserve language context
     const lang = this.i18n.currentLang();
     const catalogSegment = getCatalogSegment(lang);
     this.seo.setMetaTags({
       title: lang === 'es' ? 'Catalogo de Productos' : 'Product Catalog',
       description: lang === 'es'
         ? 'Catalogo completo de farmacos veterinarios, alimentos para animales y equipos veterinarios de HESA.'
-        : 'Complete catalog of veterinary pharmaceuticals, animal food, and veterinary equipment from HESA.',
+        : 'Complete catalog of veterinary pharmaceuticals, animal food, and veterinary equipment. HESA is a leading distributor in Costa Rica with 37+ years of experience.',
       url: `/${lang}/${catalogSegment}`,
     });
     this.seo.setHreflang('/es/catalogo', '/en/catalog');
+
+    await this.loadFilters();
+    await this.loadProducts();
   }
 
   ngOnDestroy(): void {

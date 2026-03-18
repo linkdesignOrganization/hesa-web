@@ -1,5 +1,6 @@
 import { Component, inject, signal, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Meta } from '@angular/platform-browser';
 import { AuthService } from '../../../shared/services/auth.service';
 
 /**
@@ -15,11 +16,15 @@ import { AuthService } from '../../../shared/services/auth.service';
 export class AdminLoginComponent implements OnInit {
   private auth = inject(AuthService);
   private router = inject(Router);
+  private meta = inject(Meta);
   loginError = signal(false);
   errorMessage = signal('');
   isLoading = signal(false);
 
   async ngOnInit(): Promise<void> {
+    // BUG-010/NFR-013: Prevent search engines from indexing admin pages
+    this.meta.updateTag({ name: 'robots', content: 'noindex, nofollow' });
+
     // Initialize MSAL and check if already authenticated (redirect callback)
     this.isLoading.set(true);
     try {

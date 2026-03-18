@@ -1,10 +1,11 @@
-import { Component, inject, signal, OnInit } from '@angular/core';
+import { Component, inject, signal, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { BreadcrumbComponent } from '../../../shared/components/breadcrumb/breadcrumb.component';
 import { ProductCardComponent } from '../../components/product-card/product-card.component';
 import { BrandCardComponent } from '../../components/brand-card/brand-card.component';
 import { ApiService } from '../../../shared/services/api.service';
 import { I18nService } from '../../../shared/services/i18n.service';
+import { SeoService } from '../../../shared/services/seo.service';
 import { getHomeLabel } from '../../../shared/utils/route-helpers';
 
 @Component({
@@ -14,9 +15,10 @@ import { getHomeLabel } from '../../../shared/utils/route-helpers';
   templateUrl: './search-results.component.html',
   styleUrl: './search-results.component.scss'
 })
-export class SearchResultsComponent implements OnInit {
+export class SearchResultsComponent implements OnInit, OnDestroy {
   private route = inject(ActivatedRoute);
   private api = inject(ApiService);
+  private seo = inject(SeoService);
   i18n = inject(I18nService);
 
   searchTerm = signal('');
@@ -69,5 +71,15 @@ export class SearchResultsComponent implements OnInit {
       }
     }
     this.loading.set(false);
+
+    // BUG-005/NFR-011: hreflang for search page
+    this.seo.setHreflang(
+      `/es/busqueda${q ? '?q=' + encodeURIComponent(q) : ''}`,
+      `/en/search${q ? '?q=' + encodeURIComponent(q) : ''}`
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.seo.clearDynamicTags();
   }
 }

@@ -1,5 +1,6 @@
 import { Component, inject, signal, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 import { BreadcrumbComponent } from '../../../shared/components/breadcrumb/breadcrumb.component';
 import { ProductCardComponent } from '../../components/product-card/product-card.component';
 import { ApiService, ApiProduct } from '../../../shared/services/api.service';
@@ -24,9 +25,11 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   relatedProducts = signal<ApiProduct[]>([]);
   loading = signal(true);
   notFound = signal(false);
+  error = signal(false); // BUG-012: Separate error state from notFound
   selectedImage = signal(0);
   stickyVisible = signal(false);
   lightboxOpen = signal(false);
+  private currentSlug = '';
 
   get breadcrumbs() {
     const p = this.product();
@@ -75,57 +78,9 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
 
   async ngOnInit(): Promise<void> {
     const slug = this.route.snapshot.paramMap.get('slug');
+    this.currentSlug = slug || '';
     if (slug) {
-      try {
-        const lang = this.i18n.currentLang();
-        const product = await this.api.getProductBySlug(slug, lang);
-        this.product.set(product);
-
-        // REQ-125: Dynamic meta tags
-        const productName = this.i18n.t(product.name);
-        const productDesc = this.i18n.t(product.description) || '';
-        const brandName = typeof product.brand === 'object' ? product.brand.name : '';
-        const metaTitle = product.metaTitle ? this.i18n.t(product.metaTitle) : `${productName} - ${brandName}`;
-        const metaDesc = product.metaDescription ? this.i18n.t(product.metaDescription) : productDesc.substring(0, 160);
-
-        const catSlugEs = getCategorySlug(product.category, 'es');
-        const catSlugEn = getCategorySlug(product.category, 'en');
-        const productUrl = `/${lang}/${getCatalogSegment(lang)}/${getCategorySlug(product.category, lang)}/${product.slug[lang]}`;
-
-        this.seo.setMetaTags({
-          title: metaTitle,
-          description: metaDesc,
-          url: productUrl,
-          image: product.images?.[0],
-          type: 'product',
-        });
-
-        // NFR-011: hreflang
-        this.seo.setHreflang(
-          `/es/catalogo/${catSlugEs}/${product.slug.es}`,
-          `/en/catalog/${catSlugEn}/${product.slug.en}`
-        );
-
-        // REQ-126: Product JSON-LD schema
-        this.seo.setProductSchema({
-          name: productName,
-          description: metaDesc,
-          brand: brandName,
-          category: getCategoryLabel(product.category, lang),
-          image: product.images?.[0],
-          url: productUrl,
-        });
-
-        // Load related products
-        try {
-          const related = await this.api.getRelatedProducts(product._id);
-          this.relatedProducts.set(related);
-        } catch {
-          // Non-critical
-        }
-      } catch {
-        this.notFound.set(true);
-      }
+      await this.loadProduct(slug);
     }
     this.loading.set(false);
 
@@ -141,6 +96,79 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
           observer.observe(infoSection);
         }
       }, 1000);
+    }
+  }
+
+  /**
+   * BUG-012: Load product with proper error differentiation.
+   * 404 = product not found (show not found page)
+   * Other errors = API error (show error state with retry)
+   */
+  private async loadProduct(slug: string): Promise<void> {
+    this.loading.set(true);
+    this.notFound.set(false);
+    this.error.set(false);
+    try {
+      const lang = this.i18n.currentLang();
+      const product = await this.api.getProductBySlug(slug, lang);
+      this.product.set(product);
+
+      // REQ-125: Dynamic meta tags
+      const productName = this.i18n.t(product.name);
+      const productDesc = this.i18n.t(product.description) || '';
+      const brandName = typeof product.brand === 'object' ? product.brand.name : '';
+      const metaTitle = product.metaTitle ? this.i18n.t(product.metaTitle) : `${productName} - ${brandName}`;
+      const metaDesc = product.metaDescription ? this.i18n.t(product.metaDescription) : productDesc.substring(0, 160);
+
+      const catSlugEs = getCategorySlug(product.category, 'es');
+      const catSlugEn = getCategorySlug(product.category, 'en');
+      const productUrl = `/${lang}/${getCatalogSegment(lang)}/${getCategorySlug(product.category, lang)}/${product.slug[lang]}`;
+
+      this.seo.setMetaTags({
+        title: metaTitle,
+        description: metaDesc,
+        url: productUrl,
+        image: product.images?.[0],
+        type: 'product',
+      });
+
+      // NFR-011: hreflang
+      this.seo.setHreflang(
+        `/es/catalogo/${catSlugEs}/${product.slug.es}`,
+        `/en/catalog/${catSlugEn}/${product.slug.en}`
+      );
+
+      // REQ-126: Product JSON-LD schema
+      this.seo.setProductSchema({
+        name: productName,
+        description: metaDesc,
+        brand: brandName,
+        category: getCategoryLabel(product.category, lang),
+        image: product.images?.[0],
+        url: productUrl,
+      });
+
+      // Load related products
+      try {
+        const related = await this.api.getRelatedProducts(product._id);
+        this.relatedProducts.set(related);
+      } catch {
+        // Non-critical
+      }
+    } catch (err) {
+      // BUG-012: Differentiate between 404 (not found) and other errors (API down)
+      if (err instanceof HttpErrorResponse && err.status === 404) {
+        this.notFound.set(true);
+      } else {
+        this.error.set(true);
+      }
+    }
+    this.loading.set(false);
+  }
+
+  async retry(): Promise<void> {
+    if (this.currentSlug) {
+      await this.loadProduct(this.currentSlug);
     }
   }
 

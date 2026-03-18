@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Disallow admin panel
+Disallow: /admin/
+
+# Sitemap (generated dynamically by API)
+Sitemap: https://hesa-api.azurewebsites.net/api/public/sitemap.xml
