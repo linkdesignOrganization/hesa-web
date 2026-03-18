@@ -1,9 +1,12 @@
 import { Component, input, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Product } from '../../../shared/services/mock-data.service';
 import { I18nService } from '../../../shared/services/i18n.service';
 import { buildProductUrl } from '../../../shared/utils/route-helpers';
 
+/**
+ * Product card used in catalog grids and carousels.
+ * Accepts any product-like object with name, brand, category, slug, images.
+ */
 @Component({
   selector: 'app-product-card',
   standalone: true,
@@ -12,7 +15,8 @@ import { buildProductUrl } from '../../../shared/utils/route-helpers';
   styleUrl: './product-card.component.scss'
 })
 export class ProductCardComponent {
-  product = input<Product | null>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  product = input<any>(null);
   name = input('');
   brand = input('');
   variant = input<'grid' | 'carousel'>('grid');
@@ -21,13 +25,20 @@ export class ProductCardComponent {
 
   get displayName(): string {
     const p = this.product();
-    if (p) return this.i18n.t(p.name);
+    if (p) {
+      const nameObj = p['name'] as { es: string; en: string } | undefined;
+      if (nameObj) return this.i18n.t(nameObj);
+    }
     return this.name();
   }
 
   get displayBrand(): string {
     const p = this.product();
-    if (p) return p.brand;
+    if (p) {
+      const brand = p['brand'];
+      if (typeof brand === 'string') return brand;
+      if (brand && typeof brand === 'object') return (brand as { name: string }).name || '';
+    }
     return this.brand();
   }
 
@@ -35,11 +46,23 @@ export class ProductCardComponent {
     const p = this.product();
     if (!p) return '#';
     const lang = this.i18n.currentLang();
-    return buildProductUrl(p.category, p.slug[lang], lang);
+    const slug = p['slug'] as { es: string; en: string } | undefined;
+    const category = p['category'] as string;
+    if (slug && category) {
+      return buildProductUrl(category, slug[lang], lang);
+    }
+    return '#';
   }
 
   get productCategory(): string {
     const p = this.product();
-    return p?.category ?? 'farmacos';
+    return (p?.['category'] as string) ?? 'farmacos';
+  }
+
+  get productImage(): string | undefined {
+    const p = this.product();
+    if (!p) return undefined;
+    const images = p['images'] as string[] | undefined;
+    return images?.[0];
   }
 }

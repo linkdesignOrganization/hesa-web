@@ -24,7 +24,11 @@
 
       <div class="brand-detail-page__header">
         <div class="brand-detail-page__logo">
-          <span class="brand-detail-page__logo-initial">{{ brand()!.logoPlaceholder }}</span>
+          @if (brand()!.logo) {
+            <img [src]="brand()!.logo" [alt]="brand()!.name" class="brand-detail-page__logo-img" style="width:100%;height:100%;object-fit:contain;">
+          } @else {
+            <span class="brand-detail-page__logo-initial">{{ brand()!.name.charAt(0) }}</span>
+          }
         </div>
         <div class="brand-detail-page__info">
           <h1 class="brand-detail-page__name">{{ brand()!.name }}</h1>
@@ -43,13 +47,43 @@
 
       <hr class="brand-detail-page__divider">
 
-      @if (products().length > 0) {
+      @if (products().length > 0 || activeFilters.length > 0) {
         <h2 class="text-h3 brand-detail-page__products-title">{{ i18n.currentLang() === 'es' ? 'Productos de ' + brand()!.name : brand()!.name + ' Products' }}</h2>
-        <div class="brand-detail-page__grid">
-          @for (product of products(); track product.id) {
-            <app-product-card [product]="product" />
-          }
+
+        <!-- REQ-152: Filters for brand products -->
+        <div style="display: flex; gap: 12px; margin-bottom: 24px; flex-wrap: wrap;">
+          <select class="filter-bar__dropdown" style="padding: 8px 12px; border: 1px solid var(--neutral-200); border-radius: 8px; font-size: 14px;" [value]="selectedCategory()" (change)="applyFilter('category', $any($event.target).value)">
+            <option value="">{{ i18n.currentLang() === 'es' ? 'Todas las categorias' : 'All categories' }}</option>
+            @for (cat of brand()!.categories; track cat) {
+              <option [value]="cat">{{ cat }}</option>
+            }
+          </select>
         </div>
+
+        @if (activeFilters.length > 0) {
+          <div style="display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap;">
+            @for (f of activeFilters; track f.key) {
+              <span style="display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; background: var(--neutral-50); border: 1px solid var(--neutral-200); border-radius: 20px; font-size: 13px;">
+                {{ f.label }}
+                <button style="background: none; border: none; cursor: pointer; color: var(--neutral-400); font-size: 14px;" (click)="applyFilter(f.key, '')">&times;</button>
+              </span>
+            }
+            <button style="background: none; border: none; cursor: pointer; color: var(--brand-primary); font-size: 13px; font-weight: 500;" (click)="clearFilters()">{{ i18n.currentLang() === 'es' ? 'Limpiar filtros' : 'Clear filters' }}</button>
+          </div>
+        }
+
+        @if (products().length > 0) {
+          <div class="brand-detail-page__grid">
+            @for (product of products(); track product._id) {
+              <app-product-card [product]="product" />
+            }
+          </div>
+        } @else {
+          <div style="text-align: center; padding: 40px 0; color: var(--neutral-400);">
+            <p>{{ i18n.currentLang() === 'es' ? 'No se encontraron productos con estos filtros' : 'No products found with these filters' }}</p>
+            <button class="btn btn-outline" style="margin-top: 12px;" (click)="clearFilters()">{{ i18n.currentLang() === 'es' ? 'Limpiar filtros' : 'Clear filters' }}</button>
+          </div>
+        }
       } @else {
         <div style="text-align: center; padding: 40px 0; color: var(--neutral-400);">
           <p>{{ i18n.currentLang() === 'es' ? 'Esta marca aun no tiene productos publicados' : 'This brand does not have any published products yet' }}</p>

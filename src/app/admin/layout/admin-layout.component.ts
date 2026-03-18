@@ -1,6 +1,5 @@
 import { Component, signal, inject } from '@angular/core';
 import { RouterOutlet, RouterLink, RouterLinkActive, Router } from '@angular/router';
-import { MockDataService } from '../../shared/services/mock-data.service';
 import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
@@ -11,17 +10,15 @@ import { AuthService } from '../../shared/services/auth.service';
   styleUrl: './admin-layout.component.scss'
 })
 export class AdminLayoutComponent {
-  private mockData = inject(MockDataService);
-  private auth = inject(AuthService);
+  auth = inject(AuthService);
   private router = inject(Router);
   isSidebarCollapsed = signal(false);
   isMobileSidebarOpen = signal(false);
   expandedMenus = signal<Set<string>>(new Set());
   userDropdownOpen = signal(false);
 
-  get newMessagesCount(): number {
-    return this.mockData.getDashboardData().newMessages;
-  }
+  // Will be populated from API in later iterations
+  newMessagesCount = 0;
 
   toggleSidebar(): void {
     this.isSidebarCollapsed.update(v => !v);
@@ -47,9 +44,8 @@ export class AdminLayoutComponent {
     this.userDropdownOpen.update(v => !v);
   }
 
-  logout(): void {
+  async logout(): Promise<void> {
     this.userDropdownOpen.set(false);
-    this.auth.logout();
-    this.router.navigate(['/admin/login']);
+    await this.auth.logout();
   }
 }

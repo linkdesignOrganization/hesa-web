@@ -1,8 +1,25 @@
 import { Component, input, output, signal, inject, ElementRef, ViewChild, effect } from '@angular/core';
 import { Router } from '@angular/router';
-import { MockDataService, Product, Brand } from '../../services/mock-data.service';
+import { ApiService, SearchResults } from '../../services/api.service';
 import { I18nService } from '../../services/i18n.service';
 import { getCategorySlug, getCatalogSegment, getBrandsSegment, getSearchSegment } from '../../utils/route-helpers';
+
+interface SearchProduct {
+  id: string;
+  name: { es: string; en: string };
+  slug: { es: string; en: string };
+  brand: string;
+  category: string;
+  image?: string;
+}
+
+interface SearchBrand {
+  id: string;
+  name: string;
+  slug: string;
+  logo?: string;
+  country: string;
+}
 
 @Component({
   selector: 'app-search-overlay',
@@ -15,13 +32,13 @@ export class SearchOverlayComponent {
   closeOverlay = output<void>();
 
   searchTerm = signal('');
-  productResults = signal<Product[]>([]);
-  brandResults = signal<Brand[]>([]);
+  productResults = signal<SearchProduct[]>([]);
+  brandResults = signal<SearchBrand[]>([]);
   selectedIndex = signal(-1);
   isSearching = signal(false);
 
   private router = inject(Router);
-  private mockData = inject(MockDataService);
+  private api = inject(ApiService);
   i18n = inject(I18nService);
 
   @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>;
@@ -38,7 +55,6 @@ export class SearchOverlayComponent {
 
   onInput(event: Event): void {
     const rawValue = (event.target as HTMLInputElement).value;
-    // Sanitize: limit length, strip control characters
     // eslint-disable-next-line no-control-regex
     const value = rawValue.substring(0, 100).replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, '');
     this.searchTerm.set(value);
@@ -52,12 +68,17 @@ export class SearchOverlayComponent {
       this.isSearching.set(true);
       this.productResults.set([]);
       this.brandResults.set([]);
-      // Simulate search delay for loading state feedback
-      this.searchDebounceTimer = setTimeout(() => {
-        this.productResults.set(this.mockData.searchProducts(value));
-        this.brandResults.set(this.mockData.searchBrands(value));
-        this.isSearching.set(false);
-      }, 400);
+      this.searchDebounceTimer = setTimeout(async () => {
+        try {
+          const results = await this.api.search(value, this.i18n.currentLang());
+          this.productResults.set(results.products);
+          this.brandResults.set(results.brands);
+        } catch {
+          console.error('Search failed');
+        } finally {
+          this.isSearching.set(false);
+        }
+      }, 300);
     } else {
       this.isSearching.set(false);
       this.productResults.set([]);
@@ -90,13 +111,13 @@ export class SearchOverlayComponent {
     }
   }
 
-  navigateToProduct(product: Product): void {
+  navigateToProduct(product: SearchProduct): void {
     const lang = this.i18n.currentLang();
     this.router.navigate(['/' + lang, getCatalogSegment(lang), getCategorySlug(product.category, lang), product.slug[lang]]);
     this.close();
   }
 
-  navigateToBrand(brand: Brand): void {
+  navigateToBrand(brand: SearchBrand): void {
     const lang = this.i18n.currentLang();
     this.router.navigate(['/' + lang, getBrandsSegment(lang), brand.slug]);
     this.close();
@@ -127,7 +148,7 @@ export class SearchOverlayComponent {
     this.closeOverlay.emit();
   }
 
-  getProductName(product: Product): string {
+  getProductName(product: SearchProduct): string {
     return this.i18n.t(product.name);
   }
 

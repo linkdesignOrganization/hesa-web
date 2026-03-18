@@ -1,9 +1,10 @@
-import { Component, inject, signal, OnInit } from '@angular/core';
+import { Component, inject, signal, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { BreadcrumbComponent } from '../../../shared/components/breadcrumb/breadcrumb.component';
 import { ProductCardComponent } from '../../components/product-card/product-card.component';
-import { MockDataService, Product } from '../../../shared/services/mock-data.service';
+import { ApiService, ApiProduct } from '../../../shared/services/api.service';
 import { I18nService } from '../../../shared/services/i18n.service';
+import { SeoService } from '../../../shared/services/seo.service';
 import { getCategorySlug, getCategoryLabel, getCatalogSegment, getHomeLabel, getContactSegment } from '../../../shared/utils/route-helpers';
 
 @Component({
@@ -13,17 +14,19 @@ import { getCategorySlug, getCategoryLabel, getCatalogSegment, getHomeLabel, get
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.scss'
 })
-export class ProductDetailComponent implements OnInit {
+export class ProductDetailComponent implements OnInit, OnDestroy {
   private route = inject(ActivatedRoute);
-  private mockData = inject(MockDataService);
+  private api = inject(ApiService);
+  private seo = inject(SeoService);
   i18n = inject(I18nService);
 
-  product = signal<Product | null>(null);
-  relatedProducts = signal<Product[]>([]);
+  product = signal<ApiProduct | null>(null);
+  relatedProducts = signal<ApiProduct[]>([]);
   loading = signal(true);
   notFound = signal(false);
   selectedImage = signal(0);
   stickyVisible = signal(false);
+  lightboxOpen = signal(false);
 
   get breadcrumbs() {
     const p = this.product();
@@ -46,31 +49,87 @@ export class ProductDetailComponent implements OnInit {
     return '/' + lang + '/' + getContactSegment(lang) + '?producto=' + slug;
   }
 
+  get brandName(): string {
+    const p = this.product();
+    if (!p) return '';
+    if (typeof p.brand === 'object' && p.brand) return p.brand.name;
+    return '';
+  }
+
+  get brandSlug(): string {
+    const p = this.product();
+    if (!p) return '';
+    if (typeof p.brand === 'object' && p.brand) return p.brand.slug;
+    return '';
+  }
+
   get whatsappLink(): string {
     const p = this.product();
     if (!p) return '#';
     const lang = this.i18n.currentLang();
     const msg = lang === 'es'
-      ? `Hola, me interesa el producto ${p.name.es} de ${p.brand}. Me gustaria recibir informacion.`
-      : `Hello, I am interested in the product ${p.name.en} by ${p.brand}. I would like to receive information.`;
+      ? `Hola, me interesa el producto ${p.name.es} de ${this.brandName}. Me gustaria recibir informacion.`
+      : `Hello, I am interested in the product ${p.name.en} by ${this.brandName}. I would like to receive information.`;
     return `https://wa.me/50622609020?text=${encodeURIComponent(msg)}`;
   }
 
   async ngOnInit(): Promise<void> {
     const slug = this.route.snapshot.paramMap.get('slug');
     if (slug) {
-      const product = await this.mockData.getProductBySlug(slug);
-      if (product) {
+      try {
+        const lang = this.i18n.currentLang();
+        const product = await this.api.getProductBySlug(slug, lang);
         this.product.set(product);
-        const related = this.mockData.getRelatedProducts(product);
-        this.relatedProducts.set(related);
-      } else {
+
+        // REQ-125: Dynamic meta tags
+        const productName = this.i18n.t(product.name);
+        const productDesc = this.i18n.t(product.description) || '';
+        const brandName = typeof product.brand === 'object' ? product.brand.name : '';
+        const metaTitle = product.metaTitle ? this.i18n.t(product.metaTitle) : `${productName} - ${brandName}`;
+        const metaDesc = product.metaDescription ? this.i18n.t(product.metaDescription) : productDesc.substring(0, 160);
+
+        const catSlugEs = getCategorySlug(product.category, 'es');
+        const catSlugEn = getCategorySlug(product.category, 'en');
+        const productUrl = `/${lang}/${getCatalogSegment(lang)}/${getCategorySlug(product.category, lang)}/${product.slug[lang]}`;
+
+        this.seo.setMetaTags({
+          title: metaTitle,
+          description: metaDesc,
+          url: productUrl,
+          image: product.images?.[0],
+          type: 'product',
+        });
+
+        // NFR-011: hreflang
+        this.seo.setHreflang(
+          `/es/catalogo/${catSlugEs}/${product.slug.es}`,
+          `/en/catalog/${catSlugEn}/${product.slug.en}`
+        );
+
+        // REQ-126: Product JSON-LD schema
+        this.seo.setProductSchema({
+          name: productName,
+          description: metaDesc,
+          brand: brandName,
+          category: getCategoryLabel(product.category, lang),
+          image: product.images?.[0],
+          url: productUrl,
+        });
+
+        // Load related products
+        try {
+          const related = await this.api.getRelatedProducts(product._id);
+          this.relatedProducts.set(related);
+        } catch {
+          // Non-critical
+        }
+      } catch {
         this.notFound.set(true);
       }
     }
     this.loading.set(false);
 
-    // Sticky bar via Intersection Observer
+    // Sticky bar via IntersectionObserver
     if (typeof window !== 'undefined') {
       setTimeout(() => {
         const infoSection = document.querySelector('.product-detail__info');
@@ -85,4 +144,7 @@ export class ProductDetailComponent implements OnInit {
     }
   }
 
+  ngOnDestroy(): void {
+    this.seo.clearDynamicTags();
+  }
 }

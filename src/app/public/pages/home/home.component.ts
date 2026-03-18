@@ -7,6 +7,7 @@ import { BrandLogosRowComponent } from '../../components/brand-logos-row/brand-l
 import { ManufacturerCtaComponent } from '../../components/manufacturer-cta/manufacturer-cta.component';
 import { MockDataService, Product, Brand } from '../../../shared/services/mock-data.service';
 import { I18nService } from '../../../shared/services/i18n.service';
+import { SeoService } from '../../../shared/services/seo.service';
 import { initFadeInObserver } from '../../../shared/utils/fade-in-observer';
 
 @Component({
@@ -26,6 +27,7 @@ import { initFadeInObserver } from '../../../shared/utils/fade-in-observer';
 export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   private mockData = inject(MockDataService);
   i18n = inject(I18nService);
+  private seo = inject(SeoService);
   private el = inject(ElementRef);
   private fadeObserver: IntersectionObserver | null = null;
 
@@ -50,6 +52,18 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   currentSlide = signal(0);
 
   async ngOnInit(): Promise<void> {
+    // NFR-006/NFR-008: Home page SEO
+    const lang = this.i18n.currentLang();
+    this.seo.setMetaTags({
+      title: lang === 'es' ? 'Inicio' : 'Home',
+      description: lang === 'es'
+        ? 'HESA - Importacion y distribucion de farmacos veterinarios, alimentos para animales y equipos veterinarios en Costa Rica.'
+        : 'HESA - Import and distribution of veterinary pharmaceuticals, animal food, and veterinary equipment in Costa Rica.',
+      url: `/${lang}`,
+    });
+    this.seo.setHreflang('/es', '/en');
+    this.seo.setOrganizationSchema();
+
     // Simulate independent section loading
     setTimeout(() => this.heroLoading.set(false), 600);
 

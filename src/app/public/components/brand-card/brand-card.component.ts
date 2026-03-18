@@ -1,6 +1,5 @@
 import { Component, input, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Brand } from '../../../shared/services/mock-data.service';
 import { I18nService } from '../../../shared/services/i18n.service';
 import { getBrandsSegment } from '../../../shared/utils/route-helpers';
 
@@ -12,22 +11,26 @@ import { getBrandsSegment } from '../../../shared/utils/route-helpers';
   styleUrl: './brand-card.component.scss'
 })
 export class BrandCardComponent {
-  brand = input<Brand | null>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  brand = input<any>(null);
   name = input('');
   country = input('');
   categories = input<string[]>([]);
 
   i18n = inject(I18nService);
 
-  get displayName(): string { return this.brand()?.name || this.name(); }
-  get displayCountry(): string { return this.brand()?.country || this.country(); }
-  get displayCategories(): string[] { return this.brand()?.categories || this.categories(); }
-  get logoInitial(): string { return this.brand()?.logoPlaceholder || this.displayName.charAt(0); }
+  get displayName(): string { return (this.brand()?.['name'] as string) || this.name(); }
+  get displayCountry(): string { return (this.brand()?.['country'] as string) || this.country(); }
+  get displayCategories(): string[] { return (this.brand()?.['categories'] as string[]) || this.categories(); }
+  get logoInitial(): string { return (this.brand()?.['logoPlaceholder'] as string) || this.displayName.charAt(0); }
+  get logoUrl(): string | undefined { return this.brand()?.['logo'] as string | undefined; }
 
   get brandLink(): string {
     const b = this.brand();
     if (!b) return '#';
+    const slug = b['slug'] as string;
+    if (!slug) return '#';
     const lang = this.i18n.currentLang();
-    return '/' + lang + '/' + getBrandsSegment(lang) + '/' + b.slug;
+    return '/' + lang + '/' + getBrandsSegment(lang) + '/' + slug;
   }
 }

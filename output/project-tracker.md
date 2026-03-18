@@ -5,7 +5,7 @@
 > Codigo/bugs → Developer | Testing → QA | Deploy → DevOps | Requirements → BA | Arquitectura → Architect | Visual Research → Design Researcher | UI/UX → Design Orchestrator
 
 ## Estado Actual
-**FASE 4 — Construccion Visual** (en progreso)
+**FASE 5 — Iteracion 1: Fundacion Backend + Catalogo Funcional** (en progreso)
 
 ## Design Briefs
 - Detectados: `input/design-briefs/HESA_Brief_Agentes.md` (sitio publico) + `HESA_Brief_Panel_Administracion.md` (panel admin)
@@ -55,20 +55,20 @@
 - [x] 4f-consolidate: QA consolida qa-report.md (R1: 13 bugs, 101 bloqueados)
 - [x] 4f: QA completado (4 rondas, 317/317 criterios, 0 bloqueados, LISTO_PARA_DEMO)
 - [x] 4f-verify: Verificacion post-QA (PASA, 317/317 definitivos: 263 PASA + 54 N/A, 0 parciales, 291 specs)
-- [ ] 4g: Demo para el cliente
-- [ ] 4h: Feedback del cliente
-- [ ] 4i: Recopilar feedback
-- [ ] 4j: Distribucion y mantenimiento de feedback
-- [ ] 4k: Commit de fase visual
+- [x] 4g: Demo para el cliente
+- [x] 4h: Feedback del cliente (panel sin placeholders al final, solo categorias/filtros)
+- [x] 4i: Recopilar feedback
+- [x] 4j: Distribucion y mantenimiento de feedback (521 entradas, 9 memorias)
+- [x] 4k: Commit de fase visual
 
 ### FASE 3.5-INFRA — Setup de Infraestructura Cloud
-- [ ] DevOps: Entra ID + Cosmos DB + App Service + env config
+- [x] DevOps: Entra ID + Cosmos DB + App Service + Blob Storage + Comms + CI/CD backend
 
 ### FASE 5 — Iteracion 1: Fundacion Backend + Catalogo Funcional
-- [ ] 5a: Developer implementa
-- [ ] 5a-verify: Verificacion post-Developer
-- [ ] 5b: Simplify
-- [ ] 5c: Security Review
+- [x] 5a: Developer implementa (API + MSAL + frontend conectado)
+- [x] 5a-verify: Verificacion post-Developer (PASA, 45 gaps corregidos en R2)
+- [x] 5b: Simplify (N+1 queries, dedup uploads, extracted helpers)
+- [x] 5c: Security Review (NoSQL injection, XSS, rate limiting, file validation, 0 vulns)
 - [ ] 5d: Pre-QA Deploy
 - [ ] 5d-regress: Regresion automatizada pre-QA
 - [ ] 5e-plan: QA genera plan

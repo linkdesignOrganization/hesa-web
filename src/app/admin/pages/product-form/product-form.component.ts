@@ -2,6 +2,8 @@ import { Component, signal, inject, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HasUnsavedChanges } from '../../../shared/guards/unsaved-changes.guard';
+import { ApiService, ApiProduct, ApiBrand } from '../../../shared/services/api.service';
+import { ToastService } from '../../../shared/services/toast.service';
 
 @Component({
   selector: 'app-admin-product-form',
@@ -14,32 +16,127 @@ export class AdminProductFormComponent implements HasUnsavedChanges, OnInit {
   private router = inject(Router);
   private route = inject(ActivatedRoute);
   private fb = inject(FormBuilder);
+  private api = inject(ApiService);
+  private toast = inject(ToastService);
 
   selectedCategory = signal<'farmacos' | 'alimentos' | 'equipos' | ''>('');
   activeTab = signal<'es' | 'en'>('es');
   _hasChanges = signal(false);
   showUnsavedModal = signal(false);
+  showDeleteModal = signal(false);
   submitted = signal(false);
+  saving = signal(false);
+  isEditing = signal(false);
+  productId = signal<string | null>(null);
+  brands = signal<ApiBrand[]>([]);
+  existingProduct = signal<ApiProduct | null>(null);
+
+  // Species & presentations chips
+  speciesList = signal<string[]>([]);
+  presentationsList = signal<string[]>([]);
+
+  // Image & PDF upload state
+  existingImages = signal<string[]>([]);
+  existingPdfUrl = signal<string | null>(null);
+  uploadingImages = signal(false);
+  uploadingPdf = signal(false);
 
   productForm!: FormGroup;
-
-  // Promise resolve function for the CanDeactivate guard
   private pendingNavResolve: ((allowed: boolean) => void) | null = null;
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.productForm = this.fb.group({
-      name: ['', [Validators.required]],
+      nameEs: ['', [Validators.required]],
+      nameEn: [''],
       brand: ['', [Validators.required]],
       category: ['', [Validators.required]],
-      slug: [''],
-      descriptionEs: ['', [Validators.required]],
-      descriptionEn: ['', [Validators.required]]
+      family: [''],
+      lifeStage: [''],
+      equipmentType: [''],
+      descriptionEs: [''],
+      descriptionEn: [''],
+      compositionEs: [''],
+      compositionEn: [''],
+      sanitaryRegistry: [''],
+      indicationsEs: [''],
+      indicationsEn: [''],
+      ingredientsEs: [''],
+      ingredientsEn: [''],
+      nutritionalInfoEs: [''],
+      nutritionalInfoEn: [''],
+      specificationsEs: [''],
+      specificationsEn: [''],
+      recommendedUsesEs: [''],
+      recommendedUsesEn: [''],
+      warrantyEs: [''],
+      warrantyEn: [''],
+      isActive: [true],
     });
 
-    // Track changes from form interactions
     this.productForm.valueChanges.subscribe(() => {
       this._hasChanges.set(true);
     });
+
+    // Load brands
+    try {
+      this.brands.set(await this.api.adminGetBrands());
+    } catch {
+      this.toast.error('Error al cargar las marcas');
+    }
+
+    // Check if editing
+    const id = this.route.snapshot.params['id'];
+    if (id) {
+      this.isEditing.set(true);
+      this.productId.set(id);
+      await this.loadProduct(id);
+    }
+  }
+
+  private async loadProduct(id: string): Promise<void> {
+    try {
+      const product = await this.api.adminGetProduct(id);
+      this.existingProduct.set(product);
+      this.selectedCategory.set(product.category as 'farmacos' | 'alimentos' | 'equipos');
+
+      this.productForm.patchValue({
+        nameEs: product.name.es,
+        nameEn: product.name.en,
+        brand: typeof product.brand === 'object' ? product.brand._id : product.brand,
+        category: product.category,
+        family: product.family || '',
+        lifeStage: product.lifeStage || '',
+        equipmentType: product.equipmentType || '',
+        descriptionEs: product.description?.es || '',
+        descriptionEn: product.description?.en || '',
+        compositionEs: product.composition?.es || '',
+        compositionEn: product.composition?.en || '',
+        sanitaryRegistry: product.sanitaryRegistry || '',
+        indicationsEs: product.indications?.es || '',
+        indicationsEn: product.indications?.en || '',
+        ingredientsEs: product.ingredients?.es || '',
+        ingredientsEn: product.ingredients?.en || '',
+        nutritionalInfoEs: product.nutritionalInfo?.es || '',
+        nutritionalInfoEn: product.nutritionalInfo?.en || '',
+        specificationsEs: product.specifications?.es || '',
+        specificationsEn: product.specifications?.en || '',
+        recommendedUsesEs: product.recommendedUses?.es || '',
+        recommendedUsesEn: product.recommendedUses?.en || '',
+        warrantyEs: product.warranty?.es || '',
+        warrantyEn: product.warranty?.en || '',
+        isActive: product.isActive,
+      });
+
+      this.speciesList.set(product.species || []);
+      this.presentationsList.set(product.presentations || []);
+      this.existingImages.set(product.images || []);
+      this.existingPdfUrl.set(product.pdfUrl || null);
+
+      this._hasChanges.set(false);
+    } catch {
+      this.toast.error('Error al cargar el producto');
+      this.router.navigate(['/admin/productos']);
+    }
   }
 
   selectCategory(cat: 'farmacos' | 'alimentos' | 'equipos'): void {
@@ -57,6 +154,156 @@ export class AdminProductFormComponent implements HasUnsavedChanges, OnInit {
     this._hasChanges.set(true);
   }
 
+  // --- Species chips ---
+  addSpecies(event: Event): void {
+    event.preventDefault();
+    const input = event.target as HTMLInputElement;
+    const value = input.value.trim();
+    if (value && !this.speciesList().includes(value)) {
+      this.speciesList.update(list => [...list, value]);
+      this._hasChanges.set(true);
+    }
+    input.value = '';
+  }
+
+  removeSpecies(index: number): void {
+    this.speciesList.update(list => list.filter((_, i) => i !== index));
+    this._hasChanges.set(true);
+  }
+
+  // --- Presentation chips ---
+  addPresentation(event: Event): void {
+    event.preventDefault();
+    const input = event.target as HTMLInputElement;
+    const value = input.value.trim();
+    if (value && !this.presentationsList().includes(value)) {
+      this.presentationsList.update(list => [...list, value]);
+      this._hasChanges.set(true);
+    }
+    input.value = '';
+  }
+
+  removePresentation(index: number): void {
+    this.presentationsList.update(list => list.filter((_, i) => i !== index));
+    this._hasChanges.set(true);
+  }
+
+  // --- Image Upload (REQ-243, REQ-244, REQ-254) ---
+  async onImagesSelected(event: Event): Promise<void> {
+    const input = event.target as HTMLInputElement;
+    if (!input.files || input.files.length === 0) return;
+    const files = Array.from(input.files);
+    await this.uploadImages(files);
+    input.value = '';
+  }
+
+  onImageDrop(event: DragEvent): void {
+    event.preventDefault();
+    if (!event.dataTransfer?.files) return;
+    const files = Array.from(event.dataTransfer.files);
+    const imageFiles = files.filter(f => ['image/png', 'image/jpeg', 'image/webp'].includes(f.type));
+    if (imageFiles.length === 0) {
+      this.toast.error('Solo se permiten imagenes PNG, JPG o WebP');
+      return;
+    }
+    this.uploadImages(imageFiles);
+  }
+
+  private async uploadImages(files: File[]): Promise<void> {
+    if (!this.productId()) {
+      this.toast.info('Guarda el producto primero para poder subir imagenes.');
+      return;
+    }
+
+    const maxRemaining = 6 - this.existingImages().length;
+    const filesToUpload = files.slice(0, maxRemaining);
+
+    if (files.length > maxRemaining) {
+      this.toast.warning(`Solo se pueden subir ${maxRemaining} imagenes mas.`);
+    }
+
+    for (const file of filesToUpload) {
+      if (file.size > 5 * 1024 * 1024) {
+        this.toast.error(`"${file.name}" supera el limite de 5MB`);
+        return;
+      }
+    }
+
+    this.uploadingImages.set(true);
+    try {
+      const updatedProduct = await this.api.adminUploadProductImages(this.productId()!, filesToUpload);
+      this.existingImages.set(updatedProduct.images || []);
+      this.toast.success('Imagenes subidas correctamente');
+    } catch {
+      this.toast.error('Error al subir las imagenes');
+    } finally {
+      this.uploadingImages.set(false);
+    }
+  }
+
+  async deleteImage(index: number): Promise<void> {
+    if (!this.productId()) return;
+    try {
+      const updatedProduct = await this.api.adminDeleteProductImage(this.productId()!, index);
+      this.existingImages.set(updatedProduct.images || []);
+      this.toast.success('Imagen eliminada');
+    } catch {
+      this.toast.error('Error al eliminar la imagen');
+    }
+  }
+
+  // --- PDF Upload (REQ-245) ---
+  async onPdfSelected(event: Event): Promise<void> {
+    const input = event.target as HTMLInputElement;
+    if (!input.files || !input.files[0]) return;
+    await this.uploadPdf(input.files[0]);
+    input.value = '';
+  }
+
+  onPdfDrop(event: DragEvent): void {
+    event.preventDefault();
+    if (!event.dataTransfer?.files || !event.dataTransfer.files[0]) return;
+    const file = event.dataTransfer.files[0];
+    if (file.type !== 'application/pdf') {
+      this.toast.error('Solo se permiten archivos PDF');
+      return;
+    }
+    this.uploadPdf(file);
+  }
+
+  private async uploadPdf(file: File): Promise<void> {
+    if (!this.productId()) {
+      this.toast.info('Guarda el producto primero para poder subir el PDF.');
+      return;
+    }
+    if (file.size > 10 * 1024 * 1024) {
+      this.toast.error('El archivo no debe superar 10MB');
+      return;
+    }
+    this.uploadingPdf.set(true);
+    try {
+      const updatedProduct = await this.api.adminUploadProductPdf(this.productId()!, file);
+      this.existingPdfUrl.set(updatedProduct.pdfUrl || null);
+      this.toast.success('Ficha tecnica subida correctamente');
+    } catch {
+      this.toast.error('Error al subir la ficha tecnica');
+    } finally {
+      this.uploadingPdf.set(false);
+    }
+  }
+
+  async deletePdf(): Promise<void> {
+    if (!this.productId()) return;
+    try {
+      await this.api.adminDeleteProductPdf(this.productId()!);
+      this.existingPdfUrl.set(null);
+      this.toast.success('Ficha tecnica eliminada');
+    } catch {
+      this.toast.error('Error al eliminar la ficha tecnica');
+    }
+  }
+
+  // --- Form validation ---
   onFieldBlur(fieldName: string): void {
     const control = this.productForm.get(fieldName);
     if (control) {
@@ -75,23 +322,20 @@ export class AdminProductFormComponent implements HasUnsavedChanges, OnInit {
     if (!control || !control.errors) return '';
     if (control.errors['required']) {
       const labels: Record<string, string> = {
-        name: 'El nombre del producto es obligatorio',
+        nameEs: 'El nombre del producto es obligatorio',
         brand: 'Selecciona una marca',
         category: 'Selecciona una categoria',
-        descriptionEs: 'La descripcion en espanol es obligatoria',
-        descriptionEn: 'La descripcion en ingles es obligatoria'
       };
       return labels[fieldName] || 'Este campo es obligatorio';
     }
     return '';
   }
 
-  onSubmit(): void {
+  async onSubmit(): Promise<void> {
     this.submitted.set(true);
     this.productForm.markAllAsTouched();
 
     if (this.productForm.invalid) {
-      // Scroll to first invalid field
       const firstInvalid = document.querySelector('.form-control.is-invalid, .form-select.is-invalid');
       if (firstInvalid) {
         firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -99,13 +343,87 @@ export class AdminProductFormComponent implements HasUnsavedChanges, OnInit {
       return;
     }
 
-    // Valid form — would save (mock for now)
-    this._hasChanges.set(false);
-    this.router.navigate(['/admin/productos']);
+    this.saving.set(true);
+    const productData = this.buildProductData();
+
+    try {
+      let savedProduct: ApiProduct;
+      if (this.isEditing() && this.productId()) {
+        savedProduct = await this.api.adminUpdateProduct(this.productId()!, productData);
+        this.toast.success('Producto actualizado correctamente');
+      } else {
+        savedProduct = await this.api.adminCreateProduct(productData);
+        this.toast.success('Producto creado correctamente');
+        this.productId.set(savedProduct._id);
+      }
+      this._hasChanges.set(false);
+      this.router.navigate(['/admin/productos']);
+    } catch {
+      this.toast.error('Error al guardar el producto. Intenta de nuevo.');
+    } finally {
+      this.saving.set(false);
+    }
+  }
+
+  private buildProductData(): Record<string, unknown> {
+    const v = this.productForm.value;
+    const data: Record<string, unknown> = {
+      name: { es: v.nameEs, en: v.nameEn || '' },
+      brand: v.brand,
+      category: v.category,
+      description: { es: v.descriptionEs || '', en: v.descriptionEn || '' },
+      species: this.speciesList(),
+      presentations: this.presentationsList(),
+      isActive: v.isActive,
+    };
+
+    if (v.family) data['family'] = v.family;
+    if (v.lifeStage) data['lifeStage'] = v.lifeStage;
+    if (v.equipmentType) data['equipmentType'] = v.equipmentType;
+
+    this.addCategorySpecificFields(data, v);
+    return data;
+  }
+
+  private addCategorySpecificFields(data: Record<string, unknown>, v: Record<string, string>): void {
+    if (v['category'] === 'farmacos') {
+      data['composition'] = { es: v['compositionEs'] || '', en: v['compositionEn'] || '' };
+      data['sanitaryRegistry'] = v['sanitaryRegistry'] || '';
+      data['indications'] = { es: v['indicationsEs'] || '', en: v['indicationsEn'] || '' };
+    } else if (v['category'] === 'alimentos') {
+      data['ingredients'] = { es: v['ingredientsEs'] || '', en: v['ingredientsEn'] || '' };
+      data['nutritionalInfo'] = { es: v['nutritionalInfoEs'] || '', en: v['nutritionalInfoEn'] || '' };
+    } else if (v['category'] === 'equipos') {
+      data['specifications'] = { es: v['specificationsEs'] || '', en: v['specificationsEn'] || '' };
+      data['recommendedUses'] = { es: v['recommendedUsesEs'] || '', en: v['recommendedUsesEn'] || '' };
+      data['warranty'] = { es: v['warrantyEs'] || '', en: v['warrantyEn'] || '' };
+    }
+  }
+
+  // --- Delete Product (REQ-250) ---
+  requestDeleteProduct(): void {
+    this.showDeleteModal.set(true);
+  }
+
+  cancelDelete(): void {
+    this.showDeleteModal.set(false);
+  }
+
+  async confirmDeleteProduct(): Promise<void> {
+    if (!this.productId()) return;
+    try {
+      await this.api.adminDeleteProduct(this.productId()!);
+      this.toast.success('Producto eliminado correctamente');
+      this._hasChanges.set(false);
+      this.router.navigate(['/admin/productos']);
+    } catch {
+      this.toast.error('Error al eliminar el producto');
+    } finally {
+      this.showDeleteModal.set(false);
+    }
   }
 
   // --- HasUnsavedChanges interface ---
-
   hasUnsavedChanges(): boolean {
     return this._hasChanges();
   }
@@ -117,12 +435,9 @@ export class AdminProductFormComponent implements HasUnsavedChanges, OnInit {
     });
   }
 
-  // --- Modal actions ---
-
   onCancel(): void {
     if (this._hasChanges()) {
       this.showUnsavedModal.set(true);
-      // For cancel button, resolve navigation after user makes a choice
       this.pendingNavResolve = (allowed: boolean) => {
         if (allowed) {
           this.router.navigate(['/admin/productos']);

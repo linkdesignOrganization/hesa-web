@@ -264,6 +264,103 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 28px;
     }
+
+    &--desktop {
+      display: none;
+
+      @media (min-width: 768px) {
+        display: grid;
+      }
+    }
+  }
+
+  // REQ-141: Mobile horizontal swipe carousel
+  &__related-carousel {
+    &--mobile {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      gap: 16px;
+      padding-bottom: 8px;
+
+      &::-webkit-scrollbar {
+        height: 4px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: var(--neutral-200);
+        border-radius: 4px;
+      }
+
+      @media (min-width: 768px) {
+        display: none;
+      }
+    }
+  }
+
+  &__related-carousel-item {
+    flex: 0 0 75%;
+    scroll-snap-align: start;
+    min-width: 0;
+  }
+}
+
+// ---- Lightbox (REQ-109) ----
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  &__close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 1101;
+  }
+
+  &__img {
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+    cursor: default;
+  }
+
+  &__nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.15);
+    border: none;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    &--prev {
+      left: 16px;
+    }
+
+    &--next {
+      right: 16px;
+    }
   }
 }
 

@@ -18,10 +18,10 @@
         Iniciar sesion con Microsoft
       }
     </button>
-    <!-- Error state (DC-115) -->
+    <!-- Error state (DC-115, REQ-310) -->
     @if (loginError()) {
       <div class="login-card__error">
-        <p>No tienes acceso al panel de administracion</p>
+        <p>{{ errorMessage() }}</p>
         <button class="login-card__retry" (click)="onLogin()">Reintentar</button>
       </div>
     }

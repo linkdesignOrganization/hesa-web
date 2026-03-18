@@ -121,8 +121,8 @@
           }
         </button>
         <div class="admin__header-user" (click)="toggleUserDropdown()">
-          <div class="admin__header-avatar">A</div>
-          <span class="admin__header-name">Admin</span>
+          <div class="admin__header-avatar">{{ auth.userName() ? auth.userName().charAt(0).toUpperCase() : 'A' }}</div>
+          <span class="admin__header-name">{{ auth.userName() || 'Admin' }}</span>
           <svg class="admin__header-user-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
           @if (userDropdownOpen()) {
             <div class="admin__header-dropdown">

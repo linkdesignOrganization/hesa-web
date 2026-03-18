@@ -3,7 +3,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { BreadcrumbComponent } from '../../../shared/components/breadcrumb/breadcrumb.component';
 import { ProductCardComponent } from '../../components/product-card/product-card.component';
 import { BrandCardComponent } from '../../components/brand-card/brand-card.component';
-import { MockDataService, Product, Brand } from '../../../shared/services/mock-data.service';
+import { ApiService } from '../../../shared/services/api.service';
 import { I18nService } from '../../../shared/services/i18n.service';
 import { getHomeLabel } from '../../../shared/utils/route-helpers';
 
@@ -16,12 +16,12 @@ import { getHomeLabel } from '../../../shared/utils/route-helpers';
 })
 export class SearchResultsComponent implements OnInit {
   private route = inject(ActivatedRoute);
-  private mockData = inject(MockDataService);
+  private api = inject(ApiService);
   i18n = inject(I18nService);
 
   searchTerm = signal('');
-  productResults = signal<Product[]>([]);
-  brandResults = signal<Brand[]>([]);
+  productResults = signal<Record<string, unknown>[]>([]);
+  brandResults = signal<Record<string, unknown>[]>([]);
   loading = signal(true);
 
   get breadcrumbs() {
@@ -36,16 +36,37 @@ export class SearchResultsComponent implements OnInit {
     return this.productResults().length > 0 || this.brandResults().length > 0;
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     const rawQ = this.route.snapshot.queryParamMap.get('q') || '';
-    // Sanitize: limit length, strip control characters
     // eslint-disable-next-line no-control-regex
     const q = rawQ.substring(0, 100).replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, '').trim();
     this.searchTerm.set(q);
 
-    if (q.length >= 3) {
-      this.productResults.set(this.mockData.searchProducts(q));
-      this.brandResults.set(this.mockData.searchBrands(q));
+    if (q.length >= 2) {
+      try {
+        const results = await this.api.search(q, this.i18n.currentLang());
+        // Map to products with slug for product card
+        const productsMapped = results.products.map(p => ({
+          _id: p.id,
+          name: p.name,
+          slug: p.slug,
+          brand: p.brand,
+          category: p.category,
+          images: p.image ? [p.image] : [],
+        }));
+        const brandsMapped = results.brands.map(b => ({
+          _id: b.id,
+          name: b.name,
+          slug: b.slug,
+          logo: b.logo,
+          country: b.country,
+          categories: [],
+        }));
+        this.productResults.set(productsMapped);
+        this.brandResults.set(brandsMapped);
+      } catch {
+        // Search failed silently
+      }
     }
     this.loading.set(false);
   }

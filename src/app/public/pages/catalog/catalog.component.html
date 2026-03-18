@@ -5,7 +5,7 @@
 
     <div class="catalog-page__header">
       <h1 class="text-h2">{{ i18n.currentLang() === 'es' ? 'Catalogo de Productos' : 'Product Catalog' }}</h1>
-      <span class="catalog-page__count">{{ filteredProducts().length }} {{ i18n.currentLang() === 'es' ? 'productos' : 'products' }}</span>
+      <span class="catalog-page__count">{{ totalProducts() }} {{ i18n.currentLang() === 'es' ? 'productos' : 'products' }}</span>
     </div>
 
     <!-- Mobile Filter Button (< 768px) -->
@@ -28,8 +28,8 @@
         </select>
         <select class="filter-bar__dropdown" [value]="selectedBrand()" (change)="applyFilter('brand', $any($event.target).value)">
           <option value="">{{ i18n.currentLang() === 'es' ? 'Marca' : 'Brand' }}</option>
-          @for (brand of uniqueBrands; track brand) {
-            <option [value]="brand">{{ brand }}</option>
+          @for (brand of filterValues().brands; track brand.id) {
+            <option [value]="brand.id">{{ brand.name }}</option>
           }
         </select>
         @if (showSpeciesFilter()) {
@@ -98,8 +98,8 @@
             <label class="filter-drawer__label">{{ i18n.currentLang() === 'es' ? 'Marca' : 'Brand' }}</label>
             <select class="filter-bar__dropdown" [value]="selectedBrand()" (change)="applyFilter('brand', $any($event.target).value)">
               <option value="">{{ i18n.currentLang() === 'es' ? 'Todas' : 'All' }}</option>
-              @for (brand of uniqueBrands; track brand) {
-                <option [value]="brand">{{ brand }}</option>
+              @for (brand of filterValues().brands; track brand.id) {
+                <option [value]="brand.id">{{ brand.name }}</option>
               }
             </select>
           </div>
@@ -186,7 +186,17 @@
           <div class="skeleton-card-product"><div class="skeleton-block" style="aspect-ratio: 1; border-radius: 8px;"></div><div class="skeleton-block" style="height: 16px; width: 80%; margin-top: 12px;"></div><div class="skeleton-block" style="height: 12px; width: 50%; margin-top: 8px;"></div></div>
         }
       </div>
-    } @else if (filteredProducts().length === 0 && activeFilters().length > 0) {
+    } @else if (error()) {
+      <!-- Error State -->
+      <div class="catalog-page__state catalog-page__state--error">
+        <div class="catalog-page__state-icon" aria-hidden="true">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--semantic-danger)" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <h2 class="catalog-page__state-title">{{ i18n.currentLang() === 'es' ? 'No pudimos cargar los productos' : 'We could not load the products' }}</h2>
+        <p class="catalog-page__state-desc">{{ i18n.currentLang() === 'es' ? 'Intenta de nuevo.' : 'Try again.' }}</p>
+        <button class="btn btn-primary" (click)="retry()">{{ i18n.currentLang() === 'es' ? 'Reintentar' : 'Retry' }}</button>
+      </div>
+    } @else if (products().length === 0 && activeFilters().length > 0) {
       <!-- Filters No Results State -->
       <div class="catalog-page__state catalog-page__state--no-results">
         <div class="catalog-page__state-icon" aria-hidden="true">
@@ -196,7 +206,7 @@
         <p class="catalog-page__state-desc">{{ i18n.currentLang() === 'es' ? 'Intenta limpiar algunos filtros para ver mas resultados.' : 'Try clearing some filters to see more results.' }}</p>
         <button class="btn btn-outline" (click)="clearFilters()">{{ i18n.currentLang() === 'es' ? 'Limpiar filtros' : 'Clear filters' }}</button>
       </div>
-    } @else if (filteredProducts().length === 0) {
+    } @else if (products().length === 0) {
       <!-- Empty State -->
       <div class="catalog-page__state catalog-page__state--empty">
         <div class="catalog-page__state-illustration" aria-hidden="true">
@@ -213,7 +223,7 @@
     } @else {
       <!-- Product Grid -->
       <div class="catalog-page__grid">
-        @for (product of paginatedProducts(); track product.id) {
+        @for (product of products(); track product._id) {
           <app-product-card [product]="product" />
         }
       </div>
@@ -223,8 +233,8 @@
         <div class="pagination">
           <span class="pagination__info">
             {{ i18n.currentLang() === 'es' ? 'Mostrando' : 'Showing' }}
-            {{ (currentPage() - 1) * pageSize + 1 }}-{{ Math.min(currentPage() * pageSize, filteredProducts().length) }}
-            {{ i18n.currentLang() === 'es' ? 'de' : 'of' }} {{ filteredProducts().length }}
+            {{ (currentPage() - 1) * pageSize + 1 }}-{{ Math.min(currentPage() * pageSize, totalProducts()) }}
+            {{ i18n.currentLang() === 'es' ? 'de' : 'of' }} {{ totalProducts() }}
             {{ i18n.currentLang() === 'es' ? 'productos' : 'products' }}
           </span>
           <div class="pagination__controls">

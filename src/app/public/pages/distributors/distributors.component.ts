@@ -1,8 +1,9 @@
-import { Component, inject, AfterViewInit, OnDestroy, ElementRef } from '@angular/core';
+import { Component, inject, AfterViewInit, OnInit, OnDestroy, ElementRef } from '@angular/core';
 import { TimelineComponent } from '../../components/timeline/timeline.component';
 import { ContactFormComponent } from '../../components/contact-form/contact-form.component';
 import { BrandLogosRowComponent } from '../../components/brand-logos-row/brand-logos-row.component';
 import { I18nService } from '../../../shared/services/i18n.service';
+import { SeoService } from '../../../shared/services/seo.service';
 import { initFadeInObserver } from '../../../shared/utils/fade-in-observer';
 
 @Component({
@@ -12,8 +13,9 @@ import { initFadeInObserver } from '../../../shared/utils/fade-in-observer';
   templateUrl: './distributors.component.html',
   styleUrl: './distributors.component.scss'
 })
-export class DistributorsComponent implements AfterViewInit, OnDestroy {
+export class DistributorsComponent implements OnInit, AfterViewInit, OnDestroy {
   private el = inject(ElementRef);
+  private seo = inject(SeoService);
   i18n = inject(I18nService);
   private fadeObserver: IntersectionObserver | null = null;
   private timelineObserver: IntersectionObserver | null = null;
@@ -27,6 +29,19 @@ export class DistributorsComponent implements AfterViewInit, OnDestroy {
     { icon: 'trending-up', title: { es: 'Mercado en Crecimiento', en: 'Growing Market' }, desc: { es: 'Costa Rica, puerta de entrada a Centroamerica', en: 'Costa Rica, gateway to Central America' } }
   ];
 
+  ngOnInit(): void {
+    // REQ-181: SEO meta tags for distributors page
+    const lang = this.i18n.currentLang();
+    this.seo.setMetaTags({
+      title: lang === 'es' ? 'Distribuidores' : 'Distributors',
+      description: lang === 'es'
+        ? 'HESA es su socio estrategico para la distribucion de productos veterinarios en Costa Rica y Centroamerica.'
+        : 'HESA is your strategic partner for the distribution of veterinary products in Costa Rica and Central America.',
+      url: `/${lang}/${lang === 'es' ? 'distribuidores' : 'distributors'}`,
+    });
+    this.seo.setHreflang('/es/distribuidores', '/en/distributors');
+  }
+
   ngAfterViewInit(): void {
     if (typeof window === 'undefined') return;
     setTimeout(() => {
@@ -38,6 +53,7 @@ export class DistributorsComponent implements AfterViewInit, OnDestroy {
   ngOnDestroy(): void {
     this.fadeObserver?.disconnect();
     this.timelineObserver?.disconnect();
+    this.seo.clearDynamicTags();
   }
 
   private initTimelineObserver(): void {

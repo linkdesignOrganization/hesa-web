@@ -22,7 +22,7 @@
         <div class="search-results-page__section">
           <h2 class="text-label">{{ i18n.currentLang() === 'es' ? 'PRODUCTOS' : 'PRODUCTS' }} ({{ productResults().length }})</h2>
           <div class="search-results-page__grid">
-            @for (product of productResults(); track product.id) {
+            @for (product of productResults(); track $index) {
               <app-product-card [product]="product" />
             }
           </div>
@@ -33,7 +33,7 @@
         <div class="search-results-page__section">
           <h2 class="text-label">{{ i18n.currentLang() === 'es' ? 'MARCAS' : 'BRANDS' }} ({{ brandResults().length }})</h2>
           <div class="search-results-page__brands-grid">
-            @for (brand of brandResults(); track brand.id) {
+            @for (brand of brandResults(); track $index) {
               <app-brand-card [brand]="brand" />
             }
           </div>

@@ -26,7 +26,7 @@
       </div>
     } @else {
       <div class="brands-page__grid">
-        @for (brand of brands(); track brand.id) {
+        @for (brand of brands(); track brand._id) {
           <app-brand-card [brand]="brand" />
         }
       </div>

@@ -4,11 +4,14 @@ import { AuthService } from '../services/auth.service';
 
 /**
  * Route guard that protects admin routes from unauthorized access.
- * Redirects unauthenticated users to the admin login page.
+ * REQ-308, REQ-313: Redirects unauthenticated users to admin login.
  */
-export const authGuard: CanActivateFn = () => {
+export const authGuard: CanActivateFn = async () => {
   const authService = inject(AuthService);
   const router = inject(Router);
+
+  // Ensure MSAL is initialized before checking auth state
+  await authService.initialize();
 
   if (authService.isAuthenticated()) {
     return true;

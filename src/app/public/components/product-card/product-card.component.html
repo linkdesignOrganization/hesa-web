@@ -1,6 +1,9 @@
 <a class="product-card" [class.product-card--carousel]="variant() === 'carousel'" [routerLink]="productLink" [attr.aria-label]="'Ver ' + displayName">
   <div class="product-card__image" [attr.data-category]="productCategory">
-    <div class="product-card__image-visual">
+    @if (productImage) {
+      <img [src]="productImage" [alt]="displayName" class="product-card__image-real" loading="lazy">
+    }
+    <div class="product-card__image-visual" [class.product-card__image-visual--hidden]="!!productImage">
       @if (productCategory === 'farmacos') {
         <svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <rect width="200" height="200" rx="12" fill="rgba(0,141,201,0.06)"/>

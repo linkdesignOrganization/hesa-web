@@ -49,42 +49,46 @@
             <div class="product-detail__thumbs">
               @for (img of product()!.images; track img; let i = $index) {
                 <button class="product-detail__thumb" [class.product-detail__thumb--active]="selectedImage() === i" (click)="selectedImage.set(i)" [attr.aria-label]="'Ver imagen ' + (i + 1)">
-                  <div class="product-detail__thumb-placeholder"></div>
+                  <img [src]="img" [alt]="i18n.t(product()!.name) + ' - imagen ' + (i + 1)" style="width: 100%; height: 100%; object-fit: cover;">
                 </button>
               }
             </div>
           }
-          <div class="product-detail__main-image">
-            <div class="product-detail__image-visual">
-              @if (product()!.category === 'farmacos') {
-                <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                  <rect x="32" y="10" width="56" height="90" rx="10" fill="rgba(0,141,201,0.15)" stroke="rgba(0,141,201,0.3)" stroke-width="2"/>
-                  <rect x="38" y="16" width="44" height="24" rx="5" fill="rgba(0,141,201,0.2)"/>
-                  <rect x="38" y="46" width="44" height="3" rx="1.5" fill="rgba(0,141,201,0.15)"/>
-                  <rect x="38" y="53" width="30" height="3" rx="1.5" fill="rgba(0,141,201,0.1)"/>
-                  <circle cx="60" cy="78" r="12" fill="none" stroke="rgba(80,185,42,0.4)" stroke-width="2"/>
-                  <path d="M55 78L58 81L66 73" stroke="rgba(80,185,42,0.4)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              } @else if (product()!.category === 'alimentos') {
-                <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                  <rect x="22" y="10" width="76" height="95" rx="10" fill="rgba(80,185,42,0.12)" stroke="rgba(80,185,42,0.25)" stroke-width="2"/>
-                  <rect x="28" y="16" width="64" height="28" rx="5" fill="rgba(80,185,42,0.15)"/>
-                  <rect x="34" y="50" width="52" height="3" rx="1.5" fill="rgba(80,185,42,0.12)"/>
-                  <rect x="34" y="57" width="36" height="3" rx="1.5" fill="rgba(80,185,42,0.08)"/>
-                  <circle cx="60" cy="82" r="8" fill="rgba(139,92,42,0.2)"/>
-                  <circle cx="46" cy="80" r="5" fill="rgba(139,92,42,0.15)"/>
-                  <circle cx="74" cy="81" r="5.5" fill="rgba(139,92,42,0.15)"/>
-                </svg>
-              } @else {
-                <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                  <rect x="22" y="22" width="76" height="76" rx="10" fill="rgba(124,58,237,0.1)" stroke="rgba(124,58,237,0.2)" stroke-width="2"/>
-                  <circle cx="60" cy="50" r="18" fill="none" stroke="rgba(124,58,237,0.25)" stroke-width="2"/>
-                  <circle cx="60" cy="50" r="7" fill="rgba(124,58,237,0.12)"/>
-                  <rect x="38" y="78" width="44" height="3.5" rx="1.75" fill="rgba(124,58,237,0.12)"/>
-                  <rect x="44" y="85" width="32" height="3" rx="1.5" fill="rgba(124,58,237,0.08)"/>
-                </svg>
-              }
-            </div>
+          <div class="product-detail__main-image" (click)="product()!.images && product()!.images.length > 0 ? lightboxOpen.set(true) : null">
+            @if (product()!.images && product()!.images.length > 0) {
+              <img [src]="product()!.images[selectedImage()]" [alt]="i18n.t(product()!.name)" style="width: 100%; aspect-ratio: 1/1; object-fit: contain; background: var(--neutral-50);">
+            } @else {
+              <div class="product-detail__image-visual">
+                @if (product()!.category === 'farmacos') {
+                  <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <rect x="32" y="10" width="56" height="90" rx="10" fill="rgba(0,141,201,0.15)" stroke="rgba(0,141,201,0.3)" stroke-width="2"/>
+                    <rect x="38" y="16" width="44" height="24" rx="5" fill="rgba(0,141,201,0.2)"/>
+                    <rect x="38" y="46" width="44" height="3" rx="1.5" fill="rgba(0,141,201,0.15)"/>
+                    <rect x="38" y="53" width="30" height="3" rx="1.5" fill="rgba(0,141,201,0.1)"/>
+                    <circle cx="60" cy="78" r="12" fill="none" stroke="rgba(80,185,42,0.4)" stroke-width="2"/>
+                    <path d="M55 78L58 81L66 73" stroke="rgba(80,185,42,0.4)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                } @else if (product()!.category === 'alimentos') {
+                  <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <rect x="22" y="10" width="76" height="95" rx="10" fill="rgba(80,185,42,0.12)" stroke="rgba(80,185,42,0.25)" stroke-width="2"/>
+                    <rect x="28" y="16" width="64" height="28" rx="5" fill="rgba(80,185,42,0.15)"/>
+                    <rect x="34" y="50" width="52" height="3" rx="1.5" fill="rgba(80,185,42,0.12)"/>
+                    <rect x="34" y="57" width="36" height="3" rx="1.5" fill="rgba(80,185,42,0.08)"/>
+                    <circle cx="60" cy="82" r="8" fill="rgba(139,92,42,0.2)"/>
+                    <circle cx="46" cy="80" r="5" fill="rgba(139,92,42,0.15)"/>
+                    <circle cx="74" cy="81" r="5.5" fill="rgba(139,92,42,0.15)"/>
+                  </svg>
+                } @else {
+                  <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <rect x="22" y="22" width="76" height="76" rx="10" fill="rgba(124,58,237,0.1)" stroke="rgba(124,58,237,0.2)" stroke-width="2"/>
+                    <circle cx="60" cy="50" r="18" fill="none" stroke="rgba(124,58,237,0.25)" stroke-width="2"/>
+                    <circle cx="60" cy="50" r="7" fill="rgba(124,58,237,0.12)"/>
+                    <rect x="38" y="78" width="44" height="3.5" rx="1.75" fill="rgba(124,58,237,0.12)"/>
+                    <rect x="44" y="85" width="32" height="3" rx="1.5" fill="rgba(124,58,237,0.08)"/>
+                  </svg>
+                }
+              </div>
+            }
           </div>
         </div>
 
@@ -94,7 +98,7 @@
             <div class="product-detail__translation-badge">Translation not available</div>
           }
           <h1 class="product-detail__name">{{ i18n.t(product()!.name) }}</h1>
-          <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'marcas' : 'brands') + '/' + product()!.brandSlug" class="product-detail__brand-link">{{ product()!.brand }}</a>
+          <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'marcas' : 'brands') + '/' + brandSlug" class="product-detail__brand-link">{{ brandName }}</a>
 
           <!-- Species Badges -->
           @if (product()!.species.length > 0) {
@@ -120,6 +124,7 @@
 
           <p class="product-detail__description">{{ i18n.t(product()!.description) }}</p>
 
+          <!-- Farmacos-specific fields (REQ-113) -->
           @if (product()!.composition) {
             <div class="product-detail__section">
               <p class="product-detail__section-label">{{ i18n.currentLang() === 'es' ? 'Composicion' : 'Composition' }}</p>
@@ -141,6 +146,43 @@
             </div>
           }
 
+          <!-- Alimentos-specific fields (REQ-115) -->
+          @if (product()!.ingredients) {
+            <div class="product-detail__section">
+              <p class="product-detail__section-label">{{ i18n.currentLang() === 'es' ? 'Ingredientes principales' : 'Main ingredients' }}</p>
+              <p>{{ i18n.t(product()!.ingredients!) }}</p>
+            </div>
+          }
+
+          @if (product()!.nutritionalInfo) {
+            <div class="product-detail__section">
+              <p class="product-detail__section-label">{{ i18n.currentLang() === 'es' ? 'Informacion nutricional' : 'Nutritional information' }}</p>
+              <p>{{ i18n.t(product()!.nutritionalInfo!) }}</p>
+            </div>
+          }
+
+          <!-- Equipos-specific fields (REQ-116) -->
+          @if (product()!.specifications) {
+            <div class="product-detail__section">
+              <p class="product-detail__section-label">{{ i18n.currentLang() === 'es' ? 'Especificaciones tecnicas' : 'Technical specifications' }}</p>
+              <p>{{ i18n.t(product()!.specifications!) }}</p>
+            </div>
+          }
+
+          @if (product()!.recommendedUses) {
+            <div class="product-detail__section">
+              <p class="product-detail__section-label">{{ i18n.currentLang() === 'es' ? 'Usos recomendados' : 'Recommended uses' }}</p>
+              <p>{{ i18n.t(product()!.recommendedUses!) }}</p>
+            </div>
+          }
+
+          @if (product()!.warranty) {
+            <div class="product-detail__section">
+              <p class="product-detail__section-label">{{ i18n.currentLang() === 'es' ? 'Garantia' : 'Warranty' }}</p>
+              <p>{{ i18n.t(product()!.warranty!) }}</p>
+            </div>
+          }
+
           <!-- Product CTAs -->
           <div class="product-detail__ctas">
             <a [routerLink]="['/' + i18n.currentLang(), i18n.currentLang() === 'es' ? 'contacto' : 'contact']" [queryParams]="{producto: product()!.slug[i18n.currentLang()]}" class="btn btn-primary btn-lg btn-block">
@@ -150,11 +192,11 @@
               <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
               {{ i18n.currentLang() === 'es' ? 'Consultar por WhatsApp' : 'Ask via WhatsApp' }}
             </a>
-            @if (product()!.hasPdf) {
-              <button class="btn btn-outline btn-lg btn-block">
+            @if (product()!.pdfUrl) {
+              <a [href]="product()!.pdfUrl" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-lg btn-block">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                 {{ i18n.currentLang() === 'es' ? 'Descargar ficha tecnica' : 'Download datasheet' }}
-              </button>
+              </a>
             }
           </div>
         </div>
@@ -186,15 +228,41 @@
       @if (relatedProducts().length > 0) {
         <div class="product-detail__related">
           <h2 class="text-h3">{{ i18n.currentLang() === 'es' ? 'Tambien te puede interesar' : 'You may also be interested in' }}</h2>
-          <div class="product-detail__related-grid">
-            @for (product of relatedProducts(); track product.id) {
-              <app-product-card [product]="product" />
+          <!-- Desktop: grid, Mobile: horizontal scroll carousel (REQ-141) -->
+          <div class="product-detail__related-grid product-detail__related-grid--desktop">
+            @for (product of relatedProducts(); track product._id) {
+              <app-product-card [product]="$any(product)" />
+            }
+          </div>
+          <div class="product-detail__related-carousel product-detail__related-carousel--mobile">
+            @for (product of relatedProducts(); track product._id) {
+              <div class="product-detail__related-carousel-item">
+                <app-product-card [product]="$any(product)" />
+              </div>
             }
           </div>
         </div>
       }
     </div>
   </section>
+
+  <!-- REQ-109: Lightbox -->
+  @if (lightboxOpen() && product()!.images && product()!.images.length > 0) {
+    <div class="lightbox" (click)="lightboxOpen.set(false)">
+      <button class="lightbox__close" (click)="lightboxOpen.set(false)" aria-label="Cerrar">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <img [src]="product()!.images[selectedImage()]" [alt]="i18n.t(product()!.name)" class="lightbox__img" (click)="$event.stopPropagation()">
+      @if (product()!.images.length > 1) {
+        <button class="lightbox__nav lightbox__nav--prev" (click)="$event.stopPropagation(); selectedImage.set((selectedImage() - 1 + product()!.images.length) % product()!.images.length)" aria-label="Anterior">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button class="lightbox__nav lightbox__nav--next" (click)="$event.stopPropagation(); selectedImage.set((selectedImage() + 1) % product()!.images.length)" aria-label="Siguiente">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      }
+    </div>
+  }
 
   <!-- Sticky Bar -->
   @if (product()) {
@@ -205,7 +273,7 @@
           <div class="sticky-bar__thumb"></div>
           <div>
             <span class="sticky-bar__name">{{ i18n.t(product()!.name) }}</span>
-            <span class="sticky-bar__brand">{{ product()!.brand }}</span>
+            <span class="sticky-bar__brand">{{ brandName }}</span>
           </div>
         </div>
         <a class="btn btn-primary btn-sm sticky-bar__desktop-content" [routerLink]="['/' + i18n.currentLang(), i18n.currentLang() === 'es' ? 'contacto' : 'contact']" [queryParams]="{producto: product()!.slug[i18n.currentLang()]}">
