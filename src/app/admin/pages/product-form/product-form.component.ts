@@ -39,8 +39,12 @@ export class AdminProductFormComponent implements HasUnsavedChanges, OnInit {
 
   // Image & PDF upload state
   existingImages = signal<string[]>([]);
+  pendingImageFiles = signal<File[]>([]);
+  pendingImagePreviews = signal<string[]>([]);
   existingPdfUrl = signal<string | null>(null);
   existingPdfName = signal<string>('Ficha tecnica');
+  pendingPdfFile = signal<File | null>(null);
+  pendingPdfName = signal<string>('');
   uploadingImages = signal(false);
   uploadingPdf = signal(false);
 
@@ -214,7 +218,11 @@ export class AdminProductFormComponent implements HasUnsavedChanges, OnInit {
     const input = event.target as HTMLInputElement;
     if (!input.files || input.files.length === 0) return;
     const files = Array.from(input.files);
-    await this.uploadImages(files);
+    if (this.productId()) {
+      await this.uploadImages(files);
+    } else {
+      this.queueImageFiles(files);
+    }
     input.value = '';
   }
 
@@ -227,14 +235,40 @@ export class AdminProductFormComponent implements HasUnsavedChanges, OnInit {
       this.toast.error('Solo se permiten imagenes PNG, JPG o WebP');
       return;
     }
-    this.uploadImages(imageFiles);
+    if (this.productId()) {
+      this.uploadImages(imageFiles);
+    } else {
+      this.queueImageFiles(imageFiles);
+    }
+  }
+
+  private queueImageFiles(files: File[]): void {
+    const maxRemaining = 6 - this.existingImages().length - this.pendingImageFiles().length;
+    const filesToQueue = files.slice(0, maxRemaining);
+    for (const file of filesToQueue) {
+      if (file.size > 5 * 1024 * 1024) {
+        this.toast.error(`"${file.name}" supera el limite de 5MB`);
+        return;
+      }
+    }
+    this.pendingImageFiles.update(list => [...list, ...filesToQueue]);
+    for (const file of filesToQueue) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.pendingImagePreviews.update(list => [...list, reader.result as string]);
+      };
+      reader.readAsDataURL(file);
+    }
+    this._hasChanges.set(true);
+  }
+
+  removePendingImage(index: number): void {
+    this.pendingImageFiles.update(list => list.filter((_, i) => i !== index));
+    this.pendingImagePreviews.update(list => list.filter((_, i) => i !== index));
+    this._hasChanges.set(true);
   }
 
   private async uploadImages(files: File[]): Promise<void> {
-    if (!this.productId()) {
-      this.toast.info('Guarda el producto primero para poder subir imagenes.');
-      return;
-    }
 
     const maxRemaining = 6 - this.existingImages().length;
     const filesToUpload = files.slice(0, maxRemaining);
@@ -277,7 +311,12 @@ export class AdminProductFormComponent implements HasUnsavedChanges, OnInit {
   async onPdfSelected(event: Event): Promise<void> {
     const input = event.target as HTMLInputElement;
     if (!input.files || !input.files[0]) return;
-    await this.uploadPdf(input.files[0]);
+    const file = input.files[0];
+    if (this.productId()) {
+      await this.uploadPdf(file);
+    } else {
+      this.queuePdfFile(file);
+    }
     input.value = '';
   }
 
@@ -289,14 +328,30 @@ export class AdminProductFormComponent implements HasUnsavedChanges, OnInit {
       this.toast.error('Solo se permiten archivos PDF');
       return;
     }
-    this.uploadPdf(file);
+    if (this.productId()) {
+      this.uploadPdf(file);
+    } else {
+      this.queuePdfFile(file);
+    }
+  }
+
+  private queuePdfFile(file: File): void {
+    if (file.size > 10 * 1024 * 1024) {
+      this.toast.error('El archivo no debe superar 10MB');
+      return;
+    }
+    this.pendingPdfFile.set(file);
+    this.pendingPdfName.set(file.name);
+    this._hasChanges.set(true);
+  }
+
+  removePendingPdf(): void {
+    this.pendingPdfFile.set(null);
+    this.pendingPdfName.set('');
+    this._hasChanges.set(true);
   }
 
   private async uploadPdf(file: File): Promise<void> {
-    if (!this.productId()) {
-      this.toast.info('Guarda el producto primero para poder subir el PDF.');
-      return;
-    }
     if (file.size > 10 * 1024 * 1024) {
       this.toast.error('El archivo no debe superar 10MB');
       return;
@@ -374,8 +429,25 @@ export class AdminProductFormComponent implements HasUnsavedChanges, OnInit {
         this.toast.success('Producto actualizado correctamente');
       } else {
         savedProduct = await this.api.adminCreateProduct(productData);
-        this.toast.success('Producto creado correctamente');
         this.productId.set(savedProduct._id);
+
+        // Upload queued files after product creation
+        if (this.pendingImageFiles().length > 0) {
+          try {
+            await this.uploadImages(this.pendingImageFiles());
+          } catch {
+            this.toast.warning('Producto creado, pero hubo un error al subir las imagenes.');
+          }
+        }
+        if (this.pendingPdfFile()) {
+          try {
+            await this.uploadPdf(this.pendingPdfFile()!);
+          } catch {
+            this.toast.warning('Producto creado, pero hubo un error al subir el PDF.');
+          }
+        }
+
+        this.toast.success('Producto creado correctamente');
       }
       this._hasChanges.set(false);
       this.router.navigate(['/admin/productos']);

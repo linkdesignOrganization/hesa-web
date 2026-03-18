@@ -283,7 +283,7 @@
       <p class="adm-form-section__desc">Sube las fotos del producto (maximo 6). La primera sera la imagen principal.</p>
 
       <!-- Existing images gallery -->
-      @if (existingImages().length > 0) {
+      @if (existingImages().length > 0 || pendingImagePreviews().length > 0) {
         <div class="pf-image-grid">
           @for (img of existingImages(); track img; let i = $index) {
             <div class="pf-image-grid__item">
@@ -293,7 +293,20 @@
                   <span class="material-symbols-outlined">delete</span>
                 </button>
               </div>
-              @if (i === 0) {
+              @if (i === 0 && pendingImagePreviews().length === 0) {
+                <span class="pf-image-grid__badge">Principal</span>
+              }
+            </div>
+          }
+          @for (preview of pendingImagePreviews(); track $index) {
+            <div class="pf-image-grid__item">
+              <img [src]="preview" alt="Preview">
+              <div class="pf-image-grid__overlay">
+                <button type="button" class="adm-btn adm-btn--sm adm-btn--danger-ghost" (click)="removePendingImage($index)">
+                  <span class="material-symbols-outlined">close</span>
+                </button>
+              </div>
+              @if ($index === 0 && existingImages().length === 0) {
                 <span class="pf-image-grid__badge">Principal</span>
               }
             </div>
@@ -301,13 +314,13 @@
         </div>
       }
 
-      @if (existingImages().length < 6) {
+      @if ((existingImages().length + pendingImagePreviews().length) < 6) {
         <div class="adm-uploader" (click)="imageInput.click()" (dragover)="$event.preventDefault()" (drop)="onImageDrop($event)">
           <div class="adm-uploader__icon">
             <span class="material-symbols-outlined">add_photo_alternate</span>
           </div>
           <p class="adm-uploader__text">Arrastra imagenes aqui o <strong>selecciona archivos</strong></p>
-          <span class="adm-uploader__hint">PNG, JPG hasta 5MB ({{ 6 - existingImages().length }} restantes)</span>
+          <span class="adm-uploader__hint">PNG, JPG hasta 5MB ({{ 6 - existingImages().length - pendingImagePreviews().length }} restantes)</span>
         </div>
       }
       <input #imageInput type="file" accept="image/png,image/jpeg,image/webp" multiple style="display: none;" (change)="onImagesSelected($event)">
@@ -336,6 +349,19 @@
             <a [href]="existingPdfUrl()!" target="_blank" rel="noopener" class="pf-pdf-card__link">Ver archivo</a>
           </div>
           <button type="button" class="pf-pdf-card__remove" aria-label="Eliminar PDF" (click)="deletePdf()">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+      } @else if (pendingPdfName()) {
+        <div class="pf-pdf-card">
+          <div class="pf-pdf-card__icon-wrap">
+            <span class="material-symbols-outlined">picture_as_pdf</span>
+          </div>
+          <div class="pf-pdf-card__info">
+            <p class="pf-pdf-card__name">{{ pendingPdfName() }}</p>
+            <p class="pf-pdf-card__link" style="cursor: default; color: var(--adm-text-muted);">Se subira al guardar</p>
+          </div>
+          <button type="button" class="pf-pdf-card__remove" aria-label="Quitar PDF" (click)="removePendingPdf()">
             <span class="material-symbols-outlined">close</span>
           </button>
         </div>
