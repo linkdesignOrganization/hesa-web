@@ -79,13 +79,15 @@
     border-radius: 50%;
     color: var(--brand-primary);
     transition: background-color 0.15s ease-out;
-    // NFR-026: Ensure minimum 44px touch target on mobile via padding
+    // NFR-026: Ensure minimum 44px touch target on mobile via invisible overlay
     position: relative;
 
     &::before {
       content: '';
       position: absolute;
       inset: -13px;
+      min-width: 44px;
+      min-height: 44px;
     }
 
     &:hover {
@@ -98,6 +100,11 @@
     font-size: 13px;
     color: var(--semantic-danger);
     font-weight: var(--weight-medium);
+    // NFR-026: Ensure minimum 44px touch target height
+    min-height: 44px;
+    padding: 10px 8px;
+    display: inline-flex;
+    align-items: center;
 
     &:hover {
       text-decoration: underline;

@@ -2,19 +2,20 @@
 
 ```yaml
 - generic [ref=e2]:
+  - link "Saltar al contenido principal" [ref=e3] [cursor=pointer]:
+    - /url: "#main-content"
   - generic:
-    - navigation "Navegacion principal" [ref=e3]:
-      - generic [ref=e4]:
-        - link "HESA - Ir al inicio" [ref=e5] [cursor=pointer]:
+    - navigation "Navegacion principal" [ref=e4]:
+      - generic [ref=e5]:
+        - link "HESA - Ir al inicio" [ref=e6] [cursor=pointer]:
           - /url: /es
-          - generic [ref=e6]: HESA
-          - generic [ref=e7]: H
-        - navigation [ref=e8]:
-          - generic [ref=e9]:
-            - link "Catalogo" [ref=e10] [cursor=pointer]:
-              - /url: /es/catalogo
+          - generic [ref=e7]: HESA
+          - generic [ref=e8]: H
+        - navigation [ref=e9]:
+          - generic [ref=e10]:
+            - button "Catalogo" [ref=e11] [cursor=pointer]:
               - text: Catalogo
-              - img [ref=e11]
+              - img [ref=e12]
             - generic:
               - link "Farmacos Veterinarios":
                 - /url: /es/catalogo/farmacos
@@ -28,21 +29,21 @@
                 - /url: /es/catalogo/equipos
                 - img
                 - text: Equipos Veterinarios
-          - link "Marcas" [ref=e13] [cursor=pointer]:
+          - link "Marcas" [ref=e14] [cursor=pointer]:
             - /url: /es/marcas
-          - link "Nosotros" [ref=e14] [cursor=pointer]:
+          - link "Nosotros" [ref=e15] [cursor=pointer]:
             - /url: /es/nosotros
-          - link "Distribuidores" [ref=e15] [cursor=pointer]:
+          - link "Distribuidores" [ref=e16] [cursor=pointer]:
             - /url: /es/distribuidores
-          - link "Contacto" [ref=e16] [cursor=pointer]:
+          - link "Contacto" [ref=e17] [cursor=pointer]:
             - /url: /es/contacto
-        - generic [ref=e17]:
-          - button "Buscar productos y marcas" [ref=e18] [cursor=pointer]:
-            - img [ref=e19]
-          - listbox "Seleccionar idioma" [ref=e23]:
-            - button "ES" [ref=e24] [cursor=pointer]:
-              - generic [ref=e25]: ES
-              - img [ref=e26]
+        - generic [ref=e18]:
+          - button "Buscar productos y marcas" [ref=e19] [cursor=pointer]:
+            - img [ref=e20]
+          - listbox "Seleccionar idioma" [ref=e24]:
+            - button "ES" [ref=e25] [cursor=pointer]:
+              - generic [ref=e26]: ES
+              - img [ref=e27]
     - generic:
       - search "Busqueda global":
         - generic:
@@ -52,91 +53,92 @@
             - img
             - textbox "Buscar productos, marcas..."
           - paragraph: Escribe al menos 3 caracteres
-  - generic [ref=e30]:
-    - navigation "Breadcrumb" [ref=e32]:
-      - list [ref=e33]:
-        - listitem [ref=e34]:
-          - link "Inicio" [ref=e35] [cursor=pointer]:
+  - main [ref=e29]:
+    - generic [ref=e32]:
+      - navigation "Breadcrumb" [ref=e34]:
+        - list [ref=e35]:
+          - listitem [ref=e36]:
+            - link "Inicio" [ref=e37] [cursor=pointer]:
+              - /url: /es
+            - generic [ref=e38]: ">"
+          - listitem [ref=e39]:
+            - generic [ref=e40]: Marcas
+      - generic [ref=e41]:
+        - heading "Nuestras Marcas" [level=1] [ref=e42]
+        - paragraph [ref=e43]: Distribuimos exclusivamente las mejores marcas internacionales de la industria veterinaria. Cada marca ha sido cuidadosamente seleccionada por su calidad, respaldo cientifico y trayectoria.
+      - generic [ref=e44]:
+        - link "Ver marca Mindray" [ref=e46] [cursor=pointer]:
+          - /url: /es/marcas/mindray
+          - generic [ref=e48]: M
+          - heading "Mindray" [level=3] [ref=e49]
+          - paragraph [ref=e50]:
+            - img [ref=e51]
+            - text: China
+          - generic [ref=e55]: equipos
+        - link "Ver marca Royal Canin" [ref=e57] [cursor=pointer]:
+          - /url: /es/marcas/royal-canin
+          - generic [ref=e59]: R
+          - heading "Royal Canin" [level=3] [ref=e60]
+          - paragraph [ref=e61]:
+            - img [ref=e62]
+            - text: Francia
+          - generic [ref=e66]: alimentos
+        - link "Ver marca Zoetis" [ref=e68] [cursor=pointer]:
+          - /url: /es/marcas/zoetis
+          - generic [ref=e70]: Z
+          - heading "Zoetis" [level=3] [ref=e71]
+          - paragraph [ref=e72]:
+            - img [ref=e73]
+            - text: Estados Unidos
+          - generic [ref=e77]: farmacos
+  - contentinfo "Pie de pagina" [ref=e79]:
+    - generic [ref=e81]:
+      - generic [ref=e82]:
+        - generic [ref=e83]: HESA
+        - paragraph [ref=e84]: 37 anos distribuyendo salud animal en Costa Rica
+      - generic [ref=e86]:
+        - heading "Navegacion" [level=3] [ref=e87]
+        - navigation [ref=e88]:
+          - link "Inicio" [ref=e89] [cursor=pointer]:
             - /url: /es
-          - generic [ref=e36]: ">"
-        - listitem [ref=e37]:
-          - generic [ref=e38]: Marcas
-    - generic [ref=e39]:
-      - heading "Nuestras Marcas" [level=1] [ref=e40]
-      - paragraph [ref=e41]: Distribuimos exclusivamente las mejores marcas internacionales de la industria veterinaria. Cada marca ha sido cuidadosamente seleccionada por su calidad, respaldo cientifico y trayectoria.
-    - generic [ref=e42]:
-      - link "Ver marca Mindray" [ref=e44] [cursor=pointer]:
-        - /url: /es/marcas/mindray
-        - generic [ref=e46]: M
-        - heading "Mindray" [level=3] [ref=e47]
-        - paragraph [ref=e48]:
-          - img [ref=e49]
-          - text: China
-        - generic [ref=e53]: equipos
-      - link "Ver marca Royal Canin" [ref=e55] [cursor=pointer]:
-        - /url: /es/marcas/royal-canin
-        - generic [ref=e57]: R
-        - heading "Royal Canin" [level=3] [ref=e58]
-        - paragraph [ref=e59]:
-          - img [ref=e60]
-          - text: Francia
-        - generic [ref=e64]: alimentos
-      - link "Ver marca Zoetis" [ref=e66] [cursor=pointer]:
-        - /url: /es/marcas/zoetis
-        - generic [ref=e68]: Z
-        - heading "Zoetis" [level=3] [ref=e69]
-        - paragraph [ref=e70]:
-          - img [ref=e71]
-          - text: Estados Unidos
-        - generic [ref=e75]: farmacos
-  - contentinfo "Pie de pagina" [ref=e77]:
-    - generic [ref=e79]:
-      - generic [ref=e80]:
-        - generic [ref=e81]: HESA
-        - paragraph [ref=e82]: 37 anos distribuyendo salud animal en Costa Rica
-      - generic [ref=e84]:
-        - heading "Navegacion" [level=3] [ref=e85]
-        - navigation [ref=e86]:
-          - link "Inicio" [ref=e87] [cursor=pointer]:
-            - /url: /es
-          - link "Catalogo" [ref=e88] [cursor=pointer]:
+          - link "Catalogo" [ref=e90] [cursor=pointer]:
             - /url: /es/catalogo
-          - link "Marcas" [ref=e89] [cursor=pointer]:
+          - link "Marcas" [ref=e91] [cursor=pointer]:
             - /url: /es/marcas
-          - link "Nosotros" [ref=e90] [cursor=pointer]:
+          - link "Nosotros" [ref=e92] [cursor=pointer]:
             - /url: /es/nosotros
-          - link "Distribuidores" [ref=e91] [cursor=pointer]:
+          - link "Distribuidores" [ref=e93] [cursor=pointer]:
             - /url: /es/distribuidores
-          - link "Contacto" [ref=e92] [cursor=pointer]:
+          - link "Contacto" [ref=e94] [cursor=pointer]:
             - /url: /es/contacto
-      - generic [ref=e94]:
-        - heading "Contacto" [level=3] [ref=e95]
-        - generic [ref=e96]:
-          - paragraph [ref=e97]:
-            - img [ref=e98]
+      - generic [ref=e96]:
+        - heading "Contacto" [level=3] [ref=e97]
+        - generic [ref=e98]:
+          - paragraph [ref=e99]:
+            - img [ref=e100]
             - text: +506 2260-9020
-          - paragraph [ref=e100]:
-            - img [ref=e101]
+          - paragraph [ref=e102]:
+            - img [ref=e103]
             - text: info@hesa.co.cr
-          - paragraph [ref=e104]:
-            - img [ref=e105]
+          - paragraph [ref=e106]:
+            - img [ref=e107]
             - text: Calle 2, av 12. Heredia, Costa Rica
-          - paragraph [ref=e108]:
-            - img [ref=e109]
+          - paragraph [ref=e110]:
+            - img [ref=e111]
             - text: "Lun - Vie: 8:00 - 17:00"
-      - generic [ref=e113]:
-        - heading "Redes Sociales" [level=3] [ref=e114]
-        - generic [ref=e115]:
-          - link "Facebook" [ref=e116] [cursor=pointer]:
+      - generic [ref=e115]:
+        - heading "Redes Sociales" [level=3] [ref=e116]
+        - generic [ref=e117]:
+          - link "Facebook" [ref=e118] [cursor=pointer]:
             - /url: https://facebook.com/hesacr
-            - img [ref=e117]
-          - link "Instagram" [ref=e119] [cursor=pointer]:
+            - img [ref=e119]
+          - link "Instagram" [ref=e121] [cursor=pointer]:
             - /url: https://instagram.com/hesacr
-            - img [ref=e120]
-    - generic [ref=e124]:
-      - paragraph [ref=e125]: © HESA 2026. Todos los derechos reservados.
-      - button "English" [ref=e127] [cursor=pointer]
-  - button "Contactar por WhatsApp" [ref=e128] [cursor=pointer]:
-    - img [ref=e129]
+            - img [ref=e122]
+    - generic [ref=e126]:
+      - paragraph [ref=e127]: © HESA 2026. Todos los derechos reservados.
+      - button "English" [ref=e129] [cursor=pointer]
+  - button "Contactar por WhatsApp" [ref=e130] [cursor=pointer]:
+    - img [ref=e131]
     - generic: Escribenos por WhatsApp
 ```

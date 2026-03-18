@@ -112,7 +112,7 @@
       </div>
       <div class="carousel-wrapper">
         <button class="carousel-arrow carousel-arrow--prev" [class.carousel-arrow--disabled]="currentSlide() === 0" (click)="prevSlide()" aria-label="Productos anteriores">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
         </button>
         <div class="featured-grid featured-grid--carousel">
           @for (product of featuredProducts(); track product._id) {
@@ -120,7 +120,7 @@
           }
         </div>
         <button class="carousel-arrow carousel-arrow--next" [class.carousel-arrow--disabled]="currentSlide() >= carouselDots.length - 1" (click)="nextSlide()" aria-label="Productos siguientes">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
         </button>
       </div>
       <div class="carousel-dots" role="tablist" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Paginas del carrusel' : 'Carousel pages'">

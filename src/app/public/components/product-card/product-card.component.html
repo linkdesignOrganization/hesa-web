@@ -1,7 +1,10 @@
 <a class="product-card" [class.product-card--carousel]="variant() === 'carousel'" [routerLink]="productLink" [attr.aria-label]="'Ver ' + displayName">
   <div class="product-card__image" [attr.data-category]="productCategory">
     @if (productImage) {
-      <img [src]="productImage" [alt]="displayName" class="product-card__image-real" loading="lazy">
+      <picture>
+        <source [srcset]="productImageWebP" type="image/webp">
+        <img [src]="productImage" [alt]="displayName || 'Producto'" class="product-card__image-real" loading="lazy">
+      </picture>
     }
     <div class="product-card__image-visual" [class.product-card__image-visual--hidden]="!!productImage">
       @if (productCategory === 'farmacos') {

@@ -10,7 +10,7 @@
 
     <!-- Mobile Filter Button (< 768px) -->
     <button class="filter-bar__mobile-trigger" (click)="toggleMobileFilters()" aria-label="Filtrar productos">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
       {{ i18n.currentLang() === 'es' ? 'Filtrar' : 'Filter' }}
       @if (activeFilters().length > 0) {
         <span class="filter-bar__mobile-badge">{{ activeFilters().length }}</span>
@@ -81,7 +81,7 @@
         <div class="filter-drawer__header">
           <h3>{{ i18n.currentLang() === 'es' ? 'Filtros' : 'Filters' }}</h3>
           <button class="filter-drawer__close" (click)="toggleMobileFilters()" aria-label="Cerrar filtros">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
           </button>
         </div>
         <div class="filter-drawer__body">
@@ -171,7 +171,7 @@
           <span class="filter-bar__pill">
             {{ filter.label }}
             <button class="filter-bar__pill-remove" (click)="removeFilter(filter.key)" [attr.aria-label]="'Remover filtro: ' + filter.label">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
             </button>
           </span>
         }

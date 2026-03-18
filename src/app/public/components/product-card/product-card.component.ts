@@ -65,4 +65,11 @@ export class ProductCardComponent {
     const images = p['images'] as string[] | undefined;
     return images?.[0];
   }
+
+  /** NFR-002: WebP source for <picture> element */
+  get productImageWebP(): string | undefined {
+    const img = this.productImage;
+    if (!img) return undefined;
+    return img.replace(/\.(jpe?g|png)$/i, '.webp');
+  }
 }

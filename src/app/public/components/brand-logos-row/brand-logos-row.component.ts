@@ -39,6 +39,11 @@ export class BrandLogosRowComponent implements OnInit, OnDestroy {
     }, 50);
   }
 
+  /** NFR-002: Convert image URL to WebP variant for <picture> <source> */
+  toWebP(url: string): string {
+    return url.replace(/\.(jpe?g|png)$/i, '.webp');
+  }
+
   ngOnDestroy(): void {
     this.fadeObserver?.disconnect();
   }

@@ -134,6 +134,11 @@ export class BrandDetailComponent implements OnInit, OnDestroy {
     }
   }
 
+  /** NFR-002: Convert image URL to WebP variant for <picture> <source> */
+  toWebP(url: string): string {
+    return url.replace(/\.(jpe?g|png)$/i, '.webp');
+  }
+
   get activeFilters(): { key: string; label: string }[] {
     const filters: { key: string; label: string }[] = [];
     if (this.selectedCategory()) filters.push({ key: 'category', label: this.selectedCategory() });

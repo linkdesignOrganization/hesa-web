@@ -2,19 +2,20 @@
 
 ```yaml
 - generic [ref=e2]:
+  - link "Saltar al contenido principal" [ref=e3] [cursor=pointer]:
+    - /url: "#main-content"
   - generic:
-    - navigation "Navegacion principal" [ref=e3]:
-      - generic [ref=e4]:
-        - link "HESA - Ir al inicio" [ref=e5] [cursor=pointer]:
+    - navigation "Navegacion principal" [ref=e4]:
+      - generic [ref=e5]:
+        - link "HESA - Ir al inicio" [ref=e6] [cursor=pointer]:
           - /url: /es
-          - generic [ref=e6]: HESA
-          - generic [ref=e7]: H
-        - navigation [ref=e8]:
-          - generic [ref=e9]:
-            - link "Catalogo" [ref=e10] [cursor=pointer]:
-              - /url: /es/catalogo
+          - generic [ref=e7]: HESA
+          - generic [ref=e8]: H
+        - navigation [ref=e9]:
+          - generic [ref=e10]:
+            - button "Catalogo" [ref=e11] [cursor=pointer]:
               - text: Catalogo
-              - img [ref=e11]
+              - img [ref=e12]
             - generic:
               - link "Farmacos Veterinarios":
                 - /url: /es/catalogo/farmacos
@@ -28,21 +29,21 @@
                 - /url: /es/catalogo/equipos
                 - img
                 - text: Equipos Veterinarios
-          - link "Marcas" [ref=e13] [cursor=pointer]:
+          - link "Marcas" [ref=e14] [cursor=pointer]:
             - /url: /es/marcas
-          - link "Nosotros" [ref=e14] [cursor=pointer]:
+          - link "Nosotros" [ref=e15] [cursor=pointer]:
             - /url: /es/nosotros
-          - link "Distribuidores" [ref=e15] [cursor=pointer]:
+          - link "Distribuidores" [ref=e16] [cursor=pointer]:
             - /url: /es/distribuidores
-          - link "Contacto" [ref=e16] [cursor=pointer]:
+          - link "Contacto" [ref=e17] [cursor=pointer]:
             - /url: /es/contacto
-        - generic [ref=e17]:
-          - button "Buscar productos y marcas" [ref=e18] [cursor=pointer]:
-            - img [ref=e19]
-          - listbox "Seleccionar idioma" [ref=e23]:
-            - button "ES" [ref=e24] [cursor=pointer]:
-              - generic [ref=e25]: ES
-              - img [ref=e26]
+        - generic [ref=e18]:
+          - button "Buscar productos y marcas" [ref=e19] [cursor=pointer]:
+            - img [ref=e20]
+          - listbox "Seleccionar idioma" [ref=e24]:
+            - button "ES" [ref=e25] [cursor=pointer]:
+              - generic [ref=e26]: ES
+              - img [ref=e27]
     - generic:
       - search "Busqueda global":
         - generic:
@@ -52,100 +53,101 @@
             - img
             - textbox "Buscar productos, marcas..."
           - paragraph: Escribe al menos 3 caracteres
-  - generic [ref=e30]:
-    - navigation "Breadcrumb" [ref=e32]:
-      - list [ref=e33]:
-        - listitem [ref=e34]:
-          - link "Inicio" [ref=e35] [cursor=pointer]:
+  - main [ref=e29]:
+    - generic [ref=e32]:
+      - navigation "Breadcrumb" [ref=e34]:
+        - list [ref=e35]:
+          - listitem [ref=e36]:
+            - link "Inicio" [ref=e37] [cursor=pointer]:
+              - /url: /es
+            - generic [ref=e38]: ">"
+          - listitem [ref=e39]:
+            - link "Catalogo" [ref=e40] [cursor=pointer]:
+              - /url: /es/catalogo
+            - generic [ref=e41]: ">"
+          - listitem [ref=e42]:
+            - generic [ref=e43]: Farmacos
+      - generic [ref=e44]:
+        - heading "Farmacos" [level=1] [ref=e45]
+        - generic [ref=e46]: 2 productos
+      - paragraph [ref=e47]: Medicamentos veterinarios de las mejores marcas internacionales
+      - generic [ref=e49]:
+        - combobox [ref=e50]:
+          - option "Marca" [selected]
+          - option "Zoetis"
+        - combobox [ref=e51]:
+          - option "Especie" [selected]
+          - option "Bovinos"
+          - option "Caninos"
+          - option "Equinos"
+          - option "Felinos"
+        - combobox [ref=e52]:
+          - option "Familia" [selected]
+          - option "Antibioticos"
+          - option "Antiinflamatorios"
+      - generic [ref=e53]:
+        - link "Ver Meloxicam Inyectable" [ref=e55] [cursor=pointer]:
+          - /url: /es/catalogo/farmacos/meloxicam-inyectable
+          - img "Meloxicam Inyectable" [ref=e57]
+          - generic [ref=e58]:
+            - heading "Meloxicam Inyectable" [level=3] [ref=e59]
+            - paragraph [ref=e60]: Zoetis
+            - generic [ref=e61]: Ver producto
+        - link "Ver Amoxicilina Veterinaria" [ref=e63] [cursor=pointer]:
+          - /url: /es/catalogo/farmacos/amoxicilina-veterinaria
+          - img "Amoxicilina Veterinaria" [ref=e65]
+          - generic [ref=e66]:
+            - heading "Amoxicilina Veterinaria" [level=3] [ref=e67]
+            - paragraph [ref=e68]: Zoetis
+            - generic [ref=e69]: Ver producto
+  - contentinfo "Pie de pagina" [ref=e71]:
+    - generic [ref=e73]:
+      - generic [ref=e74]:
+        - generic [ref=e75]: HESA
+        - paragraph [ref=e76]: 37 anos distribuyendo salud animal en Costa Rica
+      - generic [ref=e78]:
+        - heading "Navegacion" [level=3] [ref=e79]
+        - navigation [ref=e80]:
+          - link "Inicio" [ref=e81] [cursor=pointer]:
             - /url: /es
-          - generic [ref=e36]: ">"
-        - listitem [ref=e37]:
-          - link "Catalogo" [ref=e38] [cursor=pointer]:
+          - link "Catalogo" [ref=e82] [cursor=pointer]:
             - /url: /es/catalogo
-          - generic [ref=e39]: ">"
-        - listitem [ref=e40]:
-          - generic [ref=e41]: Farmacos
-    - generic [ref=e42]:
-      - heading "Farmacos" [level=1] [ref=e43]
-      - generic [ref=e44]: 2 productos
-    - paragraph [ref=e45]: Medicamentos veterinarios de las mejores marcas internacionales
-    - generic [ref=e47]:
-      - combobox [ref=e48]:
-        - option "Marca" [selected]
-        - option "Zoetis"
-      - combobox [ref=e49]:
-        - option "Especie" [selected]
-        - option "Bovinos"
-        - option "Caninos"
-        - option "Equinos"
-        - option "Felinos"
-      - combobox [ref=e50]:
-        - option "Familia" [selected]
-        - option "Antibioticos"
-        - option "Antiinflamatorios"
-    - generic [ref=e51]:
-      - link "Ver Meloxicam Inyectable" [ref=e53] [cursor=pointer]:
-        - /url: /es/catalogo/farmacos/meloxicam-inyectable
-        - img "Meloxicam Inyectable" [ref=e55]
-        - generic [ref=e56]:
-          - heading "Meloxicam Inyectable" [level=3] [ref=e57]
-          - paragraph [ref=e58]: Zoetis
-          - generic [ref=e59]: Ver producto
-      - link "Ver Amoxicilina Veterinaria" [ref=e61] [cursor=pointer]:
-        - /url: /es/catalogo/farmacos/amoxicilina-veterinaria
-        - img "Amoxicilina Veterinaria" [ref=e63]
-        - generic [ref=e64]:
-          - heading "Amoxicilina Veterinaria" [level=3] [ref=e65]
-          - paragraph [ref=e66]: Zoetis
-          - generic [ref=e67]: Ver producto
-  - contentinfo "Pie de pagina" [ref=e69]:
-    - generic [ref=e71]:
-      - generic [ref=e72]:
-        - generic [ref=e73]: HESA
-        - paragraph [ref=e74]: 37 anos distribuyendo salud animal en Costa Rica
-      - generic [ref=e76]:
-        - heading "Navegacion" [level=3] [ref=e77]
-        - navigation [ref=e78]:
-          - link "Inicio" [ref=e79] [cursor=pointer]:
-            - /url: /es
-          - link "Catalogo" [ref=e80] [cursor=pointer]:
-            - /url: /es/catalogo
-          - link "Marcas" [ref=e81] [cursor=pointer]:
+          - link "Marcas" [ref=e83] [cursor=pointer]:
             - /url: /es/marcas
-          - link "Nosotros" [ref=e82] [cursor=pointer]:
+          - link "Nosotros" [ref=e84] [cursor=pointer]:
             - /url: /es/nosotros
-          - link "Distribuidores" [ref=e83] [cursor=pointer]:
+          - link "Distribuidores" [ref=e85] [cursor=pointer]:
             - /url: /es/distribuidores
-          - link "Contacto" [ref=e84] [cursor=pointer]:
+          - link "Contacto" [ref=e86] [cursor=pointer]:
             - /url: /es/contacto
-      - generic [ref=e86]:
-        - heading "Contacto" [level=3] [ref=e87]
-        - generic [ref=e88]:
-          - paragraph [ref=e89]:
-            - img [ref=e90]
+      - generic [ref=e88]:
+        - heading "Contacto" [level=3] [ref=e89]
+        - generic [ref=e90]:
+          - paragraph [ref=e91]:
+            - img [ref=e92]
             - text: +506 2260-9020
-          - paragraph [ref=e92]:
-            - img [ref=e93]
+          - paragraph [ref=e94]:
+            - img [ref=e95]
             - text: info@hesa.co.cr
-          - paragraph [ref=e96]:
-            - img [ref=e97]
+          - paragraph [ref=e98]:
+            - img [ref=e99]
             - text: Calle 2, av 12. Heredia, Costa Rica
-          - paragraph [ref=e100]:
-            - img [ref=e101]
+          - paragraph [ref=e102]:
+            - img [ref=e103]
             - text: "Lun - Vie: 8:00 - 17:00"
-      - generic [ref=e105]:
-        - heading "Redes Sociales" [level=3] [ref=e106]
-        - generic [ref=e107]:
-          - link "Facebook" [ref=e108] [cursor=pointer]:
+      - generic [ref=e107]:
+        - heading "Redes Sociales" [level=3] [ref=e108]
+        - generic [ref=e109]:
+          - link "Facebook" [ref=e110] [cursor=pointer]:
             - /url: https://facebook.com/hesacr
-            - img [ref=e109]
-          - link "Instagram" [ref=e111] [cursor=pointer]:
+            - img [ref=e111]
+          - link "Instagram" [ref=e113] [cursor=pointer]:
             - /url: https://instagram.com/hesacr
-            - img [ref=e112]
-    - generic [ref=e116]:
-      - paragraph [ref=e117]: © HESA 2026. Todos los derechos reservados.
-      - button "English" [ref=e119] [cursor=pointer]
-  - button "Contactar por WhatsApp" [ref=e120] [cursor=pointer]:
-    - img [ref=e121]
+            - img [ref=e114]
+    - generic [ref=e118]:
+      - paragraph [ref=e119]: © HESA 2026. Todos los derechos reservados.
+      - button "English" [ref=e121] [cursor=pointer]
+  - button "Contactar por WhatsApp" [ref=e122] [cursor=pointer]:
+    - img [ref=e123]
     - generic: Escribenos por WhatsApp
 ```

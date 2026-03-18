@@ -2,19 +2,20 @@
 
 ```yaml
 - generic [ref=e2]:
+  - link "Saltar al contenido principal" [ref=e3] [cursor=pointer]:
+    - /url: "#main-content"
   - generic:
-    - navigation "Navegacion principal" [ref=e3]:
-      - generic [ref=e4]:
-        - link "HESA - Ir al inicio" [ref=e5] [cursor=pointer]:
+    - navigation "Navegacion principal" [ref=e4]:
+      - generic [ref=e5]:
+        - link "HESA - Ir al inicio" [ref=e6] [cursor=pointer]:
           - /url: /es
-          - generic [ref=e6]: HESA
-          - generic [ref=e7]: H
-        - navigation [ref=e8]:
-          - generic [ref=e9]:
-            - link "Catalogo" [ref=e10] [cursor=pointer]:
-              - /url: /es/catalogo
+          - generic [ref=e7]: HESA
+          - generic [ref=e8]: H
+        - navigation [ref=e9]:
+          - generic [ref=e10]:
+            - button "Catalogo" [ref=e11] [cursor=pointer]:
               - text: Catalogo
-              - img [ref=e11]
+              - img [ref=e12]
             - generic:
               - link "Farmacos Veterinarios":
                 - /url: /es/catalogo/farmacos
@@ -28,21 +29,21 @@
                 - /url: /es/catalogo/equipos
                 - img
                 - text: Equipos Veterinarios
-          - link "Marcas" [ref=e13] [cursor=pointer]:
+          - link "Marcas" [ref=e14] [cursor=pointer]:
             - /url: /es/marcas
-          - link "Nosotros" [ref=e14] [cursor=pointer]:
+          - link "Nosotros" [ref=e15] [cursor=pointer]:
             - /url: /es/nosotros
-          - link "Distribuidores" [ref=e15] [cursor=pointer]:
+          - link "Distribuidores" [ref=e16] [cursor=pointer]:
             - /url: /es/distribuidores
-          - link "Contacto" [ref=e16] [cursor=pointer]:
+          - link "Contacto" [ref=e17] [cursor=pointer]:
             - /url: /es/contacto
-        - generic [ref=e17]:
-          - button "Buscar productos y marcas" [ref=e18] [cursor=pointer]:
-            - img [ref=e19]
-          - listbox "Seleccionar idioma" [ref=e23]:
-            - button "ES" [ref=e24] [cursor=pointer]:
-              - generic [ref=e25]: ES
-              - img [ref=e26]
+        - generic [ref=e18]:
+          - button "Buscar productos y marcas" [ref=e19] [cursor=pointer]:
+            - img [ref=e20]
+          - listbox "Seleccionar idioma" [ref=e24]:
+            - button "ES" [ref=e25] [cursor=pointer]:
+              - generic [ref=e26]: ES
+              - img [ref=e27]
     - generic:
       - search "Busqueda global":
         - generic:
@@ -52,106 +53,107 @@
             - img
             - textbox "Buscar productos, marcas..."
           - paragraph: Escribe al menos 3 caracteres
-  - generic [ref=e28]:
+  - main [ref=e29]:
     - generic [ref=e30]:
-      - navigation "Breadcrumb" [ref=e32]:
-        - list [ref=e33]:
-          - listitem [ref=e34]:
-            - link "Inicio" [ref=e35] [cursor=pointer]:
-              - /url: /es
-            - generic [ref=e36]: ">"
-          - listitem [ref=e37]:
-            - link "Catalogo" [ref=e38] [cursor=pointer]:
-              - /url: /es/catalogo
-            - generic [ref=e39]: ">"
-          - listitem [ref=e40]:
-            - link "Alimentos" [ref=e41] [cursor=pointer]:
-              - /url: /es/catalogo/alimentos
-            - generic [ref=e42]: ">"
-          - listitem [ref=e43]:
-            - generic [ref=e44]: Royal Canin Kitten
-      - generic [ref=e45]:
-        - img [ref=e49]
-        - generic [ref=e57]:
-          - heading "Royal Canin Kitten" [level=1] [ref=e58]
-          - link "Royal Canin" [ref=e59] [cursor=pointer]:
-            - /url: /es/marcas/royal-canin
-          - generic [ref=e61]:
-            - img [ref=e62]
-            - text: Felinos
-          - generic [ref=e64]:
-            - paragraph [ref=e65]: Presentaciones
+      - generic [ref=e32]:
+        - navigation "Breadcrumb" [ref=e34]:
+          - list [ref=e35]:
+            - listitem [ref=e36]:
+              - link "Inicio" [ref=e37] [cursor=pointer]:
+                - /url: /es
+              - generic [ref=e38]: ">"
+            - listitem [ref=e39]:
+              - link "Catalogo" [ref=e40] [cursor=pointer]:
+                - /url: /es/catalogo
+              - generic [ref=e41]: ">"
+            - listitem [ref=e42]:
+              - link "Alimentos" [ref=e43] [cursor=pointer]:
+                - /url: /es/catalogo/alimentos
+              - generic [ref=e44]: ">"
+            - listitem [ref=e45]:
+              - generic [ref=e46]: Royal Canin Kitten
+        - generic [ref=e47]:
+          - img [ref=e51]
+          - generic [ref=e59]:
+            - heading "Royal Canin Kitten" [level=1] [ref=e60]
+            - link "Royal Canin" [ref=e61] [cursor=pointer]:
+              - /url: /es/marcas/royal-canin
+            - generic [ref=e63]:
+              - img [ref=e64]
+              - text: Felinos
             - generic [ref=e66]:
-              - button "Bolsa 1.5kg" [ref=e67] [cursor=pointer]
-              - button "Bolsa 4kg" [ref=e68] [cursor=pointer]
-          - paragraph [ref=e69]: Alimento completo para gatitos de 4 a 12 meses. Apoya el desarrollo del sistema inmunologico y la salud digestiva durante la etapa de crecimiento.
-          - generic [ref=e70]:
-            - paragraph [ref=e71]: Ingredientes principales
-            - paragraph [ref=e72]: Proteinas de ave deshidratadas, arroz, proteinas vegetales, grasas animales, aceite de pescado, fibra vegetal, minerales, vitaminas, antioxidantes.
-          - generic [ref=e73]:
-            - paragraph [ref=e74]: Informacion nutricional
-            - paragraph [ref=e75]: "Proteina bruta: 36%. Grasa: 18%. Fibra: 2.3%. Cenizas: 7.2%. Humedad: 6%. Calorias: 4080 kcal/kg."
-          - generic [ref=e76]:
-            - link "Solicitar informacion" [ref=e77] [cursor=pointer]:
-              - /url: /es/contacto?producto=royal-canin-kitten
-            - link "Consultar por WhatsApp" [ref=e78] [cursor=pointer]:
-              - /url: https://wa.me/50622609020?text=Hola%2C%20me%20interesa%20el%20producto%20Royal%20Canin%20Kitten%20de%20Royal%20Canin.%20Me%20gustaria%20recibir%20informacion.
-              - img [ref=e79]
-              - text: Consultar por WhatsApp
-    - generic [ref=e82]:
-      - generic [ref=e85]:
-        - generic [ref=e86]: Royal Canin Kitten
-        - text: Royal Canin
-      - link "Solicitar informacion" [ref=e87] [cursor=pointer]:
-        - /url: /es/contacto?producto=royal-canin-kitten
-  - contentinfo "Pie de pagina" [ref=e89]:
-    - generic [ref=e91]:
-      - generic [ref=e92]:
-        - generic [ref=e93]: HESA
-        - paragraph [ref=e94]: 37 anos distribuyendo salud animal en Costa Rica
-      - generic [ref=e96]:
-        - heading "Navegacion" [level=3] [ref=e97]
-        - navigation [ref=e98]:
-          - link "Inicio" [ref=e99] [cursor=pointer]:
+              - paragraph [ref=e67]: Presentaciones
+              - generic [ref=e68]:
+                - button "Bolsa 1.5kg" [ref=e69] [cursor=pointer]
+                - button "Bolsa 4kg" [ref=e70] [cursor=pointer]
+            - paragraph [ref=e71]: Alimento completo para gatitos de 4 a 12 meses. Apoya el desarrollo del sistema inmunologico y la salud digestiva durante la etapa de crecimiento.
+            - generic [ref=e72]:
+              - paragraph [ref=e73]: Ingredientes principales
+              - paragraph [ref=e74]: Proteinas de ave deshidratadas, arroz, proteinas vegetales, grasas animales, aceite de pescado, fibra vegetal, minerales, vitaminas, antioxidantes.
+            - generic [ref=e75]:
+              - paragraph [ref=e76]: Informacion nutricional
+              - paragraph [ref=e77]: "Proteina bruta: 36%. Grasa: 18%. Fibra: 2.3%. Cenizas: 7.2%. Humedad: 6%. Calorias: 4080 kcal/kg."
+            - generic [ref=e78]:
+              - link "Solicitar informacion" [ref=e79] [cursor=pointer]:
+                - /url: /es/contacto?producto=royal-canin-kitten
+              - link "Consultar por WhatsApp" [ref=e80] [cursor=pointer]:
+                - /url: https://wa.me/50622609020?text=Hola%2C%20me%20interesa%20el%20producto%20Royal%20Canin%20Kitten%20de%20Royal%20Canin.%20Me%20gustaria%20recibir%20informacion.
+                - img [ref=e81]
+                - text: Consultar por WhatsApp
+      - generic [ref=e84]:
+        - generic [ref=e87]:
+          - generic [ref=e88]: Royal Canin Kitten
+          - text: Royal Canin
+        - link "Solicitar informacion" [ref=e89] [cursor=pointer]:
+          - /url: /es/contacto?producto=royal-canin-kitten
+  - contentinfo "Pie de pagina" [ref=e91]:
+    - generic [ref=e93]:
+      - generic [ref=e94]:
+        - generic [ref=e95]: HESA
+        - paragraph [ref=e96]: 37 anos distribuyendo salud animal en Costa Rica
+      - generic [ref=e98]:
+        - heading "Navegacion" [level=3] [ref=e99]
+        - navigation [ref=e100]:
+          - link "Inicio" [ref=e101] [cursor=pointer]:
             - /url: /es
-          - link "Catalogo" [ref=e100] [cursor=pointer]:
+          - link "Catalogo" [ref=e102] [cursor=pointer]:
             - /url: /es/catalogo
-          - link "Marcas" [ref=e101] [cursor=pointer]:
+          - link "Marcas" [ref=e103] [cursor=pointer]:
             - /url: /es/marcas
-          - link "Nosotros" [ref=e102] [cursor=pointer]:
+          - link "Nosotros" [ref=e104] [cursor=pointer]:
             - /url: /es/nosotros
-          - link "Distribuidores" [ref=e103] [cursor=pointer]:
+          - link "Distribuidores" [ref=e105] [cursor=pointer]:
             - /url: /es/distribuidores
-          - link "Contacto" [ref=e104] [cursor=pointer]:
+          - link "Contacto" [ref=e106] [cursor=pointer]:
             - /url: /es/contacto
-      - generic [ref=e106]:
-        - heading "Contacto" [level=3] [ref=e107]
-        - generic [ref=e108]:
-          - paragraph [ref=e109]:
-            - img [ref=e110]
+      - generic [ref=e108]:
+        - heading "Contacto" [level=3] [ref=e109]
+        - generic [ref=e110]:
+          - paragraph [ref=e111]:
+            - img [ref=e112]
             - text: +506 2260-9020
-          - paragraph [ref=e112]:
-            - img [ref=e113]
+          - paragraph [ref=e114]:
+            - img [ref=e115]
             - text: info@hesa.co.cr
-          - paragraph [ref=e116]:
-            - img [ref=e117]
+          - paragraph [ref=e118]:
+            - img [ref=e119]
             - text: Calle 2, av 12. Heredia, Costa Rica
-          - paragraph [ref=e120]:
-            - img [ref=e121]
+          - paragraph [ref=e122]:
+            - img [ref=e123]
             - text: "Lun - Vie: 8:00 - 17:00"
-      - generic [ref=e125]:
-        - heading "Redes Sociales" [level=3] [ref=e126]
-        - generic [ref=e127]:
-          - link "Facebook" [ref=e128] [cursor=pointer]:
+      - generic [ref=e127]:
+        - heading "Redes Sociales" [level=3] [ref=e128]
+        - generic [ref=e129]:
+          - link "Facebook" [ref=e130] [cursor=pointer]:
             - /url: https://facebook.com/hesacr
-            - img [ref=e129]
-          - link "Instagram" [ref=e131] [cursor=pointer]:
+            - img [ref=e131]
+          - link "Instagram" [ref=e133] [cursor=pointer]:
             - /url: https://instagram.com/hesacr
-            - img [ref=e132]
-    - generic [ref=e136]:
-      - paragraph [ref=e137]: © HESA 2026. Todos los derechos reservados.
-      - button "English" [ref=e139] [cursor=pointer]
-  - button "Contactar por WhatsApp" [ref=e140] [cursor=pointer]:
-    - img [ref=e141]
+            - img [ref=e134]
+    - generic [ref=e138]:
+      - paragraph [ref=e139]: © HESA 2026. Todos los derechos reservados.
+      - button "English" [ref=e141] [cursor=pointer]
+  - button "Contactar por WhatsApp" [ref=e142] [cursor=pointer]:
+    - img [ref=e143]
     - generic: Escribenos por WhatsApp
 ```

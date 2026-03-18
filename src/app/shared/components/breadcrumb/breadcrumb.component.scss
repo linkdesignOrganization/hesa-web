@@ -23,6 +23,16 @@
     color: var(--neutral-400);
     text-decoration: none;
     transition: color 0.2s ease-out;
+    // NFR-026: Ensure minimum 44px touch target on mobile
+    padding: 10px 4px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+
+    @media (min-width: 768px) {
+      padding: 2px 0;
+      min-height: auto;
+    }
 
     &:hover {
       color: var(--brand-primary);
@@ -38,6 +48,17 @@
   &__current {
     color: var(--neutral-900);
     font-weight: var(--weight-medium);
+    // NFR-026: Match link touch target sizing
+    padding: 10px 4px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+
+    @media (min-width: 768px) {
+      padding: 2px 0;
+      min-height: auto;
+      display: inline;
+    }
   }
 
   &__separator {

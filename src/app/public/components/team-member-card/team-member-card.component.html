@@ -1,9 +1,12 @@
 <div class="team-card">
   <div class="team-card__photo">
     @if (photo()) {
-      <img [src]="photo()" [alt]="name()" class="team-card__photo-img" loading="lazy">
+      <picture>
+        <source [srcset]="photoWebP()" type="image/webp">
+        <img [src]="photo()" [alt]="name()" class="team-card__photo-img" loading="lazy">
+      </picture>
     } @else {
-      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--neutral-200)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--neutral-200)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
     }
   </div>
   <h3 class="team-card__name">{{ name() }}</h3>

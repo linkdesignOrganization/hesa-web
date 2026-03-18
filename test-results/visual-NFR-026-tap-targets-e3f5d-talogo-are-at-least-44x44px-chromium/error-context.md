@@ -2,46 +2,48 @@
 
 ```yaml
 - generic [ref=e2]:
+  - link "Saltar al contenido principal" [ref=e3] [cursor=pointer]:
+    - /url: "#main-content"
   - generic:
-    - navigation "Navegacion principal" [ref=e3]:
-      - generic [ref=e4]:
-        - link "HESA - Ir al inicio" [ref=e5] [cursor=pointer]:
+    - navigation "Navegacion principal" [ref=e4]:
+      - generic [ref=e5]:
+        - link "HESA - Ir al inicio" [ref=e6] [cursor=pointer]:
           - /url: /es
-          - generic [ref=e6]: HESA
-          - generic [ref=e7]: H
-        - generic [ref=e8]:
-          - button "Buscar productos y marcas" [ref=e9] [cursor=pointer]:
-            - img [ref=e10]
-          - listbox "Seleccionar idioma" [ref=e14]:
-            - button "ES" [ref=e15] [cursor=pointer]:
-              - generic [ref=e16]: ES
-              - img [ref=e17]
-          - button "Abrir menu" [ref=e19] [cursor=pointer]
-      - dialog "Menu de navegacion" [ref=e23]:
-        - button "Cerrar menu" [ref=e24] [cursor=pointer]:
-          - img [ref=e25]
-        - navigation [ref=e28]:
-          - link "Catalogo" [ref=e29] [cursor=pointer]:
+          - generic [ref=e7]: HESA
+          - generic [ref=e8]: H
+        - generic [ref=e9]:
+          - button "Buscar productos y marcas" [ref=e10] [cursor=pointer]:
+            - img [ref=e11]
+          - listbox "Seleccionar idioma" [ref=e15]:
+            - button "ES" [ref=e16] [cursor=pointer]:
+              - generic [ref=e17]: ES
+              - img [ref=e18]
+          - button "Abrir menu" [ref=e20] [cursor=pointer]
+      - dialog "Menu de navegacion" [ref=e24]:
+        - button "Cerrar menu" [ref=e25] [cursor=pointer]:
+          - img [ref=e26]
+        - navigation [ref=e29]:
+          - link "Catalogo" [ref=e30] [cursor=pointer]:
             - /url: /es/catalogo
-          - generic [ref=e30]:
-            - link "Farmacos Veterinarios" [ref=e31] [cursor=pointer]:
+          - generic [ref=e31]:
+            - link "Farmacos Veterinarios" [ref=e32] [cursor=pointer]:
               - /url: /es/catalogo/farmacos
-            - link "Alimentos para Animales" [ref=e32] [cursor=pointer]:
+            - link "Alimentos para Animales" [ref=e33] [cursor=pointer]:
               - /url: /es/catalogo/alimentos
-            - link "Equipos Veterinarios" [ref=e33] [cursor=pointer]:
+            - link "Equipos Veterinarios" [ref=e34] [cursor=pointer]:
               - /url: /es/catalogo/equipos
-          - link "Marcas" [ref=e34] [cursor=pointer]:
+          - link "Marcas" [ref=e35] [cursor=pointer]:
             - /url: /es/marcas
-          - link "Nosotros" [ref=e35] [cursor=pointer]:
+          - link "Nosotros" [ref=e36] [cursor=pointer]:
             - /url: /es/nosotros
-          - link "Distribuidores" [ref=e36] [cursor=pointer]:
+          - link "Distribuidores" [ref=e37] [cursor=pointer]:
             - /url: /es/distribuidores
-          - link "Contacto" [ref=e37] [cursor=pointer]:
+          - link "Contacto" [ref=e38] [cursor=pointer]:
             - /url: /es/contacto
-        - listbox "Seleccionar idioma" [ref=e40]:
-          - button "ES" [ref=e41] [cursor=pointer]:
-            - generic [ref=e42]: ES
-            - img [ref=e43]
+        - listbox "Seleccionar idioma" [ref=e41]:
+          - button "ES" [ref=e42] [cursor=pointer]:
+            - generic [ref=e43]: ES
+            - img [ref=e44]
     - generic:
       - search "Busqueda global":
         - generic:
@@ -51,110 +53,111 @@
             - img
             - textbox "Buscar productos, marcas..."
           - paragraph: Escribe al menos 3 caracteres
-  - generic [ref=e47]:
-    - navigation "Breadcrumb" [ref=e49]:
-      - list [ref=e50]:
-        - listitem [ref=e51]:
-          - link "Inicio" [ref=e52] [cursor=pointer]:
+  - main [ref=e46]:
+    - generic [ref=e49]:
+      - navigation "Breadcrumb" [ref=e51]:
+        - list [ref=e52]:
+          - listitem [ref=e53]:
+            - link "Inicio" [ref=e54] [cursor=pointer]:
+              - /url: /es
+            - generic [ref=e55]: ">"
+          - listitem [ref=e56]:
+            - generic [ref=e57]: Catalogo
+      - generic [ref=e58]:
+        - heading "Catalogo de Productos" [level=1] [ref=e59]
+        - generic [ref=e60]: 5 productos
+      - button "Filtrar productos" [ref=e61] [cursor=pointer]:
+        - img [ref=e62]
+        - text: Filtrar
+      - generic [ref=e64]:
+        - link "Ver Monitor de Signos Vitales Veterinario" [ref=e66] [cursor=pointer]:
+          - /url: /es/catalogo/equipos/monitor-signos-vitales-vet
+          - img "Monitor de Signos Vitales Veterinario" [ref=e68]
+          - generic [ref=e69]:
+            - heading "Monitor de Signos Vitales Veterinario" [level=3] [ref=e70]
+            - paragraph [ref=e71]: Mindray
+            - generic [ref=e72]: Ver producto
+        - link "Ver Royal Canin Kitten" [ref=e74] [cursor=pointer]:
+          - /url: /es/catalogo/alimentos/royal-canin-kitten
+          - img [ref=e77]
+          - generic [ref=e99]:
+            - heading "Royal Canin Kitten" [level=3] [ref=e100]
+            - paragraph [ref=e101]: Royal Canin
+            - generic [ref=e102]: Ver producto
+        - link "Ver Royal Canin Maxi Adulto" [ref=e104] [cursor=pointer]:
+          - /url: /es/catalogo/alimentos/royal-canin-maxi-adulto
+          - img "Royal Canin Maxi Adulto" [ref=e106]
+          - generic [ref=e107]:
+            - heading "Royal Canin Maxi Adulto" [level=3] [ref=e108]
+            - paragraph [ref=e109]: Royal Canin
+            - generic [ref=e110]: Ver producto
+        - link "Ver Meloxicam Inyectable" [ref=e112] [cursor=pointer]:
+          - /url: /es/catalogo/farmacos/meloxicam-inyectable
+          - img "Meloxicam Inyectable" [ref=e114]
+          - generic [ref=e115]:
+            - heading "Meloxicam Inyectable" [level=3] [ref=e116]
+            - paragraph [ref=e117]: Zoetis
+            - generic [ref=e118]: Ver producto
+        - link "Ver Amoxicilina Veterinaria" [ref=e120] [cursor=pointer]:
+          - /url: /es/catalogo/farmacos/amoxicilina-veterinaria
+          - img "Amoxicilina Veterinaria" [ref=e122]
+          - generic [ref=e123]:
+            - heading "Amoxicilina Veterinaria" [level=3] [ref=e124]
+            - paragraph [ref=e125]: Zoetis
+            - generic [ref=e126]: Ver producto
+  - contentinfo "Pie de pagina" [ref=e128]:
+    - generic [ref=e130]:
+      - generic [ref=e131]:
+        - generic [ref=e132]: HESA
+        - paragraph [ref=e133]: 37 anos distribuyendo salud animal en Costa Rica
+      - generic [ref=e134]:
+        - button "Navegacion +" [ref=e135] [cursor=pointer]:
+          - generic [ref=e136]: Navegacion
+          - generic [ref=e137]: +
+        - navigation [ref=e138]:
+          - link "Inicio" [ref=e139] [cursor=pointer]:
             - /url: /es
-          - generic [ref=e53]: ">"
-        - listitem [ref=e54]:
-          - generic [ref=e55]: Catalogo
-    - generic [ref=e56]:
-      - heading "Catalogo de Productos" [level=1] [ref=e57]
-      - generic [ref=e58]: 5 productos
-    - button "Filtrar productos" [ref=e59] [cursor=pointer]:
-      - img [ref=e60]
-      - text: Filtrar
-    - generic [ref=e62]:
-      - link "Ver Monitor de Signos Vitales Veterinario" [ref=e64] [cursor=pointer]:
-        - /url: /es/catalogo/equipos/monitor-signos-vitales-vet
-        - img "Monitor de Signos Vitales Veterinario" [ref=e66]
-        - generic [ref=e67]:
-          - heading "Monitor de Signos Vitales Veterinario" [level=3] [ref=e68]
-          - paragraph [ref=e69]: Mindray
-          - generic [ref=e70]: Ver producto
-      - link "Ver Royal Canin Kitten" [ref=e72] [cursor=pointer]:
-        - /url: /es/catalogo/alimentos/royal-canin-kitten
-        - img [ref=e75]
-        - generic [ref=e97]:
-          - heading "Royal Canin Kitten" [level=3] [ref=e98]
-          - paragraph [ref=e99]: Royal Canin
-          - generic [ref=e100]: Ver producto
-      - link "Ver Royal Canin Maxi Adulto" [ref=e102] [cursor=pointer]:
-        - /url: /es/catalogo/alimentos/royal-canin-maxi-adulto
-        - img "Royal Canin Maxi Adulto" [ref=e104]
-        - generic [ref=e105]:
-          - heading "Royal Canin Maxi Adulto" [level=3] [ref=e106]
-          - paragraph [ref=e107]: Royal Canin
-          - generic [ref=e108]: Ver producto
-      - link "Ver Meloxicam Inyectable" [ref=e110] [cursor=pointer]:
-        - /url: /es/catalogo/farmacos/meloxicam-inyectable
-        - img "Meloxicam Inyectable" [ref=e112]
-        - generic [ref=e113]:
-          - heading "Meloxicam Inyectable" [level=3] [ref=e114]
-          - paragraph [ref=e115]: Zoetis
-          - generic [ref=e116]: Ver producto
-      - link "Ver Amoxicilina Veterinaria" [ref=e118] [cursor=pointer]:
-        - /url: /es/catalogo/farmacos/amoxicilina-veterinaria
-        - img "Amoxicilina Veterinaria" [ref=e120]
-        - generic [ref=e121]:
-          - heading "Amoxicilina Veterinaria" [level=3] [ref=e122]
-          - paragraph [ref=e123]: Zoetis
-          - generic [ref=e124]: Ver producto
-  - contentinfo "Pie de pagina" [ref=e126]:
-    - generic [ref=e128]:
-      - generic [ref=e129]:
-        - generic [ref=e130]: HESA
-        - paragraph [ref=e131]: 37 anos distribuyendo salud animal en Costa Rica
-      - generic [ref=e132]:
-        - button "Navegacion +" [ref=e133] [cursor=pointer]:
-          - generic [ref=e134]: Navegacion
-          - generic [ref=e135]: +
-        - navigation [ref=e136]:
-          - link "Inicio" [ref=e137] [cursor=pointer]:
-            - /url: /es
-          - link "Catalogo" [ref=e138] [cursor=pointer]:
+          - link "Catalogo" [ref=e140] [cursor=pointer]:
             - /url: /es/catalogo
-          - link "Marcas" [ref=e139] [cursor=pointer]:
+          - link "Marcas" [ref=e141] [cursor=pointer]:
             - /url: /es/marcas
-          - link "Nosotros" [ref=e140] [cursor=pointer]:
+          - link "Nosotros" [ref=e142] [cursor=pointer]:
             - /url: /es/nosotros
-          - link "Distribuidores" [ref=e141] [cursor=pointer]:
+          - link "Distribuidores" [ref=e143] [cursor=pointer]:
             - /url: /es/distribuidores
-          - link "Contacto" [ref=e142] [cursor=pointer]:
+          - link "Contacto" [ref=e144] [cursor=pointer]:
             - /url: /es/contacto
-      - generic [ref=e143]:
-        - button "Contacto +" [ref=e144] [cursor=pointer]:
-          - generic [ref=e145]: Contacto
-          - generic [ref=e146]: +
-        - generic [ref=e147]:
-          - paragraph [ref=e148]:
-            - img [ref=e149]
+      - generic [ref=e145]:
+        - button "Contacto +" [ref=e146] [cursor=pointer]:
+          - generic [ref=e147]: Contacto
+          - generic [ref=e148]: +
+        - generic [ref=e149]:
+          - paragraph [ref=e150]:
+            - img [ref=e151]
             - text: +506 2260-9020
-          - paragraph [ref=e151]:
-            - img [ref=e152]
+          - paragraph [ref=e153]:
+            - img [ref=e154]
             - text: info@hesa.co.cr
-          - paragraph [ref=e155]:
-            - img [ref=e156]
+          - paragraph [ref=e157]:
+            - img [ref=e158]
             - text: Calle 2, av 12. Heredia, Costa Rica
-          - paragraph [ref=e159]:
-            - img [ref=e160]
+          - paragraph [ref=e161]:
+            - img [ref=e162]
             - text: "Lun - Vie: 8:00 - 17:00"
-      - generic [ref=e163]:
-        - button "Redes Sociales +" [ref=e164] [cursor=pointer]:
-          - generic [ref=e165]: Redes Sociales
-          - generic [ref=e166]: +
-        - generic [ref=e167]:
-          - link "Facebook" [ref=e168] [cursor=pointer]:
+      - generic [ref=e165]:
+        - button "Redes Sociales +" [ref=e166] [cursor=pointer]:
+          - generic [ref=e167]: Redes Sociales
+          - generic [ref=e168]: +
+        - generic [ref=e169]:
+          - link "Facebook" [ref=e170] [cursor=pointer]:
             - /url: https://facebook.com/hesacr
-            - img [ref=e169]
-          - link "Instagram" [ref=e171] [cursor=pointer]:
+            - img [ref=e171]
+          - link "Instagram" [ref=e173] [cursor=pointer]:
             - /url: https://instagram.com/hesacr
-            - img [ref=e172]
-    - generic [ref=e176]:
-      - paragraph [ref=e177]: © HESA 2026. Todos los derechos reservados.
-      - button "English" [ref=e179] [cursor=pointer]
-  - button "Contactar por WhatsApp" [ref=e180] [cursor=pointer]:
-    - img [ref=e181]
+            - img [ref=e174]
+    - generic [ref=e178]:
+      - paragraph [ref=e179]: © HESA 2026. Todos los derechos reservados.
+      - button "English" [ref=e181] [cursor=pointer]
+  - button "Contactar por WhatsApp" [ref=e182] [cursor=pointer]:
+    - img [ref=e183]
 ```

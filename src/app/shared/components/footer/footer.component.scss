@@ -4,6 +4,14 @@
 
 :host {
   display: block;
+  // NFR-003: Reserve space for footer to prevent CLS (layout shift)
+  // Mobile: accordion sections collapsed = ~280px, Desktop: grid = ~300px
+  min-height: 280px;
+  contain: layout style;
+
+  @media (min-width: 1024px) {
+    min-height: 300px;
+  }
 }
 
 .footer {
@@ -157,7 +165,17 @@
     text-decoration: none;
     letter-spacing: 0.02em;
     transition: opacity 0.2s ease-out;
-    padding: 4px 0;
+    // NFR-026: Ensure minimum 44px touch target height on mobile
+    padding: 10px 0;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+
+    @media (min-width: 768px) {
+      padding: 4px 0;
+      min-height: auto;
+      display: inline;
+    }
 
     &:hover {
       color: var(--neutral-white);
@@ -205,6 +223,12 @@
   &__social-link {
     color: rgba(255, 255, 255, 0.7);
     transition: transform 0.2s ease-out, color 0.2s ease-out;
+    // NFR-026: Ensure minimum 44x44px touch target
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
 
     &:hover {
       color: var(--neutral-white);

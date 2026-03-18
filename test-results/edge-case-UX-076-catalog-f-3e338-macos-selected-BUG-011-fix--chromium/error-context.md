@@ -2,19 +2,20 @@
 
 ```yaml
 - generic [ref=e2]:
+  - link "Saltar al contenido principal" [ref=e3] [cursor=pointer]:
+    - /url: "#main-content"
   - generic:
-    - navigation "Navegacion principal" [ref=e3]:
-      - generic [ref=e4]:
-        - link "HESA - Ir al inicio" [ref=e5] [cursor=pointer]:
+    - navigation "Navegacion principal" [ref=e4]:
+      - generic [ref=e5]:
+        - link "HESA - Ir al inicio" [ref=e6] [cursor=pointer]:
           - /url: /es
-          - generic [ref=e6]: HESA
-          - generic [ref=e7]: H
-        - navigation [ref=e8]:
-          - generic [ref=e9]:
-            - link "Catalogo" [ref=e10] [cursor=pointer]:
-              - /url: /es/catalogo
+          - generic [ref=e7]: HESA
+          - generic [ref=e8]: H
+        - navigation [ref=e9]:
+          - generic [ref=e10]:
+            - button "Catalogo" [ref=e11] [cursor=pointer]:
               - text: Catalogo
-              - img [ref=e11]
+              - img [ref=e12]
             - generic:
               - link "Farmacos Veterinarios":
                 - /url: /es/catalogo/farmacos
@@ -28,21 +29,21 @@
                 - /url: /es/catalogo/equipos
                 - img
                 - text: Equipos Veterinarios
-          - link "Marcas" [ref=e13] [cursor=pointer]:
+          - link "Marcas" [ref=e14] [cursor=pointer]:
             - /url: /es/marcas
-          - link "Nosotros" [ref=e14] [cursor=pointer]:
+          - link "Nosotros" [ref=e15] [cursor=pointer]:
             - /url: /es/nosotros
-          - link "Distribuidores" [ref=e15] [cursor=pointer]:
+          - link "Distribuidores" [ref=e16] [cursor=pointer]:
             - /url: /es/distribuidores
-          - link "Contacto" [ref=e16] [cursor=pointer]:
+          - link "Contacto" [ref=e17] [cursor=pointer]:
             - /url: /es/contacto
-        - generic [ref=e17]:
-          - button "Buscar productos y marcas" [ref=e18] [cursor=pointer]:
-            - img [ref=e19]
-          - listbox "Seleccionar idioma" [ref=e23]:
-            - button "ES" [ref=e24] [cursor=pointer]:
-              - generic [ref=e25]: ES
-              - img [ref=e26]
+        - generic [ref=e18]:
+          - button "Buscar productos y marcas" [ref=e19] [cursor=pointer]:
+            - img [ref=e20]
+          - listbox "Seleccionar idioma" [ref=e24]:
+            - button "ES" [ref=e25] [cursor=pointer]:
+              - generic [ref=e26]: ES
+              - img [ref=e27]
     - generic:
       - search "Busqueda global":
         - generic:
@@ -52,82 +53,84 @@
             - img
             - textbox "Buscar productos, marcas..."
           - paragraph: Escribe al menos 3 caracteres
-  - generic [ref=e30]:
-    - navigation "Breadcrumb" [ref=e32]:
-      - list [ref=e33]:
-        - listitem [ref=e34]:
-          - link "Inicio" [ref=e35] [cursor=pointer]:
+  - main [ref=e29]:
+    - generic [ref=e32]:
+      - navigation "Breadcrumb" [ref=e34]:
+        - list [ref=e35]:
+          - listitem [ref=e36]:
+            - link "Inicio" [ref=e37] [cursor=pointer]:
+              - /url: /es
+            - generic [ref=e38]: ">"
+          - listitem [ref=e39]:
+            - generic [ref=e40]: Catalogo
+      - generic [ref=e41]:
+        - heading "Catalogo de Productos" [level=1] [ref=e42]
+        - generic [ref=e43]: 0 productos
+      - group "Filtros del catalogo" [ref=e44]:
+        - generic [ref=e45]:
+          - combobox "Filtrar por categoria" [ref=e46] [cursor=pointer]:
+            - option "Categoria" [selected]
+            - option "Farmacos"
+            - option "Alimentos"
+            - option "Equipos"
+          - combobox "Filtrar por marca" [ref=e47] [cursor=pointer]:
+            - option "Marca" [selected]
+          - combobox "Filtrar por especie" [ref=e48] [cursor=pointer]:
+            - option "Especie" [selected]
+            - option "Caninos"
+            - option "Felinos"
+            - option "Bovinos"
+            - option "Equinos"
+            - option "Porcinos"
+            - option "Aves"
+  - contentinfo "Pie de pagina" [ref=e99]:
+    - generic [ref=e101]:
+      - generic [ref=e102]:
+        - generic [ref=e103]: HESA
+        - paragraph [ref=e104]: 37 anos distribuyendo salud animal en Costa Rica
+      - generic [ref=e106]:
+        - heading "Navegacion" [level=3] [ref=e107]
+        - navigation [ref=e108]:
+          - link "Inicio" [ref=e109] [cursor=pointer]:
             - /url: /es
-          - generic [ref=e36]: ">"
-        - listitem [ref=e37]:
-          - generic [ref=e38]: Catalogo
-    - generic [ref=e39]:
-      - heading "Catalogo de Productos" [level=1] [ref=e40]
-      - generic [ref=e41]: 0 productos
-    - generic [ref=e43]:
-      - combobox [ref=e44] [cursor=pointer]:
-        - option "Categoria" [selected]
-        - option "Farmacos"
-        - option "Alimentos"
-        - option "Equipos"
-      - combobox [ref=e45] [cursor=pointer]:
-        - option "Marca" [selected]
-      - combobox [ref=e46] [cursor=pointer]:
-        - option "Especie" [selected]
-        - option "Caninos"
-        - option "Felinos"
-        - option "Bovinos"
-        - option "Equinos"
-        - option "Porcinos"
-        - option "Aves"
-  - contentinfo "Pie de pagina" [ref=e97]:
-    - generic [ref=e99]:
-      - generic [ref=e100]:
-        - generic [ref=e101]: HESA
-        - paragraph [ref=e102]: 37 anos distribuyendo salud animal en Costa Rica
-      - generic [ref=e104]:
-        - heading "Navegacion" [level=3] [ref=e105]
-        - navigation [ref=e106]:
-          - link "Inicio" [ref=e107] [cursor=pointer]:
-            - /url: /es
-          - link "Catalogo" [ref=e108] [cursor=pointer]:
+          - link "Catalogo" [ref=e110] [cursor=pointer]:
             - /url: /es/catalogo
-          - link "Marcas" [ref=e109] [cursor=pointer]:
+          - link "Marcas" [ref=e111] [cursor=pointer]:
             - /url: /es/marcas
-          - link "Nosotros" [ref=e110] [cursor=pointer]:
+          - link "Nosotros" [ref=e112] [cursor=pointer]:
             - /url: /es/nosotros
-          - link "Distribuidores" [ref=e111] [cursor=pointer]:
+          - link "Distribuidores" [ref=e113] [cursor=pointer]:
             - /url: /es/distribuidores
-          - link "Contacto" [ref=e112] [cursor=pointer]:
+          - link "Contacto" [ref=e114] [cursor=pointer]:
             - /url: /es/contacto
-      - generic [ref=e114]:
-        - heading "Contacto" [level=3] [ref=e115]
-        - generic [ref=e116]:
-          - paragraph [ref=e117]:
-            - img [ref=e118]
+      - generic [ref=e116]:
+        - heading "Contacto" [level=3] [ref=e117]
+        - generic [ref=e118]:
+          - paragraph [ref=e119]:
+            - img [ref=e120]
             - text: +506 2260-9020
-          - paragraph [ref=e120]:
-            - img [ref=e121]
+          - paragraph [ref=e122]:
+            - img [ref=e123]
             - text: info@hesa.co.cr
-          - paragraph [ref=e124]:
-            - img [ref=e125]
+          - paragraph [ref=e126]:
+            - img [ref=e127]
             - text: Calle 2, av 12. Heredia, Costa Rica
-          - paragraph [ref=e128]:
-            - img [ref=e129]
+          - paragraph [ref=e130]:
+            - img [ref=e131]
             - text: "Lun - Vie: 8:00 - 17:00"
-      - generic [ref=e133]:
-        - heading "Redes Sociales" [level=3] [ref=e134]
-        - generic [ref=e135]:
-          - link "Facebook" [ref=e136] [cursor=pointer]:
+      - generic [ref=e135]:
+        - heading "Redes Sociales" [level=3] [ref=e136]
+        - generic [ref=e137]:
+          - link "Facebook" [ref=e138] [cursor=pointer]:
             - /url: https://facebook.com/hesacr
-            - img [ref=e137]
-          - link "Instagram" [ref=e139] [cursor=pointer]:
+            - img [ref=e139]
+          - link "Instagram" [ref=e141] [cursor=pointer]:
             - /url: https://instagram.com/hesacr
-            - img [ref=e140]
-    - generic [ref=e144]:
-      - paragraph [ref=e145]: © HESA 2026. Todos los derechos reservados.
-      - button "English" [ref=e147] [cursor=pointer]
-  - button "Contactar por WhatsApp" [ref=e148] [cursor=pointer]:
-    - img [ref=e149]
+            - img [ref=e142]
+    - generic [ref=e146]:
+      - paragraph [ref=e147]: © HESA 2026. Todos los derechos reservados.
+      - button "English" [ref=e149] [cursor=pointer]
+  - button "Contactar por WhatsApp" [ref=e150] [cursor=pointer]:
+    - img [ref=e151]
     - generic: Escribenos por WhatsApp
 ```

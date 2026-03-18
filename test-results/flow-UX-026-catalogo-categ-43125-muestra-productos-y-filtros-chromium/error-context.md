@@ -2,19 +2,20 @@
 
 ```yaml
 - generic [ref=e2]:
+  - link "Saltar al contenido principal" [ref=e3] [cursor=pointer]:
+    - /url: "#main-content"
   - generic:
-    - navigation "Navegacion principal" [ref=e3]:
-      - generic [ref=e4]:
-        - link "HESA - Ir al inicio" [ref=e5] [cursor=pointer]:
+    - navigation "Navegacion principal" [ref=e4]:
+      - generic [ref=e5]:
+        - link "HESA - Ir al inicio" [ref=e6] [cursor=pointer]:
           - /url: /es
-          - generic [ref=e6]: HESA
-          - generic [ref=e7]: H
-        - navigation [ref=e8]:
-          - generic [ref=e9]:
-            - link "Catalogo" [ref=e10] [cursor=pointer]:
-              - /url: /es/catalogo
+          - generic [ref=e7]: HESA
+          - generic [ref=e8]: H
+        - navigation [ref=e9]:
+          - generic [ref=e10]:
+            - button "Catalogo" [ref=e11] [cursor=pointer]:
               - text: Catalogo
-              - img [ref=e11]
+              - img [ref=e12]
             - generic:
               - link "Farmacos Veterinarios":
                 - /url: /es/catalogo/farmacos
@@ -28,21 +29,21 @@
                 - /url: /es/catalogo/equipos
                 - img
                 - text: Equipos Veterinarios
-          - link "Marcas" [ref=e13] [cursor=pointer]:
+          - link "Marcas" [ref=e14] [cursor=pointer]:
             - /url: /es/marcas
-          - link "Nosotros" [ref=e14] [cursor=pointer]:
+          - link "Nosotros" [ref=e15] [cursor=pointer]:
             - /url: /es/nosotros
-          - link "Distribuidores" [ref=e15] [cursor=pointer]:
+          - link "Distribuidores" [ref=e16] [cursor=pointer]:
             - /url: /es/distribuidores
-          - link "Contacto" [ref=e16] [cursor=pointer]:
+          - link "Contacto" [ref=e17] [cursor=pointer]:
             - /url: /es/contacto
-        - generic [ref=e17]:
-          - button "Buscar productos y marcas" [ref=e18] [cursor=pointer]:
-            - img [ref=e19]
-          - listbox "Seleccionar idioma" [ref=e23]:
-            - button "ES" [ref=e24] [cursor=pointer]:
-              - generic [ref=e25]: ES
-              - img [ref=e26]
+        - generic [ref=e18]:
+          - button "Buscar productos y marcas" [ref=e19] [cursor=pointer]:
+            - img [ref=e20]
+          - listbox "Seleccionar idioma" [ref=e24]:
+            - button "ES" [ref=e25] [cursor=pointer]:
+              - generic [ref=e26]: ES
+              - img [ref=e27]
     - generic:
       - search "Busqueda global":
         - generic:
@@ -52,85 +53,86 @@
             - img
             - textbox "Buscar productos, marcas..."
           - paragraph: Escribe al menos 3 caracteres
-  - generic [ref=e30]:
-    - navigation "Breadcrumb" [ref=e32]:
-      - list [ref=e33]:
-        - listitem [ref=e34]:
-          - link "Inicio" [ref=e35] [cursor=pointer]:
+  - main [ref=e29]:
+    - generic [ref=e32]:
+      - navigation "Breadcrumb" [ref=e34]:
+        - list [ref=e35]:
+          - listitem [ref=e36]:
+            - link "Inicio" [ref=e37] [cursor=pointer]:
+              - /url: /es
+            - generic [ref=e38]: ">"
+          - listitem [ref=e39]:
+            - link "Catalogo" [ref=e40] [cursor=pointer]:
+              - /url: /es/catalogo
+            - generic [ref=e41]: ">"
+          - listitem [ref=e42]:
+            - generic [ref=e43]: Equipos
+      - generic [ref=e44]:
+        - heading "Equipos" [level=1] [ref=e45]
+        - generic [ref=e46]: 1 productos
+      - paragraph [ref=e47]: Equipos e instrumentos veterinarios profesionales
+      - generic [ref=e49]:
+        - combobox [ref=e50]:
+          - option "Marca" [selected]
+          - option "Mindray"
+        - combobox [ref=e51]:
+          - option "Tipo" [selected]
+          - option "Monitoreo"
+      - link "Ver Monitor de Signos Vitales Veterinario" [ref=e54] [cursor=pointer]:
+        - /url: /es/catalogo/equipos/monitor-signos-vitales-vet
+        - img "Monitor de Signos Vitales Veterinario" [ref=e56]
+        - generic [ref=e57]:
+          - heading "Monitor de Signos Vitales Veterinario" [level=3] [ref=e58]
+          - paragraph [ref=e59]: Mindray
+          - generic [ref=e60]: Ver producto
+  - contentinfo "Pie de pagina" [ref=e62]:
+    - generic [ref=e64]:
+      - generic [ref=e65]:
+        - generic [ref=e66]: HESA
+        - paragraph [ref=e67]: 37 anos distribuyendo salud animal en Costa Rica
+      - generic [ref=e69]:
+        - heading "Navegacion" [level=3] [ref=e70]
+        - navigation [ref=e71]:
+          - link "Inicio" [ref=e72] [cursor=pointer]:
             - /url: /es
-          - generic [ref=e36]: ">"
-        - listitem [ref=e37]:
-          - link "Catalogo" [ref=e38] [cursor=pointer]:
+          - link "Catalogo" [ref=e73] [cursor=pointer]:
             - /url: /es/catalogo
-          - generic [ref=e39]: ">"
-        - listitem [ref=e40]:
-          - generic [ref=e41]: Equipos
-    - generic [ref=e42]:
-      - heading "Equipos" [level=1] [ref=e43]
-      - generic [ref=e44]: 1 productos
-    - paragraph [ref=e45]: Equipos e instrumentos veterinarios profesionales
-    - generic [ref=e47]:
-      - combobox [ref=e48]:
-        - option "Marca" [selected]
-        - option "Mindray"
-      - combobox [ref=e49]:
-        - option "Tipo" [selected]
-        - option "Monitoreo"
-    - link "Ver Monitor de Signos Vitales Veterinario" [ref=e52] [cursor=pointer]:
-      - /url: /es/catalogo/equipos/monitor-signos-vitales-vet
-      - img "Monitor de Signos Vitales Veterinario" [ref=e54]
-      - generic [ref=e55]:
-        - heading "Monitor de Signos Vitales Veterinario" [level=3] [ref=e56]
-        - paragraph [ref=e57]: Mindray
-        - generic [ref=e58]: Ver producto
-  - contentinfo "Pie de pagina" [ref=e60]:
-    - generic [ref=e62]:
-      - generic [ref=e63]:
-        - generic [ref=e64]: HESA
-        - paragraph [ref=e65]: 37 anos distribuyendo salud animal en Costa Rica
-      - generic [ref=e67]:
-        - heading "Navegacion" [level=3] [ref=e68]
-        - navigation [ref=e69]:
-          - link "Inicio" [ref=e70] [cursor=pointer]:
-            - /url: /es
-          - link "Catalogo" [ref=e71] [cursor=pointer]:
-            - /url: /es/catalogo
-          - link "Marcas" [ref=e72] [cursor=pointer]:
+          - link "Marcas" [ref=e74] [cursor=pointer]:
             - /url: /es/marcas
-          - link "Nosotros" [ref=e73] [cursor=pointer]:
+          - link "Nosotros" [ref=e75] [cursor=pointer]:
             - /url: /es/nosotros
-          - link "Distribuidores" [ref=e74] [cursor=pointer]:
+          - link "Distribuidores" [ref=e76] [cursor=pointer]:
             - /url: /es/distribuidores
-          - link "Contacto" [ref=e75] [cursor=pointer]:
+          - link "Contacto" [ref=e77] [cursor=pointer]:
             - /url: /es/contacto
-      - generic [ref=e77]:
-        - heading "Contacto" [level=3] [ref=e78]
-        - generic [ref=e79]:
-          - paragraph [ref=e80]:
-            - img [ref=e81]
+      - generic [ref=e79]:
+        - heading "Contacto" [level=3] [ref=e80]
+        - generic [ref=e81]:
+          - paragraph [ref=e82]:
+            - img [ref=e83]
             - text: +506 2260-9020
-          - paragraph [ref=e83]:
-            - img [ref=e84]
+          - paragraph [ref=e85]:
+            - img [ref=e86]
             - text: info@hesa.co.cr
-          - paragraph [ref=e87]:
-            - img [ref=e88]
+          - paragraph [ref=e89]:
+            - img [ref=e90]
             - text: Calle 2, av 12. Heredia, Costa Rica
-          - paragraph [ref=e91]:
-            - img [ref=e92]
+          - paragraph [ref=e93]:
+            - img [ref=e94]
             - text: "Lun - Vie: 8:00 - 17:00"
-      - generic [ref=e96]:
-        - heading "Redes Sociales" [level=3] [ref=e97]
-        - generic [ref=e98]:
-          - link "Facebook" [ref=e99] [cursor=pointer]:
+      - generic [ref=e98]:
+        - heading "Redes Sociales" [level=3] [ref=e99]
+        - generic [ref=e100]:
+          - link "Facebook" [ref=e101] [cursor=pointer]:
             - /url: https://facebook.com/hesacr
-            - img [ref=e100]
-          - link "Instagram" [ref=e102] [cursor=pointer]:
+            - img [ref=e102]
+          - link "Instagram" [ref=e104] [cursor=pointer]:
             - /url: https://instagram.com/hesacr
-            - img [ref=e103]
-    - generic [ref=e107]:
-      - paragraph [ref=e108]: © HESA 2026. Todos los derechos reservados.
-      - button "English" [ref=e110] [cursor=pointer]
-  - button "Contactar por WhatsApp" [ref=e111] [cursor=pointer]:
-    - img [ref=e112]
+            - img [ref=e105]
+    - generic [ref=e109]:
+      - paragraph [ref=e110]: © HESA 2026. Todos los derechos reservados.
+      - button "English" [ref=e112] [cursor=pointer]
+  - button "Contactar por WhatsApp" [ref=e113] [cursor=pointer]:
+    - img [ref=e114]
     - generic: Escribenos por WhatsApp
 ```

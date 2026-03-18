@@ -2,19 +2,20 @@
 
 ```yaml
 - generic [ref=e2]:
+  - link "Saltar al contenido principal" [ref=e3] [cursor=pointer]:
+    - /url: "#main-content"
   - generic:
-    - navigation "Navegacion principal" [ref=e3]:
-      - generic [ref=e4]:
-        - link "HESA - Ir al inicio" [ref=e5] [cursor=pointer]:
+    - navigation "Navegacion principal" [ref=e4]:
+      - generic [ref=e5]:
+        - link "HESA - Ir al inicio" [ref=e6] [cursor=pointer]:
           - /url: /es
-          - generic [ref=e6]: HESA
-          - generic [ref=e7]: H
-        - navigation [ref=e8]:
-          - generic [ref=e9]:
-            - link "Catalogo" [ref=e10] [cursor=pointer]:
-              - /url: /es/catalogo
+          - generic [ref=e7]: HESA
+          - generic [ref=e8]: H
+        - navigation [ref=e9]:
+          - generic [ref=e10]:
+            - button "Catalogo" [ref=e11] [cursor=pointer]:
               - text: Catalogo
-              - img [ref=e11]
+              - img [ref=e12]
             - generic:
               - link "Farmacos Veterinarios":
                 - /url: /es/catalogo/farmacos
@@ -28,21 +29,21 @@
                 - /url: /es/catalogo/equipos
                 - img
                 - text: Equipos Veterinarios
-          - link "Marcas" [ref=e13] [cursor=pointer]:
+          - link "Marcas" [ref=e14] [cursor=pointer]:
             - /url: /es/marcas
-          - link "Nosotros" [ref=e14] [cursor=pointer]:
+          - link "Nosotros" [ref=e15] [cursor=pointer]:
             - /url: /es/nosotros
-          - link "Distribuidores" [ref=e15] [cursor=pointer]:
+          - link "Distribuidores" [ref=e16] [cursor=pointer]:
             - /url: /es/distribuidores
-          - link "Contacto" [ref=e16] [cursor=pointer]:
+          - link "Contacto" [ref=e17] [cursor=pointer]:
             - /url: /es/contacto
-        - generic [ref=e17]:
-          - button "Buscar productos y marcas" [ref=e18] [cursor=pointer]:
-            - img [ref=e19]
-          - listbox "Seleccionar idioma" [ref=e23]:
-            - button "ES" [ref=e24] [cursor=pointer]:
-              - generic [ref=e25]: ES
-              - img [ref=e26]
+        - generic [ref=e18]:
+          - button "Buscar productos y marcas" [ref=e19] [cursor=pointer]:
+            - img [ref=e20]
+          - listbox "Seleccionar idioma" [ref=e24]:
+            - button "ES" [ref=e25] [cursor=pointer]:
+              - generic [ref=e26]: ES
+              - img [ref=e27]
     - generic:
       - search "Busqueda global":
         - generic:
@@ -52,113 +53,114 @@
             - img
             - textbox "Buscar productos, marcas..."
           - paragraph: Escribe al menos 3 caracteres
-  - generic [ref=e28]:
+  - main [ref=e29]:
     - generic [ref=e30]:
-      - navigation "Breadcrumb" [ref=e32]:
-        - list [ref=e33]:
-          - listitem [ref=e34]:
-            - link "Inicio" [ref=e35] [cursor=pointer]:
-              - /url: /es
-            - generic [ref=e36]: ">"
-          - listitem [ref=e37]:
-            - link "Catalogo" [ref=e38] [cursor=pointer]:
-              - /url: /es/catalogo
-            - generic [ref=e39]: ">"
-          - listitem [ref=e40]:
-            - link "Farmacos" [ref=e41] [cursor=pointer]:
-              - /url: /es/catalogo/farmacos
-            - generic [ref=e42]: ">"
-          - listitem [ref=e43]:
-            - generic [ref=e44]: Meloxicam Inyectable
-      - generic [ref=e45]:
-        - img "Meloxicam Inyectable" [ref=e48]
-        - generic [ref=e49]:
-          - heading "Meloxicam Inyectable" [level=1] [ref=e50]
-          - link "Zoetis" [ref=e51] [cursor=pointer]:
-            - /url: /es/marcas/zoetis
-          - generic [ref=e52]:
-            - generic [ref=e53]:
-              - img [ref=e54]
-              - text: Caninos
-            - generic [ref=e56]:
-              - img [ref=e57]
-              - text: Equinos
-          - generic [ref=e59]:
-            - paragraph [ref=e60]: Presentaciones
+      - generic [ref=e32]:
+        - navigation "Breadcrumb" [ref=e34]:
+          - list [ref=e35]:
+            - listitem [ref=e36]:
+              - link "Inicio" [ref=e37] [cursor=pointer]:
+                - /url: /es
+              - generic [ref=e38]: ">"
+            - listitem [ref=e39]:
+              - link "Catalogo" [ref=e40] [cursor=pointer]:
+                - /url: /es/catalogo
+              - generic [ref=e41]: ">"
+            - listitem [ref=e42]:
+              - link "Farmacos" [ref=e43] [cursor=pointer]:
+                - /url: /es/catalogo/farmacos
+              - generic [ref=e44]: ">"
+            - listitem [ref=e45]:
+              - generic [ref=e46]: Meloxicam Inyectable
+        - generic [ref=e47]:
+          - img "Meloxicam Inyectable" [ref=e50]
+          - generic [ref=e51]:
+            - heading "Meloxicam Inyectable" [level=1] [ref=e52]
+            - link "Zoetis" [ref=e53] [cursor=pointer]:
+              - /url: /es/marcas/zoetis
+            - generic [ref=e54]:
+              - generic [ref=e55]:
+                - img [ref=e56]
+                - text: Caninos
+              - generic [ref=e58]:
+                - img [ref=e59]
+                - text: Equinos
             - generic [ref=e61]:
-              - button "Frasco 50ml" [ref=e62] [cursor=pointer]
-              - button "Frasco 100ml" [ref=e63] [cursor=pointer]
-          - paragraph [ref=e64]: Antiinflamatorio no esteroidal para el alivio del dolor y la inflamacion en caninos y equinos. Administracion parenteral con rapida accion analgesica.
-          - generic [ref=e65]:
-            - paragraph [ref=e66]: Composicion
-            - paragraph [ref=e67]: "Cada ml contiene: Meloxicam 5mg. Vehiculo c.s."
-          - generic [ref=e68]:
-            - paragraph [ref=e69]: Registro sanitario
-            - paragraph [ref=e70]: SENASA-VET-2023-1205
-          - generic [ref=e71]:
-            - paragraph [ref=e72]: Indicaciones
-            - paragraph [ref=e73]: Tratamiento del dolor y la inflamacion asociados a trastornos musculoesqueleticos agudos y cronicos en caninos y equinos.
-          - generic [ref=e74]:
-            - link "Solicitar informacion" [ref=e75] [cursor=pointer]:
-              - /url: /es/contacto?producto=meloxicam-inyectable
-            - link "Consultar por WhatsApp" [ref=e76] [cursor=pointer]:
-              - /url: https://wa.me/50622609020?text=Hola%2C%20me%20interesa%20el%20producto%20Meloxicam%20Inyectable%20de%20Zoetis.%20Me%20gustaria%20recibir%20informacion.
-              - img [ref=e77]
-              - text: Consultar por WhatsApp
-    - generic [ref=e80]:
-      - generic [ref=e83]:
-        - generic [ref=e84]: Meloxicam Inyectable
-        - text: Zoetis
-      - link "Solicitar informacion" [ref=e85] [cursor=pointer]:
-        - /url: /es/contacto?producto=meloxicam-inyectable
-  - contentinfo "Pie de pagina" [ref=e87]:
-    - generic [ref=e89]:
-      - generic [ref=e90]:
-        - generic [ref=e91]: HESA
-        - paragraph [ref=e92]: 37 anos distribuyendo salud animal en Costa Rica
-      - generic [ref=e94]:
-        - heading "Navegacion" [level=3] [ref=e95]
-        - navigation [ref=e96]:
-          - link "Inicio" [ref=e97] [cursor=pointer]:
+              - paragraph [ref=e62]: Presentaciones
+              - generic [ref=e63]:
+                - button "Frasco 50ml" [ref=e64] [cursor=pointer]
+                - button "Frasco 100ml" [ref=e65] [cursor=pointer]
+            - paragraph [ref=e66]: Antiinflamatorio no esteroidal para el alivio del dolor y la inflamacion en caninos y equinos. Administracion parenteral con rapida accion analgesica.
+            - generic [ref=e67]:
+              - paragraph [ref=e68]: Composicion
+              - paragraph [ref=e69]: "Cada ml contiene: Meloxicam 5mg. Vehiculo c.s."
+            - generic [ref=e70]:
+              - paragraph [ref=e71]: Registro sanitario
+              - paragraph [ref=e72]: SENASA-VET-2023-1205
+            - generic [ref=e73]:
+              - paragraph [ref=e74]: Indicaciones
+              - paragraph [ref=e75]: Tratamiento del dolor y la inflamacion asociados a trastornos musculoesqueleticos agudos y cronicos en caninos y equinos.
+            - generic [ref=e76]:
+              - link "Solicitar informacion" [ref=e77] [cursor=pointer]:
+                - /url: /es/contacto?producto=meloxicam-inyectable
+              - link "Consultar por WhatsApp" [ref=e78] [cursor=pointer]:
+                - /url: https://wa.me/50622609020?text=Hola%2C%20me%20interesa%20el%20producto%20Meloxicam%20Inyectable%20de%20Zoetis.%20Me%20gustaria%20recibir%20informacion.
+                - img [ref=e79]
+                - text: Consultar por WhatsApp
+      - generic [ref=e82]:
+        - generic [ref=e85]:
+          - generic [ref=e86]: Meloxicam Inyectable
+          - text: Zoetis
+        - link "Solicitar informacion" [ref=e87] [cursor=pointer]:
+          - /url: /es/contacto?producto=meloxicam-inyectable
+  - contentinfo "Pie de pagina" [ref=e89]:
+    - generic [ref=e91]:
+      - generic [ref=e92]:
+        - generic [ref=e93]: HESA
+        - paragraph [ref=e94]: 37 anos distribuyendo salud animal en Costa Rica
+      - generic [ref=e96]:
+        - heading "Navegacion" [level=3] [ref=e97]
+        - navigation [ref=e98]:
+          - link "Inicio" [ref=e99] [cursor=pointer]:
             - /url: /es
-          - link "Catalogo" [ref=e98] [cursor=pointer]:
+          - link "Catalogo" [ref=e100] [cursor=pointer]:
             - /url: /es/catalogo
-          - link "Marcas" [ref=e99] [cursor=pointer]:
+          - link "Marcas" [ref=e101] [cursor=pointer]:
             - /url: /es/marcas
-          - link "Nosotros" [ref=e100] [cursor=pointer]:
+          - link "Nosotros" [ref=e102] [cursor=pointer]:
             - /url: /es/nosotros
-          - link "Distribuidores" [ref=e101] [cursor=pointer]:
+          - link "Distribuidores" [ref=e103] [cursor=pointer]:
             - /url: /es/distribuidores
-          - link "Contacto" [ref=e102] [cursor=pointer]:
+          - link "Contacto" [ref=e104] [cursor=pointer]:
             - /url: /es/contacto
-      - generic [ref=e104]:
-        - heading "Contacto" [level=3] [ref=e105]
-        - generic [ref=e106]:
-          - paragraph [ref=e107]:
-            - img [ref=e108]
+      - generic [ref=e106]:
+        - heading "Contacto" [level=3] [ref=e107]
+        - generic [ref=e108]:
+          - paragraph [ref=e109]:
+            - img [ref=e110]
             - text: +506 2260-9020
-          - paragraph [ref=e110]:
-            - img [ref=e111]
+          - paragraph [ref=e112]:
+            - img [ref=e113]
             - text: info@hesa.co.cr
-          - paragraph [ref=e114]:
-            - img [ref=e115]
+          - paragraph [ref=e116]:
+            - img [ref=e117]
             - text: Calle 2, av 12. Heredia, Costa Rica
-          - paragraph [ref=e118]:
-            - img [ref=e119]
+          - paragraph [ref=e120]:
+            - img [ref=e121]
             - text: "Lun - Vie: 8:00 - 17:00"
-      - generic [ref=e123]:
-        - heading "Redes Sociales" [level=3] [ref=e124]
-        - generic [ref=e125]:
-          - link "Facebook" [ref=e126] [cursor=pointer]:
+      - generic [ref=e125]:
+        - heading "Redes Sociales" [level=3] [ref=e126]
+        - generic [ref=e127]:
+          - link "Facebook" [ref=e128] [cursor=pointer]:
             - /url: https://facebook.com/hesacr
-            - img [ref=e127]
-          - link "Instagram" [ref=e129] [cursor=pointer]:
+            - img [ref=e129]
+          - link "Instagram" [ref=e131] [cursor=pointer]:
             - /url: https://instagram.com/hesacr
-            - img [ref=e130]
-    - generic [ref=e134]:
-      - paragraph [ref=e135]: © HESA 2026. Todos los derechos reservados.
-      - button "English" [ref=e137] [cursor=pointer]
-  - button "Contactar por WhatsApp" [ref=e138] [cursor=pointer]:
-    - img [ref=e139]
+            - img [ref=e132]
+    - generic [ref=e136]:
+      - paragraph [ref=e137]: © HESA 2026. Todos los derechos reservados.
+      - button "English" [ref=e139] [cursor=pointer]
+  - button "Contactar por WhatsApp" [ref=e140] [cursor=pointer]:
+    - img [ref=e141]
     - generic: Escribenos por WhatsApp
 ```

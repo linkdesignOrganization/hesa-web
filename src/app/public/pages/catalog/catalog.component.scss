@@ -146,6 +146,18 @@
     cursor: pointer;
     color: var(--brand-primary);
     line-height: 1;
+    // NFR-026: Ensure minimum 44x44px touch target via invisible ::before overlay
+    position: relative;
+    min-width: 24px;
+    min-height: 24px;
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: -10px;
+      min-width: 44px;
+      min-height: 44px;
+    }
 
     &:hover {
       color: var(--neutral-900);
@@ -155,11 +167,15 @@
   &__clear {
     background: none;
     border: none;
-    padding: 6px 12px;
+    // NFR-026: Ensure minimum 44px touch target height
+    padding: 10px 12px;
+    min-height: 44px;
     font-size: 13px;
     font-weight: var(--weight-medium);
     color: var(--neutral-400);
     cursor: pointer;
+    display: inline-flex;
+    align-items: center;
 
     &:hover {
       color: var(--neutral-900);

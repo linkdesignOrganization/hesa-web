@@ -43,7 +43,10 @@
       <div class="brand-detail-page__header">
         <div class="brand-detail-page__logo">
           @if (brand()!.logo) {
-            <img [src]="brand()!.logo" [alt]="brand()!.name" class="brand-detail-page__logo-img" style="width:100%;height:100%;object-fit:contain;">
+            <picture>
+              <source [srcset]="toWebP(brand()!.logo!)" type="image/webp">
+              <img [src]="brand()!.logo" [alt]="brand()!.name" class="brand-detail-page__logo-img" style="width:100%;height:100%;object-fit:contain;">
+            </picture>
           } @else {
             <span class="brand-detail-page__logo-initial">{{ brand()!.name.charAt(0) }}</span>
           }
@@ -51,7 +54,7 @@
         <div class="brand-detail-page__info">
           <h1 class="brand-detail-page__name">{{ brand()!.name }}</h1>
           <p class="brand-detail-page__country">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
             {{ brand()!.country }}
           </p>
           <div class="brand-detail-page__badges">

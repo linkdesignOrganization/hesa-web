@@ -2,19 +2,20 @@
 
 ```yaml
 - generic [ref=e2]:
+  - link "Saltar al contenido principal" [ref=e3] [cursor=pointer]:
+    - /url: "#main-content"
   - generic:
-    - navigation "Navegacion principal" [ref=e3]:
-      - generic [ref=e4]:
-        - link "HESA - Ir al inicio" [ref=e5] [cursor=pointer]:
+    - navigation "Navegacion principal" [ref=e4]:
+      - generic [ref=e5]:
+        - link "HESA - Ir al inicio" [ref=e6] [cursor=pointer]:
           - /url: /es
-          - generic [ref=e6]: HESA
-          - generic [ref=e7]: H
-        - navigation [ref=e8]:
-          - generic [ref=e9]:
-            - link "Catalogo" [ref=e10] [cursor=pointer]:
-              - /url: /es/catalogo
+          - generic [ref=e7]: HESA
+          - generic [ref=e8]: H
+        - navigation [ref=e9]:
+          - generic [ref=e10]:
+            - button "Catalogo" [ref=e11] [cursor=pointer]:
               - text: Catalogo
-              - img [ref=e11]
+              - img [ref=e12]
             - generic:
               - link "Farmacos Veterinarios":
                 - /url: /es/catalogo/farmacos
@@ -28,21 +29,21 @@
                 - /url: /es/catalogo/equipos
                 - img
                 - text: Equipos Veterinarios
-          - link "Marcas" [ref=e13] [cursor=pointer]:
+          - link "Marcas" [ref=e14] [cursor=pointer]:
             - /url: /es/marcas
-          - link "Nosotros" [ref=e14] [cursor=pointer]:
+          - link "Nosotros" [ref=e15] [cursor=pointer]:
             - /url: /es/nosotros
-          - link "Distribuidores" [ref=e15] [cursor=pointer]:
+          - link "Distribuidores" [ref=e16] [cursor=pointer]:
             - /url: /es/distribuidores
-          - link "Contacto" [ref=e16] [cursor=pointer]:
+          - link "Contacto" [ref=e17] [cursor=pointer]:
             - /url: /es/contacto
-        - generic [ref=e17]:
-          - button "Buscar productos y marcas" [ref=e18] [cursor=pointer]:
-            - img [ref=e19]
-          - listbox "Seleccionar idioma" [ref=e23]:
-            - button "ES" [ref=e24] [cursor=pointer]:
-              - generic [ref=e25]: ES
-              - img [ref=e26]
+        - generic [ref=e18]:
+          - button "Buscar productos y marcas" [ref=e19] [cursor=pointer]:
+            - img [ref=e20]
+          - listbox "Seleccionar idioma" [ref=e24]:
+            - button "ES" [ref=e25] [cursor=pointer]:
+              - generic [ref=e26]: ES
+              - img [ref=e27]
     - generic:
       - search "Busqueda global":
         - generic:
@@ -52,98 +53,99 @@
             - img
             - textbox "Buscar productos, marcas..."
           - paragraph: Escribe al menos 3 caracteres
-  - generic [ref=e30]:
-    - navigation "Breadcrumb" [ref=e32]:
-      - list [ref=e33]:
-        - listitem [ref=e34]:
-          - link "Inicio" [ref=e35] [cursor=pointer]:
+  - main [ref=e29]:
+    - generic [ref=e32]:
+      - navigation "Breadcrumb" [ref=e34]:
+        - list [ref=e35]:
+          - listitem [ref=e36]:
+            - link "Inicio" [ref=e37] [cursor=pointer]:
+              - /url: /es
+            - generic [ref=e38]: ">"
+          - listitem [ref=e39]:
+            - link "Catalogo" [ref=e40] [cursor=pointer]:
+              - /url: /es/catalogo
+            - generic [ref=e41]: ">"
+          - listitem [ref=e42]:
+            - generic [ref=e43]: Alimentos
+      - generic [ref=e44]:
+        - heading "Alimentos" [level=1] [ref=e45]
+        - generic [ref=e46]: 2 productos
+      - paragraph [ref=e47]: Alimentos premium para mascotas y animales de produccion
+      - generic [ref=e49]:
+        - combobox [ref=e50]:
+          - option "Marca" [selected]
+          - option "Royal Canin"
+        - combobox [ref=e51]:
+          - option "Especie" [selected]
+          - option "Caninos"
+          - option "Felinos"
+        - combobox [ref=e52]:
+          - option "Etapa de vida" [selected]
+          - option "Adulto"
+          - option "Cachorro/Kitten"
+      - generic [ref=e53]:
+        - link "Ver Royal Canin Kitten" [ref=e55] [cursor=pointer]:
+          - /url: /es/catalogo/alimentos/royal-canin-kitten
+          - img [ref=e58]
+          - generic [ref=e80]:
+            - heading "Royal Canin Kitten" [level=3] [ref=e81]
+            - paragraph [ref=e82]: Royal Canin
+            - generic [ref=e83]: Ver producto
+        - link "Ver Royal Canin Maxi Adulto" [ref=e85] [cursor=pointer]:
+          - /url: /es/catalogo/alimentos/royal-canin-maxi-adulto
+          - img "Royal Canin Maxi Adulto" [ref=e87]
+          - generic [ref=e88]:
+            - heading "Royal Canin Maxi Adulto" [level=3] [ref=e89]
+            - paragraph [ref=e90]: Royal Canin
+            - generic [ref=e91]: Ver producto
+  - contentinfo "Pie de pagina" [ref=e93]:
+    - generic [ref=e95]:
+      - generic [ref=e96]:
+        - generic [ref=e97]: HESA
+        - paragraph [ref=e98]: 37 anos distribuyendo salud animal en Costa Rica
+      - generic [ref=e100]:
+        - heading "Navegacion" [level=3] [ref=e101]
+        - navigation [ref=e102]:
+          - link "Inicio" [ref=e103] [cursor=pointer]:
             - /url: /es
-          - generic [ref=e36]: ">"
-        - listitem [ref=e37]:
-          - link "Catalogo" [ref=e38] [cursor=pointer]:
+          - link "Catalogo" [ref=e104] [cursor=pointer]:
             - /url: /es/catalogo
-          - generic [ref=e39]: ">"
-        - listitem [ref=e40]:
-          - generic [ref=e41]: Alimentos
-    - generic [ref=e42]:
-      - heading "Alimentos" [level=1] [ref=e43]
-      - generic [ref=e44]: 2 productos
-    - paragraph [ref=e45]: Alimentos premium para mascotas y animales de produccion
-    - generic [ref=e47]:
-      - combobox [ref=e48]:
-        - option "Marca" [selected]
-        - option "Royal Canin"
-      - combobox [ref=e49]:
-        - option "Especie" [selected]
-        - option "Caninos"
-        - option "Felinos"
-      - combobox [ref=e50]:
-        - option "Etapa de vida" [selected]
-        - option "Adulto"
-        - option "Cachorro/Kitten"
-    - generic [ref=e51]:
-      - link "Ver Royal Canin Kitten" [ref=e53] [cursor=pointer]:
-        - /url: /es/catalogo/alimentos/royal-canin-kitten
-        - img [ref=e56]
-        - generic [ref=e78]:
-          - heading "Royal Canin Kitten" [level=3] [ref=e79]
-          - paragraph [ref=e80]: Royal Canin
-          - generic [ref=e81]: Ver producto
-      - link "Ver Royal Canin Maxi Adulto" [ref=e83] [cursor=pointer]:
-        - /url: /es/catalogo/alimentos/royal-canin-maxi-adulto
-        - img "Royal Canin Maxi Adulto" [ref=e85]
-        - generic [ref=e86]:
-          - heading "Royal Canin Maxi Adulto" [level=3] [ref=e87]
-          - paragraph [ref=e88]: Royal Canin
-          - generic [ref=e89]: Ver producto
-  - contentinfo "Pie de pagina" [ref=e91]:
-    - generic [ref=e93]:
-      - generic [ref=e94]:
-        - generic [ref=e95]: HESA
-        - paragraph [ref=e96]: 37 anos distribuyendo salud animal en Costa Rica
-      - generic [ref=e98]:
-        - heading "Navegacion" [level=3] [ref=e99]
-        - navigation [ref=e100]:
-          - link "Inicio" [ref=e101] [cursor=pointer]:
-            - /url: /es
-          - link "Catalogo" [ref=e102] [cursor=pointer]:
-            - /url: /es/catalogo
-          - link "Marcas" [ref=e103] [cursor=pointer]:
+          - link "Marcas" [ref=e105] [cursor=pointer]:
             - /url: /es/marcas
-          - link "Nosotros" [ref=e104] [cursor=pointer]:
+          - link "Nosotros" [ref=e106] [cursor=pointer]:
             - /url: /es/nosotros
-          - link "Distribuidores" [ref=e105] [cursor=pointer]:
+          - link "Distribuidores" [ref=e107] [cursor=pointer]:
             - /url: /es/distribuidores
-          - link "Contacto" [ref=e106] [cursor=pointer]:
+          - link "Contacto" [ref=e108] [cursor=pointer]:
             - /url: /es/contacto
-      - generic [ref=e108]:
-        - heading "Contacto" [level=3] [ref=e109]
-        - generic [ref=e110]:
-          - paragraph [ref=e111]:
-            - img [ref=e112]
+      - generic [ref=e110]:
+        - heading "Contacto" [level=3] [ref=e111]
+        - generic [ref=e112]:
+          - paragraph [ref=e113]:
+            - img [ref=e114]
             - text: +506 2260-9020
-          - paragraph [ref=e114]:
-            - img [ref=e115]
+          - paragraph [ref=e116]:
+            - img [ref=e117]
             - text: info@hesa.co.cr
-          - paragraph [ref=e118]:
-            - img [ref=e119]
+          - paragraph [ref=e120]:
+            - img [ref=e121]
             - text: Calle 2, av 12. Heredia, Costa Rica
-          - paragraph [ref=e122]:
-            - img [ref=e123]
+          - paragraph [ref=e124]:
+            - img [ref=e125]
             - text: "Lun - Vie: 8:00 - 17:00"
-      - generic [ref=e127]:
-        - heading "Redes Sociales" [level=3] [ref=e128]
-        - generic [ref=e129]:
-          - link "Facebook" [ref=e130] [cursor=pointer]:
+      - generic [ref=e129]:
+        - heading "Redes Sociales" [level=3] [ref=e130]
+        - generic [ref=e131]:
+          - link "Facebook" [ref=e132] [cursor=pointer]:
             - /url: https://facebook.com/hesacr
-            - img [ref=e131]
-          - link "Instagram" [ref=e133] [cursor=pointer]:
+            - img [ref=e133]
+          - link "Instagram" [ref=e135] [cursor=pointer]:
             - /url: https://instagram.com/hesacr
-            - img [ref=e134]
-    - generic [ref=e138]:
-      - paragraph [ref=e139]: © HESA 2026. Todos los derechos reservados.
-      - button "English" [ref=e141] [cursor=pointer]
-  - button "Contactar por WhatsApp" [ref=e142] [cursor=pointer]:
-    - img [ref=e143]
+            - img [ref=e136]
+    - generic [ref=e140]:
+      - paragraph [ref=e141]: © HESA 2026. Todos los derechos reservados.
+      - button "English" [ref=e143] [cursor=pointer]
+  - button "Contactar por WhatsApp" [ref=e144] [cursor=pointer]:
+    - img [ref=e145]
     - generic: Escribenos por WhatsApp
 ```

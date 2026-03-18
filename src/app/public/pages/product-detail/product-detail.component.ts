@@ -211,6 +211,11 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
     }
   }
 
+  /** NFR-002: Convert image URL to WebP variant for <picture> <source> */
+  toWebP(url: string): string {
+    return url.replace(/\.(jpe?g|png)$/i, '.webp');
+  }
+
   ngOnDestroy(): void {
     this.seo.clearDynamicTags();
     // REQ-026 fix: Clean up body class when leaving product detail page

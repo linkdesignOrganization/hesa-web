@@ -163,4 +163,9 @@ export class SearchOverlayComponent {
   get showHint(): boolean {
     return this.searchTerm().length < 3;
   }
+
+  /** NFR-002: Convert image URL to WebP variant for <picture> <source> */
+  toWebP(url: string): string {
+    return url.replace(/\.(jpe?g|png)$/i, '.webp');
+  }
 }

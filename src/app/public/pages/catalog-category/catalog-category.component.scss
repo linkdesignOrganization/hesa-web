@@ -109,3 +109,30 @@
     }
   }
 }
+
+// =============================================================================
+// Filter pills - NFR-026: Ensure 44px touch targets
+// =============================================================================
+
+.filter-bar {
+  &__pill-remove {
+    // NFR-026: Ensure minimum 44x44px touch target via invisible overlay
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: -10px;
+      min-width: 44px;
+      min-height: 44px;
+    }
+  }
+
+  &__clear {
+    // NFR-026: Ensure minimum 44px touch target height
+    min-height: 44px;
+    padding: 10px 8px;
+    display: inline-flex;
+    align-items: center;
+  }
+}
