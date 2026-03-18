@@ -1,31 +1,27 @@
 import { test, expect } from '@playwright/test';
 
 /**
- * Admin Panel — Categories UI (REQ-269 to REQ-271)
+ * Admin Panel — Categories UI Visual (REQ-268 to REQ-272)
  * STATUS: BLOQUEADO — Requires Azure Entra ID authentication
+ * ROUND 2: Auth still not available for automated testing.
  *
- * REQ-269: Card Farmacos: subsecciones "Familias farmaceuticas" y "Especies"
- * REQ-270: Card Alimentos: subsecciones "Etapas de vida" y "Especies"
- * REQ-271: Card Equipos: subseccion "Tipos de equipo"
+ * REQ-268: 3 expandable cards (Farmacos, Alimentos, Equipos) — layout visual
+ * REQ-269: Card Farmacos: subsections Familias terapeuticas and Especies destino
+ * REQ-270: Card Alimentos: subsections Etapas de vida and Especies destino
+ * REQ-271: Card Equipos: subsection Tipos de equipo
+ * REQ-272: Tags as chips/pills with "x" to delete and "+" to add — visual styles
  *
- * All 4 criteria require an active admin session to view categories management.
+ * All criteria require an authenticated admin session.
  */
 
 const BASE_URL = 'https://gray-field-02ba8410f.2.azurestaticapps.net';
 
-test.describe('Admin Categories — Auth Gate (REQ-269 to REQ-271)', () => {
+test.describe('Admin Categories — Auth Gate (REQ-268 to REQ-272)', () => {
 
-  test('REQ-269-271: /admin/categories redirects to login without auth', async ({ page }) => {
-    await page.goto(`${BASE_URL}/admin/categories`);
+  test('REQ-268-272: /admin/categorias redirects to login without auth', async ({ page }) => {
+    await page.goto(`${BASE_URL}/admin/categorias`, { waitUntil: 'networkidle' });
 
-    try {
-      await page.waitForSelector('.login-card', { timeout: 8000 });
-      const card = page.locator('.login-card');
-      await expect(card).toBeVisible();
-    } catch {
-      const url = page.url();
-      // Should not stay on categories page without auth
-      expect(url.includes('/admin/login') || !url.includes('/admin/categories')).toBeTruthy();
-    }
+    await page.waitForURL('**/admin/login', { timeout: 10000 });
+    await expect(page.getByRole('heading', { name: /Panel de Administracion/i })).toBeVisible({ timeout: 10000 });
   });
 });

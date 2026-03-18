@@ -2,345 +2,419 @@
 
 ## Contexto de Testing
 - Iteracion: 1
-- Ronda: 1
+- Ronda: 2
 - URL del sitio desplegado: https://gray-field-02ba8410f.2.azurestaticapps.net
 - URL del backend: https://hesa-api.azurewebsites.net
 - URL del API base: https://hesa-api.azurewebsites.net/api
 - Total criterios esta iteracion: 170 (157 REQ + 13 NFR)
-- Criterios nuevos a testear: 170
-- Criterios a re-testear (fallaron en ronda anterior): 0 (primera ronda)
+- Criterios PASA (automatizado, no re-testear): 19
+- Criterios FALLA en R1 (re-verificar fix): 90
+- Criterios DESBLOQUEADOS (antes bloqueados, ahora testeables): 61
+- Total criterios que requieren sub-testers esta ronda: 151
 
-## Pre-flight Checks (LECCION APRENDIDA de Fase 4)
-Antes de iniciar testing, cada sub-tester DEBE verificar:
-1. Deep links funcionan: navegar directamente a `/es/catalogo`, `/es/marcas`, `/admin` — si alguno no carga, reportar BLOQUEADO inmediatamente
-2. API responde: `GET https://hesa-api.azurewebsites.net/api/products` debe retornar datos JSON (no error 500/404)
-3. Blob Storage accesible: verificar que las imagenes cargan (URLs tipo `https://hesastorage.blob.core.windows.net/images/...`)
-4. NO testear contra localhost bajo ningun concepto
+## Pre-Flight Obligatorio (CRITICO - Leer antes de testear)
 
-## Nota sobre Panel Admin (autenticacion)
-El panel admin requiere Azure Entra ID (REQ-308 a REQ-317). Los sub-testers NO pueden autenticarse automaticamente en tests de Playwright. Para criterios del panel:
-- Los sub-testers deben navegar a `/admin` y verificar que el flujo de login se muestra correctamente
-- Verificar que rutas protegidas redirigen a login (REQ-313)
-- Verificar que la pantalla de login tiene los elementos correctos (REQ-309)
-- Los criterios de CRUD que requieren sesion activa (REQ-224 a REQ-258, REQ-259 a REQ-274) se testean via API directa cuando sea posible, o se marcan como BLOQUEADO si la autenticacion lo impide
-- Los tests .spec.ts para panel admin deben incluir logica para navegar a la ruta y verificar lo que sea visible sin autenticacion (login page, redirect behavior)
+Leccion aprendida: En Fase 4 Ronda 2, 5 de 13 bugs reportados como "corregidos" NO estaban realmente fixeados en el sitio desplegado, desperdiciando una ronda entera. CADA sub-tester DEBE ejecutar estas verificaciones pre-flight ANTES de comenzar su testing:
 
----
+1. **BUG-001 (FIXED R1)**: Verificar que las llamadas API van a `https://hesa-api.azurewebsites.net/api`, NO a `localhost:3000`. Abrir consola del browser en cualquier pagina con datos.
+2. **BUG-002 (FIXED R2)**: Verificar que `GET https://hesa-api.azurewebsites.net/api/products` retorna JSON con datos, NO 404 "Cannot GET".
+3. **BUG-003**: Verificar que `GET /sitemap.xml` retorna XML valido, NO HTML de SPA.
+4. **BUG-004**: Verificar que `GET /robots.txt` retorna texto plano, NO HTML de SPA.
+5. **BUG-008**: Verificar que el header `X-Powered-By` ya NO aparece en responses del API.
+6. **BUG-012**: Verificar que navegar a un slug de producto inexistente muestra error state, NO redirige a /es/catalogo.
+7. **Auth bypass**: Verificar que se puede acceder al panel admin. Navegar a /admin/productos y confirmar que carga el listado con datos (no redirige a login).
 
-## Asignacion: Flow Tester -> e2e/tests/flow/
-
-### Criterios asignados (62 criterios)
-
-#### Busqueda Global (REQ-035 a REQ-041) — 7 criterios
-- REQ-035: Busqueda permite encontrar productos por nombre, marca, especie, familia
-- REQ-036: Resultados en tiempo real (predictiva) con minimo 3 caracteres
-- REQ-037: Resultados agrupados por tipo (Productos, Marcas) max 5 por tipo
-- REQ-038: Clic en resultado navega a la pagina correcta
-- REQ-039: Sin resultados muestra mensaje con sugerencias
-- REQ-040: Busqueda funciona en ambos idiomas
-- REQ-041: Busqueda tolerante a errores tipograficos (case-insensitive, acentos)
-
-#### Catalogo Publico — Flujo Principal (REQ-078 a REQ-087, REQ-264a a REQ-264j) — 20 criterios
-- REQ-078: Breadcrumb de navegacion (Inicio > Catalogo > [Categoria])
-- REQ-079: Titulo de categoria + contador de productos
-- REQ-080: Descripcion corta de categoria en idioma actual
-- REQ-081: Grid: 3 cols desktop, 2 tablet, 1-2 mobile
-- REQ-082: Cards muestran imagen, nombre, marca, iconos especie
-- REQ-083: Cards NO muestran precio, inventario ni disponibilidad
-- REQ-084: Clic en card navega a detalle de producto
-- REQ-085: Estado vacio si categoria sin productos
-- REQ-086: URL semantica /es/catalogo/farmacos
-- REQ-087: Meta titulo y descripcion unicos editables
-- REQ-264a: Catalogo general muestra TODOS los productos
-- REQ-264b: Filtro de "Categoria" adicional en catalogo general
-- REQ-264c: Todos los filtros disponibles segun categoria
-- REQ-264d: Filtros secundarios se adaptan dinamicamente
-- REQ-264e: Breadcrumb: Inicio > Catalogo
-- REQ-264f: Meta titulo y descripcion SEO optimizados
-- REQ-264g: Link "Catalogo" en header enlaza a pagina general
-- REQ-264h: Contador de productos se actualiza con filtros
-- REQ-264i: Paginacion con 24 productos por pagina
-- REQ-264j: Mobile: grid 1-2 cols, filtros colapsados
-
-#### Detalle de Producto — Flujo E2E (REQ-106 a REQ-142) — 23 criterios (los que involucran flujos)
-- REQ-106: Breadcrumb (Inicio > Catalogo > [Cat] > [Producto])
-- REQ-107: Galeria con miniaturas + imagen principal
-- REQ-108: Clic en miniatura cambia imagen principal
-- REQ-110: Nombre del producto visible (titulo grande)
-- REQ-111: Marca con link a pagina individual de marca
-- REQ-112: Badges/iconos de especie
-- REQ-113: Farmacos: formula, registro sanitario, indicaciones
-- REQ-114: Farmacos: pills de presentaciones seleccionables
-- REQ-115: Alimentos: especie, etapa, presentaciones, ingredientes
-- REQ-116: Equipos: especificaciones, usos, garantia
-- REQ-117: CTA "Solicitar informacion" abre formulario contacto con producto pre-seleccionado
-- REQ-118: CTA "Consultar por WhatsApp" abre WhatsApp con mensaje contextual
-- REQ-119: Boton ficha tecnica PDF solo si hay PDF cargado
-- REQ-121: Mobile: 1 columna, galeria arriba
-- REQ-122: Textos en idioma seleccionado
-- REQ-123: NO muestra precio, inventario, carrito
-- REQ-130: Sticky bar al scroll pasada info principal
-- REQ-131: Sticky bar: miniatura, nombre, marca, boton "Solicitar informacion"
-- REQ-132: Sticky bar desaparece al scroll arriba
-- REQ-133: Mobile: sticky bar simplificado
-- REQ-138: Seccion "Tambien te puede interesar" con 3-4 cards
-- REQ-139: Productos relacionados de misma categoria/marca
-- REQ-140: Cards relacionados formato identico al catalogo
-
-#### Marcas — Flujo E2E (REQ-143 a REQ-154) — 12 criterios
-- REQ-143: Titulo y parrafo introductorio
-- REQ-144: Grid: 3-4 cols desktop, 2 tablet, 1-2 mobile
-- REQ-145: Cards: logo, nombre, pais, badges categorias
-- REQ-146: Clic en card navega a pagina individual
-- REQ-147: Meta titulo y descripcion para SEO
-- REQ-148: Textos en idioma seleccionado
-- REQ-149: Breadcrumb (Inicio > Marcas > [Nombre])
-- REQ-150: Logo grande, nombre, pais, descripcion, categorias
-- REQ-151: Grid productos de la marca debajo
-- REQ-152: Filtros aplicables al grid de productos de la marca
-- REQ-153: Descripcion en idioma seleccionado
-- REQ-154: URL semantica /es/marcas/[slug]
-
-### Instrucciones especificas
-- URL base: https://gray-field-02ba8410f.2.azurestaticapps.net
-- **Pre-flight**: Verificar que `/es/catalogo`, `/es/catalogo/farmacos`, `/es/marcas` y `/es/catalogo/farmacos/[algun-producto]` cargan correctamente via deep link
-- **Flujos E2E prioritarios (obligatorios GIFs)**:
-  1. Home -> Catalogo general -> Filtrar por Farmacos -> Seleccionar producto -> Detalle -> Clic "Solicitar informacion" -> Verificar formulario con producto pre-seleccionado
-  2. Home -> Marcas -> Seleccionar marca -> Ver productos de la marca -> Navegar a producto -> Verificar relacionados
-  3. Busqueda: escribir termino -> ver resultados predictivos -> clic en resultado -> verifica detalle
-  4. Catalogo -> Aplicar filtros combinados (Marca + Especie) -> Verificar paginacion -> Cambiar pagina -> Volver con filtros activos
-  5. Detalle producto -> Scroll hasta sticky bar -> Verificar CTAs sticky bar -> Scroll arriba -> Sticky desaparece
-- **Idiomas**: cada flujo principal debe probarse en ES Y EN para verificar i18n (REQ-040, REQ-122, REQ-148, REQ-153)
-- **Cada test DEBE generar un archivo .spec.ts** en `e2e/tests/flow/` con naming convention: `REQ-XXX-descripcion.spec.ts`
-- Agrupar criterios relacionados en un mismo .spec.ts cuando sea logico (ej: REQ-106 a REQ-116 en un solo test de detalle producto)
-
----
-
-## Asignacion: Edge Case Tester -> e2e/tests/edge-case/
-
-### Criterios asignados (60 criterios)
-
-#### Catalogo — Filtros y Paginacion (REQ-088 a REQ-105) — 18 criterios
-- REQ-088: Farmacos: filtros Marca, Especie, Familia farmaceutica
-- REQ-089: Alimentos: filtros Marca, Especie, Etapa de vida
-- REQ-090: Equipos: filtros Marca, Tipo de equipo
-- REQ-091: Filtros como dropdowns en barra horizontal (no sidebar)
-- REQ-092: Filtros aplican inmediatamente sin boton "Aplicar"
-- REQ-093: Filtros activos como pills con "X" para remover
-- REQ-094: Boton "Limpiar filtros" cuando hay filtros activos
-- REQ-095: Combinacion de multiples filtros (interseccion)
-- REQ-096: Mobile: filtros colapsados en boton "Filtrar" + drawer
-- REQ-097: Sin resultados: mensaje + sugerencia limpiar filtros
-- REQ-098: Contador se actualiza dinamicamente
-- REQ-099: Filtros reflejados en URL query params (deep linking)
-- REQ-100: Valores de filtros generados dinamicamente desde datos
-- REQ-101: Paginacion con maximo definido por pagina
-- REQ-102: Indicador "Mostrando X de Y productos"
-- REQ-103: Paginacion accesible con teclado
-- REQ-104: Scroll al inicio del grid al cambiar pagina
-- REQ-105: Paginacion vuelve a pagina 1 al cambiar filtros
-
-#### Detalle Producto — Edge Cases (REQ-109, REQ-120, REQ-124 a REQ-129, REQ-134 a REQ-137, REQ-141 a REQ-142) — 13 criterios
-- REQ-109: Imagen principal con zoom al hover o lightbox
-- REQ-120: Sin ficha PDF: boton NO se muestra (no boton deshabilitado, no espacio vacio)
-- REQ-124: URL semantica /es/catalogo/[categoria]/[slug-del-producto]
-- REQ-125: Meta titulo (producto + marca) y meta descripcion generados
-- REQ-126: Schema markup JSON-LD tipo Product
-- REQ-127: Una sola imagen: no se muestran miniaturas
-- REQ-128: Sin imagen: placeholder visual con nombre marca/categoria
-- REQ-129: Campos vacios no generan areas en blanco
-- REQ-134: Sticky bar no causa salto de layout (CLS)
-- REQ-135: Bloques storytelling (imagen + texto) si hay contenido
-- REQ-136: Storytelling opcional: si no hay contenido, seccion no aparece
-- REQ-137: Storytelling bilingue ES/EN
-- REQ-141: Mobile: relacionados en carrusel horizontal con swipe
-- REQ-142: Si unico producto de su categoria, seccion relacionados adaptada
-
-#### Autenticacion — Azure Entra ID (REQ-308 a REQ-317) — 10 criterios
-- REQ-308: Panel requiere autenticacion para cualquier pantalla
-- REQ-309: Login: logo HESA + boton "Iniciar sesion con Microsoft" (no campos propios)
-- REQ-310: Auth falla: mensaje claro "No tienes acceso"
-- REQ-311: Token Entra ID expira -> re-autenticacion automatica
-- REQ-312: Cerrar sesion cierra sesion Azure y redirige a login
-- REQ-313: Rutas protegidas: acceso sin sesion redirige a login
-- REQ-314: Un solo nivel admin, sin roles
-- REQ-315: Acceso inicial para hola@linkdesign.cr
-- REQ-316: NO hay pantalla de gestion de usuarios
-- REQ-317: Panel NO almacena contrasenas
-
-#### SEO y Meta (REQ-033, REQ-181) — 2 criterios
-- REQ-033: Etiquetas hreflang presentes en cada pagina
-- REQ-181: Meta tags SEO optimizados para ingles (keywords "distributor Costa Rica")
-
-#### NFR de Seguridad (NFR-014, NFR-017, NFR-018, NFR-019, NFR-020) — 5 criterios
-- NFR-014: Todas las comunicaciones usan HTTPS
-- NFR-017: Inputs sanitizados contra XSS e inyeccion
-- NFR-018: API del panel valida autenticacion en cada endpoint
-- NFR-019: Archivos subidos validados por tipo y tamano maximo
-- NFR-020: Headers de seguridad: CSP, X-Frame-Options, X-Content-Type-Options
-
-#### NFR de SEO (NFR-006 a NFR-013) — 8 criterios
-- NFR-006: Cada pagina publica tiene meta titulo y descripcion unicos editables
-- NFR-007: Sitemap XML automatico con todas las paginas en ambos idiomas
-- NFR-008: Schema markup JSON-LD Organization y Product
-- NFR-009: URLs semanticas y legibles en idioma correspondiente
-- NFR-010: Imagenes con alt descriptivos en idioma de la pagina
-- NFR-011: Etiquetas hreflang conectan versiones ES y EN
-- NFR-012: Sitio indexable (no blocking robots.txt ni noindex en publicas)
-- NFR-013: Panel NO indexable (noindex o proteccion por auth)
-
-#### Panel Admin — Categorias (REQ-268 a REQ-274) — 4 criterios (los testeables sin autenticacion)
-- REQ-268: 3 cards expandibles para Farmacos, Alimentos, Equipos
-- REQ-272: Tags como chips/pills con "x" para eliminar, "+" para agregar
-- REQ-273: Advertencia al eliminar valor en uso por productos
-- REQ-274: Valores de filtro en ES/EN
-
-**Nota sobre REQ-269, REQ-270, REQ-271**: Agrupados con REQ-268 como verificacion de subsecciones de cada card de categoria.
-
-### Instrucciones especificas
-- URL base: https://gray-field-02ba8410f.2.azurestaticapps.net
-- URL API: https://hesa-api.azurewebsites.net/api
-- **Pre-flight**: Verificar que la API responde (`/api/products`, `/api/brands`, `/api/categories`)
-- **Edge cases anticipados**:
-  1. Filtros vacios: seleccionar combinacion imposible -> verificar mensaje "No se encontraron productos"
-  2. URL con filtros: navegar directamente a `/es/catalogo?categoria=farmacos&marca=zoofarma` -> verificar que filtros se restauran
-  3. Producto sin imagen: encontrar o forzar via API un producto sin imagen -> verificar placeholder
-  4. Producto unico en su categoria: verificar seccion "Tambien te puede interesar"
-  5. Auth bypass: acceder a `/admin/products`, `/admin/brands`, `/admin/messages` sin sesion -> debe redirigir a login
-  6. API endpoints sin token: `GET /api/admin/products` sin Bearer token -> debe retornar 401
-  7. XSS: intentar inyeccion en parametros de filtro URL (`?q=<script>alert(1)</script>`)
-  8. Paginacion edge: navegar a pagina que no existe (`?page=999`) -> verificar comportamiento
-  9. Meta tags: verificar `<meta name="robots" content="noindex">` en paginas del panel vs NO presente en paginas publicas
-  10. Sitemap: verificar `/sitemap.xml` existe y contiene URLs en ES y EN
-- **Autenticacion**: Para REQ-308 a REQ-317, verificar SOLO lo observable sin sesion activa. Marcar como BLOQUEADO los criterios que requieren sesion real (REQ-311, REQ-312, REQ-314, REQ-315)
-- **Cada test DEBE generar un archivo .spec.ts** en `e2e/tests/edge-case/` con naming convention: `REQ-XXX-descripcion.spec.ts`
-- Para NFR-017: verificar que la regresion automatizada ya tiene tests pasando (NFR-017-xss-security.spec.ts paso). Solo agregar tests NUEVOS para escenarios no cubiertos (XSS en filtros URL, XSS en busqueda con datos reales)
-- Para NFR-009: regresion ya tiene tests pasando. Solo verificar URLs nuevas de iteracion 1 (marcas individuales, detalle producto real)
-
----
-
-## Asignacion: Visual Checker -> e2e/tests/visual/
-
-### Criterios asignados (48 criterios)
-
-#### CRUD Productos — Panel Admin (REQ-224 a REQ-258) — 35 criterios
-- REQ-224: Titulo "Productos", subtitulo, boton "+ Crear producto"
-- REQ-225: Filtros: busqueda, categoria, marca, estado
-- REQ-226: Toggle Card/Table view, Card por defecto
-- REQ-227: Card view: imagen, nombre, marca, badge categoria, badge estado, menu 3 puntos
-- REQ-228: Menu 3 puntos: Editar, Ver en sitio, Duplicar, Desactivar/Activar, Eliminar
-- REQ-229: Table view: columnas checkbox, imagen, nombre, marca, categoria, especie, estado, acciones
-- REQ-230: Grid 3 cols desktop, 2 medianas
-- REQ-231: Paginacion "Mostrando 1-24 de X"
-- REQ-232: Estado vacio con mensaje + CTA "Crear tu primer producto"
-- REQ-233: Producto sin imagen: placeholder con icono categoria
-- REQ-234: Formulario pantalla completa con breadcrumb
-- REQ-235: Seccion 1 "Info basica": Nombre ES/EN, Marca, Categoria selector visual
-- REQ-236: Seccion 2 "Clasificacion": campos condicionales por categoria
-- REQ-237: Si Farmaco: Especie multi-select, Familia dropdown
-- REQ-238: Si Alimento: Especie multi-select, Etapa dropdown
-- REQ-239: Si Equipo: Tipo de equipo dropdown
-- REQ-240: Presentaciones (tags/chips), Estado toggle
-- REQ-241: Seccion 3 "Descripcion": tabs idioma ES/EN
-- REQ-242: Campos texto segun categoria (formula, ingredientes, specs)
-- REQ-243: Seccion 4 "Imagen y ficha": drag-drop imagen + PDF
-- REQ-244: Imagen existente con "Cambiar imagen" y "Eliminar"
-- REQ-245: PDF existente con nombre, tamano, "Descargar" y "Eliminar"
-- REQ-246: Campos obligatorios con asterisco rojo, validacion al guardar
-- REQ-247: Validacion en tiempo real al perder foco
-- REQ-248: Guardar exitoso: toast exito + redireccion listado
-- REQ-249: Guardar falla: toast error, formulario mantiene datos
-- REQ-250: Editar: boton "Eliminar producto" rojo con modal confirmacion
-- REQ-251: "Cancelar" con confirmacion si hay cambios sin guardar
-- REQ-252: Campos condicionales se muestran/ocultan al cambiar categoria
-- REQ-253: Imagen optimizada automaticamente al subir
-- REQ-254: Soporte multiples imagenes para galeria
-- REQ-255: Detalle admin: breadcrumb "Productos > [Nombre]"
-- REQ-256: Layout 2 cols: imagen + info en bloques con labels
-- REQ-257: Boton "Editar producto" esquina superior derecha
-- REQ-258: Link "Descargar ficha tecnica" si hay PDF
-
-#### CRUD Marcas — Panel Admin (REQ-259 a REQ-267) — 9 criterios
-- REQ-259: Titulo "Marcas", subtitulo, boton "+ Agregar marca"
-- REQ-260: Card view grid 3 cols: logo, nombre, pais, badges, conteo productos, menu 3 puntos
-- REQ-261: Toggle a Table view con columnas correctas
-- REQ-262: Menu 3 puntos: Editar, Ver productos, Eliminar
-- REQ-263: Estado vacio con mensaje y CTA
-- REQ-264: Formulario: Logo drag-drop, Nombre, Pais dropdown, Categorias multi-select, Descripcion ES/EN
-- REQ-265: Validacion campos obligatorios
-- REQ-266: Guardar: toast exito + redireccion listado
-- REQ-267: Eliminar marca con confirmacion + advertencia si tiene productos
-
-#### Panel Admin — Categorias (REQ-268 a REQ-271) — 4 criterios (UI/presentacion)
-- REQ-269: Card Farmacos: subsecciones "Familias farmaceuticas" y "Especies"
-- REQ-270: Card Alimentos: subsecciones "Etapas de vida" y "Especies"
-- REQ-271: Card Equipos: subseccion "Tipos de equipo"
-- (REQ-268 asignado a Edge Case como verificacion funcional de las 3 cards)
-
-### Instrucciones especificas
-- URL base: https://gray-field-02ba8410f.2.azurestaticapps.net
-- URL panel: https://gray-field-02ba8410f.2.azurestaticapps.net/admin
-- Breakpoints: mobile (<768px), tablet (768-991px), desktop (>=992px)
-- **LIMITACION CRITICA**: El panel admin requiere Azure Entra ID. El Visual Checker NO puede autenticarse. Estrategia:
-  1. Navegar a `/admin` -> verificar login page layout (REQ-309 es del Edge Case Tester, pero verificar visualmente)
-  2. Para REQ-224 a REQ-258 y REQ-259 a REQ-274: intentar navegar a las rutas del panel. Si redirige a login, marcar cada criterio que requiera sesion activa como **BLOQUEADO** con motivo "Requiere autenticacion Azure Entra ID - no disponible en entorno de testing automatizado"
-  3. Los .spec.ts generados deben documentar lo observable: que la ruta redirige a login, que el login tiene los elementos correctos
-  4. **ALTERNATIVA**: Si hay una forma de bypassear auth (ej: cookie, token manual), el PM debe indicarlo. Si no se indica, asumir que NO hay bypass
-- **Verificacion de Design Criteria**: Aunque estos son REQ-xxx (no DC-xxx), los criterios de UI del panel deben verificarse contra los design-criteria.md existentes (DC-047, DC-048, DC-072 a DC-079) cuando sea posible
-- **Cada test DEBE generar un archivo .spec.ts** en `e2e/tests/visual/`
-- **GIFs obligatorios**:
-  1. Panel login page en desktop y mobile
-  2. Si accesible: Panel listado productos (Card + Table toggle)
-  3. Si accesible: Panel formulario producto (secciones, campos condicionales, upload)
+Si CUALQUIER pre-flight falla, reportar BLOQUEADO inmediatamente al PM sin continuar el testing.
 
 ---
 
 ## Regresion Automatizada (de regression-results.md)
 
-### Resultado de `npx playwright test e2e/tests/`
-- **513 tests ejecutados, 259 passed, 254 failed** (12.9 minutos)
-- Los tests existentes son de la Fase 4 (visual build) y cubren criterios DC-xxx, BVC-xxx, UX-xxx y algunos NFR-xxx
-- Los 254 tests fallidos son MAYORMENTE tests de panel admin que requieren autenticacion (timeouts al intentar navegar a rutas protegidas) — estos fallos son ESPERADOS y NO son regresiones funcionales
+- Resultado de `npx playwright test e2e/tests/`: **359 passed, 154 failed**
+- Los 154 failed son tests de Fase 4 (visual-build) que requieren auth de panel admin -- fallos ESPERADOS por timeout de auth redirect, NO regresiones funcionales
+- Los 19 criterios que PASARON en R1 estan cubiertos por tests automatizados que siguen pasando
 
-### NFR cubiertos parcialmente por regresion automatizada (NO asignar re-testing manual):
-- **NFR-009** (URLs semanticas): 7 tests pasaron -> PASA (automatizado) parcial. Edge Case Tester solo agrega tests para URLs de marcas/productos reales
-- **NFR-017** (XSS/sanitizacion): 9 tests pasaron (headers, CSP, XSS payloads). Edge Case Tester solo agrega tests para escenarios de iteracion 1
-- **NFR-031** (Mobile responsive publico): 5 tests pasaron -> verificacion basica cubierta
-- **NFR-021** (WCAG accesibilidad): 3 tests pasaron (ARIA, focus, lang attribute)
-- **NFR-026** (Tap targets 44px): 8 tests pasaron -> cubierto
+### Criterios verificados por automatizacion (PASA automatizado -- NO asignar a sub-testers):
+- REQ-088: Farmacos: filtros Marca, Especie, Familia
+- REQ-089: Alimentos: filtros Marca, Especie, Etapa
+- REQ-090: Equipos: filtros Marca, Tipo
+- REQ-091: Filtros como dropdowns en barra horizontal
+- REQ-092: Filtros aplican inmediatamente sin boton
+- REQ-093: Filtros activos como pills con "X"
+- REQ-094: Boton "Limpiar filtros"
+- REQ-096: Mobile: filtros colapsados en drawer
+- REQ-097: Sin resultados: mensaje + sugerencia
+- REQ-098: Contador se actualiza dinamicamente
+- REQ-099: Filtros en URL query params
+- REQ-100: Valores de filtros desde datos
+- REQ-102: Indicador "Mostrando X de Y productos"
+- REQ-124: URL semantica /es/catalogo/[cat]/[slug]
+- REQ-308: Panel requiere autenticacion
+- REQ-309: Login: logo HESA + boton Microsoft
+- REQ-313: Rutas protegidas redirigen a login
+- REQ-316: NO hay pantalla de gestion de usuarios
+- REQ-317: Panel NO almacena contrasenas
 
-### NFR que requieren testing manual completo:
-- **NFR-006**: Meta titulo y descripcion unicos por pagina (verificar paginas NUEVAS de iteracion 1)
-- **NFR-007**: Sitemap XML automatico
-- **NFR-008**: Schema markup JSON-LD (Organization + Product)
-- **NFR-010**: Alt descriptivos en imagenes (idioma correcto)
-- **NFR-011**: hreflang tags en cada pagina
-- **NFR-012**: Indexabilidad (robots.txt no bloquea publicas)
-- **NFR-013**: Panel NO indexable
-- **NFR-014**: HTTPS en todas las comunicaciones
-- **NFR-018**: API valida auth en cada endpoint admin
-- **NFR-019**: Validacion de uploads (tipo y tamano)
-- **NFR-020**: Headers de seguridad (parcialmente cubierto por NFR-017 tests, pero verificar completitud)
+### NFR verificados por automatizacion (de Fase 4, siguen pasando):
+- NFR-009: URLs semanticas (7 tests passed)
+- NFR-014: HTTPS con HSTS (test passed en R1, no re-test)
+- NFR-017: XSS/sanitizacion (9 tests passed)
+- NFR-021: WCAG accesibilidad (3 tests passed)
+- NFR-026: Tap targets 44px (8 tests passed)
+- NFR-031: Mobile responsive publico (5 tests passed)
+
+---
+
+## Asignacion: Flow Tester -> e2e/tests/flow/
+
+### Criterios asignados: 62 criterios (todos FALLA en R1, re-verificar tras bug fixes)
+
+#### Busqueda Global (7 criterios FALLA)
+- REQ-035: Busqueda por nombre, marca, especie, familia (R1: API localhost)
+- REQ-036: Resultados predictivos con 3+ caracteres (R1: API no respondia)
+- REQ-037: Resultados agrupados por tipo max 5 (R1: sin datos API)
+- REQ-038: Clic en resultado navega a pagina correcta (R1: sin resultados)
+- REQ-039: Sin resultados: mensaje con sugerencias (R1: siempre "sin resultados" por API caida)
+- REQ-040: Busqueda en ambos idiomas (R1: i18n ok pero sin API)
+- REQ-041: Tolerancia a errores tipograficos (R1: no verificable sin API)
+
+#### Catalogo Publico (10 criterios FALLA)
+- REQ-078: Breadcrumb Inicio > Catalogo > Categoria (R1: sin detalle verificable)
+- REQ-079: Titulo de categoria + contador (R1: "0 productos")
+- REQ-080: Descripcion corta de categoria (R1: BUG-006, no renderiza)
+- REQ-081: Grid 3 cols desktop, 2 tablet, 1-2 mobile (R1: sin productos)
+- REQ-082: Cards: imagen, nombre, marca, iconos especie (R1: sin cards)
+- REQ-083: Cards NO muestran precio/inventario (R1: sin cards)
+- REQ-084: Clic en card navega a detalle (R1: sin cards)
+- REQ-085: Estado vacio si categoria sin productos (R1: mostraba error state)
+- REQ-086: URL semantica /es/catalogo/farmacos (R1: routing ok, sin contenido)
+- REQ-087: Meta titulo y descripcion unicos (R1: sin contenido completo)
+
+#### Catalogo General (10 criterios FALLA)
+- REQ-264a: Catalogo general muestra TODOS los productos (R1: "0 productos")
+- REQ-264b: Filtro de "Categoria" en catalogo general (R1: sin datos para filtrar)
+- REQ-264c: Filtros disponibles segun categoria (R1: Marca no carga)
+- REQ-264d: Filtros secundarios se adaptan dinamicamente (R1: sin datos)
+- REQ-264e: Breadcrumb: Inicio > Catalogo (R1: dependencia API)
+- REQ-264f: Meta titulo y descripcion SEO (R1: dependencia API)
+- REQ-264g: Link "Catalogo" en header enlaza a pagina general (R1: sin contenido)
+- REQ-264h: Contador se actualiza con filtros (R1: "0 productos")
+- REQ-264i: Paginacion 24 productos por pagina (R1: sin productos)
+- REQ-264j: Mobile: grid 1-2 cols, filtros colapsados (R1: sin productos)
+
+#### Detalle de Producto -- Flujo principal (22 criterios FALLA)
+- REQ-106: Breadcrumb Inicio > Cat > Producto (R1: BUG-012 redirige)
+- REQ-107: Galeria con miniaturas + imagen principal (R1: redirige)
+- REQ-108: Clic en miniatura cambia imagen (R1: redirige)
+- REQ-110: Nombre del producto visible (R1: redirige)
+- REQ-111: Marca con link a pagina individual (R1: redirige)
+- REQ-112: Badges/iconos de especie (R1: redirige)
+- REQ-113: Farmacos: formula, registro, indicaciones (R1: redirige)
+- REQ-114: Farmacos: pills de presentaciones (R1: redirige)
+- REQ-115: Alimentos: especie, etapa, ingredientes (R1: redirige)
+- REQ-116: Equipos: especificaciones, usos, garantia (R1: redirige)
+- REQ-117: CTA "Solicitar info" abre formulario (R1: redirige)
+- REQ-118: CTA WhatsApp con mensaje contextual (R1: redirige)
+- REQ-119: Boton ficha tecnica PDF si hay PDF (R1: redirige)
+- REQ-121: Mobile: 1 columna, galeria arriba (R1: redirige)
+- REQ-122: Textos en idioma seleccionado (R1: redirige)
+- REQ-123: NO muestra precio, inventario, carrito (R1: redirige)
+- REQ-130: Sticky bar al scroll (R1: redirige)
+- REQ-131: Sticky bar: miniatura, nombre, marca, CTA (R1: redirige)
+- REQ-132: Sticky bar desaparece al scroll arriba (R1: redirige)
+- REQ-133: Mobile: sticky bar simplificado (R1: redirige)
+- REQ-138: Seccion "Tambien te puede interesar" (R1: redirige)
+- REQ-139: Relacionados de misma categoria/marca (R1: redirige)
+- REQ-140: Cards relacionados mismo formato catalogo (R1: redirige)
+
+#### Marcas (12 criterios FALLA)
+- REQ-143: Titulo y parrafo introductorio (R1: sin cards)
+- REQ-144: Grid 3-4 cols desktop, 2 tablet, 1-2 mobile (R1: sin cards)
+- REQ-145: Cards: logo, nombre, pais, badges (R1: sin cards)
+- REQ-146: Clic en card navega a pagina individual (R1: sin cards)
+- REQ-147: Meta titulo y descripcion SEO (R1: sin datos)
+- REQ-148: Textos en idioma seleccionado (R1: BUG-013 redirige a /es)
+- REQ-149: Breadcrumb marca individual (R1: no carga)
+- REQ-150: Logo grande, nombre, pais, descripcion, categorias (R1: no carga)
+- REQ-151: Grid productos de la marca (R1: no carga)
+- REQ-152: Filtros en grid de productos de la marca (R1: no carga)
+- REQ-153: Descripcion en idioma seleccionado (R1: no verificable)
+- REQ-154: URL semantica /es/marcas/[slug] (R1: no verificable)
+
+#### Filtros con datos reales (1 criterio FALLA)
+- REQ-095: Combinacion de multiples filtros (R1: sin datos reales para interseccion)
+
+### Instrucciones especificas
+- URL base: https://gray-field-02ba8410f.2.azurestaticapps.net
+- API base: https://hesa-api.azurewebsites.net/api
+- **Pre-flight**: Ejecutar las 7 verificaciones del bloque Pre-Flight ANTES de empezar
+- **Flujos E2E prioritarios**:
+  1. Home -> Catalogo general -> Filtrar por categoria -> Ver productos -> Clic card -> Detalle -> Sticky bar -> Solicitar info -> Contacto
+  2. Home -> Busqueda -> Escribir 3+ chars -> Ver prediccion -> Clic resultado -> Detalle
+  3. Marcas listado -> Clic marca -> Marca individual -> Grid productos -> Filtrar -> Clic producto -> Detalle
+  4. Catalogo EN (/en/catalog) -> Producto EN -> Cambiar a ES -> Verificar contenido cambia
+- **Verificaciones de bug fixes**:
+  - BUG-006: Descripcion corta de categoria visible debajo del titulo en /es/catalogo/farmacos
+  - BUG-011: Toast de error en pagina EN debe aparecer en ingles, no en espanol
+  - BUG-012: Producto inexistente muestra error state, NO redirige a /es/catalogo
+  - BUG-013: /en/brands con API caida mantiene idioma ingles y ruta, NO redirige a /es
+- **Tests**: ACTUALIZAR los .spec.ts existentes:
+  - `REQ-035-041-search-global.spec.ts` -- assertions con datos reales
+  - `REQ-078-087-catalogo-publico.spec.ts` -- assertions con productos visibles
+  - `REQ-264a-264j-catalogo-general.spec.ts` -- assertions con datos
+  - `REQ-106-142-detalle-producto.spec.ts` -- assertions sin redireccion
+  - `REQ-143-154-marcas.spec.ts` -- assertions con cards de marcas
+- **GIFs OBLIGATORIOS** (5 minimo):
+  1. Catalogo con datos -> Filtrar -> Paginar -> Clic producto -> Detalle con galeria
+  2. Busqueda predictiva -> Resultados agrupados -> Clic -> Detalle
+  3. Marcas listado con cards -> Marca individual con productos
+  4. Sticky bar aparece/desaparece en detalle (desktop y mobile)
+  5. Cambio de idioma ES/EN en catalogo y detalle con datos reales
+
+---
+
+## Asignacion: Edge Case Tester -> e2e/tests/edge-case/
+
+### Criterios asignados: 35 criterios (22 FALLA + 4 DESBLOQUEADOS API + 5 DESBLOQUEADOS auth + 4 compartidos categorias)
+
+#### Detalle de Producto -- Edge Cases (13 criterios FALLA)
+- REQ-109: Imagen principal con zoom/lightbox (R1: detalle 404)
+- REQ-120: Sin ficha PDF: boton NO se muestra (R1: detalle 404)
+- REQ-125: Meta titulo (producto + marca) (R1: titulo generico)
+- REQ-126: Schema markup JSON-LD tipo Product (R1: BUG-007)
+- REQ-127: Una sola imagen: sin miniaturas (R1: detalle 404)
+- REQ-128: Sin imagen: placeholder visual (R1: detalle 404)
+- REQ-129: Campos vacios no generan areas en blanco (R1: detalle 404)
+- REQ-134: Sticky bar sin CLS (R1: detalle 404)
+- REQ-135: Storytelling imagen + texto si hay contenido (R1: detalle 404)
+- REQ-136: Storytelling: no aparece si no hay contenido (R1: detalle 404)
+- REQ-137: Storytelling bilingue ES/EN (R1: detalle 404)
+- REQ-141: Mobile: relacionados en carrusel horizontal (R1: detalle 404)
+- REQ-142: Unico producto: seccion relacionados adaptada (R1: detalle 404)
+
+#### Paginacion -- DESBLOQUEADOS (4 criterios, antes BLOQUEADO por API -- GENERAR .spec.ts)
+- REQ-101: Paginacion con maximo por pagina
+- REQ-103: Paginacion accesible con teclado
+- REQ-104: Scroll al inicio al cambiar pagina
+- REQ-105: Paginacion vuelve a pag 1 al cambiar filtros
+
+#### SEO y Meta (8 criterios FALLA -- re-verificar bug fixes)
+- REQ-033: Etiquetas hreflang en cada pagina (R1: BUG-005)
+- REQ-181: Meta tags SEO optimizados para ingles (R1: BUG-006)
+- NFR-006: Meta titulo y descripcion unicos por pagina (R1: BUG-006 SSR identico)
+- NFR-007: Sitemap XML automatico (R1: BUG-003 retorna HTML)
+- NFR-008: Schema markup JSON-LD Organization y Product (R1: BUG-007)
+- NFR-010: Imagenes con alt descriptivos en idioma (R1: sin imagenes client-side)
+- NFR-011: Etiquetas hreflang conectan ES y EN (R1: BUG-005)
+- NFR-012: Sitio indexable, no blocking robots.txt (R1: BUG-004 retorna HTML)
+
+#### NFR Seguridad (3 criterios FALLA)
+- NFR-018: API del panel valida autenticacion en cada endpoint (R1: BUG-002 API 404)
+- NFR-019: Archivos subidos validados por tipo y tamano (R1: BUG-009 sin fileFilter)
+- NFR-020: Headers de seguridad completos (R1: BUG-008 X-Powered-By)
+
+#### NFR Panel (1 criterio FALLA)
+- NFR-013: Panel NO indexable (R1: BUG-010 sin meta noindex)
+
+#### Auth Flows -- DESBLOQUEADOS (5 criterios, antes BLOQUEADO auth -- GENERAR .spec.ts)
+- REQ-310: Auth falla: mensaje "No tienes acceso"
+- REQ-311: Token expira: re-autenticacion automatica
+- REQ-312: Cerrar sesion cierra sesion Azure + redirige a login
+- REQ-314: Un solo nivel admin, sin roles
+- REQ-315: Acceso inicial para hola@linkdesign.cr
+
+#### Categorias -- Funcionalidad (4 criterios DESBLOQUEADOS compartidos con Visual Checker -- GENERAR .spec.ts)
+- REQ-268: 3 cards expandibles click expand/collapse funcionalidad
+- REQ-272: Tags: agregar con "+" y eliminar con "x"
+- REQ-273: Advertencia al eliminar valor en uso por productos
+- REQ-274: Valores de filtro en ES/EN bilingue
+
+### Instrucciones especificas
+- URL base: https://gray-field-02ba8410f.2.azurestaticapps.net
+- API base: https://hesa-api.azurewebsites.net/api
+- **Pre-flight**: Ejecutar las 7 verificaciones del bloque Pre-Flight
+- **Prioridad 1 -- Verificar bug fixes SEO**:
+  - BUG-003: `curl https://gray-field-02ba8410f.2.azurestaticapps.net/sitemap.xml` debe retornar XML con URLs en ES y EN
+  - BUG-004: `curl https://gray-field-02ba8410f.2.azurestaticapps.net/robots.txt` debe retornar texto plano con User-agent y Sitemap
+  - BUG-005: Verificar `link[rel="alternate"][hreflang]` en head de /es y /en
+  - BUG-006: Verificar que meta titulos en HTML SSR son unicos por pagina (curl -s URL | grep "<title>")
+  - BUG-007: Verificar script `application/ld+json` en home (Organization) y detalle (Product)
+  - BUG-010: Verificar meta noindex en /admin/login
+- **Prioridad 2 -- Verificar bug fixes seguridad**:
+  - BUG-008: `curl -I https://hesa-api.azurewebsites.net/` NO debe mostrar `X-Powered-By: Express`
+  - BUG-009: Intentar upload de archivo .exe via API (debe ser rechazado)
+  - NFR-018: `GET /api/admin/products` sin token debe retornar 401/403, NO datos
+- **Prioridad 3 -- Detalle producto edge cases** (ahora que BUG-012 esta corregido):
+  - Buscar un producto con multiples imagenes: verificar zoom/lightbox (REQ-109)
+  - Buscar un producto con 1 sola imagen: no deben haber miniaturas (REQ-127)
+  - Buscar un producto sin imagen: debe haber placeholder (REQ-128)
+  - Buscar un producto sin ficha PDF: boton no visible (REQ-120)
+  - Buscar un producto sin storytelling: seccion no aparece (REQ-136)
+  - Buscar un producto con storytelling: imagen + texto, bilingue (REQ-135, REQ-137)
+  - Verificar sticky bar no causa CLS: medir layout shifts (REQ-134)
+  - Categoria con 1 solo producto: seccion relacionados adaptada (REQ-142)
+  - Mobile: relacionados en carrusel horizontal con swipe (REQ-141)
+- **Prioridad 4 -- Paginacion desbloqueada** (4 criterios nuevos):
+  - Verificar paginacion visible con datos reales: max por pagina, botones prev/next
+  - Tab/Enter/flechas en paginacion (accesibilidad teclado)
+  - Scroll to top al cambiar pagina
+  - Cambiar filtro resetea a pagina 1
+- **Prioridad 5 -- Auth flows desbloqueados** (5 criterios nuevos):
+  - Verificar flujo login con credenciales invalidas -> mensaje error
+  - Verificar comportamiento con token expirado
+  - Verificar logout -> sesion Azure cerrada + redirect a login
+  - Verificar que no hay roles/permisos distintos (un solo nivel admin)
+  - Verificar acceso con cuenta hola@linkdesign.cr
+- **Tests**:
+  - ACTUALIZAR .spec.ts existentes: `REQ-109-to-REQ-142-product-detail-edge-cases.spec.ts`, `REQ-033-REQ-181-seo-hreflang-meta.spec.ts`, `NFR-006-to-NFR-013-seo-meta.spec.ts`, `NFR-014-017-018-019-020-security.spec.ts`, `REQ-125-REQ-126-product-seo.spec.ts`
+  - GENERAR nuevos .spec.ts para criterios DESBLOQUEADOS:
+    - `REQ-101-103-104-105-pagination.spec.ts` (paginacion con datos reales)
+    - `REQ-310-311-312-314-315-auth-flows.spec.ts` (auth flows completos)
+    - `REQ-268-272-273-274-categories-functionality.spec.ts` (categorias funcionalidad)
+
+---
+
+## Asignacion: Visual Checker -> e2e/tests/visual/
+
+### Criterios asignados: 54 criterios (49 DESBLOQUEADOS auth + 5 FALLA compartidos)
+
+#### CRUD Productos -- Panel Admin (35 criterios DESBLOQUEADOS -- GENERAR .spec.ts)
+- REQ-224: Titulo "Productos", subtitulo, boton "+ Crear"
+- REQ-225: Filtros: busqueda, categoria, marca, estado
+- REQ-226: Toggle Card/Table view
+- REQ-227: Card view: imagen, nombre, marca, badges, menu 3 puntos
+- REQ-228: Menu 3 puntos: Editar, Ver, Duplicar, Activar/Desactivar, Eliminar
+- REQ-229: Table view: columnas (imagen, nombre, marca, categoria, estado, acciones)
+- REQ-230: Grid 3 cols desktop, 2 medianas
+- REQ-231: Paginacion "Mostrando 1-24 de X"
+- REQ-232: Estado vacio con CTA "Crear tu primer producto"
+- REQ-233: Producto sin imagen: placeholder con icono
+- REQ-234: Formulario pantalla completa con breadcrumb "Productos > Crear/Editar"
+- REQ-235: Seccion 1: Nombre ES/EN, Marca dropdown, Categoria
+- REQ-236: Seccion 2: campos condicionales por categoria seleccionada
+- REQ-237: Farmaco: Especie multi-select, Familia dropdown
+- REQ-238: Alimento: Especie multi-select, Etapa dropdown
+- REQ-239: Equipo: Tipo de equipo dropdown
+- REQ-240: Presentaciones (tags/chips con "x"), Estado toggle activo/inactivo
+- REQ-241: Seccion 3: tabs idioma ES/EN para textos de descripcion
+- REQ-242: Campos de texto largo segun categoria (composicion, indicaciones, ingredientes, etc.)
+- REQ-243: Seccion 4: zona drag-drop para imagenes + zona para PDF
+- REQ-244: Imagen existente: botones "Cambiar" y "Eliminar"
+- REQ-245: PDF existente: nombre del archivo, tamano, botones "Descargar" y "Eliminar"
+- REQ-246: Campos obligatorios marcados con asterisco, validacion al submit
+- REQ-247: Validacion en tiempo real al perder foco (blur)
+- REQ-248: Guardar exitoso: toast de exito + redireccion al listado
+- REQ-249: Guardar falla: toast de error, mantiene datos en formulario
+- REQ-250: Modo editar: boton "Eliminar" rojo con modal de confirmacion
+- REQ-251: "Cancelar" con modal de confirmacion si hay cambios sin guardar
+- REQ-252: Campos condicionales cambian al cambiar categoria en edicion
+- REQ-253: Imagen optimizada automaticamente al subir (verificar que sube y se muestra)
+- REQ-254: Soporte multiples imagenes para galeria del producto
+- REQ-255: Detalle admin read-only: breadcrumb "Productos > Nombre del Producto"
+- REQ-256: Detalle admin: layout 2 columnas (imagen izquierda + info derecha)
+- REQ-257: Detalle admin: boton "Editar producto" esquina superior derecha
+- REQ-258: Detalle admin: link "Descargar ficha tecnica" si hay PDF asociado
+
+#### CRUD Marcas -- Panel Admin (9 criterios DESBLOQUEADOS -- GENERAR .spec.ts)
+- REQ-259: Titulo "Marcas", subtitulo, boton "+ Agregar marca"
+- REQ-260: Card view grid 3 cols: logo, nombre, pais, badges categorias, conteo productos
+- REQ-261: Toggle a Table view
+- REQ-262: Menu 3 puntos: Editar, Ver productos, Eliminar
+- REQ-263: Estado vacio con CTA "Agregar tu primera marca"
+- REQ-264: Formulario: Logo upload, Nombre, Pais dropdown, Categorias multi-select, Descripcion ES/EN
+- REQ-265: Validacion campos obligatorios (nombre, pais, al menos 1 categoria)
+- REQ-266: Guardar: toast de exito + redireccion al listado
+- REQ-267: Eliminar marca con confirmacion + advertencia si tiene productos asociados
+
+#### Categorias -- Panel Admin Visual (5 criterios DESBLOQUEADOS -- GENERAR .spec.ts)
+- REQ-268: 3 cards expandibles (Farmacos, Alimentos, Equipos) -- layout visual
+- REQ-269: Card Farmacos: subsecciones Familias terapeuticas y Especies destino
+- REQ-270: Card Alimentos: subsecciones Etapas de vida y Especies destino
+- REQ-271: Card Equipos: subseccion Tipos de equipo
+- REQ-272: Tags como chips/pills con "x" para eliminar y "+" para agregar -- estilos visuales
+
+#### Sitio Publico -- Layout con datos reales (5 criterios FALLA, compartidos con Flow Tester)
+- REQ-081: Grid de productos 3 cols desktop, 2 tablet, 1-2 mobile -- verificar responsive con datos
+- REQ-082: Cards de productos: verificar estilos (imagen, nombre bold, marca gris, iconos especie)
+- REQ-144: Grid de marcas 3-4 cols desktop, 2 tablet, 1-2 mobile -- verificar responsive
+- REQ-145: Cards de marcas: logo, nombre, pais, badges de categorias -- verificar estilos
+- REQ-264j: Catalogo general mobile: grid 1-2 cols, filtros colapsados -- verificar responsive
+
+### Instrucciones especificas
+- URL base: https://gray-field-02ba8410f.2.azurestaticapps.net
+- API base: https://hesa-api.azurewebsites.net/api
+- **Breakpoints**: mobile (<768px), tablet (768-991px), desktop (>=992px)
+- **Pre-flight**: Ejecutar las 7 verificaciones del bloque Pre-Flight. ESPECIALMENTE verificar acceso al panel admin: navegar a /admin/productos y confirmar que el listado carga con datos reales.
+- **Prioridad 1 -- CRUD Productos** (35 criterios, mayor bloque nuevo):
+  - Listado: verificar titulo, subtitulo, boton crear, filtros, toggle card/table, grid layout, paginacion
+  - Card view: verificar que cada card tiene imagen (o placeholder), nombre, marca, badges, menu 3 puntos
+  - Table view: verificar columnas, headers, datos correctos
+  - Formulario crear: verificar 4 secciones (info basica, campos condicionales, textos bilingues, media)
+  - Campos condicionales: seleccionar cada categoria y verificar que los campos correctos aparecen
+  - Tabs bilingues: verificar tabs ES/EN en seccion de textos
+  - Upload: verificar zonas drag-drop para imagenes y PDF
+  - Validacion: verificar asteriscos en campos obligatorios, errores al blur, errores al submit
+  - Guardar: verificar toast exito + redireccion, toast error + datos preservados
+  - Editar: verificar boton eliminar rojo, modal confirmacion, cancelar con modal si dirty
+  - Detalle admin: verificar layout 2 cols, breadcrumb, boton editar, link ficha PDF
+- **Prioridad 2 -- CRUD Marcas** (9 criterios):
+  - Listado: titulo, boton agregar, cards con logo/nombre/pais/badges/conteo
+  - Formulario: campos, validacion, toast, modal eliminar con advertencia de productos asociados
+- **Prioridad 3 -- Categorias** (5 criterios):
+  - 3 cards expandibles, subsecciones con tags correctos, estilos de chips/pills
+- **Prioridad 4 -- Layout publico con datos** (5 criterios compartidos):
+  - Grid responsive de productos y marcas en sitio publico con datos reales del API
+- **Tests**:
+  - REESCRIBIR completamente los .spec.ts existentes que eran shells de "bloqueado":
+    - `REQ-224-to-REQ-258-admin-products-bloqueado.spec.ts` -> REESCRIBIR con assertions reales
+    - `REQ-259-to-REQ-267-admin-brands-bloqueado.spec.ts` -> REESCRIBIR con assertions reales
+    - `REQ-269-to-REQ-271-admin-categories-bloqueado.spec.ts` -> REESCRIBIR con assertions reales
+  - GENERAR nuevos .spec.ts adicionales si necesario para cubrir todos los criterios
+  - Cada .spec.ts debe tener al menos un test por criterio REQ-xxx
+- **GIFs OBLIGATORIOS** (4 minimo):
+  1. Panel: Listado productos card view -> Toggle table view -> Filtrar -> Paginar
+  2. Panel: Click "+ Crear" -> Formulario -> Seleccionar categoria Farmacos -> Llenar campos -> Subir imagen -> Guardar -> Toast -> Redireccion
+  3. Panel: Listado marcas -> Crear marca -> Formulario -> Guardar -> Ver en listado
+  4. Panel: Categorias -> Expandir Farmacos -> Ver subsecciones -> Agregar/eliminar tag
+
+---
+
+## Distribucion de Criterios Compartidos
+
+| Criterio | Flow Tester | Edge Case Tester | Visual Checker |
+|----------|-------------|------------------|----------------|
+| REQ-081 | Funcionalidad grid | -- | Layout visual responsive |
+| REQ-082 | Funcionalidad cards | -- | Estilos visuales cards |
+| REQ-144 | Funcionalidad grid marcas | -- | Layout visual responsive |
+| REQ-145 | Funcionalidad cards marcas | -- | Estilos visuales cards |
+| REQ-264j | Funcionalidad mobile | -- | Layout responsive mobile |
+| REQ-268 | -- | Click expand/collapse | Layout visual cards |
+| REQ-272 | -- | Agregar/eliminar tags | Estilos chips/pills |
+
+Nota: El criterio se reporta como PASA solo si AMBOS sub-testers lo aprueban. Si uno aprueba y otro falla, el criterio es FALLA.
 
 ---
 
 ## Criterios Pendientes de Testing Manual
-- Total criterios que requieren sub-testers esta ronda: **170**
-- Criterios FALLARON en ronda anterior: 0 (primera ronda)
-- Criterios DESBLOQUEADOS: 0 (primera ronda)
-- Criterios nuevos sin test automatizado: **170** (todos son nuevos REQ-xxx + NFR-xxx para iteracion 1)
 
-### Distribucion resumen:
-| Sub-tester | Criterios asignados | Requieren auth panel | Potencialmente bloqueados |
-|---|---|---|---|
-| Flow Tester | 62 | 0 | 0 |
-| Edge Case Tester | 60 | ~8 (REQ-311,312,314,315 + NFR-018,019 + parciales) | ~6 |
-| Visual Checker | 48 | 48 (todos de panel admin) | ~45 |
+- Total criterios que requieren sub-testers esta ronda: **151**
+- Criterios FALLA en ronda anterior (re-verificar fix): **90**
+- Criterios DESBLOQUEADOS (antes bloqueados, ahora testeables -- generar .spec.ts): **61**
+  - 4 paginacion (BLOQUEADO API -> Edge Case)
+  - 5 auth flows (BLOQUEADO auth -> Edge Case)
+  - 35 CRUD Productos (BLOQUEADO auth -> Visual Checker)
+  - 9 CRUD Marcas (BLOQUEADO auth -> Visual Checker)
+  - 5 Categorias visual (BLOQUEADO auth -> Visual Checker)
+  - 3 Categorias funcional (BLOQUEADO auth -> Edge Case, compartidos)
+- Criterios nuevos sin test automatizado: **61** (todos los desbloqueados necesitan .spec.ts nuevos)
 
-### Riesgo principal: Panel Admin bloqueado por autenticacion
-- 48 criterios del Visual Checker + 10 del Edge Case Tester dependen de acceso al panel admin
-- Si NO hay forma de autenticarse: ~55 criterios quedaran BLOQUEADOS
-- **Recomendacion al PM**: Proporcionar token de autenticacion o mecanismo de bypass para testing, o aceptar que los criterios de panel se verificaran en una ronda posterior con acceso manual
+### Resumen de asignacion
 
-### Nota sobre .spec.ts
-Todos los sub-testers DEBEN generar archivos .spec.ts para CADA criterio testeado. Esto es obligatorio para que entren en la suite de regresion automatizada en rondas futuras. Los tests de panel admin que no puedan ejecutarse automaticamente deben al menos verificar el redirect a login y la estructura de la pagina de login.
+| Sub-tester | FALLA (re-test) | DESBLOQUEADOS (nuevo) | Total |
+|------------|-----------------|----------------------|-------|
+| Flow Tester | 62 | 0 | 62 |
+| Edge Case Tester | 22 | 13 | 35 |
+| Visual Checker | 5 (compartidos) | 49 | 54 |
+| **Total** | **89** | **62** | **151** |
+
+Nota: El total por estado es 90 FALLA + 61 DESBLOQUEADOS = 151, pero 1 criterio FALLA (REQ-095) se comparte entre sub-testers, por lo que la suma de asignaciones individuales puede diferir ligeramente del total neto.

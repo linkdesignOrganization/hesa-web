@@ -1,42 +1,29 @@
 import { test, expect } from '@playwright/test';
 
 /**
- * Admin Panel — Brands CRUD (REQ-259 to REQ-267)
+ * Admin Panel — Brands CRUD Visual (REQ-259 to REQ-267)
  * STATUS: BLOQUEADO — Requires Azure Entra ID authentication
+ * ROUND 2: Auth still not available for automated testing.
  *
- * All 9 criteria in this group require an active admin session.
- * Without authentication bypass, these cannot be visually verified.
- *
- * This spec verifies that the routes are protected (redirect to login).
+ * All 9 criteria require an authenticated admin session.
+ * Tests verify auth guard functionality.
  */
 
 const BASE_URL = 'https://gray-field-02ba8410f.2.azurestaticapps.net';
 
 test.describe('Admin Brands — Auth Gate (REQ-259 to REQ-267)', () => {
 
-  test('REQ-259: /admin/brands redirects to login without auth', async ({ page }) => {
-    await page.goto(`${BASE_URL}/admin/brands`);
+  test('REQ-259: /admin/marcas redirects to login without auth', async ({ page }) => {
+    await page.goto(`${BASE_URL}/admin/marcas`, { waitUntil: 'networkidle' });
 
-    try {
-      await page.waitForSelector('.login-card', { timeout: 8000 });
-      const card = page.locator('.login-card');
-      await expect(card).toBeVisible();
-      await expect(page.locator('h1')).toContainText('Panel de Administracion');
-    } catch {
-      const url = page.url();
-      expect(url).not.toContain('/admin/brands');
-    }
+    await page.waitForURL('**/admin/login', { timeout: 10000 });
+    await expect(page.getByRole('heading', { name: /Panel de Administracion/i })).toBeVisible({ timeout: 10000 });
   });
 
-  test('REQ-264: /admin/brands/create redirects to login without auth', async ({ page }) => {
-    await page.goto(`${BASE_URL}/admin/brands/create`);
+  test('REQ-264: /admin/marcas/crear redirects to login without auth', async ({ page }) => {
+    await page.goto(`${BASE_URL}/admin/marcas/crear`, { waitUntil: 'networkidle' });
 
-    try {
-      await page.waitForSelector('.login-card', { timeout: 8000 });
-      await expect(page.locator('.login-card')).toBeVisible();
-    } catch {
-      const url = page.url();
-      expect(url).not.toContain('/admin/brands/create');
-    }
+    await page.waitForURL('**/admin/login', { timeout: 10000 });
+    await expect(page.getByRole('heading', { name: /Panel de Administracion/i })).toBeVisible({ timeout: 10000 });
   });
 });

@@ -1,10 +1,11 @@
 import { test, expect } from '@playwright/test';
 
 const BASE_URL = 'https://gray-field-02ba8410f.2.azurestaticapps.net';
+const API_URL = 'https://hesa-api.azurewebsites.net';
 
 test.describe('NFR-006 to NFR-013: SEO and Meta Tags Edge Cases', () => {
 
-  test('NFR-006: Each public page has unique meta title (after JS render)', async ({ page }) => {
+  test('NFR-006: Each public page has unique meta title (JS-rendered)', async ({ page }) => {
     const pageTitles: Record<string, string> = {};
 
     const pages = [
@@ -26,50 +27,63 @@ test.describe('NFR-006 to NFR-013: SEO and Meta Tags Edge Cases', () => {
     expect(uniqueTitles.size).toBe(pages.length);
   });
 
-  test('NFR-007: Sitemap XML exists and is valid XML (not HTML)', async ({ page }) => {
-    const response = await page.goto(`${BASE_URL}/sitemap.xml`);
-    const contentType = response?.headers()['content-type'] || '';
-    const body = await response?.text() || '';
+  test('NFR-006: SSR titles should be unique per page (not same generic title)', async ({ request }) => {
+    const pages = ['/es', '/es/catalogo', '/es/marcas', '/es/nosotros', '/es/contacto'];
+    const titles: string[] = [];
 
-    // Should be XML, not HTML
+    for (const p of pages) {
+      const response = await request.get(`${BASE_URL}${p}`);
+      const html = await response.text();
+      const match = html.match(/<title>([^<]+)<\/title>/);
+      if (match) titles.push(match[1]);
+    }
+
+    // SSR: At least some titles should differ (not all identical "HESA - Herrera...")
+    const uniqueTitles = new Set(titles);
+    expect(uniqueTitles.size).toBeGreaterThan(1);
+  });
+
+  test('NFR-007: Sitemap XML accessible and returns valid XML', async ({ request }) => {
+    // Static web app redirects /sitemap.xml to API endpoint
+    const response = await request.get(`${BASE_URL}/sitemap.xml`, {
+      maxRedirects: 0
+    });
+
+    // Should redirect (301) to API
+    expect(response.status()).toBe(301);
+  });
+
+  test('NFR-007: Sitemap API endpoint returns valid XML', async ({ request }) => {
+    const response = await request.get(`${API_URL}/api/public/sitemap.xml`);
+    const body = await response.text();
+
+    // Should be XML, not HTML error page
     const isXml = body.includes('<?xml') || body.includes('<urlset');
-    const isHtml = body.includes('<!doctype html') || body.includes('<!DOCTYPE html');
+    const isHtml = body.includes('<!doctype html') || body.includes('<!DOCTYPE html') || body.includes('Cannot GET');
 
-    // FAIL: sitemap returns HTML (Angular SPA fallback)
     expect(isHtml).toBe(false);
     expect(isXml).toBe(true);
   });
 
-  test('NFR-008: JSON-LD Schema markup present on home page', async ({ page }) => {
+  test('NFR-008: JSON-LD Schema markup (Organization) present on home page', async ({ page }) => {
     await page.goto(`${BASE_URL}/es`);
     await page.waitForTimeout(3000);
 
-    // Check for JSON-LD script tags
     const jsonLd = page.locator('script[type="application/ld+json"]');
     expect(await jsonLd.count()).toBeGreaterThan(0);
+
+    if (await jsonLd.count() > 0) {
+      const content = await jsonLd.first().textContent();
+      expect(content).toBeTruthy();
+      const parsed = JSON.parse(content!);
+      expect(parsed['@type']).toBe('Organization');
+    }
   });
 
-  test('NFR-009: Semantic URLs in correct language', async ({ page }) => {
-    // ES URLs
-    await page.goto(`${BASE_URL}/es/catalogo/farmacos`);
-    expect(page.url()).toContain('/es/catalogo/farmacos');
-
-    await page.goto(`${BASE_URL}/es/marcas`);
-    expect(page.url()).toContain('/es/marcas');
-
-    // EN URLs
-    await page.goto(`${BASE_URL}/en/catalog/pharmaceuticals`);
-    expect(page.url()).toContain('/en/catalog/pharmaceuticals');
-
-    await page.goto(`${BASE_URL}/en/brands`);
-    expect(page.url()).toContain('/en/brands');
-  });
-
-  test('NFR-010: Images have descriptive alt text', async ({ page }) => {
+  test('NFR-010: Images have descriptive alt text in current language', async ({ page }) => {
     await page.goto(`${BASE_URL}/es`);
     await page.waitForTimeout(4000);
 
-    // Check all visible images have alt attributes
     const images = page.locator('img:visible');
     const imgCount = await images.count();
 
@@ -80,7 +94,7 @@ test.describe('NFR-006 to NFR-013: SEO and Meta Tags Edge Cases', () => {
         missingAlt++;
       }
     }
-    // Most images should have alt text (allow some decorative images)
+    // Most images should have alt text (allow some decorative icons)
     expect(missingAlt).toBeLessThan(imgCount * 0.3);
   });
 
@@ -95,39 +109,38 @@ test.describe('NFR-006 to NFR-013: SEO and Meta Tags Edge Cases', () => {
     expect(await hreflangEn.count()).toBeGreaterThan(0);
   });
 
-  test('NFR-012: Public pages are indexable (no noindex)', async ({ page }) => {
-    await page.goto(`${BASE_URL}/es`);
-    await page.waitForTimeout(3000);
-
-    // Check that no noindex meta tag exists on public pages
-    const noindex = page.locator('meta[name="robots"][content*="noindex"]');
-    expect(await noindex.count()).toBe(0);
-  });
-
-  test('NFR-012: robots.txt exists and is valid (not HTML)', async ({ page }) => {
-    const response = await page.goto(`${BASE_URL}/robots.txt`);
-    const body = await response?.text() || '';
+  test('NFR-012: robots.txt exists and is valid text format', async ({ request }) => {
+    const response = await request.get(`${BASE_URL}/robots.txt`);
+    const body = await response.text();
 
     // Should NOT be HTML
     const isHtml = body.includes('<!doctype html') || body.includes('<!DOCTYPE html');
     expect(isHtml).toBe(false);
 
-    // Should contain User-agent or similar robots.txt directives
-    const isRobotsFile = body.includes('User-agent') || body.includes('Sitemap');
-    expect(isRobotsFile).toBe(true);
+    // Should contain User-agent directive
+    expect(body).toContain('User-agent');
+
+    // Should disallow /admin/
+    expect(body).toContain('Disallow: /admin/');
+
+    // Should reference sitemap
+    expect(body.toLowerCase()).toContain('sitemap');
   });
 
-  test('NFR-013: Admin panel is NOT indexable', async ({ page }) => {
+  test('NFR-012: Public pages are indexable (no noindex)', async ({ page }) => {
+    await page.goto(`${BASE_URL}/es`);
+    await page.waitForTimeout(3000);
+
+    const noindex = page.locator('meta[name="robots"][content*="noindex"]');
+    expect(await noindex.count()).toBe(0);
+  });
+
+  test('NFR-013: Admin panel has meta noindex', async ({ page }) => {
     await page.goto(`${BASE_URL}/admin/login`);
     await page.waitForTimeout(2000);
 
-    // Admin pages should either have noindex or be behind auth
-    // The auth redirect itself prevents indexing, but ideally noindex is set too
+    // Admin login page should have noindex meta tag
     const noindex = page.locator('meta[name="robots"][content*="noindex"]');
-    // Note: Page redirects to login which is behind auth - this is sufficient protection
-    // but meta noindex should also be present
-    const noindexCount = await noindex.count();
-    // We accept either noindex tag OR auth protection
-    expect(page.url()).toContain('/admin/login');
+    expect(await noindex.count()).toBeGreaterThan(0);
   });
 });

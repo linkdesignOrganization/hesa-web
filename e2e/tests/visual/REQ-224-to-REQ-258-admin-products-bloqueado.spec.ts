@@ -1,56 +1,50 @@
 import { test, expect } from '@playwright/test';
 
 /**
- * Admin Panel — Products CRUD (REQ-224 to REQ-258)
+ * Admin Panel — Products CRUD Visual (REQ-224 to REQ-258)
  * STATUS: BLOQUEADO — Requires Azure Entra ID authentication
+ * ROUND 2: Auth still not available for automated testing.
  *
- * All 35 criteria in this group require an active admin session.
- * Without authentication bypass, these cannot be visually verified.
- *
- * This spec verifies that the routes are protected (redirect to login).
+ * All 35 criteria require an authenticated admin session.
+ * The admin routes correctly redirect to /admin/login without auth.
+ * These tests verify the auth guard and login page structure.
  */
 
 const BASE_URL = 'https://gray-field-02ba8410f.2.azurestaticapps.net';
 
-test.describe('Admin Products — Auth Gate (REQ-224 to REQ-258)', () => {
+test.describe('Admin Products — Auth Gate & Login Structure (REQ-224 to REQ-258)', () => {
 
-  test('REQ-224: /admin/products redirects to login without auth', async ({ page }) => {
-    await page.goto(`${BASE_URL}/admin/products`);
+  test('REQ-224: /admin/productos redirects to login without auth', async ({ page }) => {
+    await page.goto(`${BASE_URL}/admin/productos`, { waitUntil: 'networkidle' });
 
-    // Wait for either login card or URL change
-    try {
-      await page.waitForSelector('.login-card', { timeout: 8000 });
-      const card = page.locator('.login-card');
-      await expect(card).toBeVisible();
-      await expect(page.locator('h1')).toContainText('Panel de Administracion');
-    } catch {
-      // Page may redirect away from admin entirely
-      const url = page.url();
-      expect(url).not.toContain('/admin/products');
-    }
+    // Should redirect to login page
+    await page.waitForURL('**/admin/login', { timeout: 10000 });
+    await expect(page.getByRole('heading', { name: /Panel de Administracion/i })).toBeVisible({ timeout: 10000 });
   });
 
-  test('REQ-234: /admin/products/create redirects to login without auth', async ({ page }) => {
-    await page.goto(`${BASE_URL}/admin/products/create`);
+  test('REQ-234: /admin/productos/crear redirects to login without auth', async ({ page }) => {
+    await page.goto(`${BASE_URL}/admin/productos/crear`, { waitUntil: 'networkidle' });
 
-    try {
-      await page.waitForSelector('.login-card', { timeout: 8000 });
-      await expect(page.locator('.login-card')).toBeVisible();
-    } catch {
-      const url = page.url();
-      expect(url).not.toContain('/admin/products/create');
-    }
+    await page.waitForURL('**/admin/login', { timeout: 10000 });
+    await expect(page.getByRole('heading', { name: /Panel de Administracion/i })).toBeVisible({ timeout: 10000 });
   });
 
-  test('REQ-255: /admin/products/[id] redirects to login without auth', async ({ page }) => {
-    await page.goto(`${BASE_URL}/admin/products/some-product-id`);
+  test('REQ-255: /admin/productos/[id] redirects to login without auth', async ({ page }) => {
+    await page.goto(`${BASE_URL}/admin/productos/some-product-id`, { waitUntil: 'networkidle' });
 
-    try {
-      await page.waitForSelector('.login-card', { timeout: 8000 });
-      await expect(page.locator('.login-card')).toBeVisible();
-    } catch {
-      const url = page.url();
-      expect(url).not.toContain('/admin/products/some-product-id');
-    }
+    await page.waitForURL('**/admin/login', { timeout: 10000 });
+    await expect(page.getByRole('heading', { name: /Panel de Administracion/i })).toBeVisible({ timeout: 10000 });
+  });
+
+  test('Login page: shows HESA branding and Microsoft login button', async ({ page }) => {
+    await page.goto(`${BASE_URL}/admin/login`, { waitUntil: 'networkidle' });
+
+    // Wait for login card to appear
+    await expect(page.getByRole('heading', { name: /Panel de Administracion/i })).toBeVisible({ timeout: 10000 });
+    await expect(page.getByText('Inicia sesion con tu cuenta de Microsoft')).toBeVisible();
+    await expect(page.getByRole('button', { name: /Microsoft/i })).toBeVisible();
+
+    // Verify HESA branding
+    await expect(page.getByText('HESA')).toBeVisible();
   });
 });
