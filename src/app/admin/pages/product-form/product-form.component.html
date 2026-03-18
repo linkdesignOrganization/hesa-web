@@ -283,7 +283,7 @@
       <p class="adm-form-section__desc">Sube las fotos del producto (maximo 6). La primera sera la imagen principal.</p>
 
       <!-- Existing images gallery -->
-      @if (existingImages().length > 0 || pendingImagePreviews().length > 0) {
+      @if (existingImages().length > 0) {
         <div class="pf-image-grid">
           @for (img of existingImages(); track img; let i = $index) {
             <div class="pf-image-grid__item">
@@ -296,13 +296,6 @@
               @if (i === 0) {
                 <span class="pf-image-grid__badge">Principal</span>
               }
-            </div>
-          }
-          <!-- Pending local previews (not yet uploaded) -->
-          @for (preview of pendingImagePreviews(); track $index) {
-            <div class="pf-image-grid__item pf-image-grid__item--pending">
-              <img [src]="preview" alt="Preview pendiente">
-              <span class="pf-image-grid__badge pf-image-grid__badge--pending">Subiendo...</span>
             </div>
           }
         </div>

@@ -39,7 +39,6 @@ export class AdminProductFormComponent implements HasUnsavedChanges, OnInit {
 
   // Image & PDF upload state
   existingImages = signal<string[]>([]);
-  pendingImagePreviews = signal<string[]>([]);
   existingPdfUrl = signal<string | null>(null);
   existingPdfName = signal<string>('Ficha tecnica');
   uploadingImages = signal(false);
@@ -137,6 +136,10 @@ export class AdminProductFormComponent implements HasUnsavedChanges, OnInit {
       }
       this.existingImages.set(product.images || []);
       this.existingPdfUrl.set(product.pdfUrl || null);
+      if (product.pdfUrl) {
+        const parts = product.pdfUrl.split('/');
+        this.existingPdfName.set(decodeURIComponent(parts[parts.length - 1]) || 'Ficha tecnica.pdf');
+      }
 
       this._hasChanges.set(false);
     } catch {
@@ -211,7 +214,6 @@ export class AdminProductFormComponent implements HasUnsavedChanges, OnInit {
     const input = event.target as HTMLInputElement;
     if (!input.files || input.files.length === 0) return;
     const files = Array.from(input.files);
-    this.showLocalPreviews(files);
     await this.uploadImages(files);
     input.value = '';
   }
@@ -225,18 +227,7 @@ export class AdminProductFormComponent implements HasUnsavedChanges, OnInit {
       this.toast.error('Solo se permiten imagenes PNG, JPG o WebP');
       return;
     }
-    this.showLocalPreviews(imageFiles);
     this.uploadImages(imageFiles);
-  }
-
-  private showLocalPreviews(files: File[]): void {
-    for (const file of files) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.pendingImagePreviews.update(list => [...list, reader.result as string]);
-      };
-      reader.readAsDataURL(file);
-    }
   }
 
   private async uploadImages(files: File[]): Promise<void> {
@@ -263,7 +254,6 @@ export class AdminProductFormComponent implements HasUnsavedChanges, OnInit {
     try {
       const updatedProduct = await this.api.adminUploadProductImages(this.productId()!, filesToUpload);
       this.existingImages.set(updatedProduct.images || []);
-      this.pendingImagePreviews.set([]);
       this.toast.success('Imagenes subidas correctamente');
     } catch {
       this.toast.error('Error al subir las imagenes');
