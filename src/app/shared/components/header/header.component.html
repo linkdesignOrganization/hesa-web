@@ -2,7 +2,7 @@
   class="header"
   [class.header--scrolled]="isScrolled()"
   role="navigation"
-  aria-label="Navegacion principal">
+  [attr.aria-label]="i18n.currentLang() === 'es' ? 'Navegacion principal' : 'Main navigation'">
   <div class="header__container container">
     <!-- Logo -->
     <a [routerLink]="i18n.getLangPrefix()" class="header__logo" aria-label="HESA - Ir al inicio">
@@ -48,7 +48,7 @@
 
     <!-- Right side: search + language -->
     <div class="header__actions">
-      <button class="header__search-btn" (click)="openSearch()" aria-label="Buscar productos y marcas">
+      <button class="header__search-btn" (click)="openSearch()" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Buscar productos y marcas' : 'Search products and brands'">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
       </button>
       <app-language-selector variant="header" />
@@ -59,7 +59,7 @@
         (click)="toggleMobileMenu()"
         [attr.aria-expanded]="isMobileMenuOpen()"
         aria-controls="mobile-menu"
-        aria-label="Abrir menu">
+        [attr.aria-label]="i18n.currentLang() === 'es' ? 'Abrir menu' : 'Open menu'">
         <span class="header__hamburger-line"></span>
         <span class="header__hamburger-line"></span>
         <span class="header__hamburger-line"></span>
@@ -79,8 +79,8 @@
     [class.header__mobile-menu--open]="isMobileMenuOpen()"
     role="dialog"
     aria-modal="true"
-    aria-label="Menu de navegacion">
-    <button class="header__mobile-close" (click)="closeMobileMenu()" aria-label="Cerrar menu">
+    [attr.aria-label]="i18n.currentLang() === 'es' ? 'Menu de navegacion' : 'Navigation menu'">
+    <button class="header__mobile-close" (click)="closeMobileMenu()" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Cerrar menu' : 'Close menu'">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
     <nav class="header__mobile-nav">

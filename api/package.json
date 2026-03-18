@@ -6,7 +6,8 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/app.js",
-    "dev": "ts-node src/app.ts"
+    "dev": "ts-node src/app.ts",
+    "seed": "ts-node src/utils/seed-data.ts"
   },
   "dependencies": {
     "@azure/communication-email": "^1.0.0",

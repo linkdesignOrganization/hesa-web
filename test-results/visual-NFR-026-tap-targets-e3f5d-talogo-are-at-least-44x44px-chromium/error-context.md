@@ -68,62 +68,61 @@
       - text: Filtrar
     - generic [ref=e62]:
       - img [ref=e64]
-      - heading "No pudimos cargar los productos" [level=2] [ref=e66]
-      - paragraph [ref=e67]: Intenta de nuevo.
-      - button "Reintentar" [ref=e68] [cursor=pointer]
-  - contentinfo "Pie de pagina" [ref=e70]:
-    - generic [ref=e72]:
-      - generic [ref=e73]:
-        - generic [ref=e74]: HESA
-        - paragraph [ref=e75]: 37 anos distribuyendo salud animal en Costa Rica
-      - generic [ref=e76]:
-        - button "Navegacion +" [ref=e77] [cursor=pointer]:
-          - generic [ref=e78]: Navegacion
-          - generic [ref=e79]: +
-        - navigation [ref=e80]:
-          - link "Inicio" [ref=e81] [cursor=pointer]:
+      - heading "Aun no hay productos en el catalogo" [level=2] [ref=e69]
+      - paragraph [ref=e70]: Vuelve pronto, estamos preparando nuestro catalogo.
+  - contentinfo "Pie de pagina" [ref=e72]:
+    - generic [ref=e74]:
+      - generic [ref=e75]:
+        - generic [ref=e76]: HESA
+        - paragraph [ref=e77]: 37 anos distribuyendo salud animal en Costa Rica
+      - generic [ref=e78]:
+        - button "Navegacion +" [ref=e79] [cursor=pointer]:
+          - generic [ref=e80]: Navegacion
+          - generic [ref=e81]: +
+        - navigation [ref=e82]:
+          - link "Inicio" [ref=e83] [cursor=pointer]:
             - /url: /es
-          - link "Catalogo" [ref=e82] [cursor=pointer]:
+          - link "Catalogo" [ref=e84] [cursor=pointer]:
             - /url: /es/catalogo
-          - link "Marcas" [ref=e83] [cursor=pointer]:
+          - link "Marcas" [ref=e85] [cursor=pointer]:
             - /url: /es/marcas
-          - link "Nosotros" [ref=e84] [cursor=pointer]:
+          - link "Nosotros" [ref=e86] [cursor=pointer]:
             - /url: /es/nosotros
-          - link "Distribuidores" [ref=e85] [cursor=pointer]:
+          - link "Distribuidores" [ref=e87] [cursor=pointer]:
             - /url: /es/distribuidores
-          - link "Contacto" [ref=e86] [cursor=pointer]:
+          - link "Contacto" [ref=e88] [cursor=pointer]:
             - /url: /es/contacto
-      - generic [ref=e87]:
-        - button "Contacto +" [ref=e88] [cursor=pointer]:
-          - generic [ref=e89]: Contacto
-          - generic [ref=e90]: +
-        - generic [ref=e91]:
-          - paragraph [ref=e92]:
-            - img [ref=e93]
+      - generic [ref=e89]:
+        - button "Contacto +" [ref=e90] [cursor=pointer]:
+          - generic [ref=e91]: Contacto
+          - generic [ref=e92]: +
+        - generic [ref=e93]:
+          - paragraph [ref=e94]:
+            - img [ref=e95]
             - text: +506 2260-9020
-          - paragraph [ref=e95]:
-            - img [ref=e96]
+          - paragraph [ref=e97]:
+            - img [ref=e98]
             - text: info@hesa.co.cr
-          - paragraph [ref=e99]:
-            - img [ref=e100]
+          - paragraph [ref=e101]:
+            - img [ref=e102]
             - text: Calle 2, av 12. Heredia, Costa Rica
-          - paragraph [ref=e103]:
-            - img [ref=e104]
+          - paragraph [ref=e105]:
+            - img [ref=e106]
             - text: "Lun - Vie: 8:00 - 17:00"
-      - generic [ref=e107]:
-        - button "Redes Sociales +" [ref=e108] [cursor=pointer]:
-          - generic [ref=e109]: Redes Sociales
-          - generic [ref=e110]: +
-        - generic [ref=e111]:
-          - link "Facebook" [ref=e112] [cursor=pointer]:
+      - generic [ref=e109]:
+        - button "Redes Sociales +" [ref=e110] [cursor=pointer]:
+          - generic [ref=e111]: Redes Sociales
+          - generic [ref=e112]: +
+        - generic [ref=e113]:
+          - link "Facebook" [ref=e114] [cursor=pointer]:
             - /url: https://facebook.com/hesacr
-            - img [ref=e113]
-          - link "Instagram" [ref=e115] [cursor=pointer]:
+            - img [ref=e115]
+          - link "Instagram" [ref=e117] [cursor=pointer]:
             - /url: https://instagram.com/hesacr
-            - img [ref=e116]
-    - generic [ref=e120]:
-      - paragraph [ref=e121]: © HESA 2026. Todos los derechos reservados.
-      - button "English" [ref=e123] [cursor=pointer]
-  - button "Contactar por WhatsApp" [ref=e124] [cursor=pointer]:
-    - img [ref=e125]
+            - img [ref=e118]
+    - generic [ref=e122]:
+      - paragraph [ref=e123]: © HESA 2026. Todos los derechos reservados.
+      - button "English" [ref=e125] [cursor=pointer]
+  - button "Contactar por WhatsApp" [ref=e126] [cursor=pointer]:
+    - img [ref=e127]
 ```

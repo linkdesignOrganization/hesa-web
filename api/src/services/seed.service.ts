@@ -1,0 +1,261 @@
+/**
+ * BUG-DB-EMPTY: Seed brands and products if the collections are empty.
+ * Called from app.ts on startup, alongside seedCategories().
+ *
+ * This service creates the minimum data set required for the public site
+ * to function: 3 brands and 5 products covering all three categories
+ * (farmacos, alimentos, equipos) with various edge cases (multiple images,
+ * single image, no image, with/without PDF, with/without storytelling).
+ */
+import { Brand } from '../models/brand.model';
+import { Product } from '../models/product.model';
+
+export async function seedBrandsAndProducts(): Promise<void> {
+  const brandCount = await Brand.countDocuments();
+  const productCount = await Product.countDocuments();
+
+  if (brandCount > 0 || productCount > 0) {
+    console.log(`Seed skip: ${brandCount} brands, ${productCount} products already exist`);
+    return;
+  }
+
+  console.log('Seeding brands and products...');
+
+  // ======================== BRANDS ========================
+  const brands = await Brand.insertMany([
+    {
+      slug: 'zoetis',
+      name: 'Zoetis',
+      country: 'Estados Unidos',
+      categories: ['farmacos'],
+      description: {
+        es: 'Zoetis es lider mundial en salud animal, con un compromiso de mas de 70 anos con la ciencia y la innovacion para desarrollar medicamentos, vacunas y herramientas de diagnostico veterinario.',
+        en: 'Zoetis is a global leader in animal health, with a commitment of over 70 years to science and innovation to develop veterinary medicines, vaccines, and diagnostic tools.',
+      },
+      isFeatured: true,
+      featuredOrder: 1,
+    },
+    {
+      slug: 'royal-canin',
+      name: 'Royal Canin',
+      country: 'Francia',
+      categories: ['alimentos'],
+      description: {
+        es: 'Royal Canin es reconocida mundialmente por su nutricion de precision para perros y gatos, formulando dietas especificas basadas en el tamano, raza, edad y necesidades de salud de cada mascota.',
+        en: 'Royal Canin is globally recognized for its precision nutrition for dogs and cats, formulating specific diets based on the size, breed, age, and health needs of each pet.',
+      },
+      isFeatured: true,
+      featuredOrder: 2,
+    },
+    {
+      slug: 'mindray',
+      name: 'Mindray',
+      country: 'China',
+      categories: ['equipos'],
+      description: {
+        es: 'Mindray es una empresa lider en equipos medicos y de diagnostico veterinario, ofreciendo soluciones avanzadas para clinicas y hospitales veterinarios en todo el mundo.',
+        en: 'Mindray is a leading company in medical and veterinary diagnostic equipment, offering advanced solutions for veterinary clinics and hospitals worldwide.',
+      },
+      isFeatured: true,
+      featuredOrder: 3,
+    },
+  ]);
+
+  const zoetis = brands[0];
+  const royalCanin = brands[1];
+  const mindray = brands[2];
+
+  // ======================== PRODUCTS ========================
+  // Edge cases covered:
+  //   - Product with multiple images (amoxicilina: 3)
+  //   - Product with single image (meloxicam, mindray monitor)
+  //   - Product with no images (royal canin kitten)
+  //   - Product with PDF (amoxicilina, mindray monitor)
+  //   - Product without PDF (meloxicam, royal canin)
+  //   - Product with storytelling (amoxicilina, royal canin maxi adult)
+  //   - Product without storytelling (meloxicam, royal canin kitten, mindray monitor)
+
+  await Product.insertMany([
+    {
+      slug: { es: 'amoxicilina-veterinaria', en: 'veterinary-amoxicillin' },
+      name: { es: 'Amoxicilina Veterinaria', en: 'Veterinary Amoxicillin' },
+      brand: zoetis._id,
+      category: 'farmacos',
+      species: ['Caninos', 'Felinos', 'Bovinos'],
+      family: 'Antibioticos',
+      presentations: ['Tabletas 250mg', 'Tabletas 500mg', 'Suspension oral 100ml'],
+      description: {
+        es: 'Antibiotico de amplio espectro para el tratamiento de infecciones bacterianas en caninos, felinos y bovinos. Formula veterinaria con alta biodisponibilidad y excelente tolerancia.',
+        en: 'Broad-spectrum antibiotic for the treatment of bacterial infections in canines, felines, and bovines. Veterinary formula with high bioavailability and excellent tolerance.',
+      },
+      composition: {
+        es: 'Cada tableta contiene: Amoxicilina trihidrato equivalente a 500mg de amoxicilina. Excipientes c.s.',
+        en: 'Each tablet contains: Amoxicillin trihydrate equivalent to 500mg amoxicillin. Excipients q.s.',
+      },
+      sanitaryRegistry: 'SENASA-VET-2024-0847',
+      indications: {
+        es: 'Indicado para el tratamiento de infecciones del tracto respiratorio, urinario, piel y tejidos blandos causadas por bacterias sensibles a amoxicilina.',
+        en: 'Indicated for the treatment of respiratory tract, urinary, skin, and soft tissue infections caused by bacteria sensitive to amoxicillin.',
+      },
+      images: [
+        'https://hesastorage.blob.core.windows.net/seed/amoxicilina-1.jpg',
+        'https://hesastorage.blob.core.windows.net/seed/amoxicilina-2.jpg',
+        'https://hesastorage.blob.core.windows.net/seed/amoxicilina-3.jpg',
+      ],
+      pdfUrl: 'https://hesastorage.blob.core.windows.net/seed/amoxicilina-ficha.pdf',
+      isActive: true,
+      isFeatured: true,
+      featuredOrder: 1,
+      storytelling: [
+        {
+          text: {
+            es: 'Con mas de 70 anos de experiencia, Zoetis desarrolla formulaciones veterinarias de alta calidad que garantizan la salud y bienestar de los animales.',
+            en: 'With over 70 years of experience, Zoetis develops high-quality veterinary formulations that ensure the health and well-being of animals.',
+          },
+        },
+        {
+          text: {
+            es: 'La Amoxicilina Veterinaria de Zoetis ha sido probada en miles de casos clinicos, demostrando una eficacia superior en el tratamiento de infecciones bacterianas comunes.',
+            en: 'Zoetis Veterinary Amoxicillin has been tested in thousands of clinical cases, demonstrating superior efficacy in the treatment of common bacterial infections.',
+          },
+        },
+      ],
+      metaTitle: {
+        es: 'Amoxicilina Veterinaria - Zoetis',
+        en: 'Veterinary Amoxicillin - Zoetis',
+      },
+      metaDescription: {
+        es: 'Antibiotico de amplio espectro Amoxicilina de Zoetis para caninos, felinos y bovinos. Distribuido por HESA en Costa Rica.',
+        en: 'Broad-spectrum antibiotic Amoxicillin by Zoetis for canines, felines, and bovines. Distributed by HESA in Costa Rica.',
+      },
+      hasEnTranslation: true,
+    },
+    {
+      slug: { es: 'meloxicam-inyectable', en: 'meloxicam-injectable' },
+      name: { es: 'Meloxicam Inyectable', en: 'Meloxicam Injectable' },
+      brand: zoetis._id,
+      category: 'farmacos',
+      species: ['Caninos', 'Equinos'],
+      family: 'Antiinflamatorios',
+      presentations: ['Frasco 50ml', 'Frasco 100ml'],
+      description: {
+        es: 'Antiinflamatorio no esteroidal para el alivio del dolor y la inflamacion en caninos y equinos. Administracion parenteral con rapida accion analgesica.',
+        en: 'Non-steroidal anti-inflammatory for pain and inflammation relief in canines and equines. Parenteral administration with rapid analgesic action.',
+      },
+      composition: {
+        es: 'Cada ml contiene: Meloxicam 5mg. Vehiculo c.s.',
+        en: 'Each ml contains: Meloxicam 5mg. Vehicle q.s.',
+      },
+      sanitaryRegistry: 'SENASA-VET-2023-1205',
+      indications: {
+        es: 'Tratamiento del dolor y la inflamacion asociados a trastornos musculoesqueleticos agudos y cronicos en caninos y equinos.',
+        en: 'Treatment of pain and inflammation associated with acute and chronic musculoskeletal disorders in canines and equines.',
+      },
+      images: [
+        'https://hesastorage.blob.core.windows.net/seed/meloxicam-1.jpg',
+      ],
+      isActive: true,
+      isFeatured: true,
+      featuredOrder: 2,
+      hasEnTranslation: true,
+    },
+    {
+      slug: { es: 'royal-canin-maxi-adulto', en: 'royal-canin-maxi-adult' },
+      name: { es: 'Royal Canin Maxi Adulto', en: 'Royal Canin Maxi Adult' },
+      brand: royalCanin._id,
+      category: 'alimentos',
+      species: ['Caninos'],
+      lifeStage: 'Adulto',
+      presentations: ['Bolsa 4kg', 'Bolsa 10kg', 'Bolsa 15kg'],
+      description: {
+        es: 'Alimento seco completo para perros adultos de razas grandes (26 a 44 kg). Formulado para mantener la vitalidad, la salud articular y un peso optimo.',
+        en: 'Complete dry food for adult dogs of large breeds (26 to 44 kg). Formulated to maintain vitality, joint health, and optimal weight.',
+      },
+      ingredients: {
+        es: 'Proteinas de ave deshidratadas, arroz, harina de trigo, grasas animales, pulpa de remolacha, proteinas vegetales, aceite de pescado, minerales, vitaminas.',
+        en: 'Dehydrated poultry proteins, rice, wheat flour, animal fats, beet pulp, vegetable proteins, fish oil, minerals, vitamins.',
+      },
+      nutritionalInfo: {
+        es: 'Proteina bruta: 26%. Grasa: 14%. Fibra: 1.3%. Cenizas: 6.4%. Humedad: 9.5%. Calorias: 3820 kcal/kg.',
+        en: 'Crude protein: 26%. Fat: 14%. Fiber: 1.3%. Ash: 6.4%. Moisture: 9.5%. Calories: 3820 kcal/kg.',
+      },
+      images: [
+        'https://hesastorage.blob.core.windows.net/seed/rc-maxi-adult-1.jpg',
+        'https://hesastorage.blob.core.windows.net/seed/rc-maxi-adult-2.jpg',
+      ],
+      isActive: true,
+      isFeatured: true,
+      featuredOrder: 3,
+      storytelling: [
+        {
+          text: {
+            es: 'Royal Canin Maxi Adult esta disenado con nutricion de precision para perros grandes, apoyando sus articulaciones y manteniendo un peso saludable durante toda su vida adulta.',
+            en: 'Royal Canin Maxi Adult is designed with precision nutrition for large dogs, supporting their joints and maintaining a healthy weight throughout their adult life.',
+          },
+        },
+      ],
+      hasEnTranslation: true,
+    },
+    {
+      slug: { es: 'royal-canin-kitten', en: 'royal-canin-kitten' },
+      name: { es: 'Royal Canin Kitten', en: 'Royal Canin Kitten' },
+      brand: royalCanin._id,
+      category: 'alimentos',
+      species: ['Felinos'],
+      lifeStage: 'Cachorro/Kitten',
+      presentations: ['Bolsa 1.5kg', 'Bolsa 4kg'],
+      description: {
+        es: 'Alimento completo para gatitos de 4 a 12 meses. Apoya el desarrollo del sistema inmunologico y la salud digestiva durante la etapa de crecimiento.',
+        en: 'Complete food for kittens from 4 to 12 months. Supports immune system development and digestive health during the growth stage.',
+      },
+      ingredients: {
+        es: 'Proteinas de ave deshidratadas, arroz, proteinas vegetales, grasas animales, aceite de pescado, fibra vegetal, minerales, vitaminas, antioxidantes.',
+        en: 'Dehydrated poultry proteins, rice, vegetable proteins, animal fats, fish oil, vegetable fiber, minerals, vitamins, antioxidants.',
+      },
+      nutritionalInfo: {
+        es: 'Proteina bruta: 36%. Grasa: 18%. Fibra: 2.3%. Cenizas: 7.2%. Humedad: 6%. Calorias: 4080 kcal/kg.',
+        en: 'Crude protein: 36%. Fat: 18%. Fiber: 2.3%. Ash: 7.2%. Moisture: 6%. Calories: 4080 kcal/kg.',
+      },
+      images: [],
+      isActive: true,
+      isFeatured: false,
+      hasEnTranslation: true,
+    },
+    {
+      slug: { es: 'monitor-signos-vitales-vet', en: 'vet-vital-signs-monitor' },
+      name: { es: 'Monitor de Signos Vitales Veterinario', en: 'Veterinary Vital Signs Monitor' },
+      brand: mindray._id,
+      category: 'equipos',
+      equipmentType: 'Monitoreo',
+      presentations: ['Unidad completa'],
+      description: {
+        es: 'Monitor multiparametrico veterinario para clinicas y hospitales. Pantalla tactil a color de 12 pulgadas con medicion de ECG, SpO2, NIBP, temperatura y capnografia.',
+        en: 'Multiparameter veterinary monitor for clinics and hospitals. 12-inch color touchscreen with ECG, SpO2, NIBP, temperature, and capnography measurement.',
+      },
+      specifications: {
+        es: 'Pantalla: 12.1" TFT LCD tactil. Parametros: ECG (7 derivaciones), SpO2, NIBP, Temperatura, CO2. Bateria: 4 horas. Peso: 4.5 kg. Interfaces: WiFi, USB, LAN.',
+        en: 'Display: 12.1" TFT LCD touch. Parameters: ECG (7 leads), SpO2, NIBP, Temperature, CO2. Battery: 4 hours. Weight: 4.5 kg. Interfaces: WiFi, USB, LAN.',
+      },
+      recommendedUses: {
+        es: 'Monitoreo continuo durante cirugias, recuperacion post-operatoria, hospitalizacion y urgencias veterinarias.',
+        en: 'Continuous monitoring during surgeries, post-operative recovery, hospitalization, and veterinary emergencies.',
+      },
+      warranty: {
+        es: '2 anos de garantia del fabricante. Soporte tecnico local incluido.',
+        en: '2-year manufacturer warranty. Local technical support included.',
+      },
+      images: [
+        'https://hesastorage.blob.core.windows.net/seed/mindray-monitor-1.jpg',
+      ],
+      pdfUrl: 'https://hesastorage.blob.core.windows.net/seed/mindray-monitor-ficha.pdf',
+      isActive: true,
+      isFeatured: true,
+      featuredOrder: 4,
+      hasEnTranslation: true,
+    },
+  ]);
+
+  const finalBrands = await Brand.countDocuments();
+  const finalProducts = await Product.countDocuments();
+  console.log(`Seed complete: ${finalBrands} brands, ${finalProducts} products`);
+}

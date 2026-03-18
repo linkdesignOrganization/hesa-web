@@ -1,15 +1,18 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, signal, inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { PublicClientApplication, AuthenticationResult, InteractionRequiredAuthError } from '@azure/msal-browser';
 import { environment } from '../../../environments/environment';
 
 /**
  * Authentication service using Azure Entra ID (MSAL).
  * REQ-308 to REQ-317: Azure Entra ID authentication for the admin panel.
+ * BUG-V05: MSAL is only initialized in the browser (not during prerendering).
  */
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private msalInstance: PublicClientApplication;
+  private msalInstance: PublicClientApplication | null = null;
   private initialized = false;
+  private platformId = inject(PLATFORM_ID);
 
   /** Reactive signal exposing current auth state */
   authenticated = signal(false);
@@ -17,22 +20,25 @@ export class AuthService {
   userEmail = signal('');
 
   constructor() {
-    this.msalInstance = new PublicClientApplication({
-      auth: {
-        clientId: environment.entra.clientId,
-        authority: environment.entra.authority,
-        redirectUri: environment.entra.redirectUri,
-        postLogoutRedirectUri: environment.entra.redirectUri,
-      },
-      cache: {
-        cacheLocation: 'sessionStorage',
-      },
-    });
+    // BUG-V05: Only create MSAL instance in the browser
+    if (isPlatformBrowser(this.platformId)) {
+      this.msalInstance = new PublicClientApplication({
+        auth: {
+          clientId: environment.entra.clientId,
+          authority: environment.entra.authority,
+          redirectUri: environment.entra.redirectUri,
+          postLogoutRedirectUri: environment.entra.redirectUri,
+        },
+        cache: {
+          cacheLocation: 'sessionStorage',
+        },
+      });
+    }
   }
 
   /** Initialize MSAL and check for existing sessions */
   async initialize(): Promise<void> {
-    if (this.initialized) return;
+    if (this.initialized || !this.msalInstance) return;
     try {
       await this.msalInstance.initialize();
 
@@ -67,6 +73,7 @@ export class AuthService {
    * REQ-309: Button "Iniciar sesion con Microsoft" redirects to Azure.
    */
   async login(): Promise<void> {
+    if (!this.msalInstance) return;
     await this.initialize();
     try {
       await this.msalInstance.loginRedirect({
@@ -83,6 +90,7 @@ export class AuthService {
    * REQ-312: Closes Azure session and redirects to login.
    */
   async logout(): Promise<void> {
+    if (!this.msalInstance) return;
     await this.initialize();
     this.authenticated.set(false);
     this.userName.set('');
@@ -99,6 +107,7 @@ export class AuthService {
    * REQ-311: Silent token renewal, prompts re-auth if needed.
    */
   async getAccessToken(): Promise<string | null> {
+    if (!this.msalInstance) return null;
     await this.initialize();
     const account = this.msalInstance.getActiveAccount();
     if (!account) return null;
@@ -126,7 +135,7 @@ export class AuthService {
   }
 
   private setAuthState(response: AuthenticationResult): void {
-    this.msalInstance.setActiveAccount(response.account);
+    this.msalInstance?.setActiveAccount(response.account);
     this.authenticated.set(true);
     this.userName.set(response.account?.name || '');
     this.userEmail.set(response.account?.username || '');

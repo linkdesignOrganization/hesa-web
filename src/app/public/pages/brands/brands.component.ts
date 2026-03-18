@@ -1,4 +1,5 @@
 import { Component, inject, signal, OnInit, OnDestroy } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { BreadcrumbComponent } from '../../../shared/components/breadcrumb/breadcrumb.component';
 import { BrandCardComponent } from '../../components/brand-card/brand-card.component';
 import { ApiService, ApiBrand } from '../../../shared/services/api.service';
@@ -9,7 +10,7 @@ import { getHomeLabel, getBrandsSegment } from '../../../shared/utils/route-help
 @Component({
   selector: 'app-brands',
   standalone: true,
-  imports: [BreadcrumbComponent, BrandCardComponent],
+  imports: [RouterLink, BreadcrumbComponent, BrandCardComponent],
   templateUrl: './brands.component.html',
   styleUrl: './brands.component.scss'
 })

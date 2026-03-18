@@ -1,4 +1,5 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, signal, inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs';
 
@@ -28,6 +29,7 @@ const ROUTE_MAP: Record<string, Record<Lang, string>> = {
 @Injectable({ providedIn: 'root' })
 export class I18nService {
   currentLang = signal<Lang>('es');
+  private platformId = inject(PLATFORM_ID);
 
   constructor(private router: Router) {
     this.detectLanguage();
@@ -46,7 +48,15 @@ export class I18nService {
   }
 
   private detectLanguage(): void {
-    if (typeof window === 'undefined') return;
+    // BUG-V05: Use isPlatformBrowser for SSR safety
+    if (!isPlatformBrowser(this.platformId)) {
+      // During server-side prerendering, detect from the router URL
+      const url = this.router.url;
+      if (url.startsWith('/en/') || url === '/en') {
+        this.currentLang.set('en');
+      }
+      return;
+    }
 
     const path = window.location.pathname;
     if (path.startsWith('/en/') || path === '/en') {

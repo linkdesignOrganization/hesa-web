@@ -68,16 +68,15 @@
     - generic [ref=e42]:
       - heading "Pharmaceuticals" [level=1] [ref=e43]
       - generic [ref=e44]: 0 products
-    - generic [ref=e46]:
-      - combobox [ref=e47]:
-        - option "Brand" [selected]
+    - paragraph [ref=e45]: Veterinary pharmaceuticals from the best international brands
+    - generic [ref=e47]:
       - combobox [ref=e48]:
-        - option "Species" [selected]
+        - option "Brand" [selected]
       - combobox [ref=e49]:
+        - option "Species" [selected]
+      - combobox [ref=e50]:
         - option "Family" [selected]
-    - generic [ref=e50]:
-      - heading "Could not load products" [level=2] [ref=e51]
-      - button "Retry" [ref=e52] [cursor=pointer]
+    - heading "No products currently available" [level=2] [ref=e52]
   - contentinfo "Pie de pagina" [ref=e54]:
     - generic [ref=e56]:
       - generic [ref=e57]:

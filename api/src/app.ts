@@ -11,6 +11,7 @@ import { connectDatabase } from './config/database';
 import { securityHeaders } from './middleware/security-headers.middleware';
 import { authMiddleware } from './middleware/auth.middleware';
 import { seedCategories } from './services/category.service';
+import { seedBrandsAndProducts } from './services/seed.service';
 
 // Public routes
 import publicProductsRoutes from './routes/public/products.routes';
@@ -81,6 +82,8 @@ async function start(): Promise<void> {
     console.log('Database connected successfully');
     await seedCategories();
     console.log('Categories seeded successfully');
+    await seedBrandsAndProducts();
+    console.log('Brands and products seeded successfully');
   } catch (error) {
     console.error('Database initialization failed (API will run with degraded functionality):', error);
     // Don't exit — let the API serve what it can. Individual route handlers will return

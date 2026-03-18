@@ -68,16 +68,15 @@
     - generic [ref=e42]:
       - heading "Alimentos" [level=1] [ref=e43]
       - generic [ref=e44]: 0 productos
-    - generic [ref=e46]:
-      - combobox [ref=e47]:
-        - option "Marca" [selected]
+    - paragraph [ref=e45]: Alimentos premium para mascotas y animales de produccion
+    - generic [ref=e47]:
       - combobox [ref=e48]:
-        - option "Especie" [selected]
+        - option "Marca" [selected]
       - combobox [ref=e49]:
+        - option "Especie" [selected]
+      - combobox [ref=e50]:
         - option "Etapa de vida" [selected]
-    - generic [ref=e50]:
-      - heading "No pudimos cargar los productos" [level=2] [ref=e51]
-      - button "Reintentar" [ref=e52] [cursor=pointer]
+    - heading "No hay productos disponibles actualmente" [level=2] [ref=e52]
   - contentinfo "Pie de pagina" [ref=e54]:
     - generic [ref=e56]:
       - generic [ref=e57]:

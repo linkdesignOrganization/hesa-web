@@ -1,4 +1,5 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs';
 import { HeaderComponent } from './shared/components/header/header.component';
@@ -18,10 +19,12 @@ export class AppComponent implements OnInit {
   isAdminRoute = false;
   private router = inject(Router);
   private i18n = inject(I18nService);
+  private platformId = inject(PLATFORM_ID);
 
   ngOnInit(): void {
-    // Language detection: redirect root to appropriate language
-    if (typeof window !== 'undefined') {
+    // BUG-V05: Only run browser-specific logic in the browser (not during prerendering)
+    if (isPlatformBrowser(this.platformId)) {
+      // Language detection: redirect root to appropriate language
       const path = window.location.pathname;
       if (path === '/' || path === '') {
         const browserLang = navigator.language?.substring(0, 2);

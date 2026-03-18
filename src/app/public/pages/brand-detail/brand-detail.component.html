@@ -23,11 +23,16 @@
       <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'marcas' : 'brands')" class="btn btn-outline" style="margin-top: 24px; margin-left: 12px;">{{ i18n.currentLang() === 'es' ? 'Ver todas las marcas' : 'View all brands' }}</a>
     </div>
   </section>
-} @else if (notFound()) {
+} @else if (notFound() || !brand()) {
+  <!-- BUG-V06: Error state for brand not found / brand null fallback -->
   <section class="brand-detail-page">
     <div class="container" style="text-align: center; padding: 80px 0;">
-      <h1>{{ i18n.currentLang() === 'es' ? 'Esta marca no esta disponible' : 'This brand is not available' }}</h1>
-      <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'marcas' : 'brands')" class="btn btn-primary" style="margin-top: 24px;">{{ i18n.currentLang() === 'es' ? 'Ver todas las marcas' : 'View all brands' }}</a>
+      <div style="margin-bottom: 24px;">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--neutral-300)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
+      </div>
+      <h1 class="text-h3">{{ i18n.currentLang() === 'es' ? 'Esta marca no esta disponible' : 'This brand is not available' }}</h1>
+      <p style="color: var(--neutral-500); margin-top: 8px;">{{ i18n.currentLang() === 'es' ? 'La marca que buscas no existe o ha sido removida.' : 'The brand you are looking for does not exist or has been removed.' }}</p>
+      <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'marcas' : 'brands')" class="btn btn-primary" style="margin-top: 24px;">{{ i18n.currentLang() === 'es' ? 'Volver a marcas' : 'Back to brands' }}</a>
     </div>
   </section>
 } @else if (brand()) {
