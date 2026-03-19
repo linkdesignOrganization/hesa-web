@@ -58,9 +58,9 @@
             <span class="hero-card__brand-label">Biozoo</span>
             <h4 class="hero-card__name">Amoxicilina 500mg</h4>
             <div class="hero-card__footer">
-              <span class="hero-card__detail">{{ i18n.currentLang() === 'es' ? 'Tabletas · Caninos' : 'Tablets · Canine' }}</span>
+              <span class="hero-card__detail"><span class="material-symbols-outlined">diagnosis</span>{{ i18n.currentLang() === 'es' ? 'Tabletas · Caninos' : 'Tablets · Canine' }}</span>
               <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo' : 'catalog')" class="hero-card__go-btn" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Ver producto' : 'View product'">
-                <span class="material-symbols-outlined">arrow_forward</span>
+                <span class="material-symbols-outlined">arrow_circle_right</span>
               </a>
             </div>
           </div>
