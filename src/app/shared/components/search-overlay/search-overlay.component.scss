@@ -111,10 +111,10 @@
 
   &__group-label {
     display: block;
-    font-size: 18px;
+    font-size: 14px;
     font-weight: var(--weight-extrabold);
     color: #000000;
-    padding: 16px 20px 12px;
+    padding: 16px 20px 8px;
   }
 
   &__item {
@@ -141,8 +141,6 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    color: #000000;
-    opacity: 0.3;
 
     img {
       width: 100%;
