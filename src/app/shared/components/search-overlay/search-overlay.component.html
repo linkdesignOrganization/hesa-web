@@ -1,15 +1,19 @@
-<div class="search-overlay" [class.search-overlay--open]="isOpen()" role="search" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Busqueda global' : 'Global search'">
-  <div class="search-overlay__backdrop" (click)="close()"></div>
-  <div class="search-overlay__content">
-    <button class="search-overlay__close" (click)="close()" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Cerrar busqueda' : 'Close search'">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-    </button>
-    <div class="search-overlay__input-wrapper">
-      <svg class="search-overlay__input-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+<!-- Wild One-style inline search: replaces header content -->
+<div class="search-bar" [class.search-bar--open]="isOpen()" role="search" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Busqueda global' : 'Global search'">
+  <!-- Backdrop (click to close) -->
+  <div class="search-bar__backdrop" (click)="close()"></div>
+
+  <!-- Search bar container (sits at top of page, over the header) -->
+  <div class="search-bar__container">
+    <div class="search-bar__inner">
+      <svg class="search-bar__icon" width="18" height="18" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+        <circle cx="9" cy="9" r="7.5" stroke="currentColor" stroke-width="2"/>
+        <path d="M14.5 14.5L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
       <input
         #searchInput
         type="text"
-        class="search-overlay__input"
+        class="search-bar__input"
         [placeholder]="i18n.currentLang() === 'es' ? 'Buscar productos, marcas...' : 'Search products, brands...'"
         [value]="searchTerm()"
         (input)="onInput($event)"
@@ -17,81 +21,97 @@
         aria-autocomplete="list"
         aria-controls="search-results"
         maxlength="100" />
+      @if (searchTerm().length > 0) {
+        <button class="search-bar__reset" (click)="searchTerm.set(''); productResults.set([]); brandResults.set([])" aria-label="Clear">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      }
+      <button class="search-bar__close" (click)="close()" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Cerrar busqueda' : 'Close search'">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
     </div>
 
-    @if (showHint) {
-      <p class="search-overlay__hint">{{ i18n.currentLang() === 'es' ? 'Escribe al menos 3 caracteres' : 'Type at least 3 characters' }}</p>
-    }
+    <!-- Results dropdown below the search bar -->
+    @if (hasResults || showNoResults || isSearching()) {
+      <div class="search-bar__dropdown">
+        @if (isSearching()) {
+          <div class="search-bar__loading">
+            <div class="search-bar__spinner"></div>
+            <span>{{ i18n.currentLang() === 'es' ? 'Buscando...' : 'Searching...' }}</span>
+          </div>
+        }
 
-    @if (isSearching()) {
-      <div class="search-overlay__loading">
-        <div class="search-overlay__spinner"></div>
-        <p>{{ i18n.currentLang() === 'es' ? 'Buscando...' : 'Searching...' }}</p>
-      </div>
-    }
-
-    @if (hasResults) {
-      <div class="search-overlay__results" id="search-results" role="listbox">
-        @if (productResults().length > 0) {
-          <div class="search-overlay__group">
-            <span class="search-overlay__group-label">{{ i18n.currentLang() === 'es' ? 'PRODUCTOS' : 'PRODUCTS' }} ({{ productResults().length }})</span>
-            @for (product of productResults(); track product.id; let i = $index) {
-              <div
-                class="search-overlay__item"
-                [class.search-overlay__item--selected]="selectedIndex() === i"
-                role="option"
-                [attr.aria-selected]="selectedIndex() === i"
-                (click)="navigateToProduct(product)">
-                <div class="search-overlay__item-thumb">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--neutral-300)" stroke-width="1.5" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
-                </div>
-                <div>
-                  <div class="search-overlay__item-name">{{ getProductName(product) }}</div>
-                  <div class="search-overlay__item-meta">{{ product.brand }}</div>
-                </div>
+        @if (hasResults) {
+          <div class="search-bar__results" id="search-results" role="listbox">
+            @if (productResults().length > 0) {
+              <div class="search-bar__group">
+                <span class="search-bar__group-label">{{ i18n.currentLang() === 'es' ? 'PRODUCTOS' : 'PRODUCTS' }}</span>
+                @for (product of productResults(); track product.id; let i = $index) {
+                  <div
+                    class="search-bar__item"
+                    [class.search-bar__item--selected]="selectedIndex() === i"
+                    role="option"
+                    [attr.aria-selected]="selectedIndex() === i"
+                    (click)="navigateToProduct(product)">
+                    <div class="search-bar__item-thumb">
+                      @if (product.image) {
+                        <img [src]="toWebP(product.image)" [alt]="getProductName(product)" />
+                      } @else {
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+                      }
+                    </div>
+                    <div class="search-bar__item-info">
+                      <span class="search-bar__item-name">{{ getProductName(product) }}</span>
+                      <span class="search-bar__item-meta">{{ product.brand }}</span>
+                    </div>
+                  </div>
+                }
+              </div>
+            }
+            @if (brandResults().length > 0) {
+              <div class="search-bar__group">
+                <span class="search-bar__group-label">{{ i18n.currentLang() === 'es' ? 'MARCAS' : 'BRANDS' }}</span>
+                @for (brand of brandResults(); track brand.id; let i = $index) {
+                  <div
+                    class="search-bar__item"
+                    [class.search-bar__item--selected]="selectedIndex() === productResults().length + i"
+                    role="option"
+                    [attr.aria-selected]="selectedIndex() === productResults().length + i"
+                    (click)="navigateToBrand(brand)">
+                    <div class="search-bar__item-thumb search-bar__item-thumb--brand">
+                      @if (brand.logo) {
+                        <img [src]="toWebP(brand.logo)" [alt]="brand.name" />
+                      } @else {
+                        {{ brand.name.charAt(0) }}
+                      }
+                    </div>
+                    <div class="search-bar__item-info">
+                      <span class="search-bar__item-name">{{ brand.name }}</span>
+                      <span class="search-bar__item-meta">{{ brand.country }}</span>
+                    </div>
+                  </div>
+                }
               </div>
             }
           </div>
+
+          <!-- View all results link -->
+          @if (searchTerm().length >= 3) {
+            <div class="search-bar__view-all">
+              <a (click)="navigateToSearchResults()">
+                {{ i18n.currentLang() === 'es' ? 'Ver todos los resultados para' : 'View all results for' }} "{{ searchTerm() }}"
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </a>
+            </div>
+          }
         }
-        @if (brandResults().length > 0) {
-          <div class="search-overlay__group">
-            <span class="search-overlay__group-label">{{ i18n.currentLang() === 'es' ? 'MARCAS' : 'BRANDS' }} ({{ brandResults().length }})</span>
-            @for (brand of brandResults(); track brand.id; let i = $index) {
-              <div
-                class="search-overlay__item"
-                [class.search-overlay__item--selected]="selectedIndex() === productResults().length + i"
-                role="option"
-                [attr.aria-selected]="selectedIndex() === productResults().length + i"
-                (click)="navigateToBrand(brand)">
-                <div class="search-overlay__item-thumb search-overlay__item-thumb--brand">
-                  @if (brand.logo) {
-                    <picture>
-                      <source [srcset]="toWebP(brand.logo)" type="image/webp">
-                      <img [src]="brand.logo" [alt]="brand.name" style="width:100%;height:100%;object-fit:contain;border-radius:50%;">
-                    </picture>
-                  } @else {
-                    {{ brand.name.charAt(0) }}
-                  }
-                </div>
-                <div>
-                  <div class="search-overlay__item-name">{{ brand.name }}</div>
-                  <div class="search-overlay__item-meta">{{ brand.country }}</div>
-                </div>
-              </div>
-            }
+
+        @if (showNoResults) {
+          <div class="search-bar__empty">
+            <p>{{ i18n.currentLang() === 'es' ? 'No se encontraron resultados para' : 'No results found for' }} "{{ searchTerm() }}"</p>
+            <a (click)="navigateToCatalog()" class="search-bar__empty-link">{{ i18n.currentLang() === 'es' ? 'Explorar catálogo' : 'Explore catalog' }}</a>
           </div>
         }
-      </div>
-    }
-
-    @if (showNoResults) {
-      <div class="search-overlay__no-results">
-        <div class="search-overlay__no-results-icon" aria-hidden="true">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--neutral-300)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
-        </div>
-        <p class="search-overlay__no-results-text">{{ i18n.currentLang() === 'es' ? 'No se encontraron productos para' : 'No products found for' }} "{{ searchTerm() }}"</p>
-        <p class="search-overlay__no-results-suggestion">{{ i18n.currentLang() === 'es' ? 'Intenta con otro termino o explora el catalogo completo' : 'Try a different term or explore the full catalog' }}</p>
-        <a class="search-overlay__catalog-link btn btn-outline btn-sm" (click)="navigateToCatalog()">{{ i18n.currentLang() === 'es' ? 'Explorar catalogo completo' : 'Explore full catalog' }}</a>
       </div>
     }
   </div>
