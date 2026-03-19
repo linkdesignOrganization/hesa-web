@@ -9,13 +9,9 @@
 }
 
 .header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  position: relative;
   z-index: var(--z-sticky);
   background-color: var(--neutral-white);
-  transition: box-shadow 0.2s ease;
 
   &--scrolled {
     box-shadow: 0 1px 8px rgba(0, 0, 0, 0.06);

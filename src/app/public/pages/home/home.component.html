@@ -48,37 +48,19 @@
           <span class="hero-tag-pill">{{ i18n.currentLang() === 'es' ? 'Cobertura Nacional' : 'National Coverage' }}</span>
           <span class="hero-tag-pill">{{ i18n.currentLang() === 'es' ? '+18 Marcas' : '+18 Brands' }}</span>
         </div>
-        <!-- Two info cards -->
-        <div class="hero-cards">
-          <!-- Card 1: Featured Product -->
-          <div class="hero-card">
-            <div class="hero-card__img-wrap">
-              <img src="https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?w=400&q=80" alt="Producto destacado" loading="lazy" class="hero-card__img" />
-              <span class="hero-card__category-badge">{{ i18n.currentLang() === 'es' ? 'Fármacos' : 'Pharmaceuticals' }}</span>
-            </div>
-            <div class="hero-card__body">
-              <h4 class="hero-card__name">Amoxicilina 500mg</h4>
-              <p class="hero-card__brand">Biozoo</p>
-              <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo' : 'catalog')" class="hero-card__pill-btn hero-card__pill-btn--blue">
-                {{ i18n.currentLang() === 'es' ? 'Ver producto' : 'View product' }}
-                <span class="material-symbols-outlined">arrow_forward</span>
-              </a>
-            </div>
+        <!-- Product card -->
+        <div class="hero-card">
+          <div class="hero-card__img-wrap">
+            <img src="https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?w=400&q=80" alt="Producto destacado" loading="lazy" class="hero-card__img" />
+            <span class="hero-card__category-badge">{{ i18n.currentLang() === 'es' ? 'Fármacos' : 'Pharmaceuticals' }}</span>
           </div>
-          <!-- Card 2: Featured Brand -->
-          <div class="hero-card">
-            <div class="hero-card__img-wrap">
-              <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&q=80" alt="Marca destacada" loading="lazy" class="hero-card__img" />
-              <span class="hero-card__category-badge">{{ i18n.currentLang() === 'es' ? 'Marca' : 'Brand' }}</span>
-            </div>
-            <div class="hero-card__body">
-              <h4 class="hero-card__name">Biozoo</h4>
-              <p class="hero-card__brand">{{ i18n.currentLang() === 'es' ? 'España' : 'Spain' }}</p>
-              <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'marcas' : 'brands')" class="hero-card__pill-btn hero-card__pill-btn--blue">
-                {{ i18n.currentLang() === 'es' ? 'Ver marca' : 'View brand' }}
-                <span class="material-symbols-outlined">arrow_forward</span>
-              </a>
-            </div>
+          <div class="hero-card__body">
+            <h4 class="hero-card__name">Amoxicilina 500mg</h4>
+            <p class="hero-card__brand">Biozoo</p>
+            <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo' : 'catalog')" class="hero-card__pill-btn hero-card__pill-btn--blue">
+              {{ i18n.currentLang() === 'es' ? 'Ver producto' : 'View product' }}
+              <span class="material-symbols-outlined">arrow_forward</span>
+            </a>
           </div>
         </div>
       </div>
