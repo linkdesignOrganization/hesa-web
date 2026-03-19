@@ -1,12 +1,13 @@
 import { Component, inject, signal, OnInit } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ApiService, ApiHomeConfig } from '../../../shared/services/api.service';
+import { ApiService, ApiHeroSlide, ApiHomeConfig, ApiProduct } from '../../../shared/services/api.service';
 import { ToastService } from '../../../shared/services/toast.service';
 
 @Component({
   selector: 'app-admin-home-hero',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, NgTemplateOutlet],
   templateUrl: './home-hero.component.html',
   styleUrl: './home-hero.component.scss'
 })
@@ -14,18 +15,29 @@ export class AdminHomeHeroComponent implements OnInit {
   private api = inject(ApiService);
   private toast = inject(ToastService);
 
+  // Page state
   loading = signal(true);
-  error = signal(false);
   saving = signal(false);
+  error = signal(false);
   uploadingImage = signal(false);
-  activeLang = signal<'es' | 'en'>('es');
-  heroImage = signal<string>('');
 
-  tag = { es: '', en: '' };
-  headline = { es: '', en: '' };
-  subtitle = { es: '', en: '' };
-  ctaPrimary = { es: '', en: '' };
-  ctaSecondary = { es: '', en: '' };
+  // Hero data
+  heroMode = signal<'single' | 'carousel'>('single');
+  slides = signal<ApiHeroSlide[]>([]);
+
+  // UI state
+  activeLang = signal<'es' | 'en'>('es');
+  activeSlideIndex = signal(0);
+  expandedSlides = signal<Set<number>>(new Set([0]));
+
+  // Product modal
+  showProductModal = signal(false);
+  productSearchTerm = signal('');
+  productSearchResults = signal<ApiProduct[]>([]);
+  selectedProductForSlide = signal<number>(-1);
+  loadingProducts = signal(false);
+
+  private allProducts: ApiProduct[] = [];
 
   async ngOnInit(): Promise<void> {
     await this.loadConfig();
@@ -36,28 +48,124 @@ export class AdminHomeHeroComponent implements OnInit {
     this.error.set(false);
     try {
       const config = await this.api.adminGetHomeConfig();
-      this.heroImage.set(config.hero.image || '');
-      this.tag = { ...config.hero.tag };
-      this.headline = { ...config.hero.headline };
-      this.subtitle = { ...config.hero.subtitle };
-      this.ctaPrimary = { ...config.hero.ctaPrimary };
-      this.ctaSecondary = { ...config.hero.ctaSecondary };
+      this.heroMode.set(config.hero.mode || 'single');
+      const loadedSlides = config.hero.slides && config.hero.slides.length > 0
+        ? config.hero.slides
+        : [this.createEmptySlide()];
+      this.slides.set(loadedSlides);
+      this.activeSlideIndex.set(0);
+      this.expandedSlides.set(new Set([0]));
     } catch {
       this.error.set(true);
     }
     this.loading.set(false);
   }
 
-  async onImageSelected(event: Event): Promise<void> {
+  createEmptySlide(): ApiHeroSlide {
+    return {
+      tag: { es: '', en: '' },
+      headline: { es: '', en: '' },
+      subtitle: { es: '', en: '' },
+      ctaText: { es: '', en: '' },
+      ctaLink: '',
+      product: null,
+      tags: [],
+      imageDesktop: '',
+      imageMobile: '',
+    };
+  }
+
+  setMode(mode: 'single' | 'carousel'): void {
+    this.heroMode.set(mode);
+    if (mode === 'single') {
+      const current = this.slides();
+      if (current.length > 1) {
+        this.slides.set([current[0]]);
+      }
+      this.activeSlideIndex.set(0);
+      this.expandedSlides.set(new Set([0]));
+    }
+  }
+
+  addSlide(): void {
+    const current = this.slides();
+    if (current.length >= 4) return;
+    const newIndex = current.length;
+    this.slides.set([...current, this.createEmptySlide()]);
+    this.expandedSlides.update(set => {
+      const next = new Set(set);
+      next.add(newIndex);
+      return next;
+    });
+  }
+
+  removeSlide(index: number): void {
+    const current = this.slides();
+    if (current.length <= 1) return;
+    const updated = current.filter((_, i) => i !== index);
+    this.slides.set(updated);
+    // Update expanded slides
+    this.expandedSlides.set(new Set([0]));
+    if (this.activeSlideIndex() >= updated.length) {
+      this.activeSlideIndex.set(updated.length - 1);
+    }
+  }
+
+  toggleSlideExpand(index: number): void {
+    this.expandedSlides.update(set => {
+      const next = new Set(set);
+      if (next.has(index)) {
+        next.delete(index);
+      } else {
+        next.add(index);
+      }
+      return next;
+    });
+  }
+
+  isSlideExpanded(index: number): boolean {
+    return this.expandedSlides().has(index);
+  }
+
+  async save(): Promise<void> {
+    this.saving.set(true);
+    try {
+      const slidesData = this.slides().map(slide => ({
+        ...slide,
+        product: slide.product && typeof slide.product === 'object' && '_id' in slide.product
+          ? (slide.product as ApiProduct)._id
+          : slide.product,
+      }));
+      await this.api.adminUpdateHero({
+        mode: this.heroMode(),
+        slides: slidesData,
+      });
+      this.toast.success('Hero actualizado correctamente');
+    } catch {
+      this.toast.error('Error al guardar los cambios');
+    }
+    this.saving.set(false);
+  }
+
+  async uploadImage(slideIndex: number, imageType: 'desktop' | 'mobile', event: Event): Promise<void> {
     const input = event.target as HTMLInputElement;
     const file = input.files?.[0];
     if (!file) return;
 
     this.uploadingImage.set(true);
     try {
-      const config = await this.api.adminUploadHeroImage(file);
-      this.heroImage.set(config.hero.image || '');
-      this.toast.success('Imagen del hero actualizada');
+      const config = await this.api.adminUploadHeroSlideImage(file, slideIndex, imageType);
+      // Update the local slides with the new image
+      if (config.hero.slides[slideIndex]) {
+        const updated = [...this.slides()];
+        if (imageType === 'desktop') {
+          updated[slideIndex] = { ...updated[slideIndex], imageDesktop: config.hero.slides[slideIndex].imageDesktop };
+        } else {
+          updated[slideIndex] = { ...updated[slideIndex], imageMobile: config.hero.slides[slideIndex].imageMobile };
+        }
+        this.slides.set(updated);
+      }
+      this.toast.success(`Imagen ${imageType} actualizada`);
     } catch {
       this.toast.error('Error al subir la imagen');
     }
@@ -65,20 +173,103 @@ export class AdminHomeHeroComponent implements OnInit {
     input.value = '';
   }
 
-  async save(): Promise<void> {
-    this.saving.set(true);
-    try {
-      await this.api.adminUpdateHero({
-        tag: this.tag,
-        headline: this.headline,
-        subtitle: this.subtitle,
-        ctaPrimary: this.ctaPrimary,
-        ctaSecondary: this.ctaSecondary,
-      });
-      this.toast.success('Hero actualizado correctamente');
-    } catch {
-      this.toast.error('Error al guardar los cambios');
+  // ── Product modal ──
+
+  async openProductModal(slideIndex: number): Promise<void> {
+    this.selectedProductForSlide.set(slideIndex);
+    this.productSearchTerm.set('');
+    this.productSearchResults.set([]);
+    this.showProductModal.set(true);
+
+    // Pre-load products if not cached
+    if (this.allProducts.length === 0) {
+      await this.loadAllProducts();
     }
-    this.saving.set(false);
+    this.productSearchResults.set(this.allProducts.slice(0, 20));
+  }
+
+  private async loadAllProducts(): Promise<void> {
+    this.loadingProducts.set(true);
+    try {
+      const result = await this.api.adminGetProducts({ limit: 200 });
+      this.allProducts = result.data.filter(p => p.isActive);
+    } catch {
+      this.toast.error('Error al cargar productos');
+    }
+    this.loadingProducts.set(false);
+  }
+
+  searchProducts(term: string): void {
+    this.productSearchTerm.set(term);
+    if (!term.trim()) {
+      this.productSearchResults.set(this.allProducts.slice(0, 20));
+      return;
+    }
+    const lower = term.toLowerCase().trim();
+    const filtered = this.allProducts.filter(p =>
+      p.name.es.toLowerCase().includes(lower) ||
+      p.name.en.toLowerCase().includes(lower)
+    );
+    this.productSearchResults.set(filtered);
+  }
+
+  selectProduct(product: ApiProduct): void {
+    const slideIndex = this.selectedProductForSlide();
+    if (slideIndex < 0) return;
+    const updated = [...this.slides()];
+    updated[slideIndex] = { ...updated[slideIndex], product };
+    this.slides.set(updated);
+    this.showProductModal.set(false);
+  }
+
+  removeProduct(slideIndex: number): void {
+    const updated = [...this.slides()];
+    updated[slideIndex] = { ...updated[slideIndex], product: null };
+    this.slides.set(updated);
+  }
+
+  // ── Tags ──
+
+  addTag(slideIndex: number): void {
+    const updated = [...this.slides()];
+    const slide = updated[slideIndex];
+    const currentTags = slide.tags || [];
+    if (currentTags.length >= 6) return;
+    updated[slideIndex] = {
+      ...slide,
+      tags: [...currentTags, { es: '', en: '' }],
+    };
+    this.slides.set(updated);
+  }
+
+  removeTag(slideIndex: number, tagIndex: number): void {
+    const updated = [...this.slides()];
+    const slide = updated[slideIndex];
+    const currentTags = [...(slide.tags || [])];
+    currentTags.splice(tagIndex, 1);
+    updated[slideIndex] = { ...slide, tags: currentTags };
+    this.slides.set(updated);
+  }
+
+  // ── Helpers ──
+
+  getProductName(product: ApiProduct | string | null | undefined): string {
+    if (!product) return '';
+    if (typeof product === 'string') return product;
+    return product.name?.es || '';
+  }
+
+  getProductImage(product: ApiProduct | string | null | undefined): string {
+    if (!product || typeof product === 'string') return '';
+    return product.images?.[0] || '';
+  }
+
+  getProductBrand(product: ApiProduct | string | null | undefined): string {
+    if (!product || typeof product === 'string') return '';
+    return product.brand?.name || '';
+  }
+
+  isProductObject(product: ApiProduct | string | null | undefined): boolean {
+    return !!product && typeof product === 'object';
   }
 }

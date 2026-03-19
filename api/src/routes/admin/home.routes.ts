@@ -10,15 +10,12 @@ import { processImageSingle } from '../../utils/image-processor';
 
 const router = Router();
 
-/** Validate that every element in an array is a valid ObjectId string. */
 function validateIdArray(ids: unknown): ids is string[] {
   return Array.isArray(ids) && ids.every(id => typeof id === 'string' && mongoose.isValidObjectId(id));
 }
 
 /**
  * GET /api/admin/home
- * Get full home config for admin editing.
- * REQ-275 to REQ-283
  */
 router.get('/', async (_req: AuthRequest, res: Response) => {
   try {
@@ -32,12 +29,63 @@ router.get('/', async (_req: AuthRequest, res: Response) => {
 
 /**
  * PUT /api/admin/home/hero
- * Update hero text fields.
- * REQ-275 to REQ-277
+ * Update hero: mode + slides array.
  */
 router.put('/hero', sanitizeBody, async (req: AuthRequest, res: Response) => {
   try {
-    const config = await homeService.updateHero(req.body);
+    const { mode, slides } = req.body;
+
+    if (!mode || !['single', 'carousel'].includes(mode)) {
+      res.status(400).json({ error: 'mode must be "single" or "carousel"' });
+      return;
+    }
+
+    if (!Array.isArray(slides) || slides.length === 0) {
+      res.status(400).json({ error: 'At least one slide is required' });
+      return;
+    }
+
+    if (mode === 'single' && slides.length > 1) {
+      res.status(400).json({ error: 'Single mode allows only 1 slide' });
+      return;
+    }
+
+    if (slides.length > 4) {
+      res.status(400).json({ error: 'Maximum 4 slides allowed' });
+      return;
+    }
+
+    // Validate required fields per slide
+    for (let i = 0; i < slides.length; i++) {
+      const s = slides[i];
+      if (!s.tag?.es || !s.tag?.en) {
+        res.status(400).json({ error: `Slide ${i + 1}: tag is required (ES and EN)` });
+        return;
+      }
+      if (!s.headline?.es || !s.headline?.en) {
+        res.status(400).json({ error: `Slide ${i + 1}: headline is required (ES and EN)` });
+        return;
+      }
+      if (!s.ctaText?.es || !s.ctaText?.en) {
+        res.status(400).json({ error: `Slide ${i + 1}: CTA text is required (ES and EN)` });
+        return;
+      }
+      if (!s.ctaLink) {
+        res.status(400).json({ error: `Slide ${i + 1}: CTA link is required` });
+        return;
+      }
+      if (s.tags && s.tags.length > 6) {
+        res.status(400).json({ error: `Slide ${i + 1}: maximum 6 tags allowed` });
+        return;
+      }
+      // Validate product ID if provided
+      if (s.product && !mongoose.isValidObjectId(s.product)) {
+        res.status(400).json({ error: `Slide ${i + 1}: invalid product ID` });
+        return;
+      }
+    }
+
+    const config = await homeService.updateHero({ mode, slides });
     if (!config) {
       res.status(500).json({ error: 'Failed to update hero' });
       return;
@@ -48,6 +96,7 @@ router.put('/hero', sanitizeBody, async (req: AuthRequest, res: Response) => {
       entity: 'content',
       entityName: 'Hero del Home',
       user: req.user?.email,
+      details: `${mode}, ${slides.length} slide(s)`,
     });
 
     res.json(config);
@@ -59,8 +108,8 @@ router.put('/hero', sanitizeBody, async (req: AuthRequest, res: Response) => {
 
 /**
  * POST /api/admin/home/hero/image
- * Upload hero background image.
- * REQ-048
+ * Upload hero slide image (desktop or mobile).
+ * Body params: slideIndex (number), imageType ('desktop' | 'mobile')
  */
 router.post('/hero/image', adminUploadSingleImage.single('image'), async (req: AuthRequest, res: Response) => {
   try {
@@ -70,35 +119,49 @@ router.post('/hero/image', adminUploadSingleImage.single('image'), async (req: A
       return;
     }
 
-    // Delete old hero image
+    const slideIndex = parseInt(req.body.slideIndex, 10);
+    const imageType = req.body.imageType as 'desktop' | 'mobile';
+
+    if (isNaN(slideIndex) || slideIndex < 0 || slideIndex > 3) {
+      res.status(400).json({ error: 'Invalid slide index (0-3)' });
+      return;
+    }
+    if (!imageType || !['desktop', 'mobile'].includes(imageType)) {
+      res.status(400).json({ error: 'imageType must be "desktop" or "mobile"' });
+      return;
+    }
+
+    // Delete old image if exists
     const current = await homeService.getHomeConfig();
-    if (current.hero.image) {
-      await storageService.deleteBlob(current.hero.image);
+    const currentSlide = current.hero?.slides?.[slideIndex];
+    if (currentSlide) {
+      const oldUrl = imageType === 'desktop' ? currentSlide.imageDesktop : currentSlide.imageMobile;
+      if (oldUrl) {
+        await storageService.deleteBlob(oldUrl).catch(() => {});
+      }
     }
 
     const processed = await processImageSingle(file.buffer, 1920);
     const imageUrl = await storageService.uploadImage(processed.buffer, processed.contentType, 'home');
 
-    const config = await homeService.updateHero({ image: imageUrl });
+    const config = await homeService.updateSlideImage(slideIndex, imageType, imageUrl);
 
     await logActivity({
       action: 'update',
       entity: 'content',
-      entityName: 'Imagen del Hero',
+      entityName: `Hero Slide ${slideIndex + 1} (${imageType})`,
       user: req.user?.email,
     });
 
     res.json(config);
   } catch (error) {
-    console.error('Error uploading hero image:', error);
-    res.status(500).json({ error: 'Failed to upload hero image' });
+    console.error('Error uploading hero slide image:', error);
+    res.status(500).json({ error: 'Failed to upload hero slide image' });
   }
 });
 
 /**
  * PUT /api/admin/home/featured-products
- * Update featured products list (array of product IDs in order).
- * REQ-278 to REQ-281
  */
 router.put('/featured-products', sanitizeBody, async (req: AuthRequest, res: Response) => {
   try {
@@ -127,8 +190,6 @@ router.put('/featured-products', sanitizeBody, async (req: AuthRequest, res: Res
 
 /**
  * PUT /api/admin/home/featured-brands
- * Update featured brands list (array of brand IDs in order).
- * REQ-282 to REQ-283
  */
 router.put('/featured-brands', sanitizeBody, async (req: AuthRequest, res: Response) => {
   try {

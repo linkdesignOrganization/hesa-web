@@ -1,4 +1,4 @@
-import { HomeConfig, IHomeConfig } from '../models/home-config.model';
+import { HomeConfig, IHomeConfig, IHeroSlide } from '../models/home-config.model';
 import { Product } from '../models/product.model';
 import { Brand } from '../models/brand.model';
 import mongoose from 'mongoose';
@@ -6,29 +6,60 @@ import mongoose from 'mongoose';
 /**
  * Get the singleton home configuration document.
  * Creates one with defaults if it doesn't exist.
+ * Includes migration from legacy hero format to new slides format.
  */
 export async function getHomeConfig(): Promise<IHomeConfig> {
   let config = await HomeConfig.findOne().lean() as unknown as IHomeConfig | null;
   if (!config) {
-    const created = await HomeConfig.create({});
+    const created = await HomeConfig.create({
+      hero: {
+        mode: 'single',
+        slides: [{
+          tag: { es: 'DESDE 1987', en: 'SINCE 1987' },
+          headline: { es: 'Conectamos la industria veterinaria con las mejores marcas del mundo', en: 'Connecting the veterinary industry with the world\'s best brands' },
+          subtitle: { es: 'Importacion y distribucion de farmacos veterinarios, alimentos para animales y equipos veterinarios en Costa Rica', en: 'Import and distribution of veterinary pharmaceuticals, animal food, and veterinary equipment in Costa Rica' },
+          ctaText: { es: 'Explorar catalogo', en: 'Explore catalog' },
+          ctaLink: '/es/catalogo',
+        }],
+      },
+    });
     config = created.toObject() as unknown as IHomeConfig;
   }
+
+  // Migration: convert legacy hero format to new slides format
+  if (config.hero && (!config.hero.slides || config.hero.slides.length === 0) && config.hero.tag) {
+    const legacySlide: Partial<IHeroSlide> = {
+      tag: config.hero.tag,
+      headline: config.hero.headline,
+      subtitle: config.hero.subtitle,
+      ctaText: config.hero.ctaPrimary || { es: 'Explorar catalogo', en: 'Explore catalog' },
+      ctaLink: '/es/catalogo',
+    };
+    if (config.hero.image) {
+      legacySlide.imageDesktop = config.hero.image;
+      legacySlide.imageMobile = config.hero.image;
+    }
+    await HomeConfig.findByIdAndUpdate(config._id, {
+      $set: {
+        'hero.mode': 'single',
+        'hero.slides': [legacySlide],
+      },
+    });
+    config.hero.mode = 'single';
+    config.hero.slides = [legacySlide as IHeroSlide];
+  }
+
   return config;
 }
 
 /**
  * BUG-002 FIX: Ensure home config has featured brands/products populated.
- * When the home_config document has empty arrays, auto-populate from
- * brands/products that have isFeatured: true in the database.
- * This runs during the public home endpoint to guarantee data availability
- * even before an admin explicitly sets featured items via the panel.
  */
 export async function ensureFeaturedItemsPopulated(): Promise<void> {
   const config = await getHomeConfig();
   let needsUpdate = false;
   const updateFields: Record<string, unknown> = {};
 
-  // Auto-populate featured brands from brands with isFeatured: true
   if (!config.featuredBrands || config.featuredBrands.length === 0) {
     const featuredBrands = await Brand.find({ isFeatured: true })
       .sort({ featuredOrder: 1 })
@@ -39,7 +70,6 @@ export async function ensureFeaturedItemsPopulated(): Promise<void> {
     }
   }
 
-  // Auto-populate featured products from products with isFeatured: true
   if (!config.featuredProducts || config.featuredProducts.length === 0) {
     const featuredProducts = await Product.find({ isFeatured: true, isActive: true })
       .sort({ featuredOrder: 1 })
@@ -56,36 +86,73 @@ export async function ensureFeaturedItemsPopulated(): Promise<void> {
 }
 
 /**
- * Update the hero section of the home config.
- * Flattens bilingual fields into dot-notation for partial $set updates.
+ * Update the hero section with new mode + slides structure.
  */
-export async function updateHero(heroData: Partial<IHomeConfig['hero']>): Promise<IHomeConfig | null> {
+export async function updateHero(heroData: { mode: 'single' | 'carousel'; slides: IHeroSlide[] }): Promise<IHomeConfig | null> {
   const config = await getHomeConfig();
-  const updateFields: Record<string, unknown> = {};
-
-  if (heroData.image !== undefined) {
-    updateFields['hero.image'] = heroData.image;
-  }
-
-  const bilingualKeys = ['tag', 'headline', 'subtitle', 'ctaPrimary', 'ctaSecondary'] as const;
-  for (const key of bilingualKeys) {
-    const field = heroData[key];
-    if (field) {
-      if (field.es !== undefined) updateFields[`hero.${key}.es`] = field.es;
-      if (field.en !== undefined) updateFields[`hero.${key}.en`] = field.en;
-    }
-  }
-
   return HomeConfig.findByIdAndUpdate(
     config._id,
-    { $set: updateFields },
+    {
+      $set: {
+        'hero.mode': heroData.mode,
+        'hero.slides': heroData.slides,
+      },
+    },
     { new: true }
   ).lean() as unknown as Promise<IHomeConfig | null>;
 }
 
 /**
- * Update featured products list.
+ * Update a specific slide's image (desktop or mobile).
  */
+export async function updateSlideImage(
+  slideIndex: number,
+  imageType: 'desktop' | 'mobile',
+  imageUrl: string
+): Promise<IHomeConfig | null> {
+  const config = await getHomeConfig();
+  const field = imageType === 'desktop' ? 'imageDesktop' : 'imageMobile';
+  const key = `hero.slides.${slideIndex}.${field}`;
+  return HomeConfig.findByIdAndUpdate(
+    config._id,
+    { $set: { [key]: imageUrl } },
+    { new: true }
+  ).lean() as unknown as Promise<IHomeConfig | null>;
+}
+
+/**
+ * Get hero slides with product populated for public display.
+ */
+export async function getHeroSlidesPopulated(): Promise<{ mode: string; slides: unknown[] }> {
+  const config = await getHomeConfig();
+  const slides = config.hero?.slides || [];
+  const mode = config.hero?.mode || 'single';
+
+  const populated = await Promise.all(
+    slides.map(async (slide: IHeroSlide) => {
+      const result: Record<string, unknown> = { ...slide };
+      if (slide.product) {
+        const productId = typeof slide.product === 'string' ? slide.product : String(slide.product);
+        if (mongoose.Types.ObjectId.isValid(productId)) {
+          const product = await Product.findById(productId)
+            .populate('brand', 'name slug logo country categories')
+            .lean();
+          if (product && (product as any).isActive) {
+            result.product = product;
+          } else {
+            result.product = null;
+          }
+        }
+      }
+      return result;
+    })
+  );
+
+  return { mode, slides: populated };
+}
+
+// ---- Featured Products/Brands (unchanged) ----
+
 export async function updateFeaturedProducts(productIds: string[]): Promise<IHomeConfig | null> {
   const config = await getHomeConfig();
   return HomeConfig.findByIdAndUpdate(
@@ -95,9 +162,6 @@ export async function updateFeaturedProducts(productIds: string[]): Promise<IHom
   ).lean() as unknown as Promise<IHomeConfig | null>;
 }
 
-/**
- * Update featured brands list.
- */
 export async function updateFeaturedBrands(brandIds: string[]): Promise<IHomeConfig | null> {
   const config = await getHomeConfig();
   return HomeConfig.findByIdAndUpdate(
@@ -107,10 +171,6 @@ export async function updateFeaturedBrands(brandIds: string[]): Promise<IHomeCon
   ).lean() as unknown as Promise<IHomeConfig | null>;
 }
 
-/**
- * Get featured products in order, with brand populated.
- * REQ-066 to REQ-073: Only active products, in the order set by admin.
- */
 export async function getFeaturedProductsPopulated(): Promise<unknown[]> {
   const config = await getHomeConfig();
   if (!config.featuredProducts || config.featuredProducts.length === 0) return [];
@@ -126,17 +186,12 @@ export async function getFeaturedProductsPopulated(): Promise<unknown[]> {
     .populate('brand', 'name slug logo country categories')
     .lean();
 
-  // Maintain the admin-defined order
   const productMap = new Map(products.map(p => [String(p._id), p]));
   return config.featuredProducts
     .map(id => productMap.get(id))
     .filter(Boolean);
 }
 
-/**
- * Get featured brands in order.
- * REQ-057 to REQ-061: Brands in the order set by admin.
- */
 export async function getFeaturedBrandsPopulated(): Promise<unknown[]> {
   const config = await getHomeConfig();
   if (!config.featuredBrands || config.featuredBrands.length === 0) return [];

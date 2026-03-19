@@ -82,22 +82,34 @@ export interface ApiCategory {
   totalCount?: number;
 }
 
+export interface ApiHeroSlide {
+  _id?: string;
+  tag: { es: string; en: string };
+  headline: { es: string; en: string };
+  subtitle?: { es: string; en: string };
+  ctaText: { es: string; en: string };
+  ctaLink: string;
+  product?: ApiProduct | string | null;
+  tags?: { es: string; en: string }[];
+  imageDesktop?: string;
+  imageMobile?: string;
+}
+
 export interface ApiHomeConfig {
   _id: string;
   hero: {
-    image?: string;
-    tag: { es: string; en: string };
-    headline: { es: string; en: string };
-    subtitle: { es: string; en: string };
-    ctaPrimary: { es: string; en: string };
-    ctaSecondary: { es: string; en: string };
+    mode: 'single' | 'carousel';
+    slides: ApiHeroSlide[];
   };
   featuredProducts: string[];
   featuredBrands: string[];
 }
 
 export interface ApiHomePublic {
-  hero: ApiHomeConfig['hero'];
+  hero: {
+    mode: 'single' | 'carousel';
+    slides: ApiHeroSlide[];
+  };
   featuredProducts: ApiProduct[];
   featuredBrands: ApiBrand[];
 }
@@ -468,15 +480,17 @@ export class ApiService {
     );
   }
 
-  async adminUpdateHero(data: Record<string, unknown>): Promise<ApiHomeConfig> {
+  async adminUpdateHero(data: { mode: string; slides: Partial<ApiHeroSlide>[] }): Promise<ApiHomeConfig> {
     return firstValueFrom(
       this.http.put<ApiHomeConfig>(`${this.baseUrl}/admin/home/hero`, data)
     );
   }
 
-  async adminUploadHeroImage(file: File): Promise<ApiHomeConfig> {
+  async adminUploadHeroSlideImage(file: File, slideIndex: number, imageType: 'desktop' | 'mobile'): Promise<ApiHomeConfig> {
     const formData = new FormData();
     formData.append('image', file);
+    formData.append('slideIndex', String(slideIndex));
+    formData.append('imageType', imageType);
     return firstValueFrom(
       this.http.post<ApiHomeConfig>(`${this.baseUrl}/admin/home/hero/image`, formData)
     );

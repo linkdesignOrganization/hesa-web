@@ -1,13 +1,24 @@
 <!-- ADMIN HOME HERO EDITOR — Dashly X -->
 <div class="hero-editor">
+
+  <!-- Page Header -->
   <div class="adm-page-header">
     <div class="adm-page-header__left">
-      <h1 class="adm-page-header__title">Editor del Hero</h1>
+      <h1 class="adm-page-header__title">Hero del Home</h1>
     </div>
+    <button class="adm-btn adm-btn--primary" [disabled]="saving() || loading()" (click)="save()">
+      @if (saving()) {
+        <span class="adm-spinner"></span> Guardando...
+      } @else {
+        <span class="material-symbols-outlined">save</span> Guardar cambios
+      }
+    </button>
   </div>
 
+  <!-- Loading -->
   @if (loading()) {
     <div class="hero-editor__skeletons">
+      <div class="adm-skeleton" style="height: 48px;"></div>
       <div class="adm-skeleton adm-skeleton--card" style="height: 200px;"></div>
       <div class="adm-skeleton" style="height: 44px;"></div>
       <div class="adm-skeleton" style="height: 80px;"></div>
@@ -20,57 +31,279 @@
       </div>
     </div>
   } @else {
-    <div class="hero-editor__layout">
-      <!-- Image Preview -->
-      <div class="hero-editor__preview">
-        @if (heroImage()) {
-          <div class="hero-editor__preview-image" [style.background-image]="'url(' + heroImage() + ')'">
-            <button class="adm-btn adm-btn--secondary adm-btn--sm hero-editor__change-btn" (click)="fileInput.click()">Cambiar imagen</button>
-          </div>
-        } @else {
-          <div class="adm-uploader hero-editor__uploader" (click)="fileInput.click()">
-            <span class="material-symbols-outlined">add_photo_alternate</span>
-            <p class="adm-uploader__text">Haz clic para subir imagen del hero</p>
-            <span class="adm-uploader__hint">Recomendado: 1920x1080px, JPG o WebP</span>
-          </div>
-        }
-        <input #fileInput type="file" accept="image/jpeg,image/png,image/webp" style="display: none;" (change)="onImageSelected($event)">
-        @if (uploadingImage()) {
-          <div class="hero-editor__upload-progress">
-            <div class="hero-editor__upload-bar"></div>
-          </div>
-        }
-      </div>
 
-      <!-- Form Fields -->
-      <div class="hero-editor__form">
-        <div class="adm-tabs">
-          <button class="adm-tab" [class.adm-tab--active]="activeLang() === 'es'" (click)="activeLang.set('es')">Espanol</button>
-          <button class="adm-tab" [class.adm-tab--active]="activeLang() === 'en'" (click)="activeLang.set('en')">English</button>
+    <!-- Mode Tabs -->
+    <div class="adm-tabs hero-editor__mode-tabs">
+      <button class="adm-tab" [class.adm-tab--active]="heroMode() === 'single'" (click)="setMode('single')">
+        <span class="material-symbols-outlined">image</span> Hero Simple
+      </button>
+      <button class="adm-tab" [class.adm-tab--active]="heroMode() === 'carousel'" (click)="setMode('carousel')">
+        <span class="material-symbols-outlined">view_carousel</span> Carrusel
+      </button>
+    </div>
+
+    <!-- SINGLE MODE -->
+    @if (heroMode() === 'single') {
+      <div class="hero-editor__single">
+        <ng-container *ngTemplateOutlet="slideForm; context: { $implicit: slides()[0], index: 0 }"></ng-container>
+      </div>
+    }
+
+    <!-- CAROUSEL MODE -->
+    @if (heroMode() === 'carousel') {
+      <div class="hero-editor__carousel">
+        <!-- Slide list -->
+        <div class="hero-editor__slide-list">
+          @for (slide of slides(); track $index) {
+            <div class="hero-editor__slide-card adm-card" [class.hero-editor__slide-card--expanded]="isSlideExpanded($index)">
+              <!-- Slide header (always visible) -->
+              <div class="hero-editor__slide-header" (click)="toggleSlideExpand($index)">
+                <div class="hero-editor__slide-header-left">
+                  <div class="hero-editor__slide-thumb">
+                    @if (slide.imageDesktop) {
+                      <img [src]="slide.imageDesktop" alt="Slide thumbnail" class="hero-editor__slide-thumb-img">
+                    } @else {
+                      <span class="material-symbols-outlined hero-editor__slide-thumb-placeholder">image</span>
+                    }
+                  </div>
+                  <div class="hero-editor__slide-info">
+                    <span class="hero-editor__slide-number">Slide {{ $index + 1 }}</span>
+                    <span class="hero-editor__slide-headline">{{ slide.headline.es || 'Sin titulo' }}</span>
+                  </div>
+                </div>
+                <div class="hero-editor__slide-actions">
+                  @if (slides().length > 1) {
+                    <button class="adm-btn adm-btn--icon" aria-label="Eliminar slide" (click)="removeSlide($index); $event.stopPropagation()">
+                      <span class="material-symbols-outlined">delete</span>
+                    </button>
+                  }
+                  <span class="material-symbols-outlined hero-editor__slide-chevron">
+                    {{ isSlideExpanded($index) ? 'expand_less' : 'expand_more' }}
+                  </span>
+                </div>
+              </div>
+
+              <!-- Slide form (expandable) -->
+              @if (isSlideExpanded($index)) {
+                <div class="hero-editor__slide-body">
+                  <ng-container *ngTemplateOutlet="slideForm; context: { $implicit: slide, index: $index }"></ng-container>
+                </div>
+              }
+            </div>
+          }
         </div>
 
-        @if (activeLang() === 'es') {
-          <div class="adm-form-group"><label class="adm-form-label">Tag superior</label><input type="text" class="adm-form-control" [(ngModel)]="tag.es"></div>
-          <div class="adm-form-group"><label class="adm-form-label">Headline</label><textarea class="adm-form-control" rows="2" [(ngModel)]="headline.es"></textarea></div>
-          <div class="adm-form-group"><label class="adm-form-label">Subtitulo</label><textarea class="adm-form-control" rows="2" [(ngModel)]="subtitle.es"></textarea></div>
-          <div class="adm-form-group"><label class="adm-form-label">CTA Primario</label><input type="text" class="adm-form-control" [(ngModel)]="ctaPrimary.es"></div>
-          <div class="adm-form-group"><label class="adm-form-label">CTA Secundario</label><input type="text" class="adm-form-control" [(ngModel)]="ctaSecondary.es"></div>
-        } @else {
-          <div class="adm-form-group"><label class="adm-form-label">Top Tag</label><input type="text" class="adm-form-control" [(ngModel)]="tag.en"></div>
-          <div class="adm-form-group"><label class="adm-form-label">Headline</label><textarea class="adm-form-control" rows="2" [(ngModel)]="headline.en"></textarea></div>
-          <div class="adm-form-group"><label class="adm-form-label">Subtitle</label><textarea class="adm-form-control" rows="2" [(ngModel)]="subtitle.en"></textarea></div>
-          <div class="adm-form-group"><label class="adm-form-label">Primary CTA</label><input type="text" class="adm-form-control" [(ngModel)]="ctaPrimary.en"></div>
-          <div class="adm-form-group"><label class="adm-form-label">Secondary CTA</label><input type="text" class="adm-form-control" [(ngModel)]="ctaSecondary.en"></div>
+        <!-- Add slide button -->
+        @if (slides().length < 4) {
+          <button class="adm-btn adm-btn--secondary hero-editor__add-slide" (click)="addSlide()">
+            <span class="material-symbols-outlined">add</span> Agregar slide
+          </button>
         }
-
-        <button class="adm-btn adm-btn--primary" [disabled]="saving()" (click)="save()">
-          @if (saving()) {
-            <span class="adm-spinner"></span> Guardando...
-          } @else {
-            <span class="material-symbols-outlined">save</span> Guardar cambios
-          }
-        </button>
       </div>
-    </div>
+    }
   }
 </div>
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE FORM TEMPLATE                                                -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<ng-template #slideForm let-slide let-index="index">
+  <div class="hero-editor__form">
+
+    <!-- Language Tabs -->
+    <div class="adm-tabs hero-editor__lang-tabs">
+      <button class="adm-tab" [class.adm-tab--active]="activeLang() === 'es'" (click)="activeLang.set('es')">Espanol</button>
+      <button class="adm-tab" [class.adm-tab--active]="activeLang() === 'en'" (click)="activeLang.set('en')">English</button>
+    </div>
+
+    <!-- Text Fields -->
+    @if (activeLang() === 'es') {
+      <div class="adm-form-group">
+        <label class="adm-form-label">Tag superior <span class="hero-editor__required">*</span></label>
+        <input type="text" class="adm-form-control" placeholder="Ej: Nuevo producto" [(ngModel)]="slide.tag.es">
+      </div>
+      <div class="adm-form-group">
+        <label class="adm-form-label">Headline <span class="hero-editor__required">*</span></label>
+        <input type="text" class="adm-form-control" placeholder="Titulo principal del hero" [(ngModel)]="slide.headline.es">
+      </div>
+      <div class="adm-form-group">
+        <label class="adm-form-label">Subtitulo</label>
+        <textarea class="adm-form-control" rows="2" placeholder="Subtitulo opcional" [(ngModel)]="slide.subtitle!.es"></textarea>
+      </div>
+      <div class="adm-form-group">
+        <label class="adm-form-label">Texto del CTA <span class="hero-editor__required">*</span></label>
+        <input type="text" class="adm-form-control" placeholder="Ej: Ver producto" [(ngModel)]="slide.ctaText.es">
+      </div>
+    } @else {
+      <div class="adm-form-group">
+        <label class="adm-form-label">Top Tag <span class="hero-editor__required">*</span></label>
+        <input type="text" class="adm-form-control" placeholder="E.g.: New product" [(ngModel)]="slide.tag.en">
+      </div>
+      <div class="adm-form-group">
+        <label class="adm-form-label">Headline <span class="hero-editor__required">*</span></label>
+        <input type="text" class="adm-form-control" placeholder="Main hero title" [(ngModel)]="slide.headline.en">
+      </div>
+      <div class="adm-form-group">
+        <label class="adm-form-label">Subtitle</label>
+        <textarea class="adm-form-control" rows="2" placeholder="Optional subtitle" [(ngModel)]="slide.subtitle!.en"></textarea>
+      </div>
+      <div class="adm-form-group">
+        <label class="adm-form-label">CTA Text <span class="hero-editor__required">*</span></label>
+        <input type="text" class="adm-form-control" placeholder="E.g.: View product" [(ngModel)]="slide.ctaText.en">
+      </div>
+    }
+
+    <!-- CTA Link (shared, not bilingual) -->
+    <div class="adm-form-group">
+      <label class="adm-form-label">CTA Link <span class="hero-editor__required">*</span></label>
+      <input type="url" class="adm-form-control" placeholder="/catalogo/producto-slug" [(ngModel)]="slide.ctaLink">
+    </div>
+
+    <!-- Product Selector -->
+    <div class="adm-form-group">
+      <label class="adm-form-label">Producto asociado</label>
+      @if (isProductObject(slide.product)) {
+        <div class="hero-editor__product-card adm-card">
+          <div class="hero-editor__product-thumb">
+            @if (getProductImage(slide.product)) {
+              <img [src]="getProductImage(slide.product)" [alt]="getProductName(slide.product)" class="hero-editor__product-img">
+            } @else {
+              <span class="material-symbols-outlined">inventory_2</span>
+            }
+          </div>
+          <div class="hero-editor__product-info">
+            <span class="hero-editor__product-name">{{ getProductName(slide.product) }}</span>
+            <span class="hero-editor__product-brand">{{ getProductBrand(slide.product) }}</span>
+          </div>
+          <button class="adm-btn adm-btn--icon" aria-label="Quitar producto" (click)="removeProduct(index)">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+      } @else {
+        <button class="adm-btn adm-btn--secondary" (click)="openProductModal(index)">
+          <span class="material-symbols-outlined">add_shopping_cart</span> Seleccionar producto
+        </button>
+      }
+    </div>
+
+    <!-- Tags -->
+    <div class="adm-form-group">
+      <label class="adm-form-label">Tags del slide</label>
+      <div class="hero-editor__tags-list">
+        @for (tag of slide.tags; track $index) {
+          <div class="hero-editor__tag-item">
+            @if (activeLang() === 'es') {
+              <input type="text" class="adm-form-control adm-form-control--sm" placeholder="Tag en espanol" [(ngModel)]="tag.es">
+            } @else {
+              <input type="text" class="adm-form-control adm-form-control--sm" placeholder="Tag in English" [(ngModel)]="tag.en">
+            }
+            <button class="adm-btn adm-btn--icon adm-btn--sm" aria-label="Eliminar tag" (click)="removeTag(index, $index)">
+              <span class="material-symbols-outlined">close</span>
+            </button>
+          </div>
+        }
+      </div>
+      @if (!slide.tags || slide.tags.length < 6) {
+        <button class="adm-btn adm-btn--secondary adm-btn--sm hero-editor__add-tag" (click)="addTag(index)">
+          <span class="material-symbols-outlined">add</span> Agregar tag
+        </button>
+      }
+      @if (slide.tags && slide.tags.length > 0) {
+        <span class="hero-editor__tag-count">{{ slide.tags.length }} / 6</span>
+      }
+    </div>
+
+    <!-- Images -->
+    <div class="hero-editor__images">
+      <!-- Desktop Image -->
+      <div class="adm-form-group">
+        <label class="adm-form-label">Imagen Desktop <span class="hero-editor__required">*</span></label>
+        @if (slide.imageDesktop) {
+          <div class="hero-editor__image-preview hero-editor__image-preview--desktop" [style.background-image]="'url(' + slide.imageDesktop + ')'">
+            <button class="adm-btn adm-btn--secondary adm-btn--sm" (click)="desktopInput.click()">Cambiar</button>
+          </div>
+        } @else {
+          <div class="adm-uploader hero-editor__uploader hero-editor__uploader--desktop" (click)="desktopInput.click()">
+            <span class="material-symbols-outlined">add_photo_alternate</span>
+            <p class="adm-uploader__text">Subir imagen desktop</p>
+            <span class="adm-uploader__hint">Recomendado: 1920x1080px</span>
+          </div>
+        }
+        <input #desktopInput type="file" accept="image/jpeg,image/png,image/webp" style="display: none;" (change)="uploadImage(index, 'desktop', $event)">
+      </div>
+
+      <!-- Mobile Image -->
+      <div class="adm-form-group">
+        <label class="adm-form-label">Imagen Mobile <span class="hero-editor__required">*</span></label>
+        @if (slide.imageMobile) {
+          <div class="hero-editor__image-preview hero-editor__image-preview--mobile" [style.background-image]="'url(' + slide.imageMobile + ')'">
+            <button class="adm-btn adm-btn--secondary adm-btn--sm" (click)="mobileInput.click()">Cambiar</button>
+          </div>
+        } @else {
+          <div class="adm-uploader hero-editor__uploader hero-editor__uploader--mobile" (click)="mobileInput.click()">
+            <span class="material-symbols-outlined">add_photo_alternate</span>
+            <p class="adm-uploader__text">Subir imagen mobile</p>
+            <span class="adm-uploader__hint">Recomendado: 768x1024px</span>
+          </div>
+        }
+        <input #mobileInput type="file" accept="image/jpeg,image/png,image/webp" style="display: none;" (change)="uploadImage(index, 'mobile', $event)">
+      </div>
+    </div>
+
+    <!-- Upload progress -->
+    @if (uploadingImage()) {
+      <div class="hero-editor__upload-progress">
+        <div class="hero-editor__upload-bar"></div>
+      </div>
+    }
+  </div>
+</ng-template>
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!-- PRODUCT SELECTION MODAL                                            -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+@if (showProductModal()) {
+  <div class="adm-modal-backdrop" (click)="showProductModal.set(false)">
+    <div class="adm-modal" (click)="$event.stopPropagation()">
+      <div class="adm-modal__header">
+        <h2 class="adm-modal__title">Seleccionar Producto</h2>
+        <button class="adm-modal__close" (click)="showProductModal.set(false)">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+      <div class="adm-modal__body">
+        <div class="hero-editor__modal-search">
+          <span class="material-symbols-outlined">search</span>
+          <input type="text" class="adm-form-control" placeholder="Buscar por nombre..." [ngModel]="productSearchTerm()" (ngModelChange)="searchProducts($event)">
+        </div>
+        @if (loadingProducts()) {
+          <div class="hero-editor__modal-loading">Cargando productos...</div>
+        } @else {
+          <div class="hero-editor__modal-list">
+            @for (product of productSearchResults(); track product._id) {
+              <div class="hero-editor__modal-item" (click)="selectProduct(product)">
+                <div class="hero-editor__modal-item-thumb">
+                  @if (product.images.length > 0) {
+                    <img [src]="product.images[0]" [alt]="product.name.es" class="hero-editor__modal-item-img">
+                  } @else {
+                    <span class="material-symbols-outlined">inventory_2</span>
+                  }
+                </div>
+                <div class="hero-editor__modal-item-info">
+                  <span class="hero-editor__modal-item-name">{{ product.name.es }}</span>
+                  <span class="hero-editor__modal-item-meta">{{ product.brand ? product.brand.name : '-' }} | {{ product.category }}</span>
+                </div>
+              </div>
+            }
+            @if (productSearchResults().length === 0 && !loadingProducts()) {
+              <p class="hero-editor__no-results">No se encontraron productos.</p>
+            }
+          </div>
+        }
+      </div>
+      <div class="adm-modal__footer">
+        <button class="adm-btn adm-btn--secondary" (click)="showProductModal.set(false)">Cancelar</button>
+      </div>
+    </div>
+  </div>
+}

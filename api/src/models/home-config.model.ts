@@ -1,42 +1,63 @@
 import mongoose, { Schema, Document } from 'mongoose';
 import { bilingualField } from './shared-schema';
 
+export interface IHeroSlide {
+  tag: { es: string; en: string };
+  headline: { es: string; en: string };
+  subtitle?: { es: string; en: string };
+  ctaText: { es: string; en: string };
+  ctaLink: string;
+  product?: mongoose.Types.ObjectId | string | null;
+  tags?: { es: string; en: string }[];
+  imageDesktop?: string;
+  imageMobile?: string;
+}
+
 export interface IHomeConfig extends Document {
   hero: {
+    mode: 'single' | 'carousel';
+    slides: IHeroSlide[];
+    // Legacy fields (for migration)
     image?: string;
-    tag: { es: string; en: string };
-    headline: { es: string; en: string };
-    subtitle: { es: string; en: string };
-    ctaPrimary: { es: string; en: string };
-    ctaSecondary: { es: string; en: string };
+    tag?: { es: string; en: string };
+    headline?: { es: string; en: string };
+    subtitle?: { es: string; en: string };
+    ctaPrimary?: { es: string; en: string };
+    ctaSecondary?: { es: string; en: string };
   };
-  featuredProducts: string[]; // Array of product ObjectId strings in display order
-  featuredBrands: string[]; // Array of brand ObjectId strings in display order
+  featuredProducts: string[];
+  featuredBrands: string[];
   updatedAt: Date;
   createdAt: Date;
 }
 
+const heroSlideSchema = new Schema(
+  {
+    tag: { type: bilingualField, required: true },
+    headline: { type: bilingualField, required: true },
+    subtitle: { type: bilingualField },
+    ctaText: { type: bilingualField, required: true },
+    ctaLink: { type: String, required: true },
+    product: { type: Schema.Types.ObjectId, ref: 'Product', default: null },
+    tags: [{ type: bilingualField }],
+    imageDesktop: { type: String },
+    imageMobile: { type: String },
+  },
+  { _id: true }
+);
+
 const homeConfigSchema = new Schema<IHomeConfig>(
   {
     hero: {
+      mode: { type: String, enum: ['single', 'carousel'], default: 'single' },
+      slides: { type: [heroSlideSchema], default: [] },
+      // Legacy fields kept for backward compat / migration
       image: { type: String },
-      tag: { type: bilingualField, default: () => ({ es: 'DESDE 1989', en: 'SINCE 1989' }) },
-      headline: {
-        type: bilingualField,
-        default: () => ({
-          es: 'Conectamos la industria veterinaria con las mejores marcas del mundo',
-          en: 'Connecting the veterinary industry with the world\'s best brands',
-        }),
-      },
-      subtitle: {
-        type: bilingualField,
-        default: () => ({
-          es: 'Importacion y distribucion de farmacos veterinarios, alimentos para animales y equipos veterinarios en Costa Rica',
-          en: 'Import and distribution of veterinary pharmaceuticals, animal food, and veterinary equipment in Costa Rica',
-        }),
-      },
-      ctaPrimary: { type: bilingualField, default: () => ({ es: 'Explorar catalogo', en: 'Explore catalog' }) },
-      ctaSecondary: { type: bilingualField, default: () => ({ es: 'Distribuya con nosotros', en: 'Partner with us' }) },
+      tag: { type: bilingualField },
+      headline: { type: bilingualField },
+      subtitle: { type: bilingualField },
+      ctaPrimary: { type: bilingualField },
+      ctaSecondary: { type: bilingualField },
     },
     featuredProducts: [{ type: String }],
     featuredBrands: [{ type: String }],
