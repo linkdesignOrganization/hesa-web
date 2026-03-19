@@ -233,22 +233,15 @@
 }
 
 // ---- Frosted Glass Effect (reusable) ----
-// Glass UI tokens
-:root {
-  --glass-ui-bg: rgba(255, 255, 255, 0.08);
-  --glass-ui-bg-hover: rgba(255, 255, 255, 0.14);
-  --glass-ui-border: rgba(255, 255, 255, 0.18);
-  --glass-ui-border-hover: rgba(255, 255, 255, 0.3);
-  --glass-ui-shadow: 0 4px 24px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.25);
-  --glass-ui-filter: blur(16px) saturate(1.8);
-}
-
+// Use direct values — CSS variables in backdrop-filter can fail in some browsers
 .frosted-glass {
-  background: var(--glass-ui-bg);
-  border: 1px solid var(--glass-ui-border);
-  box-shadow: var(--glass-ui-shadow);
-  -webkit-backdrop-filter: var(--glass-ui-filter);
-  backdrop-filter: var(--glass-ui-filter);
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 0.35rem 1rem rgba(0, 0, 0, 0.04);
+  -webkit-backdrop-filter: blur(11px) saturate(125%);
+  backdrop-filter: blur(11px) saturate(125%);
 }
 
 // Half section spacing for tighter areas
