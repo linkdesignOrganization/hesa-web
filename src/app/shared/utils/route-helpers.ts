@@ -68,6 +68,27 @@ export function getHomeLabel(lang: Lang): string {
 }
 
 /**
+ * Returns the localized partners segment.
+ */
+export function getPartnersSegment(lang: Lang): string {
+  return lang === 'es' ? 'distribuidores' : 'distributors';
+}
+
+/**
+ * Returns the localized why-hesa segment.
+ */
+export function getWhyHesaSegment(lang: Lang): string {
+  return lang === 'es' ? 'por-que-hesa' : 'why-hesa';
+}
+
+/**
+ * Returns the localized clients segment.
+ */
+export function getClientsSegment(lang: Lang): string {
+  return lang === 'es' ? 'clientes' : 'clients';
+}
+
+/**
  * Builds a product detail URL.
  */
 export function buildProductUrl(category: string, slug: string, lang: Lang): string {

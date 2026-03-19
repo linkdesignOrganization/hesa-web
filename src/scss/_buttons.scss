@@ -1,5 +1,6 @@
 // =============================================================================
-// Button Styles (DC-022, DC-023, DC-071)
+// Button Styles — Premium Redesign
+// Tuft & Paw inspired: generous padding, refined transitions, subtle shadows
 // =============================================================================
 
 .btn {
@@ -9,14 +10,16 @@
   gap: var(--space-2);
   font-family: var(--font-family);
   font-weight: var(--weight-semibold);
-  font-size: var(--text-body);
+  font-size: var(--text-small);
+  letter-spacing: 0.02em;
   border-radius: var(--radius-btn);
-  padding: 14px 32px;
+  padding: 16px 36px;
   transition: var(--transition-btn);
   cursor: pointer;
   border: 2px solid transparent;
   text-decoration: none;
-  line-height: 1.4;
+  line-height: 1.2;
+  white-space: nowrap;
 
   &:focus-visible {
     outline: 2px solid var(--brand-primary);
@@ -25,24 +28,28 @@
 
   &:disabled,
   &.is-disabled {
-    opacity: 0.7;
+    opacity: 0.5;
     cursor: not-allowed;
     pointer-events: none;
   }
 }
 
-// Primary: solid blue
+// Primary: solid blue with refined hover
 .btn-primary {
   background-color: var(--brand-primary);
   color: var(--neutral-white);
 
   &:hover {
-    background-color: var(--brand-dark);
+    background-color: var(--brand-primary-dark);
     color: var(--neutral-white);
+    box-shadow: 0 4px 12px rgba(0, 141, 201, 0.3);
+    transform: translateY(-1px);
   }
 
   &:active {
-    background-color: #004d6e;
+    background-color: var(--brand-primary-deep);
+    transform: translateY(0);
+    box-shadow: none;
   }
 }
 
@@ -55,33 +62,53 @@
   &:hover {
     background-color: var(--brand-primary);
     color: var(--neutral-white);
+    box-shadow: 0 4px 12px rgba(0, 141, 201, 0.2);
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
   }
 }
 
-// Outline white (for dark backgrounds)
+// Outline white (for dark/image backgrounds)
 .btn-outline-white {
   background-color: transparent;
   color: var(--neutral-white);
-  border-color: var(--neutral-white);
+  border-color: rgba(255, 255, 255, 0.6);
 
   &:hover {
     background-color: var(--neutral-white);
-    color: var(--brand-primary);
+    color: var(--neutral-900);
+    border-color: var(--neutral-white);
   }
 }
 
-// White solid (CTA on blue backgrounds)
+// White solid (CTA on colored backgrounds)
 .btn-white {
   background-color: var(--neutral-white);
-  color: var(--brand-primary);
+  color: var(--neutral-900);
 
   &:hover {
-    background-color: var(--neutral-50);
+    background-color: var(--neutral-100);
     box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
   }
 }
 
-// WhatsApp button (DC-009)
+// Dark solid button
+.btn-dark {
+  background-color: var(--neutral-900);
+  color: var(--neutral-white);
+
+  &:hover {
+    background-color: var(--neutral-600);
+    color: var(--neutral-white);
+    transform: translateY(-1px);
+  }
+}
+
+// WhatsApp button
 .btn-whatsapp {
   background-color: var(--whatsapp);
   color: var(--neutral-white);
@@ -89,6 +116,8 @@
   &:hover {
     background-color: var(--whatsapp-hover);
     color: var(--neutral-white);
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+    transform: translateY(-1px);
   }
 }
 
@@ -102,30 +131,60 @@
   }
 }
 
-// Ghost button (text only)
+// Ghost button (text only with hover background)
 .btn-ghost {
   background-color: transparent;
-  color: var(--brand-primary);
+  color: var(--neutral-900);
   padding: 8px 16px;
 
   &:hover {
-    background-color: var(--neutral-50);
+    background-color: var(--neutral-100);
+  }
+}
+
+// Text button — no background, underline on hover (editorial feel)
+.btn-text {
+  background-color: transparent;
+  color: var(--neutral-900);
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  font-weight: var(--weight-medium);
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+  }
+
+  &:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
   }
 }
 
 // Outline gray
 .btn-outline-gray {
   background-color: transparent;
-  color: var(--neutral-400);
+  color: var(--neutral-500);
   border-color: var(--neutral-200);
 
   &:hover {
-    background-color: var(--neutral-50);
+    background-color: var(--neutral-100);
     color: var(--neutral-900);
+    border-color: var(--neutral-300);
   }
 }
 
-// Loading state (DC-121)
+// Loading state
 .btn-loading {
   position: relative;
   pointer-events: none;
@@ -142,13 +201,20 @@
 
 // Size: small
 .btn-sm {
-  padding: 8px 16px;
-  font-size: var(--text-small);
+  padding: 10px 20px;
+  font-size: var(--text-label);
 }
 
 // Size: large
 .btn-lg {
-  padding: 16px 40px;
-  font-size: var(--text-body-lg);
-  height: 50px;
+  padding: 18px 44px;
+  font-size: var(--text-body);
+  min-height: 56px;
+}
+
+// Size: extra large (hero CTAs)
+.btn-xl {
+  padding: 20px 48px;
+  font-size: var(--text-body);
+  min-height: 60px;
 }

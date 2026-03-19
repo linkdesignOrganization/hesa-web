@@ -1,13 +1,13 @@
 // =============================================================================
-// Toast Notifications — Dashly X style (DC-123 to DC-127)
-// Shared between public and admin sites
+// Toast Notifications
+// Shared between public and admin sites — uses neutral colors for compatibility
 // =============================================================================
 
 .toast-container {
   position: fixed;
   top: 24px;
   right: 24px;
-  z-index: 600; // Above modals
+  z-index: var(--z-toast, 600);
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -25,51 +25,34 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 14px 16px;
-  border-radius: 12px;
+  padding: 16px 18px;
+  border-radius: var(--radius-btn, 12px);
   background: #FFFFFF;
-  box-shadow: 0 8px 24px rgba(11, 22, 44, 0.08);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
   font-size: 14px;
-  color: #0B0E2C;
-  animation: toastIn 0.3s ease-out;
+  color: #1A1A18;
+  animation: toastIn 0.35s cubic-bezier(0.25, 0.1, 0.25, 1);
 
-  // ── Success ──
   &--success {
     border-left: 4px solid #22C55E;
-
-    .toast__icon {
-      color: #22C55E;
-    }
+    .toast__icon { color: #22C55E; }
   }
 
-  // ── Error ──
   &--error {
     border-left: 4px solid #EF4444;
-
-    .toast__icon {
-      color: #EF4444;
-    }
+    .toast__icon { color: #EF4444; }
   }
 
-  // ── Warning ──
   &--warning {
     border-left: 4px solid #F59E0B;
-
-    .toast__icon {
-      color: #F59E0B;
-    }
+    .toast__icon { color: #F59E0B; }
   }
 
-  // ── Info ──
   &--info {
-    border-left: 4px solid #1476FF;
-
-    .toast__icon {
-      color: #1476FF;
-    }
+    border-left: 4px solid #008DC9;
+    .toast__icon { color: #008DC9; }
   }
 
-  // ── Icon ──
   &__icon {
     flex-shrink: 0;
     font-size: 20px;
@@ -77,13 +60,11 @@
     height: 20px;
   }
 
-  // ── Text ──
   &__text {
     flex: 1;
     line-height: 1.5;
   }
 
-  // ── Close button ──
   &__close {
     flex-shrink: 0;
     display: flex;
@@ -94,7 +75,7 @@
     border: none;
     background: transparent;
     border-radius: 8px;
-    color: #6F7182;
+    color: #8C8780;
     cursor: pointer;
     transition: background-color 0.15s ease;
 
@@ -104,7 +85,7 @@
 
     &:hover {
       background-color: rgba(0, 0, 0, 0.05);
-      color: #0B0E2C;
+      color: #1A1A18;
     }
   }
 }

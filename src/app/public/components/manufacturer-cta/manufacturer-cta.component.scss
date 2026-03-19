@@ -1,44 +1,105 @@
 // =============================================================================
-// Manufacturer CTA Banner (DC-035, DC-064)
+// Partners CTA Banner (formerly Manufacturer CTA — DC-035, DC-064)
+// Full-width hero-style CTA with background image + dark overlay
 // =============================================================================
 
 :host {
   display: block;
 }
 
-.mfr-cta {
-  background-color: var(--brand-primary, #008DC9);
-  padding: 48px 20px;
+.partners-cta {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background-image: url('https://images.unsplash.com/photo-1576201836106-db1758fd1c97?w=1400&q=80');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: var(--section-gap-mobile, 72px) 24px;
   text-align: center;
 
   @media (min-width: 768px) {
-    padding: 80px 40px;
+    padding: var(--section-gap-tablet, 96px) 40px;
   }
 
-  &__inner {
-    max-width: 800px;
+  @media (min-width: 1200px) {
+    padding: var(--section-gap-desktop, 120px) 40px;
+  }
+
+  // ---------------------------
+  // Dark overlay
+  // ---------------------------
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background: var(--overlay, rgba(0, 0, 0, 0.5));
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  // ---------------------------
+  // Centered content
+  // ---------------------------
+  &__content {
+    position: relative;
+    z-index: 2;
+    max-width: 760px;
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
-  &__title {
-    font-size: 28px;
-    font-weight: var(--weight-bold);
-    color: var(--neutral-white);
+  // ---------------------------
+  // Eyebrow
+  // ---------------------------
+  &__eyebrow {
+    display: inline-block;
+    font-size: var(--text-eyebrow, 13px);
+    font-weight: var(--weight-semibold, 600);
+    letter-spacing: var(--tracking-wider, 0.08em);
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 16px;
+  }
+
+  // ---------------------------
+  // Heading
+  // ---------------------------
+  &__heading {
+    font-size: 32px;
+    font-weight: var(--weight-extrabold, 800);
+    letter-spacing: var(--tracking-tight, -0.02em);
+    color: var(--neutral-white, #fff);
+    line-height: 1.15;
+    margin: 0;
 
     @media (min-width: 768px) {
-      font-size: var(--text-h3);
+      font-size: var(--text-h2, 48px);
     }
   }
 
-  &__desc {
-    font-size: var(--text-body);
-    color: rgba(255, 255, 255, 0.85);
+  // ---------------------------
+  // Subtitle
+  // ---------------------------
+  &__subtitle {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.88);
     line-height: 1.7;
-    margin-top: 16px;
+    margin-top: 20px;
+    max-width: 620px;
+
+    @media (min-width: 768px) {
+      font-size: var(--text-body-xl, 20px);
+    }
   }
 
+  // ---------------------------
+  // CTA Button
+  // ---------------------------
   &__btn {
-    margin-top: 32px;
+    margin-top: 36px;
+    border-radius: var(--radius-btn, 12px);
 
     @media (max-width: 767px) {
       width: 100%;

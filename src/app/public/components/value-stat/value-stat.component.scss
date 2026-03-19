@@ -1,5 +1,5 @@
 // =============================================================================
-// Value Stat (DC-033, DC-062, DC-143)
+// Value Stat — Animated Counter (DC-033, DC-062, DC-143)
 // =============================================================================
 
 .value-stat {
@@ -7,59 +7,81 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 24px;
+  padding: 32px 24px;
+  gap: 16px;
 
-  &__icon {
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    background-color: rgba(80, 185, 42, 0.1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 16px;
-  }
-
+  // ── Number display ────────────────────────────────────────────────────
   &__number {
-    font-size: 42px;
-    font-weight: var(--weight-bold);
-    color: var(--neutral-900);
+    font-size: var(--text-display);
+    font-weight: var(--weight-extrabold);
+    color: var(--brand-primary);
     line-height: 1;
+    letter-spacing: var(--tracking-tight);
+    transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+
+    @media (max-width: 1023px) {
+      font-size: var(--text-h2);
+    }
 
     @media (max-width: 767px) {
-      font-size: 36px;
+      font-size: 40px;
     }
+  }
+
+  &__display {
+    // Holds the animated counter value
   }
 
   &__suffix {
     font-size: inherit;
     font-weight: inherit;
+    color: inherit;
   }
 
-  &__display {
-    // DC-143: This span holds the animated number value (starts at 0)
+  // ── Decorative divider ────────────────────────────────────────────────
+  &__divider {
+    width: 40px;
+    height: 3px;
+    border-radius: 2px;
+    background-color: var(--brand-primary);
+    opacity: 0.3;
+    transition: width 0.4s ease-out, opacity 0.4s ease-out;
   }
 
+  // ── Label ─────────────────────────────────────────────────────────────
   &__label {
-    font-size: 15px;
+    font-size: var(--text-label);
+    font-weight: var(--weight-medium);
     color: var(--neutral-400);
-    margin-top: 8px;
-    max-width: 180px;
-    line-height: 1.4;
+    line-height: 1.5;
+    max-width: 200px;
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
   }
 
-  // DC-143: Pre-scroll state — number shows "0" and waits for IntersectionObserver
-  &--pre-scroll {
+  // ── Pre-animation state ───────────────────────────────────────────────
+  &--counting {
     .value-stat__number {
-      opacity: 0.4;
-      transition: opacity 0.3s ease-out;
+      opacity: 0.3;
+      transform: translateY(6px);
+    }
+
+    .value-stat__divider {
+      width: 20px;
+      opacity: 0.15;
     }
   }
 
-  // DC-143: Post-animation state — applied by step 4b when count-up completes
+  // ── Post-animation state ──────────────────────────────────────────────
   &--counted {
     .value-stat__number {
       opacity: 1;
+      transform: translateY(0);
+    }
+
+    .value-stat__divider {
+      width: 40px;
+      opacity: 0.3;
     }
   }
 }

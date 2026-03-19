@@ -1,7 +1,20 @@
-<section class="mfr-cta fade-in-section">
-  <div class="mfr-cta__inner">
-    <h2 class="mfr-cta__title">{{ i18n.currentLang() === 'es' ? 'Somos su socio de distribucion en Costa Rica' : 'Your Distribution Partner in Costa Rica' }}</h2>
-    <p class="mfr-cta__desc">{{ i18n.currentLang() === 'es' ? 'Con 37 anos de experiencia y cobertura nacional, conectamos fabricantes internacionales con el mercado veterinario costarricense.' : 'With 37 years of experience and national coverage, we connect international manufacturers with the Costa Rican veterinary market.' }}</p>
-    <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'distribuidores' : 'distributors')" class="btn btn-white mfr-cta__btn">{{ i18n.currentLang() === 'es' ? 'Conocer mas' : 'Learn more' }}</a>
+<section class="partners-cta fade-in-section">
+  <div class="partners-cta__overlay"></div>
+  <div class="partners-cta__content">
+    <span class="partners-cta__eyebrow">
+      {{ i18n.currentLang() === 'es' ? 'Fabricantes internacionales' : 'International Manufacturers' }}
+    </span>
+    <h2 class="partners-cta__heading">
+      {{ i18n.currentLang() === 'es' ? 'Asóciese con HESA' : 'Partner with HESA' }}
+    </h2>
+    <p class="partners-cta__subtitle">
+      {{ i18n.currentLang() === 'es'
+        ? 'Con 37 años de experiencia, cobertura nacional y una red de distribución propia, conectamos sus productos con el mercado veterinario costarricense. Más de 50 colaboradores, flotilla propia y visitas quincenales a todo el país.'
+        : 'With 37 years of experience, national coverage, and our own distribution network, we connect your products with the Costa Rican veterinary market. Over 50 team members, our own fleet, and biweekly visits across the country.' }}
+    </p>
+    <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'distribuidores' : 'distributors')"
+       class="btn btn-white partners-cta__btn">
+      {{ i18n.currentLang() === 'es' ? 'Conozca más' : 'Learn more' }}
+    </a>
   </div>
 </section>

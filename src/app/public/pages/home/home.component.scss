@@ -1,17 +1,19 @@
 // =============================================================================
-// Home Page (DC-030 to DC-035, DC-055, DC-102)
+// Home Page — Premium Tuft & Paw Inspired Design
 // =============================================================================
 
-// ---- Section Error Shell (DC-102) ----
+// ---- Section Error Shell ----
 .section-error {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 48px 20px;
-  gap: 12px;
+  padding: 64px 20px;
+  gap: 16px;
   background-color: var(--neutral-50);
   border-radius: var(--radius-card-public);
+  margin: 40px auto;
+  max-width: var(--container-narrow);
 
   &__icon {
     width: 56px;
@@ -25,101 +27,132 @@
   }
 
   &__text {
-    font-size: 16px;
+    font-size: var(--text-body);
     color: var(--neutral-400);
     font-weight: var(--weight-medium);
   }
 }
 
-// ---- Hero (DC-030, DC-082) ----
+// =============================================================================
+// HERO — Full-viewport cinematic hero
+// =============================================================================
 .hero {
   position: relative;
   min-height: 100vh;
   display: flex;
   align-items: center;
-  background-color: #003d5c;
-  // Multi-layer background: veterinary scene illustration + gradient + dot grid
-  background-image:
-    // Layer 1: Veterinary professional scene (right side) - large detailed SVG
-    url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080"%3E%3Cdefs%3E%3ClinearGradient id="sky" x1="0%25" y1="0%25" x2="100%25" y2="100%25"%3E%3Cstop offset="0%25" stop-color="%23002e44"/%3E%3Cstop offset="40%25" stop-color="%2300496e"/%3E%3Cstop offset="100%25" stop-color="%23006d9e"/%3E%3C/linearGradient%3E%3CradialGradient id="light1" cx="75%25" cy="35%25" r="35%25"%3E%3Cstop offset="0%25" stop-color="%23008DC9" stop-opacity="0.35"/%3E%3Cstop offset="100%25" stop-color="%23003d5c" stop-opacity="0"/%3E%3C/radialGradient%3E%3CradialGradient id="light2" cx="60%25" cy="60%25" r="40%25"%3E%3Cstop offset="0%25" stop-color="%2350B92A" stop-opacity="0.12"/%3E%3Cstop offset="100%25" stop-color="%23003d5c" stop-opacity="0"/%3E%3C/radialGradient%3E%3CradialGradient id="light3" cx="85%25" cy="50%25" r="25%25"%3E%3Cstop offset="0%25" stop-color="%23ffffff" stop-opacity="0.06"/%3E%3Cstop offset="100%25" stop-color="%23003d5c" stop-opacity="0"/%3E%3C/radialGradient%3E%3Cpattern id="dots" width="30" height="30" patternUnits="userSpaceOnUse"%3E%3Ccircle cx="15" cy="15" r="0.6" fill="rgba(255,255,255,0.05)"/%3E%3C/pattern%3E%3C/defs%3E%3Crect fill="url(%23sky)" width="1920" height="1080"/%3E%3Crect fill="url(%23light1)" width="1920" height="1080"/%3E%3Crect fill="url(%23light2)" width="1920" height="1080"/%3E%3Crect fill="url(%23light3)" width="1920" height="1080"/%3E%3Crect fill="url(%23dots)" width="1920" height="1080"/%3E%3C!-- Veterinarian silhouette with stethoscope - right side --%3E%3Cg transform="translate(1200, 180)" opacity="0.18"%3E%3C!-- Head --%3E%3Cellipse cx="120" cy="60" rx="42" ry="50" fill="%23ffffff"/%3E%3C!-- Hair --%3E%3Cpath d="M78 55 Q78 15 120 10 Q162 15 162 55" fill="%23e0e0e0"/%3E%3C!-- Body / lab coat --%3E%3Cpath d="M60 110 Q60 100 80 95 L80 110 Q100 130 100 300 L140 300 Q140 130 160 110 L160 95 Q180 100 180 110 L190 300 L50 300 Z" fill="%23ffffff"/%3E%3C!-- Collar --%3E%3Cpath d="M90 95 Q120 115 150 95 L150 110 Q120 130 90 110 Z" fill="%23e8e8e8"/%3E%3C!-- Stethoscope --%3E%3Cpath d="M145 100 Q170 130 165 200 Q160 250 140 260" stroke="%2350B92A" stroke-width="3" fill="none" stroke-linecap="round"/%3E%3Ccircle cx="140" cy="265" r="10" fill="none" stroke="%2350B92A" stroke-width="3"/%3E%3Ccircle cx="140" cy="265" r="4" fill="%2350B92A" opacity="0.5"/%3E%3C!-- Arm holding animal --%3E%3Cpath d="M80 130 Q50 180 60 240 Q65 260 80 260" stroke="%23ffffff" stroke-width="20" fill="none" stroke-linecap="round"/%3E%3C!-- Dog silhouette being examined --%3E%3Cg transform="translate(-20, 220)"%3E%3Cellipse cx="100" cy="40" rx="50" ry="30" fill="%23d4a574"/%3E%3Cellipse cx="55" cy="25" rx="22" ry="18" fill="%23c49060"/%3E%3Cellipse cx="42" cy="15" rx="8" ry="14" fill="%23c49060" transform="rotate(-15 42 15)"/%3E%3Cellipse cx="62" cy="12" rx="7" ry="13" fill="%23c49060" transform="rotate(10 62 12)"/%3E%3Ccircle cx="48" cy="23" r="3" fill="%23333"/%3E%3Cellipse cx="43" cy="32" rx="6" ry="4" fill="%23222"/%3E%3C/g%3E%3C/g%3E%3C!-- Medical cross symbol - top right --%3E%3Cg transform="translate(1550, 100)" opacity="0.12"%3E%3Crect x="20" y="0" width="20" height="60" rx="4" fill="%2350B92A"/%3E%3Crect x="0" y="20" width="60" height="20" rx="4" fill="%2350B92A"/%3E%3C/g%3E%3C!-- DNA helix - decorative --%3E%3Cg opacity="0.08"%3E%3Cpath d="M1650 300 Q1680 350 1650 400 Q1620 450 1650 500 Q1680 550 1650 600 Q1620 650 1650 700" stroke="%23008DC9" stroke-width="2" fill="none"/%3E%3Cpath d="M1670 300 Q1640 350 1670 400 Q1700 450 1670 500 Q1640 550 1670 600 Q1700 650 1670 700" stroke="%2350B92A" stroke-width="2" fill="none"/%3E%3Cline x1="1650" y1="350" x2="1670" y2="350" stroke="white" stroke-width="1"/%3E%3Cline x1="1650" y1="400" x2="1670" y2="400" stroke="white" stroke-width="1"/%3E%3Cline x1="1650" y1="450" x2="1670" y2="450" stroke="white" stroke-width="1"/%3E%3Cline x1="1650" y1="500" x2="1670" y2="500" stroke="white" stroke-width="1"/%3E%3Cline x1="1650" y1="550" x2="1670" y2="550" stroke="white" stroke-width="1"/%3E%3Cline x1="1650" y1="600" x2="1670" y2="600" stroke="white" stroke-width="1"/%3E%3C/g%3E%3C!-- Paw prints scattered --%3E%3Cg opacity="0.06" fill="%23ffffff"%3E%3Ccircle cx="1100" cy="800" r="8"/%3E%3Ccircle cx="1090" cy="785" r="4"/%3E%3Ccircle cx="1110" cy="785" r="4"/%3E%3Ccircle cx="1085" cy="795" r="3.5"/%3E%3Ccircle cx="1115" cy="795" r="3.5"/%3E%3Ccircle cx="1400" cy="900" r="6"/%3E%3Ccircle cx="1392" cy="888" r="3"/%3E%3Ccircle cx="1408" cy="888" r="3"/%3E%3Ccircle cx="1388" cy="895" r="2.5"/%3E%3Ccircle cx="1412" cy="895" r="2.5"/%3E%3Ccircle cx="800" cy="950" r="7"/%3E%3Ccircle cx="791" cy="937" r="3.5"/%3E%3Ccircle cx="809" cy="937" r="3.5"/%3E%3Ccircle cx="787" cy="944" r="3"/%3E%3Ccircle cx="813" cy="944" r="3"/%3E%3C/g%3E%3C!-- Soft bokeh / light circles --%3E%3Ccircle cx="1500" cy="250" r="120" fill="rgba(0,141,201,0.06)"/%3E%3Ccircle cx="1300" cy="500" r="200" fill="rgba(80,185,42,0.04)"/%3E%3Ccircle cx="1700" cy="700" r="150" fill="rgba(255,255,255,0.03)"/%3E%3Ccircle cx="900" cy="200" r="80" fill="rgba(0,141,201,0.04)"/%3E%3Ccircle cx="500" cy="800" r="100" fill="rgba(255,255,255,0.02)"/%3E%3C/svg%3E');
-  background-size: cover;
-  background-position: center;
+  justify-content: flex-start;
+  background-color: var(--neutral-900);
   overflow: hidden;
 
+  // ---- Background image ----
   &__bg {
     position: absolute;
     inset: 0;
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
     z-index: 0;
+    // Subtle Ken Burns zoom on load
+    animation: heroZoom 20s ease-out forwards;
   }
 
+  // ---- Dark overlay for text readability ----
   &__overlay {
     position: absolute;
     inset: 0;
     background: linear-gradient(
-      to right,
+      135deg,
       rgba(0, 0, 0, 0.55) 0%,
-      rgba(0, 0, 0, 0.2) 60%,
-      transparent 100%
+      rgba(0, 0, 0, 0.4) 40%,
+      rgba(0, 0, 0, 0.25) 70%,
+      rgba(0, 0, 0, 0.35) 100%
     );
     z-index: 1;
   }
 
+  // ---- Content container ----
   &__content {
     position: relative;
     z-index: 2;
-    max-width: 560px;
-    padding-top: 100px;
-    padding-bottom: 80px;
-
-    @media (max-width: 767px) {
-      text-align: center;
-      max-width: 100%;
-    }
+    display: flex;
+    align-items: center;
+    min-height: 100vh;
+    padding-top: 120px;
+    padding-bottom: 120px;
   }
 
+  &__content-inner {
+    max-width: 680px;
+  }
+
+  // ---- Eyebrow (company name) ----
+  &__eyebrow {
+    display: block;
+    font-size: var(--text-eyebrow);
+    font-weight: var(--weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wider);
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 12px;
+    // Fade-in stagger
+    opacity: 0;
+    animation: heroFadeUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.2s forwards;
+  }
+
+  // ---- Tag (since 1989) ----
   &__tag {
     display: inline-block;
-    font-size: var(--text-label);
-    font-weight: var(--weight-semibold);
+    font-size: var(--text-eyebrow);
+    font-weight: var(--weight-bold);
     color: var(--brand-secondary);
     text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin-bottom: 16px;
+    letter-spacing: var(--tracking-wider);
+    margin-bottom: 24px;
+    padding: 6px 16px;
+    background-color: rgba(80, 185, 42, 0.15);
+    border-radius: var(--radius-pill);
+    border: 1px solid rgba(80, 185, 42, 0.25);
+    // Fade-in stagger
+    opacity: 0;
+    animation: heroFadeUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.35s forwards;
   }
 
+  // ---- Headline ----
   &__title {
-    font-size: var(--text-display);
+    font-size: clamp(36px, 5.5vw, var(--text-display));
     font-weight: var(--weight-extrabold);
     color: var(--neutral-white);
-    letter-spacing: var(--tracking-tight);
-    line-height: 1.1;
-    margin-bottom: 20px;
-
-    @media (min-width: 768px) and (max-width: 1279px) {
-      font-size: 42px;
-    }
-
-    @media (max-width: 767px) {
-      font-size: 32px;
-      font-weight: var(--weight-bold);
-    }
+    letter-spacing: var(--tracking-tighter);
+    line-height: var(--leading-tight);
+    margin-bottom: 24px;
+    // Fade-in stagger
+    opacity: 0;
+    animation: heroFadeUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.5s forwards;
   }
 
+  // ---- Subtitle ----
   &__subtitle {
-    font-size: var(--text-body-lg);
-    color: var(--neutral-white);
-    line-height: 1.6;
-    opacity: 0.9;
-    margin-bottom: 32px;
+    font-size: clamp(16px, 1.5vw, var(--text-body-xl));
+    color: rgba(255, 255, 255, 0.85);
+    line-height: var(--leading-relaxed);
+    margin-bottom: 40px;
+    max-width: 540px;
+    // Fade-in stagger
+    opacity: 0;
+    animation: heroFadeUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.65s forwards;
   }
 
+  // ---- CTAs ----
   &__ctas {
     display: flex;
     gap: 16px;
+    flex-wrap: wrap;
+    // Fade-in stagger
+    opacity: 0;
+    animation: heroFadeUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.8s forwards;
 
-    @media (max-width: 767px) {
+    @media (max-width: 479px) {
       flex-direction: column;
 
       .btn {
@@ -127,22 +160,243 @@
       }
     }
   }
+
+  // ---- Scroll indicator ----
+  &__scroll-indicator {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    animation: heroFadeUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 1.2s forwards;
+
+    @media (max-width: 767px) {
+      bottom: 24px;
+    }
+  }
+
+  &__scroll-line {
+    width: 1px;
+    height: 48px;
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.6),
+      rgba(255, 255, 255, 0)
+    );
+    position: relative;
+    overflow: hidden;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: -100%;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        to bottom,
+        transparent,
+        var(--neutral-white),
+        transparent
+      );
+      animation: scrollLine 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+  }
+
+  // ---- Skeleton loading state ----
+  &__skeleton {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    background-color: var(--neutral-900);
+    width: 100%;
+  }
+
+  &__skeleton-inner {
+    max-width: 600px;
+  }
+
+  &__skeleton-eyebrow {
+    width: 140px;
+    height: 14px;
+    margin-bottom: 20px;
+    border-radius: var(--radius-pill);
+  }
+
+  &__skeleton-title {
+    width: 90%;
+    height: 52px;
+    margin-bottom: 12px;
+    border-radius: var(--radius-sm);
+
+    &--short {
+      width: 60%;
+    }
+  }
+
+  &__skeleton-subtitle {
+    width: 70%;
+    height: 18px;
+    margin-bottom: 40px;
+    border-radius: var(--radius-sm);
+  }
+
+  &__skeleton-ctas {
+    display: flex;
+    gap: 16px;
+  }
+
+  &__skeleton-btn {
+    width: 180px;
+    height: 56px;
+    border-radius: var(--radius-btn);
+  }
+
+  // ---- Mobile adjustments ----
+  @media (max-width: 767px) {
+    min-height: 90vh;
+
+    &__content {
+      min-height: 90vh;
+      padding-top: 100px;
+      padding-bottom: 100px;
+    }
+
+    &__content-inner {
+      text-align: center;
+      max-width: 100%;
+    }
+
+    &__subtitle {
+      max-width: 100%;
+    }
+
+    &__ctas {
+      justify-content: center;
+    }
+  }
 }
 
-// ---- Category blocks gap (DC-031) ----
+// ---- Hero Animations ----
+@keyframes heroZoom {
+  0% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes heroFadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scrollLine {
+  0% {
+    top: -100%;
+  }
+  100% {
+    top: 200%;
+  }
+}
+
+// =============================================================================
+// CATEGORIES SECTION
+// =============================================================================
+.categories-header {
+  text-align: center;
+  margin-bottom: 56px;
+
+  .text-eyebrow {
+    display: block;
+    margin-bottom: 12px;
+    color: var(--brand-primary);
+  }
+
+  .text-h2 {
+    color: var(--neutral-900);
+  }
+
+  @media (min-width: 768px) {
+    margin-bottom: 72px;
+  }
+}
+
 .home-categories {
   display: flex;
   flex-direction: column;
-  gap: 32px;
-}
-
-// ---- Value Section (DC-033, DC-084) ----
-.value-section {
-  background-color: var(--neutral-50);
-  padding: 64px 0;
+  gap: 40px;
 
   @media (min-width: 768px) {
-    padding: 80px 0;
+    gap: 56px;
+  }
+
+  @media (min-width: 1280px) {
+    gap: 72px;
+  }
+}
+
+// =============================================================================
+// VALUE STATS SECTION
+// =============================================================================
+.value-section {
+  background-color: var(--surface-cream);
+  padding: var(--block-padding-mobile) 0;
+  position: relative;
+
+  // Subtle top/bottom border for separation
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      transparent,
+      var(--neutral-200),
+      transparent
+    );
+  }
+
+  @media (min-width: 768px) {
+    padding: var(--block-padding-tablet) 0;
+  }
+
+  @media (min-width: 1280px) {
+    padding: var(--block-padding-desktop) 0;
+  }
+
+  &__header {
+    text-align: center;
+    margin-bottom: 48px;
+
+    .text-eyebrow {
+      display: block;
+      margin-bottom: 12px;
+      color: var(--brand-primary);
+    }
+
+    .text-h2 {
+      color: var(--neutral-900);
+    }
+
+    @media (min-width: 768px) {
+      margin-bottom: 64px;
+    }
   }
 
   &__grid {
@@ -152,34 +406,74 @@
 
     @media (min-width: 768px) {
       grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
     }
 
     @media (min-width: 1280px) {
       grid-template-columns: repeat(4, 1fr);
+      gap: 40px;
     }
   }
 }
 
-// ---- Featured Products (DC-034, DC-055, DC-093) ----
+// =============================================================================
+// FEATURED PRODUCTS
+// =============================================================================
+.featured-section {
+  background-color: var(--neutral-white);
+}
+
 .featured-header {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
-  margin-bottom: 32px;
+  margin-bottom: 40px;
+  gap: 24px;
+
+  @media (min-width: 768px) {
+    margin-bottom: 48px;
+  }
+
+  &__text {
+    .text-eyebrow {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--brand-primary);
+    }
+
+    .text-h2 {
+      color: var(--neutral-900);
+    }
+  }
 
   &__link {
-    font-size: 15px;
-    font-weight: var(--weight-medium);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: var(--text-body);
+    font-weight: var(--weight-semibold);
     color: var(--brand-primary);
     text-decoration: none;
+    white-space: nowrap;
+    padding-bottom: 4px;
+    border-bottom: 1.5px solid transparent;
+    transition: border-color 0.2s ease-out;
 
     &:hover {
-      text-decoration: underline;
+      border-bottom-color: var(--brand-primary);
+    }
+
+    svg {
+      transition: transform 0.2s ease-out;
+    }
+
+    &:hover svg {
+      transform: translateX(3px);
     }
   }
 }
 
-// Carousel wrapper with arrows (DC-055)
+// ---- Carousel wrapper ----
 .carousel-wrapper {
   position: relative;
 }
@@ -188,8 +482,8 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   background-color: var(--neutral-white);
   border: 1px solid var(--neutral-200);
@@ -199,20 +493,23 @@
   color: var(--neutral-900);
   cursor: pointer;
   z-index: 2;
-  box-shadow: var(--shadow-sm);
-  transition: background-color 0.2s ease-out, box-shadow 0.2s ease-out;
+  box-shadow: var(--shadow-md);
+  transition: var(--transition-btn);
 
   &--prev {
-    left: -22px;
+    left: -24px;
   }
 
   &--next {
-    right: -22px;
+    right: -24px;
   }
 
   &:hover {
-    background-color: var(--neutral-50);
-    box-shadow: var(--shadow-md);
+    background-color: var(--neutral-900);
+    color: var(--neutral-white);
+    border-color: var(--neutral-900);
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-50%) scale(1.05);
   }
 
   &:focus-visible {
@@ -221,20 +518,18 @@
   }
 
   &--disabled {
-    opacity: 0.3;
+    opacity: 0.25;
     cursor: default;
     pointer-events: none;
   }
 
-  // Hide arrows on mobile, show swipe instead
   @media (max-width: 767px) {
     display: none;
   }
 }
 
-// REQ-072: Swipeable horizontal carousel on mobile
+// ---- Product grid / carousel ----
 .featured-grid {
-  // Mobile: horizontal scroll with snap
   display: flex;
   gap: 16px;
   overflow-x: auto;
@@ -243,7 +538,7 @@
   scroll-behavior: smooth;
   padding-bottom: 8px;
 
-  // Hide scrollbar but keep functionality
+  // Hide scrollbar
   scrollbar-width: none;
   &::-webkit-scrollbar {
     display: none;
@@ -255,7 +550,6 @@
     min-width: 0;
   }
 
-  // Tablet: grid 2 cols
   @media (min-width: 768px) {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -270,33 +564,46 @@
     }
   }
 
-  // Desktop: grid 3 cols
   @media (min-width: 1280px) {
     grid-template-columns: repeat(3, 1fr);
     gap: 28px;
   }
 }
 
-// ---- Carousel dots (DC-055) ----
+// ---- Carousel dots ----
 .carousel-dots {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  margin-top: 24px;
+  gap: 10px;
+  margin-top: 32px;
 
   &__dot {
     width: 8px;
     height: 8px;
     border-radius: 50%;
     background-color: var(--neutral-200);
-    transition: width 0.3s ease-out, border-radius 0.3s ease-out;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: all 0.35s cubic-bezier(0.25, 0.1, 0.25, 1);
+
+    &:hover {
+      background-color: var(--neutral-300);
+    }
 
     &--active {
-      width: 24px;
+      width: 28px;
       height: 8px;
       border-radius: 4px;
       background-color: var(--brand-primary);
     }
   }
+}
+
+// ---- Skeleton cards ----
+.skeleton-card-product {
+  padding: 16px;
+  background-color: var(--neutral-50);
+  border-radius: var(--radius-card-public);
 }

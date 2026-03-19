@@ -1,5 +1,5 @@
 // =============================================================================
-// Team Member Card (DC-065)
+// Team Member Card — Premium, minimal design
 // =============================================================================
 
 .team-card {
@@ -7,51 +7,85 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  transition: transform 0.3s ease-out;
+  padding: 24px 16px;
+  transition: transform 0.35s ease;
 
   &:hover {
+    transform: translateY(-6px);
+
+    .team-card__photo-wrap {
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    }
+
     .team-card__photo {
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-      transform: scale(1.03);
+      transform: scale(1.04);
+    }
+  }
+
+  // ===========================================================================
+  // Photo container — large rounded-square
+  // ===========================================================================
+  &__photo-wrap {
+    width: 180px;
+    height: 180px;
+    border-radius: var(--radius-image);
+    background-color: var(--neutral-100);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow 0.35s ease;
+
+    @media (max-width: 767px) {
+      width: 140px;
+      height: 140px;
+    }
+
+    picture {
+      display: block;
+      width: 100%;
+      height: 100%;
     }
   }
 
   &__photo {
-    width: 160px;
-    height: 160px;
-    border-radius: 50%;
-    background-color: var(--neutral-50);
-    border: 4px solid var(--neutral-white);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    transition: box-shadow 0.3s ease-out, transform 0.3s ease-out;
-
-    @media (max-width: 767px) {
-      width: 120px;
-      height: 120px;
-    }
-  }
-
-  &__photo-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 50%;
+    display: block;
+    transition: transform 0.4s ease;
   }
 
+  // ===========================================================================
+  // Placeholder (no photo)
+  // ===========================================================================
+  &__placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--neutral-50);
+  }
+
+  // ===========================================================================
+  // Name
+  // ===========================================================================
   &__name {
-    font-size: 18px;
-    font-weight: var(--weight-bold);
+    font-size: var(--text-body-lg);
+    font-weight: var(--weight-medium);
     color: var(--neutral-900);
-    margin-top: 16px;
+    margin-top: 20px;
+    margin-bottom: 0;
+    line-height: 1.3;
   }
 
+  // ===========================================================================
+  // Title / role
+  // ===========================================================================
   &__title {
-    font-size: 14px;
+    font-size: var(--text-small);
     color: var(--neutral-400);
-    margin-top: 4px;
+    margin-top: 6px;
+    margin-bottom: 0;
+    line-height: 1.4;
   }
 }

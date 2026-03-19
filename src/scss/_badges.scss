@@ -1,35 +1,36 @@
 // =============================================================================
-// Badge Styles (DC-007, DC-008, DC-075)
+// Badge Styles — Premium Redesign
 // =============================================================================
 
 .badge {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  font-size: var(--text-panel-badge);
+  font-size: var(--text-label);
   font-weight: var(--weight-semibold);
-  padding: 4px 10px;
+  padding: 5px 12px;
   border-radius: var(--radius-pill);
   white-space: nowrap;
+  letter-spacing: 0.01em;
 }
 
 // Category badges
 .badge-pharma {
-  background-color: var(--semantic-info-soft);
+  background-color: var(--surface-pharma);
   color: var(--brand-primary);
 }
 
 .badge-food {
-  background-color: var(--semantic-success-soft);
-  color: var(--semantic-success);
+  background-color: var(--surface-food);
+  color: var(--brand-secondary-dark);
 }
 
 .badge-equipment {
   background-color: var(--surface-equipment);
-  color: var(--neutral-400);
+  color: var(--neutral-500);
 }
 
-// Status badges (DC-007)
+// Status badges
 .badge-active {
   background-color: var(--semantic-success-soft);
   color: var(--semantic-success-text);
@@ -50,7 +51,7 @@
   color: var(--semantic-info-text);
 }
 
-// DC-008: Purple manufacturer badge
+// Purple manufacturer/partner badge
 .badge-manufacturer {
   background-color: var(--semantic-purple-soft);
   color: var(--semantic-purple-text);

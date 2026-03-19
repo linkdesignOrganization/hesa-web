@@ -1,71 +1,183 @@
 // =============================================================================
-// Contact Page (DC-043, DC-096)
+// Contact Page — Clean Two-Column Layout
 // =============================================================================
 
-.contact-page {
-  padding-top: 110px;
-  padding-bottom: 64px;
+// ---- Header ----
+.contact-header {
+  padding-top: 140px;
+  padding-bottom: 48px;
+  background-color: var(--surface-cream);
 
-  h1 {
-    margin-bottom: 40px;
+  @media (max-width: 767px) {
+    padding-top: 110px;
+    padding-bottom: 36px;
   }
 
-  &__layout {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 48px;
+  .text-eyebrow {
+    display: block;
+    margin-bottom: 16px;
+  }
 
-    @media (min-width: 768px) {
-      grid-template-columns: 40% 60%;
+  &__title {
+    font-size: var(--text-h1);
+    font-weight: var(--weight-bold);
+    color: var(--neutral-900);
+    letter-spacing: var(--tracking-tight);
+    line-height: var(--leading-tight);
+    margin-bottom: 16px;
+
+    @media (max-width: 1023px) {
+      font-size: var(--text-h2);
+    }
+
+    @media (max-width: 767px) {
+      font-size: var(--text-h3);
     }
   }
 
-  &__info {
+  &__subtitle {
+    font-size: var(--text-body-lg);
+    color: var(--neutral-400);
+    line-height: var(--leading-relaxed);
+    max-width: 480px;
+
+    @media (max-width: 767px) {
+      font-size: var(--text-body);
+    }
+  }
+}
+
+// ---- Body ----
+.contact-body {
+  padding-block: 64px 96px;
+
+  @media (max-width: 767px) {
+    padding-block: 40px 64px;
+  }
+}
+
+// ---- Two-column layout ----
+.contact-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 56px;
+
+  @media (min-width: 1024px) {
+    grid-template-columns: 380px 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+}
+
+// ---- Contact information sidebar ----
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+
+  &__blocks {
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 28px;
   }
 
-  &__info-block {
-    h3 {
-      margin-bottom: 4px;
-    }
-
-    p {
-      font-size: var(--text-body);
-      color: var(--neutral-400);
-    }
+  &__block {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
   }
 
-  &__info-title {
+  &__icon {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-btn);
+    background-color: var(--brand-primary-light);
     display: flex;
     align-items: center;
-    gap: 10px;
-    font-size: 16px;
-    font-weight: var(--weight-semibold);
-    color: var(--neutral-900);
+    justify-content: center;
   }
 
+  &__label {
+    font-size: var(--text-small);
+    font-weight: var(--weight-semibold);
+    color: var(--neutral-400);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wider);
+    margin-bottom: 4px;
+  }
+
+  &__value {
+    font-size: var(--text-body);
+    color: var(--neutral-900);
+    line-height: var(--leading-normal);
+    font-weight: var(--weight-medium);
+  }
+
+  // Social links
   &__social {
+    padding-top: 28px;
+    border-top: 1px solid var(--neutral-200);
+  }
+
+  &__social-label {
+    font-size: var(--text-small);
+    font-weight: var(--weight-semibold);
+    color: var(--neutral-400);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wider);
+    margin-bottom: 16px;
+  }
+
+  &__social-links {
     display: flex;
     gap: 12px;
-    margin-top: 8px;
   }
 
   &__social-link {
-    width: 40px;
-    height: 40px;
-    border-radius: 8px;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-btn);
     background-color: var(--neutral-50);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--neutral-400);
-    transition: all 0.2s ease-out;
+    color: var(--neutral-500);
+    transition: var(--transition-btn);
 
     &:hover {
       background-color: var(--brand-primary);
       color: var(--neutral-white);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
     }
+  }
+
+  // WhatsApp CTA
+  &__whatsapp {
+    padding-top: 28px;
+    border-top: 1px solid var(--neutral-200);
+  }
+
+  &__whatsapp-btn {
+    width: 100%;
+    justify-content: center;
+    gap: 10px;
+    padding: 16px 24px;
+    font-size: var(--text-small);
+  }
+}
+
+// ---- Form wrapper ----
+.contact-form-wrapper {
+  background-color: var(--neutral-white);
+  border-radius: var(--radius-block);
+  box-shadow: var(--shadow-md);
+  padding: 40px;
+  border: 1px solid var(--neutral-100);
+
+  @media (max-width: 767px) {
+    padding: 28px 20px;
+    border-radius: var(--radius-card-public);
   }
 }

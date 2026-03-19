@@ -1,25 +1,35 @@
 // =============================================================================
-// Language Selector (DC-068)
+// Language Selector — Header pill toggle + Footer text toggle
 // =============================================================================
 
+// =============================================================================
+// Header variant — pill-shaped selector with dropdown
+// =============================================================================
 .lang-selector {
   position: relative;
 
+  // ---------------------------------------------------------------------------
+  // Trigger button — pill shape
+  // ---------------------------------------------------------------------------
   &__trigger {
     display: flex;
     align-items: center;
-    gap: 6px;
-    padding: 6px 10px;
-    border-radius: 6px;
-    font-size: 14px;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-pill);
+    font-size: var(--text-small);
     font-weight: var(--weight-medium);
-    color: var(--neutral-900);
-    transition: background-color 0.15s ease-out;
+    color: var(--neutral-600);
+    background-color: transparent;
+    border: 1px solid var(--neutral-200);
+    transition: var(--transition-btn);
     min-height: 44px;
     min-width: 44px;
 
     &:hover {
       background-color: var(--neutral-50);
+      border-color: var(--neutral-300);
+      color: var(--neutral-900);
     }
 
     &:focus-visible {
@@ -28,83 +38,121 @@
     }
   }
 
-  &__flag {
-    font-size: 16px;
-    line-height: 1;
-  }
-
+  // ---------------------------------------------------------------------------
+  // Language code label
+  // ---------------------------------------------------------------------------
   &__code {
-    font-size: 14px;
+    font-size: var(--text-small);
+    font-weight: var(--weight-semibold);
+    letter-spacing: 0.03em;
   }
 
+  // ---------------------------------------------------------------------------
+  // Chevron icon
+  // ---------------------------------------------------------------------------
   &__chevron {
-    transition: transform 0.2s ease-out;
+    transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    opacity: 0.5;
 
     &--open {
       transform: rotate(180deg);
     }
   }
 
+  // ---------------------------------------------------------------------------
+  // Dropdown menu
+  // ---------------------------------------------------------------------------
   &__dropdown {
     position: absolute;
-    top: calc(100% + 4px);
+    top: calc(100% + var(--space-2));
     right: 0;
     background-color: var(--neutral-white);
-    box-shadow: var(--shadow-md);
-    border-radius: 8px;
+    box-shadow: var(--shadow-lg);
+    border-radius: var(--radius-btn);
+    border: 1px solid var(--neutral-100);
     overflow: hidden;
     min-width: 160px;
-    animation: dropdownIn 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    animation: langDropdownIn 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     z-index: var(--z-dropdown);
   }
 
+  // ---------------------------------------------------------------------------
+  // Dropdown options
+  // ---------------------------------------------------------------------------
   &__option {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: var(--space-3);
     width: 100%;
-    padding: 10px 16px;
-    font-size: 14px;
+    padding: var(--space-3) var(--space-4);
+    font-size: var(--text-small);
     font-weight: var(--weight-medium);
-    color: var(--neutral-900);
-    transition: background-color 0.15s ease-out;
+    color: var(--neutral-600);
+    transition: background-color var(--transition-fast),
+      color var(--transition-fast);
     text-align: left;
     min-height: 44px;
+    border: none;
+    background: none;
+    cursor: pointer;
 
     &:hover {
       background-color: var(--neutral-50);
+      color: var(--neutral-900);
     }
 
+    // Active language — distinct styling
     &--active {
-      background-color: var(--surface-pharma);
+      background-color: var(--brand-primary-light);
       color: var(--brand-primary);
+      font-weight: var(--weight-semibold);
+
+      &:hover {
+        background-color: var(--brand-primary-light);
+        color: var(--brand-primary);
+      }
     }
   }
 }
 
+// =============================================================================
+// Footer variant — simple text toggle
+// =============================================================================
 .lang-footer {
-  font-size: 14px;
-  color: rgba(255, 255, 255, 0.8);
+  font-size: var(--text-small);
+  color: rgba(255, 255, 255, 0.65);
   font-weight: var(--weight-medium);
-  transition: opacity 0.2s ease-out;
+  letter-spacing: 0.02em;
+  transition: color var(--transition-fast);
   padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
   min-height: 44px;
   display: inline-flex;
   align-items: center;
 
   &:hover {
     color: var(--neutral-white);
-    text-decoration: underline;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--neutral-white);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
   }
 }
 
-@keyframes dropdownIn {
+// =============================================================================
+// Animations
+// =============================================================================
+@keyframes langDropdownIn {
   from {
     opacity: 0;
-    transform: translateY(-4px);
+    transform: translateY(-6px) scale(0.98);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
 }

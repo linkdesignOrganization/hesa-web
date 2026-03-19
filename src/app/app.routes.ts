@@ -22,7 +22,10 @@ export const routes: Routes = [
   { path: 'es/marcas', title: 'Marcas | HESA - Herrera y Elizondo S.A.', loadComponent: () => import('./public/pages/brands/brands.component').then(m => m.BrandsComponent) },
   { path: 'es/marcas/:slug', title: 'Marca | HESA - Herrera y Elizondo S.A.', loadComponent: () => import('./public/pages/brand-detail/brand-detail.component').then(m => m.BrandDetailComponent) },
   { path: 'es/nosotros', title: 'Nosotros | HESA - Herrera y Elizondo S.A.', loadComponent: () => import('./public/pages/about/about.component').then(m => m.AboutComponent) },
-  { path: 'es/distribuidores', title: 'Distribuidores | HESA - Herrera y Elizondo S.A.', loadComponent: () => import('./public/pages/distributors/distributors.component').then(m => m.DistributorsComponent) },
+  { path: 'es/distribuidores', title: 'Socios | HESA - Herrera y Elizondo S.A.', loadComponent: () => import('./public/pages/distributors/distributors.component').then(m => m.DistributorsComponent) },
+  { path: 'es/socios', redirectTo: 'es/distribuidores', pathMatch: 'full' },
+  { path: 'es/por-que-hesa', title: 'Por qué HESA | HESA - Herrera y Elizondo S.A.', loadComponent: () => import('./public/pages/why-hesa/why-hesa.component').then(m => m.WhyHesaComponent) },
+  { path: 'es/clientes', title: 'Clientes | HESA - Herrera y Elizondo S.A.', loadComponent: () => import('./public/pages/clients/clients.component').then(m => m.ClientsComponent) },
   { path: 'es/contacto', title: 'Contacto | HESA - Herrera y Elizondo S.A.', loadComponent: () => import('./public/pages/contact/contact.component').then(m => m.ContactComponent) },
   { path: 'es/busqueda', title: 'Busqueda | HESA - Herrera y Elizondo S.A.', loadComponent: () => import('./public/pages/search-results/search-results.component').then(m => m.SearchResultsComponent) },
 
@@ -36,7 +39,10 @@ export const routes: Routes = [
   { path: 'en/brands', title: 'Brands | HESA - Herrera y Elizondo S.A.', loadComponent: () => import('./public/pages/brands/brands.component').then(m => m.BrandsComponent) },
   { path: 'en/brands/:slug', title: 'Brand | HESA - Herrera y Elizondo S.A.', loadComponent: () => import('./public/pages/brand-detail/brand-detail.component').then(m => m.BrandDetailComponent) },
   { path: 'en/about', title: 'About | HESA - Herrera y Elizondo S.A.', loadComponent: () => import('./public/pages/about/about.component').then(m => m.AboutComponent) },
-  { path: 'en/distributors', title: 'Distributors | HESA - Herrera y Elizondo S.A.', loadComponent: () => import('./public/pages/distributors/distributors.component').then(m => m.DistributorsComponent) },
+  { path: 'en/distributors', title: 'Partners | HESA - Herrera y Elizondo S.A.', loadComponent: () => import('./public/pages/distributors/distributors.component').then(m => m.DistributorsComponent) },
+  { path: 'en/partners', redirectTo: 'en/distributors', pathMatch: 'full' },
+  { path: 'en/why-hesa', title: 'Why HESA | HESA - Herrera y Elizondo S.A.', loadComponent: () => import('./public/pages/why-hesa/why-hesa.component').then(m => m.WhyHesaComponent) },
+  { path: 'en/clients', title: 'Clients | HESA - Herrera y Elizondo S.A.', loadComponent: () => import('./public/pages/clients/clients.component').then(m => m.ClientsComponent) },
   { path: 'en/contact', title: 'Contact | HESA - Herrera y Elizondo S.A.', loadComponent: () => import('./public/pages/contact/contact.component').then(m => m.ContactComponent) },
   { path: 'en/search', title: 'Search | HESA - Herrera y Elizondo S.A.', loadComponent: () => import('./public/pages/search-results/search-results.component').then(m => m.SearchResultsComponent) },
 

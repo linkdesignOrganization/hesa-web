@@ -1,27 +1,56 @@
-<!-- SEARCH RESULTS -->
-<section class="search-results-page">
-  <div class="container">
-    <app-breadcrumb [items]="breadcrumbs" />
-    <h1 class="search-results-page__title">{{ i18n.currentLang() === 'es' ? 'Resultados para' : 'Results for' }} "<span>{{ searchTerm() }}</span>"</h1>
+<!-- SEARCH RESULTS — Clean results page -->
 
+<section class="search-page">
+  <div class="container">
+
+    <!-- Breadcrumb -->
+    <app-breadcrumb [items]="breadcrumbs" />
+
+    <!-- Header -->
+    <div class="search-page__header">
+      <h1 class="search-page__title">
+        {{ i18n.currentLang() === 'es' ? 'Resultados para' : 'Results for' }}
+        <span class="search-page__term">"{{ searchTerm() }}"</span>
+      </h1>
+    </div>
+
+    <!-- Loading state -->
     @if (loading()) {
-      <div style="text-align: center; padding: 60px 0;">
-        <div class="spinner-sm"></div>
-        <p style="margin-top: 12px; color: var(--neutral-400);">{{ i18n.currentLang() === 'es' ? 'Buscando...' : 'Searching...' }}</p>
+      <div class="search-page__loading">
+        <div class="search-page__loading-dots">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <p class="search-page__loading-text">{{ i18n.currentLang() === 'es' ? 'Buscando...' : 'Searching...' }}</p>
       </div>
     } @else if (!hasResults) {
-      <div style="text-align: center; padding: 60px 0;">
-        <p style="font-size: 18px; color: var(--neutral-500); margin-bottom: 16px;">
-          {{ i18n.currentLang() === 'es' ? 'No se encontraron resultados para' : 'No results found for' }} "{{ searchTerm() }}"
+      <!-- No results state -->
+      <div class="search-page__empty">
+        <div class="search-page__empty-icon">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--neutral-300)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/><path d="M8 11h6"/></svg>
+        </div>
+        <h2 class="search-page__empty-title">
+          {{ i18n.currentLang() === 'es' ? 'No se encontraron resultados' : 'No results found' }}
+        </h2>
+        <p class="search-page__empty-text">
+          {{ i18n.currentLang() === 'es' ? 'No encontramos coincidencias para' : 'We couldn\'t find any matches for' }}
+          "<strong>{{ searchTerm() }}</strong>"
         </p>
-        <p style="color: var(--neutral-400); margin-bottom: 24px;">{{ i18n.currentLang() === 'es' ? 'Intenta con terminos mas generales' : 'Try more general terms' }}</p>
-        <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo' : 'catalog')" class="btn btn-outline">{{ i18n.currentLang() === 'es' ? 'Explorar catalogo completo' : 'Explore full catalog' }}</a>
+        <p class="search-page__empty-hint">{{ i18n.currentLang() === 'es' ? 'Intenta con terminos mas generales o revisa la ortografia' : 'Try more general terms or check the spelling' }}</p>
+        <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo' : 'catalog')" class="btn btn-primary">
+          {{ i18n.currentLang() === 'es' ? 'Explorar catalogo' : 'Explore catalog' }}
+        </a>
       </div>
     } @else {
+      <!-- Product results -->
       @if (productResults().length > 0) {
-        <div class="search-results-page__section">
-          <h2 class="text-label">{{ i18n.currentLang() === 'es' ? 'PRODUCTOS' : 'PRODUCTS' }} ({{ productResults().length }})</h2>
-          <div class="search-results-page__grid">
+        <div class="search-page__section">
+          <div class="search-page__section-header">
+            <h2 class="search-page__section-title">{{ i18n.currentLang() === 'es' ? 'Productos' : 'Products' }}</h2>
+            <span class="search-page__section-count">{{ productResults().length }}</span>
+          </div>
+          <div class="search-page__product-grid">
             @for (product of productResults(); track $index) {
               <app-product-card [product]="product" />
             }
@@ -29,10 +58,14 @@
         </div>
       }
 
+      <!-- Brand results -->
       @if (brandResults().length > 0) {
-        <div class="search-results-page__section">
-          <h2 class="text-label">{{ i18n.currentLang() === 'es' ? 'MARCAS' : 'BRANDS' }} ({{ brandResults().length }})</h2>
-          <div class="search-results-page__brands-grid">
+        <div class="search-page__section">
+          <div class="search-page__section-header">
+            <h2 class="search-page__section-title">{{ i18n.currentLang() === 'es' ? 'Marcas' : 'Brands' }}</h2>
+            <span class="search-page__section-count">{{ brandResults().length }}</span>
+          </div>
+          <div class="search-page__brand-grid">
             @for (brand of brandResults(); track $index) {
               <app-brand-card [brand]="brand" />
             }
@@ -40,5 +73,6 @@
         </div>
       }
     }
+
   </div>
 </section>

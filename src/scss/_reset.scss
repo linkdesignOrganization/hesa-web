@@ -1,5 +1,5 @@
 // =============================================================================
-// CSS Reset & Base Styles
+// CSS Reset & Base Styles — Premium Redesign
 // =============================================================================
 
 *,
@@ -10,7 +10,6 @@
   padding: 0;
 }
 
-// DC-149: Smooth scroll global
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
@@ -20,11 +19,12 @@ body {
   font-family: var(--font-family);
   font-size: var(--text-body);
   font-weight: var(--weight-regular);
-  line-height: 1.6;
+  line-height: var(--leading-relaxed);
   color: var(--neutral-900);
   background-color: var(--neutral-white);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 img {
@@ -34,12 +34,12 @@ img {
 }
 
 a {
-  color: var(--brand-primary);
+  color: var(--neutral-900);
   text-decoration: none;
-  transition: color 0.2s ease-out;
+  transition: color var(--transition-fast);
 
   &:hover {
-    color: var(--brand-dark);
+    color: var(--brand-primary);
   }
 }
 
@@ -58,8 +58,10 @@ ol {
 
 h1, h2, h3, h4, h5, h6 {
   font-weight: var(--weight-bold);
-  line-height: 1.2;
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
   color: var(--neutral-900);
+  text-wrap: balance;
 }
 
 input,
@@ -67,6 +69,12 @@ textarea,
 select {
   font-family: inherit;
   font-size: inherit;
+}
+
+// Selection styling
+::selection {
+  background-color: var(--brand-primary);
+  color: var(--neutral-white);
 }
 
 // Focus visible for accessibility
@@ -78,4 +86,16 @@ select {
 // Remove default focus for mouse users
 :focus:not(:focus-visible) {
   outline: none;
+}
+
+// Smooth image rendering
+img {
+  image-rendering: auto;
+}
+
+// Remove tap highlight on mobile
+@media (pointer: coarse) {
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
 }

@@ -1,56 +1,77 @@
-<!-- DISTRIBUTORS PAGE (DC-042) -->
+<!-- PARTNERS PAGE (DC-042) — Pitch HESA's distribution capabilities to international manufacturers -->
 
-<!-- Hero B2B -->
-<section class="dist-hero">
-  @if (content()?.heroImage) {
-    <div class="dist-hero__bg" [style.background-image]="'url(' + content()!.heroImage + ')'"></div>
-  }
-  <div class="dist-hero__overlay"></div>
-  <div class="container dist-hero__content">
-    <h1 class="dist-hero__title">{{ getSection('heroTitle') || (i18n.currentLang() === 'es' ? 'Conviertase en Nuestro Socio de Distribucion en Costa Rica' : 'Become Our Distribution Partner in Costa Rica') }}</h1>
-    <p class="dist-hero__subtitle">{{ getSection('heroSubtitle') || (i18n.currentLang() === 'es' ? '37 anos de trayectoria comprobada en distribucion de productos veterinarios. Cobertura nacional, flotilla propia y equipo de ventas especializado.' : '37 years of proven track record in veterinary product distribution. Nationwide coverage, own fleet, and specialized sales team.') }}</p>
-    <button type="button" (click)="scrollToContactForm()" class="btn btn-primary btn-lg">{{ i18n.currentLang() === 'es' ? 'Contactenos' : 'Contact Us' }}</button>
+<!-- Hero -->
+<section class="partners-hero">
+  <div class="partners-hero__bg" style="background-image: url('https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=1400&q=80')"></div>
+  <div class="partners-hero__overlay"></div>
+  <div class="container partners-hero__content">
+    <p class="partners-hero__eyebrow">{{ i18n.currentLang() === 'es' ? 'Alianzas Internacionales' : 'International Partnerships' }}</p>
+    <h1 class="partners-hero__title">{{ getSection('heroTitle') || (i18n.currentLang() === 'es' ? 'Socios Estrategicos' : 'Strategic Partners') }}</h1>
+    <p class="partners-hero__subtitle">{{ getSection('heroSubtitle') || (i18n.currentLang() === 'es' ? 'Conectamos a los fabricantes mas importantes del mundo con el mercado veterinario costarricense a traves de una red de distribucion nacional propia con 37 anos de experiencia.' : 'We connect the world\'s leading manufacturers with the Costa Rican veterinary market through our own national distribution network with 37 years of experience.') }}</p>
+    <button type="button" (click)="scrollToContactForm()" class="btn btn-primary btn-lg">{{ i18n.currentLang() === 'es' ? 'Inicie la Conversacion' : 'Start the Conversation' }}</button>
   </div>
 </section>
 
 <!-- Benefits Grid -->
-<section class="section-spacing">
+<section class="section-spacing partners-benefits">
   <div class="container">
-    <h2 class="text-h2" style="text-align: center; margin-bottom: 48px;">{{ getSection('whyTitle') || (i18n.currentLang() === 'es' ? 'Por que Elegir HESA' : 'Why Choose HESA') }}</h2>
-    <div class="dist-benefits__grid">
+    <p class="text-eyebrow partners-benefits__eyebrow">{{ i18n.currentLang() === 'es' ? 'Ventajas Competitivas' : 'Competitive Advantages' }}</p>
+    <h2 class="text-h2 partners-benefits__heading">{{ getSection('whyTitle') || (i18n.currentLang() === 'es' ? 'Por que Asociarse con HESA' : 'Why Partner with HESA') }}</h2>
+    <div class="partners-benefits__grid">
       @for (benefit of benefits; track benefit.title.es) {
-        <div class="dist-benefits__card fade-in-section">
-          <div class="dist-benefits__icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--brand-primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="16 12 12 8 8 12"/><line x1="12" y1="16" x2="12" y2="8"/></svg>
+        <div class="partners-benefits__card fade-in-section">
+          <div class="partners-benefits__icon">
+            @switch (benefit.icon) {
+              @case ('globe') {
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--brand-primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              }
+              @case ('truck') {
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--brand-primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+              }
+              @case ('shield') {
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--brand-primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              }
+              @case ('users') {
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--brand-primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              }
+              @case ('award') {
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--brand-primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+              }
+              @case ('trending-up') {
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--brand-primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+              }
+            }
           </div>
-          <h3 class="dist-benefits__title">{{ i18n.t(benefit.title) }}</h3>
-          <p class="dist-benefits__desc">{{ i18n.t(benefit.desc) }}</p>
+          <h3 class="partners-benefits__title">{{ i18n.t(benefit.title) }}</h3>
+          <p class="partners-benefits__desc">{{ i18n.t(benefit.desc) }}</p>
         </div>
       }
     </div>
   </div>
 </section>
 
-<!-- Logo Wall -->
+<!-- Brand Logos -->
 <app-brand-logos-row />
 
-<!-- Timeline (DC-066, DC-095) -->
-<section class="section-spacing">
+<!-- Partnership Process Timeline -->
+<section class="section-spacing partners-timeline">
   <div class="container">
-    <h2 class="text-h2" style="text-align: center; margin-bottom: 48px;">{{ getSection('timelineTitle') || (i18n.currentLang() === 'es' ? 'Como Funciona' : 'How It Works') }}</h2>
+    <p class="text-eyebrow partners-timeline__eyebrow">{{ i18n.currentLang() === 'es' ? 'Proceso de Alianza' : 'Partnership Process' }}</p>
+    <h2 class="text-h2 partners-timeline__heading">{{ getSection('timelineTitle') || (i18n.currentLang() === 'es' ? 'Como Funciona' : 'How It Works') }}</h2>
     <app-timeline />
   </div>
 </section>
 
-<!-- Manufacturer Contact Form -->
-<section class="section-spacing" id="contact-form">
+<!-- Contact Form -->
+<section class="section-spacing partners-contact" id="contact-form">
   <div class="container">
-    <div class="dist-form__layout">
-      <div class="dist-form__info">
-        <h2 class="text-h2">{{ getSection('formTitle') || (i18n.currentLang() === 'es' ? 'Inicie su Alianza' : 'Start Your Partnership') }}</h2>
-        <p>{{ getSection('formDescription') || (i18n.currentLang() === 'es' ? 'Complete el formulario y nuestro equipo comercial se comunicara con usted en un plazo de 48 horas para discutir oportunidades de distribucion.' : 'Fill out the form and our commercial team will get in touch within 48 hours to discuss distribution opportunities.') }}</p>
+    <div class="partners-contact__layout">
+      <div class="partners-contact__info">
+        <p class="text-eyebrow">{{ i18n.currentLang() === 'es' ? 'Hablemos' : 'Let\'s Talk' }}</p>
+        <h2 class="text-h2">{{ getSection('formTitle') || (i18n.currentLang() === 'es' ? 'Inicie la Conversacion' : 'Start the Conversation') }}</h2>
+        <p class="partners-contact__desc">{{ getSection('formDescription') || (i18n.currentLang() === 'es' ? 'Complete el formulario y nuestro equipo comercial se comunicara con usted en un plazo de 48 horas para discutir oportunidades de distribucion.' : 'Fill out the form and our commercial team will get in touch within 48 hours to discuss distribution opportunities.') }}</p>
       </div>
-      <div class="dist-form__form">
+      <div class="partners-contact__form">
         <app-contact-form variant="manufacturer" />
       </div>
     </div>

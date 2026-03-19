@@ -1,21 +1,28 @@
 // =============================================================================
-// Product Card — Public (DC-054, DC-136)
+// Product Card — Premium minimal style (Tuft & Paw inspired)
 // =============================================================================
 
 .product-card {
   display: flex;
   flex-direction: column;
-  background-color: var(--neutral-white);
+  background-color: var(--neutral-white, #fff);
   border-radius: var(--radius-card-public);
-  box-shadow: var(--shadow-sm);
   overflow: hidden;
   text-decoration: none;
   color: inherit;
   transition: var(--transition-card);
+  position: relative;
+
+  // No border, no resting shadow — clean and airy
+  box-shadow: none;
 
   &:hover {
-    transform: scale(1.02);
+    transform: translateY(-4px);
     box-shadow: var(--shadow-md);
+
+    .product-card__img {
+      transform: scale(1.03);
+    }
 
     .product-card__cta {
       opacity: 1;
@@ -24,13 +31,22 @@
   }
 
   &:active {
-    transform: scale(0.99);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
   }
 
   &:focus-visible {
     outline: 2px solid var(--brand-primary);
     outline-offset: 2px;
-    border-radius: 14px;
+  }
+
+  // ---------------------------------------------------------------------------
+  // Image area
+  // ---------------------------------------------------------------------------
+  &__image-wrapper {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-card-public);
   }
 
   &__image {
@@ -40,14 +56,16 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    position: relative;
+    border-radius: var(--radius-card-public);
   }
 
-  &__image-real {
+  &__img {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    padding: 16px;
+    padding: var(--space-4);
+    transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: transform;
   }
 
   &__image-visual {
@@ -67,37 +85,97 @@
     }
   }
 
-  &__info {
-    padding: 16px;
+  // ---------------------------------------------------------------------------
+  // Category badge — small pill overlaid on image
+  // ---------------------------------------------------------------------------
+  &__badge {
+    position: absolute;
+    top: var(--space-3);
+    left: var(--space-3);
+    font-size: var(--text-label);
+    font-weight: var(--weight-medium);
+    line-height: 1;
+    padding: 4px 10px;
+    border-radius: var(--radius-pill);
+    pointer-events: none;
+    letter-spacing: 0.02em;
+
+    // Default / pharma
+    background-color: var(--surface-pharma, rgba(0, 141, 201, 0.1));
+    color: var(--brand-primary, #008dc9);
+
+    &--pharma {
+      background-color: var(--surface-pharma, rgba(0, 141, 201, 0.1));
+      color: var(--brand-primary, #008dc9);
+    }
+
+    &--food {
+      background-color: var(--surface-food, rgba(80, 185, 42, 0.1));
+      color: #3a8a1e;
+    }
+
+    &--equipment {
+      background-color: var(--surface-equipment, rgba(124, 58, 237, 0.08));
+      color: #6d3ac7;
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // Body / info area
+  // ---------------------------------------------------------------------------
+  &__body {
+    padding: var(--space-4) var(--space-4) var(--space-4);
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: var(--space-2);
+  }
+
+  &__brand {
+    font-size: var(--text-label);
+    color: var(--neutral-400);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    line-height: 1.2;
+    margin: 0;
   }
 
   &__name {
-    font-size: 16px;
-    font-weight: var(--weight-bold);
+    font-size: var(--text-body);
+    font-weight: var(--weight-medium);
     color: var(--neutral-900);
+    margin: 0;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    line-height: 1.3;
-  }
-
-  &__brand {
-    font-size: 14px;
-    color: var(--neutral-400);
+    line-height: 1.35;
   }
 
   &__cta {
-    margin-top: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: var(--space-2);
+    font-size: var(--text-small);
+    font-weight: var(--weight-medium);
+    color: var(--brand-primary);
     opacity: 0;
-    transform: translateY(4px);
-    transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+    transform: translateY(6px);
+    transition: var(--transition-fast);
+    transition-property: opacity, transform;
+
+    svg {
+      transition: transform 0.25s ease;
+    }
+
+    &:hover svg {
+      transform: translateX(3px);
+    }
   }
 
-  // Carousel variant: CTA always visible
+  // ---------------------------------------------------------------------------
+  // Carousel variant — CTA always visible
+  // ---------------------------------------------------------------------------
   &--carousel {
     .product-card__cta {
       opacity: 1;
@@ -105,11 +183,20 @@
     }
   }
 
-  // Mobile: CTA always visible (no hover on touch)
+  // ---------------------------------------------------------------------------
+  // Mobile — CTA always visible, no hover on touch devices
+  // ---------------------------------------------------------------------------
   @media (max-width: 767px) {
     .product-card__cta {
       opacity: 1;
       transform: translateY(0);
+    }
+  }
+
+  // Ensure the card has a soft resting state on hover-capable devices
+  @media (hover: hover) {
+    &:hover .product-card__cta svg {
+      transform: translateX(3px);
     }
   }
 }

@@ -3,7 +3,16 @@
   display: block;
 }
 
-// NFR-023: Skip to main content link — visible only on focus for keyboard users
+// Space for fixed header (72px mobile, 80px desktop)
+main {
+  padding-top: 72px;
+
+  @media (min-width: 1024px) {
+    padding-top: 80px;
+  }
+}
+
+// NFR-023: Skip to main content link
 .skip-to-content {
   position: absolute;
   top: -100px;

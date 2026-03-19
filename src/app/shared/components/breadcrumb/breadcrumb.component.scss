@@ -1,69 +1,97 @@
 // =============================================================================
-// Breadcrumb (DC-067)
+// Breadcrumb — Minimal, muted navigation trail
 // =============================================================================
 
 .breadcrumb {
+  padding: var(--space-6) 0;
+
+  @media (max-width: 767px) {
+    padding: var(--space-4) 0;
+  }
+
+  // ---------------------------------------------------------------------------
+  // List container
+  // ---------------------------------------------------------------------------
   &__list {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
+    gap: 0;
   }
 
+  // ---------------------------------------------------------------------------
+  // Individual item
+  // ---------------------------------------------------------------------------
   &__item {
     display: flex;
     align-items: center;
-    font-size: 14px;
+    font-size: var(--text-small);
+    line-height: var(--leading-normal);
 
     @media (max-width: 767px) {
-      font-size: 13px;
+      font-size: var(--text-eyebrow);
     }
   }
 
+  // ---------------------------------------------------------------------------
+  // Clickable link — muted, subtle
+  // ---------------------------------------------------------------------------
   &__link {
     color: var(--neutral-400);
     text-decoration: none;
-    transition: color 0.2s ease-out;
-    // NFR-026: Ensure minimum 44px touch target on mobile
-    padding: 10px 4px;
+    font-weight: var(--weight-regular);
+    transition: color var(--transition-fast);
+
+    // NFR-026: 44px touch target on mobile
+    padding: 10px var(--space-1);
     min-height: 44px;
     display: inline-flex;
     align-items: center;
 
     @media (min-width: 768px) {
-      padding: 2px 0;
+      padding: var(--space-1) 0;
       min-height: auto;
     }
 
     &:hover {
       color: var(--brand-primary);
-      text-decoration: underline;
     }
 
     &:focus-visible {
       outline: 2px solid var(--brand-primary);
       outline-offset: 2px;
+      border-radius: var(--radius-sm);
     }
   }
 
+  // ---------------------------------------------------------------------------
+  // Current page — slightly darker
+  // ---------------------------------------------------------------------------
   &__current {
-    color: var(--neutral-900);
+    color: var(--neutral-600);
     font-weight: var(--weight-medium);
+
     // NFR-026: Match link touch target sizing
-    padding: 10px 4px;
+    padding: 10px var(--space-1);
     min-height: 44px;
     display: inline-flex;
     align-items: center;
 
     @media (min-width: 768px) {
-      padding: 2px 0;
+      padding: var(--space-1) 0;
       min-height: auto;
       display: inline;
     }
   }
 
+  // ---------------------------------------------------------------------------
+  // Separator — soft, muted
+  // ---------------------------------------------------------------------------
   &__separator {
-    color: var(--neutral-200);
-    padding: 0 8px;
+    color: var(--neutral-300);
+    padding: 0 var(--space-2);
+    font-size: var(--text-small);
     user-select: none;
+    opacity: 0.7;
   }
 }

@@ -1,28 +1,22 @@
 // =============================================================================
-// Footer Component (DC-051, DC-086)
+// Footer Component — Premium Redesign
+// Dark, elegant, generous whitespace
 // =============================================================================
 
 :host {
   display: block;
-  // NFR-003: Reserve space for footer to prevent CLS (layout shift)
-  // Mobile: accordion sections collapsed = ~280px, Desktop: grid = ~300px
-  min-height: 280px;
   contain: layout style;
-
-  @media (min-width: 1024px) {
-    min-height: 300px;
-  }
 }
 
 .footer {
-  background-color: var(--brand-dark);
+  background-color: var(--neutral-900);
   color: var(--neutral-white);
 
   &__main {
-    padding: 40px 0;
+    padding: 56px 0 40px;
 
     @media (min-width: 1024px) {
-      padding: 64px 0;
+      padding: 80px 0 56px;
     }
   }
 
@@ -37,18 +31,16 @@
     }
 
     @media (min-width: 1024px) {
-      grid-template-columns: 1.5fr 1fr 1fr 1fr;
-      gap: 48px;
+      grid-template-columns: 1.6fr 1fr 1fr 1fr;
+      gap: 56px;
     }
   }
 
   // ---- Brand ----
   &__brand {
-    margin-bottom: 32px;
-    text-align: center;
+    margin-bottom: 40px;
 
     @media (min-width: 768px) {
-      text-align: left;
       grid-column: 1 / -1;
     }
 
@@ -59,27 +51,52 @@
   }
 
   &__logo {
-    font-size: 48px;
+    font-size: 40px;
     font-weight: var(--weight-extrabold);
-    letter-spacing: -0.02em;
-    opacity: 0.9;
+    letter-spacing: var(--tracking-tighter);
     color: var(--neutral-white);
+    line-height: 1;
 
     @media (min-width: 1024px) {
-      font-size: 56px;
+      font-size: 48px;
     }
   }
 
   &__tagline {
     font-size: 15px;
-    opacity: 0.7;
-    margin-top: 12px;
-    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.5);
+    margin-top: 16px;
+    line-height: var(--leading-relaxed);
+    max-width: 280px;
   }
 
-  // ---- Section (accordion on mobile) ----
+  &__social-links {
+    display: flex;
+    gap: 8px;
+    margin-top: 24px;
+  }
+
+  &__social-link {
+    color: rgba(255, 255, 255, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    transition: all 0.2s ease;
+
+    &:hover {
+      color: var(--neutral-white);
+      border-color: rgba(255, 255, 255, 0.4);
+      background-color: rgba(255, 255, 255, 0.06);
+    }
+  }
+
+  // ---- Sections ----
   &__section {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 
     @media (min-width: 768px) {
       border-bottom: none;
@@ -91,36 +108,29 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    padding: 16px 0;
+    padding: 18px 0;
     color: var(--neutral-white);
-    font-size: 16px;
-    font-weight: var(--weight-semibold);
+    font-size: 15px;
+    font-weight: var(--weight-medium);
 
     @media (min-width: 768px) {
       display: none;
     }
   }
 
-  &__toggle-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 28px;
-    height: 28px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 50%;
-    font-size: 18px;
-    transition: transform 0.3s ease-out;
+  &__toggle-chevron {
+    opacity: 0.4;
+    transition: transform 0.3s ease;
 
     .footer__section--open & {
-      transform: rotate(45deg);
+      transform: rotate(180deg);
     }
   }
 
   &__section-content {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease-out;
+    transition: max-height 0.3s ease;
 
     .footer__section--open & {
       max-height: 300px;
@@ -134,7 +144,7 @@
     nav {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 4px;
       padding-bottom: 16px;
 
       @media (min-width: 768px) {
@@ -149,10 +159,12 @@
     &--desktop {
       @media (min-width: 768px) {
         display: block;
-        font-size: 16px;
+        font-size: var(--text-label);
         font-weight: var(--weight-semibold);
+        text-transform: uppercase;
+        letter-spacing: var(--tracking-wide);
+        color: rgba(255, 255, 255, 0.35);
         margin-bottom: 20px;
-        letter-spacing: 0.02em;
       }
     }
   }
@@ -160,35 +172,31 @@
   // ---- Links ----
   &__link {
     font-size: 15px;
-    font-weight: var(--weight-medium);
-    color: rgba(255, 255, 255, 0.7);
+    font-weight: var(--weight-regular);
+    color: rgba(255, 255, 255, 0.6);
     text-decoration: none;
-    letter-spacing: 0.02em;
-    transition: opacity 0.2s ease-out;
-    // NFR-026: Ensure minimum 44px touch target height on mobile
     padding: 10px 0;
     min-height: 44px;
     display: flex;
     align-items: center;
+    transition: color 0.2s ease;
 
     @media (min-width: 768px) {
-      padding: 4px 0;
+      padding: 5px 0;
       min-height: auto;
       display: inline;
     }
 
     &:hover {
       color: var(--neutral-white);
-      opacity: 1;
-      text-decoration: underline;
     }
   }
 
-  // ---- Contact ----
+  // ---- Contact Info ----
   &__contact-info {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 8px;
     padding-bottom: 16px;
 
     @media (min-width: 768px) {
@@ -196,49 +204,15 @@
     }
 
     p {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 14px;
-      color: rgba(255, 255, 255, 0.7);
-
-      svg {
-        flex-shrink: 0;
-        opacity: 0.7;
-      }
+      font-size: 15px;
+      color: rgba(255, 255, 255, 0.6);
+      line-height: 1.5;
     }
   }
 
-  // ---- Social ----
-  &__social-links {
-    display: flex;
-    gap: 16px;
-    padding-bottom: 16px;
-
-    @media (min-width: 768px) {
-      padding-bottom: 0;
-    }
-  }
-
-  &__social-link {
-    color: rgba(255, 255, 255, 0.7);
-    transition: transform 0.2s ease-out, color 0.2s ease-out;
-    // NFR-026: Ensure minimum 44x44px touch target
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 44px;
-    min-height: 44px;
-
-    &:hover {
-      color: var(--neutral-white);
-      transform: scale(1.1);
-    }
-  }
-
-  // ---- Bottom ----
+  // ---- Bottom bar ----
   &__bottom {
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
     padding: 24px 0;
   }
 
@@ -255,7 +229,8 @@
   }
 
   &__copyright {
-    font-size: 14px;
-    opacity: 0.6;
+    font-size: var(--text-label);
+    color: rgba(255, 255, 255, 0.3);
+    letter-spacing: 0.02em;
   }
 }

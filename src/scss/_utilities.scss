@@ -1,8 +1,8 @@
 // =============================================================================
-// Utility Classes & Mixins
+// Utility Classes & Mixins — Premium Redesign
 // =============================================================================
 
-// ---- Breakpoint Mixins (DC-026) ----
+// ---- Breakpoint Mixins ----
 @mixin tablet {
   @media (min-width: 768px) {
     @content;
@@ -39,7 +39,7 @@
   }
 }
 
-// ---- Container (DC-019) ----
+// ---- Containers ----
 .container {
   width: 100%;
   max-width: var(--container-max-width);
@@ -51,7 +51,29 @@
   }
 }
 
-// ---- Skeleton Shimmer Animation (DC-120) ----
+.container-narrow {
+  width: 100%;
+  max-width: var(--container-narrow);
+  margin-inline: auto;
+  padding-inline: var(--container-padding-mobile);
+
+  @include tablet {
+    padding-inline: var(--container-padding-desktop);
+  }
+}
+
+.container-wide {
+  width: 100%;
+  max-width: var(--container-wide);
+  margin-inline: auto;
+  padding-inline: var(--container-padding-mobile);
+
+  @include tablet {
+    padding-inline: var(--container-padding-desktop);
+  }
+}
+
+// ---- Skeleton Shimmer Animation ----
 @keyframes shimmer {
   0% {
     background-position: -200% 0;
@@ -65,18 +87,18 @@
   background: linear-gradient(
     90deg,
     var(--neutral-200) 25%,
-    var(--neutral-50) 50%,
+    var(--neutral-100) 50%,
     var(--neutral-200) 75%
   );
   background-size: 200% 100%;
   animation: shimmer 1.5s ease-in-out infinite;
-  border-radius: var(--radius-btn);
+  border-radius: var(--radius-sm);
 }
 
-// ---- Scroll Fade In (DC-025, DC-139) ----
+// ---- Scroll Fade In ----
 .fade-in-section {
   opacity: 0;
-  transform: translateY(24px);
+  transform: translateY(28px);
   transition: var(--transition-fade-in);
 
   &.is-visible {
@@ -85,14 +107,17 @@
   }
 }
 
-// ---- Spinner Animation (DC-121) ----
+// Staggered fade-in delays
+.fade-in-delay-1 { transition-delay: 0.1s; }
+.fade-in-delay-2 { transition-delay: 0.2s; }
+.fade-in-delay-3 { transition-delay: 0.3s; }
+.fade-in-delay-4 { transition-delay: 0.4s; }
+.fade-in-delay-5 { transition-delay: 0.5s; }
+
+// ---- Spinner Animation ----
 @keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 .spinner {
@@ -105,7 +130,7 @@
   animation: spin 1s linear infinite;
 }
 
-// ---- Badge Pulse (DC-145) ----
+// ---- Badge Pulse ----
 @keyframes badge-pulse {
   0% { transform: scale(1); }
   50% { transform: scale(1.15); }
@@ -125,49 +150,52 @@
   border: 0;
 }
 
-// ---- Typography Utilities (DC-012) ----
-.text-display {
-  font-size: var(--text-display);
-  font-weight: var(--weight-extrabold);
-  letter-spacing: var(--tracking-tight);
-  line-height: 1.1;
+// ---- Typography Utilities ----
 
-  @include mobile-only {
-    font-size: 32px;
-    font-weight: var(--weight-bold);
-  }
+// Display — hero headlines, massive impact
+.text-display {
+  font-size: clamp(40px, 6vw, var(--text-display));
+  font-weight: var(--weight-extrabold);
+  letter-spacing: var(--tracking-tighter);
+  line-height: var(--leading-none);
 }
 
 .text-h1 {
-  font-size: var(--text-h1);
+  font-size: clamp(36px, 5vw, var(--text-h1));
   font-weight: var(--weight-bold);
-
-  @include mobile-only {
-    font-size: 32px;
-  }
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--leading-tight);
 }
 
 .text-h2 {
-  font-size: var(--text-h2);
+  font-size: clamp(28px, 3.5vw, var(--text-h2));
   font-weight: var(--weight-bold);
-
-  @include mobile-only {
-    font-size: 28px;
-  }
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--leading-tight);
 }
 
 .text-h3 {
-  font-size: var(--text-h3);
-  font-weight: var(--weight-bold);
+  font-size: clamp(24px, 2.5vw, var(--text-h3));
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-snug);
+}
 
-  @include mobile-only {
-    font-size: 24px;
-  }
+.text-h4 {
+  font-size: var(--text-h4);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-snug);
+}
+
+.text-body-xl {
+  font-size: var(--text-body-xl);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-relaxed);
 }
 
 .text-body-lg {
   font-size: var(--text-body-lg);
   font-weight: var(--weight-regular);
+  line-height: var(--leading-relaxed);
 }
 
 .text-small {
@@ -179,10 +207,19 @@
   font-size: var(--text-label);
   font-weight: var(--weight-semibold);
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: var(--tracking-wide);
 }
 
-// ---- Section Spacing (DC-017) ----
+// Eyebrow — overline/kicker text, T&P style
+.text-eyebrow {
+  font-size: var(--text-eyebrow);
+  font-weight: var(--weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  color: var(--neutral-400);
+}
+
+// ---- Section Spacing ----
 .section-spacing {
   padding-block: var(--section-gap-mobile);
 
@@ -192,5 +229,18 @@
 
   @include desktop-lg {
     padding-block: var(--section-gap-desktop);
+  }
+}
+
+// Half section spacing for tighter areas
+.section-spacing-sm {
+  padding-block: calc(var(--section-gap-mobile) / 2);
+
+  @include tablet {
+    padding-block: calc(var(--section-gap-tablet) / 2);
+  }
+
+  @include desktop-lg {
+    padding-block: calc(var(--section-gap-desktop) / 2);
   }
 }

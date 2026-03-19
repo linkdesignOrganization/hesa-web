@@ -1,37 +1,48 @@
 <!-- ============================================================ -->
-<!-- HOME PAGE                                                    -->
+<!-- HOME PAGE — Premium Tuft & Paw Inspired Design              -->
 <!-- ============================================================ -->
 
 <!-- HERO SECTION -->
 <section class="hero">
   @if (heroLoading()) {
     <div class="hero__skeleton">
-      <div class="skeleton-block" style="width: 120px; height: 16px; margin-bottom: 16px;"></div>
-      <div class="skeleton-block" style="width: 80%; height: 48px; margin-bottom: 16px;"></div>
-      <div class="skeleton-block" style="width: 60%; height: 20px; margin-bottom: 32px;"></div>
-      <div style="display: flex; gap: 16px;">
-        <div class="skeleton-block" style="width: 180px; height: 48px; border-radius: 8px;"></div>
-        <div class="skeleton-block" style="width: 200px; height: 48px; border-radius: 8px;"></div>
+      <div class="hero__skeleton-inner container">
+        <div class="skeleton hero__skeleton-eyebrow"></div>
+        <div class="skeleton hero__skeleton-title"></div>
+        <div class="skeleton hero__skeleton-title hero__skeleton-title--short"></div>
+        <div class="skeleton hero__skeleton-subtitle"></div>
+        <div class="hero__skeleton-ctas">
+          <div class="skeleton hero__skeleton-btn"></div>
+          <div class="skeleton hero__skeleton-btn"></div>
+        </div>
       </div>
     </div>
   } @else {
-    @if (hero().image) {
-      <div class="hero__bg" [style.background-image]="'url(' + hero().image + ')'"></div>
-    }
+    <!-- Background image: API image or fallback stock photo -->
+    <div class="hero__bg" [style.background-image]="'url(' + (hero().image || 'https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=1600&q=80') + ')'"></div>
     <div class="hero__overlay"></div>
+
     <div class="hero__content container">
-      <span class="hero__tag">{{ i18n.t(hero().tag) }}</span>
-      <h1 class="hero__title">{{ i18n.t(hero().headline) }}</h1>
-      <p class="hero__subtitle">{{ i18n.t(hero().subtitle) }}</p>
-      <div class="hero__ctas">
-        <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo' : 'catalog')" class="btn btn-primary btn-lg">{{ i18n.t(hero().ctaPrimary) }}</a>
-        <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'distribuidores' : 'distributors')" class="btn btn-outline-white btn-lg">{{ i18n.t(hero().ctaSecondary) }}</a>
+      <div class="hero__content-inner">
+        <span class="hero__eyebrow">HESA &mdash; Herrera y Elizondo S.A.</span>
+        <span class="hero__tag">{{ i18n.t(hero().tag) }}</span>
+        <h1 class="hero__title">{{ i18n.t(hero().headline) }}</h1>
+        <p class="hero__subtitle">{{ i18n.t(hero().subtitle) }}</p>
+        <div class="hero__ctas">
+          <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo' : 'catalog')" class="btn btn-primary btn-xl">{{ i18n.t(hero().ctaPrimary) }}</a>
+          <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'distribuidores' : 'distributors')" class="btn btn-outline-white btn-xl">{{ i18n.t(hero().ctaSecondary) }}</a>
+        </div>
       </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="hero__scroll-indicator" aria-hidden="true">
+      <div class="hero__scroll-line"></div>
     </div>
   }
 </section>
 
-<!-- BRAND LOGOS (between hero and category blocks per DC-032) -->
+<!-- BRAND LOGOS MARQUEE -->
 @if (!brandsLoading() && featuredBrands().length > 0) {
   <app-brand-logos-row />
 } @else if (brandsError()) {
@@ -47,6 +58,10 @@
 <!-- CATEGORY BLOCKS -->
 <section class="section-spacing">
   <div class="container">
+    <div class="categories-header fade-in-section">
+      <span class="text-eyebrow">{{ i18n.currentLang() === 'es' ? 'Nuestras lineas' : 'Our lines' }}</span>
+      <h2 class="text-h2">{{ i18n.currentLang() === 'es' ? 'Lo que distribuimos' : 'What we distribute' }}</h2>
+    </div>
     <div class="home-categories">
       <app-category-block
         category="pharma"
@@ -78,9 +93,13 @@
   </div>
 </section>
 
-<!-- VALUE PROPOSITION -->
+<!-- VALUE STATS SECTION -->
 <section class="value-section fade-in-section">
   <div class="container">
+    <div class="value-section__header">
+      <span class="text-eyebrow">{{ i18n.currentLang() === 'es' ? 'Nuestra trayectoria' : 'Our track record' }}</span>
+      <h2 class="text-h2">{{ i18n.currentLang() === 'es' ? 'Numeros que respaldan' : 'Numbers that speak' }}</h2>
+    </div>
     <div class="value-section__grid">
       @for (stat of stats; track stat.label.es) {
         <app-value-stat [number]="stat.number" [suffix]="stat.suffix" [label]="i18n.t(stat.label)" />
@@ -94,21 +113,34 @@
   <section class="section-spacing">
     <div class="container">
       <div class="featured-header">
-        <div class="skeleton-block" style="width: 200px; height: 28px;"></div>
+        <div>
+          <div class="skeleton" style="width: 100px; height: 14px; margin-bottom: 12px;"></div>
+          <div class="skeleton" style="width: 260px; height: 32px;"></div>
+        </div>
       </div>
       <div class="featured-grid">
         @for (i of [1,2,3,4]; track i) {
-          <div class="skeleton-card-product"><div class="skeleton-block" style="aspect-ratio: 1; border-radius: 8px;"></div><div class="skeleton-block" style="height: 16px; width: 80%; margin-top: 12px;"></div><div class="skeleton-block" style="height: 12px; width: 50%; margin-top: 8px;"></div></div>
+          <div class="skeleton-card-product">
+            <div class="skeleton" style="aspect-ratio: 1; border-radius: var(--radius-image);"></div>
+            <div class="skeleton" style="height: 16px; width: 80%; margin-top: 16px;"></div>
+            <div class="skeleton" style="height: 12px; width: 50%; margin-top: 8px;"></div>
+          </div>
         }
       </div>
     </div>
   </section>
 } @else if (featuredProducts().length > 0) {
-  <section class="section-spacing">
+  <section class="section-spacing featured-section">
     <div class="container">
       <div class="featured-header">
-        <h2 class="text-h2">{{ i18n.currentLang() === 'es' ? 'Productos Destacados' : 'Featured Products' }}</h2>
-        <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo' : 'catalog')" class="featured-header__link">{{ i18n.currentLang() === 'es' ? 'Ver todos' : 'View all' }}</a>
+        <div class="featured-header__text">
+          <span class="text-eyebrow">{{ i18n.currentLang() === 'es' ? 'Catalogo' : 'Catalog' }}</span>
+          <h2 class="text-h2">{{ i18n.currentLang() === 'es' ? 'Productos Destacados' : 'Featured Products' }}</h2>
+        </div>
+        <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo' : 'catalog')" class="featured-header__link">
+          {{ i18n.currentLang() === 'es' ? 'Ver todos' : 'View all' }}
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
       </div>
       <div class="carousel-wrapper">
         <button class="carousel-arrow carousel-arrow--prev" [class.carousel-arrow--disabled]="currentSlide() === 0" (click)="prevSlide()" aria-label="Productos anteriores">

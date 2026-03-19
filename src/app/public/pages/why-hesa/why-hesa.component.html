@@ -1,0 +1,80 @@
+<!-- WHY HESA PAGE — Value Proposition -->
+
+<!-- Hero -->
+<section class="why-hero">
+  <div class="why-hero__bg" style="background-image: url('https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=1400&q=80')"></div>
+  <div class="why-hero__overlay"></div>
+  <div class="container why-hero__content">
+    <span class="why-hero__eyebrow">{{ i18n.currentLang() === 'es' ? 'Nuestra propuesta de valor' : 'Our value proposition' }}</span>
+    <h1 class="why-hero__title">{{ i18n.currentLang() === 'es' ? 'Por que HESA' : 'Why HESA' }}</h1>
+    <p class="why-hero__subtitle">{{ i18n.currentLang() === 'es' ? 'El distribuidor veterinario lider de Costa Rica, con mas de 37 anos conectando profesionales con las mejores marcas del mundo' : 'Costa Rica\'s premier veterinary distributor, with over 37 years connecting professionals with the world\'s best brands' }}</p>
+  </div>
+</section>
+
+<!-- Key Differentiators -->
+<section class="section-spacing">
+  <div class="container">
+    <div class="why-diff__header fade-in-section">
+      <span class="text-eyebrow">{{ i18n.currentLang() === 'es' ? 'Lo que nos diferencia' : 'What sets us apart' }}</span>
+      <h2 class="why-diff__title">{{ i18n.currentLang() === 'es' ? 'Nuestros Diferenciadores' : 'Our Differentiators' }}</h2>
+      <p class="why-diff__subtitle">{{ i18n.currentLang() === 'es' ? 'Factores clave que hacen de HESA el socio ideal para su negocio veterinario' : 'Key factors that make HESA the ideal partner for your veterinary business' }}</p>
+    </div>
+
+    <div class="why-diff__grid">
+      @for (item of differentiators; track item.icon; let i = $index) {
+        <div class="why-diff__card fade-in-section" [class]="'fade-in-delay-' + ((i % 3) + 1)">
+          <div class="why-diff__icon">
+            @switch (item.icon) {
+              @case ('map') {
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--brand-primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
+              }
+              @case ('truck') {
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--brand-primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+              }
+              @case ('shield') {
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--brand-primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+              }
+              @case ('award') {
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--brand-primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+              }
+              @case ('users') {
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--brand-primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              }
+              @case ('clipboard') {
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--brand-primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/><path d="M9 14l2 2 4-4"/></svg>
+              }
+            }
+          </div>
+          <h3 class="why-diff__card-title">{{ i18n.t(item.title) }}</h3>
+          <p class="why-diff__card-text">{{ i18n.t(item.description) }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Numbers Section -->
+<section class="why-stats fade-in-section">
+  <div class="container">
+    <div class="why-stats__header">
+      <span class="text-eyebrow">{{ i18n.currentLang() === 'es' ? 'Nuestro impacto' : 'Our impact' }}</span>
+      <h2 class="why-stats__title">{{ i18n.currentLang() === 'es' ? 'HESA en Numeros' : 'HESA in Numbers' }}</h2>
+    </div>
+    <div class="why-stats__grid">
+      @for (stat of stats; track stat.label.es) {
+        <app-value-stat [number]="stat.number" [suffix]="stat.suffix" [label]="i18n.t(stat.label)" />
+      }
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="section-spacing why-cta fade-in-section">
+  <div class="container">
+    <div class="why-cta__inner">
+      <h2 class="why-cta__title">{{ i18n.currentLang() === 'es' ? 'Trabaje con el lider en distribucion veterinaria' : 'Work with the leader in veterinary distribution' }}</h2>
+      <p class="why-cta__text">{{ i18n.currentLang() === 'es' ? 'Contactenos hoy para conocer como HESA puede ser el socio ideal para su negocio' : 'Contact us today to learn how HESA can be the ideal partner for your business' }}</p>
+      <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'contacto' : 'contact')" class="btn btn-primary btn-lg">{{ i18n.currentLang() === 'es' ? 'Contactenos' : 'Contact Us' }}</a>
+    </div>
+  </div>
+</section>

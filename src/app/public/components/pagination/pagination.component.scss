@@ -1,63 +1,131 @@
 // =============================================================================
-// Pagination (DC-057, DC-094)
+// Pagination — Premium Controls (DC-057, DC-094)
 // =============================================================================
 
 .pagination {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
-  padding: 40px 0;
+  gap: 20px;
+  padding: 48px 24px;
 
+  // ── Info text ─────────────────────────────────────────────────────────
   &__info {
-    font-size: 14px;
+    font-size: var(--text-small);
     color: var(--neutral-400);
+    font-weight: var(--weight-medium);
+    margin: 0;
   }
 
+  // ── Desktop controls ──────────────────────────────────────────────────
   &__controls {
     display: none;
     align-items: center;
-    gap: 4px;
+    gap: 8px;
 
     @media (min-width: 768px) {
       display: flex;
     }
   }
 
+  &__pages {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  // ── Mobile controls ───────────────────────────────────────────────────
   &__mobile {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 20px;
 
     @media (min-width: 768px) {
       display: none;
     }
   }
 
-  &__page-info {
-    font-size: 14px;
+  &__page-indicator {
+    font-size: var(--text-small);
+    font-weight: var(--weight-semibold);
     color: var(--neutral-900);
-    font-weight: var(--weight-medium);
+    white-space: nowrap;
   }
 
-  &__arrow {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    background-color: var(--neutral-white);
-    border: 1px solid var(--neutral-200);
+  // ── Arrow / nav buttons ───────────────────────────────────────────────
+  &__btn {
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid var(--neutral-200);
+    background-color: #fff;
     color: var(--neutral-900);
-    transition: background-color 0.15s ease-out;
+    cursor: pointer;
+    transition:
+      background-color var(--transition-fast),
+      border-color var(--transition-fast),
+      box-shadow var(--transition-fast);
 
-    &:hover:not(.pagination__arrow--disabled) {
+    &:hover:not(:disabled) {
       background-color: var(--neutral-50);
+      border-color: var(--neutral-300);
+      box-shadow: var(--shadow-sm);
     }
 
-    &--disabled {
+    &:active:not(:disabled) {
+      transform: scale(0.95);
+    }
+
+    &:disabled {
       opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--brand-primary);
+      outline-offset: 2px;
+    }
+  }
+
+  // ── Page number buttons ───────────────────────────────────────────────
+  &__page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    height: 44px;
+    padding: 0 4px;
+    border-radius: var(--radius-pill);
+    border: 1px solid transparent;
+    background-color: transparent;
+    font-size: 14px;
+    font-weight: var(--weight-medium);
+    color: var(--neutral-500);
+    cursor: pointer;
+    transition:
+      background-color var(--transition-fast),
+      color var(--transition-fast),
+      border-color var(--transition-fast),
+      box-shadow var(--transition-fast);
+
+    &:hover:not(.pagination__page--active) {
+      background-color: var(--neutral-100);
+      color: var(--neutral-900);
+    }
+
+    &:active:not(.pagination__page--active) {
+      transform: scale(0.95);
+    }
+
+    &--active {
+      background-color: var(--brand-primary);
+      color: #fff;
+      font-weight: var(--weight-semibold);
+      border-color: var(--brand-primary);
+      box-shadow: var(--shadow-sm);
       cursor: default;
     }
 
@@ -67,36 +135,16 @@
     }
   }
 
-  &__page {
-    width: 44px;
-    height: 44px;
-    border-radius: var(--radius-btn);
-    font-size: 14px;
-    font-weight: var(--weight-medium);
-    color: var(--neutral-900);
+  // ── Ellipsis ──────────────────────────────────────────────────────────
+  &__ellipsis {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background-color 0.15s ease-out;
-
-    &:hover:not(.pagination__page--active) {
-      background-color: var(--neutral-50);
-    }
-
-    &--active {
-      background-color: var(--brand-primary);
-      color: var(--neutral-white);
-    }
-
-    &:focus-visible {
-      outline: 2px solid var(--brand-primary);
-      outline-offset: 2px;
-    }
-  }
-
-  &__ellipsis {
-    width: 40px;
-    text-align: center;
-    color: var(--neutral-400);
+    width: 44px;
+    height: 44px;
+    color: var(--neutral-300);
+    font-size: 16px;
+    letter-spacing: 2px;
+    user-select: none;
   }
 }

@@ -1,41 +1,82 @@
 <!-- BRANDS LIST PAGE -->
 <section class="brands-page">
-  <div class="container">
-    <app-breadcrumb [items]="breadcrumbs" />
+  <!-- Page Header -->
+  <div class="brands-header">
+    <div class="container">
+      <app-breadcrumb [items]="breadcrumbs" />
 
-    <div class="brands-page__header">
-      <h1 class="text-h2">{{ i18n.currentLang() === 'es' ? 'Nuestras Marcas' : 'Our Brands' }}</h1>
-      <p class="brands-page__intro">{{ i18n.currentLang() === 'es' ? 'Distribuimos exclusivamente las mejores marcas internacionales de la industria veterinaria. Cada marca ha sido cuidadosamente seleccionada por su calidad, respaldo cientifico y trayectoria.' : 'We exclusively distribute the best international brands in the veterinary industry. Each brand has been carefully selected for its quality, scientific backing and track record.' }}</p>
+      <div class="brands-header__content">
+        <span class="brands-header__eyebrow">
+          {{ i18n.currentLang() === 'es' ? 'Marcas exclusivas' : 'Exclusive brands' }}
+        </span>
+        <h1 class="brands-header__title">
+          {{ i18n.currentLang() === 'es' ? 'Nuestras Marcas' : 'Our Brands' }}
+        </h1>
+        <p class="brands-header__subtitle">
+          {{ i18n.currentLang() === 'es' ? 'Distribuimos exclusivamente las mejores marcas internacionales de la industria veterinaria. Cada marca ha sido cuidadosamente seleccionada por su calidad, respaldo cientifico y trayectoria.' : 'We exclusively distribute the best international brands in the veterinary industry. Each brand has been carefully selected for its quality, scientific backing and track record.' }}
+        </p>
+      </div>
     </div>
+  </div>
 
+  <!-- Page Body -->
+  <div class="container">
     @if (loading()) {
-      <div class="brands-page__grid">
-        @for (i of [1,2,3,4,5,6]; track i) {
-          <div class="skeleton-card" style="height: 220px; border-radius: 12px;"></div>
+      <!-- Loading Skeleton Grid -->
+      <div class="brands-grid">
+        @for (i of [1,2,3,4,5,6,7,8]; track i) {
+          <div class="skeleton-brand-card">
+            <div class="skeleton-brand-card__logo skeleton"></div>
+            <div class="skeleton-brand-card__body">
+              <div class="skeleton-brand-card__line skeleton-brand-card__line--wide skeleton"></div>
+              <div class="skeleton-brand-card__line skeleton-brand-card__line--medium skeleton"></div>
+            </div>
+          </div>
         }
       </div>
     } @else if (error()) {
       <!-- Error State -->
-      <div class="brands-page__state" role="alert">
-        <div class="brands-page__state-icon" aria-hidden="true">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--semantic-danger)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <div class="state-message state-message--error" role="alert">
+        <div class="state-message__icon" aria-hidden="true">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
         </div>
-        <h2 class="brands-page__state-title">{{ i18n.currentLang() === 'es' ? 'No pudimos cargar las marcas' : 'Could not load brands' }}</h2>
-        <p class="brands-page__state-desc">{{ i18n.currentLang() === 'es' ? 'Hubo un problema al cargar las marcas. Intenta de nuevo.' : 'There was a problem loading brands. Please try again.' }}</p>
-        <button class="btn btn-outline" (click)="loadBrands()">{{ i18n.currentLang() === 'es' ? 'Reintentar' : 'Retry' }}</button>
+        <h2 class="state-message__title">
+          {{ i18n.currentLang() === 'es' ? 'No pudimos cargar las marcas' : 'Could not load brands' }}
+        </h2>
+        <p class="state-message__text">
+          {{ i18n.currentLang() === 'es' ? 'Hubo un problema al cargar las marcas. Intenta de nuevo.' : 'There was a problem loading brands. Please try again.' }}
+        </p>
+        <button class="btn btn-outline" (click)="loadBrands()">
+          {{ i18n.currentLang() === 'es' ? 'Reintentar' : 'Retry' }}
+        </button>
       </div>
     } @else if (brands().length === 0) {
-      <!-- BUG-F03: Empty state when no brands are available -->
-      <div class="brands-page__state" role="status">
-        <div class="brands-page__state-icon" aria-hidden="true">
-          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--neutral-300)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+      <!-- Empty State -->
+      <div class="state-message state-message--empty" role="status">
+        <div class="state-message__icon" aria-hidden="true">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="18" height="18" x="3" y="3" rx="2"/>
+            <path d="M3 9h18"/>
+            <path d="M9 21V9"/>
+          </svg>
         </div>
-        <h2 class="brands-page__state-title">{{ i18n.currentLang() === 'es' ? 'No hay marcas disponibles' : 'No brands available' }}</h2>
-        <p class="brands-page__state-desc">{{ i18n.currentLang() === 'es' ? 'Aun no hay marcas publicadas en el catalogo. Vuelve pronto.' : 'No brands have been published in the catalog yet. Come back soon.' }}</p>
-        <a [routerLink]="i18n.getLangPrefix()" class="btn btn-outline">{{ i18n.currentLang() === 'es' ? 'Volver al inicio' : 'Back to home' }}</a>
+        <h2 class="state-message__title">
+          {{ i18n.currentLang() === 'es' ? 'No hay marcas disponibles' : 'No brands available' }}
+        </h2>
+        <p class="state-message__text">
+          {{ i18n.currentLang() === 'es' ? 'Aun no hay marcas publicadas en el catalogo. Vuelve pronto.' : 'No brands have been published in the catalog yet. Come back soon.' }}
+        </p>
+        <a [routerLink]="i18n.getLangPrefix()" class="btn btn-outline">
+          {{ i18n.currentLang() === 'es' ? 'Volver al inicio' : 'Back to home' }}
+        </a>
       </div>
     } @else {
-      <div class="brands-page__grid">
+      <!-- Brand Cards Grid -->
+      <div class="brands-grid">
         @for (brand of brands(); track brand._id) {
           <app-brand-card [brand]="brand" />
         }
