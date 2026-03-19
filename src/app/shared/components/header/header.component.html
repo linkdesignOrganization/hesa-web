@@ -3,96 +3,93 @@
   [class.header--scrolled]="isScrolled()"
   role="navigation"
   [attr.aria-label]="i18n.currentLang() === 'es' ? 'Navegacion principal' : 'Main navigation'">
-  <div class="header__inner">
-    <!-- Logo -->
-    <a [routerLink]="i18n.getLangPrefix()" class="header__logo" aria-label="HESA - Ir al inicio">
-      <span class="header__logo-text">HESA</span>
-    </a>
 
-    <!-- Desktop Navigation (centered) -->
-    <nav class="header__nav">
-      <div
-        class="header__nav-item header__nav-item--dropdown"
-        (mouseenter)="isSubmenuOpen.set(true)"
-        (mouseleave)="isSubmenuOpen.set(false)"
-        (keydown)="onSubmenuKeydown($event)">
+  <!-- Row 1: Nosotros — LOGO — Search -->
+  <div class="header__row-top">
+    <div class="header__row-top-inner">
+      <!-- Left: Nosotros -->
+      <div class="header__top-left">
+        <a
+          [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'nosotros' : 'about')"
+          routerLinkActive="header__top-link--active"
+          class="header__top-link">
+          {{ i18n.currentLang() === 'es' ? 'Nosotros' : 'About' }}
+        </a>
+      </div>
+
+      <!-- Center: Logo -->
+      <a [routerLink]="i18n.getLangPrefix()" class="header__logo" aria-label="HESA - Ir al inicio">
+        <img src="logo.svg" alt="HESA" class="header__logo-img" width="140" height="55" />
+      </a>
+
+      <!-- Right: Search + Language + Hamburger -->
+      <div class="header__top-right">
+        <button
+          class="header__icon-btn"
+          (click)="openSearch()"
+          [attr.aria-label]="i18n.currentLang() === 'es' ? 'Buscar' : 'Search'">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+            <circle cx="9" cy="9" r="7.5" stroke="currentColor" stroke-width="2"/>
+            <path d="M14.5 14.5L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+
+        <app-language-selector variant="header" />
+
+        <!-- Hamburger (mobile/tablet) -->
+        <button
+          class="header__hamburger"
+          [class.header__hamburger--active]="isMobileMenuOpen()"
+          (click)="toggleMobileMenu()"
+          [attr.aria-expanded]="isMobileMenuOpen()"
+          aria-controls="mobile-menu"
+          [attr.aria-label]="isMobileMenuOpen() ? (i18n.currentLang() === 'es' ? 'Cerrar menu' : 'Close menu') : (i18n.currentLang() === 'es' ? 'Abrir menu' : 'Open menu')">
+          <span class="header__hamburger-line"></span>
+          <span class="header__hamburger-line"></span>
+          <span class="header__hamburger-line"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Row 2: Category Navigation -->
+  <nav class="header__row-nav">
+    <ul class="header__nav-list">
+      <li>
+        <a
+          [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/farmacos' : 'catalog/pharmaceuticals')"
+          routerLinkActive="header__nav-link--active"
+          class="header__nav-link">
+          <span>{{ i18n.currentLang() === 'es' ? 'Fármacos' : 'Pharmaceuticals' }}</span>
+        </a>
+      </li>
+      <li>
+        <a
+          [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/alimentos' : 'catalog/food')"
+          routerLinkActive="header__nav-link--active"
+          class="header__nav-link">
+          <span>{{ i18n.currentLang() === 'es' ? 'Alimentos' : 'Food' }}</span>
+        </a>
+      </li>
+      <li>
+        <a
+          [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/equipos' : 'catalog/equipment')"
+          routerLinkActive="header__nav-link--active"
+          class="header__nav-link">
+          <span>{{ i18n.currentLang() === 'es' ? 'Equipos' : 'Equipment' }}</span>
+        </a>
+      </li>
+      <li>
         <a
           [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo' : 'catalog')"
           routerLinkActive="header__nav-link--active"
-          class="header__nav-link"
-          aria-haspopup="true"
-          [attr.aria-expanded]="isSubmenuOpen()"
-          role="button">
-          {{ i18n.currentLang() === 'es' ? 'Catálogo' : 'Catalog' }}
-          <svg class="header__chevron" [class.header__chevron--open]="isSubmenuOpen()" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="header__nav-link">
+          <span>{{ i18n.currentLang() === 'es' ? 'Ver todos' : 'Shop All' }}</span>
         </a>
-
-        <!-- Mega dropdown -->
-        <div class="header__mega" [class.header__mega--open]="isSubmenuOpen()">
-          <div class="header__mega-inner">
-            <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/farmacos' : 'catalog/pharmaceuticals')" class="header__mega-card">
-              <div class="header__mega-icon header__mega-icon--pharma">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"/><path d="m8.5 8.5 7 7"/></svg>
-              </div>
-              <div class="header__mega-text">
-                <span class="header__mega-title">{{ i18n.currentLang() === 'es' ? 'Fármacos' : 'Pharmaceuticals' }}</span>
-                <span class="header__mega-desc">{{ i18n.currentLang() === 'es' ? 'Medicamentos y tratamientos veterinarios' : 'Veterinary medicines and treatments' }}</span>
-              </div>
-            </a>
-            <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/alimentos' : 'catalog/food')" class="header__mega-card">
-              <div class="header__mega-icon header__mega-icon--food">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5"/><path d="M8.5 8.5v.01"/><path d="M16 15.5v.01"/><path d="M12 12v.01"/><path d="M11 17v.01"/><path d="M7 14v.01"/></svg>
-              </div>
-              <div class="header__mega-text">
-                <span class="header__mega-title">{{ i18n.currentLang() === 'es' ? 'Alimentos' : 'Food' }}</span>
-                <span class="header__mega-desc">{{ i18n.currentLang() === 'es' ? 'Nutrición animal de alta calidad' : 'High-quality animal nutrition' }}</span>
-              </div>
-            </a>
-            <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/equipos' : 'catalog/equipment')" class="header__mega-card">
-              <div class="header__mega-icon header__mega-icon--equip">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76Z"/></svg>
-              </div>
-              <div class="header__mega-text">
-                <span class="header__mega-title">{{ i18n.currentLang() === 'es' ? 'Equipos' : 'Equipment' }}</span>
-                <span class="header__mega-desc">{{ i18n.currentLang() === 'es' ? 'Equipamiento veterinario profesional' : 'Professional veterinary equipment' }}</span>
-              </div>
-            </a>
-            <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo' : 'catalog')" class="header__mega-viewall">
-              {{ i18n.currentLang() === 'es' ? 'Ver todo el catálogo' : 'View full catalog' }}
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'marcas' : 'brands')" routerLinkActive="header__nav-link--active" class="header__nav-link">{{ i18n.currentLang() === 'es' ? 'Marcas' : 'Brands' }}</a>
-      <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'nosotros' : 'about')" routerLinkActive="header__nav-link--active" class="header__nav-link">{{ i18n.currentLang() === 'es' ? 'Nosotros' : 'About' }}</a>
-      <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'distribuidores' : 'distributors')" routerLinkActive="header__nav-link--active" class="header__nav-link">{{ i18n.currentLang() === 'es' ? 'Socios' : 'Partners' }}</a>
-      <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'contacto' : 'contact')" routerLinkActive="header__nav-link--active" class="header__nav-link">{{ i18n.currentLang() === 'es' ? 'Contacto' : 'Contact' }}</a>
-    </nav>
-
-    <!-- Utility icons (right) -->
-    <div class="header__actions">
-      <button class="header__action-btn" (click)="openSearch()" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Buscar productos y marcas' : 'Search products and brands'">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-      </button>
-
-      <app-language-selector variant="header" />
-
-      <!-- Hamburger (mobile/tablet) -->
-      <button
-        class="header__hamburger"
-        [class.header__hamburger--active]="isMobileMenuOpen()"
-        (click)="toggleMobileMenu()"
-        [attr.aria-expanded]="isMobileMenuOpen()"
-        aria-controls="mobile-menu"
-        [attr.aria-label]="isMobileMenuOpen() ? (i18n.currentLang() === 'es' ? 'Cerrar menu' : 'Close menu') : (i18n.currentLang() === 'es' ? 'Abrir menu' : 'Open menu')">
-        <span class="header__hamburger-line"></span>
-        <span class="header__hamburger-line"></span>
-        <span class="header__hamburger-line"></span>
-      </button>
-    </div>
-  </div>
+      </li>
+    </ul>
+  </nav>
 </header>
 
 <!-- Full-screen Mobile Menu -->
@@ -103,18 +100,30 @@
   role="dialog"
   aria-modal="true"
   [attr.aria-label]="i18n.currentLang() === 'es' ? 'Menu de navegacion' : 'Navigation menu'">
+
+  <div class="mobile-menu__header">
+    <a [routerLink]="i18n.getLangPrefix()" class="mobile-menu__logo" (click)="closeMobileMenu()" aria-label="HESA">
+      <img src="logo.svg" alt="HESA" width="100" height="40" />
+    </a>
+    <button class="mobile-menu__close" (click)="closeMobileMenu()" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Cerrar menu' : 'Close menu'">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+
   <nav class="mobile-menu__nav">
-    <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo' : 'catalog')" class="mobile-menu__link" (click)="closeMobileMenu()">{{ i18n.currentLang() === 'es' ? 'Catálogo' : 'Catalog' }}</a>
-    <div class="mobile-menu__sub">
-      <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/farmacos' : 'catalog/pharmaceuticals')" class="mobile-menu__sublink" (click)="closeMobileMenu()">{{ i18n.currentLang() === 'es' ? 'Fármacos' : 'Pharmaceuticals' }}</a>
-      <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/alimentos' : 'catalog/food')" class="mobile-menu__sublink" (click)="closeMobileMenu()">{{ i18n.currentLang() === 'es' ? 'Alimentos' : 'Food' }}</a>
-      <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/equipos' : 'catalog/equipment')" class="mobile-menu__sublink" (click)="closeMobileMenu()">{{ i18n.currentLang() === 'es' ? 'Equipos' : 'Equipment' }}</a>
-    </div>
-    <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'marcas' : 'brands')" class="mobile-menu__link" (click)="closeMobileMenu()">{{ i18n.currentLang() === 'es' ? 'Marcas' : 'Brands' }}</a>
-    <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'nosotros' : 'about')" class="mobile-menu__link" (click)="closeMobileMenu()">{{ i18n.currentLang() === 'es' ? 'Nosotros' : 'About' }}</a>
-    <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'distribuidores' : 'distributors')" class="mobile-menu__link" (click)="closeMobileMenu()">{{ i18n.currentLang() === 'es' ? 'Socios' : 'Partners' }}</a>
-    <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'contacto' : 'contact')" class="mobile-menu__link" (click)="closeMobileMenu()">{{ i18n.currentLang() === 'es' ? 'Contacto' : 'Contact' }}</a>
+    <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/farmacos' : 'catalog/pharmaceuticals')" class="mobile-menu__link" (click)="closeMobileMenu()">{{ i18n.currentLang() === 'es' ? 'Fármacos' : 'Pharmaceuticals' }}</a>
+    <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/alimentos' : 'catalog/food')" class="mobile-menu__link" (click)="closeMobileMenu()">{{ i18n.currentLang() === 'es' ? 'Alimentos' : 'Food' }}</a>
+    <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/equipos' : 'catalog/equipment')" class="mobile-menu__link" (click)="closeMobileMenu()">{{ i18n.currentLang() === 'es' ? 'Equipos' : 'Equipment' }}</a>
+    <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo' : 'catalog')" class="mobile-menu__link" (click)="closeMobileMenu()">{{ i18n.currentLang() === 'es' ? 'Ver todos' : 'Shop All' }}</a>
+
+    <div class="mobile-menu__divider"></div>
+
+    <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'marcas' : 'brands')" class="mobile-menu__link mobile-menu__link--secondary" (click)="closeMobileMenu()">{{ i18n.currentLang() === 'es' ? 'Marcas' : 'Brands' }}</a>
+    <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'nosotros' : 'about')" class="mobile-menu__link mobile-menu__link--secondary" (click)="closeMobileMenu()">{{ i18n.currentLang() === 'es' ? 'Nosotros' : 'About' }}</a>
+    <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'distribuidores' : 'distributors')" class="mobile-menu__link mobile-menu__link--secondary" (click)="closeMobileMenu()">{{ i18n.currentLang() === 'es' ? 'Socios' : 'Partners' }}</a>
+    <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'contacto' : 'contact')" class="mobile-menu__link mobile-menu__link--secondary" (click)="closeMobileMenu()">{{ i18n.currentLang() === 'es' ? 'Contacto' : 'Contact' }}</a>
   </nav>
+
   <div class="mobile-menu__footer">
     <app-language-selector variant="header" />
   </div>

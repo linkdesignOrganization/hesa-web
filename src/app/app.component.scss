@@ -3,12 +3,14 @@
   display: block;
 }
 
-// Space for fixed header (72px mobile, 80px desktop)
+// Space for fixed header
+// Mobile: 1 row only (64px) — nav row hidden
+// Desktop: 2 rows (72px top + ~47px nav = ~119px)
 main {
-  padding-top: 72px;
+  padding-top: 64px;
 
   @media (min-width: 1024px) {
-    padding-top: 80px;
+    padding-top: 119px;
   }
 }
 
