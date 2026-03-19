@@ -205,21 +205,13 @@
       }
     }
 
-    &--active {
+    &--active,
+    &--mega-active {
       span {
         text-decoration: underline;
         text-underline-offset: 0.3rem;
         text-decoration-thickness: 1.5px;
       }
-    }
-  }
-
-  // Active state when mega menu is open for this category
-  &__nav-list > li:hover > .header__nav-link {
-    span {
-      text-decoration: underline;
-      text-underline-offset: 0.3rem;
-      text-decoration-thickness: 1.5px;
     }
   }
 

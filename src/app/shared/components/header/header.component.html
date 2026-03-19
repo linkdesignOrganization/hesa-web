@@ -75,7 +75,8 @@
         <a
           [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/farmacos' : 'catalog/pharmaceuticals')"
           routerLinkActive="header__nav-link--active"
-          class="header__nav-link">
+          class="header__nav-link"
+          [class.header__nav-link--mega-active]="activeMega() === 'farmacos'">
           <span>{{ i18n.currentLang() === 'es' ? 'Fármacos' : 'Pharmaceuticals' }}</span>
         </a>
       </li>
@@ -83,7 +84,8 @@
         <a
           [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/alimentos' : 'catalog/food')"
           routerLinkActive="header__nav-link--active"
-          class="header__nav-link">
+          class="header__nav-link"
+          [class.header__nav-link--mega-active]="activeMega() === 'alimentos'">
           <span>{{ i18n.currentLang() === 'es' ? 'Alimentos' : 'Food' }}</span>
         </a>
       </li>
@@ -91,7 +93,8 @@
         <a
           [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/equipos' : 'catalog/equipment')"
           routerLinkActive="header__nav-link--active"
-          class="header__nav-link">
+          class="header__nav-link"
+          [class.header__nav-link--mega-active]="activeMega() === 'equipos'">
           <span>{{ i18n.currentLang() === 'es' ? 'Equipos' : 'Equipment' }}</span>
         </a>
       </li>

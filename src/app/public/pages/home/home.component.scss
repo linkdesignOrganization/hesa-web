@@ -189,12 +189,11 @@
 // GLASS STATS CARD (bottom-left)
 // =============================================================================
 .hero-stats-card {
-  // Uses global .frosted-glass via @extend or applied in HTML
-  background: rgba(255, 255, 255, 0.15);
-  -webkit-backdrop-filter: blur(60px) saturate(1.5);
-  backdrop-filter: blur(60px) saturate(1.5);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 8px 32px rgba(0, 0, 0, 0.1);
+  background: var(--glass-ui-bg);
+  border: 1px solid var(--glass-ui-border);
+  box-shadow: var(--glass-ui-shadow);
+  -webkit-backdrop-filter: var(--glass-ui-filter);
+  backdrop-filter: var(--glass-ui-filter);
   border-radius: 20px;
   padding: 24px;
   display: flex;
@@ -274,10 +273,10 @@
 }
 
 .hero-tag-pill {
-  background: rgba(80, 185, 42, 0.35);
-  -webkit-backdrop-filter: blur(60px) saturate(1.5);
-  backdrop-filter: blur(60px) saturate(1.5);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: var(--glass-ui-bg);
+  -webkit-backdrop-filter: var(--glass-ui-filter);
+  backdrop-filter: var(--glass-ui-filter);
+  border: 1px solid var(--glass-ui-border);
   border-radius: 16px;
   padding: 8px 16px;
   color: white;
@@ -288,7 +287,7 @@
 // Product card wrapper
 .hero-cards {
   width: 100%;
-  max-width: 220px;
+  max-width: 180px;
 
   @media (max-width: 991px) {
     max-width: 100%;
