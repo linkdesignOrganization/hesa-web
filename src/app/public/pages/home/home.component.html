@@ -2,44 +2,80 @@
 <!-- HOME PAGE — Premium Tuft & Paw Inspired Design              -->
 <!-- ============================================================ -->
 
-<!-- HERO SECTION -->
-<section class="hero">
-  @if (heroLoading()) {
-    <div class="hero__skeleton">
-      <div class="hero__skeleton-inner container">
-        <div class="skeleton hero__skeleton-eyebrow"></div>
-        <div class="skeleton hero__skeleton-title"></div>
-        <div class="skeleton hero__skeleton-title hero__skeleton-title--short"></div>
-        <div class="skeleton hero__skeleton-subtitle"></div>
-        <div class="hero__skeleton-ctas">
-          <div class="skeleton hero__skeleton-btn"></div>
-          <div class="skeleton hero__skeleton-btn"></div>
+<!-- HERO SECTION — Healixx-style rounded hero with two columns -->
+<section class="hero-section">
+  <div class="hero-wrapper" [style.background-image]="'url(' + (hero().image || 'https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?w=1600&q=80') + ')'">
+    <div class="hero-gradient"></div>
+    <div class="hero-columns">
+      <!-- LEFT COLUMN -->
+      <div class="hero-left">
+        <div class="hero-title-box">
+          <!-- Pill tagline -->
+          <div class="hero-tagline">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <span>{{ i18n.currentLang() === 'es' ? 'Distribución veterinaria desde 1987' : 'Veterinary distribution since 1987' }}</span>
+          </div>
+          <!-- Heading + paragraph + CTA -->
+          <div class="hero-text-group">
+            <h1 class="hero-heading">{{ i18n.t(hero().headline) }}</h1>
+            <p class="hero-para">{{ i18n.t(hero().subtitle) }}</p>
+          </div>
+          <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo' : 'catalog')" class="hero-cta">
+            <span>{{ i18n.t(hero().ctaPrimary) }}</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+          </a>
+        </div>
+        <!-- Glass stats card -->
+        <div class="hero-stats-card">
+          <div class="hero-stats-card__numbers">
+            <h2 class="hero-stats-card__count">37+</h2>
+            <p class="hero-stats-card__text">{{ i18n.currentLang() === 'es' ? 'Años distribuyendo salud animal en Costa Rica' : 'Years distributing animal health in Costa Rica' }}</p>
+          </div>
+          <div class="hero-stats-card__badges">
+            <span class="hero-stats-card__badge">{{ i18n.currentLang() === 'es' ? '100% Cobertura' : '100% Coverage' }}</span>
+            <span class="hero-stats-card__badge">{{ i18n.currentLang() === 'es' ? '50+ Colaboradores' : '50+ Collaborators' }}</span>
+            <span class="hero-stats-card__badge">{{ i18n.currentLang() === 'es' ? 'Flotilla propia' : 'Own fleet' }}</span>
+          </div>
+        </div>
+      </div>
+      <!-- RIGHT COLUMN -->
+      <div class="hero-right">
+        <!-- Tag pills -->
+        <div class="hero-tags">
+          <span class="hero-tag-pill">{{ i18n.currentLang() === 'es' ? 'Fármacos' : 'Pharmaceuticals' }}</span>
+          <span class="hero-tag-pill">{{ i18n.currentLang() === 'es' ? 'Alimentos' : 'Food' }}</span>
+          <span class="hero-tag-pill">{{ i18n.currentLang() === 'es' ? 'Equipos' : 'Equipment' }}</span>
+          <span class="hero-tag-pill">{{ i18n.currentLang() === 'es' ? 'Cobertura Nacional' : 'National Coverage' }}</span>
+          <span class="hero-tag-pill">{{ i18n.currentLang() === 'es' ? '+18 Marcas' : '+18 Brands' }}</span>
+        </div>
+        <!-- Two info cards -->
+        <div class="hero-cards">
+          <!-- Card 1: Catalog stats -->
+          <div class="hero-card">
+            <div class="hero-card__header">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--brand-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
+              <span class="hero-card__badge">{{ i18n.currentLang() === 'es' ? 'Catálogo' : 'Catalog' }}</span>
+            </div>
+            <h4 class="hero-card__title">{{ i18n.currentLang() === 'es' ? 'Productos de clase mundial para profesionales' : 'World-class products for professionals' }}</h4>
+            <p class="hero-card__desc">{{ i18n.currentLang() === 'es' ? 'Fármacos, alimentos y equipos de las mejores marcas internacionales.' : 'Pharmaceuticals, food and equipment from the best international brands.' }}</p>
+            <div class="hero-card__stat">
+              <h3>96+</h3>
+              <span>{{ i18n.currentLang() === 'es' ? 'Productos' : 'Products' }}</span>
+            </div>
+          </div>
+          <!-- Card 2: Coverage -->
+          <div class="hero-card hero-card--accent">
+            <h4 class="hero-card__big-number">150+</h4>
+            <p class="hero-card__big-label">{{ i18n.currentLang() === 'es' ? 'Clientes activos' : 'Active clients' }}</p>
+            <div class="hero-card__dots">
+              <span></span><span></span><span></span>
+            </div>
+            <img class="hero-card__image" src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&q=80" alt="" loading="lazy" />
+          </div>
         </div>
       </div>
     </div>
-  } @else {
-    <!-- Background image: API image or fallback stock photo -->
-    <div class="hero__bg" [style.background-image]="'url(' + (hero().image || 'https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=1600&q=80') + ')'"></div>
-    <div class="hero__overlay"></div>
-
-    <div class="hero__content container">
-      <div class="hero__content-inner">
-        <span class="hero__eyebrow">HESA &mdash; Herrera y Elizondo S.A.</span>
-        <span class="hero__tag">{{ i18n.t(hero().tag) }}</span>
-        <h1 class="hero__title">{{ i18n.t(hero().headline) }}</h1>
-        <p class="hero__subtitle">{{ i18n.t(hero().subtitle) }}</p>
-        <div class="hero__ctas">
-          <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo' : 'catalog')" class="btn btn-primary btn-xl">{{ i18n.t(hero().ctaPrimary) }}</a>
-          <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'distribuidores' : 'distributors')" class="btn btn-outline-white btn-xl">{{ i18n.t(hero().ctaSecondary) }}</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Scroll indicator -->
-    <div class="hero__scroll-indicator" aria-hidden="true">
-      <div class="hero__scroll-line"></div>
-    </div>
-  }
+  </div>
 </section>
 
 <!-- BRAND LOGOS MARQUEE -->

@@ -34,281 +34,382 @@
 }
 
 // =============================================================================
-// HERO — Full-viewport cinematic hero
+// HERO — Healixx-style rounded hero with two columns
 // =============================================================================
-.hero {
+
+.hero-section {
+  padding: 20px 30px 0;
+
+  @media (max-width: 767px) {
+    padding: 10px 10px 0;
+  }
+}
+
+.hero-wrapper {
+  max-width: 1398px;
+  width: 100%;
+  margin: 0 auto;
+  border-radius: 32px;
+  overflow: hidden;
   position: relative;
-  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #2a3a4a;
+
+  @media (max-width: 767px) {
+    border-radius: 20px;
+  }
+}
+
+.hero-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.45) 100%);
+  border-radius: 32px;
+  z-index: 1;
+}
+
+.hero-columns {
+  position: relative;
+  z-index: 2;
   display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 50px 40px 40px;
+  gap: 20px;
+  min-height: 85vh;
+
+  @media (max-width: 991px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 40px;
+    min-height: auto;
+    padding: 40px 24px 32px;
+  }
+}
+
+// =============================================================================
+// LEFT COLUMN
+// =============================================================================
+.hero-left {
+  max-width: 610px;
+  display: flex;
+  flex-direction: column;
+  gap: 120px;
+  // Slide-in animation
+  opacity: 0;
+  animation: heroSlideIn 0.7s ease 0.1s forwards;
+
+  @media (max-width: 991px) {
+    max-width: 100%;
+    gap: 60px;
+  }
+}
+
+.hero-title-box {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+// Pill tagline
+.hero-tagline {
+  display: inline-flex;
   align-items: center;
-  justify-content: flex-start;
-  background-color: var(--neutral-900);
+  gap: 8px;
+  background-color: rgba(0, 141, 201, 0.55);
+  border-radius: 100px;
+  padding: 6px 16px;
+  width: fit-content;
+
+  span {
+    color: white;
+    font-size: 14px;
+    font-weight: var(--weight-medium);
+  }
+}
+
+.hero-text-group {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.hero-heading {
+  font-size: clamp(36px, 6vw, 80px);
+  font-weight: var(--weight-semibold);
+  color: white;
+  letter-spacing: -2px;
+  line-height: 0.95;
+
+  @media (max-width: 479px) {
+    font-size: 36px;
+    letter-spacing: -1px;
+  }
+}
+
+.hero-para {
+  color: white;
+  font-size: 18px;
+  font-weight: var(--weight-medium);
+  max-width: 460px;
+  line-height: 1.6;
+  opacity: 0.9;
+
+  @media (max-width: 767px) {
+    font-size: 16px;
+  }
+}
+
+// CTA Button — white pill
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background-color: white;
+  color: #000000;
+  border-radius: 100px;
+  padding: 14px 28px;
+  font-size: 15px;
+  font-weight: var(--weight-medium);
+  text-decoration: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  width: fit-content;
+
+  &:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+    color: #000000;
+  }
+}
+
+// =============================================================================
+// GLASS STATS CARD (bottom-left)
+// =============================================================================
+.hero-stats-card {
+  background-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 380px;
+
+  &__numbers {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  &__count {
+    font-size: 48px;
+    font-weight: var(--weight-semibold);
+    color: white;
+    line-height: 1;
+  }
+
+  &__text {
+    font-size: 15px;
+    font-weight: var(--weight-medium);
+    color: white;
+    max-width: 200px;
+    line-height: 1.4;
+    opacity: 0.9;
+  }
+
+  &__badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  &__badge {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    font-size: 12px;
+    font-weight: var(--weight-medium);
+    padding: 5px 12px;
+    border-radius: 100px;
+  }
+}
+
+// =============================================================================
+// RIGHT COLUMN
+// =============================================================================
+.hero-right {
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 24px;
+  // Slide-in animation (delayed)
+  opacity: 0;
+  animation: heroSlideIn 0.7s ease 0.2s forwards;
+
+  @media (max-width: 991px) {
+    max-width: 100%;
+    align-items: flex-start;
+  }
+}
+
+// Tag pills
+.hero-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: flex-end;
+  max-width: 400px;
+
+  @media (max-width: 991px) {
+    justify-content: flex-start;
+    max-width: 100%;
+  }
+}
+
+.hero-tag-pill {
+  background-color: rgba(136, 152, 171, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 16px;
+  padding: 8px 16px;
+  color: white;
+  font-size: 13px;
+  font-weight: var(--weight-medium);
+}
+
+// Two info cards
+.hero-cards {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+  }
+}
+
+.hero-card {
+  background-color: white;
+  border-radius: 24px;
+  padding: 24px;
+  flex: 1;
+  min-width: 0;
   overflow: hidden;
 
-  // ---- Background image ----
-  &__bg {
-    position: absolute;
-    inset: 0;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    z-index: 0;
-    // Subtle Ken Burns zoom on load
-    animation: heroZoom 20s ease-out forwards;
-  }
-
-  // ---- Dark overlay for text readability ----
-  &__overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      135deg,
-      rgba(0, 0, 0, 0.55) 0%,
-      rgba(0, 0, 0, 0.4) 40%,
-      rgba(0, 0, 0, 0.25) 70%,
-      rgba(0, 0, 0, 0.35) 100%
-    );
-    z-index: 1;
-  }
-
-  // ---- Content container ----
-  &__content {
-    position: relative;
-    z-index: 2;
+  &__header {
     display: flex;
     align-items: center;
-    min-height: 100vh;
-    padding-top: 120px;
-    padding-bottom: 120px;
+    gap: 10px;
+    margin-bottom: 16px;
   }
 
-  &__content-inner {
-    max-width: 680px;
+  &__badge {
+    font-size: 12px;
+    font-weight: var(--weight-medium);
+    color: #000000;
+    opacity: 0.5;
+    padding: 3px 14px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 100px;
   }
 
-  // ---- Eyebrow (company name) ----
-  &__eyebrow {
-    display: block;
-    font-size: var(--text-eyebrow);
-    font-weight: var(--weight-semibold);
-    text-transform: uppercase;
-    letter-spacing: var(--tracking-wider);
-    color: rgba(255, 255, 255, 0.5);
-    margin-bottom: 12px;
-    // Fade-in stagger
-    opacity: 0;
-    animation: heroFadeUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.2s forwards;
-  }
-
-  // ---- Tag (since 1989) ----
-  &__tag {
-    display: inline-block;
-    font-size: var(--text-eyebrow);
-    font-weight: var(--weight-bold);
-    color: var(--brand-secondary);
-    text-transform: uppercase;
-    letter-spacing: var(--tracking-wider);
-    margin-bottom: 24px;
-    padding: 6px 16px;
-    background-color: rgba(80, 185, 42, 0.15);
-    border-radius: var(--radius-pill);
-    border: 1px solid rgba(80, 185, 42, 0.25);
-    // Fade-in stagger
-    opacity: 0;
-    animation: heroFadeUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.35s forwards;
-  }
-
-  // ---- Headline ----
   &__title {
-    font-size: clamp(36px, 5.5vw, var(--text-display));
-    font-weight: var(--weight-extrabold);
-    color: var(--neutral-white);
-    letter-spacing: var(--tracking-tighter);
-    line-height: var(--leading-tight);
-    margin-bottom: 24px;
-    // Fade-in stagger
-    opacity: 0;
-    animation: heroFadeUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.5s forwards;
+    font-size: 18px;
+    font-weight: var(--weight-semibold);
+    color: #000000;
+    line-height: 1.3;
+    margin-bottom: 8px;
   }
 
-  // ---- Subtitle ----
-  &__subtitle {
-    font-size: clamp(16px, 1.5vw, var(--text-body-xl));
-    color: rgba(255, 255, 255, 0.85);
-    line-height: var(--leading-relaxed);
-    margin-bottom: 40px;
-    max-width: 540px;
-    // Fade-in stagger
-    opacity: 0;
-    animation: heroFadeUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.65s forwards;
+  &__desc {
+    font-size: 13px;
+    color: #000000;
+    opacity: 0.55;
+    line-height: 1.5;
+    margin-bottom: 20px;
   }
 
-  // ---- CTAs ----
-  &__ctas {
+  &__stat {
     display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
-    // Fade-in stagger
-    opacity: 0;
-    animation: heroFadeUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.8s forwards;
+    align-items: baseline;
+    gap: 8px;
 
-    @media (max-width: 479px) {
-      flex-direction: column;
+    h3 {
+      font-size: 32px;
+      font-weight: var(--weight-semibold);
+      color: #000000;
+      line-height: 1;
+    }
 
-      .btn {
-        width: 100%;
-      }
+    span {
+      font-size: 13px;
+      color: #000000;
+      opacity: 0.5;
     }
   }
 
-  // ---- Scroll indicator ----
-  &__scroll-indicator {
-    position: absolute;
-    bottom: 40px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 2;
+  // Accent card variant (right card)
+  &--accent {
+    position: relative;
+    min-height: 260px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    opacity: 0;
-    animation: heroFadeUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 1.2s forwards;
-
-    @media (max-width: 767px) {
-      bottom: 24px;
-    }
+    padding-bottom: 0;
+    background: linear-gradient(180deg, white 0%, #f0f5f6 100%);
   }
 
-  &__scroll-line {
-    width: 1px;
-    height: 48px;
-    background: linear-gradient(
-      to bottom,
-      rgba(255, 255, 255, 0.6),
-      rgba(255, 255, 255, 0)
-    );
-    position: relative;
-    overflow: hidden;
-
-    &::after {
-      content: '';
-      position: absolute;
-      top: -100%;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(
-        to bottom,
-        transparent,
-        var(--neutral-white),
-        transparent
-      );
-      animation: scrollLine 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-    }
+  &__big-number {
+    font-size: 40px;
+    font-weight: var(--weight-semibold);
+    color: #000000;
+    line-height: 1;
+    margin-bottom: 4px;
   }
 
-  // ---- Skeleton loading state ----
-  &__skeleton {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    background-color: var(--neutral-900);
-    width: 100%;
-  }
-
-  &__skeleton-inner {
-    max-width: 600px;
-  }
-
-  &__skeleton-eyebrow {
-    width: 140px;
-    height: 14px;
-    margin-bottom: 20px;
-    border-radius: var(--radius-pill);
-  }
-
-  &__skeleton-title {
-    width: 90%;
-    height: 52px;
+  &__big-label {
+    font-size: 15px;
+    font-weight: var(--weight-medium);
+    color: #000000;
+    opacity: 0.55;
     margin-bottom: 12px;
-    border-radius: var(--radius-sm);
-
-    &--short {
-      width: 60%;
-    }
   }
 
-  &__skeleton-subtitle {
-    width: 70%;
-    height: 18px;
-    margin-bottom: 40px;
-    border-radius: var(--radius-sm);
-  }
-
-  &__skeleton-ctas {
+  &__dots {
     display: flex;
-    gap: 16px;
+    gap: 5px;
+    margin-bottom: 16px;
+
+    span {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background-color: #e0e5e8;
+    }
   }
 
-  &__skeleton-btn {
-    width: 180px;
-    height: 56px;
-    border-radius: var(--radius-btn);
-  }
-
-  // ---- Mobile adjustments ----
-  @media (max-width: 767px) {
-    min-height: 90vh;
-
-    &__content {
-      min-height: 90vh;
-      padding-top: 100px;
-      padding-bottom: 100px;
-    }
-
-    &__content-inner {
-      text-align: center;
-      max-width: 100%;
-    }
-
-    &__subtitle {
-      max-width: 100%;
-    }
-
-    &__ctas {
-      justify-content: center;
-    }
+  &__image {
+    width: 100%;
+    height: auto;
+    border-radius: 16px 16px 0 0;
+    object-fit: cover;
+    margin-top: auto;
   }
 }
 
-// ---- Hero Animations ----
-@keyframes heroZoom {
-  0% {
-    transform: scale(1.08);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-@keyframes heroFadeUp {
+// =============================================================================
+// HERO ANIMATION
+// =============================================================================
+@keyframes heroSlideIn {
   0% {
     opacity: 0;
-    transform: translateY(24px);
+    transform: translateY(30px);
   }
   100% {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-@keyframes scrollLine {
-  0% {
-    top: -100%;
-  }
-  100% {
-    top: 200%;
   }
 }
 
