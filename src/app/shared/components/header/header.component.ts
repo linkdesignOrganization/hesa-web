@@ -18,6 +18,11 @@ export class HeaderComponent implements OnDestroy {
   isSubmenuOpen = signal(false);
   isSearchOpen = signal(false);
 
+  /** Which mega menu is currently open (null = none) */
+  activeMega = signal<'farmacos' | 'alimentos' | 'equipos' | null>(null);
+
+  private megaCloseTimer: ReturnType<typeof setTimeout> | null = null;
+
   private onScroll = (): void => {
     this.isScrolled.set(window.scrollY > 50);
   };
@@ -31,6 +36,29 @@ export class HeaderComponent implements OnDestroy {
   ngOnDestroy(): void {
     if (typeof window !== 'undefined') {
       window.removeEventListener('scroll', this.onScroll);
+    }
+    if (this.megaCloseTimer) clearTimeout(this.megaCloseTimer);
+  }
+
+  openMega(category: 'farmacos' | 'alimentos' | 'equipos'): void {
+    if (this.megaCloseTimer) {
+      clearTimeout(this.megaCloseTimer);
+      this.megaCloseTimer = null;
+    }
+    this.activeMega.set(category);
+  }
+
+  closeMega(): void {
+    // Small delay so mouse can move from nav link to mega panel
+    this.megaCloseTimer = setTimeout(() => {
+      this.activeMega.set(null);
+    }, 120);
+  }
+
+  keepMegaOpen(): void {
+    if (this.megaCloseTimer) {
+      clearTimeout(this.megaCloseTimer);
+      this.megaCloseTimer = null;
     }
   }
 
@@ -60,7 +88,6 @@ export class HeaderComponent implements OnDestroy {
     this.isSearchOpen.set(false);
   }
 
-  /** NFR-023: Keyboard navigation for submenu */
   onSubmenuKeydown(event: KeyboardEvent): void {
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault();
@@ -70,7 +97,6 @@ export class HeaderComponent implements OnDestroy {
     }
   }
 
-  /** NFR-023: Keyboard support for mobile menu */
   @HostListener('document:keydown.escape')
   onEscapeKey(): void {
     if (this.isMobileMenuOpen()) {
@@ -78,6 +104,9 @@ export class HeaderComponent implements OnDestroy {
     }
     if (this.isSearchOpen()) {
       this.closeSearch();
+    }
+    if (this.activeMega()) {
+      this.activeMega.set(null);
     }
   }
 }

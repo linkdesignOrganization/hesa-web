@@ -60,10 +60,11 @@
     </div>
   </div>
 
-  <!-- Row 2: Category Navigation -->
+  <!-- Row 2: Category Navigation with Mega Menus -->
   <nav class="header__row-nav">
     <ul class="header__nav-list">
-      <li>
+      <!-- Fármacos -->
+      <li (mouseenter)="openMega('farmacos')" (mouseleave)="closeMega()">
         <a
           [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/farmacos' : 'catalog/pharmaceuticals')"
           routerLinkActive="header__nav-link--active"
@@ -71,7 +72,8 @@
           <span>{{ i18n.currentLang() === 'es' ? 'Fármacos' : 'Pharmaceuticals' }}</span>
         </a>
       </li>
-      <li>
+      <!-- Alimentos -->
+      <li (mouseenter)="openMega('alimentos')" (mouseleave)="closeMega()">
         <a
           [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/alimentos' : 'catalog/food')"
           routerLinkActive="header__nav-link--active"
@@ -79,7 +81,8 @@
           <span>{{ i18n.currentLang() === 'es' ? 'Alimentos' : 'Food' }}</span>
         </a>
       </li>
-      <li>
+      <!-- Equipos -->
+      <li (mouseenter)="openMega('equipos')" (mouseleave)="closeMega()">
         <a
           [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/equipos' : 'catalog/equipment')"
           routerLinkActive="header__nav-link--active"
@@ -87,6 +90,7 @@
           <span>{{ i18n.currentLang() === 'es' ? 'Equipos' : 'Equipment' }}</span>
         </a>
       </li>
+      <!-- Ver todos -->
       <li>
         <a
           [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo' : 'catalog')"
@@ -97,6 +101,97 @@
         </a>
       </li>
     </ul>
+
+    <!-- Mega Menu: Fármacos -->
+    <div class="mega" [class.mega--open]="activeMega() === 'farmacos'" (mouseenter)="keepMegaOpen()" (mouseleave)="closeMega()">
+      <div class="mega__inner">
+        <div class="mega__links">
+          <span class="mega__heading">{{ i18n.currentLang() === 'es' ? 'Por especie' : 'By species' }}</span>
+          <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/farmacos' : 'catalog/pharmaceuticals')" [queryParams]="{species: 'Caninos'}" class="mega__link" (click)="activeMega.set(null)">{{ i18n.currentLang() === 'es' ? 'Caninos' : 'Canine' }}</a>
+          <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/farmacos' : 'catalog/pharmaceuticals')" [queryParams]="{species: 'Felinos'}" class="mega__link" (click)="activeMega.set(null)">{{ i18n.currentLang() === 'es' ? 'Felinos' : 'Feline' }}</a>
+          <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/farmacos' : 'catalog/pharmaceuticals')" [queryParams]="{species: 'Bovinos'}" class="mega__link" (click)="activeMega.set(null)">{{ i18n.currentLang() === 'es' ? 'Bovinos' : 'Bovine' }}</a>
+          <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/farmacos' : 'catalog/pharmaceuticals')" [queryParams]="{species: 'Equinos'}" class="mega__link" (click)="activeMega.set(null)">{{ i18n.currentLang() === 'es' ? 'Equinos' : 'Equine' }}</a>
+          <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/farmacos' : 'catalog/pharmaceuticals')" class="mega__view-all" (click)="activeMega.set(null)">
+            {{ i18n.currentLang() === 'es' ? 'Ver todos los fármacos' : 'Shop All Pharmaceuticals' }}
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+        </div>
+        <div class="mega__promos">
+          <div class="mega__promo-card">
+            <img src="https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?w=400&q=80" alt="" loading="lazy" />
+            <div class="mega__promo-overlay">
+              <span class="mega__promo-title">{{ i18n.currentLang() === 'es' ? 'Salud animal' : 'Animal health' }}</span>
+            </div>
+          </div>
+          <div class="mega__promo-card">
+            <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&q=80" alt="" loading="lazy" />
+            <div class="mega__promo-overlay">
+              <span class="mega__promo-title">{{ i18n.currentLang() === 'es' ? 'Cuidado veterinario' : 'Veterinary care' }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mega Menu: Alimentos -->
+    <div class="mega" [class.mega--open]="activeMega() === 'alimentos'" (mouseenter)="keepMegaOpen()" (mouseleave)="closeMega()">
+      <div class="mega__inner">
+        <div class="mega__links">
+          <span class="mega__heading">{{ i18n.currentLang() === 'es' ? 'Por especie' : 'By species' }}</span>
+          <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/alimentos' : 'catalog/food')" [queryParams]="{species: 'Perros'}" class="mega__link" (click)="activeMega.set(null)">{{ i18n.currentLang() === 'es' ? 'Perros' : 'Dogs' }}</a>
+          <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/alimentos' : 'catalog/food')" [queryParams]="{species: 'Gatos'}" class="mega__link" (click)="activeMega.set(null)">{{ i18n.currentLang() === 'es' ? 'Gatos' : 'Cats' }}</a>
+          <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/alimentos' : 'catalog/food')" [queryParams]="{species: 'Aves'}" class="mega__link" (click)="activeMega.set(null)">{{ i18n.currentLang() === 'es' ? 'Aves' : 'Birds' }}</a>
+          <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/alimentos' : 'catalog/food')" class="mega__view-all" (click)="activeMega.set(null)">
+            {{ i18n.currentLang() === 'es' ? 'Ver todos los alimentos' : 'Shop All Food' }}
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+        </div>
+        <div class="mega__promos">
+          <div class="mega__promo-card">
+            <img src="https://images.unsplash.com/photo-1450778869180-e1e2e3d1e7a0?w=400&q=80" alt="" loading="lazy" />
+            <div class="mega__promo-overlay">
+              <span class="mega__promo-title">{{ i18n.currentLang() === 'es' ? 'Nutrición premium' : 'Premium nutrition' }}</span>
+            </div>
+          </div>
+          <div class="mega__promo-card">
+            <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=400&q=80" alt="" loading="lazy" />
+            <div class="mega__promo-overlay">
+              <span class="mega__promo-title">{{ i18n.currentLang() === 'es' ? 'Para toda mascota' : 'For every pet' }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mega Menu: Equipos -->
+    <div class="mega" [class.mega--open]="activeMega() === 'equipos'" (mouseenter)="keepMegaOpen()" (mouseleave)="closeMega()">
+      <div class="mega__inner">
+        <div class="mega__links">
+          <span class="mega__heading">{{ i18n.currentLang() === 'es' ? 'Por tipo' : 'By type' }}</span>
+          <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/equipos' : 'catalog/equipment')" [queryParams]="{equipmentType: 'Diagnóstico'}" class="mega__link" (click)="activeMega.set(null)">{{ i18n.currentLang() === 'es' ? 'Diagnóstico' : 'Diagnostic' }}</a>
+          <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/equipos' : 'catalog/equipment')" [queryParams]="{equipmentType: 'Cirugía'}" class="mega__link" (click)="activeMega.set(null)">{{ i18n.currentLang() === 'es' ? 'Cirugía' : 'Surgery' }}</a>
+          <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/equipos' : 'catalog/equipment')" [queryParams]="{equipmentType: 'Laboratorio'}" class="mega__link" (click)="activeMega.set(null)">{{ i18n.currentLang() === 'es' ? 'Laboratorio' : 'Laboratory' }}</a>
+          <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/equipos' : 'catalog/equipment')" class="mega__view-all" (click)="activeMega.set(null)">
+            {{ i18n.currentLang() === 'es' ? 'Ver todos los equipos' : 'Shop All Equipment' }}
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+        </div>
+        <div class="mega__promos">
+          <div class="mega__promo-card">
+            <img src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?w=400&q=80" alt="" loading="lazy" />
+            <div class="mega__promo-overlay">
+              <span class="mega__promo-title">{{ i18n.currentLang() === 'es' ? 'Equipamiento profesional' : 'Professional equipment' }}</span>
+            </div>
+          </div>
+          <div class="mega__promo-card">
+            <img src="https://images.unsplash.com/photo-1606567595334-d39972c85dbe?w=400&q=80" alt="" loading="lazy" />
+            <div class="mega__promo-overlay">
+              <span class="mega__promo-title">{{ i18n.currentLang() === 'es' ? 'Tecnología veterinaria' : 'Veterinary technology' }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </nav>
 </header>
 
