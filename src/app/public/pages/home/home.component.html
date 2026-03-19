@@ -55,12 +55,14 @@
             <span class="hero-card__category-badge">{{ i18n.currentLang() === 'es' ? 'Fármacos' : 'Pharmaceuticals' }}</span>
           </div>
           <div class="hero-card__body">
+            <span class="hero-card__brand-label">Biozoo</span>
             <h4 class="hero-card__name">Amoxicilina 500mg</h4>
-            <p class="hero-card__brand">Biozoo</p>
-            <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo' : 'catalog')" class="hero-card__pill-btn hero-card__pill-btn--blue">
-              {{ i18n.currentLang() === 'es' ? 'Ver producto' : 'View product' }}
-              <span class="material-symbols-outlined">arrow_forward</span>
-            </a>
+            <div class="hero-card__footer">
+              <span class="hero-card__detail">{{ i18n.currentLang() === 'es' ? 'Tabletas · Caninos' : 'Tablets · Canine' }}</span>
+              <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo' : 'catalog')" class="hero-card__go-btn" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Ver producto' : 'View product'">
+                <span class="material-symbols-outlined">arrow_forward</span>
+              </a>
+            </div>
           </div>
         </div>
       </div>
