@@ -1,138 +1,92 @@
 // =============================================================================
-// Search Bar — Wild One-style inline search
-// Drops down from the header, replaces header visually
+// Inline Search — pill input that replaces header row 1 content
 // =============================================================================
 
-.search-bar {
-  position: fixed;
-  inset: 0;
-  z-index: var(--z-modal);
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.2s ease;
+:host {
+  display: block;
+  width: 100%;
+}
 
-  &--open {
-    pointer-events: auto;
-    opacity: 1;
+.inline-search {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
 
-    .search-bar__container {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  // Backdrop — semi-transparent, below the search bar
-  &__backdrop {
-    position: absolute;
-    inset: 0;
-    background-color: rgba(0, 0, 0, 0.3);
-  }
-
-  // Container — white bar at top of page
-  &__container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    background-color: var(--neutral-white);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    opacity: 0;
-    transform: translateY(-100%);
-    transition: opacity 0.2s ease, transform 0.2s ease;
-  }
-
-  // Inner — centered input area
-  &__inner {
+  // Pill-shaped input field
+  &__field {
     display: flex;
     align-items: center;
-    gap: 12px;
-    max-width: var(--container-max-width);
-    margin: 0 auto;
-    padding: 16px var(--container-padding-mobile);
-    height: 72px;
+    gap: 10px;
+    height: 44px;
+    padding: 0 16px;
+    border: 1.5px solid var(--brand-secondary);
+    border-radius: var(--radius-pill);
+    background-color: var(--neutral-white);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 
-    @media (min-width: 768px) {
-      padding: 16px var(--container-padding-desktop);
-    }
-
-    @media (min-width: 1024px) {
-      padding: 16px 80px;
+    &:focus-within {
+      box-shadow: 0 0 0 3px rgba(80, 185, 42, 0.12);
     }
   }
 
-  // Search icon (left of input)
   &__icon {
     flex-shrink: 0;
-    color: var(--neutral-900);
+    color: #000000;
+    opacity: 0.4;
   }
 
-  // Input field
   &__input {
     flex: 1;
-    height: 40px;
     border: none;
     outline: none;
     background: transparent;
     font-family: var(--font-family);
-    font-size: 16px;
+    font-size: 15px;
     font-weight: var(--weight-regular);
-    color: var(--neutral-900);
-    caret-color: var(--neutral-900);
+    color: #000000;
+    min-width: 0;
 
     &::placeholder {
-      color: var(--neutral-400);
-    }
-
-    @media (min-width: 768px) {
-      font-size: 18px;
+      color: #000000;
+      opacity: 0.35;
     }
   }
 
-  // Reset button (clear text)
-  &__reset {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    color: var(--neutral-400);
-    flex-shrink: 0;
-    transition: background-color 0.15s ease, color 0.15s ease;
-
-    &:hover {
-      background-color: var(--neutral-100);
-      color: var(--neutral-900);
-    }
-  }
-
-  // Close button
   &__close {
+    flex-shrink: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 36px;
-    height: 36px;
+    width: 28px;
+    height: 28px;
     border-radius: 50%;
-    color: var(--neutral-900);
-    flex-shrink: 0;
-    margin-left: 4px;
-    transition: background-color 0.15s ease;
+    color: #000000;
+    opacity: 0.4;
+    transition: opacity 0.15s ease, background-color 0.15s ease;
 
     &:hover {
+      opacity: 1;
       background-color: var(--neutral-100);
     }
   }
 
-  // ==========================================================================
-  // Dropdown results
-  // ==========================================================================
+  // ===========================================================================
+  // Predictions Dropdown
+  // ===========================================================================
   &__dropdown {
-    border-top: 1px solid rgba(0, 0, 0, 0.06);
-    max-height: 60vh;
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    background-color: var(--neutral-white);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    max-height: 400px;
     overflow-y: auto;
-    animation: searchDropIn 0.2s ease;
+    z-index: 100;
+    animation: dropIn 0.2s ease;
 
     &::-webkit-scrollbar {
       width: 4px;
@@ -147,9 +101,8 @@
     padding: 8px 0;
   }
 
-  // Result groups
   &__group {
-    padding: 8px 0;
+    padding: 4px 0;
 
     & + & {
       border-top: 1px solid rgba(0, 0, 0, 0.06);
@@ -159,41 +112,20 @@
   &__group-label {
     display: block;
     font-size: 11px;
-    font-weight: var(--weight-semibold);
-    color: var(--neutral-400);
+    font-weight: var(--weight-bold);
+    color: #000000;
+    opacity: 0.35;
     letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 8px var(--container-padding-mobile) 4px;
-
-    @media (min-width: 768px) {
-      padding-left: var(--container-padding-desktop);
-      padding-right: var(--container-padding-desktop);
-    }
-
-    @media (min-width: 1024px) {
-      padding-left: 80px;
-      padding-right: 80px;
-    }
+    padding: 8px 20px 4px;
   }
 
-  // Individual items
   &__item {
     display: flex;
     align-items: center;
-    gap: 14px;
-    padding: 10px var(--container-padding-mobile);
+    gap: 12px;
+    padding: 8px 20px;
     cursor: pointer;
     transition: background-color 0.1s ease;
-
-    @media (min-width: 768px) {
-      padding-left: var(--container-padding-desktop);
-      padding-right: var(--container-padding-desktop);
-    }
-
-    @media (min-width: 1024px) {
-      padding-left: 80px;
-      padding-right: 80px;
-    }
 
     &:hover,
     &--selected {
@@ -202,8 +134,8 @@
   }
 
   &__item-thumb {
-    width: 44px;
-    height: 44px;
+    width: 40px;
+    height: 40px;
     border-radius: 8px;
     background-color: var(--neutral-100);
     flex-shrink: 0;
@@ -211,7 +143,8 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    color: var(--neutral-400);
+    color: #000000;
+    opacity: 0.3;
 
     img {
       width: 100%;
@@ -221,14 +154,14 @@
 
     &--brand {
       border-radius: 50%;
-      font-size: 16px;
+      font-size: 15px;
       font-weight: var(--weight-bold);
       color: var(--brand-primary);
+      opacity: 1;
       background-color: var(--brand-primary-light);
 
       img {
         border-radius: 50%;
-        object-fit: contain;
         padding: 4px;
       }
     }
@@ -242,111 +175,73 @@
   }
 
   &__item-name {
-    font-size: 15px;
+    font-size: 14px;
     font-weight: var(--weight-medium);
-    color: var(--neutral-900);
+    color: #000000;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
   &__item-meta {
-    font-size: 13px;
-    color: var(--neutral-400);
+    font-size: 12px;
+    color: #000000;
+    opacity: 0.4;
   }
 
-  // View all link
   &__view-all {
     border-top: 1px solid rgba(0, 0, 0, 0.06);
-    padding: 14px var(--container-padding-mobile);
-
-    @media (min-width: 768px) {
-      padding-left: var(--container-padding-desktop);
-      padding-right: var(--container-padding-desktop);
-    }
-
-    @media (min-width: 1024px) {
-      padding-left: 80px;
-      padding-right: 80px;
-    }
+    padding: 12px 20px;
 
     a {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      font-size: 14px;
-      font-weight: var(--weight-medium);
-      color: var(--brand-primary);
+      font-size: 13px;
+      font-weight: var(--weight-semibold);
+      color: #000000;
       cursor: pointer;
-      transition: color 0.15s ease;
 
       &:hover {
-        color: var(--brand-primary-dark);
+        text-decoration: underline;
+        text-underline-offset: 3px;
       }
     }
   }
 
-  // Loading
   &__loading {
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 24px var(--container-padding-mobile);
-    color: var(--neutral-400);
-    font-size: 14px;
-
-    @media (min-width: 768px) {
-      padding-left: var(--container-padding-desktop);
-      padding-right: var(--container-padding-desktop);
-    }
-
-    @media (min-width: 1024px) {
-      padding-left: 80px;
-      padding-right: 80px;
-    }
+    gap: 10px;
+    padding: 20px;
+    color: #000000;
+    opacity: 0.4;
+    font-size: 13px;
   }
 
   &__spinner {
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
     border: 2px solid var(--neutral-200);
-    border-top-color: var(--neutral-900);
+    border-top-color: #000000;
     border-radius: 50%;
-    animation: search-spin 0.6s linear infinite;
+    animation: spin 0.6s linear infinite;
   }
 
-  // Empty state
   &__empty {
-    padding: 32px var(--container-padding-mobile);
+    padding: 24px 20px;
     text-align: center;
-
-    @media (min-width: 768px) {
-      padding-left: var(--container-padding-desktop);
-      padding-right: var(--container-padding-desktop);
-    }
-
-    p {
-      font-size: 15px;
-      color: var(--neutral-900);
-      margin-bottom: 8px;
-    }
-  }
-
-  &__empty-link {
     font-size: 14px;
-    font-weight: var(--weight-medium);
-    color: var(--brand-primary);
-    cursor: pointer;
-    text-decoration: underline;
-    text-underline-offset: 3px;
+    color: #000000;
+    opacity: 0.5;
   }
 }
 
-@keyframes search-spin {
-  to { transform: rotate(360deg); }
+@keyframes dropIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes searchDropIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }

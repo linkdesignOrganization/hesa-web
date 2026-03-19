@@ -1,69 +1,76 @@
 <header
   class="header"
   [class.header--scrolled]="isScrolled()"
+  [class.header--search-active]="isSearchOpen()"
   role="navigation"
   [attr.aria-label]="i18n.currentLang() === 'es' ? 'Navegacion principal' : 'Main navigation'">
 
   <!-- Row 1: Nosotros — LOGO — Search -->
   <div class="header__row-top">
     <div class="header__row-top-inner">
-      <!-- Left: Nosotros -->
-      <div class="header__top-left">
-        <a
-          [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'nosotros' : 'about')"
-          routerLinkActive="header__top-link--active"
-          class="header__top-link">
-          {{ i18n.currentLang() === 'es' ? 'Nosotros' : 'About' }}
-        </a>
-      </div>
 
-      <!-- Center: Logo (inline SVG) -->
-      <a [routerLink]="i18n.getLangPrefix()" class="header__logo" aria-label="HESA - Ir al inicio">
-        <svg class="header__logo-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 566.93 235.91" aria-hidden="true">
-          <g>
+      <!-- Default content (fades out when search opens) -->
+      <div class="header__default" [class.header__default--hidden]="isSearchOpen()">
+        <!-- Left: Nosotros -->
+        <div class="header__top-left">
+          <a
+            [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'nosotros' : 'about')"
+            routerLinkActive="header__top-link--active"
+            class="header__top-link">
+            {{ i18n.currentLang() === 'es' ? 'Nosotros' : 'About' }}
+          </a>
+        </div>
+
+        <!-- Center: Logo -->
+        <a [routerLink]="i18n.getLangPrefix()" class="header__logo" aria-label="HESA - Ir al inicio">
+          <svg class="header__logo-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 566.93 235.91" aria-hidden="true">
             <g>
-              <path fill="#72bf44" d="M377.9,140.16l-62.1-59.67c-5.55-5.08-9.14-9.94-10.76-14.57-1.62-4.62-2.43-10.98-2.43-19.08s2.72-14.45,8.15-19.08c5.43-4.62,13.58-6.94,24.46-6.94s19.02,2.32,24.46,6.94c5.43,4.63,8.15,11.1,8.15,19.43v30.88h24.29v-29.49c0-32.38-18.62-48.57-55.86-48.57-19.43,0-33.94,4.22-43.54,12.66-9.6,8.45-14.4,20.41-14.4,35.91,0,10.41,1.33,19.03,3.99,25.85,2.66,6.83,7.57,13.82,14.74,20.99l61.06,59.67c5.32,5.32,8.85,10.35,10.58,15.09,1.73,4.74,2.6,11.1,2.6,19.08s-2.89,14.28-8.67,18.91c-5.78,4.63-14.34,6.94-25.67,6.94s-19.89-2.31-25.67-6.94c-5.78-4.62-8.67-11.1-8.67-19.43v-30.88h-24.29v29.49c0,32.38,19.54,48.57,58.63,48.57s58.63-16.19,58.63-48.57c0-10.41-1.27-19.02-3.82-25.85-2.55-6.82-7.17-13.93-13.88-21.34Z"/>
-              <path fill="#72bf44" d="M527.52,105.82v-57.24c0-15.5-4.86-27.47-14.57-35.91-9.71-8.44-24.05-12.66-43.02-12.66s-33.19,4.22-42.67,12.66c-9.48,8.44-14.22,20.41-14.22,35.91v29.49h24.29v-29.49c0-18.51,10.99-27.75,32.96-27.75s32.96,9.25,32.96,27.75v57.24h-47.04c-23.84,0-43.16,17.59-43.16,41.43v40.1c0,15.49,4.86,27.46,14.57,35.91,9.71,8.44,24.06,12.66,43.02,12.66s33.19-4.22,42.67-12.66c9.49-8.45,14.22-20.41,14.22-35.91v-60.71h39.41v-20.82h-39.41ZM503.24,187.34c0,18.5-10.98,27.75-32.96,27.75s-32.96-9.25-32.96-27.75v-38.02c0-11.83,9.59-22.69,21.42-22.69h44.5v60.71Z"/>
+              <g>
+                <path fill="#72bf44" d="M377.9,140.16l-62.1-59.67c-5.55-5.08-9.14-9.94-10.76-14.57-1.62-4.62-2.43-10.98-2.43-19.08s2.72-14.45,8.15-19.08c5.43-4.62,13.58-6.94,24.46-6.94s19.02,2.32,24.46,6.94c5.43,4.63,8.15,11.1,8.15,19.43v30.88h24.29v-29.49c0-32.38-18.62-48.57-55.86-48.57-19.43,0-33.94,4.22-43.54,12.66-9.6,8.45-14.4,20.41-14.4,35.91,0,10.41,1.33,19.03,3.99,25.85,2.66,6.83,7.57,13.82,14.74,20.99l61.06,59.67c5.32,5.32,8.85,10.35,10.58,15.09,1.73,4.74,2.6,11.1,2.6,19.08s-2.89,14.28-8.67,18.91c-5.78,4.63-14.34,6.94-25.67,6.94s-19.89-2.31-25.67-6.94c-5.78-4.62-8.67-11.1-8.67-19.43v-30.88h-24.29v29.49c0,32.38,19.54,48.57,58.63,48.57s58.63-16.19,58.63-48.57c0-10.41-1.27-19.02-3.82-25.85-2.55-6.82-7.17-13.93-13.88-21.34Z"/>
+                <path fill="#72bf44" d="M527.52,105.82v-57.24c0-15.5-4.86-27.47-14.57-35.91-9.71-8.44-24.05-12.66-43.02-12.66s-33.19,4.22-42.67,12.66c-9.48,8.44-14.22,20.41-14.22,35.91v29.49h24.29v-29.49c0-18.51,10.99-27.75,32.96-27.75s32.96,9.25,32.96,27.75v57.24h-47.04c-23.84,0-43.16,17.59-43.16,41.43v40.1c0,15.49,4.86,27.46,14.57,35.91,9.71,8.44,24.06,12.66,43.02,12.66s33.19-4.22,42.67-12.66c9.49-8.45,14.22-20.41,14.22-35.91v-60.71h39.41v-20.82h-39.41ZM503.24,187.34c0,18.5-10.98,27.75-32.96,27.75s-32.96-9.25-32.96-27.75v-38.02c0-11.83,9.59-22.69,21.42-22.69h44.5v60.71Z"/>
+              </g>
+              <path fill="#0095da" d="M243.3,12.66c-9.71-8.44-24.06-12.66-43.02-12.66s-33.19,4.22-42.67,12.66c-9.49,8.45-14.22,20.41-14.22,35.91v60.71h-26.47V5.2h-24.29v104.08H24.29V5.2H0v225.51h24.29v-100.61h68.35v100.61h24.29v-100.61h26.47v57.24c0,15.5,4.86,27.47,14.57,35.91,9.71,8.44,24.05,12.66,43.02,12.66s33.19-4.22,42.67-12.66c9.48-8.44,14.22-20.41,14.22-35.91v-29.49h-24.29v29.49c0,18.51-10.99,27.75-32.96,27.75s-32.96-9.25-32.96-27.75v-57.24s33.03.25,44.04,0c34.01-.78,46.17-17.59,46.17-41.43v-40.1c0-15.49-4.86-27.46-14.57-35.91ZM233.59,86.59c0,11.83-9.59,22.69-21.42,22.69h-44.5v-60.71c0-18.5,10.98-27.75,32.96-27.75s32.96,9.25,32.96,27.75v38.02Z"/>
             </g>
-            <path fill="#0095da" d="M243.3,12.66c-9.71-8.44-24.06-12.66-43.02-12.66s-33.19,4.22-42.67,12.66c-9.49,8.45-14.22,20.41-14.22,35.91v60.71h-26.47V5.2h-24.29v104.08H24.29V5.2H0v225.51h24.29v-100.61h68.35v100.61h24.29v-100.61h26.47v57.24c0,15.5,4.86,27.47,14.57,35.91,9.71,8.44,24.05,12.66,43.02,12.66s33.19-4.22,42.67-12.66c9.48-8.44,14.22-20.41,14.22-35.91v-29.49h-24.29v29.49c0,18.51-10.99,27.75-32.96,27.75s-32.96-9.25-32.96-27.75v-57.24s33.03.25,44.04,0c34.01-.78,46.17-17.59,46.17-41.43v-40.1c0-15.49-4.86-27.46-14.57-35.91ZM233.59,86.59c0,11.83-9.59,22.69-21.42,22.69h-44.5v-60.71c0-18.5,10.98-27.75,32.96-27.75s32.96,9.25,32.96,27.75v38.02Z"/>
-          </g>
-        </svg>
-      </a>
-
-      <!-- Right: Search + Language + Hamburger -->
-      <div class="header__top-right">
-        <button
-          class="header__icon-btn"
-          (click)="openSearch()"
-          [attr.aria-label]="i18n.currentLang() === 'es' ? 'Buscar' : 'Search'">
-          <svg width="18" height="18" viewBox="0 0 22 22" fill="none" aria-hidden="true">
-            <circle cx="9" cy="9" r="7.5" stroke="currentColor" stroke-width="2"/>
-            <path d="M14.5 14.5L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
           </svg>
-        </button>
+        </a>
 
-        <app-language-selector variant="header" />
-
-        <!-- Hamburger (mobile/tablet) -->
-        <button
-          class="header__hamburger"
-          [class.header__hamburger--active]="isMobileMenuOpen()"
-          (click)="toggleMobileMenu()"
-          [attr.aria-expanded]="isMobileMenuOpen()"
-          aria-controls="mobile-menu"
-          [attr.aria-label]="isMobileMenuOpen() ? (i18n.currentLang() === 'es' ? 'Cerrar menu' : 'Close menu') : (i18n.currentLang() === 'es' ? 'Abrir menu' : 'Open menu')">
-          <span class="header__hamburger-line"></span>
-          <span class="header__hamburger-line"></span>
-          <span class="header__hamburger-line"></span>
-        </button>
+        <!-- Right: Search + Language + Hamburger -->
+        <div class="header__top-right">
+          <button
+            class="header__icon-btn"
+            (click)="openSearch()"
+            [attr.aria-label]="i18n.currentLang() === 'es' ? 'Buscar' : 'Search'">
+            <svg width="18" height="18" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+              <circle cx="9" cy="9" r="7.5" stroke="currentColor" stroke-width="2"/>
+              <path d="M14.5 14.5L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <app-language-selector variant="header" />
+          <button
+            class="header__hamburger"
+            [class.header__hamburger--active]="isMobileMenuOpen()"
+            (click)="toggleMobileMenu()"
+            [attr.aria-expanded]="isMobileMenuOpen()"
+            aria-controls="mobile-menu"
+            [attr.aria-label]="isMobileMenuOpen() ? (i18n.currentLang() === 'es' ? 'Cerrar menu' : 'Close menu') : (i18n.currentLang() === 'es' ? 'Abrir menu' : 'Open menu')">
+            <span class="header__hamburger-line"></span>
+            <span class="header__hamburger-line"></span>
+            <span class="header__hamburger-line"></span>
+          </button>
+        </div>
       </div>
+
+      <!-- Inline Search (fades in when search opens, replaces default content) -->
+      <div class="header__search" [class.header__search--active]="isSearchOpen()">
+        <app-search-overlay [isOpen]="isSearchOpen()" (closeOverlay)="closeSearch()" />
+      </div>
+
     </div>
   </div>
 
   <!-- Row 2: Category Navigation with Mega Menus -->
   <nav class="header__row-nav">
     <ul class="header__nav-list">
-      <!-- Fármacos -->
       <li (mouseenter)="openMega('farmacos')" (mouseleave)="closeMega()">
         <a
           [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/farmacos' : 'catalog/pharmaceuticals')"
@@ -72,7 +79,6 @@
           <span>{{ i18n.currentLang() === 'es' ? 'Fármacos' : 'Pharmaceuticals' }}</span>
         </a>
       </li>
-      <!-- Alimentos -->
       <li (mouseenter)="openMega('alimentos')" (mouseleave)="closeMega()">
         <a
           [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/alimentos' : 'catalog/food')"
@@ -81,7 +87,6 @@
           <span>{{ i18n.currentLang() === 'es' ? 'Alimentos' : 'Food' }}</span>
         </a>
       </li>
-      <!-- Equipos -->
       <li (mouseenter)="openMega('equipos')" (mouseleave)="closeMega()">
         <a
           [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/equipos' : 'catalog/equipment')"
@@ -90,7 +95,6 @@
           <span>{{ i18n.currentLang() === 'es' ? 'Equipos' : 'Equipment' }}</span>
         </a>
       </li>
-      <!-- Ver todos -->
       <li>
         <a
           [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo' : 'catalog')"
@@ -207,13 +211,7 @@
   <div class="mobile-menu__header">
     <a [routerLink]="i18n.getLangPrefix()" class="mobile-menu__logo" (click)="closeMobileMenu()" aria-label="HESA">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 566.93 235.91" width="100" height="40" aria-hidden="true">
-        <g>
-          <g>
-            <path fill="#72bf44" d="M377.9,140.16l-62.1-59.67c-5.55-5.08-9.14-9.94-10.76-14.57-1.62-4.62-2.43-10.98-2.43-19.08s2.72-14.45,8.15-19.08c5.43-4.62,13.58-6.94,24.46-6.94s19.02,2.32,24.46,6.94c5.43,4.63,8.15,11.1,8.15,19.43v30.88h24.29v-29.49c0-32.38-18.62-48.57-55.86-48.57-19.43,0-33.94,4.22-43.54,12.66-9.6,8.45-14.4,20.41-14.4,35.91,0,10.41,1.33,19.03,3.99,25.85,2.66,6.83,7.57,13.82,14.74,20.99l61.06,59.67c5.32,5.32,8.85,10.35,10.58,15.09,1.73,4.74,2.6,11.1,2.6,19.08s-2.89,14.28-8.67,18.91c-5.78,4.63-14.34,6.94-25.67,6.94s-19.89-2.31-25.67-6.94c-5.78-4.62-8.67-11.1-8.67-19.43v-30.88h-24.29v29.49c0,32.38,19.54,48.57,58.63,48.57s58.63-16.19,58.63-48.57c0-10.41-1.27-19.02-3.82-25.85-2.55-6.82-7.17-13.93-13.88-21.34Z"/>
-            <path fill="#72bf44" d="M527.52,105.82v-57.24c0-15.5-4.86-27.47-14.57-35.91-9.71-8.44-24.05-12.66-43.02-12.66s-33.19,4.22-42.67,12.66c-9.48,8.44-14.22,20.41-14.22,35.91v29.49h24.29v-29.49c0-18.51,10.99-27.75,32.96-27.75s32.96,9.25,32.96,27.75v57.24h-47.04c-23.84,0-43.16,17.59-43.16,41.43v40.1c0,15.49,4.86,27.46,14.57,35.91,9.71,8.44,24.06,12.66,43.02,12.66s33.19-4.22,42.67-12.66c9.49-8.45,14.22-20.41,14.22-35.91v-60.71h39.41v-20.82h-39.41ZM503.24,187.34c0,18.5-10.98,27.75-32.96,27.75s-32.96-9.25-32.96-27.75v-38.02c0-11.83,9.59-22.69,21.42-22.69h44.5v60.71Z"/>
-          </g>
-          <path fill="#0095da" d="M243.3,12.66c-9.71-8.44-24.06-12.66-43.02-12.66s-33.19,4.22-42.67,12.66c-9.49,8.45-14.22,20.41-14.22,35.91v60.71h-26.47V5.2h-24.29v104.08H24.29V5.2H0v225.51h24.29v-100.61h68.35v100.61h24.29v-100.61h26.47v57.24c0,15.5,4.86,27.47,14.57,35.91,9.71,8.44,24.05,12.66,43.02,12.66s33.19-4.22,42.67-12.66c9.48-8.44,14.22-20.41,14.22-35.91v-29.49h-24.29v29.49c0,18.51-10.99,27.75-32.96,27.75s-32.96-9.25-32.96-27.75v-57.24s33.03.25,44.04,0c34.01-.78,46.17-17.59,46.17-41.43v-40.1c0-15.49-4.86-27.46-14.57-35.91ZM233.59,86.59c0,11.83-9.59,22.69-21.42,22.69h-44.5v-60.71c0-18.5,10.98-27.75,32.96-27.75s32.96,9.25,32.96,27.75v38.02Z"/>
-        </g>
+        <g><g><path fill="#72bf44" d="M377.9,140.16l-62.1-59.67c-5.55-5.08-9.14-9.94-10.76-14.57-1.62-4.62-2.43-10.98-2.43-19.08s2.72-14.45,8.15-19.08c5.43-4.62,13.58-6.94,24.46-6.94s19.02,2.32,24.46,6.94c5.43,4.63,8.15,11.1,8.15,19.43v30.88h24.29v-29.49c0-32.38-18.62-48.57-55.86-48.57-19.43,0-33.94,4.22-43.54,12.66-9.6,8.45-14.4,20.41-14.4,35.91,0,10.41,1.33,19.03,3.99,25.85,2.66,6.83,7.57,13.82,14.74,20.99l61.06,59.67c5.32,5.32,8.85,10.35,10.58,15.09,1.73,4.74,2.6,11.1,2.6,19.08s-2.89,14.28-8.67,18.91c-5.78,4.63-14.34,6.94-25.67,6.94s-19.89-2.31-25.67-6.94c-5.78-4.62-8.67-11.1-8.67-19.43v-30.88h-24.29v29.49c0,32.38,19.54,48.57,58.63,48.57s58.63-16.19,58.63-48.57c0-10.41-1.27-19.02-3.82-25.85-2.55-6.82-7.17-13.93-13.88-21.34Z"/><path fill="#72bf44" d="M527.52,105.82v-57.24c0-15.5-4.86-27.47-14.57-35.91-9.71-8.44-24.05-12.66-43.02-12.66s-33.19,4.22-42.67,12.66-14.22,20.41-14.22,35.91v29.49h24.29v-29.49c0-18.51,10.99-27.75,32.96-27.75s32.96,9.25,32.96,27.75v57.24h-47.04c-23.84,0-43.16,17.59-43.16,41.43v40.1c0,15.49,4.86,27.46,14.57,35.91,9.71,8.44,24.06,12.66,43.02,12.66s33.19-4.22,42.67-12.66c9.49-8.45,14.22-20.41,14.22-35.91v-60.71h39.41v-20.82h-39.41ZM503.24,187.34c0,18.5-10.98,27.75-32.96,27.75s-32.96-9.25-32.96-27.75v-38.02c0-11.83,9.59-22.69,21.42-22.69h44.5v60.71Z"/></g><path fill="#0095da" d="M243.3,12.66c-9.71-8.44-24.06-12.66-43.02-12.66s-33.19,4.22-42.67,12.66c-9.49,8.45-14.22,20.41-14.22,35.91v60.71h-26.47V5.2h-24.29v104.08H24.29V5.2H0v225.51h24.29v-100.61h68.35v100.61h24.29v-100.61h26.47v57.24c0,15.5,4.86,27.47,14.57,35.91,9.71,8.44,24.05,12.66,43.02,12.66s33.19-4.22,42.67-12.66c9.48-8.44,14.22-20.41,14.22-35.91v-29.49h-24.29v29.49c0,18.51-10.99,27.75-32.96,27.75s-32.96-9.25-32.96-27.75v-57.24s33.03.25,44.04,0c34.01-.78,46.17-17.59,46.17-41.43v-40.1c0-15.49-4.86-27.46-14.57-35.91ZM233.59,86.59c0,11.83-9.59,22.69-21.42,22.69h-44.5v-60.71c0-18.5,10.98-27.75,32.96-27.75s32.96,9.25,32.96,27.75v38.02Z"/></g>
       </svg>
     </a>
     <button class="mobile-menu__close" (click)="closeMobileMenu()" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Cerrar menu' : 'Close menu'">
@@ -226,9 +224,7 @@
     <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/alimentos' : 'catalog/food')" class="mobile-menu__link" (click)="closeMobileMenu()">{{ i18n.currentLang() === 'es' ? 'Alimentos' : 'Food' }}</a>
     <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/equipos' : 'catalog/equipment')" class="mobile-menu__link" (click)="closeMobileMenu()">{{ i18n.currentLang() === 'es' ? 'Equipos' : 'Equipment' }}</a>
     <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo' : 'catalog')" class="mobile-menu__link" (click)="closeMobileMenu()">{{ i18n.currentLang() === 'es' ? 'Ver todos' : 'Shop All' }}</a>
-
     <div class="mobile-menu__divider"></div>
-
     <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'marcas' : 'brands')" class="mobile-menu__link mobile-menu__link--secondary" (click)="closeMobileMenu()">{{ i18n.currentLang() === 'es' ? 'Marcas' : 'Brands' }}</a>
     <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'nosotros' : 'about')" class="mobile-menu__link mobile-menu__link--secondary" (click)="closeMobileMenu()">{{ i18n.currentLang() === 'es' ? 'Nosotros' : 'About' }}</a>
     <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'distribuidores' : 'distributors')" class="mobile-menu__link mobile-menu__link--secondary" (click)="closeMobileMenu()">{{ i18n.currentLang() === 'es' ? 'Socios' : 'Partners' }}</a>
@@ -239,6 +235,3 @@
     <app-language-selector variant="header" />
   </div>
 </div>
-
-<!-- Search Overlay -->
-<app-search-overlay [isOpen]="isSearchOpen()" (closeOverlay)="closeSearch()" />

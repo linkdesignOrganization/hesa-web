@@ -1,113 +1,104 @@
-<!-- Wild One-style inline search: replaces header content -->
-<div class="search-bar" [class.search-bar--open]="isOpen()" role="search" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Busqueda global' : 'Global search'">
-  <!-- Backdrop (click to close) -->
-  <div class="search-bar__backdrop" (click)="close()"></div>
+<!-- Inline search input — lives inside header row 1 -->
+<div class="inline-search" role="search">
+  <div class="inline-search__field">
+    <svg class="inline-search__icon" width="16" height="16" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+      <circle cx="9" cy="9" r="7.5" stroke="currentColor" stroke-width="2"/>
+      <path d="M14.5 14.5L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+    <input
+      #searchInput
+      type="text"
+      class="inline-search__input"
+      [placeholder]="i18n.currentLang() === 'es' ? 'Buscar productos, marcas...' : 'Search products, brands...'"
+      [value]="searchTerm()"
+      (input)="onInput($event)"
+      (keydown)="onKeydown($event)"
+      aria-autocomplete="list"
+      aria-controls="search-results"
+      maxlength="100" />
+    <button class="inline-search__close" (click)="close()" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Cerrar' : 'Close'">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
 
-  <!-- Search bar container (sits at top of page, over the header) -->
-  <div class="search-bar__container">
-    <div class="search-bar__inner">
-      <svg class="search-bar__icon" width="18" height="18" viewBox="0 0 22 22" fill="none" aria-hidden="true">
-        <circle cx="9" cy="9" r="7.5" stroke="currentColor" stroke-width="2"/>
-        <path d="M14.5 14.5L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-      </svg>
-      <input
-        #searchInput
-        type="text"
-        class="search-bar__input"
-        [placeholder]="i18n.currentLang() === 'es' ? 'Buscar productos, marcas...' : 'Search products, brands...'"
-        [value]="searchTerm()"
-        (input)="onInput($event)"
-        (keydown)="onKeydown($event)"
-        aria-autocomplete="list"
-        aria-controls="search-results"
-        maxlength="100" />
-      <button class="search-bar__close" (click)="close()" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Cerrar busqueda' : 'Close search'">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-      </button>
-    </div>
+  <!-- Predictions dropdown -->
+  @if (hasResults || showNoResults || isSearching()) {
+    <div class="inline-search__dropdown">
+      @if (isSearching()) {
+        <div class="inline-search__loading">
+          <div class="inline-search__spinner"></div>
+          <span>{{ i18n.currentLang() === 'es' ? 'Buscando...' : 'Searching...' }}</span>
+        </div>
+      }
 
-    <!-- Results dropdown below the search bar -->
-    @if (hasResults || showNoResults || isSearching()) {
-      <div class="search-bar__dropdown">
-        @if (isSearching()) {
-          <div class="search-bar__loading">
-            <div class="search-bar__spinner"></div>
-            <span>{{ i18n.currentLang() === 'es' ? 'Buscando...' : 'Searching...' }}</span>
-          </div>
-        }
-
-        @if (hasResults) {
-          <div class="search-bar__results" id="search-results" role="listbox">
-            @if (productResults().length > 0) {
-              <div class="search-bar__group">
-                <span class="search-bar__group-label">{{ i18n.currentLang() === 'es' ? 'PRODUCTOS' : 'PRODUCTS' }}</span>
-                @for (product of productResults(); track product.id; let i = $index) {
-                  <div
-                    class="search-bar__item"
-                    [class.search-bar__item--selected]="selectedIndex() === i"
-                    role="option"
-                    [attr.aria-selected]="selectedIndex() === i"
-                    (click)="navigateToProduct(product)">
-                    <div class="search-bar__item-thumb">
-                      @if (product.image) {
-                        <img [src]="toWebP(product.image)" [alt]="getProductName(product)" />
-                      } @else {
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
-                      }
-                    </div>
-                    <div class="search-bar__item-info">
-                      <span class="search-bar__item-name">{{ getProductName(product) }}</span>
-                      <span class="search-bar__item-meta">{{ product.brand }}</span>
-                    </div>
+      @if (hasResults) {
+        <div class="inline-search__results" id="search-results" role="listbox">
+          @if (productResults().length > 0) {
+            <div class="inline-search__group">
+              <span class="inline-search__group-label">{{ i18n.currentLang() === 'es' ? 'PRODUCTOS' : 'PRODUCTS' }}</span>
+              @for (product of productResults(); track product.id; let i = $index) {
+                <div
+                  class="inline-search__item"
+                  [class.inline-search__item--selected]="selectedIndex() === i"
+                  role="option"
+                  [attr.aria-selected]="selectedIndex() === i"
+                  (click)="navigateToProduct(product)">
+                  <div class="inline-search__item-thumb">
+                    @if (product.image) {
+                      <img [src]="toWebP(product.image)" [alt]="getProductName(product)" />
+                    } @else {
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+                    }
                   </div>
-                }
-              </div>
-            }
-            @if (brandResults().length > 0) {
-              <div class="search-bar__group">
-                <span class="search-bar__group-label">{{ i18n.currentLang() === 'es' ? 'MARCAS' : 'BRANDS' }}</span>
-                @for (brand of brandResults(); track brand.id; let i = $index) {
-                  <div
-                    class="search-bar__item"
-                    [class.search-bar__item--selected]="selectedIndex() === productResults().length + i"
-                    role="option"
-                    [attr.aria-selected]="selectedIndex() === productResults().length + i"
-                    (click)="navigateToBrand(brand)">
-                    <div class="search-bar__item-thumb search-bar__item-thumb--brand">
-                      @if (brand.logo) {
-                        <img [src]="toWebP(brand.logo)" [alt]="brand.name" />
-                      } @else {
-                        {{ brand.name.charAt(0) }}
-                      }
-                    </div>
-                    <div class="search-bar__item-info">
-                      <span class="search-bar__item-name">{{ brand.name }}</span>
-                      <span class="search-bar__item-meta">{{ brand.country }}</span>
-                    </div>
+                  <div class="inline-search__item-info">
+                    <span class="inline-search__item-name">{{ getProductName(product) }}</span>
+                    <span class="inline-search__item-meta">{{ product.brand }}</span>
                   </div>
-                }
-              </div>
-            }
-          </div>
-
-          <!-- View all results link -->
-          @if (searchTerm().length >= 3) {
-            <div class="search-bar__view-all">
-              <a (click)="navigateToSearchResults()">
-                {{ i18n.currentLang() === 'es' ? 'Ver todos los resultados para' : 'View all results for' }} "{{ searchTerm() }}"
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-              </a>
+                </div>
+              }
             </div>
           }
-        }
-
-        @if (showNoResults) {
-          <div class="search-bar__empty">
-            <p>{{ i18n.currentLang() === 'es' ? 'No se encontraron resultados para' : 'No results found for' }} "{{ searchTerm() }}"</p>
-            <a (click)="navigateToCatalog()" class="search-bar__empty-link">{{ i18n.currentLang() === 'es' ? 'Explorar catálogo' : 'Explore catalog' }}</a>
+          @if (brandResults().length > 0) {
+            <div class="inline-search__group">
+              <span class="inline-search__group-label">{{ i18n.currentLang() === 'es' ? 'MARCAS' : 'BRANDS' }}</span>
+              @for (brand of brandResults(); track brand.id; let i = $index) {
+                <div
+                  class="inline-search__item"
+                  [class.inline-search__item--selected]="selectedIndex() === productResults().length + i"
+                  role="option"
+                  [attr.aria-selected]="selectedIndex() === productResults().length + i"
+                  (click)="navigateToBrand(brand)">
+                  <div class="inline-search__item-thumb inline-search__item-thumb--brand">
+                    @if (brand.logo) {
+                      <img [src]="toWebP(brand.logo)" [alt]="brand.name" />
+                    } @else {
+                      {{ brand.name.charAt(0) }}
+                    }
+                  </div>
+                  <div class="inline-search__item-info">
+                    <span class="inline-search__item-name">{{ brand.name }}</span>
+                    <span class="inline-search__item-meta">{{ brand.country }}</span>
+                  </div>
+                </div>
+              }
+            </div>
+          }
+        </div>
+        @if (searchTerm().length >= 3) {
+          <div class="inline-search__view-all">
+            <a (click)="navigateToSearchResults()">
+              {{ i18n.currentLang() === 'es' ? 'Ver todos los resultados' : 'View all results' }}
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
           </div>
         }
-      </div>
-    }
-  </div>
+      }
+
+      @if (showNoResults) {
+        <div class="inline-search__empty">
+          {{ i18n.currentLang() === 'es' ? 'Sin resultados para' : 'No results for' }} "{{ searchTerm() }}"
+        </div>
+      }
+    </div>
+  }
 </div>
