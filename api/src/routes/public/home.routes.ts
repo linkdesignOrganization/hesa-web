@@ -101,7 +101,8 @@ router.post('/import-mock-catalog', async (_req: Request, res: Response) => {
     res.json({ success: true, summary });
   } catch (error) {
     console.error('Mock catalog import error:', error);
-    res.status(500).json({ error: 'Mock catalog import failed' });
+    const message = error instanceof Error ? error.message : 'Unknown error';
+    res.status(500).json({ error: 'Mock catalog import failed', message });
   }
 });
 
