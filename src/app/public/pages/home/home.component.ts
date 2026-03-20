@@ -108,6 +108,10 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
+  isExternalLink(link: string): boolean {
+    return link?.startsWith('http://') || link?.startsWith('https://') || link?.startsWith('tel:') || link?.startsWith('mailto:');
+  }
+
   // ---- Hero slide navigation ----
 
   nextHeroSlide(): void {

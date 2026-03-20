@@ -52,11 +52,9 @@
     <!-- CAROUSEL MODE -->
     @if (heroMode() === 'carousel') {
       <div class="hero-editor__carousel">
-        <!-- Slide list -->
         <div class="hero-editor__slide-list">
           @for (slide of slides(); track $index) {
             <div class="hero-editor__slide-card adm-card" [class.hero-editor__slide-card--expanded]="isSlideExpanded($index)">
-              <!-- Slide header (always visible) -->
               <div class="hero-editor__slide-header" (click)="toggleSlideExpand($index)">
                 <div class="hero-editor__slide-header-left">
                   <div class="hero-editor__slide-thumb">
@@ -82,8 +80,6 @@
                   </span>
                 </div>
               </div>
-
-              <!-- Slide form (expandable) -->
               @if (isSlideExpanded($index)) {
                 <div class="hero-editor__slide-body">
                   <ng-container *ngTemplateOutlet="slideForm; context: { $implicit: slide, index: $index }"></ng-container>
@@ -92,8 +88,6 @@
             </div>
           }
         </div>
-
-        <!-- Add slide button -->
         @if (slides().length < 4) {
           <button class="adm-btn adm-btn--secondary hero-editor__add-slide" (click)="addSlide()">
             <span class="material-symbols-outlined">add</span> Agregar slide
@@ -112,7 +106,7 @@
 
     <!-- Language Tabs -->
     <div class="adm-tabs hero-editor__lang-tabs">
-      <button class="adm-tab" [class.adm-tab--active]="activeLang() === 'es'" (click)="activeLang.set('es')">Espanol</button>
+      <button class="adm-tab" [class.adm-tab--active]="activeLang() === 'es'" (click)="activeLang.set('es')">Español</button>
       <button class="adm-tab" [class.adm-tab--active]="activeLang() === 'en'" (click)="activeLang.set('en')">English</button>
     </div>
 
@@ -127,11 +121,11 @@
         <input type="text" class="adm-form-control" placeholder="Titulo principal del hero" [(ngModel)]="slide.headline.es">
       </div>
       <div class="adm-form-group">
-        <label class="adm-form-label">Subtitulo</label>
+        <label class="adm-form-label">Subtítulo</label>
         <textarea class="adm-form-control" rows="2" placeholder="Subtitulo opcional" [(ngModel)]="slide.subtitle!.es"></textarea>
       </div>
       <div class="adm-form-group">
-        <label class="adm-form-label">Texto del CTA <span class="hero-editor__required">*</span></label>
+        <label class="adm-form-label">Texto del botón <span class="hero-editor__required">*</span></label>
         <input type="text" class="adm-form-control" placeholder="Ej: Ver producto" [(ngModel)]="slide.ctaText.es">
       </div>
     } @else {
@@ -148,15 +142,16 @@
         <textarea class="adm-form-control" rows="2" placeholder="Optional subtitle" [(ngModel)]="slide.subtitle!.en"></textarea>
       </div>
       <div class="adm-form-group">
-        <label class="adm-form-label">CTA Text <span class="hero-editor__required">*</span></label>
+        <label class="adm-form-label">Button text <span class="hero-editor__required">*</span></label>
         <input type="text" class="adm-form-control" placeholder="E.g.: View product" [(ngModel)]="slide.ctaText.en">
       </div>
     }
 
-    <!-- CTA Link (shared, not bilingual) -->
+    <!-- CTA Link (accepts any URL — internal, external, whatsapp, etc.) -->
     <div class="adm-form-group">
-      <label class="adm-form-label">CTA Link <span class="hero-editor__required">*</span></label>
-      <input type="url" class="adm-form-control" placeholder="/catalogo/producto-slug" [(ngModel)]="slide.ctaLink">
+      <label class="adm-form-label">Link del botón <span class="hero-editor__required">*</span></label>
+      <input type="text" class="adm-form-control" placeholder="https://ejemplo.com o /es/catalogo" [(ngModel)]="slide.ctaLink">
+      <span class="hero-editor__hint">Acepta cualquier link: interno, externo, WhatsApp, etc.</span>
     </div>
 
     <!-- Product Selector -->
@@ -186,41 +181,34 @@
       }
     </div>
 
-    <!-- Tags — ES and EN are independent -->
+    <!-- Tags — ES and EN shown together, each with its own add/remove -->
     <div class="adm-form-group">
-      <label class="adm-form-label">Tags en Español</label>
+      <label class="adm-form-label">Tags en Español ({{ slide.tags?.length || 0 }}/6)</label>
       <div class="hero-editor__tags-list">
         @for (tag of slide.tags; track $index) {
-          @if (tag.es !== undefined) {
-            <div class="hero-editor__tag-item">
-              <input type="text" class="adm-form-control adm-form-control--sm" placeholder="Tag en español" [(ngModel)]="tag.es">
-              <button class="adm-btn adm-btn--icon adm-btn--sm" aria-label="Eliminar tag" (click)="removeTag(index, $index)">
-                <span class="material-symbols-outlined">close</span>
-              </button>
-            </div>
-          }
+          <div class="hero-editor__tag-item">
+            <input type="text" class="adm-form-control adm-form-control--sm" placeholder="Una palabra" [(ngModel)]="tag.es" maxlength="30">
+            <button class="adm-btn adm-btn--icon adm-btn--sm" aria-label="Eliminar tag" (click)="removeTag(index, $index)">
+              <span class="material-symbols-outlined">close</span>
+            </button>
+          </div>
         }
       </div>
       @if (!slide.tags || slide.tags.length < 6) {
         <button class="adm-btn adm-btn--secondary adm-btn--sm hero-editor__add-tag" (click)="addTag(index)">
-          <span class="material-symbols-outlined">add</span> Agregar tag ES
+          <span class="material-symbols-outlined">add</span> Agregar tag
         </button>
       }
     </div>
     <div class="adm-form-group">
-      <label class="adm-form-label">Tags in English</label>
+      <label class="adm-form-label">Tags in English ({{ slide.tags?.length || 0 }}/6)</label>
       <div class="hero-editor__tags-list">
         @for (tag of slide.tags; track $index) {
-          @if (tag.en !== undefined) {
-            <div class="hero-editor__tag-item">
-              <input type="text" class="adm-form-control adm-form-control--sm" placeholder="Tag in English" [(ngModel)]="tag.en">
-            </div>
-          }
+          <div class="hero-editor__tag-item">
+            <input type="text" class="adm-form-control adm-form-control--sm" placeholder="One word" [(ngModel)]="tag.en" maxlength="30">
+          </div>
         }
       </div>
-      @if (slide.tags && slide.tags.length > 0) {
-        <span class="hero-editor__tag-count">{{ slide.tags.length }} / 6 tags</span>
-      }
     </div>
 
     <!-- Images -->
@@ -230,13 +218,23 @@
         <label class="adm-form-label">Imagen Desktop <span class="hero-editor__required">*</span></label>
         @if (slide.imageDesktop) {
           <div class="hero-editor__image-preview hero-editor__image-preview--desktop" [style.background-image]="'url(' + slide.imageDesktop + ')'">
+            @if (uploadingImage()) {
+              <div class="hero-editor__image-loading">
+                <span class="material-symbols-outlined hero-editor__image-spinner">progress_activity</span>
+              </div>
+            }
             <button class="adm-btn adm-btn--secondary adm-btn--sm" (click)="desktopInput.click()">Cambiar</button>
           </div>
         } @else {
           <div class="adm-uploader hero-editor__uploader hero-editor__uploader--desktop" (click)="desktopInput.click()">
-            <span class="material-symbols-outlined">add_photo_alternate</span>
-            <p class="adm-uploader__text">Subir imagen desktop</p>
-            <span class="adm-uploader__hint">Recomendado: 1920x1080px</span>
+            @if (uploadingImage()) {
+              <span class="material-symbols-outlined hero-editor__image-spinner">progress_activity</span>
+              <p class="adm-uploader__text">Subiendo...</p>
+            } @else {
+              <span class="material-symbols-outlined">add_photo_alternate</span>
+              <p class="adm-uploader__text">Subir imagen desktop</p>
+              <span class="adm-uploader__hint">Recomendado: 1920x1080px</span>
+            }
           </div>
         }
         <input #desktopInput type="file" accept="image/jpeg,image/png,image/webp" style="display: none;" (change)="uploadImage(index, 'desktop', $event)">
@@ -247,20 +245,30 @@
         <label class="adm-form-label">Imagen Mobile <span class="hero-editor__required">*</span></label>
         @if (slide.imageMobile) {
           <div class="hero-editor__image-preview hero-editor__image-preview--mobile" [style.background-image]="'url(' + slide.imageMobile + ')'">
+            @if (uploadingImage()) {
+              <div class="hero-editor__image-loading">
+                <span class="material-symbols-outlined hero-editor__image-spinner">progress_activity</span>
+              </div>
+            }
             <button class="adm-btn adm-btn--secondary adm-btn--sm" (click)="mobileInput.click()">Cambiar</button>
           </div>
         } @else {
           <div class="adm-uploader hero-editor__uploader hero-editor__uploader--mobile" (click)="mobileInput.click()">
-            <span class="material-symbols-outlined">add_photo_alternate</span>
-            <p class="adm-uploader__text">Subir imagen mobile</p>
-            <span class="adm-uploader__hint">Recomendado: 768x1024px</span>
+            @if (uploadingImage()) {
+              <span class="material-symbols-outlined hero-editor__image-spinner">progress_activity</span>
+              <p class="adm-uploader__text">Subiendo...</p>
+            } @else {
+              <span class="material-symbols-outlined">add_photo_alternate</span>
+              <p class="adm-uploader__text">Subir imagen mobile</p>
+              <span class="adm-uploader__hint">Recomendado: 768x1024px</span>
+            }
           </div>
         }
         <input #mobileInput type="file" accept="image/jpeg,image/png,image/webp" style="display: none;" (change)="uploadImage(index, 'mobile', $event)">
       </div>
     </div>
 
-    <!-- Upload progress -->
+    <!-- Upload progress bar -->
     @if (uploadingImage()) {
       <div class="hero-editor__upload-progress">
         <div class="hero-editor__upload-bar"></div>

@@ -270,8 +270,8 @@
 
 // Product card wrapper
 .hero-cards {
-  width: 100%;
-  max-width: 180px;
+  width: 200px;
+  flex-shrink: 0;
 
   @media (max-width: 991px) {
     max-width: 100%;

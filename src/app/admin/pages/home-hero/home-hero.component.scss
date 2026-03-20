@@ -166,7 +166,36 @@
   &__form {
     display: flex;
     flex-direction: column;
-    gap: 0; // adm-form-group handles its own spacing
+    gap: var(--adm-sp-5);
+
+    .adm-form-group {
+      margin-bottom: 0;
+    }
+  }
+
+  // ── Hint text below inputs ──
+  &__hint {
+    display: block;
+    font-size: 12px;
+    color: var(--adm-text-muted);
+    margin-top: 4px;
+  }
+
+  // ── Loading spinner on image preview ──
+  &__image-loading {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: var(--adm-radius-card);
+  }
+
+  &__image-spinner {
+    font-size: 36px;
+    color: white;
+    animation: admSpinHero 0.8s linear infinite;
   }
 
   // ── Images layout ──
