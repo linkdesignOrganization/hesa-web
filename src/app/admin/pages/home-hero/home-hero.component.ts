@@ -22,7 +22,8 @@ export class AdminHomeHeroComponent implements OnInit {
   uploadingImage = signal(false);
 
   // Hero data
-  heroMode = signal<'single' | 'carousel'>('single');
+  heroMode = signal<'single' | 'carousel'>('single'); // what's in production
+  viewingMode = signal<'single' | 'carousel'>('single'); // what's being viewed/edited
   slides = signal<ApiHeroSlide[]>([]);
 
   // UI state
@@ -49,6 +50,7 @@ export class AdminHomeHeroComponent implements OnInit {
     try {
       const config = await this.api.adminGetHomeConfig();
       this.heroMode.set(config.hero.mode || 'single');
+      this.viewingMode.set(config.hero.mode || 'single');
       const loadedSlides = config.hero.slides && config.hero.slides.length > 0
         ? config.hero.slides
         : [this.createEmptySlide()];
@@ -76,8 +78,13 @@ export class AdminHomeHeroComponent implements OnInit {
     };
   }
 
-  setMode(mode: 'single' | 'carousel'): void {
-    this.heroMode.set(mode);
+  /** Navigate to view/edit a mode's form (does NOT save) */
+  viewMode(mode: 'single' | 'carousel'): void {
+    this.viewingMode.set(mode);
+  }
+
+  /** Activate a mode via toggle — saves to production */
+  async activateMode(mode: 'single' | 'carousel'): Promise<void> {
     if (mode === 'single') {
       const current = this.slides();
       if (current.length > 1) {
@@ -86,6 +93,9 @@ export class AdminHomeHeroComponent implements OnInit {
       this.activeSlideIndex.set(0);
       this.expandedSlides.set(new Set([0]));
     }
+    this.heroMode.set(mode);
+    this.viewingMode.set(mode);
+    await this.save();
   }
 
   addSlide(): void {

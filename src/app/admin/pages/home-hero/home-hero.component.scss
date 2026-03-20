@@ -42,6 +42,10 @@
       border-color: var(--adm-text-muted);
     }
 
+    &--viewing {
+      border-color: var(--adm-text-muted);
+    }
+
     &--active {
       border-color: var(--adm-primary);
       box-shadow: 0 0 0 1px var(--adm-primary);
@@ -273,6 +277,15 @@
   // ── Add slide button ──
   &__add-slide {
     align-self: flex-start;
+  }
+
+  // ── Form footer (save button inside card) ──
+  &__form-footer {
+    padding-top: var(--adm-sp-6);
+    margin-top: var(--adm-sp-4);
+    border-top: 1px solid var(--adm-border);
+    display: flex;
+    justify-content: flex-end;
   }
 
   // ── Form area ──

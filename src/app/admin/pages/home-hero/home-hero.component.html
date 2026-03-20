@@ -6,13 +6,6 @@
     <div class="adm-page-header__left">
       <h1 class="adm-page-header__title">Hero del Home</h1>
     </div>
-    <button class="adm-btn adm-btn--primary" [disabled]="saving() || loading()" (click)="save()">
-      @if (saving()) {
-        <span class="adm-spinner"></span> Guardando...
-      } @else {
-        <span class="material-symbols-outlined">save</span> Guardar cambios
-      }
-    </button>
   </div>
 
   <!-- Loading -->
@@ -32,60 +25,75 @@
     </div>
   } @else {
 
-    <!-- Mode Selector with toggles -->
+    <!-- Mode Selector — click card to view, toggle to activate in production -->
     <div class="hero-editor__mode-selector">
-      <div class="hero-editor__mode-option" [class.hero-editor__mode-option--active]="heroMode() === 'single'" (click)="setMode('single')">
+      <div class="hero-editor__mode-option"
+        [class.hero-editor__mode-option--viewing]="viewingMode() === 'single'"
+        [class.hero-editor__mode-option--active]="heroMode() === 'single'"
+        (click)="viewMode('single')">
         <div class="hero-editor__mode-option-header">
           <div class="hero-editor__mode-option-info">
             <span class="material-symbols-outlined">image</span>
             <div>
               <span class="hero-editor__mode-option-title">Portada simple</span>
-              <span class="hero-editor__mode-option-desc">Un solo hero estatico</span>
+              <span class="hero-editor__mode-option-desc">Un solo hero estático</span>
             </div>
           </div>
           <label class="adm-form-switch hero-editor__mode-toggle" (click)="$event.stopPropagation()">
-            <input type="radio" name="heroMode" [checked]="heroMode() === 'single'" (change)="setMode('single')">
+            <input type="radio" name="heroMode" [checked]="heroMode() === 'single'" (change)="activateMode('single')">
             <span class="hero-editor__toggle-track" [class.hero-editor__toggle-track--on]="heroMode() === 'single'">
               <span class="hero-editor__toggle-knob"></span>
             </span>
           </label>
         </div>
         @if (heroMode() === 'single') {
-          <span class="hero-editor__mode-badge">En produccion</span>
+          <span class="hero-editor__mode-badge">En producción</span>
         }
       </div>
 
-      <div class="hero-editor__mode-option" [class.hero-editor__mode-option--active]="heroMode() === 'carousel'" (click)="setMode('carousel')">
+      <div class="hero-editor__mode-option"
+        [class.hero-editor__mode-option--viewing]="viewingMode() === 'carousel'"
+        [class.hero-editor__mode-option--active]="heroMode() === 'carousel'"
+        (click)="viewMode('carousel')">
         <div class="hero-editor__mode-option-header">
           <div class="hero-editor__mode-option-info">
             <span class="material-symbols-outlined">view_carousel</span>
             <div>
               <span class="hero-editor__mode-option-title">Carrusel</span>
-              <span class="hero-editor__mode-option-desc">Multiples slides (max 4)</span>
+              <span class="hero-editor__mode-option-desc">Múltiples slides (max 4)</span>
             </div>
           </div>
           <label class="adm-form-switch hero-editor__mode-toggle" (click)="$event.stopPropagation()">
-            <input type="radio" name="heroMode" [checked]="heroMode() === 'carousel'" (change)="setMode('carousel')">
+            <input type="radio" name="heroMode" [checked]="heroMode() === 'carousel'" (change)="activateMode('carousel')">
             <span class="hero-editor__toggle-track" [class.hero-editor__toggle-track--on]="heroMode() === 'carousel'">
               <span class="hero-editor__toggle-knob"></span>
             </span>
           </label>
         </div>
         @if (heroMode() === 'carousel') {
-          <span class="hero-editor__mode-badge">En produccion</span>
+          <span class="hero-editor__mode-badge">En producción</span>
         }
       </div>
     </div>
 
     <!-- SINGLE MODE -->
-    @if (heroMode() === 'single') {
+    @if (viewingMode() === 'single') {
       <div class="hero-editor__single adm-card">
         <ng-container *ngTemplateOutlet="slideForm; context: { $implicit: slides()[0], index: 0 }"></ng-container>
+        <div class="hero-editor__form-footer">
+          <button class="adm-btn adm-btn--primary" [disabled]="saving() || loading()" (click)="save()">
+            @if (saving()) {
+              <span class="adm-spinner"></span> Guardando...
+            } @else {
+              <span class="material-symbols-outlined">save</span> Guardar cambios
+            }
+          </button>
+        </div>
       </div>
     }
 
     <!-- CAROUSEL MODE -->
-    @if (heroMode() === 'carousel') {
+    @if (viewingMode() === 'carousel') {
       <div class="hero-editor__carousel">
         <div class="hero-editor__slide-list">
           @for (slide of slides(); track $index) {
@@ -128,6 +136,15 @@
             <span class="material-symbols-outlined">add</span> Agregar slide
           </button>
         }
+        <div class="hero-editor__form-footer">
+          <button class="adm-btn adm-btn--primary" [disabled]="saving() || loading()" (click)="save()">
+            @if (saving()) {
+              <span class="adm-spinner"></span> Guardando...
+            } @else {
+              <span class="material-symbols-outlined">save</span> Guardar cambios
+            }
+          </button>
+        </div>
       </div>
     }
   }
