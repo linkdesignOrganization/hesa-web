@@ -35,7 +35,7 @@
     <!-- Mode Tabs -->
     <div class="adm-tabs hero-editor__mode-tabs">
       <button class="adm-tab" [class.adm-tab--active]="heroMode() === 'single'" (click)="setMode('single')">
-        <span class="material-symbols-outlined">image</span> Hero Simple
+        <span class="material-symbols-outlined">image</span> Portada simple
       </button>
       <button class="adm-tab" [class.adm-tab--active]="heroMode() === 'carousel'" (click)="setMode('carousel')">
         <span class="material-symbols-outlined">view_carousel</span> Carrusel
@@ -44,7 +44,7 @@
 
     <!-- SINGLE MODE -->
     @if (heroMode() === 'single') {
-      <div class="hero-editor__single">
+      <div class="hero-editor__single adm-card">
         <ng-container *ngTemplateOutlet="slideForm; context: { $implicit: slides()[0], index: 0 }"></ng-container>
       </div>
     }
@@ -186,30 +186,40 @@
       }
     </div>
 
-    <!-- Tags -->
+    <!-- Tags — ES and EN are independent -->
     <div class="adm-form-group">
-      <label class="adm-form-label">Tags del slide</label>
+      <label class="adm-form-label">Tags en Español</label>
       <div class="hero-editor__tags-list">
         @for (tag of slide.tags; track $index) {
-          <div class="hero-editor__tag-item">
-            @if (activeLang() === 'es') {
-              <input type="text" class="adm-form-control adm-form-control--sm" placeholder="Tag en espanol" [(ngModel)]="tag.es">
-            } @else {
-              <input type="text" class="adm-form-control adm-form-control--sm" placeholder="Tag in English" [(ngModel)]="tag.en">
-            }
-            <button class="adm-btn adm-btn--icon adm-btn--sm" aria-label="Eliminar tag" (click)="removeTag(index, $index)">
-              <span class="material-symbols-outlined">close</span>
-            </button>
-          </div>
+          @if (tag.es !== undefined) {
+            <div class="hero-editor__tag-item">
+              <input type="text" class="adm-form-control adm-form-control--sm" placeholder="Tag en español" [(ngModel)]="tag.es">
+              <button class="adm-btn adm-btn--icon adm-btn--sm" aria-label="Eliminar tag" (click)="removeTag(index, $index)">
+                <span class="material-symbols-outlined">close</span>
+              </button>
+            </div>
+          }
         }
       </div>
       @if (!slide.tags || slide.tags.length < 6) {
         <button class="adm-btn adm-btn--secondary adm-btn--sm hero-editor__add-tag" (click)="addTag(index)">
-          <span class="material-symbols-outlined">add</span> Agregar tag
+          <span class="material-symbols-outlined">add</span> Agregar tag ES
         </button>
       }
+    </div>
+    <div class="adm-form-group">
+      <label class="adm-form-label">Tags in English</label>
+      <div class="hero-editor__tags-list">
+        @for (tag of slide.tags; track $index) {
+          @if (tag.en !== undefined) {
+            <div class="hero-editor__tag-item">
+              <input type="text" class="adm-form-control adm-form-control--sm" placeholder="Tag in English" [(ngModel)]="tag.en">
+            </div>
+          }
+        }
+      </div>
       @if (slide.tags && slide.tags.length > 0) {
-        <span class="hero-editor__tag-count">{{ slide.tags.length }} / 6</span>
+        <span class="hero-editor__tag-count">{{ slide.tags.length }} / 6 tags</span>
       }
     </div>
 
