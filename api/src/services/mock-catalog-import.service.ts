@@ -414,6 +414,29 @@ async function pause(ms: number): Promise<void> {
   await new Promise(resolve => setTimeout(resolve, ms));
 }
 
+function isRetryableWriteError(error: unknown): boolean {
+  if (!(error instanceof Error)) return false;
+  return error.message.includes('16500') || error.message.toLowerCase().includes('batch write error');
+}
+
+async function withRetries<T>(fn: () => Promise<T>, attempts = 5, delayMs = 1200): Promise<T> {
+  let lastError: unknown;
+
+  for (let attempt = 0; attempt < attempts; attempt += 1) {
+    try {
+      return await fn();
+    } catch (error) {
+      lastError = error;
+      if (!isRetryableWriteError(error) || attempt === attempts - 1) {
+        throw error;
+      }
+      await pause(delayMs * (attempt + 1));
+    }
+  }
+
+  throw lastError;
+}
+
 async function insertInChunks<T extends object>(
   model: { insertMany: (docs: T[], options?: { ordered?: boolean }) => Promise<any[]> },
   docs: T[],
@@ -423,11 +446,11 @@ async function insertInChunks<T extends object>(
 
   for (let index = 0; index < docs.length; index += chunkSize) {
     const chunk = docs.slice(index, index + chunkSize);
-    const result = await model.insertMany(chunk, { ordered: true });
+    const result = await withRetries(() => model.insertMany(chunk, { ordered: true }));
     inserted.push(...result);
 
     if (index + chunkSize < docs.length) {
-      await pause(150);
+      await pause(450);
     }
   }
 
@@ -553,8 +576,10 @@ export async function importMockCatalog(): Promise<MockCatalogImportSummary> {
   const brandDocs = await Promise.all(brandDefinitions.map(def => resolveBrandDetails(publicDir, def)));
   const featuredBrandOrder = new Map(FEATURED_BRAND_NAMES.map((name, index) => [name, index + 1]));
 
-  await Product.deleteMany({});
-  await Brand.deleteMany({});
+  await withRetries(() => Product.deleteMany({}));
+  await pause(600);
+  await withRetries(() => Brand.deleteMany({}));
+  await pause(600);
 
   const insertedBrands = await insertInChunks(
     Brand,
@@ -568,7 +593,7 @@ export async function importMockCatalog(): Promise<MockCatalogImportSummary> {
       isFeatured: featuredBrandOrder.has(brand.name),
       featuredOrder: featuredBrandOrder.get(brand.name),
     })),
-    10
+    5
   );
 
   const brandMap = new Map(insertedBrands.map(brand => [brand.name, brand]));
@@ -608,7 +633,7 @@ export async function importMockCatalog(): Promise<MockCatalogImportSummary> {
       hasEnTranslation: true,
       createdAt: new Date(Date.now() + index),
     };
-  }), 20);
+  }), 5);
   importedProducts.push(...foods.map(product => ({ _id: String(product._id), category: 'alimentos' as const, nameEs: product.name.es })));
 
   const pharmaBrands = PHARMA_BRANDS.map(brand => brandMap.get(brand.name)).filter(Boolean);
@@ -641,7 +666,7 @@ export async function importMockCatalog(): Promise<MockCatalogImportSummary> {
       hasEnTranslation: true,
       createdAt: new Date(Date.now() + 200 + index),
     };
-  }), 20);
+  }), 5);
   importedProducts.push(...farmacos.map(product => ({ _id: String(product._id), category: 'farmacos' as const, nameEs: product.name.es })));
 
   const equipmentBrands = EQUIPMENT_BRANDS.map(brand => brandMap.get(brand.name)).filter(Boolean);
@@ -673,10 +698,10 @@ export async function importMockCatalog(): Promise<MockCatalogImportSummary> {
       hasEnTranslation: true,
       createdAt: new Date(Date.now() + 400 + index),
     };
-  }), 20);
+  }), 5);
   importedProducts.push(...equipos.map(product => ({ _id: String(product._id), category: 'equipos' as const, nameEs: product.name.es })));
 
-  await Category.findOneAndUpdate(
+  await withRetries(() => Category.findOneAndUpdate(
     { key: 'alimentos' },
     {
       $set: {
@@ -689,27 +714,27 @@ export async function importMockCatalog(): Promise<MockCatalogImportSummary> {
         ],
       },
     }
-  );
+  ));
 
   const pharmaFamilies = Array.from(new Set(pharmaAssets.map(asset => asset.info?.section).filter(Boolean) as string[]));
-  await Category.findOneAndUpdate(
+  await withRetries(() => Category.findOneAndUpdate(
     { key: 'farmacos' },
     {
       $set: {
         families: pharmaFamilies.map(family => ({ es: family, en: family })),
       },
     }
-  );
+  ));
 
   const equipmentTypes = Array.from(new Set(equipmentAssets.map(asset => asset.info?.section).filter(Boolean) as string[]));
-  await Category.findOneAndUpdate(
+  await withRetries(() => Category.findOneAndUpdate(
     { key: 'equipos' },
     {
       $set: {
         equipmentTypes: equipmentTypes.map(type => ({ es: type, en: type })),
       },
     }
-  );
+  ));
 
   const featuredProducts = [
     ...importedProducts.filter(product => product.category === 'farmacos').slice(0, 4),
@@ -718,9 +743,9 @@ export async function importMockCatalog(): Promise<MockCatalogImportSummary> {
   ];
 
   for (let index = 0; index < featuredProducts.length; index += 1) {
-    await Product.findByIdAndUpdate(featuredProducts[index]._id, {
+    await withRetries(() => Product.findByIdAndUpdate(featuredProducts[index]._id, {
       $set: { isFeatured: true, featuredOrder: index + 1 },
-    });
+    }));
   }
 
   const featuredBrandIds = FEATURED_BRAND_NAMES
@@ -733,12 +758,12 @@ export async function importMockCatalog(): Promise<MockCatalogImportSummary> {
     homeConfig = await HomeConfig.create({});
   }
 
-  await HomeConfig.findByIdAndUpdate(homeConfig._id, {
+  await withRetries(() => HomeConfig.findByIdAndUpdate(homeConfig!._id, {
     $set: {
       featuredProducts: featuredProducts.map(product => product._id),
       featuredBrands: featuredBrandIds,
     },
-  });
+  }));
 
   return {
     brands: insertedBrands.length,
