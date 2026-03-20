@@ -18,7 +18,7 @@ router.get('/', async (_req: Request, res: Response) => {
       homeService.getFeaturedBrandsPopulated(),
     ]);
 
-    res.setHeader('Cache-Control', 'public, max-age=600, stale-while-revalidate=60');
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
     res.json({
       hero: heroData,
       featuredProducts,
