@@ -103,13 +103,6 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   heroMode = computed(() => this.hero().mode);
   activeFeatureVideoLayer = signal<0 | 1>(0);
 
-  currentSlideData = computed(() => {
-    const slides = this.hero().slides;
-    if (!slides || slides.length === 0) return null;
-    const idx = this.activeSlide();
-    return slides[idx] ?? slides[0];
-  });
-
   stats = [
     { number: '37', suffix: '+', label: { es: 'Anos de experiencia en el sector veterinario', en: 'Years of experience in the veterinary sector' } },
     { number: '100', suffix: '%', label: { es: 'Cobertura nacional con agentes propios', en: 'National coverage with own agents' } },
@@ -385,6 +378,37 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   getShowcaseCategoryLabel(category: FeaturedShowcaseCategoryId): string {
     return this.i18n.t(this.showcaseCategoryLabels[category]);
+  }
+
+  getHeroCategoryLabel(category: ApiProduct['category']): string {
+    return this.i18n.t(this.showcaseCategoryLabels[category]);
+  }
+
+  getHeroProductRoute(product: ApiProduct): string {
+    const lang = this.i18n.currentLang();
+    return `${this.i18n.t(this.showcaseCategoryLinks[product.category])}/${product.slug[lang]}`;
+  }
+
+  getHeroProductMeta(product: ApiProduct): string[] {
+    const meta = new Set<string>();
+
+    if (product.species?.length) {
+      meta.add(product.species[0]);
+    }
+
+    if (product.family) {
+      meta.add(product.family);
+    } else if (product.lifeStage) {
+      meta.add(product.lifeStage);
+    } else if (product.equipmentType) {
+      meta.add(product.equipmentType);
+    }
+
+    if (product.presentations?.length) {
+      meta.add(product.presentations[0]);
+    }
+
+    return Array.from(meta).filter(Boolean).slice(0, 3);
   }
 
   getShowcaseMeta(item: FeaturedShowcaseItem): LocalizedText[] {

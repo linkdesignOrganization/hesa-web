@@ -394,17 +394,17 @@
     min-height: 54px;
     padding: 0 22px;
     border-radius: 999px;
-    background: rgba(0, 149, 218, 0.1);
+    background: var(--neutral-900);
     font-size: 16px;
     font-weight: var(--weight-bold);
-    color: var(--brand-primary-deep);
+    color: var(--neutral-white);
     text-decoration: none;
     white-space: nowrap;
     transition: background-color 0.18s ease, color 0.18s ease, transform 0.18s ease;
 
     &:hover {
-      background: rgba(0, 149, 218, 0.16);
-      color: var(--brand-primary-deep);
+      background: #000000;
+      color: var(--neutral-white);
       transform: translateY(-1px);
 
       .material-symbols-outlined {

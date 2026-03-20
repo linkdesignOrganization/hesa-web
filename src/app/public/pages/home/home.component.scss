@@ -51,10 +51,10 @@
   margin: 0 auto;
   border-radius: 32px;
   position: relative;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-color: #2a3a4a;
+  overflow: hidden;
+  isolation: isolate;
+  background: linear-gradient(180deg, #eef4f5 0%, #e5ecef 100%);
+  box-shadow: 0 30px 72px rgba(15, 23, 42, 0.12);
 
   @media (max-width: 767px) {
     border-radius: 20px;
@@ -66,6 +66,19 @@
     @media (max-width: 991px) {
       min-height: 400px;
     }
+  }
+}
+
+.hero-stage {
+  display: grid;
+  min-height: clamp(680px, 84vh, 920px);
+
+  @media (max-width: 991px) {
+    min-height: 980px;
+  }
+
+  @media (max-width: 767px) {
+    min-height: 840px;
   }
 }
 
@@ -95,14 +108,6 @@
 @keyframes skeleton-pulse {
   0%, 100% { opacity: 0.4; }
   50% { opacity: 0.8; }
-}
-
-.hero-gradient {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.4) 100%);
-  border-radius: inherit;
-  pointer-events: none;
 }
 
 // =============================================================================
@@ -163,21 +168,98 @@
 }
 
 .hero-columns {
-  transition: opacity 0.6s ease;
+  grid-area: 1 / 1;
   position: relative;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  padding: 50px 40px 40px;
-  gap: 20px;
-  min-height: 85vh;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(20px) scale(0.985);
+  transition:
+    opacity 0.82s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.95s cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0s linear 0.95s;
 
-  @media (max-width: 991px) {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 40px;
-    min-height: auto;
-    padding: 40px 24px 32px;
+  &--active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: none;
+    z-index: 2;
+    transition:
+      opacity 0.82s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 1.05s cubic-bezier(0.22, 1, 0.36, 1),
+      visibility 0s linear 0s;
+  }
+
+  &__media {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  &__picture {
+    position: absolute;
+    inset: 0;
+    display: block;
+  }
+
+  &__image,
+  &__image-placeholder {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  &__image {
+    object-fit: cover;
+    object-position: center center;
+    transform: scale(1.06);
+    filter: saturate(0.95) contrast(1.04);
+    transition: transform 1.35s cubic-bezier(0.22, 1, 0.36, 1), filter 0.82s ease;
+  }
+
+  &--active &__image {
+    transform: scale(1);
+    filter: saturate(1) contrast(1.02);
+  }
+
+  &__image-placeholder {
+    background:
+      linear-gradient(135deg, rgba(238, 245, 246, 0.96) 0%, rgba(246, 250, 251, 0.98) 48%, rgba(232, 240, 242, 0.96) 100%);
+  }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(90deg, rgba(8, 16, 24, 0.74) 0%, rgba(8, 16, 24, 0.46) 32%, rgba(8, 16, 24, 0.2) 58%, rgba(8, 16, 24, 0.14) 100%),
+      linear-gradient(180deg, rgba(8, 16, 24, 0.04) 0%, rgba(8, 16, 24, 0.38) 100%);
+
+    @media (max-width: 991px) {
+      background:
+        linear-gradient(180deg, rgba(8, 16, 24, 0.34) 0%, rgba(8, 16, 24, 0.18) 24%, rgba(8, 16, 24, 0.56) 100%),
+        linear-gradient(90deg, rgba(8, 16, 24, 0.44) 0%, rgba(8, 16, 24, 0.1) 46%, rgba(8, 16, 24, 0.12) 100%);
+    }
+  }
+
+  &__content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 20px;
+    width: 100%;
+    min-height: 100%;
+    padding: 54px 42px 42px;
+
+    @media (max-width: 991px) {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 34px;
+      padding: 88px 24px 24px;
+    }
   }
 }
 
@@ -185,23 +267,36 @@
 // LEFT COLUMN
 // =============================================================================
 .hero-left {
-  max-width: 700px;
+  flex: 1 1 0;
+  max-width: 720px;
+  min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 120px;
-  padding-top: 50px;
+  justify-content: space-between;
+  gap: 96px;
+  padding-top: 38px;
   position: relative;
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.74s ease, transform 0.98s cubic-bezier(0.22, 1, 0.36, 1);
+
+  .hero-columns--active & {
+    opacity: 1;
+    transform: none;
+    transition-delay: 0.08s;
+  }
 
   @media (max-width: 991px) {
     max-width: 100%;
-    gap: 60px;
+    gap: 40px;
+    padding-top: 0;
   }
 }
 
 .hero-title-box {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 28px;
 }
 
 // Pill tagline
@@ -209,44 +304,51 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background-color: rgba(0, 141, 201, 0.55);
-  border-radius: 100px;
-  padding: 6px 16px;
+  min-height: 40px;
+  padding: 0 16px;
+  background-color: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+  backdrop-filter: blur(18px);
   width: fit-content;
 
   span {
     color: white;
-    font-size: 14px;
-    font-weight: var(--weight-medium);
+    font-size: 13px;
+    font-weight: var(--weight-semibold);
+    line-height: 1;
+    letter-spacing: 0.02em;
   }
 }
 
 .hero-text-group {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 18px;
 }
 
 .hero-heading {
-  font-size: clamp(36px, 6vw, 80px);
-  font-weight: var(--weight-semibold);
+  margin: 0;
+  max-width: 11ch;
+  font-size: clamp(42px, 6.15vw, 88px);
+  font-weight: var(--weight-extrabold);
   color: white;
-  letter-spacing: -2px;
-  line-height: 0.95;
+  letter-spacing: -0.06em;
+  line-height: 0.92;
 
   @media (max-width: 479px) {
-    font-size: 36px;
-    letter-spacing: -1px;
+    font-size: 38px;
+    letter-spacing: -0.05em;
   }
 }
 
 .hero-para {
-  color: white;
-  font-size: 18px;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: clamp(16px, 1.35vw, 20px);
   font-weight: var(--weight-medium);
-  max-width: 460px;
+  max-width: 34ch;
   line-height: 1.6;
-  opacity: 0.9;
 
   @media (max-width: 767px) {
     font-size: 16px;
@@ -257,21 +359,36 @@
 .hero-cta {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
+  justify-content: center;
+  gap: 10px;
+  min-height: 52px;
   background-color: white;
   color: #000000;
-  border-radius: 100px;
-  padding: 14px 28px;
-  font-size: 15px;
-  font-weight: var(--weight-medium);
+  border-radius: 999px;
+  padding: 0 20px;
+  font-size: 14px;
+  font-weight: var(--weight-semibold);
+  line-height: 1;
   text-decoration: none;
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  box-shadow: 0 18px 36px rgba(15, 23, 42, 0.12);
+  transition: opacity 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
   width: fit-content;
+
+  .material-symbols-outlined {
+    font-size: 18px;
+    line-height: 1;
+    transition: transform 0.2s ease;
+  }
 
   &:hover {
     opacity: 0.9;
     transform: translateY(-1px);
+    box-shadow: 0 22px 42px rgba(15, 23, 42, 0.16);
     color: #000000;
+
+    .material-symbols-outlined {
+      transform: translateX(2px);
+    }
   }
 }
 
@@ -279,33 +396,34 @@
 // GLASS STATS CARD (bottom-left)
 // =============================================================================
 .hero-stats-card {
-  border-radius: 20px;
+  border-radius: 22px;
   padding: 24px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  max-width: 380px;
+  gap: 18px;
+  max-width: 408px;
 
   &__numbers {
     display: flex;
     align-items: flex-start;
-    gap: 16px;
+    gap: 14px;
   }
 
   &__count {
-    font-size: 48px;
-    font-weight: var(--weight-semibold);
+    font-size: 52px;
+    font-weight: var(--weight-extrabold);
     color: white;
     line-height: 1;
+    letter-spacing: -0.06em;
   }
 
   &__text {
     font-size: 15px;
     font-weight: var(--weight-medium);
     color: white;
-    max-width: 200px;
-    line-height: 1.4;
-    opacity: 0.9;
+    max-width: 220px;
+    line-height: 1.45;
+    opacity: 0.92;
   }
 
   &__badges {
@@ -327,16 +445,28 @@
 // RIGHT COLUMN
 // =============================================================================
 .hero-right {
-  max-width: 520px;
+  flex: 0 0 360px;
+  max-width: 360px;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   gap: 24px;
   position: relative;
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.74s ease, transform 1.02s cubic-bezier(0.22, 1, 0.36, 1);
+
+  .hero-columns--active & {
+    opacity: 1;
+    transform: none;
+    transition-delay: 0.16s;
+  }
 
   @media (max-width: 991px) {
+    flex-basis: auto;
     max-width: 100%;
     align-items: flex-start;
+    width: 100%;
   }
 }
 
@@ -344,7 +474,7 @@
 .hero-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 8px;
   justify-content: flex-end;
   max-width: 400px;
 
@@ -355,141 +485,13 @@
 }
 
 .hero-tag-pill {
-  border-radius: 30px;
-  padding: 6px 12px;
+  border-radius: 999px;
+  padding: 8px 12px;
   color: white;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: var(--weight-medium);
+  line-height: 1;
 }
-
-// Product card wrapper
-.hero-cards {
-  width: 250px;
-  flex-shrink: 0;
-
-  @media (max-width: 991px) {
-    max-width: 100%;
-  }
-}
-
-.hero-card {
-  background-color: white;
-  border-radius: 20px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  max-width: 300px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-
-  @media (max-width: 991px) {
-    max-width: 300px;
-  }
-
-  &:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
-  }
-
-  // Image area
-  &__img-wrap {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 4 / 3;
-    overflow: hidden;
-    background-color: #f5f5f3;
-  }
-
-  &__img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  &__img-placeholder {
-    width: 100%;
-    height: 100%;
-    background-color: #e8e8e6;
-  }
-
-  // Category badge — top-right, pill left / flat right
-  &__category-badge {
-    position: absolute;
-    top: 12px;
-    right: 0;
-    background-color: var(--brand-primary);
-    color: white;
-    font-size: 11px;
-    font-weight: var(--weight-semibold);
-    padding: 6px 14px;
-    border-radius: 100px 0 0 100px;
-    letter-spacing: 0.01em;
-  }
-
-  // Body
-  &__body {
-    padding: 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    flex: 1;
-  }
-
-  &__brand-label {
-    font-size: 13px;
-    font-weight: var(--weight-medium);
-    color: #000000;
-    opacity: 0.4;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-
-  &__name {
-    font-size: 20px;
-    font-weight: var(--weight-bold);
-    color: #000000;
-    line-height: 1.3;
-  }
-
-  &__footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 10px;
-  }
-
-  &__detail {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    font-size: 12px;
-    font-weight: var(--weight-medium);
-    color: #000000;
-    opacity: 0.4;
-
-    .material-symbols-outlined {
-      font-size: 16px;
-    }
-  }
-
-  &__go-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #000000;
-    text-decoration: none;
-    transition: transform 0.15s ease, opacity 0.15s ease;
-
-    .material-symbols-outlined {
-      font-size: 42px;
-    }
-
-    &:hover {
-      transform: scale(1.3);
-      color: #000000;
-    }
-  }
-}
-
 
 // =============================================================================
 // WHY HESA SECTION
