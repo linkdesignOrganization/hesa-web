@@ -18,12 +18,125 @@
     padding: var(--adm-sp-12) 0;
   }
 
-  // ── Mode Tabs ──
-  &__mode-tabs {
+  // ── Mode Selector ──
+  &__mode-selector {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--adm-sp-4);
     margin-bottom: var(--adm-sp-6);
 
-    .adm-tab {
-      gap: var(--adm-sp-2);
+    @media (max-width: 640px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__mode-option {
+    border: 2px solid var(--adm-border);
+    border-radius: var(--adm-radius-card);
+    padding: var(--adm-sp-4);
+    cursor: pointer;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+
+    &:hover {
+      border-color: var(--adm-text-muted);
+    }
+
+    &--active {
+      border-color: var(--adm-primary);
+      box-shadow: 0 0 0 1px var(--adm-primary);
+
+      &:hover {
+        border-color: var(--adm-primary);
+      }
+    }
+  }
+
+  &__mode-option-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--adm-sp-3);
+  }
+
+  &__mode-option-info {
+    display: flex;
+    align-items: center;
+    gap: var(--adm-sp-3);
+
+    > .material-symbols-outlined {
+      font-size: 28px;
+      color: var(--adm-text-muted);
+
+      .hero-editor__mode-option--active & {
+        color: var(--adm-primary);
+      }
+    }
+  }
+
+  &__mode-option-title {
+    display: block;
+    font-size: var(--adm-body-size);
+    font-weight: 600;
+    color: var(--adm-text-heading);
+  }
+
+  &__mode-option-desc {
+    display: block;
+    font-size: var(--adm-small-size);
+    color: var(--adm-text-muted);
+    margin-top: 2px;
+  }
+
+  &__mode-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--adm-primary);
+    background: rgba(20, 118, 255, 0.08);
+    padding: 3px 10px;
+    border-radius: 100px;
+    margin-top: var(--adm-sp-3);
+    letter-spacing: 0.02em;
+  }
+
+  // Toggle switch
+  &__mode-toggle {
+    cursor: pointer;
+    flex-shrink: 0;
+
+    input {
+      display: none;
+    }
+  }
+
+  &__toggle-track {
+    display: block;
+    width: 44px;
+    height: 24px;
+    background: var(--adm-border);
+    border-radius: 12px;
+    position: relative;
+    transition: background 0.2s ease;
+
+    &--on {
+      background: var(--adm-primary);
+    }
+  }
+
+  &__toggle-knob {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-radius: 50%;
+    transition: transform 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+
+    .hero-editor__toggle-track--on & {
+      transform: translateX(20px);
     }
   }
 

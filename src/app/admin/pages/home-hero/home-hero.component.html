@@ -32,14 +32,49 @@
     </div>
   } @else {
 
-    <!-- Mode Tabs -->
-    <div class="adm-tabs hero-editor__mode-tabs">
-      <button class="adm-tab" [class.adm-tab--active]="heroMode() === 'single'" (click)="setMode('single')">
-        <span class="material-symbols-outlined">image</span> Portada simple
-      </button>
-      <button class="adm-tab" [class.adm-tab--active]="heroMode() === 'carousel'" (click)="setMode('carousel')">
-        <span class="material-symbols-outlined">view_carousel</span> Carrusel
-      </button>
+    <!-- Mode Selector with toggles -->
+    <div class="hero-editor__mode-selector">
+      <div class="hero-editor__mode-option" [class.hero-editor__mode-option--active]="heroMode() === 'single'" (click)="setMode('single')">
+        <div class="hero-editor__mode-option-header">
+          <div class="hero-editor__mode-option-info">
+            <span class="material-symbols-outlined">image</span>
+            <div>
+              <span class="hero-editor__mode-option-title">Portada simple</span>
+              <span class="hero-editor__mode-option-desc">Un solo hero estatico</span>
+            </div>
+          </div>
+          <label class="adm-form-switch hero-editor__mode-toggle" (click)="$event.stopPropagation()">
+            <input type="radio" name="heroMode" [checked]="heroMode() === 'single'" (change)="setMode('single')">
+            <span class="hero-editor__toggle-track" [class.hero-editor__toggle-track--on]="heroMode() === 'single'">
+              <span class="hero-editor__toggle-knob"></span>
+            </span>
+          </label>
+        </div>
+        @if (heroMode() === 'single') {
+          <span class="hero-editor__mode-badge">En produccion</span>
+        }
+      </div>
+
+      <div class="hero-editor__mode-option" [class.hero-editor__mode-option--active]="heroMode() === 'carousel'" (click)="setMode('carousel')">
+        <div class="hero-editor__mode-option-header">
+          <div class="hero-editor__mode-option-info">
+            <span class="material-symbols-outlined">view_carousel</span>
+            <div>
+              <span class="hero-editor__mode-option-title">Carrusel</span>
+              <span class="hero-editor__mode-option-desc">Multiples slides (max 4)</span>
+            </div>
+          </div>
+          <label class="adm-form-switch hero-editor__mode-toggle" (click)="$event.stopPropagation()">
+            <input type="radio" name="heroMode" [checked]="heroMode() === 'carousel'" (change)="setMode('carousel')">
+            <span class="hero-editor__toggle-track" [class.hero-editor__toggle-track--on]="heroMode() === 'carousel'">
+              <span class="hero-editor__toggle-knob"></span>
+            </span>
+          </label>
+        </div>
+        @if (heroMode() === 'carousel') {
+          <span class="hero-editor__mode-badge">En produccion</span>
+        }
+      </div>
     </div>
 
     <!-- SINGLE MODE -->
