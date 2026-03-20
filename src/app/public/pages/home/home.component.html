@@ -4,112 +4,129 @@
 
 <!-- HERO SECTION — Supports single and carousel modes -->
 <section class="hero-section">
-  <div class="hero-wrapper" [style.background-image]="'url(' + (currentSlideData().imageDesktop || 'https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?w=1600&q=80') + ')'" [attr.data-mobile-bg]="currentSlideData().imageMobile || null">
-
-    <!-- Carousel navigation arrows (only when carousel mode with multiple slides) -->
-    @if (heroMode() === 'carousel' && hero().slides.length > 1) {
-      <div class="hero-nav-arrows">
-        <button class="hero-nav-arrow" (click)="prevHeroSlide()" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Slide anterior' : 'Previous slide'">
-          <span class="material-symbols-outlined">arrow_back</span>
-        </button>
-        <button class="hero-nav-arrow" (click)="nextHeroSlide()" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Siguiente slide' : 'Next slide'">
-          <span class="material-symbols-outlined">arrow_forward</span>
-        </button>
-      </div>
-    }
-
-    <div class="hero-gradient"></div>
-
-    <!-- Slides layer -->
-    @for (slide of hero().slides; track $index) {
-      <div class="hero-columns"
-        [style.opacity]="activeSlide() === $index ? '1' : '0'"
-        [style.position]="activeSlide() === $index ? 'relative' : 'absolute'"
-        [style.pointer-events]="activeSlide() === $index ? 'auto' : 'none'"
-        [style.inset]="activeSlide() !== $index ? '0' : null"
-        [style.z-index]="activeSlide() === $index ? '1' : '0'">
-        <!-- LEFT COLUMN -->
-        <div class="hero-left">
-          <div class="hero-title-box">
-            <!-- Pill tagline -->
-            <div class="hero-tagline">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-              <span>{{ i18n.t(slide.tag) }}</span>
-            </div>
-            <!-- Heading + paragraph + CTA -->
-            <div class="hero-text-group">
-              <h1 class="hero-heading">{{ i18n.t(slide.headline) }}</h1>
-              @if (slide.subtitle) {
-                <p class="hero-para">{{ i18n.t(slide.subtitle) }}</p>
-              }
-            </div>
-            @if (isExternalLink(slide.ctaLink)) {
-              <a [href]="slide.ctaLink" target="_blank" rel="noopener noreferrer" class="hero-cta">
-                <span>{{ i18n.t(slide.ctaText) }}</span>
-                <span class="material-symbols-outlined" style="font-size:16px">arrow_forward</span>
-              </a>
-            } @else {
-              <a [routerLink]="slide.ctaLink" class="hero-cta">
-                <span>{{ i18n.t(slide.ctaText) }}</span>
-                <span class="material-symbols-outlined" style="font-size:16px">arrow_forward</span>
-              </a>
-            }
-          </div>
-          <!-- Glass stats card — included per slide for CSS layout compatibility -->
-          <div class="hero-stats-card frosted-white">
-            <div class="hero-stats-card__numbers">
-              <h2 class="hero-stats-card__count">37+</h2>
-              <p class="hero-stats-card__text">{{ i18n.currentLang() === 'es' ? 'Anos distribuyendo salud animal en Costa Rica' : 'Years distributing animal health in Costa Rica' }}</p>
-            </div>
-            <div class="hero-stats-card__badges">
-              <span class="hero-stats-card__badge frosted-white">{{ i18n.currentLang() === 'es' ? '100% Cobertura' : '100% Coverage' }}</span>
-              <span class="hero-stats-card__badge frosted-white">{{ i18n.currentLang() === 'es' ? '50+ Colaboradores' : '50+ Collaborators' }}</span>
-              <span class="hero-stats-card__badge frosted-white">{{ i18n.currentLang() === 'es' ? 'Flotilla propia' : 'Own fleet' }}</span>
-            </div>
-          </div>
+  <!-- Skeleton while hero is loading -->
+  @if (heroLoading()) {
+    <div class="hero-wrapper hero-wrapper--skeleton">
+      <div class="hero-skeleton">
+        <div class="hero-skeleton__left">
+          <div class="skeleton" style="width: 120px; height: 28px; border-radius: 100px;"></div>
+          <div class="skeleton" style="width: 80%; height: 48px; margin-top: 24px;"></div>
+          <div class="skeleton" style="width: 60%; height: 48px; margin-top: 8px;"></div>
+          <div class="skeleton" style="width: 90%; height: 20px; margin-top: 24px;"></div>
+          <div class="skeleton" style="width: 160px; height: 48px; border-radius: 100px; margin-top: 32px;"></div>
         </div>
-        <!-- RIGHT COLUMN -->
-        <div class="hero-right">
-          <!-- Tag pills (show current language's tags) -->
-          @if ((i18n.currentLang() === 'es' ? slide.tagsEs : slide.tagsEn)?.length) {
-            <div class="hero-tags">
-              @for (tag of (i18n.currentLang() === 'es' ? slide.tagsEs : slide.tagsEn); track $index) {
-                <span class="hero-tag-pill frosted-white">{{ tag }}</span>
-              }
-            </div>
-          }
-          <!-- Product card (only if product is a populated object) -->
-          @if (isProductObject(slide.product)) {
-            <div class="hero-card">
-              <div class="hero-card__img-wrap">
-                @if (slide.product.images && slide.product.images.length > 0) {
-                  <img [src]="slide.product.images[0]" [alt]="i18n.t(slide.product.name)" loading="lazy" class="hero-card__img" />
-                } @else {
-                  <img src="https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?w=400&q=80" alt="" loading="lazy" class="hero-card__img" />
-                }
-                @if (slide.product.category) {
-                  <span class="hero-card__category-badge">{{ slide.product.category === 'farmacos' ? (i18n.currentLang() === 'es' ? 'Farmacos' : 'Pharmaceuticals') : slide.product.category === 'alimentos' ? (i18n.currentLang() === 'es' ? 'Alimentos' : 'Food') : (i18n.currentLang() === 'es' ? 'Equipos' : 'Equipment') }}</span>
+      </div>
+    </div>
+  } @else if (!heroError() && hero().slides.length > 0) {
+    <div class="hero-wrapper"
+      [style.background-image]="currentSlideData()?.imageDesktop ? 'url(' + currentSlideData()!.imageDesktop + ')' : 'none'"
+      [attr.data-mobile-bg]="currentSlideData()?.imageMobile || null">
+
+      <!-- Carousel navigation arrows (only when carousel mode with multiple slides) -->
+      @if (heroMode() === 'carousel' && hero().slides.length > 1) {
+        <div class="hero-nav-arrows">
+          <button class="hero-nav-arrow" (click)="prevHeroSlide()" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Slide anterior' : 'Previous slide'">
+            <span class="material-symbols-outlined">arrow_back</span>
+          </button>
+          <button class="hero-nav-arrow" (click)="nextHeroSlide()" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Siguiente slide' : 'Next slide'">
+            <span class="material-symbols-outlined">arrow_forward</span>
+          </button>
+        </div>
+      }
+
+      <div class="hero-gradient"></div>
+
+      <!-- Slides layer -->
+      @for (slide of hero().slides; track $index) {
+        <div class="hero-columns"
+          [style.opacity]="activeSlide() === $index ? '1' : '0'"
+          [style.position]="activeSlide() === $index ? 'relative' : 'absolute'"
+          [style.pointer-events]="activeSlide() === $index ? 'auto' : 'none'"
+          [style.inset]="activeSlide() !== $index ? '0' : null"
+          [style.z-index]="activeSlide() === $index ? '1' : '0'">
+          <!-- LEFT COLUMN -->
+          <div class="hero-left">
+            <div class="hero-title-box">
+              <!-- Pill tagline -->
+              <div class="hero-tagline">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                <span>{{ i18n.t(slide.tag) }}</span>
+              </div>
+              <!-- Heading + paragraph + CTA -->
+              <div class="hero-text-group">
+                <h1 class="hero-heading">{{ i18n.t(slide.headline) }}</h1>
+                @if (slide.subtitle) {
+                  <p class="hero-para">{{ i18n.t(slide.subtitle) }}</p>
                 }
               </div>
-              <div class="hero-card__body">
-                @if (slide.product.brand) {
-                  <span class="hero-card__brand-label">{{ slide.product.brand.name }}</span>
+              @if (isExternalLink(slide.ctaLink)) {
+                <a [href]="slide.ctaLink" target="_blank" rel="noopener noreferrer" class="hero-cta">
+                  <span>{{ i18n.t(slide.ctaText) }}</span>
+                  <span class="material-symbols-outlined" style="font-size:16px">arrow_forward</span>
+                </a>
+              } @else {
+                <a [routerLink]="slide.ctaLink" class="hero-cta">
+                  <span>{{ i18n.t(slide.ctaText) }}</span>
+                  <span class="material-symbols-outlined" style="font-size:16px">arrow_forward</span>
+                </a>
+              }
+            </div>
+            <!-- Glass stats card — included per slide for CSS layout compatibility -->
+            <div class="hero-stats-card frosted-white">
+              <div class="hero-stats-card__numbers">
+                <h2 class="hero-stats-card__count">37+</h2>
+                <p class="hero-stats-card__text">{{ i18n.currentLang() === 'es' ? 'Anos distribuyendo salud animal en Costa Rica' : 'Years distributing animal health in Costa Rica' }}</p>
+              </div>
+              <div class="hero-stats-card__badges">
+                <span class="hero-stats-card__badge frosted-white">{{ i18n.currentLang() === 'es' ? '100% Cobertura' : '100% Coverage' }}</span>
+                <span class="hero-stats-card__badge frosted-white">{{ i18n.currentLang() === 'es' ? '50+ Colaboradores' : '50+ Collaborators' }}</span>
+                <span class="hero-stats-card__badge frosted-white">{{ i18n.currentLang() === 'es' ? 'Flotilla propia' : 'Own fleet' }}</span>
+              </div>
+            </div>
+          </div>
+          <!-- RIGHT COLUMN -->
+          <div class="hero-right">
+            <!-- Tag pills (show current language's tags) -->
+            @if ((i18n.currentLang() === 'es' ? slide.tagsEs : slide.tagsEn)?.length) {
+              <div class="hero-tags">
+                @for (tag of (i18n.currentLang() === 'es' ? slide.tagsEs : slide.tagsEn); track $index) {
+                  <span class="hero-tag-pill frosted-white">{{ tag }}</span>
                 }
-                <h4 class="hero-card__name">{{ i18n.t(slide.product.name) }}</h4>
-                <div class="hero-card__footer">
-                  <span class="hero-card__detail"><span class="material-symbols-outlined">diagnosis</span></span>
-                  <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo' : 'catalog') + '/' + i18n.t(slide.product.slug)" class="hero-card__go-btn" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Ver producto' : 'View product'">
-                    <span class="material-symbols-outlined">arrow_circle_right</span>
-                  </a>
+              </div>
+            }
+            <!-- Product card (only if product is a populated object) -->
+            @if (isProductObject(slide.product)) {
+              <div class="hero-card">
+                <div class="hero-card__img-wrap">
+                  @if (slide.product.images && slide.product.images.length > 0) {
+                    <img [src]="slide.product.images[0]" [alt]="i18n.t(slide.product.name)" loading="lazy" class="hero-card__img" />
+                  } @else {
+                    <div class="hero-card__img-placeholder"></div>
+                  }
+                  @if (slide.product.category) {
+                    <span class="hero-card__category-badge">{{ slide.product.category === 'farmacos' ? (i18n.currentLang() === 'es' ? 'Farmacos' : 'Pharmaceuticals') : slide.product.category === 'alimentos' ? (i18n.currentLang() === 'es' ? 'Alimentos' : 'Food') : (i18n.currentLang() === 'es' ? 'Equipos' : 'Equipment') }}</span>
+                  }
+                </div>
+                <div class="hero-card__body">
+                  @if (slide.product.brand) {
+                    <span class="hero-card__brand-label">{{ slide.product.brand.name }}</span>
+                  }
+                  <h4 class="hero-card__name">{{ i18n.t(slide.product.name) }}</h4>
+                  <div class="hero-card__footer">
+                    <span class="hero-card__detail"><span class="material-symbols-outlined">diagnosis</span></span>
+                    <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo' : 'catalog') + '/' + i18n.t(slide.product.slug)" class="hero-card__go-btn" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Ver producto' : 'View product'">
+                      <span class="material-symbols-outlined">arrow_circle_right</span>
+                    </a>
+                  </div>
                 </div>
               </div>
-            </div>
-          }
+            }
+          </div>
         </div>
-      </div>
-    }
+      }
 
-  </div>
+    </div>
+  }
 </section>
 
 <!-- BRAND LOGOS MARQUEE -->

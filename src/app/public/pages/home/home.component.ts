@@ -42,13 +42,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   hero = signal<{ mode: 'single' | 'carousel'; slides: ApiHeroSlide[] }>({
     mode: 'single' as const,
-    slides: [{
-      tag: { es: 'DESDE 1987', en: 'SINCE 1987' },
-      headline: { es: 'Conectamos la industria veterinaria con las mejores marcas del mundo', en: 'Connecting the veterinary industry with the world\'s best brands' },
-      subtitle: { es: 'Importacion y distribucion de farmacos veterinarios, alimentos para animales y equipos veterinarios en Costa Rica', en: 'Import and distribution of veterinary pharmaceuticals, animal food, and veterinary equipment in Costa Rica' },
-      ctaText: { es: 'Explorar catalogo', en: 'Explore catalog' },
-      ctaLink: '/es/catalogo',
-    }]
+    slides: []
   });
 
   activeSlide = signal(0);
@@ -57,6 +51,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   currentSlideData = computed(() => {
     const slides = this.hero().slides;
+    if (!slides || slides.length === 0) return null;
     const idx = this.activeSlide();
     return slides[idx] ?? slides[0];
   });

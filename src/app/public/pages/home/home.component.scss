@@ -59,6 +59,42 @@
   @media (max-width: 767px) {
     border-radius: 20px;
   }
+
+  &--skeleton {
+    min-height: 85vh;
+
+    @media (max-width: 991px) {
+      min-height: 400px;
+    }
+  }
+}
+
+// ---- Hero skeleton ----
+.hero-skeleton {
+  display: flex;
+  align-items: flex-end;
+  padding: 50px 40px 40px;
+  min-height: 85vh;
+
+  @media (max-width: 991px) {
+    min-height: 400px;
+    padding: 40px 24px 32px;
+  }
+
+  &__left {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .skeleton {
+    background: rgba(255, 255, 255, 0.12);
+    animation: skeleton-pulse 1.5s ease-in-out infinite;
+  }
+}
+
+@keyframes skeleton-pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
 }
 
 .hero-gradient {
@@ -67,6 +103,63 @@
   background: linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.4) 100%);
   border-radius: inherit;
   pointer-events: none;
+}
+
+// =============================================================================
+// HERO CAROUSEL NAV ARROWS — right side, vertically centered, stacked
+// =============================================================================
+.hero-nav-arrows {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 10;
+
+  @media (max-width: 767px) {
+    right: 12px;
+    gap: 8px;
+  }
+}
+
+.hero-nav-arrow {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: white;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #000000;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  .material-symbols-outlined {
+    font-size: 22px;
+  }
+
+  &:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--brand-primary);
+    outline-offset: 2px;
+  }
+
+  @media (max-width: 767px) {
+    width: 40px;
+    height: 40px;
+
+    .material-symbols-outlined {
+      font-size: 20px;
+    }
+  }
 }
 
 .hero-columns {
@@ -284,7 +377,12 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  max-width: 200px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  @media (max-width: 991px) {
+    max-width: 200px;
+  }
 
   &:hover {
     transform: translateY(-6px);
@@ -304,6 +402,12 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+
+  &__img-placeholder {
+    width: 100%;
+    height: 100%;
+    background-color: #e8e8e6;
   }
 
   // Category badge — top-right, pill left / flat right
