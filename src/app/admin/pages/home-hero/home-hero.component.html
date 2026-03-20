@@ -29,7 +29,6 @@
     <div class="hero-editor__mode-selector">
       <div class="hero-editor__mode-option"
         [class.hero-editor__mode-option--viewing]="viewingMode() === 'single'"
-        [class.hero-editor__mode-option--active]="heroMode() === 'single'"
         (click)="viewMode('single')">
         <div class="hero-editor__mode-option-header">
           <div class="hero-editor__mode-option-info">
@@ -53,7 +52,6 @@
 
       <div class="hero-editor__mode-option"
         [class.hero-editor__mode-option--viewing]="viewingMode() === 'carousel'"
-        [class.hero-editor__mode-option--active]="heroMode() === 'carousel'"
         (click)="viewMode('carousel')">
         <div class="hero-editor__mode-option-header">
           <div class="hero-editor__mode-option-info">

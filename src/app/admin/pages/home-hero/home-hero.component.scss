@@ -43,10 +43,6 @@
     }
 
     &--viewing {
-      border-color: var(--adm-text-muted);
-    }
-
-    &--active {
       border-color: var(--adm-primary);
       box-shadow: 0 0 0 1px var(--adm-primary);
 
