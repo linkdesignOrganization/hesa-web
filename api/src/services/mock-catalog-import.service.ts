@@ -410,6 +410,30 @@ function buildMeta(nameEs: string, brandName: string, category: CategoryKey) {
   };
 }
 
+async function pause(ms: number): Promise<void> {
+  await new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function insertInChunks<T extends object>(
+  model: { insertMany: (docs: T[], options?: { ordered?: boolean }) => Promise<any[]> },
+  docs: T[],
+  chunkSize: number
+): Promise<any[]> {
+  const inserted: any[] = [];
+
+  for (let index = 0; index < docs.length; index += chunkSize) {
+    const chunk = docs.slice(index, index + chunkSize);
+    const result = await model.insertMany(chunk, { ordered: true });
+    inserted.push(...result);
+
+    if (index + chunkSize < docs.length) {
+      await pause(150);
+    }
+  }
+
+  return inserted;
+}
+
 function ensureUniqueSlugs(
   usedSlugs: Set<string>,
   base: { es: string; en: string }
@@ -467,7 +491,7 @@ async function buildFoodAssets(publicDir: string): Promise<AssetRecord[]> {
   const markdownEntries = await parseCatalogMarkdown(path.join(baseDir, 'catalogo-productos.md'));
   const files = await walkImageAssets(baseDir);
 
-  return files.map(absolutePath => {
+  const rawAssets = files.map(absolutePath => {
     const relativePath = path.relative(publicDir, absolutePath);
     const fileName = path.basename(absolutePath);
     const folderName = path.basename(path.dirname(absolutePath));
@@ -477,6 +501,15 @@ async function buildFoodAssets(publicDir: string): Promise<AssetRecord[]> {
       folderName,
       info: markdownEntries.get(fileName),
     };
+  });
+
+  const seen = new Set<string>();
+  return rawAssets.filter(asset => {
+    const productName = asset.info?.productName || path.basename(asset.fileName, path.extname(asset.fileName));
+    const dedupeKey = `${normalizeKey(asset.folderName || '')}::${normalizeKey(productName)}`;
+    if (seen.has(dedupeKey)) return false;
+    seen.add(dedupeKey);
+    return true;
   });
 }
 
@@ -523,7 +556,8 @@ export async function importMockCatalog(): Promise<MockCatalogImportSummary> {
   await Product.deleteMany({});
   await Brand.deleteMany({});
 
-  const insertedBrands = await Brand.insertMany(
+  const insertedBrands = await insertInChunks(
+    Brand,
     brandDocs.map(brand => ({
       slug: brand.slug,
       name: brand.name,
@@ -533,14 +567,15 @@ export async function importMockCatalog(): Promise<MockCatalogImportSummary> {
       logo: brand.logo,
       isFeatured: featuredBrandOrder.has(brand.name),
       featuredOrder: featuredBrandOrder.get(brand.name),
-    }))
+    })),
+    10
   );
 
   const brandMap = new Map(insertedBrands.map(brand => [brand.name, brand]));
   const usedSlugs = new Set<string>();
   const importedProducts: ImportedProductRecord[] = [];
 
-  const foods = await Product.insertMany(foodAssets.map((asset, index) => {
+  const foods = await insertInChunks(Product, foodAssets.map((asset, index) => {
     const folderName = asset.folderName || '';
     const [speciesFolderRaw, brandNameRaw] = folderName.split(' - ').map(part => part.trim());
     const speciesKey = normalizeKey(speciesFolderRaw);
@@ -573,11 +608,11 @@ export async function importMockCatalog(): Promise<MockCatalogImportSummary> {
       hasEnTranslation: true,
       createdAt: new Date(Date.now() + index),
     };
-  }));
+  }), 20);
   importedProducts.push(...foods.map(product => ({ _id: String(product._id), category: 'alimentos' as const, nameEs: product.name.es })));
 
   const pharmaBrands = PHARMA_BRANDS.map(brand => brandMap.get(brand.name)).filter(Boolean);
-  const farmacos = await Product.insertMany(pharmaAssets.map((asset, index) => {
+  const farmacos = await insertInChunks(Product, pharmaAssets.map((asset, index) => {
     const brand = pharmaBrands[index % pharmaBrands.length]!;
     const nameEs = asset.info?.productName || path.basename(asset.fileName, path.extname(asset.fileName));
     const nameEn = nameEs;
@@ -606,11 +641,11 @@ export async function importMockCatalog(): Promise<MockCatalogImportSummary> {
       hasEnTranslation: true,
       createdAt: new Date(Date.now() + 200 + index),
     };
-  }));
+  }), 20);
   importedProducts.push(...farmacos.map(product => ({ _id: String(product._id), category: 'farmacos' as const, nameEs: product.name.es })));
 
   const equipmentBrands = EQUIPMENT_BRANDS.map(brand => brandMap.get(brand.name)).filter(Boolean);
-  const equipos = await Product.insertMany(equipmentAssets.map((asset, index) => {
+  const equipos = await insertInChunks(Product, equipmentAssets.map((asset, index) => {
     const brand = equipmentBrands[index % equipmentBrands.length]!;
     const nameEs = asset.info?.productName || path.basename(asset.fileName, path.extname(asset.fileName));
     const nameEn = nameEs;
@@ -638,7 +673,7 @@ export async function importMockCatalog(): Promise<MockCatalogImportSummary> {
       hasEnTranslation: true,
       createdAt: new Date(Date.now() + 400 + index),
     };
-  }));
+  }), 20);
   importedProducts.push(...equipos.map(product => ({ _id: String(product._id), category: 'equipos' as const, nameEs: product.name.es })));
 
   await Category.findOneAndUpdate(
