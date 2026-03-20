@@ -72,39 +72,54 @@
   <nav class="header__row-nav">
     <ul class="header__nav-list">
       <li (mouseenter)="openMega('farmacos')" (mouseleave)="closeMega()">
-        <a
-          [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/farmacos' : 'catalog/pharmaceuticals')"
-          routerLinkActive="header__nav-link--active"
+        <button
+          type="button"
           class="header__nav-link"
+          (click)="openMega('farmacos')"
+          [attr.aria-expanded]="activeMega() === 'farmacos'"
           [class.header__nav-link--mega-active]="activeMega() === 'farmacos'">
-          <span>{{ i18n.currentLang() === 'es' ? 'Fármacos' : 'Pharmaceuticals' }}</span>
-        </a>
+          <span class="header__nav-label">
+            <span class="material-symbols-outlined header__nav-icon" aria-hidden="true">{{ categoryIcons.farmacos }}</span>
+            <span>{{ i18n.currentLang() === 'es' ? 'Fármacos' : 'Pharmaceuticals' }}</span>
+          </span>
+        </button>
       </li>
       <li (mouseenter)="openMega('alimentos')" (mouseleave)="closeMega()">
-        <a
-          [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/alimentos' : 'catalog/food')"
-          routerLinkActive="header__nav-link--active"
+        <button
+          type="button"
           class="header__nav-link"
+          (click)="openMega('alimentos')"
+          [attr.aria-expanded]="activeMega() === 'alimentos'"
           [class.header__nav-link--mega-active]="activeMega() === 'alimentos'">
-          <span>{{ i18n.currentLang() === 'es' ? 'Alimentos' : 'Food' }}</span>
-        </a>
+          <span class="header__nav-label">
+            <span class="material-symbols-outlined header__nav-icon" aria-hidden="true">{{ categoryIcons.alimentos }}</span>
+            <span>{{ i18n.currentLang() === 'es' ? 'Alimentos' : 'Food' }}</span>
+          </span>
+        </button>
       </li>
       <li (mouseenter)="openMega('equipos')" (mouseleave)="closeMega()">
-        <a
-          [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/equipos' : 'catalog/equipment')"
-          routerLinkActive="header__nav-link--active"
+        <button
+          type="button"
           class="header__nav-link"
+          (click)="openMega('equipos')"
+          [attr.aria-expanded]="activeMega() === 'equipos'"
           [class.header__nav-link--mega-active]="activeMega() === 'equipos'">
-          <span>{{ i18n.currentLang() === 'es' ? 'Equipos' : 'Equipment' }}</span>
-        </a>
+          <span class="header__nav-label">
+            <span class="material-symbols-outlined header__nav-icon" aria-hidden="true">{{ categoryIcons.equipos }}</span>
+            <span>{{ i18n.currentLang() === 'es' ? 'Equipos' : 'Equipment' }}</span>
+          </span>
+        </button>
       </li>
       <li>
         <a
           [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo' : 'catalog')"
           routerLinkActive="header__nav-link--active"
           [routerLinkActiveOptions]="{ exact: true }"
-          class="header__nav-link">
-          <span>{{ i18n.currentLang() === 'es' ? 'Ver todos' : 'Shop All' }}</span>
+          class="header__nav-link header__nav-link--all">
+          <span class="header__nav-label">
+            <span>{{ i18n.currentLang() === 'es' ? 'Ver todos' : 'Shop All' }}</span>
+            <span class="material-symbols-outlined header__nav-hover-icon" aria-hidden="true">arrow_circle_right</span>
+          </span>
         </a>
       </li>
     </ul>
@@ -112,30 +127,56 @@
     <!-- Mega Menu: Fármacos -->
     <div class="mega" [class.mega--open]="activeMega() === 'farmacos'" (mouseenter)="keepMegaOpen()" (mouseleave)="closeMega()">
       <div class="mega__inner">
-        <div class="mega__links">
-          <span class="mega__heading">{{ i18n.currentLang() === 'es' ? 'Por especie' : 'By species' }}</span>
-          <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/farmacos' : 'catalog/pharmaceuticals')" [queryParams]="{species: 'Caninos'}" class="mega__link" (click)="activeMega.set(null)">{{ i18n.currentLang() === 'es' ? 'Caninos' : 'Canine' }}</a>
-          <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/farmacos' : 'catalog/pharmaceuticals')" [queryParams]="{species: 'Felinos'}" class="mega__link" (click)="activeMega.set(null)">{{ i18n.currentLang() === 'es' ? 'Felinos' : 'Feline' }}</a>
-          <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/farmacos' : 'catalog/pharmaceuticals')" [queryParams]="{species: 'Bovinos'}" class="mega__link" (click)="activeMega.set(null)">{{ i18n.currentLang() === 'es' ? 'Bovinos' : 'Bovine' }}</a>
-          <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/farmacos' : 'catalog/pharmaceuticals')" [queryParams]="{species: 'Equinos'}" class="mega__link" (click)="activeMega.set(null)">{{ i18n.currentLang() === 'es' ? 'Equinos' : 'Equine' }}</a>
-          <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/farmacos' : 'catalog/pharmaceuticals')" class="mega__view-all" (click)="activeMega.set(null)">
-            {{ i18n.currentLang() === 'es' ? 'Ver todos los fármacos' : 'Shop All Pharmaceuticals' }}
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-          </a>
+        <div class="mega__content">
+          <div class="mega__filters">
+            <div class="mega__links">
+              <span class="mega__heading">{{ i18n.currentLang() === 'es' ? 'Por especie' : 'By species' }}</span>
+              <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/farmacos' : 'catalog/pharmaceuticals')" [queryParams]="{species: 'Caninos'}" class="mega__link" (click)="activeMega.set(null)">{{ i18n.currentLang() === 'es' ? 'Caninos' : 'Canine' }}</a>
+              <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/farmacos' : 'catalog/pharmaceuticals')" [queryParams]="{species: 'Felinos'}" class="mega__link" (click)="activeMega.set(null)">{{ i18n.currentLang() === 'es' ? 'Felinos' : 'Feline' }}</a>
+              <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/farmacos' : 'catalog/pharmaceuticals')" [queryParams]="{species: 'Bovinos'}" class="mega__link" (click)="activeMega.set(null)">{{ i18n.currentLang() === 'es' ? 'Bovinos' : 'Bovine' }}</a>
+              <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/farmacos' : 'catalog/pharmaceuticals')" [queryParams]="{species: 'Equinos'}" class="mega__link" (click)="activeMega.set(null)">{{ i18n.currentLang() === 'es' ? 'Equinos' : 'Equine' }}</a>
+            </div>
+            <div class="mega__links mega__links--brands">
+              <span class="mega__heading">{{ i18n.currentLang() === 'es' ? 'Por marca' : 'By brand' }}</span>
+              @for (brand of megaBrandLinks.farmacos; track brand.slug) {
+                <a [routerLink]="getBrandRoute(brand.slug)" class="mega__link" (click)="activeMega.set(null)">{{ brand.name }}</a>
+              }
+            </div>
+          </div>
+          <div class="mega__action">
+            <a [routerLink]="getCategoryRoute('farmacos')" class="mega__view-all" (click)="activeMega.set(null)">
+              {{ i18n.currentLang() === 'es' ? 'Ver todos los fármacos' : 'Shop All Pharmaceuticals' }}
+              <span class="material-symbols-outlined" aria-hidden="true">arrow_circle_right</span>
+            </a>
+          </div>
         </div>
         <div class="mega__promos">
-          <div class="mega__promo-card">
-            <img src="https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?w=400&q=80" alt="" loading="lazy" />
-            <div class="mega__promo-overlay">
-              <span class="mega__promo-title">{{ i18n.currentLang() === 'es' ? 'Salud animal' : 'Animal health' }}</span>
-            </div>
-          </div>
-          <div class="mega__promo-card">
-            <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&q=80" alt="" loading="lazy" />
-            <div class="mega__promo-overlay">
-              <span class="mega__promo-title">{{ i18n.currentLang() === 'es' ? 'Cuidado veterinario' : 'Veterinary care' }}</span>
-            </div>
-          </div>
+          @for (card of megaFeaturedProducts.farmacos; track card.name.es) {
+            <a [routerLink]="getCategoryRoute(card.category)" class="mega-card" [attr.data-category]="card.category" (click)="activeMega.set(null)">
+              <div class="mega-card__media" [attr.data-category]="card.category">
+                <span class="mega-card__category">{{ i18n.currentLang() === 'es' ? 'Destacado' : 'Featured' }}</span>
+                @if (card.brandLogo) {
+                  <div class="mega-card__brand-logo-wrap">
+                    <img [src]="card.brandLogo" [alt]="card.brand" class="mega-card__brand-logo" loading="lazy">
+                  </div>
+                }
+                <img [src]="card.image" [alt]="t(card.name)" class="mega-card__image" loading="lazy">
+              </div>
+              <div class="mega-card__body">
+                <div class="mega-card__brand">{{ card.brand }}</div>
+                <h3 class="mega-card__name">{{ t(card.name) }}</h3>
+                <div class="mega-card__meta">
+                  @for (meta of card.meta; track meta.es) {
+                    <span class="mega-card__meta-pill">{{ t(meta) }}</span>
+                  }
+                </div>
+                <div class="mega-card__footer">
+                  <span class="mega-card__cta">{{ i18n.currentLang() === 'es' ? 'Ver Producto' : 'View Product' }}</span>
+                  <span class="mega-card__arrow material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+                </div>
+              </div>
+            </a>
+          }
         </div>
       </div>
     </div>
@@ -143,29 +184,55 @@
     <!-- Mega Menu: Alimentos -->
     <div class="mega" [class.mega--open]="activeMega() === 'alimentos'" (mouseenter)="keepMegaOpen()" (mouseleave)="closeMega()">
       <div class="mega__inner">
-        <div class="mega__links">
-          <span class="mega__heading">{{ i18n.currentLang() === 'es' ? 'Por especie' : 'By species' }}</span>
-          <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/alimentos' : 'catalog/food')" [queryParams]="{species: 'Perros'}" class="mega__link" (click)="activeMega.set(null)">{{ i18n.currentLang() === 'es' ? 'Perros' : 'Dogs' }}</a>
-          <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/alimentos' : 'catalog/food')" [queryParams]="{species: 'Gatos'}" class="mega__link" (click)="activeMega.set(null)">{{ i18n.currentLang() === 'es' ? 'Gatos' : 'Cats' }}</a>
-          <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/alimentos' : 'catalog/food')" [queryParams]="{species: 'Aves'}" class="mega__link" (click)="activeMega.set(null)">{{ i18n.currentLang() === 'es' ? 'Aves' : 'Birds' }}</a>
-          <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/alimentos' : 'catalog/food')" class="mega__view-all" (click)="activeMega.set(null)">
-            {{ i18n.currentLang() === 'es' ? 'Ver todos los alimentos' : 'Shop All Food' }}
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-          </a>
+        <div class="mega__content">
+          <div class="mega__filters">
+            <div class="mega__links">
+              <span class="mega__heading">{{ i18n.currentLang() === 'es' ? 'Por especie' : 'By species' }}</span>
+              <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/alimentos' : 'catalog/food')" [queryParams]="{species: 'Perros'}" class="mega__link" (click)="activeMega.set(null)">{{ i18n.currentLang() === 'es' ? 'Perros' : 'Dogs' }}</a>
+              <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/alimentos' : 'catalog/food')" [queryParams]="{species: 'Gatos'}" class="mega__link" (click)="activeMega.set(null)">{{ i18n.currentLang() === 'es' ? 'Gatos' : 'Cats' }}</a>
+              <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/alimentos' : 'catalog/food')" [queryParams]="{species: 'Aves'}" class="mega__link" (click)="activeMega.set(null)">{{ i18n.currentLang() === 'es' ? 'Aves' : 'Birds' }}</a>
+            </div>
+            <div class="mega__links mega__links--brands">
+              <span class="mega__heading">{{ i18n.currentLang() === 'es' ? 'Por marca' : 'By brand' }}</span>
+              @for (brand of megaBrandLinks.alimentos; track brand.slug) {
+                <a [routerLink]="getBrandRoute(brand.slug)" class="mega__link" (click)="activeMega.set(null)">{{ brand.name }}</a>
+              }
+            </div>
+          </div>
+          <div class="mega__action">
+            <a [routerLink]="getCategoryRoute('alimentos')" class="mega__view-all" (click)="activeMega.set(null)">
+              {{ i18n.currentLang() === 'es' ? 'Ver todos los alimentos' : 'Shop All Food' }}
+              <span class="material-symbols-outlined" aria-hidden="true">arrow_circle_right</span>
+            </a>
+          </div>
         </div>
         <div class="mega__promos">
-          <div class="mega__promo-card">
-            <img src="https://images.unsplash.com/photo-1450778869180-e1e2e3d1e7a0?w=400&q=80" alt="" loading="lazy" />
-            <div class="mega__promo-overlay">
-              <span class="mega__promo-title">{{ i18n.currentLang() === 'es' ? 'Nutrición premium' : 'Premium nutrition' }}</span>
-            </div>
-          </div>
-          <div class="mega__promo-card">
-            <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=400&q=80" alt="" loading="lazy" />
-            <div class="mega__promo-overlay">
-              <span class="mega__promo-title">{{ i18n.currentLang() === 'es' ? 'Para toda mascota' : 'For every pet' }}</span>
-            </div>
-          </div>
+          @for (card of megaFeaturedProducts.alimentos; track card.name.es) {
+            <a [routerLink]="getCategoryRoute(card.category)" class="mega-card" [attr.data-category]="card.category" (click)="activeMega.set(null)">
+              <div class="mega-card__media" [attr.data-category]="card.category">
+                <span class="mega-card__category">{{ i18n.currentLang() === 'es' ? 'Destacado' : 'Featured' }}</span>
+                @if (card.brandLogo) {
+                  <div class="mega-card__brand-logo-wrap">
+                    <img [src]="card.brandLogo" [alt]="card.brand" class="mega-card__brand-logo" loading="lazy">
+                  </div>
+                }
+                <img [src]="card.image" [alt]="t(card.name)" class="mega-card__image" loading="lazy">
+              </div>
+              <div class="mega-card__body">
+                <div class="mega-card__brand">{{ card.brand }}</div>
+                <h3 class="mega-card__name">{{ t(card.name) }}</h3>
+                <div class="mega-card__meta">
+                  @for (meta of card.meta; track meta.es) {
+                    <span class="mega-card__meta-pill">{{ t(meta) }}</span>
+                  }
+                </div>
+                <div class="mega-card__footer">
+                  <span class="mega-card__cta">{{ i18n.currentLang() === 'es' ? 'Ver Producto' : 'View Product' }}</span>
+                  <span class="mega-card__arrow material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+                </div>
+              </div>
+            </a>
+          }
         </div>
       </div>
     </div>
@@ -173,29 +240,55 @@
     <!-- Mega Menu: Equipos -->
     <div class="mega" [class.mega--open]="activeMega() === 'equipos'" (mouseenter)="keepMegaOpen()" (mouseleave)="closeMega()">
       <div class="mega__inner">
-        <div class="mega__links">
-          <span class="mega__heading">{{ i18n.currentLang() === 'es' ? 'Por tipo' : 'By type' }}</span>
-          <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/equipos' : 'catalog/equipment')" [queryParams]="{equipmentType: 'Diagnóstico'}" class="mega__link" (click)="activeMega.set(null)">{{ i18n.currentLang() === 'es' ? 'Diagnóstico' : 'Diagnostic' }}</a>
-          <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/equipos' : 'catalog/equipment')" [queryParams]="{equipmentType: 'Cirugía'}" class="mega__link" (click)="activeMega.set(null)">{{ i18n.currentLang() === 'es' ? 'Cirugía' : 'Surgery' }}</a>
-          <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/equipos' : 'catalog/equipment')" [queryParams]="{equipmentType: 'Laboratorio'}" class="mega__link" (click)="activeMega.set(null)">{{ i18n.currentLang() === 'es' ? 'Laboratorio' : 'Laboratory' }}</a>
-          <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/equipos' : 'catalog/equipment')" class="mega__view-all" (click)="activeMega.set(null)">
-            {{ i18n.currentLang() === 'es' ? 'Ver todos los equipos' : 'Shop All Equipment' }}
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-          </a>
+        <div class="mega__content">
+          <div class="mega__filters">
+            <div class="mega__links">
+              <span class="mega__heading">{{ i18n.currentLang() === 'es' ? 'Por tipo' : 'By type' }}</span>
+              <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/equipos' : 'catalog/equipment')" [queryParams]="{equipmentType: 'Diagnóstico'}" class="mega__link" (click)="activeMega.set(null)">{{ i18n.currentLang() === 'es' ? 'Diagnóstico' : 'Diagnostic' }}</a>
+              <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/equipos' : 'catalog/equipment')" [queryParams]="{equipmentType: 'Cirugía'}" class="mega__link" (click)="activeMega.set(null)">{{ i18n.currentLang() === 'es' ? 'Cirugía' : 'Surgery' }}</a>
+              <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/equipos' : 'catalog/equipment')" [queryParams]="{equipmentType: 'Laboratorio'}" class="mega__link" (click)="activeMega.set(null)">{{ i18n.currentLang() === 'es' ? 'Laboratorio' : 'Laboratory' }}</a>
+            </div>
+            <div class="mega__links mega__links--brands">
+              <span class="mega__heading">{{ i18n.currentLang() === 'es' ? 'Por marca' : 'By brand' }}</span>
+              @for (brand of megaBrandLinks.equipos; track brand.slug) {
+                <a [routerLink]="getBrandRoute(brand.slug)" class="mega__link" (click)="activeMega.set(null)">{{ brand.name }}</a>
+              }
+            </div>
+          </div>
+          <div class="mega__action">
+            <a [routerLink]="getCategoryRoute('equipos')" class="mega__view-all" (click)="activeMega.set(null)">
+              {{ i18n.currentLang() === 'es' ? 'Ver todos los equipos' : 'Shop All Equipment' }}
+              <span class="material-symbols-outlined" aria-hidden="true">arrow_circle_right</span>
+            </a>
+          </div>
         </div>
         <div class="mega__promos">
-          <div class="mega__promo-card">
-            <img src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?w=400&q=80" alt="" loading="lazy" />
-            <div class="mega__promo-overlay">
-              <span class="mega__promo-title">{{ i18n.currentLang() === 'es' ? 'Equipamiento profesional' : 'Professional equipment' }}</span>
-            </div>
-          </div>
-          <div class="mega__promo-card">
-            <img src="https://images.unsplash.com/photo-1606567595334-d39972c85dbe?w=400&q=80" alt="" loading="lazy" />
-            <div class="mega__promo-overlay">
-              <span class="mega__promo-title">{{ i18n.currentLang() === 'es' ? 'Tecnología veterinaria' : 'Veterinary technology' }}</span>
-            </div>
-          </div>
+          @for (card of megaFeaturedProducts.equipos; track card.name.es) {
+            <a [routerLink]="getCategoryRoute(card.category)" class="mega-card" [attr.data-category]="card.category" (click)="activeMega.set(null)">
+              <div class="mega-card__media" [attr.data-category]="card.category">
+                <span class="mega-card__category">{{ i18n.currentLang() === 'es' ? 'Destacado' : 'Featured' }}</span>
+                @if (card.brandLogo) {
+                  <div class="mega-card__brand-logo-wrap">
+                    <img [src]="card.brandLogo" [alt]="card.brand" class="mega-card__brand-logo" loading="lazy">
+                  </div>
+                }
+                <img [src]="card.image" [alt]="t(card.name)" class="mega-card__image" loading="lazy">
+              </div>
+              <div class="mega-card__body">
+                <div class="mega-card__brand">{{ card.brand }}</div>
+                <h3 class="mega-card__name">{{ t(card.name) }}</h3>
+                <div class="mega-card__meta">
+                  @for (meta of card.meta; track meta.es) {
+                    <span class="mega-card__meta-pill">{{ t(meta) }}</span>
+                  }
+                </div>
+                <div class="mega-card__footer">
+                  <span class="mega-card__cta">{{ i18n.currentLang() === 'es' ? 'Ver Producto' : 'View Product' }}</span>
+                  <span class="mega-card__arrow material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+                </div>
+              </div>
+            </a>
+          }
         </div>
       </div>
     </div>
@@ -223,9 +316,9 @@
   </div>
 
   <nav class="mobile-menu__nav">
-    <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/farmacos' : 'catalog/pharmaceuticals')" class="mobile-menu__link" (click)="closeMobileMenu()">{{ i18n.currentLang() === 'es' ? 'Fármacos' : 'Pharmaceuticals' }}</a>
-    <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/alimentos' : 'catalog/food')" class="mobile-menu__link" (click)="closeMobileMenu()">{{ i18n.currentLang() === 'es' ? 'Alimentos' : 'Food' }}</a>
-    <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/equipos' : 'catalog/equipment')" class="mobile-menu__link" (click)="closeMobileMenu()">{{ i18n.currentLang() === 'es' ? 'Equipos' : 'Equipment' }}</a>
+    <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/farmacos' : 'catalog/pharmaceuticals')" class="mobile-menu__link" (click)="closeMobileMenu()"><span class="material-symbols-outlined mobile-menu__link-icon" aria-hidden="true">{{ categoryIcons.farmacos }}</span><span>{{ i18n.currentLang() === 'es' ? 'Fármacos' : 'Pharmaceuticals' }}</span></a>
+    <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/alimentos' : 'catalog/food')" class="mobile-menu__link" (click)="closeMobileMenu()"><span class="material-symbols-outlined mobile-menu__link-icon" aria-hidden="true">{{ categoryIcons.alimentos }}</span><span>{{ i18n.currentLang() === 'es' ? 'Alimentos' : 'Food' }}</span></a>
+    <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/equipos' : 'catalog/equipment')" class="mobile-menu__link" (click)="closeMobileMenu()"><span class="material-symbols-outlined mobile-menu__link-icon" aria-hidden="true">{{ categoryIcons.equipos }}</span><span>{{ i18n.currentLang() === 'es' ? 'Equipos' : 'Equipment' }}</span></a>
     <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo' : 'catalog')" class="mobile-menu__link" (click)="closeMobileMenu()">{{ i18n.currentLang() === 'es' ? 'Ver todos' : 'Shop All' }}</a>
     <div class="mobile-menu__divider"></div>
     <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'marcas' : 'brands')" class="mobile-menu__link mobile-menu__link--secondary" (click)="closeMobileMenu()">{{ i18n.currentLang() === 'es' ? 'Marcas' : 'Brands' }}</a>

@@ -155,7 +155,7 @@
         </div>
       </div>
       <div class="feature-card__footer">
-        <div class="feature-card__stat-badge">
+        <div class="feature-card__stat-badge feature-card__stat-badge--primary">
           <span class="material-symbols-outlined feature-card__stat-icon" aria-hidden="true">travel_explore</span>
         </div>
         <div class="feature-card__stat-content">
@@ -166,23 +166,20 @@
     </article>
 
     <article class="feature-card feature-card--video">
-      <video class="feature-card__video" autoplay muted loop playsinline preload="auto" aria-hidden="true" disablePictureInPicture>
-        <source src="/0_Cat_Turkish_1080x1920.mp4" type="video/mp4">
-      </video>
-      <div class="feature-card__video-overlay"></div>
+      <div class="feature-card__media" aria-hidden="true">
+        <video #featureVideoLayer class="feature-card__video" [class.feature-card__video--active]="activeFeatureVideoLayer() === 0" muted playsinline preload="auto" disablePictureInPicture></video>
+        <video #featureVideoLayer class="feature-card__video" [class.feature-card__video--active]="activeFeatureVideoLayer() === 1" muted playsinline preload="auto" disablePictureInPicture></video>
+      </div>
       <div class="feature-card__video-content">
-        <h3 class="visually-hidden">{{ i18n.currentLang() === 'es' ? 'Distribución que acompaña a su negocio' : 'Distribution that supports your business' }}</h3>
-        <div class="feature-card__headline-stack">
-          <span class="feature-card__headline-pill">{{ i18n.currentLang() === 'es' ? 'Distribución que' : 'Distribution that' }}</span>
-          <span class="feature-card__headline-pill">{{ i18n.currentLang() === 'es' ? 'acompaña' : 'supports' }}</span>
-          <span class="feature-card__headline-pill">{{ i18n.currentLang() === 'es' ? 'su negocio' : 'your business' }}</span>
-        </div>
+        <h3 class="feature-card__headline">
+          <span class="feature-card__headline-pill">{{ i18n.currentLang() === 'es' ? 'Distribución que acompaña su negocio' : 'Distribution that supports your business' }}</span>
+        </h3>
         <div class="feature-card__tags">
           <span class="feature-card__tag feature-card__tag--light">{{ i18n.currentLang() === 'es' ? 'Veterinarias' : 'Vet clinics' }}</span>
-          <span class="feature-card__tag feature-card__tag--muted">Pet shops</span>
-          <span class="feature-card__tag feature-card__tag--muted">{{ i18n.currentLang() === 'es' ? 'Agroservicios' : 'Agro stores' }}</span>
+          <span class="feature-card__tag feature-card__tag--glass frosted-white">Pet shops</span>
+          <span class="feature-card__tag feature-card__tag--glass frosted-white">{{ i18n.currentLang() === 'es' ? 'Agroservicios' : 'Agro stores' }}</span>
           <span class="feature-card__tag feature-card__tag--light">{{ i18n.currentLang() === 'es' ? 'Entrega directa' : 'Direct delivery' }}</span>
-          <span class="feature-card__tag feature-card__tag--muted">{{ i18n.currentLang() === 'es' ? 'Marcas exclusivas' : 'Exclusive brands' }}</span>
+          <span class="feature-card__tag feature-card__tag--glass frosted-white">{{ i18n.currentLang() === 'es' ? 'Marcas exclusivas' : 'Exclusive brands' }}</span>
         </div>
       </div>
     </article>
@@ -199,7 +196,7 @@
         </div>
       </div>
       <div class="feature-card__footer">
-        <div class="feature-card__stat-badge">
+        <div class="feature-card__stat-badge feature-card__stat-badge--secondary">
           <span class="material-symbols-outlined feature-card__stat-icon" aria-hidden="true">handshake</span>
         </div>
         <div class="feature-card__stat-content">
@@ -208,6 +205,139 @@
         </div>
       </div>
     </article>
+  </div>
+</section>
+
+<!-- SERVICE SPOTLIGHT -->
+<section class="service-spotlight fade-in-section">
+  <div class="service-spotlight__inner">
+    <div class="service-spotlight__content">
+      <h2 class="service-spotlight__headline">
+        <span class="service-spotlight__headline-main">
+          {{ i18n.currentLang() === 'es'
+            ? 'Cuente con un equipo que llega hasta su negocio y entiende las necesidades del sector,'
+            : 'Count on a team that reaches your business and understands the needs of the industry,' }}
+        </span>
+        <span class="service-spotlight__headline-accent">
+          {{ i18n.currentLang() === 'es'
+            ? ' para que usted se enfoque en lo que mejor hace.'
+            : ' so you can focus on what you do best.' }}
+        </span>
+      </h2>
+    </div>
+
+    <div class="service-spotlight__pills">
+      <a
+        [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/farmacos' : 'catalog/pharmaceuticals')"
+        class="service-spotlight__pill frosted-white">
+        {{ i18n.currentLang() === 'es' ? 'Farmacos' : 'Pharmaceuticals' }}
+      </a>
+      <a
+        [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/alimentos' : 'catalog/food')"
+        class="service-spotlight__pill frosted-white">
+        {{ i18n.currentLang() === 'es' ? 'Alimentos' : 'Food' }}
+      </a>
+      <a
+        [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/equipos' : 'catalog/equipment')"
+        class="service-spotlight__pill frosted-white">
+        {{ i18n.currentLang() === 'es' ? 'Equipos' : 'Equipment' }}
+      </a>
+      <a
+        [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo' : 'catalog')"
+        class="service-spotlight__pill frosted-white">
+        {{ i18n.currentLang() === 'es' ? 'Ver todo' : 'Shop all' }}
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED SHOWCASE -->
+<section class="featured-showcase fade-in-section">
+  <div class="featured-showcase__shell">
+    <div class="featured-showcase__marquee" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Marcas destacadas de esta seleccion' : 'Featured brands in this selection'">
+      <div class="featured-showcase__marquee-track">
+        @for (group of showcaseMarqueeGroups; track group) {
+          <div class="featured-showcase__marquee-group" [attr.aria-hidden]="group === 1">
+            @for (logo of featuredShowcaseBrandLogos; track logo.name) {
+              <div class="featured-showcase__marquee-item">
+                <img [src]="logo.src" [alt]="logo.name" class="featured-showcase__marquee-logo" loading="lazy">
+              </div>
+            }
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="featured-showcase__intro">
+      <div class="featured-showcase__intro-copy">
+        <h2 class="featured-showcase__title">{{ i18n.currentLang() === 'es' ? 'Productos Destacados' : 'Featured Products' }}</h2>
+      </div>
+      <p class="featured-showcase__intro-text">{{ getLocalizedText(activeShowcaseTabData().description) }}</p>
+    </div>
+
+    <div class="featured-showcase__tabs-shell">
+      <div class="featured-showcase__tabs" role="tablist" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Categorias destacadas' : 'Featured categories'">
+        @for (tab of featuredShowcaseTabs; track tab.id) {
+          <button
+            type="button"
+            class="featured-showcase__tab"
+            [class.featured-showcase__tab--active]="activeShowcaseTab() === tab.id"
+            (click)="selectShowcaseTab(tab.id)"
+            role="tab"
+            [attr.aria-selected]="activeShowcaseTab() === tab.id">
+            <span class="material-symbols-outlined featured-showcase__tab-icon" aria-hidden="true">{{ tab.icon }}</span>
+            <span>{{ getLocalizedText(tab.label) }}</span>
+          </button>
+        }
+      </div>
+    </div>
+
+    <div class="featured-showcase__cards" [class.featured-showcase__cards--transitioning]="showcaseTransitioning()">
+      @for (item of activeShowcaseTabData().items; track item.name.es) {
+        <a
+          class="showcase-product-card"
+          [attr.data-category]="item.category"
+          [routerLink]="getLocalizedText(item.href)"
+          [attr.aria-label]="(i18n.currentLang() === 'es' ? 'Explorar ' : 'Explore ') + getLocalizedText(item.name)">
+          <div class="showcase-product-card__media" [attr.data-category]="item.category">
+            <span class="showcase-product-card__category">{{ getShowcaseCategoryLabel(item.category) }}</span>
+
+            @if (item.brandLogo) {
+              <div class="showcase-product-card__brand-logo-wrap">
+                <img [src]="item.brandLogo" [alt]="item.brand" class="showcase-product-card__brand-logo" loading="lazy">
+              </div>
+            }
+
+            <img [src]="item.image" [alt]="getLocalizedText(item.name)" class="showcase-product-card__image" loading="lazy">
+          </div>
+
+          <div class="showcase-product-card__body">
+            <div class="showcase-product-card__brand">{{ item.brand }}</div>
+            <h3 class="showcase-product-card__name">{{ getLocalizedText(item.name) }}</h3>
+
+            <div class="showcase-product-card__meta">
+              @for (meta of getShowcaseMeta(item); track meta.es) {
+                <span class="showcase-product-card__meta-pill">{{ getLocalizedText(meta) }}</span>
+              }
+            </div>
+
+            <div class="showcase-product-card__footer">
+              <span class="showcase-product-card__cta">{{ i18n.currentLang() === 'es' ? 'Ver Producto' : 'View Product' }}</span>
+              <span class="showcase-product-card__arrow" aria-hidden="true">
+                <span class="material-symbols-outlined">arrow_forward</span>
+              </span>
+            </div>
+          </div>
+        </a>
+      }
+    </div>
+
+    <div class="featured-showcase__footer">
+      <a [routerLink]="getLocalizedText(activeShowcaseTabData().link)" class="featured-showcase__footer-link">
+        {{ i18n.currentLang() === 'es' ? 'Ver todo el catalogo' : 'View full catalog' }}
+        <span class="material-symbols-outlined" aria-hidden="true">arrow_outward</span>
+      </a>
+    </div>
   </div>
 </section>
 

@@ -184,35 +184,73 @@
   }
 
   &__nav-link {
-    display: block;
-    padding: 14px 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 18px;
+    margin: 6px 10px;
+    border-radius: 999px;
+    border: none;
+    background: transparent;
+    appearance: none;
+    font-family: inherit;
     font-size: 15px;
     font-weight: var(--weight-bold);
     color: #000000;
     text-decoration: none;
     line-height: 1;
-    transition: color 0.15s ease;
-
-    span {
-      transition: text-decoration 0.1s ease;
-    }
+    cursor: pointer;
+    transition: background-color 0.18s ease, color 0.18s ease;
 
     &:hover {
-      span {
-        text-decoration: underline;
-        text-underline-offset: 0.3rem;
-        text-decoration-thickness: 1.5px;
-      }
+      background-color: var(--brand-primary-light);
+      color: var(--brand-primary-deep);
     }
 
     &--active,
     &--mega-active {
-      span {
-        text-decoration: underline;
-        text-underline-offset: 0.3rem;
-        text-decoration-thickness: 1.5px;
-      }
+      background-color: var(--brand-primary-light);
+      color: var(--brand-primary-deep);
     }
+  }
+
+  &__nav-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  &__nav-link--all &__nav-label {
+    gap: 0;
+  }
+
+  &__nav-icon {
+    font-size: 18px;
+    line-height: 1;
+    font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+  }
+
+  &__nav-hover-icon {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 0;
+    margin-left: 0;
+    opacity: 0;
+    overflow: hidden;
+    font-size: 18px;
+    line-height: 1;
+    transform: translateX(-4px) scale(0.94);
+    transition: width 0.18s ease, margin-left 0.18s ease, opacity 0.18s ease, transform 0.18s ease;
+  }
+
+  &__nav-link--all:hover &__nav-hover-icon,
+  &__nav-link--all.header__nav-link--active &__nav-hover-icon {
+    width: 18px;
+    margin-left: 6px;
+    opacity: 1;
+    transform: translateX(0) scale(1);
   }
 
   // ===========================================================================
@@ -290,10 +328,26 @@
 
   &__inner {
     display: flex;
+    align-items: flex-start;
     gap: 48px;
-    max-width: 960px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 36px 48px;
+  }
+
+  &__content {
+    flex: 0 0 430px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+  }
+
+  &__filters {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px;
+    align-items: start;
   }
 
   // Left column: filter links
@@ -302,6 +356,10 @@
     flex-direction: column;
     gap: 4px;
     min-width: 200px;
+
+    &--brands {
+      min-width: 180px;
+    }
   }
 
   &__heading {
@@ -330,70 +388,258 @@
   &__view-all {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    justify-content: center;
+    align-self: flex-start;
+    gap: 10px;
+    min-height: 54px;
+    padding: 0 22px;
+    border-radius: 999px;
+    background: rgba(0, 149, 218, 0.1);
     font-size: 16px;
     font-weight: var(--weight-bold);
-    color: #000000;
+    color: var(--brand-primary-deep);
     text-decoration: none;
-    margin-top: 20px;
-    padding: 8px 0;
+    white-space: nowrap;
+    transition: background-color 0.18s ease, color 0.18s ease, transform 0.18s ease;
 
     &:hover {
-      text-decoration: underline;
-      text-underline-offset: 4px;
-      text-decoration-thickness: 1.5px;
+      background: rgba(0, 149, 218, 0.16);
+      color: var(--brand-primary-deep);
+      transform: translateY(-1px);
 
-      svg {
+      .material-symbols-outlined {
         transform: translateX(3px);
       }
     }
 
-    svg {
+    .material-symbols-outlined {
+      font-size: 20px;
+      line-height: 1;
       transition: transform 0.2s ease;
     }
   }
 
+  &__action {
+    display: flex;
+    align-items: flex-start;
+  }
+
   // Right column: promo image cards
   &__promos {
-    display: flex;
-    gap: 16px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 240px));
+    gap: 18px;
     flex: 1;
     justify-content: flex-end;
   }
+}
 
-  &__promo-card {
-    position: relative;
-    width: 200px;
-    height: 240px;
-    border-radius: var(--radius-btn);
-    overflow: hidden;
-    flex-shrink: 0;
+.mega-card {
+  --mega-card-pad: 12px;
+  --mega-card-inner-radius: 20px;
+  min-width: 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: var(--mega-card-pad);
+  border-radius: 26px;
+  background:
+    radial-gradient(circle at top right, rgba(255, 255, 255, 0.7), transparent 38%),
+    linear-gradient(180deg, #eef7fc 0%, #ffffff 100%);
+  text-decoration: none;
+  box-shadow: 0 16px 30px rgba(15, 23, 42, 0.08);
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
 
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.4s ease;
-    }
-
-    &:hover img {
-      transform: scale(1.05);
-    }
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 34px rgba(15, 23, 42, 0.12);
+    color: inherit;
   }
 
-  &__promo-overlay {
+  &::before {
+    content: '';
     position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 16px;
-    background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.5) 100%);
+    inset: var(--mega-card-pad);
+    border-radius: var(--mega-card-inner-radius);
+    background: var(--neutral-white);
+    z-index: 0;
   }
 
-  &__promo-title {
-    font-size: 14px;
+  &[data-category='farmacos'] {
+    background:
+      radial-gradient(circle at top right, rgba(255, 255, 255, 0.74), transparent 38%),
+      linear-gradient(180deg, rgba(229, 244, 252, 0.98) 0%, rgba(255, 255, 255, 1) 100%);
+  }
+
+  &[data-category='alimentos'] {
+    background:
+      radial-gradient(circle at top right, rgba(255, 255, 255, 0.74), transparent 38%),
+      linear-gradient(180deg, rgba(241, 250, 236, 0.98) 0%, rgba(255, 255, 255, 1) 100%);
+  }
+
+  &[data-category='equipos'] {
+    background:
+      radial-gradient(circle at top right, rgba(255, 255, 255, 0.72), transparent 38%),
+      linear-gradient(180deg, rgba(240, 247, 246, 0.98) 0%, rgba(255, 255, 255, 1) 100%);
+  }
+
+  &__media {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1 / 1;
+    padding: 20px;
+    border-radius: var(--mega-card-inner-radius) var(--mega-card-inner-radius) 0 0;
+    overflow: hidden;
+    background: var(--neutral-white);
+  }
+
+  &__category {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 9px;
+    border-radius: 999px;
+    background: var(--brand-primary);
+    color: var(--neutral-white);
+    font-size: 10px;
     font-weight: var(--weight-semibold);
-    color: #ffffff;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  &__brand-logo-wrap {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 62px;
+    max-width: 108px;
+    min-height: 28px;
+    padding: 5px 10px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(14px);
+  }
+
+  &__brand-logo {
+    width: auto;
+    max-width: 100%;
+    max-height: 14px;
+    object-fit: contain;
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  &__body {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 10px;
+    padding: 14px 14px 6px;
+    color: var(--neutral-900);
+  }
+
+  &__brand {
+    font-size: 10px;
+    font-weight: var(--weight-semibold);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(15, 23, 42, 0.42);
+  }
+
+  &__name {
+    margin: 0;
+    font-size: 18px;
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+    font-weight: var(--weight-extrabold);
+    color: var(--neutral-900);
+  }
+
+  &__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  &__meta-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 0;
+    padding: 7px 9px;
+    border-radius: 999px;
+    font-size: 11px;
+    line-height: 1;
+    font-weight: var(--weight-medium);
+    background: rgba(15, 23, 42, 0.05);
+    color: rgba(15, 23, 42, 0.72);
+  }
+
+  &[data-category='farmacos'] &__meta-pill {
+    background: rgba(0, 141, 201, 0.1);
+    color: #0b6188;
+  }
+
+  &[data-category='alimentos'] &__meta-pill {
+    background: rgba(80, 185, 42, 0.12);
+    color: #397e1f;
+  }
+
+  &[data-category='equipos'] &__meta-pill {
+    background: rgba(15, 118, 110, 0.1);
+    color: #0f6b64;
+  }
+
+  &__footer {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding-top: 2px;
+  }
+
+  &__cta {
+    color: var(--neutral-900);
+    font-size: 12px;
+    font-weight: var(--weight-semibold);
+  }
+
+  &__arrow {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(15, 23, 42, 0.06);
+    color: var(--neutral-900);
+    font-size: 17px;
+    transition: transform 0.22s ease, background-color 0.22s ease, color 0.22s ease;
+  }
+
+  &:hover &__arrow {
+    transform: translateX(3px);
+    background: var(--brand-primary);
+    color: var(--neutral-white);
   }
 }
 
@@ -463,6 +709,9 @@
   }
 
   &__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
     font-size: 28px;
     font-weight: var(--weight-bold);
     color: var(--neutral-900);
@@ -486,6 +735,12 @@
         transition-delay: #{$i * 0.04}s;
       }
     }
+  }
+
+  &__link-icon {
+    font-size: 28px;
+    line-height: 1;
+    font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
   }
 
   &__divider {
