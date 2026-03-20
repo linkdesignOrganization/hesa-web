@@ -1,4 +1,5 @@
-import { Component, inject, signal, computed, OnInit, AfterViewInit, OnDestroy, ElementRef } from '@angular/core';
+import { Component, inject, signal, computed, OnInit, AfterViewInit, OnDestroy, ElementRef, ViewChild, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { CategoryBlockComponent } from '../../components/category-block/category-block.component';
 import { ProductCardComponent } from '../../components/product-card/product-card.component';
@@ -30,6 +31,16 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   private seo = inject(SeoService);
   private el = inject(ElementRef);
   private fadeObserver: IntersectionObserver | null = null;
+  private platformId = inject(PLATFORM_ID);
+
+  // Video auto-cycle for feature card
+  @ViewChild('featureVideo') featureVideoRef!: ElementRef<HTMLVideoElement>;
+  private videoSources = [
+    '0_Cat_Turkish_1080x1920.mp4',
+    '0_Portrait_Face_2160x3840.mp4',
+    '1517679_Hamster_Tiny_1080x1920.mp4',
+  ];
+  private currentVideoIndex = 0;
 
   featuredProducts = signal<ApiProduct[]>([]);
   featuredBrands = signal<ApiBrand[]>([]);
@@ -146,7 +157,22 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     if (typeof window === 'undefined') return;
     setTimeout(() => {
       this.fadeObserver = initFadeInObserver(this.el);
+      this.setupVideoCycle();
     }, 500);
+  }
+
+  private setupVideoCycle(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+    // Wait for video element to be available
+    setTimeout(() => {
+      const video = this.featureVideoRef?.nativeElement;
+      if (!video) return;
+      video.addEventListener('ended', () => {
+        this.currentVideoIndex = (this.currentVideoIndex + 1) % this.videoSources.length;
+        video.src = this.videoSources[this.currentVideoIndex];
+        video.play().catch(() => {});
+      });
+    }, 1000);
   }
 
   ngOnDestroy(): void {

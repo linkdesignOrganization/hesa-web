@@ -140,6 +140,59 @@
   </div>
 </section>
 
+<!-- FEATURE CARDS SECTION -->
+<section class="feature-cards-section">
+  <div class="feature-cards-section__inner">
+    <!-- Card 1: Cobertura nacional -->
+    <div class="feature-card feature-card--light">
+      <div class="feature-card__top">
+        <h3 class="feature-card__title">{{ i18n.currentLang() === 'es' ? 'Cobertura nacional' : 'National coverage' }}</h3>
+        <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'nosotros' : 'about')" class="feature-card__cta">{{ i18n.currentLang() === 'es' ? 'Explorar' : 'Explore' }}</a>
+      </div>
+      <div class="feature-card__divider"></div>
+      <p class="feature-card__text">{{ i18n.currentLang() === 'es' ? 'Agentes propios en todas las zonas del país, sin intermediarios.' : 'Own agents in every region of the country, no middlemen.' }}</p>
+      <div class="feature-card__stat">
+        <span class="material-symbols-outlined feature-card__stat-icon">location_on</span>
+        <div class="feature-card__stat-number">37</div>
+      </div>
+      <span class="feature-card__stat-label">{{ i18n.currentLang() === 'es' ? 'años' : 'years' }}</span>
+    </div>
+
+    <!-- Card 2: Distribución exclusiva (video bg) -->
+    <div class="feature-card feature-card--video">
+      <video #featureVideo class="feature-card__video" autoplay muted loop playsinline>
+        <source src="0_Cat_Turkish_1080x1920.mp4" type="video/mp4">
+      </video>
+      <div class="feature-card__video-overlay"></div>
+      <div class="feature-card__video-content">
+        <h3 class="feature-card__title feature-card__title--white">{{ i18n.currentLang() === 'es' ? 'Distribución exclusiva' : 'Exclusive distribution' }}</h3>
+        <div class="feature-card__tags">
+          <span class="feature-card__tag frosted-white">{{ i18n.currentLang() === 'es' ? 'Veterinarias' : 'Vet clinics' }}</span>
+          <span class="feature-card__tag frosted-white">Pet Shops</span>
+          <span class="feature-card__tag frosted-white">{{ i18n.currentLang() === 'es' ? 'Agroservicios' : 'Agro stores' }}</span>
+          <span class="feature-card__tag frosted-white">{{ i18n.currentLang() === 'es' ? 'Clínicas' : 'Clinics' }}</span>
+          <span class="feature-card__tag frosted-white">Groomers</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3: Clientes en todo el país -->
+    <div class="feature-card feature-card--light">
+      <div class="feature-card__top">
+        <h3 class="feature-card__title">{{ i18n.currentLang() === 'es' ? 'Clientes en todo el país' : 'Clients nationwide' }}</h3>
+        <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'contacto' : 'contact')" class="feature-card__cta">{{ i18n.currentLang() === 'es' ? 'Explorar' : 'Explore' }}</a>
+      </div>
+      <div class="feature-card__divider"></div>
+      <p class="feature-card__text">{{ i18n.currentLang() === 'es' ? 'Veterinarias, agroservicios y comercios confían en nosotros como su proveedor.' : 'Veterinary clinics, agro stores and businesses trust us as their supplier.' }}</p>
+      <div class="feature-card__stat">
+        <span class="material-symbols-outlined feature-card__stat-icon">groups</span>
+        <div class="feature-card__stat-number">500+</div>
+      </div>
+      <span class="feature-card__stat-label">{{ i18n.currentLang() === 'es' ? 'clientes activos' : 'active clients' }}</span>
+    </div>
+  </div>
+</section>
+
 <!-- BRAND LOGOS MARQUEE -->
 @if (!brandsLoading() && featuredBrands().length > 0) {
   <app-brand-logos-row />
