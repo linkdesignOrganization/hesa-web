@@ -106,20 +106,20 @@
 }
 
 // =============================================================================
-// HERO CAROUSEL NAV ARROWS — right side, vertically centered, stacked
+// HERO CAROUSEL NAV ARROWS — top-right corner, horizontal row
 // =============================================================================
 .hero-nav-arrows {
   position: absolute;
-  right: 20px;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 24px;
+  right: 24px;
   display: flex;
-  flex-direction: column;
-  gap: 12px;
+  flex-direction: row;
+  gap: 10px;
   z-index: 10;
 
   @media (max-width: 767px) {
-    right: 12px;
+    top: 16px;
+    right: 16px;
     gap: 8px;
   }
 }
@@ -163,6 +163,7 @@
 }
 
 .hero-columns {
+  transition: opacity 0.6s ease;
   position: relative;
   display: flex;
   justify-content: space-between;
@@ -354,8 +355,8 @@
 }
 
 .hero-tag-pill {
-  border-radius: 16px;
-  padding: 8px 16px;
+  border-radius: 30px;
+  padding: 6px 12px;
   color: white;
   font-size: 13px;
   font-weight: var(--weight-medium);
@@ -363,7 +364,7 @@
 
 // Product card wrapper
 .hero-cards {
-  width: 200px;
+  width: 250px;
   flex-shrink: 0;
 
   @media (max-width: 991px) {
@@ -377,11 +378,11 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  max-width: 200px;
+  max-width: 250px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 
   @media (max-width: 991px) {
-    max-width: 200px;
+    max-width: 250px;
   }
 
   &:hover {
