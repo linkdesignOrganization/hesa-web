@@ -1,5 +1,6 @@
 import { Router, Request, Response } from 'express';
 import * as homeService from '../../services/home.service';
+import { importMockCatalog } from '../../services/mock-catalog-import.service';
 
 const router = Router();
 
@@ -87,6 +88,20 @@ router.post('/seed-hero', async (_req: Request, res: Response) => {
   } catch (error) {
     console.error('Seed error:', error);
     res.status(500).json({ error: 'Seed failed' });
+  }
+});
+
+/**
+ * POST /api/public/home/import-mock-catalog
+ * TEMPORARY: Populate the production catalog with mock brands/products for testing.
+ */
+router.post('/import-mock-catalog', async (_req: Request, res: Response) => {
+  try {
+    const summary = await importMockCatalog();
+    res.json({ success: true, summary });
+  } catch (error) {
+    console.error('Mock catalog import error:', error);
+    res.status(500).json({ error: 'Mock catalog import failed' });
   }
 });
 

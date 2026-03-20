@@ -36,6 +36,11 @@ jobs:
         run: |
           mkdir -p deploy
           cp -r api/dist deploy/dist
+          mkdir -p deploy/public
+          cp -r public/Alimentos deploy/public/Alimentos
+          cp -r public/farmacos deploy/public/farmacos
+          cp -r public/equipo deploy/public/equipo
+          cp -r public/brands deploy/public/brands
           cp api/package.json deploy/package.json
           cp api/package-lock.json deploy/package-lock.json
           cd deploy
