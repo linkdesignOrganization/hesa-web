@@ -83,19 +83,28 @@ export class AdminHomeHeroComponent implements OnInit {
     this.viewingMode.set(mode);
   }
 
-  /** Activate a mode via toggle — saves to production */
+  /** Activate a mode via toggle — saves mode to production */
   async activateMode(mode: 'single' | 'carousel'): Promise<void> {
-    if (mode === 'single') {
-      const current = this.slides();
-      if (current.length > 1) {
-        this.slides.set([current[0]]);
-      }
-      this.activeSlideIndex.set(0);
-      this.expandedSlides.set(new Set([0]));
-    }
     this.heroMode.set(mode);
     this.viewingMode.set(mode);
-    await this.save();
+    // Save only the mode change with current slides (don't delete any)
+    this.saving.set(true);
+    try {
+      const slidesData = this.slides().map(slide => ({
+        ...slide,
+        product: slide.product && typeof slide.product === 'object' && '_id' in slide.product
+          ? (slide.product as ApiProduct)._id
+          : slide.product,
+      }));
+      await this.api.adminUpdateHero({
+        mode,
+        slides: slidesData,
+      });
+      this.toast.success(mode === 'single' ? 'Portada simple activada' : 'Carrusel activado');
+    } catch {
+      this.toast.error('Error al activar el modo');
+    }
+    this.saving.set(false);
   }
 
   addSlide(): void {
@@ -147,10 +156,17 @@ export class AdminHomeHeroComponent implements OnInit {
           ? (slide.product as ApiProduct)._id
           : slide.product,
       }));
-      await this.api.adminUpdateHero({
-        mode: this.heroMode(),
+      // Save with the MODE that corresponds to the form being edited
+      const config = await this.api.adminUpdateHero({
+        mode: this.viewingMode(),
         slides: slidesData,
       });
+      // Sync heroMode to what was just saved
+      this.heroMode.set(this.viewingMode());
+      // Reload slides from server response to stay in sync
+      if (config.hero.slides && config.hero.slides.length > 0) {
+        this.slides.set(config.hero.slides);
+      }
       this.toast.success('Hero actualizado correctamente');
     } catch {
       this.toast.error('Error al guardar los cambios');
