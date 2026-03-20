@@ -7,6 +7,7 @@ dotenv.config({ path: path.resolve(__dirname, '../../.env') });
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
+import multer from 'multer';
 import { connectDatabase } from './config/database';
 import { securityHeaders } from './middleware/security-headers.middleware';
 import { authMiddleware } from './middleware/auth.middleware';
@@ -88,6 +89,21 @@ app.use('/api/admin/dashboard', authMiddleware, adminDashboardRoutes);
 // Error handling middleware
 app.use((err: Error, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
   console.error('Unhandled error:', err);
+
+  if (err instanceof multer.MulterError) {
+    if (err.code === 'LIMIT_FILE_SIZE') {
+      res.status(413).json({ error: 'La imagen excede el limite de 15 MB' });
+      return;
+    }
+    res.status(400).json({ error: err.message });
+    return;
+  }
+
+  if (err.message?.startsWith('Invalid file type:')) {
+    res.status(400).json({ error: err.message });
+    return;
+  }
+
   res.status(500).json({ error: 'Internal server error' });
 });
 

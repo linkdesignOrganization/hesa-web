@@ -3,6 +3,43 @@ import { Product } from '../models/product.model';
 import { Brand } from '../models/brand.model';
 import mongoose from 'mongoose';
 
+function createDefaultSingleHeroSlide(): IHeroSlide {
+  return {
+    tag: { es: 'Atencion cercana', en: 'Close support' },
+    headline: {
+      es: 'Soluciones veterinarias que respaldan su operacion diaria',
+      en: 'Veterinary solutions that support your daily operation',
+    },
+    subtitle: {
+      es: 'Marcas confiables, disponibilidad constante y un equipo comercial listo para atender a su negocio.',
+      en: 'Trusted brands, steady availability, and a commercial team ready to support your business.',
+    },
+    ctaText: { es: 'Ver catalogo', en: 'View catalog' },
+    ctaLink: '/es/catalogo',
+    product: null,
+    tagsEs: ['Farmacos', 'Alimentos', 'Equipos'],
+    tagsEn: ['Pharmaceuticals', 'Food', 'Equipment'],
+    imageDesktop: '/hero.jpg',
+    imageMobile: '/hero.jpg',
+  };
+}
+
+function isSingleHeroMissing(slide: IHeroSlide | null | undefined): boolean {
+  if (!slide) return true;
+
+  return !slide.tag?.es &&
+    !slide.tag?.en &&
+    !slide.headline?.es &&
+    !slide.headline?.en &&
+    !slide.subtitle?.es &&
+    !slide.subtitle?.en &&
+    !slide.ctaText?.es &&
+    !slide.ctaText?.en &&
+    !slide.ctaLink &&
+    !slide.imageDesktop &&
+    !slide.imageMobile;
+}
+
 /**
  * Get the singleton home configuration document.
  * Creates one with defaults if it doesn't exist.
@@ -47,6 +84,21 @@ export async function getHomeConfig(): Promise<IHomeConfig> {
     });
     config.hero.mode = 'single';
     config.hero.slides = [legacySlide as IHeroSlide];
+  }
+
+  if (isSingleHeroMissing(config.hero?.single)) {
+    const defaultSingle = createDefaultSingleHeroSlide();
+    const updated = await HomeConfig.findByIdAndUpdate(
+      config._id,
+      { $set: { 'hero.single': defaultSingle } },
+      { new: true }
+    ).lean() as unknown as IHomeConfig | null;
+
+    if (updated) {
+      config = updated;
+    } else {
+      config.hero.single = defaultSingle;
+    }
   }
 
   return config;
@@ -125,9 +177,21 @@ export async function updateSlideImage(
 ): Promise<IHomeConfig | null> {
   const config = await getHomeConfig();
   const field = imageType === 'desktop' ? 'imageDesktop' : 'imageMobile';
-  const key = target === 'single'
-    ? `hero.single.${field}`
-    : `hero.slides.${slideIndex}.${field}`;
+
+  if (target === 'single' && isSingleHeroMissing(config.hero?.single)) {
+    const singleSlide = {
+      ...createDefaultSingleHeroSlide(),
+      [field]: imageUrl,
+    };
+
+    return HomeConfig.findByIdAndUpdate(
+      config._id,
+      { $set: { 'hero.single': singleSlide } },
+      { new: true }
+    ).lean() as unknown as Promise<IHomeConfig | null>;
+  }
+
+  const key = target === 'single' ? `hero.single.${field}` : `hero.slides.${slideIndex}.${field}`;
   return HomeConfig.findByIdAndUpdate(
     config._id,
     { $set: { [key]: imageUrl } },

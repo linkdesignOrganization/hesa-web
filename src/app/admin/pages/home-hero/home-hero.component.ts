@@ -208,8 +208,9 @@ export class AdminHomeHeroComponent implements OnInit {
         this.slides.set(updated);
       }
       this.toast.success(`Imagen ${imageType} actualizada`);
-    } catch {
-      this.toast.error('Error al subir la imagen');
+    } catch (error: any) {
+      const message = error?.error?.error || 'Error al subir la imagen';
+      this.toast.error(message);
     }
     this.uploadingImage.set(false);
     input.value = '';
