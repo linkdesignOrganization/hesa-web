@@ -161,11 +161,11 @@
     <!-- Card 2: Distribución exclusiva (video bg) -->
     <div class="feature-card feature-card--video">
       <video #featureVideo class="feature-card__video" autoplay muted loop playsinline>
-        <source src="0_Cat_Turkish_1080x1920.mp4" type="video/mp4">
+        <source src="/0_Cat_Turkish_1080x1920.mp4" type="video/mp4">
       </video>
       <div class="feature-card__video-overlay"></div>
       <div class="feature-card__video-content">
-        <h3 class="feature-card__title feature-card__title--white">{{ i18n.currentLang() === 'es' ? 'Distribución exclusiva' : 'Exclusive distribution' }}</h3>
+        <h3 class="feature-card__title feature-card__title--white">{{ i18n.currentLang() === 'es' ? 'Presencia en todo el territorio nacional' : 'Presence throughout the national territory' }}</h3>
         <div class="feature-card__tags">
           <span class="feature-card__tag frosted-white">{{ i18n.currentLang() === 'es' ? 'Veterinarias' : 'Vet clinics' }}</span>
           <span class="feature-card__tag frosted-white">Pet Shops</span>
@@ -179,7 +179,7 @@
     <!-- Card 3: Clientes en todo el país -->
     <div class="feature-card feature-card--light">
       <div class="feature-card__top">
-        <h3 class="feature-card__title">{{ i18n.currentLang() === 'es' ? 'Clientes en todo el país' : 'Clients nationwide' }}</h3>
+        <h3 class="feature-card__title">{{ i18n.currentLang() === 'es' ? 'Relaciones comerciales que perduran' : 'Lasting business relationships' }}</h3>
         <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'contacto' : 'contact')" class="feature-card__cta">{{ i18n.currentLang() === 'es' ? 'Explorar' : 'Explore' }}</a>
       </div>
       <div class="feature-card__divider"></div>

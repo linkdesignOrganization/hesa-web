@@ -36,9 +36,9 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   // Video auto-cycle for feature card
   @ViewChild('featureVideo') featureVideoRef!: ElementRef<HTMLVideoElement>;
   private videoSources = [
-    '0_Cat_Turkish_1080x1920.mp4',
-    '0_Portrait_Face_2160x3840.mp4',
-    '1517679_Hamster_Tiny_1080x1920.mp4',
+    '/0_Cat_Turkish_1080x1920.mp4',
+    '/0_Portrait_Face_2160x3840.mp4',
+    '/1517679_Hamster_Tiny_1080x1920.mp4',
   ];
   private currentVideoIndex = 0;
 
