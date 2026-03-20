@@ -69,7 +69,8 @@ export class AdminHomeHeroComponent implements OnInit {
       ctaText: { es: '', en: '' },
       ctaLink: '',
       product: null,
-      tags: [],
+      tagsEs: [],
+      tagsEn: [],
       imageDesktop: '',
       imageMobile: '',
     };
@@ -228,26 +229,41 @@ export class AdminHomeHeroComponent implements OnInit {
     this.slides.set(updated);
   }
 
-  // ── Tags ──
+  // ── Tags (ES and EN independent) ──
 
-  addTag(slideIndex: number): void {
+  addTagEs(slideIndex: number): void {
     const updated = [...this.slides()];
     const slide = updated[slideIndex];
-    const currentTags = slide.tags || [];
-    if (currentTags.length >= 6) return;
-    updated[slideIndex] = {
-      ...slide,
-      tags: [...currentTags, { es: '', en: '' }],
-    };
+    const current = slide.tagsEs || [];
+    if (current.length >= 6) return;
+    updated[slideIndex] = { ...slide, tagsEs: [...current, ''] };
     this.slides.set(updated);
   }
 
-  removeTag(slideIndex: number, tagIndex: number): void {
+  removeTagEs(slideIndex: number, tagIndex: number): void {
     const updated = [...this.slides()];
     const slide = updated[slideIndex];
-    const currentTags = [...(slide.tags || [])];
-    currentTags.splice(tagIndex, 1);
-    updated[slideIndex] = { ...slide, tags: currentTags };
+    const current = [...(slide.tagsEs || [])];
+    current.splice(tagIndex, 1);
+    updated[slideIndex] = { ...slide, tagsEs: current };
+    this.slides.set(updated);
+  }
+
+  addTagEn(slideIndex: number): void {
+    const updated = [...this.slides()];
+    const slide = updated[slideIndex];
+    const current = slide.tagsEn || [];
+    if (current.length >= 6) return;
+    updated[slideIndex] = { ...slide, tagsEn: [...current, ''] };
+    this.slides.set(updated);
+  }
+
+  removeTagEn(slideIndex: number, tagIndex: number): void {
+    const updated = [...this.slides()];
+    const slide = updated[slideIndex];
+    const current = [...(slide.tagsEn || [])];
+    current.splice(tagIndex, 1);
+    updated[slideIndex] = { ...slide, tagsEn: current };
     this.slides.set(updated);
   }
 

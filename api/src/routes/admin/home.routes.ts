@@ -74,8 +74,12 @@ router.put('/hero', sanitizeBody, async (req: AuthRequest, res: Response) => {
         res.status(400).json({ error: `Slide ${i + 1}: CTA link is required` });
         return;
       }
-      if (s.tags && s.tags.length > 6) {
-        res.status(400).json({ error: `Slide ${i + 1}: maximum 6 tags allowed` });
+      if (s.tagsEs && s.tagsEs.length > 6) {
+        res.status(400).json({ error: `Slide ${i + 1}: maximum 6 Spanish tags allowed` });
+        return;
+      }
+      if (s.tagsEn && s.tagsEn.length > 6) {
+        res.status(400).json({ error: `Slide ${i + 1}: maximum 6 English tags allowed` });
         return;
       }
       // Validate product ID if provided

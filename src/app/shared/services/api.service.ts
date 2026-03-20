@@ -90,7 +90,8 @@ export interface ApiHeroSlide {
   ctaText: { es: string; en: string };
   ctaLink: string;
   product?: ApiProduct | string | null;
-  tags?: { es: string; en: string }[];
+  tagsEs?: string[];
+  tagsEn?: string[];
   imageDesktop?: string;
   imageMobile?: string;
 }

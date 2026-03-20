@@ -70,11 +70,11 @@
         </div>
         <!-- RIGHT COLUMN -->
         <div class="hero-right">
-          <!-- Tag pills (only if slide has tags) -->
-          @if (slide.tags && slide.tags.length > 0) {
+          <!-- Tag pills (show current language's tags) -->
+          @if ((i18n.currentLang() === 'es' ? slide.tagsEs : slide.tagsEn)?.length) {
             <div class="hero-tags">
-              @for (tag of slide.tags; track $index) {
-                <span class="hero-tag-pill frosted-white">{{ i18n.t(tag) }}</span>
+              @for (tag of (i18n.currentLang() === 'es' ? slide.tagsEs : slide.tagsEn); track $index) {
+                <span class="hero-tag-pill frosted-white">{{ tag }}</span>
               }
             </div>
           }

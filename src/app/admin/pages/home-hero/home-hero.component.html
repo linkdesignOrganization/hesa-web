@@ -181,34 +181,43 @@
       }
     </div>
 
-    <!-- Tags — ES and EN shown together, each with its own add/remove -->
+    <!-- Tags ES — independent -->
     <div class="adm-form-group">
-      <label class="adm-form-label">Tags en Español ({{ slide.tags?.length || 0 }}/6)</label>
+      <label class="adm-form-label">Tags en Español ({{ slide.tagsEs?.length || 0 }}/6)</label>
       <div class="hero-editor__tags-list">
-        @for (tag of slide.tags; track $index) {
+        @for (tag of slide.tagsEs; track $index) {
           <div class="hero-editor__tag-item">
-            <input type="text" class="adm-form-control adm-form-control--sm" placeholder="Una palabra" [(ngModel)]="tag.es" maxlength="30">
-            <button class="adm-btn adm-btn--icon adm-btn--sm" aria-label="Eliminar tag" (click)="removeTag(index, $index)">
+            <input type="text" class="adm-form-control adm-form-control--sm" placeholder="Una palabra" [(ngModel)]="slide.tagsEs![$index]" maxlength="30">
+            <button class="adm-btn adm-btn--icon adm-btn--sm" aria-label="Eliminar tag" (click)="removeTagEs(index, $index)">
               <span class="material-symbols-outlined">close</span>
             </button>
           </div>
         }
       </div>
-      @if (!slide.tags || slide.tags.length < 6) {
-        <button class="adm-btn adm-btn--secondary adm-btn--sm hero-editor__add-tag" (click)="addTag(index)">
+      @if (!slide.tagsEs || slide.tagsEs.length < 6) {
+        <button class="adm-btn adm-btn--secondary adm-btn--sm hero-editor__add-tag" (click)="addTagEs(index)">
           <span class="material-symbols-outlined">add</span> Agregar tag
         </button>
       }
     </div>
+    <!-- Tags EN — independent -->
     <div class="adm-form-group">
-      <label class="adm-form-label">Tags in English ({{ slide.tags?.length || 0 }}/6)</label>
+      <label class="adm-form-label">Tags in English ({{ slide.tagsEn?.length || 0 }}/6)</label>
       <div class="hero-editor__tags-list">
-        @for (tag of slide.tags; track $index) {
+        @for (tag of slide.tagsEn; track $index) {
           <div class="hero-editor__tag-item">
-            <input type="text" class="adm-form-control adm-form-control--sm" placeholder="One word" [(ngModel)]="tag.en" maxlength="30">
+            <input type="text" class="adm-form-control adm-form-control--sm" placeholder="One word" [(ngModel)]="slide.tagsEn![$index]" maxlength="30">
+            <button class="adm-btn adm-btn--icon adm-btn--sm" aria-label="Remove tag" (click)="removeTagEn(index, $index)">
+              <span class="material-symbols-outlined">close</span>
+            </button>
           </div>
         }
       </div>
+      @if (!slide.tagsEn || slide.tagsEn.length < 6) {
+        <button class="adm-btn adm-btn--secondary adm-btn--sm hero-editor__add-tag" (click)="addTagEn(index)">
+          <span class="material-symbols-outlined">add</span> Add tag
+        </button>
+      }
     </div>
 
     <!-- Images -->

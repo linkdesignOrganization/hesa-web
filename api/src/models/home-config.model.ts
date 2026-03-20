@@ -8,7 +8,8 @@ export interface IHeroSlide {
   ctaText: { es: string; en: string };
   ctaLink: string;
   product?: mongoose.Types.ObjectId | string | null;
-  tags?: { es: string; en: string }[];
+  tagsEs?: string[];
+  tagsEn?: string[];
   imageDesktop?: string;
   imageMobile?: string;
 }
@@ -39,7 +40,8 @@ const heroSlideSchema = new Schema(
     ctaText: { type: bilingualField, required: true },
     ctaLink: { type: String, required: true },
     product: { type: Schema.Types.ObjectId, ref: 'Product', default: null },
-    tags: [{ type: bilingualField }],
+    tagsEs: [{ type: String }],
+    tagsEn: [{ type: String }],
     imageDesktop: { type: String },
     imageMobile: { type: String },
   },
