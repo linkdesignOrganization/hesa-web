@@ -100,6 +100,7 @@ export interface ApiHomeConfig {
   _id: string;
   hero: {
     mode: 'single' | 'carousel';
+    single: ApiHeroSlide | null;
     slides: ApiHeroSlide[];
   };
   featuredProducts: string[];
@@ -481,17 +482,18 @@ export class ApiService {
     );
   }
 
-  async adminUpdateHero(data: { mode: string; slides: Partial<ApiHeroSlide>[] }): Promise<ApiHomeConfig> {
+  async adminUpdateHero(data: { mode: string; target: string; single?: Partial<ApiHeroSlide>; slides?: Partial<ApiHeroSlide>[] }): Promise<ApiHomeConfig> {
     return firstValueFrom(
       this.http.put<ApiHomeConfig>(`${this.baseUrl}/admin/home/hero`, data)
     );
   }
 
-  async adminUploadHeroSlideImage(file: File, slideIndex: number, imageType: 'desktop' | 'mobile'): Promise<ApiHomeConfig> {
+  async adminUploadHeroSlideImage(file: File, slideIndex: number, imageType: 'desktop' | 'mobile', target: 'single' | 'carousel' = 'carousel'): Promise<ApiHomeConfig> {
     const formData = new FormData();
     formData.append('image', file);
     formData.append('slideIndex', String(slideIndex));
     formData.append('imageType', imageType);
+    formData.append('target', target);
     return firstValueFrom(
       this.http.post<ApiHomeConfig>(`${this.baseUrl}/admin/home/hero/image`, formData)
     );

@@ -24,7 +24,8 @@ export class AdminHomeHeroComponent implements OnInit {
   // Hero data
   heroMode = signal<'single' | 'carousel'>('single'); // what's in production
   viewingMode = signal<'single' | 'carousel'>('single'); // what's being viewed/edited
-  slides = signal<ApiHeroSlide[]>([]);
+  singleSlide = signal<ApiHeroSlide>(this.createEmptySlide()); // portada simple data
+  slides = signal<ApiHeroSlide[]>([]); // carousel slides data
 
   // UI state
   activeLang = signal<'es' | 'en'>('es');
@@ -51,6 +52,9 @@ export class AdminHomeHeroComponent implements OnInit {
       const config = await this.api.adminGetHomeConfig();
       this.heroMode.set(config.hero.mode || 'single');
       this.viewingMode.set(config.hero.mode || 'single');
+      // Load single slide data
+      this.singleSlide.set(config.hero.single || this.createEmptySlide());
+      // Load carousel slides
       const loadedSlides = config.hero.slides && config.hero.slides.length > 0
         ? config.hero.slides
         : [this.createEmptySlide()];
@@ -83,23 +87,24 @@ export class AdminHomeHeroComponent implements OnInit {
     this.viewingMode.set(mode);
   }
 
-  /** Activate a mode via toggle — saves mode to production */
+  /** Activate a mode via toggle — only changes which mode is active */
   async activateMode(mode: 'single' | 'carousel'): Promise<void> {
     this.heroMode.set(mode);
     this.viewingMode.set(mode);
-    // Save only the mode change with current slides (don't delete any)
     this.saving.set(true);
     try {
-      const slidesData = this.slides().map(slide => ({
-        ...slide,
-        product: slide.product && typeof slide.product === 'object' && '_id' in slide.product
-          ? (slide.product as ApiProduct)._id
-          : slide.product,
-      }));
-      await this.api.adminUpdateHero({
-        mode,
-        slides: slidesData,
-      });
+      // Send mode change with the target's own data
+      const payload: any = { mode, target: mode };
+      if (mode === 'single') {
+        const s = this.singleSlide();
+        payload.single = { ...s, product: this.serializeProduct(s.product) };
+      } else {
+        payload.slides = this.slides().map(slide => ({
+          ...slide,
+          product: this.serializeProduct(slide.product),
+        }));
+      }
+      await this.api.adminUpdateHero(payload);
       this.toast.success(mode === 'single' ? 'Portada simple activada' : 'Carrusel activado');
     } catch {
       this.toast.error('Error al activar el modo');
@@ -147,26 +152,33 @@ export class AdminHomeHeroComponent implements OnInit {
     return this.expandedSlides().has(index);
   }
 
+  private serializeProduct(product: any): string | null {
+    if (!product) return null;
+    if (typeof product === 'object' && '_id' in product) return product._id;
+    if (typeof product === 'string') return product;
+    return null;
+  }
+
   async save(): Promise<void> {
     this.saving.set(true);
     try {
-      const slidesData = this.slides().map(slide => ({
-        ...slide,
-        product: slide.product && typeof slide.product === 'object' && '_id' in slide.product
-          ? (slide.product as ApiProduct)._id
-          : slide.product,
-      }));
-      // Save with the MODE that corresponds to the form being edited
-      const config = await this.api.adminUpdateHero({
-        mode: this.viewingMode(),
-        slides: slidesData,
-      });
-      // Sync heroMode to what was just saved
-      this.heroMode.set(this.viewingMode());
-      // Reload slides from server response to stay in sync
-      if (config.hero.slides && config.hero.slides.length > 0) {
-        this.slides.set(config.hero.slides);
+      const target = this.viewingMode();
+      const payload: any = { mode: this.heroMode(), target };
+
+      if (target === 'single') {
+        const s = this.singleSlide();
+        payload.single = { ...s, product: this.serializeProduct(s.product) };
+      } else {
+        payload.slides = this.slides().map(slide => ({
+          ...slide,
+          product: this.serializeProduct(slide.product),
+        }));
       }
+
+      const config = await this.api.adminUpdateHero(payload);
+      // Reload from server
+      if (config.hero.single) this.singleSlide.set(config.hero.single);
+      if (config.hero.slides?.length) this.slides.set(config.hero.slides);
       this.toast.success('Hero actualizado correctamente');
     } catch {
       this.toast.error('Error al guardar los cambios');
@@ -181,9 +193,12 @@ export class AdminHomeHeroComponent implements OnInit {
 
     this.uploadingImage.set(true);
     try {
-      const config = await this.api.adminUploadHeroSlideImage(file, slideIndex, imageType);
-      // Update the local slides with the new image
-      if (config.hero.slides[slideIndex]) {
+      const target = this.viewingMode();
+      const config = await this.api.adminUploadHeroSlideImage(file, slideIndex, imageType, target);
+      // Update local data with new image
+      if (target === 'single' && config.hero.single) {
+        this.singleSlide.set(config.hero.single);
+      } else if (config.hero.slides[slideIndex]) {
         const updated = [...this.slides()];
         if (imageType === 'desktop') {
           updated[slideIndex] = { ...updated[slideIndex], imageDesktop: config.hero.slides[slideIndex].imageDesktop };
@@ -243,54 +258,58 @@ export class AdminHomeHeroComponent implements OnInit {
   selectProduct(product: ApiProduct): void {
     const slideIndex = this.selectedProductForSlide();
     if (slideIndex < 0) return;
-    const updated = [...this.slides()];
-    updated[slideIndex] = { ...updated[slideIndex], product };
-    this.slides.set(updated);
+    const slide = this.getSlide(slideIndex);
+    this.setSlide(slideIndex, { ...slide, product });
     this.showProductModal.set(false);
   }
 
   removeProduct(slideIndex: number): void {
-    const updated = [...this.slides()];
-    updated[slideIndex] = { ...updated[slideIndex], product: null };
-    this.slides.set(updated);
+    const slide = this.getSlide(slideIndex);
+    this.setSlide(slideIndex, { ...slide, product: null });
   }
 
   // ── Tags (ES and EN independent) ──
 
+  private getSlide(index: number): ApiHeroSlide {
+    return this.viewingMode() === 'single' ? this.singleSlide() : this.slides()[index];
+  }
+
+  private setSlide(index: number, slide: ApiHeroSlide): void {
+    if (this.viewingMode() === 'single') {
+      this.singleSlide.set(slide);
+    } else {
+      const updated = [...this.slides()];
+      updated[index] = slide;
+      this.slides.set(updated);
+    }
+  }
+
   addTagEs(slideIndex: number): void {
-    const updated = [...this.slides()];
-    const slide = updated[slideIndex];
+    const slide = this.getSlide(slideIndex);
     const current = slide.tagsEs || [];
     if (current.length >= 6) return;
-    updated[slideIndex] = { ...slide, tagsEs: [...current, ''] };
-    this.slides.set(updated);
+    this.setSlide(slideIndex, { ...slide, tagsEs: [...current, ''] });
   }
 
   removeTagEs(slideIndex: number, tagIndex: number): void {
-    const updated = [...this.slides()];
-    const slide = updated[slideIndex];
+    const slide = this.getSlide(slideIndex);
     const current = [...(slide.tagsEs || [])];
     current.splice(tagIndex, 1);
-    updated[slideIndex] = { ...slide, tagsEs: current };
-    this.slides.set(updated);
+    this.setSlide(slideIndex, { ...slide, tagsEs: current });
   }
 
   addTagEn(slideIndex: number): void {
-    const updated = [...this.slides()];
-    const slide = updated[slideIndex];
+    const slide = this.getSlide(slideIndex);
     const current = slide.tagsEn || [];
     if (current.length >= 6) return;
-    updated[slideIndex] = { ...slide, tagsEn: [...current, ''] };
-    this.slides.set(updated);
+    this.setSlide(slideIndex, { ...slide, tagsEn: [...current, ''] });
   }
 
   removeTagEn(slideIndex: number, tagIndex: number): void {
-    const updated = [...this.slides()];
-    const slide = updated[slideIndex];
+    const slide = this.getSlide(slideIndex);
     const current = [...(slide.tagsEn || [])];
     current.splice(tagIndex, 1);
-    updated[slideIndex] = { ...slide, tagsEn: current };
-    this.slides.set(updated);
+    this.setSlide(slideIndex, { ...slide, tagsEn: current });
   }
 
   // ── Helpers ──

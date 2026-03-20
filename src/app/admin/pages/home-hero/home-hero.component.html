@@ -77,7 +77,7 @@
     <!-- SINGLE MODE -->
     @if (viewingMode() === 'single') {
       <div class="hero-editor__single adm-card">
-        <ng-container *ngTemplateOutlet="slideForm; context: { $implicit: slides()[0], index: 0 }"></ng-container>
+        <ng-container *ngTemplateOutlet="slideForm; context: { $implicit: singleSlide(), index: 0, target: 'single' }"></ng-container>
         <div class="hero-editor__form-footer">
           <button class="adm-btn adm-btn--primary" [disabled]="saving() || loading()" (click)="save()">
             @if (saving()) {

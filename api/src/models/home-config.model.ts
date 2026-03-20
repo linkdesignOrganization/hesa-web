@@ -17,6 +17,7 @@ export interface IHeroSlide {
 export interface IHomeConfig extends Document {
   hero: {
     mode: 'single' | 'carousel';
+    single: IHeroSlide | null;
     slides: IHeroSlide[];
     // Legacy fields (for migration)
     image?: string;
@@ -52,8 +53,9 @@ const homeConfigSchema = new Schema<IHomeConfig>(
   {
     hero: {
       mode: { type: String, enum: ['single', 'carousel'], default: 'single' },
+      single: { type: heroSlideSchema, default: null },
       slides: { type: [heroSlideSchema], default: [] },
-      // Legacy fields kept for backward compat / migration
+      // Legacy
       image: { type: String },
       tag: { type: bilingualField },
       headline: { type: bilingualField },

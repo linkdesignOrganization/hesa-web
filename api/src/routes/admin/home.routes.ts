@@ -33,63 +33,52 @@ router.get('/', async (_req: AuthRequest, res: Response) => {
  */
 router.put('/hero', sanitizeBody, async (req: AuthRequest, res: Response) => {
   try {
-    const { mode, slides } = req.body;
+    const { mode, target, single, slides } = req.body;
 
     if (!mode || !['single', 'carousel'].includes(mode)) {
       res.status(400).json({ error: 'mode must be "single" or "carousel"' });
       return;
     }
 
-    if (!Array.isArray(slides) || slides.length === 0) {
-      res.status(400).json({ error: 'At least one slide is required' });
-      return;
+    const saveTarget = target || mode;
+
+    // Validate slide fields helper
+    function validateSlide(s: any, label: string): string | null {
+      if (!s.tag?.es || !s.tag?.en) return `${label}: tag is required (ES and EN)`;
+      if (!s.headline?.es || !s.headline?.en) return `${label}: headline is required (ES and EN)`;
+      if (!s.ctaText?.es || !s.ctaText?.en) return `${label}: CTA text is required (ES and EN)`;
+      if (!s.ctaLink) return `${label}: CTA link is required`;
+      if (s.tagsEs && s.tagsEs.length > 6) return `${label}: maximum 6 Spanish tags`;
+      if (s.tagsEn && s.tagsEn.length > 6) return `${label}: maximum 6 English tags`;
+      if (s.product && !mongoose.isValidObjectId(s.product)) return `${label}: invalid product ID`;
+      return null;
     }
 
-    if (mode === 'single' && slides.length > 1) {
-      res.status(400).json({ error: 'Single mode allows only 1 slide' });
-      return;
+    if (saveTarget === 'single') {
+      if (!single) {
+        res.status(400).json({ error: 'single slide data is required' });
+        return;
+      }
+      const err = validateSlide(single, 'Portada');
+      if (err) { res.status(400).json({ error: err }); return; }
     }
 
-    if (slides.length > 4) {
-      res.status(400).json({ error: 'Maximum 4 slides allowed' });
-      return;
-    }
-
-    // Validate required fields per slide
-    for (let i = 0; i < slides.length; i++) {
-      const s = slides[i];
-      if (!s.tag?.es || !s.tag?.en) {
-        res.status(400).json({ error: `Slide ${i + 1}: tag is required (ES and EN)` });
+    if (saveTarget === 'carousel') {
+      if (!Array.isArray(slides) || slides.length === 0) {
+        res.status(400).json({ error: 'At least one slide is required' });
         return;
       }
-      if (!s.headline?.es || !s.headline?.en) {
-        res.status(400).json({ error: `Slide ${i + 1}: headline is required (ES and EN)` });
+      if (slides.length > 4) {
+        res.status(400).json({ error: 'Maximum 4 slides allowed' });
         return;
       }
-      if (!s.ctaText?.es || !s.ctaText?.en) {
-        res.status(400).json({ error: `Slide ${i + 1}: CTA text is required (ES and EN)` });
-        return;
-      }
-      if (!s.ctaLink) {
-        res.status(400).json({ error: `Slide ${i + 1}: CTA link is required` });
-        return;
-      }
-      if (s.tagsEs && s.tagsEs.length > 6) {
-        res.status(400).json({ error: `Slide ${i + 1}: maximum 6 Spanish tags allowed` });
-        return;
-      }
-      if (s.tagsEn && s.tagsEn.length > 6) {
-        res.status(400).json({ error: `Slide ${i + 1}: maximum 6 English tags allowed` });
-        return;
-      }
-      // Validate product ID if provided
-      if (s.product && !mongoose.isValidObjectId(s.product)) {
-        res.status(400).json({ error: `Slide ${i + 1}: invalid product ID` });
-        return;
+      for (let i = 0; i < slides.length; i++) {
+        const err = validateSlide(slides[i], `Slide ${i + 1}`);
+        if (err) { res.status(400).json({ error: err }); return; }
       }
     }
 
-    const config = await homeService.updateHero({ mode, slides });
+    const config = await homeService.updateHero({ mode, target: saveTarget as any, single, slides });
     if (!config) {
       res.status(500).json({ error: 'Failed to update hero' });
       return;
@@ -100,7 +89,7 @@ router.put('/hero', sanitizeBody, async (req: AuthRequest, res: Response) => {
       entity: 'content',
       entityName: 'Hero del Home',
       user: req.user?.email,
-      details: `${mode}, ${slides.length} slide(s)`,
+      details: `${mode}, target: ${saveTarget}`,
     });
 
     res.json(config);
@@ -123,13 +112,10 @@ router.post('/hero/image', adminUploadSingleImage.single('image'), async (req: A
       return;
     }
 
-    const slideIndex = parseInt(req.body.slideIndex, 10);
+    const slideIndex = parseInt(req.body.slideIndex || '0', 10);
     const imageType = req.body.imageType as 'desktop' | 'mobile';
+    const target = (req.body.target || 'carousel') as 'single' | 'carousel';
 
-    if (isNaN(slideIndex) || slideIndex < 0 || slideIndex > 3) {
-      res.status(400).json({ error: 'Invalid slide index (0-3)' });
-      return;
-    }
     if (!imageType || !['desktop', 'mobile'].includes(imageType)) {
       res.status(400).json({ error: 'imageType must be "desktop" or "mobile"' });
       return;
@@ -137,18 +123,21 @@ router.post('/hero/image', adminUploadSingleImage.single('image'), async (req: A
 
     // Delete old image if exists
     const current = await homeService.getHomeConfig();
-    const currentSlide = current.hero?.slides?.[slideIndex];
-    if (currentSlide) {
-      const oldUrl = imageType === 'desktop' ? currentSlide.imageDesktop : currentSlide.imageMobile;
-      if (oldUrl) {
-        await storageService.deleteBlob(oldUrl).catch(() => {});
+    if (target === 'single' && current.hero?.single) {
+      const oldUrl = imageType === 'desktop' ? current.hero.single.imageDesktop : current.hero.single.imageMobile;
+      if (oldUrl) await storageService.deleteBlob(oldUrl).catch(() => {});
+    } else if (target === 'carousel') {
+      const currentSlide = current.hero?.slides?.[slideIndex];
+      if (currentSlide) {
+        const oldUrl = imageType === 'desktop' ? currentSlide.imageDesktop : currentSlide.imageMobile;
+        if (oldUrl) await storageService.deleteBlob(oldUrl).catch(() => {});
       }
     }
 
     const processed = await processImageSingle(file.buffer, 1920);
     const imageUrl = await storageService.uploadImage(processed.buffer, processed.contentType, 'home');
 
-    const config = await homeService.updateSlideImage(slideIndex, imageType, imageUrl);
+    const config = await homeService.updateSlideImage(target, slideIndex, imageType, imageUrl);
 
     await logActivity({
       action: 'update',

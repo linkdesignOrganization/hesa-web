@@ -86,33 +86,48 @@ export async function ensureFeaturedItemsPopulated(): Promise<void> {
 }
 
 /**
- * Update the hero section with new mode + slides structure.
+ * Update hero. Saves single and carousel data independently.
+ * - target 'single': saves to hero.single
+ * - target 'carousel': saves to hero.slides
+ * - mode: which one is active
  */
-export async function updateHero(heroData: { mode: 'single' | 'carousel'; slides: IHeroSlide[] }): Promise<IHomeConfig | null> {
+export async function updateHero(heroData: {
+  mode: 'single' | 'carousel';
+  target: 'single' | 'carousel';
+  single?: IHeroSlide;
+  slides?: IHeroSlide[];
+}): Promise<IHomeConfig | null> {
   const config = await getHomeConfig();
+  const updateFields: Record<string, unknown> = {
+    'hero.mode': heroData.mode,
+  };
+  if (heroData.target === 'single' && heroData.single) {
+    updateFields['hero.single'] = heroData.single;
+  }
+  if (heroData.target === 'carousel' && heroData.slides) {
+    updateFields['hero.slides'] = heroData.slides;
+  }
   return HomeConfig.findByIdAndUpdate(
     config._id,
-    {
-      $set: {
-        'hero.mode': heroData.mode,
-        'hero.slides': heroData.slides,
-      },
-    },
+    { $set: updateFields },
     { new: true }
   ).lean() as unknown as Promise<IHomeConfig | null>;
 }
 
 /**
- * Update a specific slide's image (desktop or mobile).
+ * Update a specific image. Supports both single and carousel slides.
  */
 export async function updateSlideImage(
+  target: 'single' | 'carousel',
   slideIndex: number,
   imageType: 'desktop' | 'mobile',
   imageUrl: string
 ): Promise<IHomeConfig | null> {
   const config = await getHomeConfig();
   const field = imageType === 'desktop' ? 'imageDesktop' : 'imageMobile';
-  const key = `hero.slides.${slideIndex}.${field}`;
+  const key = target === 'single'
+    ? `hero.single.${field}`
+    : `hero.slides.${slideIndex}.${field}`;
   return HomeConfig.findByIdAndUpdate(
     config._id,
     { $set: { [key]: imageUrl } },
@@ -121,34 +136,53 @@ export async function updateSlideImage(
 }
 
 /**
- * Get hero slides with product populated for public display.
+ * Populate a single slide's product reference.
+ */
+async function populateSlideProduct(slide: IHeroSlide): Promise<Record<string, unknown>> {
+  const result: Record<string, unknown> = { ...slide };
+  if (slide.product) {
+    const productId = typeof slide.product === 'string' ? slide.product : String(slide.product);
+    if (mongoose.Types.ObjectId.isValid(productId)) {
+      const product = await Product.findById(productId)
+        .populate('brand', 'name slug logo country categories')
+        .lean();
+      if (product && (product as any).isActive) {
+        result.product = product;
+      } else {
+        result.product = null;
+      }
+    }
+  }
+  return result;
+}
+
+/**
+ * Get hero data for public display.
+ * Returns the active mode's data as { mode, slides[] }.
  */
 export async function getHeroSlidesPopulated(): Promise<{ mode: string; slides: unknown[] }> {
   const config = await getHomeConfig();
-  const slides = config.hero?.slides || [];
   const mode = config.hero?.mode || 'single';
 
-  const populated = await Promise.all(
-    slides.map(async (slide: IHeroSlide) => {
-      const result: Record<string, unknown> = { ...slide };
-      if (slide.product) {
-        const productId = typeof slide.product === 'string' ? slide.product : String(slide.product);
-        if (mongoose.Types.ObjectId.isValid(productId)) {
-          const product = await Product.findById(productId)
-            .populate('brand', 'name slug logo country categories')
-            .lean();
-          if (product && (product as any).isActive) {
-            result.product = product;
-          } else {
-            result.product = null;
-          }
-        }
-      }
-      return result;
-    })
-  );
+  if (mode === 'single') {
+    const singleSlide = config.hero?.single;
+    if (singleSlide) {
+      const populated = await populateSlideProduct(singleSlide);
+      return { mode: 'single', slides: [populated] };
+    }
+    // Fallback: try first carousel slide
+    const fallback = config.hero?.slides?.[0];
+    if (fallback) {
+      const populated = await populateSlideProduct(fallback);
+      return { mode: 'single', slides: [populated] };
+    }
+    return { mode: 'single', slides: [] };
+  }
 
-  return { mode, slides: populated };
+  // Carousel mode
+  const slides = config.hero?.slides || [];
+  const populated = await Promise.all(slides.map(populateSlideProduct));
+  return { mode: 'carousel', slides: populated };
 }
 
 // ---- Featured Products/Brands (unchanged) ----
