@@ -1011,9 +1011,10 @@ app-home {
       justify-content: center;
       padding: 7px 11px;
       border-radius: 999px;
-      background: var(--brand-primary);
-      color: var(--neutral-white);
-      font-size: 10px;
+      background: rgba(255, 255, 255, 0.86);
+      color: var(--neutral-900);
+      backdrop-filter: blur(18px);
+      font-size: 11px;
       font-weight: var(--weight-semibold);
       letter-spacing: 0.04em;
       text-transform: uppercase;

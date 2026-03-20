@@ -117,7 +117,7 @@
                     [routerLink]="getHeroProductRoute(slide.product)"
                     [attr.aria-label]="(i18n.currentLang() === 'es' ? 'Ver producto ' : 'View product ') + i18n.t(slide.product.name)">
                     <div class="hero-card__media">
-                      <span class="hero-card__badge">{{ i18n.currentLang() === 'es' ? 'Destacado' : 'Featured' }}</span>
+                      <span class="hero-card__badge">{{ getHeroCategoryLabel(slide.product.category) }}</span>
                       @if (slide.product.brand?.logo) {
                         <div class="hero-card__brand-logo-wrap">
                           <img [src]="slide.product.brand!.logo" [alt]="slide.product.brand!.name" class="hero-card__brand-logo" loading="lazy">
