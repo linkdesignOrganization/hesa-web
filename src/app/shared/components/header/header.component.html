@@ -71,11 +71,11 @@
   <!-- Row 2: Category Navigation with Mega Menus -->
   <nav class="header__row-nav">
     <ul class="header__nav-list">
-      <li (mouseenter)="openMega('farmacos')" (mouseleave)="closeMega()">
+      <li>
         <button
           type="button"
           class="header__nav-link"
-          (click)="openMega('farmacos')"
+          (click)="toggleMega('farmacos')"
           [attr.aria-expanded]="activeMega() === 'farmacos'"
           [class.header__nav-link--mega-active]="activeMega() === 'farmacos'">
           <span class="header__nav-label">
@@ -84,11 +84,11 @@
           </span>
         </button>
       </li>
-      <li (mouseenter)="openMega('alimentos')" (mouseleave)="closeMega()">
+      <li>
         <button
           type="button"
           class="header__nav-link"
-          (click)="openMega('alimentos')"
+          (click)="toggleMega('alimentos')"
           [attr.aria-expanded]="activeMega() === 'alimentos'"
           [class.header__nav-link--mega-active]="activeMega() === 'alimentos'">
           <span class="header__nav-label">
@@ -97,11 +97,11 @@
           </span>
         </button>
       </li>
-      <li (mouseenter)="openMega('equipos')" (mouseleave)="closeMega()">
+      <li>
         <button
           type="button"
           class="header__nav-link"
-          (click)="openMega('equipos')"
+          (click)="toggleMega('equipos')"
           [attr.aria-expanded]="activeMega() === 'equipos'"
           [class.header__nav-link--mega-active]="activeMega() === 'equipos'">
           <span class="header__nav-label">
@@ -125,8 +125,15 @@
     </ul>
 
     <!-- Mega Menu: Fármacos -->
-    <div class="mega" [class.mega--open]="activeMega() === 'farmacos'" (mouseenter)="keepMegaOpen()" (mouseleave)="closeMega()">
+    <div class="mega" [class.mega--open]="activeMega() === 'farmacos'">
       <div class="mega__inner">
+        <button
+          type="button"
+          class="mega__close"
+          (click)="closeMega()"
+          [attr.aria-label]="i18n.currentLang() === 'es' ? 'Cerrar menu de fármacos' : 'Close pharmaceuticals menu'">
+          <span class="material-symbols-outlined" aria-hidden="true">close</span>
+        </button>
         <div class="mega__content">
           <div class="mega__filters">
             <div class="mega__links">
@@ -182,8 +189,15 @@
     </div>
 
     <!-- Mega Menu: Alimentos -->
-    <div class="mega" [class.mega--open]="activeMega() === 'alimentos'" (mouseenter)="keepMegaOpen()" (mouseleave)="closeMega()">
+    <div class="mega" [class.mega--open]="activeMega() === 'alimentos'">
       <div class="mega__inner">
+        <button
+          type="button"
+          class="mega__close"
+          (click)="closeMega()"
+          [attr.aria-label]="i18n.currentLang() === 'es' ? 'Cerrar menu de alimentos' : 'Close food menu'">
+          <span class="material-symbols-outlined" aria-hidden="true">close</span>
+        </button>
         <div class="mega__content">
           <div class="mega__filters">
             <div class="mega__links">
@@ -238,8 +252,15 @@
     </div>
 
     <!-- Mega Menu: Equipos -->
-    <div class="mega" [class.mega--open]="activeMega() === 'equipos'" (mouseenter)="keepMegaOpen()" (mouseleave)="closeMega()">
+    <div class="mega" [class.mega--open]="activeMega() === 'equipos'">
       <div class="mega__inner">
+        <button
+          type="button"
+          class="mega__close"
+          (click)="closeMega()"
+          [attr.aria-label]="i18n.currentLang() === 'es' ? 'Cerrar menu de equipos' : 'Close equipment menu'">
+          <span class="material-symbols-outlined" aria-hidden="true">close</span>
+        </button>
         <div class="mega__content">
           <div class="mega__filters">
             <div class="mega__links">

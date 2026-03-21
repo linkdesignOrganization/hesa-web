@@ -5,7 +5,7 @@ import { adminUploadSingleImage } from '../../middleware/admin-upload.middleware
 import * as contentService from '../../services/content.service';
 import * as storageService from '../../services/storage.service';
 import { logActivity } from '../../services/activity-log.service';
-import { processImageSingle } from '../../utils/image-processor';
+import { optimizeImageForProfile } from '../../utils/image-processor';
 
 const router = Router();
 
@@ -107,16 +107,16 @@ router.post('/:pageKey/image', adminUploadSingleImage.single('image'), async (re
       return;
     }
 
-    // Delete old image
     const current = await contentService.getPageContent(pageKey);
-    if (current.heroImage) {
-      await storageService.deleteBlob(current.heroImage);
-    }
+    const previousHeroImage = current.heroImage;
 
-    const processed = await processImageSingle(file.buffer, 1600);
+    const processed = await optimizeImageForProfile(file.buffer, 'content-hero');
     const imageUrl = await storageService.uploadImage(processed.buffer, processed.contentType, `content/${pageKey}`);
 
     const content = await contentService.updatePageHeroImage(pageKey, imageUrl);
+    if (previousHeroImage && previousHeroImage !== imageUrl) {
+      await storageService.deleteBlob(previousHeroImage).catch(() => {});
+    }
 
     await logActivity({
       action: 'update',

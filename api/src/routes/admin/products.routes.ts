@@ -7,7 +7,7 @@ import * as productService from '../../services/product.service';
 import * as storageService from '../../services/storage.service';
 import { logActivity } from '../../services/activity-log.service';
 import { generateProductSlugs } from '../../utils/slug';
-import { processImageSingle } from '../../utils/image-processor';
+import { optimizeImageForProfile } from '../../utils/image-processor';
 
 const router = Router();
 
@@ -214,7 +214,7 @@ router.post('/:id/images', adminUploadImages.array('images', 6), async (req: Aut
 
     const uploadedUrls: string[] = [];
     for (const file of files) {
-      const processed = await processImageSingle(file.buffer, 1200);
+      const processed = await optimizeImageForProfile(file.buffer, 'product');
       const url = await storageService.uploadImage(processed.buffer, processed.contentType, 'products');
       uploadedUrls.push(url);
     }

@@ -1,4 +1,4 @@
-import { Component, signal, inject, OnDestroy, HostListener } from '@angular/core';
+import { Component, signal, inject, OnDestroy, HostListener, ElementRef } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { LanguageSelectorComponent } from '../language-selector/language-selector.component';
 import { SearchOverlayComponent } from '../search-overlay/search-overlay.component';
@@ -34,6 +34,7 @@ interface MegaBrandLink {
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent implements OnDestroy {
+  private elementRef = inject(ElementRef<HTMLElement>);
   i18n = inject(I18nService);
   isScrolled = signal(false);
   isMobileMenuOpen = signal(false);
@@ -145,8 +146,6 @@ export class HeaderComponent implements OnDestroy {
     ]
   };
 
-  private megaCloseTimer: ReturnType<typeof setTimeout> | null = null;
-
   private onScroll = (): void => {
     this.isScrolled.set(window.scrollY > 50);
   };
@@ -161,29 +160,14 @@ export class HeaderComponent implements OnDestroy {
     if (typeof window !== 'undefined') {
       window.removeEventListener('scroll', this.onScroll);
     }
-    if (this.megaCloseTimer) clearTimeout(this.megaCloseTimer);
   }
 
-  openMega(category: MegaCategory): void {
-    if (this.megaCloseTimer) {
-      clearTimeout(this.megaCloseTimer);
-      this.megaCloseTimer = null;
-    }
-    this.activeMega.set(category);
+  toggleMega(category: MegaCategory): void {
+    this.activeMega.update(current => current === category ? null : category);
   }
 
   closeMega(): void {
-    // Small delay so mouse can move from nav link to mega panel
-    this.megaCloseTimer = setTimeout(() => {
-      this.activeMega.set(null);
-    }, 120);
-  }
-
-  keepMegaOpen(): void {
-    if (this.megaCloseTimer) {
-      clearTimeout(this.megaCloseTimer);
-      this.megaCloseTimer = null;
-    }
+    this.activeMega.set(null);
   }
 
   toggleMobileMenu(): void {
@@ -260,6 +244,18 @@ export class HeaderComponent implements OnDestroy {
     }
     if (this.activeMega()) {
       this.activeMega.set(null);
+    }
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent): void {
+    if (!this.activeMega()) return;
+
+    const target = event.target;
+    if (!(target instanceof Node)) return;
+
+    if (!this.elementRef.nativeElement.contains(target)) {
+      this.closeMega();
     }
   }
 }

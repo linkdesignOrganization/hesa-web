@@ -6,7 +6,7 @@ import { adminUploadSingleImage } from '../../middleware/admin-upload.middleware
 import * as homeService from '../../services/home.service';
 import * as storageService from '../../services/storage.service';
 import { logActivity } from '../../services/activity-log.service';
-import { processImageSingle } from '../../utils/image-processor';
+import { optimizeImageForProfile } from '../../utils/image-processor';
 
 const router = Router();
 
@@ -121,23 +121,27 @@ router.post('/hero/image', adminUploadSingleImage.single('image'), async (req: A
       return;
     }
 
-    // Delete old image if exists
     const current = await homeService.getHomeConfig();
+    let previousImageUrl: string | undefined;
     if (target === 'single' && current.hero?.single) {
-      const oldUrl = imageType === 'desktop' ? current.hero.single.imageDesktop : current.hero.single.imageMobile;
-      if (oldUrl) await storageService.deleteBlob(oldUrl).catch(() => {});
+      previousImageUrl = imageType === 'desktop' ? current.hero.single.imageDesktop : current.hero.single.imageMobile;
     } else if (target === 'carousel') {
       const currentSlide = current.hero?.slides?.[slideIndex];
       if (currentSlide) {
-        const oldUrl = imageType === 'desktop' ? currentSlide.imageDesktop : currentSlide.imageMobile;
-        if (oldUrl) await storageService.deleteBlob(oldUrl).catch(() => {});
+        previousImageUrl = imageType === 'desktop' ? currentSlide.imageDesktop : currentSlide.imageMobile;
       }
     }
 
-    const processed = await processImageSingle(file.buffer, 1920);
+    const processed = await optimizeImageForProfile(
+      file.buffer,
+      imageType === 'desktop' ? 'home-hero-desktop' : 'home-hero-mobile'
+    );
     const imageUrl = await storageService.uploadImage(processed.buffer, processed.contentType, 'home');
 
     const config = await homeService.updateSlideImage(target, slideIndex, imageType, imageUrl);
+    if (previousImageUrl && previousImageUrl !== imageUrl) {
+      await storageService.deleteBlob(previousImageUrl).catch(() => {});
+    }
 
     await logActivity({
       action: 'update',

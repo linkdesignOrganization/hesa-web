@@ -91,8 +91,8 @@ export class AdminBrandFormComponent implements HasUnsavedChanges, OnInit {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files[0]) {
       const file = input.files[0];
-      if (file.size > 5 * 1024 * 1024) {
-        this.toast.error('El archivo no debe superar 5MB');
+      if (!['image/png', 'image/jpeg', 'image/webp'].includes(file.type)) {
+        this.toast.error('Solo se permiten imagenes PNG, JPG o WebP');
         return;
       }
       this.logoFile.set(file);
@@ -111,10 +111,6 @@ export class AdminBrandFormComponent implements HasUnsavedChanges, OnInit {
       const file = event.dataTransfer.files[0];
       if (!['image/png', 'image/jpeg', 'image/webp'].includes(file.type)) {
         this.toast.error('Solo se permiten imagenes PNG, JPG o WebP');
-        return;
-      }
-      if (file.size > 5 * 1024 * 1024) {
-        this.toast.error('El archivo no debe superar 5MB');
         return;
       }
       this.logoFile.set(file);
@@ -197,8 +193,9 @@ export class AdminBrandFormComponent implements HasUnsavedChanges, OnInit {
         try {
           this.uploadingLogo.set(true);
           await this.api.adminUploadBrandLogo(savedBrand._id, this.logoFile()!);
-        } catch {
-          this.toast.warning('La marca se guardo pero hubo un error al subir el logo');
+        } catch (error: any) {
+          const message = error?.error?.error || 'La marca se guardo pero hubo un error al subir el logo';
+          this.toast.warning(message);
         } finally {
           this.uploadingLogo.set(false);
         }

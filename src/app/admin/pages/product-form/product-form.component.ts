@@ -245,12 +245,6 @@ export class AdminProductFormComponent implements HasUnsavedChanges, OnInit {
   private queueImageFiles(files: File[]): void {
     const maxRemaining = 6 - this.existingImages().length - this.pendingImageFiles().length;
     const filesToQueue = files.slice(0, maxRemaining);
-    for (const file of filesToQueue) {
-      if (file.size > 5 * 1024 * 1024) {
-        this.toast.error(`"${file.name}" supera el limite de 5MB`);
-        return;
-      }
-    }
     this.pendingImageFiles.update(list => [...list, ...filesToQueue]);
     for (const file of filesToQueue) {
       const reader = new FileReader();
@@ -277,20 +271,14 @@ export class AdminProductFormComponent implements HasUnsavedChanges, OnInit {
       this.toast.warning(`Solo se pueden subir ${maxRemaining} imagenes mas.`);
     }
 
-    for (const file of filesToUpload) {
-      if (file.size > 5 * 1024 * 1024) {
-        this.toast.error(`"${file.name}" supera el limite de 5MB`);
-        return;
-      }
-    }
-
     this.uploadingImages.set(true);
     try {
       const updatedProduct = await this.api.adminUploadProductImages(this.productId()!, filesToUpload);
       this.existingImages.set(updatedProduct.images || []);
       this.toast.success('Imagenes subidas correctamente');
-    } catch {
-      this.toast.error('Error al subir las imagenes');
+    } catch (error: any) {
+      const message = error?.error?.error || 'Error al subir las imagenes';
+      this.toast.error(message);
     } finally {
       this.uploadingImages.set(false);
     }

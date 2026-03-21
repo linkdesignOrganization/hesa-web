@@ -12,8 +12,6 @@ const ALLOWED_IMAGE_MIMETYPES = [
   'image/jpeg',
   'image/png',
   'image/webp',
-  'image/gif',
-  'image/svg+xml',
 ];
 
 const ALLOWED_PDF_MIMETYPES = ['application/pdf'];
@@ -50,23 +48,25 @@ const pdfFileFilter = (
   }
 };
 
-/** Multi-image upload (up to 6 images, 5 MB each). */
+const MAX_ADMIN_IMAGE_SIZE = 25 * 1024 * 1024;
+
+/** Multi-image upload (up to 6 images, 25 MB each before optimization). */
 export const adminUploadImages = multer({
   storage: multer.memoryStorage(),
-  limits: { fileSize: 5 * 1024 * 1024 },
+  limits: { fileSize: MAX_ADMIN_IMAGE_SIZE },
   fileFilter: imageFileFilter,
 });
 
-/** Single-image upload (15 MB). */
+/** Single-image upload (25 MB before optimization). */
 export const adminUploadSingleImage = multer({
   storage: multer.memoryStorage(),
-  limits: { fileSize: 15 * 1024 * 1024 },
+  limits: { fileSize: MAX_ADMIN_IMAGE_SIZE },
   fileFilter: imageFileFilter,
 });
 
-/** Single PDF upload (5 MB). */
+/** Single PDF upload (10 MB). */
 export const adminUploadPdf = multer({
   storage: multer.memoryStorage(),
-  limits: { fileSize: 5 * 1024 * 1024 },
+  limits: { fileSize: 10 * 1024 * 1024 },
   fileFilter: pdfFileFilter,
 });

@@ -80,8 +80,9 @@ export class AdminContentEditorComponent implements OnInit {
       const content = await this.api.adminUploadContentImage(this.pageKey(), file);
       this.heroImage.set(content.heroImage || '');
       this.toast.success('Imagen actualizada');
-    } catch {
-      this.toast.error('Error al subir la imagen');
+    } catch (error: any) {
+      const message = error?.error?.error || 'Error al subir la imagen';
+      this.toast.error(message);
     }
     input.value = '';
   }

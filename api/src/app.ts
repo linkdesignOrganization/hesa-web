@@ -92,7 +92,10 @@ app.use((err: Error, _req: express.Request, res: express.Response, _next: expres
 
   if (err instanceof multer.MulterError) {
     if (err.code === 'LIMIT_FILE_SIZE') {
-      res.status(413).json({ error: 'La imagen excede el limite de 15 MB' });
+      const message = err.field === 'pdf'
+        ? 'El archivo PDF excede el limite de 10 MB'
+        : 'La imagen excede el limite de 25 MB';
+      res.status(413).json({ error: message });
       return;
     }
     res.status(400).json({ error: err.message });

@@ -116,8 +116,9 @@ export class AdminSettingsComponent implements OnInit {
       const result = await this.api.adminUploadOgImage(file);
       this.config.ogImage = result.ogImage;
       this.toast.success('Imagen OG actualizada');
-    } catch {
-      this.toast.error('Error al subir la imagen');
+    } catch (error: any) {
+      const message = error?.error?.error || 'Error al subir la imagen';
+      this.toast.error(message);
     }
   }
 }

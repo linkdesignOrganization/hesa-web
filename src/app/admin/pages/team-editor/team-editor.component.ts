@@ -99,8 +99,9 @@ export class AdminTeamEditorComponent implements OnInit {
       }
       this.showForm.set(false);
       await this.loadTeam();
-    } catch {
-      this.toast.error('Error al guardar');
+    } catch (error: any) {
+      const message = error?.error?.error || 'Error al guardar';
+      this.toast.error(message);
     }
     this.savingMember.set(false);
   }
@@ -165,8 +166,8 @@ export class AdminTeamEditorComponent implements OnInit {
   }
 
   private setPhotoFile(file: File): void {
-    if (file.size > 5 * 1024 * 1024) {
-      this.toast.error('La imagen no debe superar 5MB');
+    if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type)) {
+      this.toast.error('Solo se permiten imagenes JPG, PNG o WebP');
       return;
     }
     this.pendingPhotoFile.set(file);

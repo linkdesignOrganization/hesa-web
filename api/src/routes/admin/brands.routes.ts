@@ -7,7 +7,7 @@ import * as brandService from '../../services/brand.service';
 import * as storageService from '../../services/storage.service';
 import { logActivity } from '../../services/activity-log.service';
 import { generateSlug } from '../../utils/slug';
-import { processImageSingle } from '../../utils/image-processor';
+import { optimizeImageForProfile } from '../../utils/image-processor';
 
 const router = Router();
 
@@ -180,15 +180,14 @@ router.post('/:id/logo', adminUploadSingleImage.single('image'), async (req: Aut
       return;
     }
 
-    // Delete existing logo
-    if (brand.logo) {
-      await storageService.deleteBlob(brand.logo);
-    }
-
-    const processed = await processImageSingle(file.buffer, 400);
+    const previousLogo = brand.logo;
+    const processed = await optimizeImageForProfile(file.buffer, 'brand-logo');
     const logoUrl = await storageService.uploadImage(processed.buffer, processed.contentType, 'brands');
 
     const updated = await brandService.updateBrand(req.params.id, { logo: logoUrl });
+    if (previousLogo && previousLogo !== logoUrl) {
+      await storageService.deleteBlob(previousLogo);
+    }
     res.json(updated);
   } catch (error) {
     console.error('Error uploading logo:', error);

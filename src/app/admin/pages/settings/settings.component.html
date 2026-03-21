@@ -157,7 +157,7 @@
             </div>
             <div class="adm-form-group adm-form-group--full">
               <label class="adm-form-label">Imagen para compartir (OG Image)</label>
-              <span class="adm-form-hint">Tamano recomendado: 1200x630px</span>
+              <span class="adm-form-hint">Tamano recomendado: 1200x630px. El sistema la optimiza automaticamente.</span>
               @if (config.ogImage) {
                 <div class="settings-og-preview">
                   <img [src]="config.ogImage" alt="OG Image preview">
@@ -169,7 +169,7 @@
                 </div>
                 <p class="adm-uploader__text">{{ config.ogImage ? 'Cambiar imagen' : 'Seleccionar imagen' }}</p>
               </div>
-              <input #ogInput type="file" accept="image/*" style="display: none;" (change)="uploadOgImage($event)">
+              <input #ogInput type="file" accept="image/jpeg,image/png,image/webp" style="display: none;" (change)="uploadOgImage($event)">
             </div>
           </div>
         </div>

@@ -327,12 +327,42 @@
   }
 
   &__inner {
+    position: relative;
     display: flex;
     align-items: flex-start;
     gap: 48px;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 36px 48px;
+    padding: 54px 48px 36px;
+  }
+
+  &__close {
+    position: absolute;
+    top: 18px;
+    right: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 999px;
+    background: rgba(15, 23, 42, 0.04);
+    color: var(--neutral-900);
+    cursor: pointer;
+    transition: background-color 0.18s ease, color 0.18s ease, transform 0.18s ease;
+
+    &:hover {
+      background: var(--brand-primary-light);
+      color: var(--brand-primary-deep);
+      transform: translateY(-1px);
+    }
+
+    .material-symbols-outlined {
+      font-size: 20px;
+      line-height: 1;
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+    }
   }
 
   &__content {

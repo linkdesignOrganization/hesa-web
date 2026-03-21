@@ -6,7 +6,7 @@ import { adminUploadSingleImage } from '../../middleware/admin-upload.middleware
 import * as teamService from '../../services/team.service';
 import * as storageService from '../../services/storage.service';
 import { logActivity } from '../../services/activity-log.service';
-import { processImageSingle } from '../../utils/image-processor';
+import { optimizeImageForProfile } from '../../utils/image-processor';
 
 const router = Router();
 
@@ -166,15 +166,14 @@ router.post('/:id/photo', adminUploadSingleImage.single('image'), async (req: Au
       return;
     }
 
-    // Delete existing photo
-    if (member.photo) {
-      await storageService.deleteBlob(member.photo);
-    }
-
-    const processed = await processImageSingle(file.buffer, 400);
+    const previousPhoto = member.photo;
+    const processed = await optimizeImageForProfile(file.buffer, 'team-photo');
     const photoUrl = await storageService.uploadImage(processed.buffer, processed.contentType, 'team');
 
     const updated = await teamService.updateTeamMember(req.params.id, { photo: photoUrl });
+    if (previousPhoto && previousPhoto !== photoUrl) {
+      await storageService.deleteBlob(previousPhoto).catch(() => {});
+    }
     res.json(updated);
   } catch (error) {
     console.error('Error uploading team photo:', error);

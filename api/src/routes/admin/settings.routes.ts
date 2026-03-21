@@ -5,11 +5,11 @@ import {
   updateConfig,
 } from '../../services/site-config.service';
 import { logActivity } from '../../services/activity-log.service';
-import { uploadImage } from '../../services/storage.service';
+import { deleteBlob, uploadImage } from '../../services/storage.service';
 import { AuthRequest } from '../../middleware/auth.middleware';
 import { sanitizeBody } from '../../middleware/validate.middleware';
-import multer from 'multer';
-import sharp from 'sharp';
+import { adminUploadSingleImage } from '../../middleware/admin-upload.middleware';
+import { optimizeImageForProfile } from '../../utils/image-processor';
 
 /** Allowed fields per config key to prevent arbitrary field injection */
 const ALLOWED_FIELDS: Record<string, string[]> = {
@@ -32,18 +32,6 @@ function filterAllowedFields(key: string, data: Record<string, unknown>): Record
 }
 
 const router = Router();
-const upload = multer({
-  storage: multer.memoryStorage(),
-  limits: { fileSize: 5 * 1024 * 1024 }, // 5MB
-  fileFilter: (_req, file, cb) => {
-    if (file.mimetype.startsWith('image/')) {
-      cb(null, true);
-    } else {
-      cb(new Error('Only image files are allowed'));
-    }
-  },
-});
-
 /**
  * GET /api/admin/settings
  * REQ-303 to REQ-307: Get all site configuration
@@ -136,20 +124,22 @@ router.put('/:key', sanitizeBody, async (req: Request, res: Response) => {
  * POST /api/admin/settings/logo
  * Upload site logo
  */
-router.post('/logo', upload.single('image'), async (req: Request, res: Response) => {
+router.post('/logo', adminUploadSingleImage.single('image'), async (req: Request, res: Response) => {
   try {
     if (!req.file) {
       res.status(400).json({ error: 'No image file provided' });
       return;
     }
 
-    const optimized = await sharp(req.file.buffer)
-      .resize(400, 200, { fit: 'inside', withoutEnlargement: true })
-      .webp({ quality: 85 })
-      .toBuffer();
+    const current = await getConfigByKey('general');
+    const previousLogoUrl = current?.logoUrl;
+    const optimized = await optimizeImageForProfile(req.file.buffer, 'site-logo');
 
-    const url = await uploadImage(optimized, 'image/webp', 'site');
+    const url = await uploadImage(optimized.buffer, optimized.contentType, 'site');
     await updateConfig('general', { logoUrl: url });
+    if (previousLogoUrl && previousLogoUrl !== url) {
+      await deleteBlob(previousLogoUrl);
+    }
 
     res.json({ logoUrl: url });
   } catch (error) {
@@ -162,20 +152,22 @@ router.post('/logo', upload.single('image'), async (req: Request, res: Response)
  * POST /api/admin/settings/og-image
  * Upload OG image for social sharing
  */
-router.post('/og-image', upload.single('image'), async (req: Request, res: Response) => {
+router.post('/og-image', adminUploadSingleImage.single('image'), async (req: Request, res: Response) => {
   try {
     if (!req.file) {
       res.status(400).json({ error: 'No image file provided' });
       return;
     }
 
-    const optimized = await sharp(req.file.buffer)
-      .resize(1200, 630, { fit: 'cover' })
-      .jpeg({ quality: 80 })
-      .toBuffer();
+    const current = await getConfigByKey('seo');
+    const previousOgImage = current?.ogImage;
+    const optimized = await optimizeImageForProfile(req.file.buffer, 'og-image');
 
-    const url = await uploadImage(optimized, 'image/jpeg', 'site');
+    const url = await uploadImage(optimized.buffer, optimized.contentType, 'site');
     await updateConfig('seo', { ogImage: url });
+    if (previousOgImage && previousOgImage !== url) {
+      await deleteBlob(previousOgImage);
+    }
 
     res.json({ ogImage: url });
   } catch (error) {
