@@ -19,13 +19,19 @@ export class ContactComponent implements OnInit, OnDestroy {
   private route = inject(ActivatedRoute);
 
   prefilledProduct = '';
+  prefilledType = '';
   content = signal<ApiPageContent | null>(null);
   siteConfig = signal<ApiSiteConfig | null>(null);
 
   async ngOnInit(): Promise<void> {
     const producto = this.route.snapshot.queryParamMap.get('producto');
     if (producto) {
-      this.prefilledProduct = producto.replace(/-/g, ' ');
+      this.prefilledProduct = decodeURIComponent(producto).replace(/-/g, ' ');
+    }
+
+    const type = this.route.snapshot.queryParamMap.get('type');
+    if (type && ['info', 'comercial', 'soporte', 'otro'].includes(type)) {
+      this.prefilledType = type;
     }
 
     // BUG-005/NFR-006: SEO meta tags and hreflang for contact page

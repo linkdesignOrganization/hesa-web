@@ -13,6 +13,7 @@ import { ApiService } from '../../../shared/services/api.service';
 export class ContactFormComponent {
   variant = input<'general' | 'manufacturer'>('general');
   prefilledProduct = input('');
+  prefilledConsultationType = input('');
 
   i18n = inject(I18nService);
   private api = inject(ApiService);
@@ -58,6 +59,10 @@ export class ContactFormComponent {
   ngOnInit(): void {
     if (this.prefilledProduct()) {
       this.productOfInterest = this.prefilledProduct();
+    }
+
+    if (this.variant() === 'general' && ['info', 'comercial', 'soporte', 'otro'].includes(this.prefilledConsultationType())) {
+      this.consultationType = this.prefilledConsultationType();
     }
   }
 
