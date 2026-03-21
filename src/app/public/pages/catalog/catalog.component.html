@@ -14,58 +14,64 @@
 
         <div class="catalog-discovery__hero-card">
           <span class="catalog-discovery__hero-label">
-            {{ i18n.currentLang() === 'es' ? 'Descubrimiento rapido' : 'Quick discovery' }}
+            {{ i18n.currentLang() === 'es' ? 'En el catalogo' : 'In the catalog' }}
           </span>
-          <strong class="catalog-discovery__hero-count">{{ totalProducts() }}</strong>
-          <p class="catalog-discovery__hero-meta">
-            {{ i18n.currentLang() === 'es' ? 'productos disponibles para explorar en tiempo real.' : 'products available to explore in real time.' }}
-          </p>
+          <div class="catalog-discovery__hero-badges">
+            @for (badge of catalogSummaryBadges(); track badge.key) {
+              <span class="catalog-discovery__hero-badge">
+                <strong>{{ badge.value }}</strong>
+                <span>{{ badge.label }}</span>
+              </span>
+            }
+          </div>
         </div>
       </div>
 
-      <div class="catalog-discovery__switcher" role="tablist" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Categorias del catalogo' : 'Catalog categories'">
-        <button
-          type="button"
-          class="catalog-discovery__switch"
-          [class.catalog-discovery__switch--active]="selectedCategory() === ''"
-          (click)="selectCategory('')">
-          <span class="material-symbols-outlined" aria-hidden="true">{{ getCategoryIcon('') }}</span>
-          {{ i18n.currentLang() === 'es' ? 'Todos' : 'All' }}
-        </button>
-        @for (category of categoryTabs; track category) {
+      <div class="catalog-discovery__controls">
+        <div class="catalog-discovery__switcher" role="tablist" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Categorias del catalogo' : 'Catalog categories'">
           <button
             type="button"
             class="catalog-discovery__switch"
-            [class.catalog-discovery__switch--active]="selectedCategory() === category"
-            (click)="selectCategory(category)">
-            <span class="material-symbols-outlined" aria-hidden="true">{{ getCategoryIcon(category) }}</span>
-            {{ getLocalizedCategoryLabel(category) }}
+            [class.catalog-discovery__switch--active]="selectedCategory() === ''"
+            (click)="selectCategory('')">
+            <span class="material-symbols-outlined" aria-hidden="true">{{ getCategoryIcon('') }}</span>
+            {{ i18n.currentLang() === 'es' ? 'Todos' : 'All' }}
           </button>
-        }
-      </div>
-
-      <div class="catalog-discovery__toolbar">
-        <label class="catalog-discovery__search">
-          <span class="material-symbols-outlined" aria-hidden="true">search</span>
-          <input
-            type="search"
-            [value]="searchTerm()"
-            (input)="onSearchInput($any($event.target).value)"
-            [attr.placeholder]="searchPlaceholder"
-            [attr.aria-label]="searchPlaceholder">
-        </label>
-
-        <button
-          type="button"
-          class="catalog-discovery__mobile-filters"
-          (click)="toggleMobileFilters()"
-          [attr.aria-label]="i18n.currentLang() === 'es' ? 'Abrir filtros' : 'Open filters'">
-          <span class="material-symbols-outlined" aria-hidden="true">tune</span>
-          {{ i18n.currentLang() === 'es' ? 'Filtros' : 'Filters' }}
-          @if (activeFilters().length > 0) {
-            <span class="catalog-discovery__mobile-badge">{{ activeFilters().length }}</span>
+          @for (category of categoryTabs; track category) {
+            <button
+              type="button"
+              class="catalog-discovery__switch"
+              [class.catalog-discovery__switch--active]="selectedCategory() === category"
+              (click)="selectCategory(category)">
+              <span class="material-symbols-outlined" aria-hidden="true">{{ getCategoryIcon(category) }}</span>
+              {{ getLocalizedCategoryLabel(category) }}
+            </button>
           }
-        </button>
+        </div>
+
+        <div class="catalog-discovery__toolbar">
+          <label class="catalog-discovery__search">
+            <span class="material-symbols-outlined" aria-hidden="true">search</span>
+            <input
+              type="search"
+              [value]="searchTerm()"
+              (input)="onSearchInput($any($event.target).value)"
+              [attr.placeholder]="searchPlaceholder"
+              [attr.aria-label]="searchPlaceholder">
+          </label>
+
+          <button
+            type="button"
+            class="catalog-discovery__mobile-filters"
+            (click)="toggleMobileFilters()"
+            [attr.aria-label]="i18n.currentLang() === 'es' ? 'Abrir filtros' : 'Open filters'">
+            <span class="material-symbols-outlined" aria-hidden="true">tune</span>
+            {{ i18n.currentLang() === 'es' ? 'Filtros' : 'Filters' }}
+            @if (activeFilters().length > 0) {
+              <span class="catalog-discovery__mobile-badge">{{ activeFilters().length }}</span>
+            }
+          </button>
+        </div>
       </div>
     </div>
   </header>
@@ -85,61 +91,24 @@
           }
         </div>
 
-        <div class="catalog-filters__group">
-          <label class="catalog-filters__label">{{ i18n.currentLang() === 'es' ? 'Marca' : 'Brand' }}</label>
-          <select class="catalog-filters__select" [value]="selectedBrand()" (change)="applyFilter('brand', $any($event.target).value)">
-            <option value="">{{ i18n.currentLang() === 'es' ? 'Todas las marcas' : 'All brands' }}</option>
-            @for (brand of filterValues().brands; track brand.id) {
-              <option [value]="brand.id">{{ brand.name }}</option>
-            }
-          </select>
-        </div>
-
-        @if (showSpeciesFilter() && filterValues().species.length > 0) {
+        @for (group of filterGroups(); track group.key) {
           <div class="catalog-filters__group">
-            <label class="catalog-filters__label">{{ i18n.currentLang() === 'es' ? 'Especie' : 'Species' }}</label>
-            <select class="catalog-filters__select" [value]="selectedSpecies()" (change)="applyFilter('species', $any($event.target).value)">
-              <option value="">{{ i18n.currentLang() === 'es' ? 'Todas las especies' : 'All species' }}</option>
-              @for (species of filterValues().species; track species.es) {
-                <option [value]="species.es">{{ getLocalizedOption(species) }}</option>
+            <p class="catalog-filters__label">{{ group.label }}</p>
+            <div class="catalog-filters__checks">
+              @for (option of group.options; track option.value) {
+                <label class="catalog-filters__check">
+                  <input
+                    class="catalog-filters__checkbox"
+                    type="checkbox"
+                    [checked]="isFilterSelected(group.key, option.value)"
+                    (change)="toggleFilterValue(group.key, option.value)">
+                  <span class="catalog-filters__check-mark">
+                    <span class="material-symbols-outlined" aria-hidden="true">check</span>
+                  </span>
+                  <span class="catalog-filters__check-label">{{ option.label }}</span>
+                </label>
               }
-            </select>
-          </div>
-        }
-
-        @if (showFamilyFilter() && filterValues().families.length > 0) {
-          <div class="catalog-filters__group">
-            <label class="catalog-filters__label">{{ i18n.currentLang() === 'es' ? 'Familia' : 'Family' }}</label>
-            <select class="catalog-filters__select" [value]="selectedFamily()" (change)="applyFilter('family', $any($event.target).value)">
-              <option value="">{{ i18n.currentLang() === 'es' ? 'Todas las familias' : 'All families' }}</option>
-              @for (family of filterValues().families; track family.es) {
-                <option [value]="family.es">{{ getLocalizedOption(family) }}</option>
-              }
-            </select>
-          </div>
-        }
-
-        @if (showLifeStageFilter() && filterValues().lifeStages.length > 0) {
-          <div class="catalog-filters__group">
-            <label class="catalog-filters__label">{{ i18n.currentLang() === 'es' ? 'Etapa de vida' : 'Life stage' }}</label>
-            <select class="catalog-filters__select" [value]="selectedLifeStage()" (change)="applyFilter('lifeStage', $any($event.target).value)">
-              <option value="">{{ i18n.currentLang() === 'es' ? 'Todas las etapas' : 'All life stages' }}</option>
-              @for (lifeStage of filterValues().lifeStages; track lifeStage.es) {
-                <option [value]="lifeStage.es">{{ getLocalizedOption(lifeStage) }}</option>
-              }
-            </select>
-          </div>
-        }
-
-        @if (showEquipmentTypeFilter() && filterValues().equipmentTypes.length > 0) {
-          <div class="catalog-filters__group">
-            <label class="catalog-filters__label">{{ i18n.currentLang() === 'es' ? 'Tipo de equipo' : 'Equipment type' }}</label>
-            <select class="catalog-filters__select" [value]="selectedEquipmentType()" (change)="applyFilter('equipmentType', $any($event.target).value)">
-              <option value="">{{ i18n.currentLang() === 'es' ? 'Todos los tipos' : 'All types' }}</option>
-              @for (equipmentType of filterValues().equipmentTypes; track equipmentType.es) {
-                <option [value]="equipmentType.es">{{ getLocalizedOption(equipmentType) }}</option>
-              }
-            </select>
+            </div>
           </div>
         }
       </aside>
@@ -147,25 +116,27 @@
       <div class="catalog-results">
         <div class="catalog-results__header">
           <div>
-            <p class="catalog-results__eyebrow">{{ i18n.currentLang() === 'es' ? 'Resultados' : 'Results' }}</p>
-            <h2 class="catalog-results__title">
-              {{ totalProducts() }}
-              {{ i18n.currentLang() === 'es' ? 'productos para explorar' : 'products to explore' }}
-            </h2>
+            <p class="catalog-results__eyebrow">{{ i18n.currentLang() === 'es' ? 'Productos disponibles' : 'Available products' }}</p>
           </div>
-          @if (activeFilters().length > 0 || selectedCategory()) {
-            <button type="button" class="catalog-results__clear" (click)="clearFilters()">
-              {{ i18n.currentLang() === 'es' ? 'Limpiar busqueda' : 'Reset search' }}
-            </button>
-          }
+          <div class="catalog-results__header-actions">
+            <span class="catalog-results__summary-badge">{{ resultsCountLabel }}</span>
+            @if (activeFilters().length > 0 || selectedCategory()) {
+              <button type="button" class="catalog-results__clear" (click)="clearFilters()">
+                {{ i18n.currentLang() === 'es' ? 'Limpiar busqueda' : 'Reset search' }}
+              </button>
+            }
+          </div>
         </div>
 
         @if (activeFilters().length > 0) {
           <div class="catalog-results__pills">
-            @for (filter of activeFilters(); track filter.key) {
+            @for (filter of activeFilters(); track filter.key + ':' + (filter.value || filter.label)) {
               <span class="catalog-results__pill">
                 {{ filter.label }}
-                <button type="button" (click)="removeFilter(filter.key)" [attr.aria-label]="(i18n.currentLang() === 'es' ? 'Remover filtro ' : 'Remove filter ') + filter.label">
+                <button
+                  type="button"
+                  (click)="removeFilter(filter.key, filter.value)"
+                  [attr.aria-label]="(i18n.currentLang() === 'es' ? 'Remover filtro ' : 'Remove filter ') + filter.label">
                   <span class="material-symbols-outlined" aria-hidden="true">close</span>
                 </button>
               </span>
@@ -253,61 +224,24 @@
       </div>
 
       <div class="catalog-drawer__body">
-        <div class="catalog-filters__group">
-          <label class="catalog-filters__label">{{ i18n.currentLang() === 'es' ? 'Marca' : 'Brand' }}</label>
-          <select class="catalog-filters__select" [value]="selectedBrand()" (change)="applyFilter('brand', $any($event.target).value)">
-            <option value="">{{ i18n.currentLang() === 'es' ? 'Todas las marcas' : 'All brands' }}</option>
-            @for (brand of filterValues().brands; track brand.id) {
-              <option [value]="brand.id">{{ brand.name }}</option>
-            }
-          </select>
-        </div>
-
-        @if (showSpeciesFilter() && filterValues().species.length > 0) {
+        @for (group of filterGroups(); track group.key) {
           <div class="catalog-filters__group">
-            <label class="catalog-filters__label">{{ i18n.currentLang() === 'es' ? 'Especie' : 'Species' }}</label>
-            <select class="catalog-filters__select" [value]="selectedSpecies()" (change)="applyFilter('species', $any($event.target).value)">
-              <option value="">{{ i18n.currentLang() === 'es' ? 'Todas las especies' : 'All species' }}</option>
-              @for (species of filterValues().species; track species.es) {
-                <option [value]="species.es">{{ getLocalizedOption(species) }}</option>
+            <p class="catalog-filters__label">{{ group.label }}</p>
+            <div class="catalog-filters__checks">
+              @for (option of group.options; track option.value) {
+                <label class="catalog-filters__check">
+                  <input
+                    class="catalog-filters__checkbox"
+                    type="checkbox"
+                    [checked]="isFilterSelected(group.key, option.value)"
+                    (change)="toggleFilterValue(group.key, option.value)">
+                  <span class="catalog-filters__check-mark">
+                    <span class="material-symbols-outlined" aria-hidden="true">check</span>
+                  </span>
+                  <span class="catalog-filters__check-label">{{ option.label }}</span>
+                </label>
               }
-            </select>
-          </div>
-        }
-
-        @if (showFamilyFilter() && filterValues().families.length > 0) {
-          <div class="catalog-filters__group">
-            <label class="catalog-filters__label">{{ i18n.currentLang() === 'es' ? 'Familia' : 'Family' }}</label>
-            <select class="catalog-filters__select" [value]="selectedFamily()" (change)="applyFilter('family', $any($event.target).value)">
-              <option value="">{{ i18n.currentLang() === 'es' ? 'Todas las familias' : 'All families' }}</option>
-              @for (family of filterValues().families; track family.es) {
-                <option [value]="family.es">{{ getLocalizedOption(family) }}</option>
-              }
-            </select>
-          </div>
-        }
-
-        @if (showLifeStageFilter() && filterValues().lifeStages.length > 0) {
-          <div class="catalog-filters__group">
-            <label class="catalog-filters__label">{{ i18n.currentLang() === 'es' ? 'Etapa de vida' : 'Life stage' }}</label>
-            <select class="catalog-filters__select" [value]="selectedLifeStage()" (change)="applyFilter('lifeStage', $any($event.target).value)">
-              <option value="">{{ i18n.currentLang() === 'es' ? 'Todas las etapas' : 'All life stages' }}</option>
-              @for (lifeStage of filterValues().lifeStages; track lifeStage.es) {
-                <option [value]="lifeStage.es">{{ getLocalizedOption(lifeStage) }}</option>
-              }
-            </select>
-          </div>
-        }
-
-        @if (showEquipmentTypeFilter() && filterValues().equipmentTypes.length > 0) {
-          <div class="catalog-filters__group">
-            <label class="catalog-filters__label">{{ i18n.currentLang() === 'es' ? 'Tipo de equipo' : 'Equipment type' }}</label>
-            <select class="catalog-filters__select" [value]="selectedEquipmentType()" (change)="applyFilter('equipmentType', $any($event.target).value)">
-              <option value="">{{ i18n.currentLang() === 'es' ? 'Todos los tipos' : 'All types' }}</option>
-              @for (equipmentType of filterValues().equipmentTypes; track equipmentType.es) {
-                <option [value]="equipmentType.es">{{ getLocalizedOption(equipmentType) }}</option>
-              }
-            </select>
+            </div>
           </div>
         }
       </div>

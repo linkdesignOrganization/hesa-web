@@ -1,4 +1,4 @@
-import { Component, input, inject } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { I18nService } from '../../../shared/services/i18n.service';
 import { ApiProduct } from '../../../shared/services/api.service';
@@ -66,13 +66,6 @@ export class ProductCardComponent {
     return p.images?.[0];
   }
 
-  /** NFR-002: WebP source for <picture> element */
-  get productImageWebP(): string | undefined {
-    const img = this.productImage;
-    if (!img) return undefined;
-    return img.replace(/\.(jpe?g|png)$/i, '.webp');
-  }
-
   get displayCategoryLabel(): string {
     return getCategoryLabel(this.productCategory, this.i18n.currentLang());
   }
@@ -112,7 +105,15 @@ export class ProductCardComponent {
       return [firstSpecies, p.lifeStage, firstPresentation].filter(Boolean) as string[];
     }
 
-    return [p.equipmentType, firstPresentation, !firstPresentation ? this.displayBrand : undefined]
+    return [p.equipmentType, firstPresentation, !firstPresentation ? firstSpecies || this.displayBrand : undefined]
       .filter(Boolean) as string[];
+  }
+
+  get ctaLabel(): string {
+    return this.i18n.currentLang() === 'es' ? 'Ver producto' : 'View product';
+  }
+
+  get productAriaLabel(): string {
+    return `${this.ctaLabel}: ${this.displayName}`;
   }
 }

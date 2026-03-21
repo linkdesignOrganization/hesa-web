@@ -253,7 +253,7 @@ export class ApiService {
 
   // ==================== PUBLIC ENDPOINTS ====================
 
-  async getProducts(params: Record<string, string | number | undefined> = {}): Promise<PaginatedResponse<ApiProduct>> {
+  async getProducts(params: Record<string, string | string[] | number | undefined> = {}): Promise<PaginatedResponse<ApiProduct>> {
     const httpParams = this.buildParams(params);
     return firstValueFrom(
       this.http.get<PaginatedResponse<ApiProduct>>(`${this.baseUrl}/public/products`, { params: httpParams })
@@ -300,7 +300,7 @@ export class ApiService {
     );
   }
 
-  async getBrandProducts(slug: string, params: Record<string, string | number | undefined> = {}): Promise<PaginatedResponse<ApiProduct>> {
+  async getBrandProducts(slug: string, params: Record<string, string | string[] | number | undefined> = {}): Promise<PaginatedResponse<ApiProduct>> {
     const httpParams = this.buildParams(params);
     return firstValueFrom(
       this.http.get<PaginatedResponse<ApiProduct>>(`${this.baseUrl}/public/brands/${slug}/products`, { params: httpParams })
@@ -329,7 +329,7 @@ export class ApiService {
 
   // ==================== ADMIN ENDPOINTS ====================
 
-  async adminGetProducts(params: Record<string, string | number | undefined> = {}): Promise<PaginatedResponse<ApiProduct>> {
+  async adminGetProducts(params: Record<string, string | string[] | number | undefined> = {}): Promise<PaginatedResponse<ApiProduct>> {
     const httpParams = this.buildParams(params);
     return firstValueFrom(
       this.http.get<PaginatedResponse<ApiProduct>>(`${this.baseUrl}/admin/products`, { params: httpParams })
@@ -603,7 +603,7 @@ export class ApiService {
 
   // ==================== ADMIN MESSAGES ====================
 
-  async adminGetMessages(params: Record<string, string | number | undefined> = {}): Promise<PaginatedResponse<ApiMessage>> {
+  async adminGetMessages(params: Record<string, string | string[] | number | undefined> = {}): Promise<PaginatedResponse<ApiMessage>> {
     const httpParams = this.buildParams(params);
     return firstValueFrom(
       this.http.get<PaginatedResponse<ApiMessage>>(`${this.baseUrl}/admin/messages`, { params: httpParams })
@@ -736,11 +736,14 @@ export class ApiService {
 
   // ==================== HELPERS ====================
 
-  private buildParams(params: Record<string, string | number | undefined | null>): HttpParams {
+  private buildParams(params: Record<string, string | string[] | number | undefined | null>): HttpParams {
     let httpParams = new HttpParams();
     for (const [key, value] of Object.entries(params)) {
       if (value !== undefined && value !== null && value !== '') {
-        httpParams = httpParams.set(key, String(value));
+        const serializedValue = Array.isArray(value) ? value.filter(Boolean).join(',') : String(value);
+        if (serializedValue) {
+          httpParams = httpParams.set(key, serializedValue);
+        }
       }
     }
     return httpParams;

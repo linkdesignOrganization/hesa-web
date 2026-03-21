@@ -60,10 +60,7 @@
               (click)="currentProduct.images.length > 0 ? lightboxOpen.set(true) : null"
               [attr.aria-label]="i18n.currentLang() === 'es' ? 'Abrir galeria del producto' : 'Open product gallery'">
               @if (currentProduct.images.length > 0) {
-                <picture>
-                  <source [srcset]="toWebP(currentProduct.images[selectedImage()])" type="image/webp">
-                  <img [src]="currentProduct.images[selectedImage()]" [alt]="i18n.t(currentProduct.name)" class="product-detail__hero-image">
-                </picture>
+                <img [src]="currentProduct.images[selectedImage()]" [alt]="i18n.t(currentProduct.name)" class="product-detail__hero-image">
               } @else {
                 <div class="product-detail__placeholder">
                   <span class="material-symbols-outlined" aria-hidden="true">{{ categoryIcon }}</span>
@@ -78,16 +75,13 @@
             @if (currentProduct.images.length > 1) {
               <div class="product-detail__thumbs">
                 @for (image of currentProduct.images; track image; let imageIndex = $index) {
-                  <button
-                    type="button"
-                    class="product-detail__thumb"
-                    [class.product-detail__thumb--active]="selectedImage() === imageIndex"
-                    (click)="selectedImage.set(imageIndex)"
-                    [attr.aria-label]="(i18n.currentLang() === 'es' ? 'Ver imagen ' : 'View image ') + (imageIndex + 1)">
-                    <picture>
-                      <source [srcset]="toWebP(image)" type="image/webp">
-                      <img [src]="image" [alt]="i18n.t(currentProduct.name) + ' ' + (imageIndex + 1)" loading="lazy">
-                    </picture>
+                <button
+                  type="button"
+                  class="product-detail__thumb"
+                  [class.product-detail__thumb--active]="selectedImage() === imageIndex"
+                  (click)="selectedImage.set(imageIndex)"
+                  [attr.aria-label]="(i18n.currentLang() === 'es' ? 'Ver imagen ' : 'View image ') + (imageIndex + 1)">
+                    <img [src]="image" [alt]="i18n.t(currentProduct.name) + ' ' + (imageIndex + 1)" loading="lazy">
                   </button>
                 }
               </div>
@@ -229,10 +223,7 @@
               <article class="product-detail__story-card" [class.product-detail__story-card--text-only]="!block.image">
                 @if (block.image) {
                   <div class="product-detail__story-image">
-                    <picture>
-                      <source [srcset]="toWebP(block.image!)" type="image/webp">
-                      <img [src]="block.image!" [alt]="i18n.t(currentProduct.name)" loading="lazy">
-                    </picture>
+                    <img [src]="block.image!" [alt]="i18n.t(currentProduct.name)" loading="lazy">
                   </div>
                 }
                 <div class="product-detail__story-copy">
@@ -268,10 +259,7 @@
       </button>
 
       <div class="lightbox__content" (click)="$event.stopPropagation()">
-        <picture>
-          <source [srcset]="toWebP(currentProduct.images[selectedImage()])" type="image/webp">
-          <img [src]="currentProduct.images[selectedImage()]" [alt]="i18n.t(currentProduct.name)" class="lightbox__image">
-        </picture>
+        <img [src]="currentProduct.images[selectedImage()]" [alt]="i18n.t(currentProduct.name)" class="lightbox__image">
       </div>
 
       @if (currentProduct.images.length > 1) {

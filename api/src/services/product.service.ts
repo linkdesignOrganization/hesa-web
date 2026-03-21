@@ -4,11 +4,11 @@ import mongoose from 'mongoose';
 
 interface ProductQuery {
   category?: string;
-  brand?: string;
-  species?: string;
-  family?: string;
-  lifeStage?: string;
-  equipmentType?: string;
+  brand?: string | string[];
+  species?: string | string[];
+  family?: string | string[];
+  lifeStage?: string | string[];
+  equipmentType?: string | string[];
   isActive?: boolean;
   page?: number;
   limit?: number;
@@ -59,30 +59,30 @@ async function buildProductFilter(query: ProductQuery): Promise<Record<string, u
     filter.category = query.category;
   }
 
-  // String filter fields: validate as plain strings, no operators
-  if (query.species && typeof query.species === 'string') {
-    filter.species = query.species.substring(0, 100);
-  }
-  if (query.family && typeof query.family === 'string') {
-    filter.family = query.family.substring(0, 100);
-  }
-  if (query.lifeStage && typeof query.lifeStage === 'string') {
-    filter.lifeStage = query.lifeStage.substring(0, 100);
-  }
-  if (query.equipmentType && typeof query.equipmentType === 'string') {
-    filter.equipmentType = query.equipmentType.substring(0, 100);
+  const species = normalizeStringValues(query.species);
+  const families = normalizeStringValues(query.family);
+  const lifeStages = normalizeStringValues(query.lifeStage);
+  const equipmentTypes = normalizeStringValues(query.equipmentType);
+
+  if (species.length > 0) {
+    filter.species = { $in: species };
   }
 
-  if (query.brand) {
-    if (mongoose.isValidObjectId(query.brand)) {
-      filter.brand = new mongoose.Types.ObjectId(query.brand);
-    } else {
-      const safeBrandSlug = String(query.brand).substring(0, 100);
-      const brandDoc = await Brand.findOne({ slug: safeBrandSlug });
-      if (brandDoc) {
-        filter.brand = brandDoc._id;
-      }
-    }
+  if (families.length > 0) {
+    filter.family = { $in: families };
+  }
+
+  if (lifeStages.length > 0) {
+    filter.lifeStage = { $in: lifeStages };
+  }
+
+  if (equipmentTypes.length > 0) {
+    filter.equipmentType = { $in: equipmentTypes };
+  }
+
+  const brandFilter = await resolveBrandFilter(query.brand);
+  if (brandFilter.length > 0) {
+    filter.brand = { $in: brandFilter };
   }
 
   if (query.search && typeof query.search === 'string') {
@@ -96,6 +96,46 @@ async function buildProductFilter(query: ProductQuery): Promise<Record<string, u
   }
 
   return filter;
+}
+
+function normalizeStringValues(values?: string | string[]): string[] {
+  const rawValues = Array.isArray(values)
+    ? values
+    : typeof values === 'string'
+      ? values.split(',')
+      : [];
+
+  return Array.from(
+    new Set(
+      rawValues
+        .filter(value => typeof value === 'string')
+        .map(value => value.substring(0, 100).trim())
+        .filter(Boolean)
+    )
+  );
+}
+
+async function resolveBrandFilter(values?: string | string[]): Promise<mongoose.Types.ObjectId[]> {
+  const normalizedValues = normalizeStringValues(values);
+  if (normalizedValues.length === 0) return [];
+
+  const ids: mongoose.Types.ObjectId[] = [];
+  const slugs: string[] = [];
+
+  for (const value of normalizedValues) {
+    if (mongoose.isValidObjectId(value)) {
+      ids.push(new mongoose.Types.ObjectId(value));
+    } else {
+      slugs.push(value);
+    }
+  }
+
+  if (slugs.length > 0) {
+    const brandDocs = await Brand.find({ slug: { $in: slugs } }, '_id').lean();
+    ids.push(...brandDocs.map(doc => new mongoose.Types.ObjectId(String(doc._id))));
+  }
+
+  return ids;
 }
 
 export async function getProductBySlug(slug: string, lang: 'es' | 'en'): Promise<IProduct | null> {

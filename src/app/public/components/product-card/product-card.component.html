@@ -6,7 +6,7 @@
   [class.product-card--food]="productCategory === 'alimentos'"
   [class.product-card--equipment]="productCategory === 'equipos'"
   [routerLink]="productLink"
-  [attr.aria-label]="'Ver ' + displayName">
+  [attr.aria-label]="productAriaLabel">
   @if (variant() === 'discovery') {
     <div class="product-card__discovery-shell">
       <div class="product-card__media">
@@ -20,10 +20,7 @@
 
         <div class="product-card__image" [attr.data-category]="productCategory">
           @if (productImage) {
-            <picture>
-              <source [srcset]="productImageWebP" type="image/webp">
-              <img [src]="productImage" [alt]="displayName || 'Producto'" class="product-card__img" loading="lazy">
-            </picture>
+            <img [src]="productImage" [alt]="displayName || 'Producto'" class="product-card__img" loading="lazy">
           }
           <div class="product-card__image-visual" [class.product-card__image-visual--hidden]="!!productImage">
             @if (productCategory === 'farmacos') {
@@ -66,11 +63,10 @@
       </div>
 
       <div class="product-card__body">
-        <p class="product-card__category-label">{{ displayCategoryLabel }}</p>
-        <h3 class="product-card__name">{{ displayName }}</h3>
-        @if (displayDescription) {
-          <p class="product-card__description">{{ displayDescription }}</p>
+        @if (displayBrand) {
+          <div class="product-card__brand">{{ displayBrand }}</div>
         }
+        <h3 class="product-card__name">{{ displayName }}</h3>
         @if (quickFacts.length > 0) {
           <div class="product-card__facts">
             @for (fact of quickFacts; track fact) {
@@ -78,23 +74,19 @@
             }
           </div>
         }
-        <span class="product-card__cta">
-          {{ i18n.currentLang() === 'es' ? 'Ver producto' : 'View product' }}
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M5 12h14"/>
-            <path d="m12 5 7 7-7 7"/>
-          </svg>
-        </span>
+        <div class="product-card__footer">
+          <span class="product-card__cta">{{ ctaLabel }}</span>
+          <span class="product-card__arrow" aria-hidden="true">
+            <span class="material-symbols-outlined">arrow_forward</span>
+          </span>
+        </div>
       </div>
     </div>
   } @else {
     <div class="product-card__image-wrapper">
       <div class="product-card__image" [attr.data-category]="productCategory">
         @if (productImage) {
-          <picture>
-            <source [srcset]="productImageWebP" type="image/webp">
-            <img [src]="productImage" [alt]="displayName || 'Producto'" class="product-card__img" loading="lazy">
-          </picture>
+          <img [src]="productImage" [alt]="displayName || 'Producto'" class="product-card__img" loading="lazy">
         }
         <div class="product-card__image-visual" [class.product-card__image-visual--hidden]="!!productImage">
           @if (productCategory === 'farmacos') {
@@ -152,7 +144,7 @@
       }
       <h3 class="product-card__name">{{ displayName }}</h3>
       <span class="product-card__cta">
-        {{ i18n.currentLang() === 'es' ? 'Ver producto' : 'View product' }}
+        {{ ctaLabel }}
         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M5 12h14"/>
           <path d="m12 5 7 7-7 7"/>

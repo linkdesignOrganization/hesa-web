@@ -407,10 +407,6 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
     }
   }
 
-  toWebP(url: string): string {
-    return url.replace(/\.(jpe?g|png)$/i, '.webp');
-  }
-
   ngOnDestroy(): void {
     this.seo.clearDynamicTags();
     this.stickyObserver?.disconnect();

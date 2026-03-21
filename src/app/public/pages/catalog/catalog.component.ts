@@ -2,12 +2,34 @@ import { Component, inject, signal, OnInit, OnDestroy, computed } from '@angular
 import { ActivatedRoute, Router } from '@angular/router';
 import { BreadcrumbComponent } from '../../../shared/components/breadcrumb/breadcrumb.component';
 import { ProductCardComponent } from '../../components/product-card/product-card.component';
-import { ApiService, ApiProduct, FilterValues } from '../../../shared/services/api.service';
+import { ApiProduct, ApiService, FilterValues } from '../../../shared/services/api.service';
 import { I18nService } from '../../../shared/services/i18n.service';
 import { SeoService } from '../../../shared/services/seo.service';
 import { getCatalogSegment, getCategoryLabel, getCategorySlug, getHomeLabel } from '../../../shared/utils/route-helpers';
 
 type CatalogCategoryKey = '' | 'farmacos' | 'alimentos' | 'equipos';
+type FilterKey = 'brand' | 'species' | 'family' | 'lifeStage' | 'equipmentType';
+
+interface FilterChip {
+  key: FilterKey | 'search';
+  value?: string;
+  label: string;
+}
+
+interface FilterGroup {
+  key: FilterKey;
+  label: string;
+  options: Array<{
+    value: string;
+    label: string;
+  }>;
+}
+
+interface CatalogSummaryBadge {
+  key: 'products' | 'brands' | 'categories';
+  label: string;
+  value: number;
+}
 
 @Component({
   selector: 'app-catalog',
@@ -31,13 +53,14 @@ export class CatalogComponent implements OnInit, OnDestroy {
   totalPages = signal(0);
   pageSize = 24;
   mobileFiltersOpen = signal(false);
+  catalogBaseTotal = signal(0);
 
   selectedCategory = signal<CatalogCategoryKey>('');
-  selectedBrand = signal('');
-  selectedSpecies = signal('');
-  selectedFamily = signal('');
-  selectedLifeStage = signal('');
-  selectedEquipmentType = signal('');
+  selectedBrandIds = signal<string[]>([]);
+  selectedSpecies = signal<string[]>([]);
+  selectedFamilies = signal<string[]>([]);
+  selectedLifeStages = signal<string[]>([]);
+  selectedEquipmentTypes = signal<string[]>([]);
   searchTerm = signal('');
 
   filterValues = signal<FilterValues>({
@@ -52,8 +75,8 @@ export class CatalogComponent implements OnInit, OnDestroy {
 
   readonly categoryTabs: Exclude<CatalogCategoryKey, ''>[] = ['farmacos', 'alimentos', 'equipos'];
 
-  activeFilters = computed(() => {
-    const filters: { key: string; label: string }[] = [];
+  activeFilters = computed<FilterChip[]>(() => {
+    const filters: FilterChip[] = [];
 
     if (this.searchTerm()) {
       filters.push({
@@ -62,26 +85,109 @@ export class CatalogComponent implements OnInit, OnDestroy {
       });
     }
 
-    if (this.selectedBrand()) {
-      const brand = this.filterValues().brands.find(b => b.id === this.selectedBrand() || b.slug === this.selectedBrand());
-      filters.push({ key: 'brand', label: brand?.name || this.selectedBrand() });
+    for (const value of this.selectedBrandIds()) {
+      filters.push({ key: 'brand', value, label: this.getOptionLabel('brand', value) });
     }
-    if (this.selectedSpecies()) filters.push({ key: 'species', label: this.selectedSpecies() });
-    if (this.selectedFamily()) filters.push({ key: 'family', label: this.selectedFamily() });
-    if (this.selectedLifeStage()) filters.push({ key: 'lifeStage', label: this.selectedLifeStage() });
-    if (this.selectedEquipmentType()) filters.push({ key: 'equipmentType', label: this.selectedEquipmentType() });
+
+    for (const value of this.selectedSpecies()) {
+      filters.push({ key: 'species', value, label: this.getOptionLabel('species', value) });
+    }
+
+    for (const value of this.selectedFamilies()) {
+      filters.push({ key: 'family', value, label: this.getOptionLabel('family', value) });
+    }
+
+    for (const value of this.selectedLifeStages()) {
+      filters.push({ key: 'lifeStage', value, label: this.getOptionLabel('lifeStage', value) });
+    }
+
+    for (const value of this.selectedEquipmentTypes()) {
+      filters.push({ key: 'equipmentType', value, label: this.getOptionLabel('equipmentType', value) });
+    }
 
     return filters;
   });
 
-  showSpeciesFilter = computed(() => {
-    const category = this.selectedCategory();
-    return !category || category === 'farmacos' || category === 'alimentos';
+  filterGroups = computed<FilterGroup[]>(() => {
+    const groups: FilterGroup[] = [
+      {
+        key: 'brand',
+        label: this.i18n.currentLang() === 'es' ? 'Marca' : 'Brand',
+        options: this.filterValues().brands.map(brand => ({
+          value: brand.id,
+          label: brand.name
+        }))
+      }
+    ];
+
+    if (this.showSpeciesFilter() && this.filterValues().species.length > 0) {
+      groups.push({
+        key: 'species',
+        label: this.i18n.currentLang() === 'es' ? 'Especie' : 'Species',
+        options: this.filterValues().species.map(species => ({
+          value: species.es,
+          label: this.getLocalizedOption(species)
+        }))
+      });
+    }
+
+    if (this.showFamilyFilter() && this.filterValues().families.length > 0) {
+      groups.push({
+        key: 'family',
+        label: this.i18n.currentLang() === 'es' ? 'Familia' : 'Family',
+        options: this.filterValues().families.map(family => ({
+          value: family.es,
+          label: this.getLocalizedOption(family)
+        }))
+      });
+    }
+
+    if (this.showLifeStageFilter() && this.filterValues().lifeStages.length > 0) {
+      groups.push({
+        key: 'lifeStage',
+        label: this.i18n.currentLang() === 'es' ? 'Etapa de vida' : 'Life stage',
+        options: this.filterValues().lifeStages.map(lifeStage => ({
+          value: lifeStage.es,
+          label: this.getLocalizedOption(lifeStage)
+        }))
+      });
+    }
+
+    if (this.showEquipmentTypeFilter() && this.filterValues().equipmentTypes.length > 0) {
+      groups.push({
+        key: 'equipmentType',
+        label: this.i18n.currentLang() === 'es' ? 'Tipo de equipo' : 'Equipment type',
+        options: this.filterValues().equipmentTypes.map(equipmentType => ({
+          value: equipmentType.es,
+          label: this.getLocalizedOption(equipmentType)
+        }))
+      });
+    }
+
+    return groups;
   });
 
-  showFamilyFilter = computed(() => this.selectedCategory() === 'farmacos');
-  showLifeStageFilter = computed(() => this.selectedCategory() === 'alimentos');
-  showEquipmentTypeFilter = computed(() => this.selectedCategory() === 'equipos');
+  catalogSummaryBadges = computed<CatalogSummaryBadge[]>(() => {
+    const badges: CatalogSummaryBadge[] = [
+      {
+        key: 'products',
+        label: this.i18n.currentLang() === 'es' ? 'productos' : 'products',
+        value: this.catalogBaseTotal()
+      },
+      {
+        key: 'brands',
+        label: this.i18n.currentLang() === 'es' ? 'marcas' : 'brands',
+        value: this.filterValues().brands.length
+      },
+      {
+        key: 'categories',
+        label: this.i18n.currentLang() === 'es' ? 'categorias' : 'categories',
+        value: this.selectedCategory() ? 1 : this.categoryTabs.length
+      }
+    ];
+
+    return badges.filter(badge => badge.value > 0);
+  });
 
   currentTheme = computed(() => {
     const category = this.selectedCategory();
@@ -144,6 +250,12 @@ export class CatalogComponent implements OnInit, OnDestroy {
       : 'Search by product, brand or presentation';
   }
 
+  get resultsCountLabel(): string {
+    return this.i18n.currentLang() === 'es'
+      ? `${this.totalProducts()} resultados`
+      : `${this.totalProducts()} results`;
+  }
+
   async ngOnInit(): Promise<void> {
     this.restoreFiltersFromUrl();
 
@@ -158,6 +270,7 @@ export class CatalogComponent implements OnInit, OnDestroy {
     });
     this.seo.setHreflang('/es/catalogo', '/en/catalog');
 
+    await this.loadCategoryMetadata();
     await this.loadFilters();
     await this.loadProducts();
   }
@@ -187,8 +300,35 @@ export class CatalogComponent implements OnInit, OnDestroy {
     return this.i18n.currentLang() === 'es' ? option.es : (option.en || option.es);
   }
 
+  isFilterSelected(key: FilterKey, value: string): boolean {
+    return this.getSelectedValues(key).includes(value);
+  }
+
+  showSpeciesFilter(): boolean {
+    const category = this.selectedCategory();
+    return !category || category === 'farmacos' || category === 'alimentos';
+  }
+
+  showFamilyFilter(): boolean {
+    return this.selectedCategory() === 'farmacos';
+  }
+
+  showLifeStageFilter(): boolean {
+    return this.selectedCategory() === 'alimentos';
+  }
+
+  showEquipmentTypeFilter(): boolean {
+    return this.selectedCategory() === 'equipos';
+  }
+
   async selectCategory(category: CatalogCategoryKey): Promise<void> {
-    await this.applyFilter('category', category);
+    this.clearSearchDebounce();
+    this.selectedCategory.set(category);
+    this.clearCategoryScopedFilters(category);
+    this.currentPage.set(1);
+    await this.loadFilters();
+    this.syncFiltersToUrl();
+    await this.loadProducts();
   }
 
   onSearchInput(term: string): void {
@@ -201,14 +341,83 @@ export class CatalogComponent implements OnInit, OnDestroy {
     }, 280);
   }
 
+  async toggleFilterValue(key: FilterKey, value: string, shouldLoad: boolean = true): Promise<void> {
+    this.clearSearchDebounce();
+    const nextValues = this.toggleListValue(this.getSelectedValues(key), value);
+    this.setSelectedValues(key, nextValues);
+    this.currentPage.set(1);
+
+    if (!shouldLoad) return;
+
+    this.syncFiltersToUrl();
+    await this.loadProducts();
+  }
+
+  async removeFilter(key: FilterKey | 'search', value?: string): Promise<void> {
+    if (key === 'search') {
+      this.searchTerm.set('');
+      this.currentPage.set(1);
+      this.syncFiltersToUrl();
+      await this.loadProducts();
+      return;
+    }
+
+    if (!value) return;
+
+    this.setSelectedValues(
+      key,
+      this.getSelectedValues(key).filter(item => item !== value)
+    );
+    this.currentPage.set(1);
+    this.syncFiltersToUrl();
+    await this.loadProducts();
+  }
+
+  async clearFilters(): Promise<void> {
+    this.clearSearchDebounce();
+    this.selectedCategory.set('');
+    this.selectedBrandIds.set([]);
+    this.selectedSpecies.set([]);
+    this.selectedFamilies.set([]);
+    this.selectedLifeStages.set([]);
+    this.selectedEquipmentTypes.set([]);
+    this.searchTerm.set('');
+    this.currentPage.set(1);
+    await this.loadFilters();
+    this.syncFiltersToUrl();
+    await this.loadProducts();
+  }
+
+  async goToPage(page: number): Promise<void> {
+    this.currentPage.set(page);
+    this.syncFiltersToUrl();
+    await this.loadProducts();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  toggleMobileFilters(): void {
+    this.mobileFiltersOpen.update(value => !value);
+  }
+
+  async applyMobileFilters(): Promise<void> {
+    this.mobileFiltersOpen.set(false);
+  }
+
+  async retry(): Promise<void> {
+    await this.loadProducts();
+  }
+
   private restoreFiltersFromUrl(): void {
     const params = this.route.snapshot.queryParams;
-    if (params['category']) this.selectedCategory.set(params['category']);
-    if (params['brand']) this.selectedBrand.set(params['brand']);
-    if (params['species']) this.selectedSpecies.set(params['species']);
-    if (params['family']) this.selectedFamily.set(params['family']);
-    if (params['lifeStage']) this.selectedLifeStage.set(params['lifeStage']);
-    if (params['equipmentType']) this.selectedEquipmentType.set(params['equipmentType']);
+    const category = params['category'] as CatalogCategoryKey | undefined;
+    if (category) this.selectedCategory.set(category);
+
+    this.selectedBrandIds.set(this.parseParamValues(params['brand']));
+    this.selectedSpecies.set(this.parseParamValues(params['species']));
+    this.selectedFamilies.set(this.parseParamValues(params['family']));
+    this.selectedLifeStages.set(this.parseParamValues(params['lifeStage']));
+    this.selectedEquipmentTypes.set(this.parseParamValues(params['equipmentType']));
+
     if (params['search']) this.searchTerm.set(params['search']);
     if (params['page']) {
       const page = parseInt(params['page'], 10);
@@ -226,11 +435,11 @@ export class CatalogComponent implements OnInit, OnDestroy {
   private syncFiltersToUrl(): void {
     const queryParams: Record<string, string | null> = {
       category: this.selectedCategory() || null,
-      brand: this.selectedBrand() || null,
-      species: this.selectedSpecies() || null,
-      family: this.selectedFamily() || null,
-      lifeStage: this.selectedLifeStage() || null,
-      equipmentType: this.selectedEquipmentType() || null,
+      brand: this.serializeParamValues(this.selectedBrandIds()),
+      species: this.serializeParamValues(this.selectedSpecies()),
+      family: this.serializeParamValues(this.selectedFamilies()),
+      lifeStage: this.serializeParamValues(this.selectedLifeStages()),
+      equipmentType: this.serializeParamValues(this.selectedEquipmentTypes()),
       search: this.searchTerm() || null,
       page: this.currentPage() > 1 ? String(this.currentPage()) : null
     };
@@ -241,6 +450,21 @@ export class CatalogComponent implements OnInit, OnDestroy {
       queryParamsHandling: 'merge',
       replaceUrl: true
     });
+  }
+
+  private async loadCategoryMetadata(): Promise<void> {
+    try {
+      const categories = await this.api.getCategories();
+      const baseTotal = categories.reduce((sum, category) => sum + (category.activeCount || category.totalCount || 0), 0);
+      this.catalogBaseTotal.set(baseTotal);
+
+      if (baseTotal === 0) {
+        const result = await this.api.getProducts({ limit: 1 });
+        this.catalogBaseTotal.set(result.total);
+      }
+    } catch {
+      // Non-critical
+    }
   }
 
   private async loadFilters(): Promise<void> {
@@ -260,11 +484,11 @@ export class CatalogComponent implements OnInit, OnDestroy {
     try {
       const result = await this.api.getProducts({
         category: this.selectedCategory() || undefined,
-        brand: this.selectedBrand() || undefined,
-        species: this.selectedSpecies() || undefined,
-        family: this.selectedFamily() || undefined,
-        lifeStage: this.selectedLifeStage() || undefined,
-        equipmentType: this.selectedEquipmentType() || undefined,
+        brand: this.selectedBrandIds().length > 0 ? this.selectedBrandIds() : undefined,
+        species: this.selectedSpecies().length > 0 ? this.selectedSpecies() : undefined,
+        family: this.selectedFamilies().length > 0 ? this.selectedFamilies() : undefined,
+        lifeStage: this.selectedLifeStages().length > 0 ? this.selectedLifeStages() : undefined,
+        equipmentType: this.selectedEquipmentTypes().length > 0 ? this.selectedEquipmentTypes() : undefined,
         search: this.searchTerm() || undefined,
         page: this.currentPage(),
         limit: this.pageSize,
@@ -279,90 +503,91 @@ export class CatalogComponent implements OnInit, OnDestroy {
     }
   }
 
-  async applyFilter(key: string, value: string): Promise<void> {
-    this.clearSearchDebounce();
+  private clearCategoryScopedFilters(category: CatalogCategoryKey): void {
+    if (category !== 'farmacos') {
+      this.selectedFamilies.set([]);
+    }
 
+    if (category !== 'alimentos') {
+      this.selectedLifeStages.set([]);
+    }
+
+    if (category !== 'equipos') {
+      this.selectedEquipmentTypes.set([]);
+    }
+
+    if (category === 'equipos') {
+      this.selectedSpecies.set([]);
+    }
+  }
+
+  private getSelectedValues(key: FilterKey): string[] {
     switch (key) {
-      case 'category':
-        this.selectedCategory.set((value || '') as CatalogCategoryKey);
-        this.selectedBrand.set('');
-        this.selectedFamily.set('');
-        this.selectedLifeStage.set('');
-        this.selectedEquipmentType.set('');
-        if (!value || value === 'equipos') {
-          this.selectedSpecies.set('');
-        }
-        await this.loadFilters();
-        break;
       case 'brand':
-        this.selectedBrand.set(value);
+        return this.selectedBrandIds();
+      case 'species':
+        return this.selectedSpecies();
+      case 'family':
+        return this.selectedFamilies();
+      case 'lifeStage':
+        return this.selectedLifeStages();
+      case 'equipmentType':
+        return this.selectedEquipmentTypes();
+    }
+  }
+
+  private setSelectedValues(key: FilterKey, values: string[]): void {
+    switch (key) {
+      case 'brand':
+        this.selectedBrandIds.set(values);
         break;
       case 'species':
-        this.selectedSpecies.set(value);
+        this.selectedSpecies.set(values);
         break;
       case 'family':
-        this.selectedFamily.set(value);
+        this.selectedFamilies.set(values);
         break;
       case 'lifeStage':
-        this.selectedLifeStage.set(value);
+        this.selectedLifeStages.set(values);
         break;
       case 'equipmentType':
-        this.selectedEquipmentType.set(value);
-        break;
-      case 'search':
-        this.searchTerm.set(value);
+        this.selectedEquipmentTypes.set(values);
         break;
     }
-
-    this.currentPage.set(1);
-    this.syncFiltersToUrl();
-    await this.loadProducts();
   }
 
-  async removeFilter(key: string): Promise<void> {
-    if (key === 'search') {
-      this.searchTerm.set('');
-      this.currentPage.set(1);
-      this.syncFiltersToUrl();
-      await this.loadProducts();
-      return;
+  private toggleListValue(values: string[], value: string): string[] {
+    return values.includes(value)
+      ? values.filter(item => item !== value)
+      : [...values, value];
+  }
+
+  private parseParamValues(value: string | undefined): string[] {
+    if (!value) return [];
+    return value
+      .split(',')
+      .map(item => item.trim())
+      .filter(Boolean);
+  }
+
+  private serializeParamValues(values: string[]): string | null {
+    return values.length > 0 ? values.join(',') : null;
+  }
+
+  private getOptionLabel(key: FilterKey, value: string): string {
+    if (key === 'brand') {
+      const brand = this.filterValues().brands.find(item => item.id === value || item.slug === value);
+      return brand?.name || value;
     }
-    await this.applyFilter(key, '');
+
+    const categoryOptions = this.getCategoryOptions(key);
+    return categoryOptions.find(option => option.es === value)?.[this.i18n.currentLang()] || value;
   }
 
-  async clearFilters(): Promise<void> {
-    this.clearSearchDebounce();
-    this.selectedCategory.set('');
-    this.selectedBrand.set('');
-    this.selectedSpecies.set('');
-    this.selectedFamily.set('');
-    this.selectedLifeStage.set('');
-    this.selectedEquipmentType.set('');
-    this.searchTerm.set('');
-    this.currentPage.set(1);
-    this.syncFiltersToUrl();
-    await this.loadFilters();
-    await this.loadProducts();
-  }
-
-  async goToPage(page: number): Promise<void> {
-    this.currentPage.set(page);
-    this.syncFiltersToUrl();
-    await this.loadProducts();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  toggleMobileFilters(): void {
-    this.mobileFiltersOpen.update(current => !current);
-  }
-
-  async applyMobileFilters(): Promise<void> {
-    this.mobileFiltersOpen.set(false);
-    this.syncFiltersToUrl();
-    await this.loadProducts();
-  }
-
-  async retry(): Promise<void> {
-    await this.loadProducts();
+  private getCategoryOptions(key: Exclude<FilterKey, 'brand'>): Array<{ es: string; en: string }> {
+    if (key === 'species') return this.filterValues().species;
+    if (key === 'family') return this.filterValues().families;
+    if (key === 'lifeStage') return this.filterValues().lifeStages;
+    return this.filterValues().equipmentTypes;
   }
 }

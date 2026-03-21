@@ -90,10 +90,10 @@
   }
 
   &--equipment {
-    --detail-accent: #6172ff;
-    --detail-accent-soft: rgba(97, 114, 255, 0.14);
+    --detail-accent: #0f6b64;
+    --detail-accent-soft: rgba(15, 118, 110, 0.14);
     --detail-surface: radial-gradient(circle at top right, rgba(255, 255, 255, 0.76), transparent 42%),
-      linear-gradient(180deg, #eef4ff 0%, #e1e7f5 100%);
+      linear-gradient(180deg, #f0f7f6 0%, #e5eeed 100%);
   }
 
   @media (max-width: 767px) {

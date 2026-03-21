@@ -10,6 +10,21 @@ function safeQueryString(value: unknown, maxLen = 100): string | undefined {
   return value.substring(0, maxLen).trim();
 }
 
+/** Normalize a public query param into a sanitized string array. */
+function safeQueryArray(value: unknown, maxLen = 100): string[] | undefined {
+  const rawValues = Array.isArray(value)
+    ? value.flatMap(item => (typeof item === 'string' ? item.split(',') : []))
+    : typeof value === 'string'
+      ? value.split(',')
+      : [];
+
+  const sanitized = rawValues
+    .map(item => item.trim().substring(0, maxLen))
+    .filter(Boolean);
+
+  return sanitized.length > 0 ? sanitized : undefined;
+}
+
 /**
  * GET /api/public/products
  * Public catalog listing with filters and pagination.
@@ -22,11 +37,11 @@ router.get('/', async (req: Request, res: Response) => {
 
     const result = await productService.getProducts({
       category: safeQueryString(req.query.category),
-      brand: safeQueryString(req.query.brand),
-      species: safeQueryString(req.query.species),
-      family: safeQueryString(req.query.family),
-      lifeStage: safeQueryString(req.query.lifeStage),
-      equipmentType: safeQueryString(req.query.equipmentType),
+      brand: safeQueryArray(req.query.brand),
+      species: safeQueryArray(req.query.species),
+      family: safeQueryArray(req.query.family),
+      lifeStage: safeQueryArray(req.query.lifeStage),
+      equipmentType: safeQueryArray(req.query.equipmentType),
       search: safeQueryString(req.query.search),
       isActive: true,
       page,
