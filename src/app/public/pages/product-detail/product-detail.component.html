@@ -99,6 +99,16 @@
 
         <aside class="product-detail__summary">
           <div class="product-detail__summary-card">
+            <span class="product-detail__availability-badge">
+              {{ i18n.currentLang() === 'es' ? 'Disponible' : 'Available' }}
+            </span>
+
+            <h1 class="product-detail__name">{{ productDisplayName }}</h1>
+
+            @if (productLead) {
+              <p class="product-detail__lead">{{ productLead }}</p>
+            }
+
             <div class="product-detail__hero-meta-strip">
               @if (brandName) {
                 <a class="product-detail__hero-meta-item product-detail__hero-meta-item--brand" [routerLink]="brandRoute">
@@ -110,34 +120,25 @@
                     }
                   </span>
                   <span class="product-detail__hero-meta-copy">
-                    <span class="product-detail__brand-label">{{ i18n.currentLang() === 'es' ? 'Marca' : 'Brand' }}</span>
                     <strong>{{ brandName }}</strong>
                   </span>
                 </a>
               }
 
               <div class="product-detail__hero-meta-item">
-                <span class="product-detail__hero-meta-icon material-symbols-outlined" aria-hidden="true">{{ categoryIcon }}</span>
+                <span class="material-symbols-outlined product-detail__hero-meta-symbol" aria-hidden="true">{{ categoryIcon }}</span>
                 <span class="product-detail__hero-meta-copy">
-                  <span class="product-detail__brand-label">{{ i18n.currentLang() === 'es' ? 'Categoría' : 'Category' }}</span>
                   <strong>{{ categoryLabel }}</strong>
                 </span>
               </div>
 
               <div class="product-detail__hero-meta-item">
-                <span class="product-detail__hero-meta-icon material-symbols-outlined" aria-hidden="true">check_circle</span>
+                <span class="material-symbols-outlined product-detail__hero-meta-symbol" aria-hidden="true">workspace_premium</span>
                 <span class="product-detail__hero-meta-copy">
-                  <span class="product-detail__brand-label">{{ i18n.currentLang() === 'es' ? 'Estado' : 'Status' }}</span>
-                  <strong>{{ i18n.currentLang() === 'es' ? 'Producto disponible' : 'Product available' }}</strong>
+                  <strong>{{ i18n.currentLang() === 'es' ? 'Exclusivo' : 'Exclusive' }}</strong>
                 </span>
               </div>
             </div>
-
-            <h1 class="product-detail__name">{{ productDisplayName }}</h1>
-
-            @if (productLead) {
-              <p class="product-detail__lead">{{ productLead }}</p>
-            }
 
             @if (summaryRows().length > 0) {
               <div class="product-detail__info-rows">
@@ -161,17 +162,17 @@
             <div class="product-detail__hero-actions">
               @if (currentProduct.pdfUrl) {
                 <a [href]="currentProduct.pdfUrl" target="_blank" rel="noopener noreferrer" class="btn btn-primary product-detail__hero-cta">
-                  <span class="material-symbols-outlined" aria-hidden="true">download</span>
+                  <span class="material-symbols-outlined" aria-hidden="true">picture_as_pdf</span>
                   {{ downloadCtaLabel }}
                 </a>
               } @else {
                 <a class="btn btn-primary product-detail__hero-cta" [routerLink]="contactRoute" [queryParams]="infoContactParams">
-                  <span class="material-symbols-outlined" aria-hidden="true">download</span>
+                  <span class="material-symbols-outlined" aria-hidden="true">picture_as_pdf</span>
                   {{ downloadCtaLabel }}
                 </a>
               }
 
-              <a class="btn btn-outline product-detail__hero-cta" [routerLink]="contactRoute" [queryParams]="availabilityContactParams">
+              <a class="btn product-detail__hero-cta product-detail__hero-cta--dark-outline" [routerLink]="contactRoute" [queryParams]="availabilityContactParams">
                 <span class="material-symbols-outlined" aria-hidden="true">contact_support</span>
                 {{ i18n.currentLang() === 'es' ? 'Consultar disponibilidad' : 'Check availability' }}
               </a>
@@ -414,32 +415,4 @@
     </div>
   }
 
-  <div class="sticky-bar" [class.sticky-bar--visible]="stickyVisible()">
-    <div class="container sticky-bar__inner">
-      <div class="sticky-bar__meta">
-        @if (currentProduct.images.length > 0) {
-          <div class="sticky-bar__thumb">
-            <img [src]="currentProduct.images[0]" [alt]="productDisplayName" loading="lazy">
-          </div>
-        }
-        <div>
-          <strong>{{ productDisplayName }}</strong>
-          @if (brandName) {
-            <span>{{ brandName }}</span>
-          }
-        </div>
-      </div>
-
-      <div class="sticky-bar__actions">
-        <a class="btn btn-whatsapp btn-sm" [href]="whatsappLink" target="_blank" rel="noopener noreferrer">
-          <span class="material-symbols-outlined" aria-hidden="true">chat</span>
-          WhatsApp
-        </a>
-        <a class="btn btn-primary btn-sm" [routerLink]="contactRoute" [queryParams]="availabilityContactParams">
-          <span class="material-symbols-outlined" aria-hidden="true">contact_support</span>
-          {{ i18n.currentLang() === 'es' ? 'Disponibilidad' : 'Availability' }}
-        </a>
-      </div>
-    </div>
-  </div>
 }

@@ -1,5 +1,5 @@
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
-import { Component, HostListener, OnDestroy, OnInit, PLATFORM_ID, computed, effect, inject, signal } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit, PLATFORM_ID, computed, inject, signal } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { BreadcrumbComponent } from '../../../shared/components/breadcrumb/breadcrumb.component';
@@ -64,21 +64,9 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   notFound = signal(false);
   error = signal(false);
   selectedImage = signal(0);
-  stickyVisible = signal(false);
   lightboxOpen = signal(false);
   openFaqIndex = signal<number | null>(0);
   private currentSlug = '';
-  private stickyObserver: IntersectionObserver | null = null;
-
-  private stickyBodyClassEffect = isPlatformBrowser(this.platformId)
-    ? effect(() => {
-        if (this.stickyVisible()) {
-          this.document.body.classList.add('has-sticky-bottom-bar');
-        } else {
-          this.document.body.classList.remove('has-sticky-bottom-bar');
-        }
-      })
-    : null;
 
   summaryRows = computed<ProductSummaryRow[]>(() => {
     const product = this.product();
@@ -483,9 +471,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
 
   get downloadCtaLabel(): string {
     const lang = this.i18n.currentLang();
-    return this.product()?.pdfUrl
-      ? (lang === 'es' ? 'Descargar ficha técnica' : 'Download technical sheet')
-      : (lang === 'es' ? 'Solicitar ficha técnica' : 'Request technical sheet');
+    return lang === 'es' ? 'Ficha técnica' : 'Technical sheet';
   }
 
   async ngOnInit(): Promise<void> {
@@ -498,22 +484,6 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
 
     this.loading.set(false);
 
-    if (isPlatformBrowser(this.platformId)) {
-      setTimeout(() => this.observeStickySummary(), 100);
-    }
-  }
-
-  private observeStickySummary(): void {
-    this.stickyObserver?.disconnect();
-    const summaryCard = this.document.querySelector('.product-detail__summary-card');
-    if (!summaryCard) return;
-
-    this.stickyObserver = new IntersectionObserver(
-      ([entry]) => this.stickyVisible.set(!entry.isIntersecting),
-      { threshold: 0.2 }
-    );
-
-    this.stickyObserver.observe(summaryCard);
   }
 
   private async loadProduct(slug: string): Promise<void> {
@@ -561,10 +531,6 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
         this.loadBrandDetail(product),
         this.loadRelatedProducts(product._id),
       ]);
-
-      if (isPlatformBrowser(this.platformId)) {
-        setTimeout(() => this.observeStickySummary(), 100);
-      }
     } catch (error) {
       if (error instanceof HttpErrorResponse && error.status === 404) {
         this.notFound.set(true);
@@ -666,10 +632,6 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.seo.clearDynamicTags();
-    this.stickyObserver?.disconnect();
-    if (isPlatformBrowser(this.platformId)) {
-      this.document.body.classList.remove('has-sticky-bottom-bar');
-    }
   }
 
   private localized(value?: { es: string; en: string } | string | null): string {

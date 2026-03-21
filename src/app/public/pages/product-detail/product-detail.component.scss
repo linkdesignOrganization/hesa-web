@@ -42,7 +42,7 @@
 
   &__hero {
     display: grid;
-    grid-template-columns: minmax(0, 0.88fr) minmax(360px, 1.12fr);
+    grid-template-columns: minmax(0, 0.78fr) minmax(380px, 1.22fr);
     gap: 22px;
     align-items: start;
     margin-top: 16px;
@@ -199,13 +199,6 @@
     }
   }
 
-  &__summary {
-    @media (min-width: 1024px) {
-      position: sticky;
-      top: 104px;
-    }
-  }
-
   &__summary-card {
     padding: 0;
     background: transparent;
@@ -226,6 +219,7 @@
     padding: 20px 22px;
     border-radius: 30px;
     background: var(--detail-surface);
+    margin-top: 22px;
   }
 
   &__hero-meta-item {
@@ -242,23 +236,16 @@
     cursor: pointer;
   }
 
-  &__hero-meta-icon {
-    width: 46px;
-    height: 46px;
-    flex: 0 0 46px;
-    border-radius: 16px;
-    display: grid;
-    place-items: center;
-    background: rgba(255, 255, 255, 0.82);
+  &__hero-meta-symbol {
+    flex: 0 0 auto;
     color: var(--detail-accent);
-    font-size: 1.15rem;
+    font-size: 1.55rem;
   }
 
   &__hero-meta-copy {
     min-width: 0;
     display: flex;
     flex-direction: column;
-    gap: 2px;
 
     strong {
       color: var(--neutral-900);
@@ -287,7 +274,6 @@
     }
   }
 
-  &__brand-label,
   &__section-label,
   &__section-kicker {
     margin: 0;
@@ -303,12 +289,27 @@
   }
 
   &__name {
-    margin: 20px 0 0;
+    margin: 10px 0 0;
     font-size: clamp(2rem, 3.3vw, 3.35rem);
     line-height: 0.98;
     letter-spacing: -0.06em;
     font-weight: var(--weight-extrabold);
     color: var(--neutral-900);
+  }
+
+  &__availability-badge {
+    display: inline-flex;
+    align-items: center;
+    min-height: 0;
+    padding: 10px 14px;
+    border-radius: 999px;
+    background: rgba(80, 185, 42, 0.14);
+    color: #3b8a1e;
+    font-size: 0.8rem;
+    line-height: 1;
+    font-weight: var(--weight-bold);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
   }
 
   &__lead {
@@ -400,6 +401,20 @@
 
     @media (max-width: 767px) {
       width: 100%;
+    }
+  }
+
+  &__hero-cta--dark-outline {
+    border: 1.5px solid rgba(15, 23, 42, 0.28);
+    background: transparent;
+    color: var(--neutral-900);
+
+    &:hover {
+      background: var(--neutral-900);
+      border-color: var(--neutral-900);
+      color: var(--neutral-white);
+      box-shadow: 0 10px 20px rgba(15, 23, 42, 0.14);
+      transform: translateY(-1px);
     }
   }
 
