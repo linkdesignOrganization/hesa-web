@@ -1,9 +1,10 @@
-import { Component, signal, inject, OnDestroy, HostListener, ElementRef } from '@angular/core';
+import { Component, signal, inject, OnDestroy, OnInit, HostListener, ElementRef } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { LanguageSelectorComponent } from '../language-selector/language-selector.component';
 import { SearchOverlayComponent } from '../search-overlay/search-overlay.component';
+import { ApiProduct, ApiService, FilterValues } from '../../services/api.service';
 import { I18nService } from '../../services/i18n.service';
-import { getBrandsSegment } from '../../utils/route-helpers';
+import { buildProductUrl, getBrandsSegment, getClientsSegment, getPartnersSegment } from '../../utils/route-helpers';
 
 interface LocalizedText {
   es: string;
@@ -19,11 +20,23 @@ interface MegaFeaturedCard {
   brandLogo?: string;
   category: MegaCategory;
   meta: LocalizedText[];
+  href: string;
 }
 
 interface MegaBrandLink {
   name: string;
   slug: string;
+}
+
+interface MegaFilterOption {
+  label: LocalizedText;
+  value: string;
+}
+
+interface MegaFilterGroup {
+  title: LocalizedText;
+  queryParam: 'species' | 'family' | 'lifeStage' | 'equipmentType';
+  options: MegaFilterOption[];
 }
 
 @Component({
@@ -33,118 +46,44 @@ interface MegaBrandLink {
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
-export class HeaderComponent implements OnDestroy {
+export class HeaderComponent implements OnInit, OnDestroy {
   private elementRef = inject(ElementRef<HTMLElement>);
+  private api = inject(ApiService);
   i18n = inject(I18nService);
   isScrolled = signal(false);
   isMobileMenuOpen = signal(false);
   isSubmenuOpen = signal(false);
   isSearchOpen = signal(false);
+  isAboutMenuOpen = signal(false);
 
   /** Which mega menu is currently open (null = none) */
   activeMega = signal<MegaCategory | null>(null);
+
+  readonly megaCategories: MegaCategory[] = ['farmacos', 'alimentos', 'equipos'];
+
+  private readonly emptyFilters: FilterValues = {
+    brands: [],
+    species: [],
+    families: [],
+    lifeStages: [],
+    equipmentTypes: [],
+  };
 
   readonly categoryIcons: Record<MegaCategory, string> = {
     farmacos: 'pill',
     alimentos: 'pets',
     equipos: 'biotech'
   };
-
-  readonly megaFeaturedProducts: Record<MegaCategory, MegaFeaturedCard[]> = {
-    farmacos: [
-      {
-        name: { es: 'Clamovet 250 mg Caja x40 Tabletas', en: 'Clamovet 250 mg 40-Tablet Box' },
-        brand: 'Orion Pharma',
-        image: '/Clamovet 250 mg Caja x40 Tabletas.jpg',
-        brandLogo: '/brands/orion-pharma/logo.svg',
-        category: 'farmacos',
-        meta: [
-          { es: 'Perros y gatos', en: 'Dogs and cats' },
-          { es: 'Antibiotico', en: 'Antibiotic' }
-        ]
-      },
-      {
-        name: { es: 'Toltravet Plus Caja x32 Tab', en: 'Toltravet Plus 32-Tablet Box' },
-        brand: 'Trisal',
-        image: '/Toltravet Plus Caja x32 Tab Antiparasitario Interno.jpg',
-        brandLogo: '/brands/trisal/logo.png',
-        category: 'farmacos',
-        meta: [
-          { es: 'Perros y gatos', en: 'Dogs and cats' },
-          { es: 'Antiparasitario', en: 'Antiparasitic' }
-        ]
-      }
-    ],
-    alimentos: [
-      {
-        name: { es: 'SUSTILE Leche Maternizada para Cachorros 400 gr', en: 'SUSTILE Puppy Milk Replacer 400 g' },
-        brand: 'New Born',
-        image: '/SUSTILE Leche Maternizada para Cachorros 400 gr.jpg',
-        brandLogo: '/brands/new-born/logo.png',
-        category: 'alimentos',
-        meta: [
-          { es: 'Caninos', en: 'Dogs' },
-          { es: 'Nutricion inicial', en: 'Starter nutrition' }
-        ]
-      },
-      {
-        name: { es: 'Felovite II con Taurina 2.5 oz', en: 'Felovite II with Taurine 2.5 oz' },
-        brand: 'Mitzi',
-        image: '/Felovite II con Taurina 2.5 oz Suplemento para gatos.jpg',
-        brandLogo: '/brands/mitzi/mitzi-logo.webp',
-        category: 'alimentos',
-        meta: [
-          { es: 'Felinos', en: 'Cats' },
-          { es: 'Suplemento diario', en: 'Daily supplement' }
-        ]
-      }
-    ],
-    equipos: [
-      {
-        name: { es: 'Ciprovet 5 ml Colirio', en: 'Ciprovet 5 ml Eye Drops' },
-        brand: 'Europlex',
-        image: '/Ciprovet 5 ml Colirio Cicatrizante y Antibacteriano.jpg',
-        brandLogo: '/brands/europlex/logo.png',
-        category: 'equipos',
-        meta: [
-          { es: 'Diagnostico', en: 'Diagnostics' },
-          { es: 'Consulta clinica', en: 'Clinical consult' }
-        ]
-      },
-      {
-        name: { es: 'Tobramax 5 ml', en: 'Tobramax 5 ml' },
-        brand: 'Unimedical',
-        image: '/Tobramax 5ml.jpg',
-        brandLogo: '/brands/unimedical/logo.png',
-        category: 'equipos',
-        meta: [
-          { es: 'Soporte oftalmologico', en: 'Ophthalmic support' },
-          { es: 'Uso diario', en: 'Daily use' }
-        ]
-      }
-    ]
-  };
-
-  readonly megaBrandLinks: Record<MegaCategory, MegaBrandLink[]> = {
-    farmacos: [
-      { name: 'Biozoo', slug: 'biozoo' },
-      { name: 'Orion Pharma', slug: 'orion-pharma-animal-health' },
-      { name: 'Unimedical', slug: 'unimedical' },
-      { name: 'Vemedim', slug: 'vemedim' }
-    ],
-    alimentos: [
-      { name: '1st Choice', slug: '1st-choice-nutrition' },
-      { name: 'Mitzi', slug: 'mitzi-katzenstreu' },
-      { name: 'Pronature', slug: 'pronature' },
-      { name: 'Raff', slug: 'raff' }
-    ],
-    equipos: [
-      { name: 'Emcoclavos', slug: 'emcoclavos-s-a' },
-      { name: 'FionaVet', slug: 'fionavet' },
-      { name: 'Kruuse', slug: 'kruuse' },
-      { name: 'Mustad', slug: 'mustad' }
-    ]
-  };
+  readonly megaFilterValues = signal<Record<MegaCategory, FilterValues>>({
+    farmacos: this.emptyFilters,
+    alimentos: this.emptyFilters,
+    equipos: this.emptyFilters,
+  });
+  readonly megaFeaturedProducts = signal<Record<MegaCategory, MegaFeaturedCard[]>>({
+    farmacos: [],
+    alimentos: [],
+    equipos: [],
+  });
 
   private onScroll = (): void => {
     this.isScrolled.set(window.scrollY > 50);
@@ -156,6 +95,10 @@ export class HeaderComponent implements OnDestroy {
     }
   }
 
+  async ngOnInit(): Promise<void> {
+    await Promise.all([this.loadMegaFilters(), this.loadMegaFeaturedProducts()]);
+  }
+
   ngOnDestroy(): void {
     if (typeof window !== 'undefined') {
       window.removeEventListener('scroll', this.onScroll);
@@ -163,11 +106,21 @@ export class HeaderComponent implements OnDestroy {
   }
 
   toggleMega(category: MegaCategory): void {
+    this.isAboutMenuOpen.set(false);
     this.activeMega.update(current => current === category ? null : category);
   }
 
   closeMega(): void {
     this.activeMega.set(null);
+  }
+
+  toggleAboutMenu(): void {
+    this.closeMega();
+    this.isAboutMenuOpen.update(value => !value);
+  }
+
+  closeAboutMenu(): void {
+    this.isAboutMenuOpen.set(false);
   }
 
   toggleMobileMenu(): void {
@@ -225,6 +178,31 @@ export class HeaderComponent implements OnDestroy {
     return `/${lang}/${getBrandsSegment(lang)}/${slug}`;
   }
 
+  getAboutRoute(): string {
+    const lang = this.i18n.currentLang();
+    return `${this.i18n.getLangPrefix()}/${lang === 'es' ? 'nosotros' : 'about'}`;
+  }
+
+  getPartnersRoute(): string {
+    const lang = this.i18n.currentLang();
+    return `/${lang}/${getPartnersSegment(lang)}`;
+  }
+
+  getClientsRoute(): string {
+    const lang = this.i18n.currentLang();
+    return `/${lang}/${getClientsSegment(lang)}`;
+  }
+
+  getAboutMenuItems(): Array<{ label: string; route: string }> {
+    const lang = this.i18n.currentLang();
+    return [
+      { label: lang === 'es' ? 'Sobre HESA' : 'About HESA', route: this.getAboutRoute() },
+      { label: 'Partners', route: this.getPartnersRoute() },
+      { label: lang === 'es' ? 'Clientes' : 'Clients', route: this.getClientsRoute() },
+      { label: lang === 'es' ? 'Marcas' : 'Brands', route: `/${lang}/${getBrandsSegment(lang)}` },
+    ];
+  }
+
   onSubmenuKeydown(event: KeyboardEvent): void {
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault();
@@ -245,17 +223,178 @@ export class HeaderComponent implements OnDestroy {
     if (this.activeMega()) {
       this.activeMega.set(null);
     }
+    if (this.isAboutMenuOpen()) {
+      this.isAboutMenuOpen.set(false);
+    }
   }
 
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent): void {
-    if (!this.activeMega()) return;
-
     const target = event.target;
     if (!(target instanceof Node)) return;
 
     if (!this.elementRef.nativeElement.contains(target)) {
       this.closeMega();
+      this.closeAboutMenu();
     }
+  }
+
+  getMegaFilterGroups(category: MegaCategory): MegaFilterGroup[] {
+    const values = this.megaFilterValues()[category] || this.emptyFilters;
+
+    const toOptions = (items: Array<{ es: string; en: string }> = []): MegaFilterOption[] =>
+      items.map(item => ({
+        label: { es: item.es, en: item.en },
+        value: item.es,
+      }));
+
+    if (category === 'farmacos') {
+      return [
+        {
+          title: { es: 'Por especie', en: 'By species' },
+          queryParam: 'species' as const,
+          options: toOptions(values.species),
+        },
+        {
+          title: { es: 'Por familia', en: 'By family' },
+          queryParam: 'family' as const,
+          options: toOptions(values.families),
+        },
+      ].filter(group => group.options.length > 0);
+    }
+
+    if (category === 'alimentos') {
+      return [
+        {
+          title: { es: 'Por especie', en: 'By species' },
+          queryParam: 'species' as const,
+          options: toOptions(values.species),
+        },
+        {
+          title: { es: 'Por etapa', en: 'By life stage' },
+          queryParam: 'lifeStage' as const,
+          options: toOptions(values.lifeStages),
+        },
+      ].filter(group => group.options.length > 0);
+    }
+
+    return [
+      {
+        title: { es: 'Por tipo', en: 'By type' },
+        queryParam: 'equipmentType' as const,
+        options: toOptions(values.equipmentTypes),
+      },
+    ].filter(group => group.options.length > 0);
+  }
+
+  getMegaBrandColumns(category: MegaCategory): MegaBrandLink[][] {
+    const links = (this.megaFilterValues()[category]?.brands || []).map(brand => ({
+      name: brand.name,
+      slug: brand.slug,
+    }));
+
+    return this.chunkArray(links, 5);
+  }
+
+  getMegaFeaturedCards(category: MegaCategory): MegaFeaturedCard[] {
+    return this.megaFeaturedProducts()[category] || [];
+  }
+
+  getMegaFilterRoute(category: MegaCategory): string {
+    return this.getCategoryRoute(category);
+  }
+
+  getMegaFilterQuery(queryParam: MegaFilterGroup['queryParam'], value: string): Record<string, string> {
+    return { [queryParam]: value };
+  }
+
+  closeHeaderMenus(): void {
+    this.closeMega();
+    this.closeAboutMenu();
+  }
+
+  private async loadMegaFilters(): Promise<void> {
+    try {
+      const results = await Promise.all(
+        this.megaCategories.map(async category => [category, await this.api.getFilterValues(category)] as const)
+      );
+
+      const nextState = { ...this.megaFilterValues() };
+      for (const [category, values] of results) {
+        nextState[category] = values;
+      }
+      this.megaFilterValues.set(nextState);
+    } catch {
+      // Keep header functional even if dynamic menu data fails to load.
+    }
+  }
+
+  private async loadMegaFeaturedProducts(): Promise<void> {
+    try {
+      const homeData = await this.api.getHomeData();
+      const nextState: Record<MegaCategory, MegaFeaturedCard[]> = {
+        farmacos: [],
+        alimentos: [],
+        equipos: [],
+      };
+
+      for (const category of this.megaCategories) {
+        const pool = homeData.featuredProducts.filter(product => product.category === category);
+        nextState[category] = this.shuffle(pool)
+          .slice(0, 2)
+          .map(product => this.toMegaFeaturedCard(product));
+      }
+
+      this.megaFeaturedProducts.set(nextState);
+    } catch {
+      // Keep header functional if featured products cannot be loaded.
+    }
+  }
+
+  private toMegaFeaturedCard(product: ApiProduct): MegaFeaturedCard {
+    return {
+      name: product.name,
+      brand: product.brand?.name || '',
+      image: product.images?.[0] || '',
+      brandLogo: product.brand?.logo,
+      category: product.category,
+      meta: this.getProductMeta(product),
+      href: buildProductUrl(product.category, product.slug[this.i18n.currentLang()], this.i18n.currentLang()),
+    };
+  }
+
+  private getProductMeta(product: ApiProduct): LocalizedText[] {
+    const same = (value: string): LocalizedText => ({ es: value, en: value });
+    const species = product.species?.length ? same(product.species.slice(0, 2).join(' · ')) : null;
+    const family = product.family ? same(product.family) : null;
+    const lifeStage = product.lifeStage ? same(product.lifeStage) : null;
+    const equipmentType = product.equipmentType ? same(product.equipmentType) : null;
+    const presentation = product.presentations?.length ? same(product.presentations[0]) : null;
+
+    const metaByCategory: Record<MegaCategory, Array<LocalizedText | null>> = {
+      farmacos: [species, family, presentation],
+      alimentos: [species, lifeStage, presentation],
+      equipos: [equipmentType, presentation, species],
+    };
+
+    return metaByCategory[product.category].filter(Boolean).slice(0, 2) as LocalizedText[];
+  }
+
+  private chunkArray<T>(items: T[], size: number): T[][] {
+    if (items.length === 0) return [];
+    const chunks: T[][] = [];
+    for (let index = 0; index < items.length; index += size) {
+      chunks.push(items.slice(index, index + size));
+    }
+    return chunks;
+  }
+
+  private shuffle<T>(items: T[]): T[] {
+    const next = [...items];
+    for (let index = next.length - 1; index > 0; index -= 1) {
+      const swapIndex = Math.floor(Math.random() * (index + 1));
+      [next[index], next[swapIndex]] = [next[swapIndex], next[index]];
+    }
+    return next;
   }
 }

@@ -13,12 +13,28 @@
       <div class="header__default" [class.header__default--hidden]="isSearchOpen()">
         <!-- Left: Nosotros -->
         <div class="header__top-left">
-          <a
-            [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'nosotros' : 'about')"
-            routerLinkActive="header__top-link--active"
-            class="header__top-link">
-            {{ i18n.currentLang() === 'es' ? 'Nosotros' : 'About' }}
-          </a>
+          <div class="header__about-menu">
+            <button
+              type="button"
+              class="header__about-trigger"
+              (click)="toggleAboutMenu()"
+              [attr.aria-expanded]="isAboutMenuOpen()">
+              <span>{{ i18n.currentLang() === 'es' ? 'Nosotros' : 'About' }}</span>
+              <svg class="header__about-chevron" [class.header__about-chevron--open]="isAboutMenuOpen()" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+
+            @if (isAboutMenuOpen()) {
+              <div class="header__about-dropdown">
+                @for (item of getAboutMenuItems(); track item.route) {
+                  <a [routerLink]="item.route" class="header__about-option" (click)="closeAboutMenu()">
+                    {{ item.label }}
+                  </a>
+                }
+              </div>
+            }
+          </div>
         </div>
 
         <!-- Center: Logo -->
@@ -71,45 +87,21 @@
   <!-- Row 2: Category Navigation with Mega Menus -->
   <nav class="header__row-nav">
     <ul class="header__nav-list">
-      <li>
-        <button
-          type="button"
-          class="header__nav-link"
-          (click)="toggleMega('farmacos')"
-          [attr.aria-expanded]="activeMega() === 'farmacos'"
-          [class.header__nav-link--mega-active]="activeMega() === 'farmacos'">
-          <span class="header__nav-label">
-            <span class="material-symbols-outlined header__nav-icon" aria-hidden="true">{{ categoryIcons.farmacos }}</span>
-            <span>{{ i18n.currentLang() === 'es' ? 'Fármacos' : 'Pharmaceuticals' }}</span>
-          </span>
-        </button>
-      </li>
-      <li>
-        <button
-          type="button"
-          class="header__nav-link"
-          (click)="toggleMega('alimentos')"
-          [attr.aria-expanded]="activeMega() === 'alimentos'"
-          [class.header__nav-link--mega-active]="activeMega() === 'alimentos'">
-          <span class="header__nav-label">
-            <span class="material-symbols-outlined header__nav-icon" aria-hidden="true">{{ categoryIcons.alimentos }}</span>
-            <span>{{ i18n.currentLang() === 'es' ? 'Alimentos' : 'Food' }}</span>
-          </span>
-        </button>
-      </li>
-      <li>
-        <button
-          type="button"
-          class="header__nav-link"
-          (click)="toggleMega('equipos')"
-          [attr.aria-expanded]="activeMega() === 'equipos'"
-          [class.header__nav-link--mega-active]="activeMega() === 'equipos'">
-          <span class="header__nav-label">
-            <span class="material-symbols-outlined header__nav-icon" aria-hidden="true">{{ categoryIcons.equipos }}</span>
-            <span>{{ i18n.currentLang() === 'es' ? 'Equipos' : 'Equipment' }}</span>
-          </span>
-        </button>
-      </li>
+      @for (category of megaCategories; track category) {
+        <li>
+          <button
+            type="button"
+            class="header__nav-link"
+            (click)="toggleMega(category)"
+            [attr.aria-expanded]="activeMega() === category"
+            [class.header__nav-link--mega-active]="activeMega() === category">
+            <span class="header__nav-label">
+              <span class="material-symbols-outlined header__nav-icon" aria-hidden="true">{{ categoryIcons[category] }}</span>
+              <span>{{ getCategoryLabel(category) }}</span>
+            </span>
+          </button>
+        </li>
+      }
       <li>
         <a
           [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo' : 'catalog')"
@@ -124,195 +116,105 @@
       </li>
     </ul>
 
-    <!-- Mega Menu: Fármacos -->
-    <div class="mega" [class.mega--open]="activeMega() === 'farmacos'">
-      <div class="mega__inner">
-        <button
-          type="button"
-          class="mega__close"
-          (click)="closeMega()"
-          [attr.aria-label]="i18n.currentLang() === 'es' ? 'Cerrar menu de fármacos' : 'Close pharmaceuticals menu'">
-          <span class="material-symbols-outlined" aria-hidden="true">close</span>
-        </button>
-        <div class="mega__content">
-          <div class="mega__filters">
-            <div class="mega__links">
-              <span class="mega__heading">{{ i18n.currentLang() === 'es' ? 'Por especie' : 'By species' }}</span>
-              <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/farmacos' : 'catalog/pharmaceuticals')" [queryParams]="{species: 'Caninos'}" class="mega__link" (click)="activeMega.set(null)">{{ i18n.currentLang() === 'es' ? 'Caninos' : 'Canine' }}</a>
-              <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/farmacos' : 'catalog/pharmaceuticals')" [queryParams]="{species: 'Felinos'}" class="mega__link" (click)="activeMega.set(null)">{{ i18n.currentLang() === 'es' ? 'Felinos' : 'Feline' }}</a>
-              <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/farmacos' : 'catalog/pharmaceuticals')" [queryParams]="{species: 'Bovinos'}" class="mega__link" (click)="activeMega.set(null)">{{ i18n.currentLang() === 'es' ? 'Bovinos' : 'Bovine' }}</a>
-              <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/farmacos' : 'catalog/pharmaceuticals')" [queryParams]="{species: 'Equinos'}" class="mega__link" (click)="activeMega.set(null)">{{ i18n.currentLang() === 'es' ? 'Equinos' : 'Equine' }}</a>
-            </div>
-            <div class="mega__links mega__links--brands">
-              <span class="mega__heading">{{ i18n.currentLang() === 'es' ? 'Por marca' : 'By brand' }}</span>
-              @for (brand of megaBrandLinks.farmacos; track brand.slug) {
-                <a [routerLink]="getBrandRoute(brand.slug)" class="mega__link" (click)="activeMega.set(null)">{{ brand.name }}</a>
-              }
-            </div>
-          </div>
-          <div class="mega__action">
-            <a [routerLink]="getCategoryRoute('farmacos')" class="mega__view-all" (click)="activeMega.set(null)">
-              {{ i18n.currentLang() === 'es' ? 'Ver todos los fármacos' : 'Shop All Pharmaceuticals' }}
-              <span class="material-symbols-outlined" aria-hidden="true">arrow_circle_right</span>
-            </a>
-          </div>
-        </div>
-        <div class="mega__promos">
-          @for (card of megaFeaturedProducts.farmacos; track card.name.es) {
-            <a [routerLink]="getCategoryRoute(card.category)" class="mega-card" [attr.data-category]="card.category" (click)="activeMega.set(null)">
-              <div class="mega-card__media" [attr.data-category]="card.category">
-                <span class="mega-card__category">{{ i18n.currentLang() === 'es' ? 'Destacado' : 'Featured' }}</span>
-                @if (card.brandLogo) {
-                  <div class="mega-card__brand-logo-wrap">
-                    <img [src]="card.brandLogo" [alt]="card.brand" class="mega-card__brand-logo" loading="lazy">
-                  </div>
-                }
-                <img [src]="card.image" [alt]="t(card.name)" class="mega-card__image" loading="lazy">
-              </div>
-              <div class="mega-card__body">
-                <div class="mega-card__brand">{{ card.brand }}</div>
-                <h3 class="mega-card__name">{{ t(card.name) }}</h3>
-                <div class="mega-card__meta">
-                  @for (meta of card.meta; track meta.es) {
-                    <span class="mega-card__meta-pill">{{ t(meta) }}</span>
-                  }
-                </div>
-                <div class="mega-card__footer">
-                  <span class="mega-card__cta">{{ i18n.currentLang() === 'es' ? 'Ver Producto' : 'View Product' }}</span>
-                  <span class="mega-card__arrow material-symbols-outlined" aria-hidden="true">arrow_forward</span>
-                </div>
-              </div>
-            </a>
-          }
-        </div>
-      </div>
-    </div>
+    @for (category of megaCategories; track category) {
+      <div class="mega" [class.mega--open]="activeMega() === category">
+        <div class="mega__inner">
+          <button
+            type="button"
+            class="mega__close"
+            (click)="closeMega()"
+            [attr.aria-label]="(i18n.currentLang() === 'es' ? 'Cerrar menu de ' : 'Close menu for ') + getCategoryLabel(category)">
+            <span class="material-symbols-outlined" aria-hidden="true">close</span>
+          </button>
 
-    <!-- Mega Menu: Alimentos -->
-    <div class="mega" [class.mega--open]="activeMega() === 'alimentos'">
-      <div class="mega__inner">
-        <button
-          type="button"
-          class="mega__close"
-          (click)="closeMega()"
-          [attr.aria-label]="i18n.currentLang() === 'es' ? 'Cerrar menu de alimentos' : 'Close food menu'">
-          <span class="material-symbols-outlined" aria-hidden="true">close</span>
-        </button>
-        <div class="mega__content">
-          <div class="mega__filters">
-            <div class="mega__links">
-              <span class="mega__heading">{{ i18n.currentLang() === 'es' ? 'Por especie' : 'By species' }}</span>
-              <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/alimentos' : 'catalog/food')" [queryParams]="{species: 'Perros'}" class="mega__link" (click)="activeMega.set(null)">{{ i18n.currentLang() === 'es' ? 'Perros' : 'Dogs' }}</a>
-              <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/alimentos' : 'catalog/food')" [queryParams]="{species: 'Gatos'}" class="mega__link" (click)="activeMega.set(null)">{{ i18n.currentLang() === 'es' ? 'Gatos' : 'Cats' }}</a>
-              <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/alimentos' : 'catalog/food')" [queryParams]="{species: 'Aves'}" class="mega__link" (click)="activeMega.set(null)">{{ i18n.currentLang() === 'es' ? 'Aves' : 'Birds' }}</a>
-            </div>
-            <div class="mega__links mega__links--brands">
-              <span class="mega__heading">{{ i18n.currentLang() === 'es' ? 'Por marca' : 'By brand' }}</span>
-              @for (brand of megaBrandLinks.alimentos; track brand.slug) {
-                <a [routerLink]="getBrandRoute(brand.slug)" class="mega__link" (click)="activeMega.set(null)">{{ brand.name }}</a>
-              }
-            </div>
-          </div>
-          <div class="mega__action">
-            <a [routerLink]="getCategoryRoute('alimentos')" class="mega__view-all" (click)="activeMega.set(null)">
-              {{ i18n.currentLang() === 'es' ? 'Ver todos los alimentos' : 'Shop All Food' }}
-              <span class="material-symbols-outlined" aria-hidden="true">arrow_circle_right</span>
-            </a>
-          </div>
-        </div>
-        <div class="mega__promos">
-          @for (card of megaFeaturedProducts.alimentos; track card.name.es) {
-            <a [routerLink]="getCategoryRoute(card.category)" class="mega-card" [attr.data-category]="card.category" (click)="activeMega.set(null)">
-              <div class="mega-card__media" [attr.data-category]="card.category">
-                <span class="mega-card__category">{{ i18n.currentLang() === 'es' ? 'Destacado' : 'Featured' }}</span>
-                @if (card.brandLogo) {
-                  <div class="mega-card__brand-logo-wrap">
-                    <img [src]="card.brandLogo" [alt]="card.brand" class="mega-card__brand-logo" loading="lazy">
+          <div class="mega__content">
+            <div class="mega__filters">
+              <div class="mega__filter-groups">
+                @for (group of getMegaFilterGroups(category); track group.title.es + group.queryParam) {
+                  <div class="mega__links">
+                    <span class="mega__heading">{{ t(group.title) }}</span>
+                    @for (option of group.options; track option.value) {
+                      <a
+                        [routerLink]="getMegaFilterRoute(category)"
+                        [queryParams]="getMegaFilterQuery(group.queryParam, option.value)"
+                        class="mega__link"
+                        (click)="closeHeaderMenus()">
+                        {{ t(option.label) }}
+                      </a>
+                    }
                   </div>
                 }
-                <img [src]="card.image" [alt]="t(card.name)" class="mega-card__image" loading="lazy">
               </div>
-              <div class="mega-card__body">
-                <div class="mega-card__brand">{{ card.brand }}</div>
-                <h3 class="mega-card__name">{{ t(card.name) }}</h3>
-                <div class="mega-card__meta">
-                  @for (meta of card.meta; track meta.es) {
-                    <span class="mega-card__meta-pill">{{ t(meta) }}</span>
-                  }
-                </div>
-                <div class="mega-card__footer">
-                  <span class="mega-card__cta">{{ i18n.currentLang() === 'es' ? 'Ver Producto' : 'View Product' }}</span>
-                  <span class="mega-card__arrow material-symbols-outlined" aria-hidden="true">arrow_forward</span>
-                </div>
-              </div>
-            </a>
-          }
-        </div>
-      </div>
-    </div>
 
-    <!-- Mega Menu: Equipos -->
-    <div class="mega" [class.mega--open]="activeMega() === 'equipos'">
-      <div class="mega__inner">
-        <button
-          type="button"
-          class="mega__close"
-          (click)="closeMega()"
-          [attr.aria-label]="i18n.currentLang() === 'es' ? 'Cerrar menu de equipos' : 'Close equipment menu'">
-          <span class="material-symbols-outlined" aria-hidden="true">close</span>
-        </button>
-        <div class="mega__content">
-          <div class="mega__filters">
-            <div class="mega__links">
-              <span class="mega__heading">{{ i18n.currentLang() === 'es' ? 'Por tipo' : 'By type' }}</span>
-              <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/equipos' : 'catalog/equipment')" [queryParams]="{equipmentType: 'Diagnóstico'}" class="mega__link" (click)="activeMega.set(null)">{{ i18n.currentLang() === 'es' ? 'Diagnóstico' : 'Diagnostic' }}</a>
-              <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/equipos' : 'catalog/equipment')" [queryParams]="{equipmentType: 'Cirugía'}" class="mega__link" (click)="activeMega.set(null)">{{ i18n.currentLang() === 'es' ? 'Cirugía' : 'Surgery' }}</a>
-              <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/equipos' : 'catalog/equipment')" [queryParams]="{equipmentType: 'Laboratorio'}" class="mega__link" (click)="activeMega.set(null)">{{ i18n.currentLang() === 'es' ? 'Laboratorio' : 'Laboratory' }}</a>
-            </div>
-            <div class="mega__links mega__links--brands">
-              <span class="mega__heading">{{ i18n.currentLang() === 'es' ? 'Por marca' : 'By brand' }}</span>
-              @for (brand of megaBrandLinks.equipos; track brand.slug) {
-                <a [routerLink]="getBrandRoute(brand.slug)" class="mega__link" (click)="activeMega.set(null)">{{ brand.name }}</a>
+              @if (getMegaBrandColumns(category).length > 0) {
+                <div class="mega__brand-block">
+                  <span class="mega__heading">{{ i18n.currentLang() === 'es' ? 'Por marca' : 'By brand' }}</span>
+                  <div class="mega__brand-columns">
+                    @for (column of getMegaBrandColumns(category); track $index) {
+                      <div class="mega__brand-column">
+                        @for (brand of column; track brand.slug) {
+                          <a [routerLink]="getBrandRoute(brand.slug)" class="mega__link" (click)="closeHeaderMenus()">{{ brand.name }}</a>
+                        }
+                      </div>
+                    }
+                  </div>
+                </div>
               }
             </div>
+
+            <div class="mega__action">
+              <a [routerLink]="getCategoryRoute(category)" class="mega__view-all" (click)="closeHeaderMenus()">
+                {{
+                  category === 'farmacos'
+                    ? (i18n.currentLang() === 'es' ? 'Ver todos los fármacos' : 'Shop All Pharmaceuticals')
+                    : category === 'alimentos'
+                      ? (i18n.currentLang() === 'es' ? 'Ver todos los alimentos' : 'Shop All Food')
+                      : (i18n.currentLang() === 'es' ? 'Ver todos los equipos' : 'Shop All Equipment')
+                }}
+                <span class="material-symbols-outlined" aria-hidden="true">arrow_circle_right</span>
+              </a>
+            </div>
           </div>
-          <div class="mega__action">
-            <a [routerLink]="getCategoryRoute('equipos')" class="mega__view-all" (click)="activeMega.set(null)">
-              {{ i18n.currentLang() === 'es' ? 'Ver todos los equipos' : 'Shop All Equipment' }}
-              <span class="material-symbols-outlined" aria-hidden="true">arrow_circle_right</span>
-            </a>
-          </div>
-        </div>
-        <div class="mega__promos">
-          @for (card of megaFeaturedProducts.equipos; track card.name.es) {
-            <a [routerLink]="getCategoryRoute(card.category)" class="mega-card" [attr.data-category]="card.category" (click)="activeMega.set(null)">
-              <div class="mega-card__media" [attr.data-category]="card.category">
-                <span class="mega-card__category">{{ i18n.currentLang() === 'es' ? 'Destacado' : 'Featured' }}</span>
-                @if (card.brandLogo) {
-                  <div class="mega-card__brand-logo-wrap">
-                    <img [src]="card.brandLogo" [alt]="card.brand" class="mega-card__brand-logo" loading="lazy">
+
+          @if (getMegaFeaturedCards(category).length > 0) {
+            <div class="mega__promos">
+              @for (card of getMegaFeaturedCards(category); track card.href) {
+                <a [routerLink]="card.href" class="mega-card" [attr.data-category]="card.category" (click)="closeHeaderMenus()">
+                  <div class="mega-card__media" [attr.data-category]="card.category">
+                    <span class="mega-card__category">{{ i18n.currentLang() === 'es' ? 'Destacado' : 'Featured' }}</span>
+                    @if (card.brandLogo) {
+                      <div class="mega-card__brand-logo-wrap">
+                        <img [src]="card.brandLogo" [alt]="card.brand" class="mega-card__brand-logo" loading="lazy">
+                      </div>
+                    }
+                    @if (card.image) {
+                      <img [src]="card.image" [alt]="t(card.name)" class="mega-card__image" loading="lazy">
+                    } @else {
+                      <div class="mega-card__placeholder">
+                        <span class="material-symbols-outlined" aria-hidden="true">{{ categoryIcons[card.category] }}</span>
+                      </div>
+                    }
                   </div>
-                }
-                <img [src]="card.image" [alt]="t(card.name)" class="mega-card__image" loading="lazy">
-              </div>
-              <div class="mega-card__body">
-                <div class="mega-card__brand">{{ card.brand }}</div>
-                <h3 class="mega-card__name">{{ t(card.name) }}</h3>
-                <div class="mega-card__meta">
-                  @for (meta of card.meta; track meta.es) {
-                    <span class="mega-card__meta-pill">{{ t(meta) }}</span>
-                  }
-                </div>
-                <div class="mega-card__footer">
-                  <span class="mega-card__cta">{{ i18n.currentLang() === 'es' ? 'Ver Producto' : 'View Product' }}</span>
-                  <span class="mega-card__arrow material-symbols-outlined" aria-hidden="true">arrow_forward</span>
-                </div>
-              </div>
-            </a>
+                  <div class="mega-card__body">
+                    <div class="mega-card__brand">{{ card.brand }}</div>
+                    <h3 class="mega-card__name">{{ t(card.name) }}</h3>
+                    <div class="mega-card__meta">
+                      @for (meta of card.meta; track meta.es + meta.en) {
+                        <span class="mega-card__meta-pill">{{ t(meta) }}</span>
+                      }
+                    </div>
+                    <div class="mega-card__footer">
+                      <span class="mega-card__cta">{{ i18n.currentLang() === 'es' ? 'Ver Producto' : 'View Product' }}</span>
+                      <span class="mega-card__arrow material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+                    </div>
+                  </div>
+                </a>
+              }
+            </div>
           }
         </div>
       </div>
-    </div>
+    }
   </nav>
 </header>
 
@@ -344,7 +246,8 @@
     <div class="mobile-menu__divider"></div>
     <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'marcas' : 'brands')" class="mobile-menu__link mobile-menu__link--secondary" (click)="closeMobileMenu()">{{ i18n.currentLang() === 'es' ? 'Marcas' : 'Brands' }}</a>
     <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'nosotros' : 'about')" class="mobile-menu__link mobile-menu__link--secondary" (click)="closeMobileMenu()">{{ i18n.currentLang() === 'es' ? 'Nosotros' : 'About' }}</a>
-    <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'distribuidores' : 'distributors')" class="mobile-menu__link mobile-menu__link--secondary" (click)="closeMobileMenu()">{{ i18n.currentLang() === 'es' ? 'Socios' : 'Partners' }}</a>
+    <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'distribuidores' : 'distributors')" class="mobile-menu__link mobile-menu__link--secondary" (click)="closeMobileMenu()">Partners</a>
+    <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'clientes' : 'clients')" class="mobile-menu__link mobile-menu__link--secondary" (click)="closeMobileMenu()">{{ i18n.currentLang() === 'es' ? 'Clientes' : 'Clients' }}</a>
     <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'contacto' : 'contact')" class="mobile-menu__link mobile-menu__link--secondary" (click)="closeMobileMenu()">{{ i18n.currentLang() === 'es' ? 'Contacto' : 'Contact' }}</a>
   </nav>
 
