@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild, computed, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { BreadcrumbComponent } from '../../../shared/components/breadcrumb/breadcrumb.component';
@@ -40,6 +41,7 @@ interface CategorySummaryBadge {
 })
 export class CatalogCategoryComponent implements OnInit, OnDestroy {
   private api = inject(ApiService);
+  private location = inject(Location);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private seo = inject(SeoService);
@@ -448,12 +450,12 @@ export class CatalogCategoryComponent implements OnInit, OnDestroy {
       page: this.currentPage() > 1 ? String(this.currentPage()) : null,
     };
 
-    this.router.navigate([], {
+    const urlTree = this.router.createUrlTree([], {
       relativeTo: this.route,
-      queryParams,
-      queryParamsHandling: 'merge',
-      replaceUrl: true,
+      queryParams
     });
+
+    this.location.replaceState(this.router.serializeUrl(urlTree));
   }
 
   private async loadFilters(): Promise<void> {

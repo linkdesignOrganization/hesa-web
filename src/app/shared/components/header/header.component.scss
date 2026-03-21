@@ -265,7 +265,6 @@
     width: 44px;
     height: 44px;
     border-radius: 50%;
-    margin-right: -8px;
     transition: background-color 0.15s ease;
 
     @media (min-width: 1024px) {
@@ -738,7 +737,6 @@
     height: 44px;
     color: var(--neutral-900);
     border-radius: 50%;
-    margin-right: -8px;
 
     &:hover {
       background-color: var(--neutral-100);
