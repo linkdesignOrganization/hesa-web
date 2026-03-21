@@ -1,8 +1,9 @@
 import { Component, inject, signal, computed, OnInit, AfterViewInit, OnDestroy, ElementRef, ViewChildren, QueryList } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ApiService, ApiProduct, ApiHeroSlide } from '../../../shared/services/api.service';
+import { ApiBrand, ApiService, ApiProduct, ApiHeroSlide } from '../../../shared/services/api.service';
 import { I18nService } from '../../../shared/services/i18n.service';
 import { SeoService } from '../../../shared/services/seo.service';
+import { buildProductUrl } from '../../../shared/utils/route-helpers';
 import { initFadeInObserver } from '../../../shared/utils/fade-in-observer';
 
 interface LocalizedText {
@@ -32,7 +33,6 @@ interface FeaturedShowcaseTab {
   icon: string;
   link: LocalizedText;
   description: LocalizedText;
-  items: FeaturedShowcaseItem[];
 }
 
 interface FeaturedShowcaseBrandLogo {
@@ -119,7 +119,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     equipos: { es: '/es/catalogo/equipos', en: '/en/catalog/equipment' }
   };
 
-  readonly featuredShowcaseBrandLogos: FeaturedShowcaseBrandLogo[] = [
+  private readonly featuredShowcaseFallbackBrandLogos: FeaturedShowcaseBrandLogo[] = [
     { name: 'Orion Pharma', src: '/brands/orion-pharma/logo.svg' },
     { name: 'Trisal', src: '/brands/trisal/logo.png' },
     { name: 'Kruuse', src: '/brands/kruuse/logo.svg' },
@@ -129,7 +129,152 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     { name: 'Unimedical', src: '/brands/unimedical/logo.png' }
   ];
 
+  readonly featuredShowcaseBrandLogos = signal<FeaturedShowcaseBrandLogo[]>(this.featuredShowcaseFallbackBrandLogos);
+
   readonly showcaseMarqueeGroups = [0, 1] as const;
+
+  private readonly featuredShowcaseFallbackItems: Record<FeaturedShowcaseCategoryId, FeaturedShowcaseItem[]> = {
+    farmacos: [
+      {
+        name: { es: 'Clamovet 250 mg Caja x40 Tabletas', en: 'Clamovet 250 mg 40-Tablet Box' },
+        brand: 'Orion Pharma',
+        category: 'farmacos',
+        image: '/Clamovet 250 mg Caja x40 Tabletas.jpg',
+        brandLogo: '/brands/orion-pharma/logo.svg',
+        href: {
+          es: buildProductUrl('farmacos', 'clamovet-250-mg-caja-x40-tabletas', 'es'),
+          en: buildProductUrl('farmacos', 'clamovet-250-mg-40-tablet-box', 'en')
+        },
+        species: { es: 'Perros y gatos', en: 'Dogs and cats' },
+        family: { es: 'Antibiotico', en: 'Antibiotic' },
+        lifeStage: { es: 'Uso clinico', en: 'Clinical use' },
+        presentations: [{ es: 'Caja x40 tabletas', en: '40-tablet box' }]
+      },
+      {
+        name: { es: 'Toltravet Plus Caja x32 Tab', en: 'Toltravet Plus 32-Tablet Box' },
+        brand: 'Trisal',
+        category: 'farmacos',
+        image: '/Toltravet Plus Caja x32 Tab Antiparasitario Interno.jpg',
+        brandLogo: '/brands/trisal/logo.png',
+        href: {
+          es: buildProductUrl('farmacos', 'toltravet-plus-caja-x32-tab', 'es'),
+          en: buildProductUrl('farmacos', 'toltravet-plus-32-tablet-box', 'en')
+        },
+        species: { es: 'Perros y gatos', en: 'Dogs and cats' },
+        family: { es: 'Antiparasitario', en: 'Antiparasitic' },
+        lifeStage: { es: 'Control rutinario', en: 'Routine control' },
+        presentations: [{ es: 'Caja x32 tabletas', en: '32-tablet box' }]
+      },
+      {
+        name: { es: 'Tobramax 5 ml', en: 'Tobramax 5 ml' },
+        brand: 'Unimedical',
+        category: 'farmacos',
+        image: '/Tobramax 5ml.jpg',
+        brandLogo: '/brands/unimedical/logo.png',
+        href: {
+          es: buildProductUrl('farmacos', 'tobramax-5-ml', 'es'),
+          en: buildProductUrl('farmacos', 'tobramax-5-ml', 'en')
+        },
+        species: { es: 'Perros y gatos', en: 'Dogs and cats' },
+        family: { es: 'Oftalmologico', en: 'Ophthalmic' },
+        lifeStage: { es: 'Consulta diaria', en: 'Daily consult' },
+        presentations: [{ es: 'Frasco 5 ml', en: '5 ml bottle' }]
+      }
+    ],
+    alimentos: [
+      {
+        name: { es: 'SUSTILE Leche Maternizada para Cachorros 400 gr', en: 'SUSTILE Puppy Milk Replacer 400 g' },
+        brand: 'New Born',
+        category: 'alimentos',
+        image: '/SUSTILE Leche Maternizada para Cachorros 400 gr.jpg',
+        brandLogo: '/brands/new-born/logo.png',
+        href: {
+          es: buildProductUrl('alimentos', 'sustile-leche-maternizada-para-cachorros-400-gr', 'es'),
+          en: buildProductUrl('alimentos', 'sustile-puppy-milk-replacer-400-g', 'en')
+        },
+        species: { es: 'Caninos', en: 'Dogs' },
+        family: { es: 'Nutricion inicial', en: 'Starter nutrition' },
+        lifeStage: { es: 'Cachorros', en: 'Puppies' },
+        presentations: [{ es: 'Bolsa 400 gr', en: '400 g bag' }]
+      },
+      {
+        name: { es: 'Felovite II con Taurina 2.5 oz', en: 'Felovite II with Taurine 2.5 oz' },
+        brand: 'Mitzi',
+        category: 'alimentos',
+        image: '/Felovite II con Taurina 2.5 oz Suplemento para gatos.jpg',
+        brandLogo: '/brands/mitzi/mitzi-logo.webp',
+        href: {
+          es: buildProductUrl('alimentos', 'felovite-ii-con-taurina-2-5-oz', 'es'),
+          en: buildProductUrl('alimentos', 'felovite-ii-with-taurine-2-5-oz', 'en')
+        },
+        species: { es: 'Felinos', en: 'Cats' },
+        family: { es: 'Suplemento diario', en: 'Daily supplement' },
+        lifeStage: { es: 'Mantenimiento', en: 'Maintenance' },
+        presentations: [{ es: 'Tubo 2.5 oz', en: '2.5 oz tube' }]
+      },
+      {
+        name: { es: 'Apeticat Jarabe 100 ml', en: 'Apeticat Syrup 100 ml' },
+        brand: 'Biozoo',
+        category: 'alimentos',
+        image: '/Apeticat Jarabe 100 ml.jpg',
+        brandLogo: '/brands/biozoo/logo.svg',
+        href: {
+          es: buildProductUrl('alimentos', 'apeticat-jarabe-100-ml', 'es'),
+          en: buildProductUrl('alimentos', 'apeticat-syrup-100-ml', 'en')
+        },
+        species: { es: 'Gatos', en: 'Cats' },
+        family: { es: 'Soporte nutricional', en: 'Nutritional support' },
+        lifeStage: { es: 'Apoyo diario', en: 'Daily support' },
+        presentations: [{ es: 'Frasco 100 ml', en: '100 ml bottle' }]
+      }
+    ],
+    equipos: [
+      {
+        name: { es: 'Meloxivet 4 mg Blister x10 tabletas', en: 'Meloxivet 4 mg 10-Tablet Blister' },
+        brand: 'Kruuse',
+        category: 'equipos',
+        image: '/Meloxivet 4 mg Blister x10 tabletas.jpg',
+        brandLogo: '/brands/kruuse/logo.svg',
+        href: {
+          es: buildProductUrl('equipos', 'meloxivet-4-mg-blister-x10-tabletas', 'es'),
+          en: buildProductUrl('equipos', 'meloxivet-4-mg-10-tablet-blister', 'en')
+        },
+        species: { es: 'Perros y gatos', en: 'Dogs and cats' },
+        equipmentType: { es: 'Procedimientos', en: 'Procedures' },
+        presentations: [{ es: 'Blister x10', en: '10-tablet blister' }]
+      },
+      {
+        name: { es: 'Ciprovet 5 ml Colirio', en: 'Ciprovet 5 ml Eye Drops' },
+        brand: 'Europlex',
+        category: 'equipos',
+        image: '/Ciprovet 5 ml Colirio Cicatrizante y Antibacteriano.jpg',
+        brandLogo: '/brands/europlex/logo.png',
+        href: {
+          es: buildProductUrl('equipos', 'ciprovet-5-ml-colirio', 'es'),
+          en: buildProductUrl('equipos', 'ciprovet-5-ml-eye-drops', 'en')
+        },
+        species: { es: 'Perros y gatos', en: 'Dogs and cats' },
+        equipmentType: { es: 'Diagnostico', en: 'Diagnostics' },
+        presentations: [{ es: 'Frasco 5 ml', en: '5 ml bottle' }]
+      },
+      {
+        name: { es: 'Bactrina Blister x8', en: 'Bactrina 8-Tablet Blister' },
+        brand: 'Unimedical',
+        category: 'equipos',
+        image: '/Bactrina Blister x8.jpg',
+        brandLogo: '/brands/unimedical/logo.png',
+        href: {
+          es: buildProductUrl('equipos', 'bactrina-blister-x8', 'es'),
+          en: buildProductUrl('equipos', 'bactrina-8-tablet-blister', 'en')
+        },
+        species: { es: 'Perros y gatos', en: 'Dogs and cats' },
+        equipmentType: { es: 'Consulta clinica', en: 'Clinical consult' },
+        presentations: [{ es: 'Blister x8', en: '8-tablet blister' }]
+      }
+    ]
+  };
+
+  readonly featuredShowcaseItems = signal<Record<FeaturedShowcaseCategoryId, FeaturedShowcaseItem[]>>(this.featuredShowcaseFallbackItems);
 
   readonly featuredShowcaseTabs: FeaturedShowcaseTab[] = [
     {
@@ -140,45 +285,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       description: {
         es: 'Productos que nuestros clientes prefieren por su calidad, disponibilidad y resultados consistentes.',
         en: 'Products our clients prefer for their quality, availability, and consistent results.'
-      },
-      items: [
-        {
-          name: { es: 'Clamovet 250 mg Caja x40 Tabletas', en: 'Clamovet 250 mg 40-Tablet Box' },
-          brand: 'Orion Pharma',
-          category: 'farmacos',
-          image: '/Clamovet 250 mg Caja x40 Tabletas.jpg',
-          brandLogo: '/brands/orion-pharma/logo.svg',
-          href: this.showcaseCategoryLinks.farmacos,
-          species: { es: 'Perros y gatos', en: 'Dogs and cats' },
-          family: { es: 'Antibiotico', en: 'Antibiotic' },
-          lifeStage: { es: 'Uso clinico', en: 'Clinical use' },
-          presentations: [{ es: 'Caja x40 tabletas', en: '40-tablet box' }]
-        },
-        {
-          name: { es: 'Toltravet Plus Caja x32 Tab', en: 'Toltravet Plus 32-Tablet Box' },
-          brand: 'Trisal',
-          category: 'farmacos',
-          image: '/Toltravet Plus Caja x32 Tab Antiparasitario Interno.jpg',
-          brandLogo: '/brands/trisal/logo.png',
-          href: this.showcaseCategoryLinks.farmacos,
-          species: { es: 'Perros y gatos', en: 'Dogs and cats' },
-          family: { es: 'Antiparasitario', en: 'Antiparasitic' },
-          lifeStage: { es: 'Control rutinario', en: 'Routine control' },
-          presentations: [{ es: 'Caja x32 tabletas', en: '32-tablet box' }]
-        },
-        {
-          name: { es: 'Tobramax 5 ml', en: 'Tobramax 5 ml' },
-          brand: 'Unimedical',
-          category: 'farmacos',
-          image: '/Tobramax 5ml.jpg',
-          brandLogo: '/brands/unimedical/logo.png',
-          href: this.showcaseCategoryLinks.farmacos,
-          species: { es: 'Perros y gatos', en: 'Dogs and cats' },
-          family: { es: 'Oftalmologico', en: 'Ophthalmic' },
-          lifeStage: { es: 'Consulta diaria', en: 'Daily consult' },
-          presentations: [{ es: 'Frasco 5 ml', en: '5 ml bottle' }]
-        }
-      ]
+      }
     },
     {
       id: 'alimentos',
@@ -188,45 +295,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       description: {
         es: 'Productos que nuestros clientes prefieren por su calidad, disponibilidad y resultados consistentes.',
         en: 'Products our clients prefer for their quality, availability, and consistent results.'
-      },
-      items: [
-        {
-          name: { es: 'SUSTILE Leche Maternizada para Cachorros 400 gr', en: 'SUSTILE Puppy Milk Replacer 400 g' },
-          brand: 'New Born',
-          category: 'alimentos',
-          image: '/SUSTILE Leche Maternizada para Cachorros 400 gr.jpg',
-          brandLogo: '/brands/new-born/logo.png',
-          href: this.showcaseCategoryLinks.alimentos,
-          species: { es: 'Caninos', en: 'Dogs' },
-          family: { es: 'Nutricion inicial', en: 'Starter nutrition' },
-          lifeStage: { es: 'Cachorros', en: 'Puppies' },
-          presentations: [{ es: 'Bolsa 400 gr', en: '400 g bag' }]
-        },
-        {
-          name: { es: 'Felovite II con Taurina 2.5 oz', en: 'Felovite II with Taurine 2.5 oz' },
-          brand: 'Mitzi',
-          category: 'alimentos',
-          image: '/Felovite II con Taurina 2.5 oz Suplemento para gatos.jpg',
-          brandLogo: '/brands/mitzi/mitzi-logo.webp',
-          href: this.showcaseCategoryLinks.alimentos,
-          species: { es: 'Felinos', en: 'Cats' },
-          family: { es: 'Suplemento diario', en: 'Daily supplement' },
-          lifeStage: { es: 'Mantenimiento', en: 'Maintenance' },
-          presentations: [{ es: 'Tubo 2.5 oz', en: '2.5 oz tube' }]
-        },
-        {
-          name: { es: 'Apeticat Jarabe 100 ml', en: 'Apeticat Syrup 100 ml' },
-          brand: 'Biozoo',
-          category: 'alimentos',
-          image: '/Apeticat Jarabe 100 ml.jpg',
-          brandLogo: '/brands/biozoo/logo.svg',
-          href: this.showcaseCategoryLinks.alimentos,
-          species: { es: 'Gatos', en: 'Cats' },
-          family: { es: 'Soporte nutricional', en: 'Nutritional support' },
-          lifeStage: { es: 'Apoyo diario', en: 'Daily support' },
-          presentations: [{ es: 'Frasco 100 ml', en: '100 ml bottle' }]
-        }
-      ]
+      }
     },
     {
       id: 'equipos',
@@ -236,42 +305,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       description: {
         es: 'Productos que nuestros clientes prefieren por su calidad, disponibilidad y resultados consistentes.',
         en: 'Products our clients prefer for their quality, availability, and consistent results.'
-      },
-      items: [
-        {
-          name: { es: 'Meloxivet 4 mg Blister x10 tabletas', en: 'Meloxivet 4 mg 10-Tablet Blister' },
-          brand: 'Kruuse',
-          category: 'equipos',
-          image: '/Meloxivet 4 mg Blister x10 tabletas.jpg',
-          brandLogo: '/brands/kruuse/logo.svg',
-          href: this.showcaseCategoryLinks.equipos,
-          species: { es: 'Perros y gatos', en: 'Dogs and cats' },
-          equipmentType: { es: 'Procedimientos', en: 'Procedures' },
-          presentations: [{ es: 'Blister x10', en: '10-tablet blister' }]
-        },
-        {
-          name: { es: 'Ciprovet 5 ml Colirio', en: 'Ciprovet 5 ml Eye Drops' },
-          brand: 'Europlex',
-          category: 'equipos',
-          image: '/Ciprovet 5 ml Colirio Cicatrizante y Antibacteriano.jpg',
-          brandLogo: '/brands/europlex/logo.png',
-          href: this.showcaseCategoryLinks.equipos,
-          species: { es: 'Perros y gatos', en: 'Dogs and cats' },
-          equipmentType: { es: 'Diagnostico', en: 'Diagnostics' },
-          presentations: [{ es: 'Frasco 5 ml', en: '5 ml bottle' }]
-        },
-        {
-          name: { es: 'Bactrina Blister x8', en: 'Bactrina 8-Tablet Blister' },
-          brand: 'Unimedical',
-          category: 'equipos',
-          image: '/Bactrina Blister x8.jpg',
-          brandLogo: '/brands/unimedical/logo.png',
-          href: this.showcaseCategoryLinks.equipos,
-          species: { es: 'Perros y gatos', en: 'Dogs and cats' },
-          equipmentType: { es: 'Consulta clinica', en: 'Clinical consult' },
-          presentations: [{ es: 'Blister x8', en: '8-tablet blister' }]
-        }
-      ]
+      }
     }
   ];
 
@@ -310,9 +344,13 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   activeShowcaseTab = signal<FeaturedShowcaseCategoryId>('farmacos');
   showcaseTransitioning = signal(false);
 
-  activeShowcaseTabData = computed(() =>
-    this.featuredShowcaseTabs.find(tab => tab.id === this.activeShowcaseTab()) ?? this.featuredShowcaseTabs[0]
-  );
+  activeShowcaseTabData = computed(() => {
+    const tab = this.featuredShowcaseTabs.find(item => item.id === this.activeShowcaseTab()) ?? this.featuredShowcaseTabs[0];
+    return {
+      ...tab,
+      items: this.featuredShowcaseItems()[tab.id] ?? []
+    };
+  });
 
   async ngOnInit(): Promise<void> {
     // NFR-006/NFR-008: Home page SEO
@@ -331,6 +369,8 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     try {
       const homeData = await this.api.getHomeData();
       this.hero.set(homeData.hero);
+      this.featuredShowcaseBrandLogos.set(this.toFeaturedShowcaseBrandLogos(homeData.featuredBrands, homeData.featuredProducts));
+      this.featuredShowcaseItems.set(this.buildFeaturedShowcaseItems(homeData.featuredProducts));
       this.heroLoading.set(false);
     } catch {
       this.heroLoading.set(false);
@@ -428,6 +468,92 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     return meta.slice(0, 3);
+  }
+
+  private buildFeaturedShowcaseItems(products: ApiProduct[]): Record<FeaturedShowcaseCategoryId, FeaturedShowcaseItem[]> {
+    const categories: FeaturedShowcaseCategoryId[] = ['farmacos', 'alimentos', 'equipos'];
+    const nextState: Record<FeaturedShowcaseCategoryId, FeaturedShowcaseItem[]> = {
+      farmacos: this.featuredShowcaseFallbackItems.farmacos,
+      alimentos: this.featuredShowcaseFallbackItems.alimentos,
+      equipos: this.featuredShowcaseFallbackItems.equipos,
+    };
+
+    for (const category of categories) {
+      const pool = products.filter(product => product.category === category && product.isActive);
+      if (!pool.length) continue;
+
+      nextState[category] = this.shuffle(pool)
+        .slice(0, 3)
+        .map(product => this.toFeaturedShowcaseItem(product));
+    }
+
+    return nextState;
+  }
+
+  private toFeaturedShowcaseItem(product: ApiProduct): FeaturedShowcaseItem {
+    return {
+      name: product.name,
+      brand: product.brand?.name || '',
+      category: product.category,
+      image: product.images?.[0] || '',
+      brandLogo: product.brand?.logo,
+      href: {
+        es: buildProductUrl(product.category, product.slug.es, 'es'),
+        en: buildProductUrl(product.category, product.slug.en, 'en'),
+      },
+      species: product.species?.length ? this.toLocalizedText(product.species.slice(0, 2).join(' · ')) : undefined,
+      family: product.family ? this.toLocalizedText(product.family) : undefined,
+      lifeStage: product.lifeStage ? this.toLocalizedText(product.lifeStage) : undefined,
+      equipmentType: product.equipmentType ? this.toLocalizedText(product.equipmentType) : undefined,
+      presentations: product.presentations?.length ? product.presentations.map(value => this.toLocalizedText(value)) : undefined,
+    };
+  }
+
+  private toFeaturedShowcaseBrandLogos(brands: ApiBrand[], products: ApiProduct[]): FeaturedShowcaseBrandLogo[] {
+    const fromFeaturedBrands = brands
+      .filter(brand => !!brand.logo)
+      .map(brand => ({
+        name: brand.name,
+        src: brand.logo!,
+      }));
+
+    if (fromFeaturedBrands.length) {
+      return this.shuffle(this.dedupeBrandLogos(fromFeaturedBrands));
+    }
+
+    const fromFeaturedProducts = products
+      .filter(product => !!product.brand?.logo)
+      .map(product => ({
+        name: product.brand!.name,
+        src: product.brand!.logo!,
+      }));
+
+    return fromFeaturedProducts.length
+      ? this.shuffle(this.dedupeBrandLogos(fromFeaturedProducts))
+      : this.featuredShowcaseFallbackBrandLogos;
+  }
+
+  private dedupeBrandLogos(items: FeaturedShowcaseBrandLogo[]): FeaturedShowcaseBrandLogo[] {
+    const seen = new Set<string>();
+    return items.filter(item => {
+      const key = `${item.name}::${item.src}`;
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+  }
+
+  private toLocalizedText(value: string): LocalizedText {
+    return { es: value, en: value };
+  }
+
+  private shuffle<T>(items: T[]): T[] {
+    const next = [...items];
+    for (let index = next.length - 1; index > 0; index -= 1) {
+      const swapIndex = Math.floor(Math.random() * (index + 1));
+      [next[index], next[swapIndex]] = [next[swapIndex], next[index]];
+    }
+    return next;
   }
 
   /** Type-guard: returns the product object only if it is a populated ApiProduct (not a string/null) */

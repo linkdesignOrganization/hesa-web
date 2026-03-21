@@ -291,7 +291,7 @@
       <div class="featured-showcase__marquee-track">
         @for (group of showcaseMarqueeGroups; track group) {
           <div class="featured-showcase__marquee-group" [attr.aria-hidden]="group === 1">
-            @for (logo of featuredShowcaseBrandLogos; track logo.name) {
+            @for (logo of featuredShowcaseBrandLogos(); track logo.name) {
               <div class="featured-showcase__marquee-item">
                 <img [src]="logo.src" [alt]="logo.name" class="featured-showcase__marquee-logo" loading="lazy">
               </div>
