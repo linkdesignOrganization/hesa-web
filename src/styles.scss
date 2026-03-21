@@ -1691,7 +1691,7 @@ app-product-detail {
     &__brand-panel-top {
       display: grid;
       grid-template-columns: 176px minmax(0, 1fr);
-      gap: 26px;
+      gap: 38px;
       align-items: center;
 
       @media (max-width: 767px) {

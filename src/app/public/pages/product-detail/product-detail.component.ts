@@ -108,7 +108,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
     const product = this.product();
     const supportText = product?.category === 'equipos'
       ? (lang === 'es' ? 'Soporte y respaldo técnico' : 'Technical support and backup')
-      : (lang === 'es' ? 'Productos con registro sanitario' : 'Products with sanitary registration');
+      : (lang === 'es' ? 'Productos con registro' : 'Registered products');
 
     return [
       { icon: 'local_shipping', text: lang === 'es' ? 'Entrega en todo el país' : 'Nationwide delivery' },

@@ -114,25 +114,6 @@
 
             <h1 class="product-detail__name">{{ productDisplayName }}</h1>
 
-            @if (accordionItems().length > 0) {
-              <div class="product-detail__accordion-list">
-                @for (item of accordionItems(); track item.label; let itemIndex = $index) {
-                  <details class="product-detail__accordion-item" [open]="itemIndex === 0">
-                    <summary class="product-detail__accordion-summary">
-                      <span class="product-detail__accordion-title">
-                        <span class="material-symbols-outlined" aria-hidden="true">{{ item.icon }}</span>
-                        {{ item.label }}
-                      </span>
-                      <span class="material-symbols-outlined product-detail__accordion-chevron" aria-hidden="true">expand_more</span>
-                    </summary>
-                    <div class="product-detail__accordion-body">
-                      <p>{{ item.value }}</p>
-                    </div>
-                  </details>
-                }
-              </div>
-            }
-
             <div class="product-detail__hero-meta-strip">
               <div class="product-detail__hero-meta-item">
                 <span class="material-symbols-outlined product-detail__hero-meta-symbol" aria-hidden="true">{{ categoryIcon }}</span>
@@ -155,6 +136,25 @@
                 </span>
               </div>
             </div>
+
+            @if (accordionItems().length > 0) {
+              <div class="product-detail__accordion-list">
+                @for (item of accordionItems(); track item.label) {
+                  <details class="product-detail__accordion-item">
+                    <summary class="product-detail__accordion-summary">
+                      <span class="product-detail__accordion-title">
+                        <span class="material-symbols-outlined" aria-hidden="true">{{ item.icon }}</span>
+                        {{ item.label }}
+                      </span>
+                      <span class="material-symbols-outlined product-detail__accordion-chevron" aria-hidden="true">expand_more</span>
+                    </summary>
+                    <div class="product-detail__accordion-body">
+                      <p>{{ item.value }}</p>
+                    </div>
+                  </details>
+                }
+              </div>
+            }
 
             @if (summaryRows().length > 0) {
               <div class="product-detail__info-rows">

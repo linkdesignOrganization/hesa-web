@@ -218,7 +218,7 @@
     padding: 14px 18px;
     border-radius: 30px;
     background: var(--detail-surface);
-    margin-top: 22px;
+    margin-top: 18px;
   }
 
   &__hero-meta-item {
@@ -262,7 +262,7 @@
     font-weight: var(--weight-bold);
     letter-spacing: 0.06em;
     text-decoration: none;
-    box-shadow: 0 16px 28px rgba(15, 23, 42, 0.08);
+    box-shadow: none;
 
     img {
       width: 82%;
