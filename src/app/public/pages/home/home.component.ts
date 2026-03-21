@@ -1,11 +1,6 @@
 import { Component, inject, signal, computed, OnInit, AfterViewInit, OnDestroy, ElementRef, ViewChildren, QueryList } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { CategoryBlockComponent } from '../../components/category-block/category-block.component';
-import { ProductCardComponent } from '../../components/product-card/product-card.component';
-import { ValueStatComponent } from '../../components/value-stat/value-stat.component';
-import { BrandLogosRowComponent } from '../../components/brand-logos-row/brand-logos-row.component';
-import { ManufacturerCtaComponent } from '../../components/manufacturer-cta/manufacturer-cta.component';
-import { ApiService, ApiProduct, ApiBrand, ApiHeroSlide } from '../../../shared/services/api.service';
+import { ApiService, ApiProduct, ApiHeroSlide } from '../../../shared/services/api.service';
 import { I18nService } from '../../../shared/services/i18n.service';
 import { SeoService } from '../../../shared/services/seo.service';
 import { initFadeInObserver } from '../../../shared/utils/fade-in-observer';
@@ -45,17 +40,29 @@ interface FeaturedShowcaseBrandLogo {
   src: string;
 }
 
+interface AlliancesInsightCard {
+  label: LocalizedText;
+  ctaText: LocalizedText;
+  ctaLink: LocalizedText;
+  title: LocalizedText;
+  body: LocalizedText;
+  statValue: string;
+  statLabel: LocalizedText;
+}
+
+interface AlliancesInsightSection {
+  headlineLead: LocalizedText;
+  headlineAccent: LocalizedText;
+  imageDesktop: string;
+  imageMobile: string;
+  tags: LocalizedText[];
+  card: AlliancesInsightCard;
+}
+
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [
-    RouterLink,
-    CategoryBlockComponent,
-    ProductCardComponent,
-    ValueStatComponent,
-    BrandLogosRowComponent,
-    ManufacturerCtaComponent
-  ],
+  imports: [RouterLink],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -81,17 +88,14 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   private nextFeatureVideoIndex = 1;
   private featureVideoFadeTimeout: ReturnType<typeof setTimeout> | null = null;
   private showcaseTransitionTimeout: ReturnType<typeof setTimeout> | null = null;
+  private parallaxCleanup: Array<() => void> = [];
+  private parallaxAnimationFrame: number | null = null;
 
   @ViewChildren('featureVideoLayer') featureVideoRefs?: QueryList<ElementRef<HTMLVideoElement>>;
+  @ViewChildren('parallaxLayer') parallaxLayerRefs?: QueryList<ElementRef<HTMLElement>>;
 
-  featuredProducts = signal<ApiProduct[]>([]);
-  featuredBrands = signal<ApiBrand[]>([]);
   heroLoading = signal(true);
-  productsLoading = signal(true);
-  brandsLoading = signal(true);
   heroError = signal(false);
-  productsError = signal(false);
-  brandsError = signal(false);
 
   hero = signal<{ mode: 'single' | 'carousel'; slides: ApiHeroSlide[] }>({
     mode: 'single' as const,
@@ -102,13 +106,6 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   heroMode = computed(() => this.hero().mode);
   activeFeatureVideoLayer = signal<0 | 1>(0);
-
-  stats = [
-    { number: '37', suffix: '+', label: { es: 'Anos de experiencia en el sector veterinario', en: 'Years of experience in the veterinary sector' } },
-    { number: '100', suffix: '%', label: { es: 'Cobertura nacional con agentes propios', en: 'National coverage with own agents' } },
-    { number: '50', suffix: '+', label: { es: 'Colaboradores dedicados al sector veterinario', en: 'Collaborators dedicated to the veterinary sector' } },
-    { number: '20', suffix: '+', label: { es: 'Marcas internacionales de primer nivel', en: 'Top international brands' } }
-  ];
 
   private readonly showcaseCategoryLabels: Record<FeaturedShowcaseCategoryId, LocalizedText> = {
     farmacos: { es: 'Farmacos', en: 'Pharmaceuticals' },
@@ -278,14 +275,44 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   ];
 
+  readonly alliancesInsight: AlliancesInsightSection = {
+    headlineLead: {
+      es: 'Representamos marcas que confían en nosotros y atendemos',
+      en: 'We represent brands that trust us and support'
+    },
+    headlineAccent: {
+      es: 'clientes que cuentan con nosotros',
+      en: 'clients who count on us'
+    },
+    imageDesktop: '/ds.jpg',
+    imageMobile: '/ms.jpg',
+    tags: [
+      { es: 'Cobertura nacional', en: 'National coverage' },
+      { es: '37 años', en: '37 years' },
+      { es: 'Exclusividad', en: 'Exclusivity' },
+      { es: 'Soporte técnico', en: 'Technical support' },
+      { es: 'Confianza', en: 'Trust' }
+    ],
+    card: {
+      label: { es: 'Alianzas', en: 'Alliances' },
+      ctaText: { es: 'Conozca más', en: 'Learn more' },
+      ctaLink: { es: '/es/distribuidores', en: '/en/distributors' },
+      title: { es: 'Un socio que cumple', en: 'A partner that delivers' },
+      body: {
+        es: 'Más de tres décadas construyendo relaciones comerciales sólidas con clientes y fabricantes del sector veterinario.',
+        en: 'More than three decades building strong commercial relationships with clients and manufacturers across the veterinary industry.'
+      },
+      statValue: '37',
+      statLabel: { es: 'años en el mercado', en: 'years in the market' }
+    }
+  };
+
   activeShowcaseTab = signal<FeaturedShowcaseCategoryId>('farmacos');
   showcaseTransitioning = signal(false);
 
   activeShowcaseTabData = computed(() =>
     this.featuredShowcaseTabs.find(tab => tab.id === this.activeShowcaseTab()) ?? this.featuredShowcaseTabs[0]
   );
-
-  currentSlide = signal(0);
 
   async ngOnInit(): Promise<void> {
     // NFR-006/NFR-008: Home page SEO
@@ -303,25 +330,11 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     // Load all home data from API
     try {
       const homeData = await this.api.getHomeData();
-
-      // Hero
       this.hero.set(homeData.hero);
       this.heroLoading.set(false);
-
-      // Featured products
-      this.featuredProducts.set(homeData.featuredProducts);
-      this.productsLoading.set(false);
-
-      // Featured brands
-      this.featuredBrands.set(homeData.featuredBrands);
-      this.brandsLoading.set(false);
     } catch {
       this.heroLoading.set(false);
       this.heroError.set(true);
-      this.productsLoading.set(false);
-      this.productsError.set(true);
-      this.brandsLoading.set(false);
-      this.brandsError.set(true);
     }
   }
 
@@ -340,25 +353,6 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     const total = this.hero().slides.length;
     this.activeSlide.update(i => (i - 1 + total) % total);
   }
-
-  // ---- Featured products carousel ----
-
-  private readonly PRODUCTS_PER_SLIDE = 6;
-
-  nextSlide(): void {
-    const maxSlides = Math.ceil(this.featuredProducts().length / this.PRODUCTS_PER_SLIDE);
-    this.currentSlide.update(c => Math.min(c + 1, maxSlides - 1));
-  }
-
-  prevSlide(): void {
-    this.currentSlide.update(c => Math.max(c - 1, 0));
-  }
-
-  get carouselDots(): number[] {
-    const maxSlides = Math.ceil(this.featuredProducts().length / this.PRODUCTS_PER_SLIDE);
-    return Array.from({ length: maxSlides }, (_, i) => i);
-  }
-
   selectShowcaseTab(tabId: FeaturedShowcaseCategoryId): void {
     if (tabId === this.activeShowcaseTab() || this.showcaseTransitioning()) return;
 
@@ -446,7 +440,46 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     setTimeout(() => {
       this.fadeObserver = initFadeInObserver(this.el);
       this.setupFeatureVideo();
+      this.setupParallax();
     }, 500);
+  }
+
+  private setupParallax(): void {
+    if (typeof window === 'undefined') return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const layers = this.parallaxLayerRefs?.toArray().map(ref => ref.nativeElement) ?? [];
+    if (!layers.length) return;
+
+    const updateParallax = () => {
+      this.parallaxAnimationFrame = null;
+      const viewportHeight = window.innerHeight || 1;
+
+      layers.forEach(layer => {
+        const section = layer.closest<HTMLElement>('[data-parallax-section]');
+        if (!section) return;
+
+        const rect = section.getBoundingClientRect();
+        const distanceFromCenter = rect.top + rect.height / 2 - viewportHeight / 2;
+        const normalizedDistance = distanceFromCenter / viewportHeight;
+        const speed = Number(layer.dataset['parallaxSpeed'] ?? '0.1');
+        const offset = Math.max(Math.min(normalizedDistance * speed * -viewportHeight, 46), -46);
+
+        layer.style.setProperty('--parallax-offset', `${offset.toFixed(2)}px`);
+      });
+    };
+
+    const requestParallaxUpdate = () => {
+      if (this.parallaxAnimationFrame !== null) return;
+      this.parallaxAnimationFrame = window.requestAnimationFrame(updateParallax);
+    };
+
+    requestParallaxUpdate();
+    window.addEventListener('scroll', requestParallaxUpdate, { passive: true });
+    window.addEventListener('resize', requestParallaxUpdate);
+
+    this.parallaxCleanup.push(() => window.removeEventListener('scroll', requestParallaxUpdate));
+    this.parallaxCleanup.push(() => window.removeEventListener('resize', requestParallaxUpdate));
   }
 
   private setupFeatureVideo(): void {
@@ -565,6 +598,12 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     this.fadeObserver?.disconnect();
     if (this.featureVideoFadeTimeout) clearTimeout(this.featureVideoFadeTimeout);
     if (this.showcaseTransitionTimeout) clearTimeout(this.showcaseTransitionTimeout);
+    if (this.parallaxAnimationFrame !== null && typeof window !== 'undefined') {
+      window.cancelAnimationFrame(this.parallaxAnimationFrame);
+      this.parallaxAnimationFrame = null;
+    }
+    this.parallaxCleanup.forEach(cleanup => cleanup());
+    this.parallaxCleanup = [];
     this.featureVideoListeners.forEach(removeListener => removeListener());
     this.featureVideoListeners = [];
     this.seo.clearDynamicTags();

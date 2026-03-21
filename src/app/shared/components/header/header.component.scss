@@ -545,6 +545,21 @@
     text-transform: uppercase;
   }
 
+  &[data-category='farmacos'] &__category {
+    background: var(--brand-primary);
+    color: var(--neutral-white);
+  }
+
+  &[data-category='alimentos'] &__category {
+    background: var(--brand-secondary);
+    color: var(--neutral-white);
+  }
+
+  &[data-category='equipos'] &__category {
+    background: #0f6b64;
+    color: var(--neutral-white);
+  }
+
   &__brand-logo-wrap {
     position: absolute;
     top: 10px;
