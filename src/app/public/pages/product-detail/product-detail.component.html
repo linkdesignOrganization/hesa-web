@@ -99,36 +99,52 @@
 
         <aside class="product-detail__summary">
           <div class="product-detail__summary-card">
-            <span class="product-detail__availability-badge">
-              {{ i18n.currentLang() === 'es' ? 'Disponible' : 'Available' }}
-            </span>
+            @if (brandName) {
+              <a
+                class="product-detail__brand-badge"
+                [routerLink]="brandRoute"
+                [attr.aria-label]="brandName">
+                @if (brandLogo) {
+                  <img [src]="brandLogo" [alt]="brandName" loading="lazy">
+                } @else {
+                  <span>{{ brandInitials }}</span>
+                }
+              </a>
+            }
 
             <h1 class="product-detail__name">{{ productDisplayName }}</h1>
 
-            @if (productLead) {
-              <p class="product-detail__lead">{{ productLead }}</p>
+            @if (accordionItems().length > 0) {
+              <div class="product-detail__accordion-list">
+                @for (item of accordionItems(); track item.label; let itemIndex = $index) {
+                  <details class="product-detail__accordion-item" [open]="itemIndex === 0">
+                    <summary class="product-detail__accordion-summary">
+                      <span class="product-detail__accordion-title">
+                        <span class="material-symbols-outlined" aria-hidden="true">{{ item.icon }}</span>
+                        {{ item.label }}
+                      </span>
+                      <span class="material-symbols-outlined product-detail__accordion-chevron" aria-hidden="true">expand_more</span>
+                    </summary>
+                    <div class="product-detail__accordion-body">
+                      <p>{{ item.value }}</p>
+                    </div>
+                  </details>
+                }
+              </div>
             }
 
             <div class="product-detail__hero-meta-strip">
-              @if (brandName) {
-                <a class="product-detail__hero-meta-item product-detail__hero-meta-item--brand" [routerLink]="brandRoute">
-                  <span class="product-detail__brand-mark">
-                    @if (brandLogo) {
-                      <img [src]="brandLogo" [alt]="brandName" loading="lazy">
-                    } @else {
-                      <span>{{ brandInitials }}</span>
-                    }
-                  </span>
-                  <span class="product-detail__hero-meta-copy">
-                    <strong>{{ brandName }}</strong>
-                  </span>
-                </a>
-              }
-
               <div class="product-detail__hero-meta-item">
                 <span class="material-symbols-outlined product-detail__hero-meta-symbol" aria-hidden="true">{{ categoryIcon }}</span>
                 <span class="product-detail__hero-meta-copy">
                   <strong>{{ categoryLabel }}</strong>
+                </span>
+              </div>
+
+              <div class="product-detail__hero-meta-item">
+                <span class="material-symbols-outlined product-detail__hero-meta-symbol" aria-hidden="true">check_circle</span>
+                <span class="product-detail__hero-meta-copy">
+                  <strong>{{ i18n.currentLang() === 'es' ? 'Disponible' : 'Available' }}</strong>
                 </span>
               </div>
 
@@ -161,12 +177,12 @@
 
             <div class="product-detail__hero-actions">
               @if (currentProduct.pdfUrl) {
-                <a [href]="currentProduct.pdfUrl" target="_blank" rel="noopener noreferrer" class="btn btn-primary product-detail__hero-cta">
+                <a [href]="currentProduct.pdfUrl" target="_blank" rel="noopener noreferrer" class="btn btn-dark product-detail__hero-cta">
                   <span class="material-symbols-outlined" aria-hidden="true">picture_as_pdf</span>
                   {{ downloadCtaLabel }}
                 </a>
               } @else {
-                <a class="btn btn-primary product-detail__hero-cta" [routerLink]="contactRoute" [queryParams]="infoContactParams">
+                <a class="btn btn-dark product-detail__hero-cta" [routerLink]="contactRoute" [queryParams]="infoContactParams">
                   <span class="material-symbols-outlined" aria-hidden="true">picture_as_pdf</span>
                   {{ downloadCtaLabel }}
                 </a>
@@ -187,78 +203,6 @@
             <span class="material-symbols-outlined" aria-hidden="true">{{ item.icon }}</span>
             <p>{{ item.text }}</p>
           </article>
-        }
-      </section>
-
-      <section class="product-detail__section-shell">
-        <div class="product-detail__section-head">
-          <p class="product-detail__section-kicker">{{ i18n.currentLang() === 'es' ? 'Información del producto' : 'Product information' }}</p>
-          <h2>{{ i18n.currentLang() === 'es' ? 'Ficha del producto' : 'Product overview' }}</h2>
-        </div>
-
-        <div class="product-detail__detail-tabs">
-          @for (tab of detailTabs(); track tab.id) {
-            <button
-              type="button"
-              class="product-detail__detail-tab"
-              [class.product-detail__detail-tab--active]="activeDetailTab()?.id === tab.id"
-              (click)="selectDetailTab(tab.id)">
-              {{ tab.label }}
-            </button>
-          }
-        </div>
-
-        @if (activeDetailTab(); as tab) {
-          <div class="product-detail__detail-panel">
-            <div class="product-detail__detail-copy">
-              <div class="product-detail__section-head product-detail__section-head--compact">
-                <h2>{{ tab.title }}</h2>
-                @if (tab.intro) {
-                  <p class="product-detail__detail-intro">{{ tab.intro }}</p>
-                }
-              </div>
-
-              @if (tab.rows.length > 0) {
-                <div class="product-detail__detail-flow">
-                  @for (row of tab.rows; track row.label) {
-                    <div class="product-detail__detail-row">
-                      <p class="product-detail__detail-row-label">{{ row.label }}</p>
-                      <div class="product-detail__detail-row-value">
-                        @if (row.value) {
-                          <p>{{ row.value }}</p>
-                        }
-                        @if (row.items?.length) {
-                          <div class="product-detail__chips product-detail__chips--inline">
-                            @for (item of row.items!; track item) {
-                              <span class="product-detail__chip">{{ item }}</span>
-                            }
-                          </div>
-                        }
-                      </div>
-                    </div>
-                  }
-                </div>
-              }
-            </div>
-
-            @if (tab.image || tab.notes?.length) {
-              <div class="product-detail__detail-side">
-                @if (tab.image) {
-                  <div class="product-detail__detail-media">
-                    <img [src]="tab.image!" [alt]="productDisplayName" loading="lazy">
-                  </div>
-                }
-
-                @if (tab.notes?.length) {
-                  <div class="product-detail__detail-notes">
-                    @for (note of tab.notes!; track note) {
-                      <p>{{ note }}</p>
-                    }
-                  </div>
-                }
-              </div>
-            }
-          </div>
         }
       </section>
 

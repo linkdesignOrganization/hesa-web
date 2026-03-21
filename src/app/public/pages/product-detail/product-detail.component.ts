@@ -20,20 +20,10 @@ interface ProductTrustItem {
   text: string;
 }
 
-interface ProductTechnicalCard {
+interface ProductAccordionItem {
+  icon: string;
   label: string;
-  value?: string;
-  items?: string[];
-}
-
-interface ProductDetailTab {
-  id: string;
-  label: string;
-  title: string;
-  intro?: string;
-  rows: ProductTechnicalCard[];
-  notes?: string[];
-  image?: string;
+  value: string;
 }
 
 @Component({
@@ -59,7 +49,6 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   error = signal(false);
   selectedImage = signal(0);
   lightboxOpen = signal(false);
-  activeDetailTabId = signal('');
   private currentSlug = '';
 
   summaryRows = computed<ProductSummaryRow[]>(() => {
@@ -129,157 +118,25 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
     ];
   });
 
-  detailTabs = computed<ProductDetailTab[]>(() => {
+  accordionItems = computed<ProductAccordionItem[]>(() => {
     const product = this.product();
     if (!product) return [];
 
     const lang = this.i18n.currentLang();
-    const storytelling = (product.storytelling || [])
-      .map(block => ({
-        image: block.image,
-        text: this.localized(block.text),
-      }))
-      .filter(block => !!block.text);
-    const tabs: ProductDetailTab[] = [];
-    const addTab = (
-      id: string,
-      labelEs: string,
-      labelEn: string,
-      titleEs: string,
-      titleEn: string,
-      rows: ProductTechnicalCard[],
-      intro?: string,
-      notes?: string[],
-      image?: string,
-    ) => {
-      if (!rows.length && !intro && !notes?.length) return;
-      tabs.push({
-        id,
-        label: lang === 'es' ? labelEs : labelEn,
-        title: lang === 'es' ? titleEs : titleEn,
-        intro,
-        rows,
-        notes,
-        image,
-      });
-    };
-    const rowText = (labelEs: string, labelEn: string, value?: string): ProductTechnicalCard | null => {
-      if (!value) return null;
-      return {
+    const items: ProductAccordionItem[] = [];
+    const pushItem = (icon: string, labelEs: string, labelEn: string, value?: string) => {
+      if (!value?.trim()) return;
+      items.push({
+        icon,
         label: lang === 'es' ? labelEs : labelEn,
         value,
-      };
+      });
     };
-    const rowList = (labelEs: string, labelEn: string, items?: string[]): ProductTechnicalCard | null => {
-      if (!items?.length) return null;
-      return {
-        label: lang === 'es' ? labelEs : labelEn,
-        items,
-      };
-    };
-    const compact = <T>(items: Array<T | null | undefined>): T[] => items.filter(Boolean) as T[];
 
-    if (product.category === 'farmacos') {
-      addTab(
-        'formula',
-        'Fórmula',
-        'Formula',
-        'Composición y respaldo regulatorio',
-        'Composition and regulatory support',
-        compact([
-          rowText('Composición', 'Composition', this.localized(product.composition)),
-          rowText('Familia', 'Family', product.family),
-          rowText('Registro', 'Registry', product.sanitaryRegistry),
-        ]),
-      );
+    pushItem('description', 'Descripción', 'Description', this.localized(product.description));
+    pushItem('science', 'Composición', 'Composition', this.localized(product.composition));
 
-      addTab(
-        'uso',
-        'Uso',
-        'Use',
-        'Uso recomendado y presentaciones',
-        'Recommended use and presentations',
-        compact([
-          rowList('Especies', 'Species', product.species),
-          rowText('Indicaciones', 'Indications', this.localized(product.indications)),
-          rowList('Presentaciones', 'Presentations', product.presentations),
-        ]),
-      );
-    }
-
-    if (product.category === 'alimentos') {
-      addTab(
-        'nutricion',
-        'Nutrición',
-        'Nutrition',
-        'Perfil nutricional del producto',
-        'Nutritional profile of the product',
-        compact([
-          rowText('Ingredientes', 'Ingredients', this.localized(product.ingredients)),
-          rowText('Información nutricional', 'Nutritional information', this.localized(product.nutritionalInfo)),
-        ]),
-      );
-
-      addTab(
-        'perfil',
-        'Perfil',
-        'Profile',
-        'Especies, etapa y formatos',
-        'Species, life stage, and formats',
-        compact([
-          rowList('Especies', 'Species', product.species),
-          rowText('Etapa de vida', 'Life stage', product.lifeStage),
-          rowList('Presentaciones', 'Presentations', product.presentations),
-        ]),
-      );
-    }
-
-    if (product.category === 'equipos') {
-      addTab(
-        'especificaciones',
-        'Especificaciones',
-        'Specifications',
-        'Información técnica clave',
-        'Key technical information',
-        compact([
-          rowText('Tipo de equipo', 'Equipment type', product.equipmentType),
-          rowText('Especificaciones', 'Specifications', this.localized(product.specifications)),
-          rowText('Garantía', 'Warranty', this.localized(product.warranty)),
-        ]),
-      );
-
-      addTab(
-        'aplicaciones',
-        'Aplicaciones',
-        'Applications',
-        'Uso y formatos disponibles',
-        'Use and available formats',
-        compact([
-          rowText('Aplicaciones', 'Applications', this.localized(product.recommendedUses)),
-          rowList('Presentaciones', 'Presentations', product.presentations),
-        ]),
-      );
-    }
-
-    addTab(
-      'contexto',
-      'Contexto',
-      'Context',
-      lang === 'es' ? 'Resumen comercial del producto' : 'Commercial overview of the product',
-      lang === 'es' ? 'Resumen comercial del producto' : 'Commercial overview of the product',
-      [],
-      this.localized(product.description),
-      storytelling.map(block => block.text),
-      storytelling.find(block => block.image)?.image,
-    );
-
-    return tabs;
-  });
-
-  activeDetailTab = computed<ProductDetailTab | null>(() => {
-    const tabs = this.detailTabs();
-    if (!tabs.length) return null;
-    return tabs.find(tab => tab.id === this.activeDetailTabId()) || tabs[0];
+    return items;
   });
 
   get breadcrumbs() {
@@ -301,11 +158,6 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   get productDisplayName(): string {
     const product = this.product();
     return product ? this.i18n.t(product.name) : '';
-  }
-
-  get productLead(): string {
-    const product = this.product();
-    return product ? this.localized(product.description) : '';
   }
 
   get categoryLabel(): string {
@@ -412,7 +264,6 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
       const product = await this.api.getProductBySlug(slug, lang);
       this.product.set(product);
       this.selectedImage.set(0);
-      this.activeDetailTabId.set('');
 
       const productName = this.i18n.t(product.name);
       const brandName = product.brand?.name || '';
@@ -485,7 +336,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
       try {
         await navigator.share({
           title,
-          text: this.productLead,
+          text: this.localized(product.description) || title,
           url,
         });
         return;
@@ -506,10 +357,6 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
     } catch {
       this.toast.info(this.i18n.currentLang() === 'es' ? 'No pudimos copiar el enlace automáticamente' : 'We could not copy the link automatically');
     }
-  }
-
-  selectDetailTab(id: string): void {
-    this.activeDetailTabId.set(id);
   }
 
   @HostListener('document:keydown', ['$event'])
