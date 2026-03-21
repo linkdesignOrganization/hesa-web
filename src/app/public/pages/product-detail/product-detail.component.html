@@ -192,75 +192,74 @@
 
       <section class="product-detail__section-shell">
         <div class="product-detail__section-head">
-          <p class="product-detail__section-kicker">{{ i18n.currentLang() === 'es' ? 'Detalles técnicos' : 'Technical details' }}</p>
-          <h2>{{ i18n.currentLang() === 'es' ? 'Información clave para evaluación comercial y técnica' : 'Key information for technical and commercial evaluation' }}</h2>
+          <p class="product-detail__section-kicker">{{ i18n.currentLang() === 'es' ? 'Información del producto' : 'Product information' }}</p>
+          <h2>{{ i18n.currentLang() === 'es' ? 'Ficha del producto' : 'Product overview' }}</h2>
         </div>
 
-        <div class="product-detail__technical-grid">
-          @for (card of technicalCards(); track card.title) {
-            <article class="product-detail__technical-card">
-              <div class="product-detail__technical-icon">
-                <span class="material-symbols-outlined" aria-hidden="true">{{ card.icon }}</span>
-              </div>
-              <div class="product-detail__technical-copy">
-                <h3>{{ card.title }}</h3>
-                @if (card.value) {
-                  <p>{{ card.value }}</p>
+        <div class="product-detail__detail-tabs">
+          @for (tab of detailTabs(); track tab.id) {
+            <button
+              type="button"
+              class="product-detail__detail-tab"
+              [class.product-detail__detail-tab--active]="activeDetailTab()?.id === tab.id"
+              (click)="selectDetailTab(tab.id)">
+              {{ tab.label }}
+            </button>
+          }
+        </div>
+
+        @if (activeDetailTab(); as tab) {
+          <div class="product-detail__detail-panel">
+            <div class="product-detail__detail-copy">
+              <div class="product-detail__section-head product-detail__section-head--compact">
+                <h2>{{ tab.title }}</h2>
+                @if (tab.intro) {
+                  <p class="product-detail__detail-intro">{{ tab.intro }}</p>
                 }
-                @if (card.items?.length) {
-                  <div class="product-detail__technical-chips">
-                    @for (item of card.items!; track item) {
-                      <span class="product-detail__chip">{{ item }}</span>
+              </div>
+
+              @if (tab.rows.length > 0) {
+                <div class="product-detail__detail-flow">
+                  @for (row of tab.rows; track row.label) {
+                    <div class="product-detail__detail-row">
+                      <p class="product-detail__detail-row-label">{{ row.label }}</p>
+                      <div class="product-detail__detail-row-value">
+                        @if (row.value) {
+                          <p>{{ row.value }}</p>
+                        }
+                        @if (row.items?.length) {
+                          <div class="product-detail__chips product-detail__chips--inline">
+                            @for (item of row.items!; track item) {
+                              <span class="product-detail__chip">{{ item }}</span>
+                            }
+                          </div>
+                        }
+                      </div>
+                    </div>
+                  }
+                </div>
+              }
+            </div>
+
+            @if (tab.image || tab.notes?.length) {
+              <div class="product-detail__detail-side">
+                @if (tab.image) {
+                  <div class="product-detail__detail-media">
+                    <img [src]="tab.image!" [alt]="productDisplayName" loading="lazy">
+                  </div>
+                }
+
+                @if (tab.notes?.length) {
+                  <div class="product-detail__detail-notes">
+                    @for (note of tab.notes!; track note) {
+                      <p>{{ note }}</p>
                     }
                   </div>
                 }
               </div>
-            </article>
-          }
-        </div>
-
-        @if (storytellingBlocks().length > 0) {
-          <div class="product-detail__storytelling">
-            <div class="product-detail__section-head product-detail__section-head--compact">
-              <p class="product-detail__section-kicker">{{ i18n.currentLang() === 'es' ? 'Contexto comercial' : 'Commercial context' }}</p>
-              <h2>{{ i18n.currentLang() === 'es' ? 'Cómo se presenta este producto' : 'How this product is positioned' }}</h2>
-            </div>
-
-            <div class="product-detail__story-grid">
-              @for (block of storytellingBlocks(); track $index) {
-                <article class="product-detail__story-card" [class.product-detail__story-card--text-only]="!block.image">
-                  @if (block.image) {
-                    <div class="product-detail__story-image">
-                      <img [src]="block.image!" [alt]="productDisplayName" loading="lazy">
-                    </div>
-                  }
-                  <div class="product-detail__story-copy">
-                    <p>{{ block.text }}</p>
-                  </div>
-                </article>
-              }
-            </div>
+            }
           </div>
         }
-      </section>
-
-      <section class="product-detail__positioning-shell">
-        <div class="product-detail__positioning-copy">
-          <p class="product-detail__section-kicker">{{ i18n.currentLang() === 'es' ? 'Portafolio HESA' : 'HESA portfolio' }}</p>
-          <h2>{{ i18n.currentLang() === 'es' ? 'Respaldado por décadas de experiencia' : 'Backed by decades of experience' }}</h2>
-          <p>
-            {{ i18n.currentLang() === 'es'
-              ? 'Este producto forma parte de nuestro portafolio de soluciones veterinarias, seleccionado por su calidad comprobada y disponibilidad garantizada en todo el país.'
-              : 'This product is part of our veterinary solutions portfolio, selected for its proven quality and guaranteed availability nationwide.' }}
-          </p>
-        </div>
-
-        <div class="product-detail__positioning-media">
-          <picture>
-            <source media="(max-width: 767px)" srcset="/ms.jpg">
-            <img src="/ds.jpg" [alt]="i18n.currentLang() === 'es' ? 'Equipo HESA' : 'HESA team'" loading="lazy">
-          </picture>
-        </div>
       </section>
 
       @if (brandName) {
@@ -281,113 +280,39 @@
                 @if (brandDescription) {
                   <p>{{ brandDescription }}</p>
                 }
+                @if (brandCountry) {
+                  <p class="product-detail__brand-country-text">
+                    {{ i18n.currentLang() === 'es' ? 'País de origen:' : 'Country of origin:' }} {{ brandCountry }}
+                  </p>
+                }
               </div>
             </div>
 
             <div class="product-detail__brand-panel-footer">
-              @if (brandCountry) {
-                <span class="product-detail__brand-country">
-                  @if (brandCountryFlag) {
-                    <span class="product-detail__brand-country-flag" aria-hidden="true">{{ brandCountryFlag }}</span>
-                  } @else {
-                    <span class="material-symbols-outlined" aria-hidden="true">public</span>
-                  }
-                  {{ brandCountry }}
-                </span>
-              }
-
-              <a class="product-detail__brand-panel-link" [routerLink]="brandRoute">
-                {{ i18n.currentLang() === 'es' ? 'Ver todos los productos de esta marca' : 'View all products from this brand' }}
-                <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+              <a class="btn btn-dark product-detail__brand-panel-btn" [routerLink]="brandRoute">
+                {{ i18n.currentLang() === 'es' ? 'Productos de la marca' : 'Brand products' }}
               </a>
             </div>
           </div>
         </section>
       }
 
-      <section class="product-detail__contact-banner">
-        <div class="product-detail__contact-copy">
-          <p class="product-detail__section-kicker product-detail__section-kicker--light">{{ i18n.currentLang() === 'es' ? 'Contacto comercial' : 'Commercial contact' }}</p>
-          <h2>{{ i18n.currentLang() === 'es' ? '¿Le interesa este producto para su negocio?' : 'Interested in this product for your business?' }}</h2>
+      <section class="product-detail__positioning-shell">
+        <div class="product-detail__positioning-copy">
+          <p class="product-detail__section-kicker">{{ i18n.currentLang() === 'es' ? 'Portafolio HESA' : 'HESA portfolio' }}</p>
+          <h2>{{ i18n.currentLang() === 'es' ? 'Respaldado por décadas de experiencia' : 'Backed by decades of experience' }}</h2>
           <p>
             {{ i18n.currentLang() === 'es'
-              ? 'Escríbanos y le contactamos para hablar sobre condiciones, disponibilidad y entregas.'
-              : 'Contact us and we will get in touch to discuss terms, availability, and deliveries.' }}
+              ? 'Este producto forma parte de nuestro portafolio de soluciones veterinarias, seleccionado por su calidad comprobada y disponibilidad garantizada en todo el país.'
+              : 'This product is part of our veterinary solutions portfolio, selected for its proven quality and guaranteed availability nationwide.' }}
           </p>
         </div>
 
-        <div class="product-detail__contact-actions">
-          <a class="btn btn-whatsapp btn-lg" [href]="whatsappLink" target="_blank" rel="noopener noreferrer">
-            <span class="material-symbols-outlined" aria-hidden="true">chat</span>
-            WhatsApp
-          </a>
-          <a class="btn btn-outline btn-lg product-detail__contact-btn" [routerLink]="contactRoute" [queryParams]="availabilityContactParams">
-            <span class="material-symbols-outlined" aria-hidden="true">mail</span>
-            {{ i18n.currentLang() === 'es' ? 'Formulario de contacto' : 'Contact form' }}
-          </a>
-          <a class="btn btn-outline btn-lg product-detail__contact-btn" [href]="callLink">
-            <span class="material-symbols-outlined" aria-hidden="true">phone</span>
-            {{ i18n.currentLang() === 'es' ? 'Llamar ahora' : 'Call now' }}
-          </a>
-        </div>
-      </section>
-
-      @if (relatedProducts().length > 0) {
-        <section class="product-detail__related">
-          <div class="product-detail__section-head">
-            <p class="product-detail__section-kicker">{{ i18n.currentLang() === 'es' ? 'Relacionados' : 'Related products' }}</p>
-            <h2>{{ i18n.currentLang() === 'es' ? 'Otros productos que podrían interesarle' : 'Other products you may be interested in' }}</h2>
-          </div>
-
-          <div class="product-detail__related-grid">
-            @for (relatedProduct of relatedProducts(); track relatedProduct._id) {
-              <app-product-card [product]="relatedProduct" variant="discovery" />
-            }
-          </div>
-        </section>
-      }
-
-      @if (faqItems().length > 0) {
-        <section class="product-detail__faq-shell">
-          <div class="product-detail__section-head">
-            <p class="product-detail__section-kicker">{{ i18n.currentLang() === 'es' ? 'FAQ' : 'FAQ' }}</p>
-            <h2>{{ i18n.currentLang() === 'es' ? 'Preguntas frecuentes sobre este producto' : 'Frequently asked questions about this product' }}</h2>
-          </div>
-
-          <div class="product-detail__faq-list">
-            @for (faq of faqItems(); track faq.question; let faqIndex = $index) {
-              <article class="product-detail__faq-item" [class.product-detail__faq-item--open]="openFaqIndex() === faqIndex">
-                <button type="button" class="product-detail__faq-toggle" (click)="toggleFaq(faqIndex)">
-                  <span>{{ faq.question }}</span>
-                  <span class="material-symbols-outlined" aria-hidden="true">{{ openFaqIndex() === faqIndex ? 'remove' : 'add' }}</span>
-                </button>
-                @if (openFaqIndex() === faqIndex) {
-                  <div class="product-detail__faq-answer">
-                    <p>{{ faq.answer }}</p>
-                  </div>
-                }
-              </article>
-            }
-          </div>
-        </section>
-      }
-
-      <section class="product-detail__quick-links-shell">
-        <div class="product-detail__section-head product-detail__section-head--compact">
-          <p class="product-detail__section-kicker">{{ i18n.currentLang() === 'es' ? 'Navegación rápida' : 'Quick navigation' }}</p>
-          <h2>{{ i18n.currentLang() === 'es' ? 'Siga explorando HESA' : 'Keep exploring HESA' }}</h2>
-        </div>
-
-        <div class="product-detail__quick-links-grid">
-          @for (link of quickLinks(); track link.label) {
-            <a class="product-detail__quick-link" [routerLink]="link.routerLink" [queryParams]="link.queryParams || undefined" [fragment]="link.fragment || undefined">
-              <span class="product-detail__quick-link-icon material-symbols-outlined" aria-hidden="true">{{ link.icon }}</span>
-              <span class="product-detail__quick-link-copy">
-                <strong>{{ link.label }}</strong>
-              </span>
-              <span class="product-detail__quick-link-arrow material-symbols-outlined" aria-hidden="true">arrow_forward</span>
-            </a>
-          }
+        <div class="product-detail__positioning-media">
+          <picture>
+            <source media="(max-width: 767px)" srcset="/ms.jpg">
+            <img src="/ds.jpg" [alt]="i18n.currentLang() === 'es' ? 'Equipo HESA' : 'HESA team'" loading="lazy">
+          </picture>
         </div>
       </section>
     </div>

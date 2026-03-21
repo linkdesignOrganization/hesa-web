@@ -3,7 +3,6 @@ import { Component, HostListener, OnDestroy, OnInit, PLATFORM_ID, computed, inje
 import { HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { BreadcrumbComponent } from '../../../shared/components/breadcrumb/breadcrumb.component';
-import { ProductCardComponent } from '../../components/product-card/product-card.component';
 import { ApiBrand, ApiProduct, ApiService } from '../../../shared/services/api.service';
 import { I18nService } from '../../../shared/services/i18n.service';
 import { SeoService } from '../../../shared/services/seo.service';
@@ -22,29 +21,25 @@ interface ProductTrustItem {
 }
 
 interface ProductTechnicalCard {
-  icon: string;
-  title: string;
+  label: string;
   value?: string;
   items?: string[];
 }
 
-interface ProductFaqItem {
-  question: string;
-  answer: string;
-}
-
-interface ProductQuickLink {
-  icon: string;
+interface ProductDetailTab {
+  id: string;
   label: string;
-  routerLink: string[];
-  queryParams?: Record<string, string>;
-  fragment?: string;
+  title: string;
+  intro?: string;
+  rows: ProductTechnicalCard[];
+  notes?: string[];
+  image?: string;
 }
 
 @Component({
   selector: 'app-product-detail',
   standalone: true,
-  imports: [RouterLink, BreadcrumbComponent, ProductCardComponent],
+  imports: [RouterLink, BreadcrumbComponent],
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.scss'
 })
@@ -59,13 +54,12 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
 
   product = signal<ApiProduct | null>(null);
   brandDetail = signal<ApiBrand | null>(null);
-  relatedProducts = signal<ApiProduct[]>([]);
   loading = signal(true);
   notFound = signal(false);
   error = signal(false);
   selectedImage = signal(0);
   lightboxOpen = signal(false);
-  openFaqIndex = signal<number | null>(0);
+  activeDetailTabId = signal('');
   private currentSlug = '';
 
   summaryRows = computed<ProductSummaryRow[]>(() => {
@@ -135,189 +129,157 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
     ];
   });
 
-  technicalCards = computed<ProductTechnicalCard[]>(() => {
+  detailTabs = computed<ProductDetailTab[]>(() => {
     const product = this.product();
     if (!product) return [];
 
     const lang = this.i18n.currentLang();
-    const cards: ProductTechnicalCard[] = [];
-    const addTextCard = (icon: string, titleEs: string, titleEn: string, value?: string) => {
-      if (!value) return;
-      cards.push({
-        icon,
-        title: lang === 'es' ? titleEs : titleEn,
-        value,
-      });
-    };
-    const addListCard = (icon: string, titleEs: string, titleEn: string, items?: string[]) => {
-      if (!items?.length) return;
-      cards.push({
-        icon,
-        title: lang === 'es' ? titleEs : titleEn,
-        items,
-      });
-    };
-
-    if (product.category === 'farmacos') {
-      addTextCard('science', 'Composición / fórmula', 'Composition / formula', this.localized(product.composition));
-      addListCard('pets', 'Especies de destino', 'Target species', product.species);
-      addTextCard('medication', 'Indicaciones', 'Indications', this.localized(product.indications));
-      addListCard('straighten', 'Presentaciones', 'Presentations', product.presentations);
-      addTextCard('assignment', 'Número de registro', 'Registry number', product.sanitaryRegistry);
-    }
-
-    if (product.category === 'alimentos') {
-      addTextCard('nutrition', 'Ingredientes principales', 'Main ingredients', this.localized(product.ingredients));
-      addTextCard('schedule', 'Etapa de vida', 'Life stage', product.lifeStage);
-      addListCard('pets', 'Especies de destino', 'Target species', product.species);
-      addListCard('straighten', 'Presentaciones', 'Presentations', product.presentations);
-      addTextCard('monitor_heart', 'Información nutricional', 'Nutritional information', this.localized(product.nutritionalInfo));
-    }
-
-    if (product.category === 'equipos') {
-      addTextCard('memory', 'Especificaciones técnicas', 'Technical specifications', this.localized(product.specifications));
-      addTextCard('biotech', 'Tipo de equipo', 'Equipment type', product.equipmentType);
-      addTextCard('construction', 'Aplicaciones', 'Applications', this.localized(product.recommendedUses));
-      addListCard('straighten', 'Presentaciones', 'Presentations', product.presentations);
-      addTextCard('verified_user', 'Garantía', 'Warranty', this.localized(product.warranty));
-    }
-
-    return cards;
-  });
-
-  storytellingBlocks = computed(() =>
-    (this.product()?.storytelling || [])
+    const storytelling = (product.storytelling || [])
       .map(block => ({
         image: block.image,
         text: this.localized(block.text),
       }))
-      .filter(block => !!block.text)
-  );
-
-  faqItems = computed<ProductFaqItem[]>(() => {
-    const product = this.product();
-    if (!product) return [];
-
-    const lang = this.i18n.currentLang();
-    const presentations = product.presentations?.join(', ');
-    const registry = product.sanitaryRegistry;
-    const warranty = this.localized(product.warranty);
+      .filter(block => !!block.text);
+    const tabs: ProductDetailTab[] = [];
+    const addTab = (
+      id: string,
+      labelEs: string,
+      labelEn: string,
+      titleEs: string,
+      titleEn: string,
+      rows: ProductTechnicalCard[],
+      intro?: string,
+      notes?: string[],
+      image?: string,
+    ) => {
+      if (!rows.length && !intro && !notes?.length) return;
+      tabs.push({
+        id,
+        label: lang === 'es' ? labelEs : labelEn,
+        title: lang === 'es' ? titleEs : titleEn,
+        intro,
+        rows,
+        notes,
+        image,
+      });
+    };
+    const rowText = (labelEs: string, labelEn: string, value?: string): ProductTechnicalCard | null => {
+      if (!value) return null;
+      return {
+        label: lang === 'es' ? labelEs : labelEn,
+        value,
+      };
+    };
+    const rowList = (labelEs: string, labelEn: string, items?: string[]): ProductTechnicalCard | null => {
+      if (!items?.length) return null;
+      return {
+        label: lang === 'es' ? labelEs : labelEn,
+        items,
+      };
+    };
+    const compact = <T>(items: Array<T | null | undefined>): T[] => items.filter(Boolean) as T[];
 
     if (product.category === 'farmacos') {
-      return [
-        {
-          question: lang === 'es' ? '¿Cómo puedo verificar el registro sanitario?' : 'How can I verify the sanitary registration?',
-          answer: registry
-            ? (lang === 'es'
-                ? `Puede consultar el número ${registry} en la ficha técnica del producto o solicitar a nuestro equipo comercial la documentación complementaria.`
-                : `You can check registry number ${registry} in the product technical sheet or ask our commercial team for supporting documentation.`)
-            : (lang === 'es'
-                ? 'Nuestro equipo puede compartir la documentación técnica y regulatoria disponible para este producto.'
-                : 'Our team can share the available technical and regulatory documentation for this product.'),
-        },
-        {
-          question: lang === 'es' ? '¿Cuál es la vida útil del producto?' : 'What is the product shelf life?',
-          answer: lang === 'es'
-            ? 'La vida útil exacta depende del lote y de las condiciones de almacenamiento. Podemos enviarle la ficha técnica completa para confirmar ese dato.'
-            : 'Shelf life depends on the batch and storage conditions. We can send the full technical sheet to confirm that information.',
-        },
-        {
-          question: lang === 'es' ? '¿Requiere cadena de frío?' : 'Does it require a cold chain?',
-          answer: lang === 'es'
-            ? 'Las condiciones de conservación pueden variar según la formulación. Le recomendamos solicitar la ficha técnica o consultar a un asesor antes de programar su compra.'
-            : 'Storage requirements may vary by formulation. We recommend requesting the technical sheet or consulting an advisor before planning your purchase.',
-        },
-      ];
+      addTab(
+        'formula',
+        'Fórmula',
+        'Formula',
+        'Composición y respaldo regulatorio',
+        'Composition and regulatory support',
+        compact([
+          rowText('Composición', 'Composition', this.localized(product.composition)),
+          rowText('Familia', 'Family', product.family),
+          rowText('Registro', 'Registry', product.sanitaryRegistry),
+        ]),
+      );
+
+      addTab(
+        'uso',
+        'Uso',
+        'Use',
+        'Uso recomendado y presentaciones',
+        'Recommended use and presentations',
+        compact([
+          rowList('Especies', 'Species', product.species),
+          rowText('Indicaciones', 'Indications', this.localized(product.indications)),
+          rowList('Presentaciones', 'Presentations', product.presentations),
+        ]),
+      );
     }
 
     if (product.category === 'alimentos') {
-      return [
-        {
-          question: lang === 'es' ? '¿Cuál es la ración recomendada?' : 'What is the recommended feeding amount?',
-          answer: presentations
-            ? (lang === 'es'
-                ? `La ración depende de la especie, etapa y presentación disponible (${presentations}). Nuestro equipo puede orientarle con una recomendación comercial y técnica.`
-                : `Feeding guidance depends on species, life stage, and available presentation (${presentations}). Our team can help you with a commercial and technical recommendation.`)
-            : (lang === 'es'
-                ? 'La ración debe ajustarse según especie, etapa de vida y objetivo nutricional.'
-                : 'Feeding amounts should be adjusted according to species, life stage, and nutritional goal.'),
-        },
-        {
-          question: lang === 'es' ? '¿Cómo debo almacenarlo?' : 'How should it be stored?',
-          answer: lang === 'es'
-            ? 'Se recomienda mantenerlo en un lugar fresco, seco y protegido de la humedad. Si lo desea, podemos enviarle la ficha técnica para revisar condiciones específicas.'
-            : 'We recommend storing it in a cool, dry place protected from moisture. If needed, we can send the technical sheet with specific storage guidance.',
-        },
-        {
-          question: lang === 'es' ? '¿Qué presentaciones manejan?' : 'Which presentations are available?',
-          answer: presentations
-            ? (lang === 'es'
-                ? `Actualmente este producto se trabaja en estas presentaciones: ${presentations}.`
-                : `This product is currently available in the following presentations: ${presentations}.`)
-            : (lang === 'es'
-                ? 'Podemos confirmarle las presentaciones activas según disponibilidad.'
-                : 'We can confirm active presentations according to availability.'),
-        },
-      ];
+      addTab(
+        'nutricion',
+        'Nutrición',
+        'Nutrition',
+        'Perfil nutricional del producto',
+        'Nutritional profile of the product',
+        compact([
+          rowText('Ingredientes', 'Ingredients', this.localized(product.ingredients)),
+          rowText('Información nutricional', 'Nutritional information', this.localized(product.nutritionalInfo)),
+        ]),
+      );
+
+      addTab(
+        'perfil',
+        'Perfil',
+        'Profile',
+        'Especies, etapa y formatos',
+        'Species, life stage, and formats',
+        compact([
+          rowList('Especies', 'Species', product.species),
+          rowText('Etapa de vida', 'Life stage', product.lifeStage),
+          rowList('Presentaciones', 'Presentations', product.presentations),
+        ]),
+      );
     }
 
-    return [
-      {
-        question: lang === 'es' ? '¿Incluye garantía?' : 'Does it include warranty?',
-        answer: warranty
-          ? (lang === 'es'
-              ? `Sí. El producto cuenta con esta cobertura de garantía: ${warranty}`
-              : `Yes. This product includes the following warranty coverage: ${warranty}`)
-          : (lang === 'es'
-              ? 'Sí, podemos indicarle la cobertura disponible según modelo y condiciones comerciales.'
-              : 'Yes, we can share the available coverage according to the model and commercial terms.'),
-      },
-      {
-        question: lang === 'es' ? '¿Ofrecen capacitación para uso?' : 'Do you offer usage training?',
-        answer: lang === 'es'
-          ? 'Sí. Nuestro equipo puede coordinar acompañamiento técnico y resolver dudas sobre instalación, operación o arranque.'
-          : 'Yes. Our team can coordinate technical support and answer questions about setup, operation, or startup.',
-      },
-      {
-        question: lang === 'es' ? '¿Tienen repuestos disponibles?' : 'Are spare parts available?',
-        answer: lang === 'es'
-          ? 'La disponibilidad de repuestos y accesorios depende de la línea del equipo. Podemos confirmarlo rápidamente con nuestro equipo comercial.'
-          : 'Spare part and accessory availability depends on the equipment line. We can confirm it quickly through our commercial team.',
-      },
-    ];
+    if (product.category === 'equipos') {
+      addTab(
+        'especificaciones',
+        'Especificaciones',
+        'Specifications',
+        'Información técnica clave',
+        'Key technical information',
+        compact([
+          rowText('Tipo de equipo', 'Equipment type', product.equipmentType),
+          rowText('Especificaciones', 'Specifications', this.localized(product.specifications)),
+          rowText('Garantía', 'Warranty', this.localized(product.warranty)),
+        ]),
+      );
+
+      addTab(
+        'aplicaciones',
+        'Aplicaciones',
+        'Applications',
+        'Uso y formatos disponibles',
+        'Use and available formats',
+        compact([
+          rowText('Aplicaciones', 'Applications', this.localized(product.recommendedUses)),
+          rowList('Presentaciones', 'Presentations', product.presentations),
+        ]),
+      );
+    }
+
+    addTab(
+      'contexto',
+      'Contexto',
+      'Context',
+      lang === 'es' ? 'Resumen comercial del producto' : 'Commercial overview of the product',
+      lang === 'es' ? 'Resumen comercial del producto' : 'Commercial overview of the product',
+      [],
+      this.localized(product.description),
+      storytelling.map(block => block.text),
+      storytelling.find(block => block.image)?.image,
+    );
+
+    return tabs;
   });
 
-  quickLinks = computed<ProductQuickLink[]>(() => {
-    const lang = this.i18n.currentLang();
-    const productName = this.productDisplayName;
-
-    return [
-      {
-        icon: 'grid_view',
-        label: lang === 'es' ? 'Ver catálogo completo' : 'View full catalog',
-        routerLink: ['/' + lang, getCatalogSegment(lang)],
-      },
-      {
-        icon: 'storefront',
-        label: lang === 'es' ? 'Ver todas las marcas' : 'View all brands',
-        routerLink: ['/' + lang, getBrandsSegment(lang)],
-      },
-      {
-        icon: 'description',
-        label: lang === 'es' ? 'Políticas comerciales' : 'Commercial policies',
-        routerLink: ['/' + lang, lang === 'es' ? 'nosotros' : 'about'],
-        fragment: 'commercial-policies',
-      },
-      {
-        icon: 'support_agent',
-        label: lang === 'es' ? 'Contactar a un asesor' : 'Contact an advisor',
-        routerLink: ['/' + lang, getContactSegment(lang)],
-        queryParams: {
-          producto: productName,
-          type: 'comercial',
-        },
-      },
-    ];
+  activeDetailTab = computed<ProductDetailTab | null>(() => {
+    const tabs = this.detailTabs();
+    if (!tabs.length) return null;
+    return tabs.find(tab => tab.id === this.activeDetailTabId()) || tabs[0];
   });
 
   get breadcrumbs() {
@@ -390,37 +352,6 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
     return this.localizeCountry(detail?.country || this.product()?.brand?.country || '');
   }
 
-  get brandCountryFlag(): string {
-    const normalized = this.normalizeCountry(this.brandDetail()?.country || this.product()?.brand?.country || '');
-    const flags: Record<string, string> = {
-      'costa rica': '🇨🇷',
-      'estados unidos': '🇺🇸',
-      'united states': '🇺🇸',
-      'francia': '🇫🇷',
-      'france': '🇫🇷',
-      'noruega': '🇳🇴',
-      'norway': '🇳🇴',
-      'mexico': '🇲🇽',
-      'brasil': '🇧🇷',
-      'brazil': '🇧🇷',
-      'alemania': '🇩🇪',
-      'germany': '🇩🇪',
-      'china': '🇨🇳',
-      'japon': '🇯🇵',
-      'japan': '🇯🇵',
-      'india': '🇮🇳',
-      'espana': '🇪🇸',
-      'spain': '🇪🇸',
-      'italia': '🇮🇹',
-      'italy': '🇮🇹',
-      'paises bajos': '🇳🇱',
-      'netherlands': '🇳🇱',
-      'suiza': '🇨🇭',
-      'switzerland': '🇨🇭',
-    };
-    return flags[normalized] || '';
-  }
-
   get brandInitials(): string {
     return this.brandName
       .split(/\s+/)
@@ -428,21 +359,6 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
       .slice(0, 2)
       .map(token => token[0]?.toUpperCase() ?? '')
       .join('') || 'H';
-  }
-
-  get whatsappLink(): string {
-    const product = this.product();
-    if (!product) return '#';
-    const lang = this.i18n.currentLang();
-    const brandPart = this.brandName ? (lang === 'es' ? ` de ${this.brandName}` : ` by ${this.brandName}`) : '';
-    const message = lang === 'es'
-      ? `Hola, me interesa el producto ${product.name.es}${brandPart}. Me gustaria consultar disponibilidad e informacion comercial.`
-      : `Hello, I am interested in the product ${product.name.en}${brandPart}. I would like to check availability and commercial information.`;
-    return `https://wa.me/50622609020?text=${encodeURIComponent(message)}`;
-  }
-
-  get callLink(): string {
-    return 'tel:+50622609020';
   }
 
   get contactRoute(): string[] {
@@ -483,7 +399,6 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
     }
 
     this.loading.set(false);
-
   }
 
   private async loadProduct(slug: string): Promise<void> {
@@ -497,7 +412,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
       const product = await this.api.getProductBySlug(slug, lang);
       this.product.set(product);
       this.selectedImage.set(0);
-      this.openFaqIndex.set(0);
+      this.activeDetailTabId.set('');
 
       const productName = this.i18n.t(product.name);
       const brandName = product.brand?.name || '';
@@ -527,10 +442,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
         url: productUrl,
       });
 
-      await Promise.allSettled([
-        this.loadBrandDetail(product),
-        this.loadRelatedProducts(product._id),
-      ]);
+      await this.loadBrandDetail(product);
     } catch (error) {
       if (error instanceof HttpErrorResponse && error.status === 404) {
         this.notFound.set(true);
@@ -556,16 +468,6 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
       this.brandDetail.set(null);
     }
   }
-
-  private async loadRelatedProducts(productId: string): Promise<void> {
-    try {
-      const related = await this.api.getRelatedProducts(productId);
-      this.relatedProducts.set(related);
-    } catch {
-      this.relatedProducts.set([]);
-    }
-  }
-
   async retry(): Promise<void> {
     if (this.currentSlug) {
       await this.loadProduct(this.currentSlug);
@@ -606,8 +508,8 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
     }
   }
 
-  toggleFaq(index: number): void {
-    this.openFaqIndex.update(current => current === index ? null : index);
+  selectDetailTab(id: string): void {
+    this.activeDetailTabId.set(id);
   }
 
   @HostListener('document:keydown', ['$event'])
@@ -640,19 +542,15 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
     return this.i18n.t(value);
   }
 
-  private normalizeCountry(value: string): string {
-    return value
-      .normalize('NFD')
-      .replace(/\p{Diacritic}/gu, '')
-      .toLowerCase()
-      .trim();
-  }
-
   private localizeCountry(value: string): string {
     if (!value) return '';
 
     const lang = this.i18n.currentLang();
-    const normalized = this.normalizeCountry(value);
+    const normalized = value
+      .normalize('NFD')
+      .replace(/\p{Diacritic}/gu, '')
+      .toLowerCase()
+      .trim();
     const countryMap: Record<string, { es: string; en: string }> = {
       'costa rica': { es: 'Costa Rica', en: 'Costa Rica' },
       'estados unidos': { es: 'Estados Unidos', en: 'United States' },

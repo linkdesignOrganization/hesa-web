@@ -423,7 +423,7 @@
   &__quick-links-shell {
     margin-top: 28px;
     padding: 30px;
-    background: var(--neutral-white);
+    background: var(--detail-surface);
 
     @media (max-width: 767px) {
       padding: 22px;
@@ -450,85 +450,108 @@
     margin-bottom: 18px;
   }
 
-  &__technical-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 16px;
+  &__detail-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
 
-    @media (max-width: 767px) {
+  &__detail-tab {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 0;
+    padding: 12px 18px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.62);
+    color: rgba(15, 23, 42, 0.76);
+    font-size: 0.92rem;
+    line-height: 1;
+    font-weight: var(--weight-semibold);
+    transition: background-color 0.22s ease, color 0.22s ease, transform 0.22s ease;
+
+    &:hover {
+      transform: translateY(-1px);
+      background: rgba(255, 255, 255, 0.82);
+    }
+  }
+
+  &__detail-tab--active {
+    background: var(--neutral-white);
+    color: var(--neutral-900);
+    box-shadow: 0 16px 28px rgba(15, 23, 42, 0.08);
+  }
+
+  &__detail-panel {
+    display: grid;
+    grid-template-columns: minmax(0, 1.08fr) minmax(260px, 0.92fr);
+    gap: 28px;
+
+    @media (max-width: 991px) {
       grid-template-columns: 1fr;
     }
   }
 
-  &__technical-card {
-    padding: 22px;
-    border-radius: 28px;
-    background: var(--detail-surface);
-    display: grid;
-    grid-template-columns: 46px 1fr;
-    gap: 14px;
-    align-items: start;
+  &__detail-copy {
+    min-width: 0;
   }
 
-  &__technical-icon {
-    width: 46px;
-    height: 46px;
-    border-radius: 16px;
-    background: rgba(255, 255, 255, 0.88);
-    display: grid;
-    place-items: center;
-    color: var(--detail-accent);
+  &__detail-intro {
+    margin: 0;
+    color: rgba(15, 23, 42, 0.74);
+    font-size: 1rem;
+    line-height: 1.72;
+  }
 
-    .material-symbols-outlined {
-      font-size: 1.2rem;
+  &__detail-flow {
+    display: grid;
+    gap: 18px;
+  }
+
+  &__detail-row {
+    display: grid;
+    grid-template-columns: minmax(148px, 180px) minmax(0, 1fr);
+    gap: 16px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(15, 23, 42, 0.08);
+
+    @media (max-width: 767px) {
+      grid-template-columns: 1fr;
+      gap: 10px;
     }
   }
 
-  &__technical-copy {
+  &__detail-row-label {
+    margin: 0;
+    color: rgba(15, 23, 42, 0.52);
+    font-size: var(--text-label);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: var(--weight-bold);
+  }
+
+  &__detail-row-value {
     min-width: 0;
 
-    h3 {
-      margin: 0;
-      font-size: 1rem;
-      line-height: 1.2;
-      color: var(--neutral-900);
-      font-weight: var(--weight-bold);
-    }
-
     p {
-      margin: 10px 0 0;
-      color: rgba(15, 23, 42, 0.74);
-      line-height: 1.75;
+      margin: 0;
+      color: rgba(15, 23, 42, 0.78);
+      line-height: 1.78;
       white-space: pre-line;
     }
   }
 
-  &__storytelling {
-    margin-top: 28px;
-  }
-
-  &__story-grid {
+  &__detail-side {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 20px;
-
-    @media (max-width: 767px) {
-      grid-template-columns: 1fr;
-    }
+    gap: 18px;
+    align-content: start;
   }
 
-  &__story-card {
+  &__detail-media {
     overflow: hidden;
-    background: var(--neutral-white);
-
-    &--text-only .product-detail__story-copy {
-      padding-top: 28px;
-    }
-  }
-
-  &__story-image {
-    aspect-ratio: 16 / 9;
-    overflow: hidden;
+    border-radius: 28px;
+    aspect-ratio: 4 / 3;
 
     img {
       width: 100%;
@@ -537,13 +560,14 @@
     }
   }
 
-  &__story-copy {
-    padding: 22px 24px 24px;
+  &__detail-notes {
+    display: grid;
+    gap: 14px;
 
     p {
       margin: 0;
       color: rgba(15, 23, 42, 0.76);
-      line-height: 1.75;
+      line-height: 1.72;
     }
   }
 
@@ -601,5 +625,19 @@
     @media (max-width: 991px) {
       min-height: 320px;
     }
+  }
+
+  &__brand-country-text {
+    margin: 14px 0 0;
+    color: rgba(15, 23, 42, 0.66);
+    font-size: 0.96rem;
+    line-height: 1.6;
+  }
+
+  &__brand-panel-btn.btn {
+    padding: 12px 18px;
+    min-height: 0;
+    border-radius: 999px;
+    line-height: 1;
   }
 }

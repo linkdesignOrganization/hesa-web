@@ -1633,7 +1633,9 @@ app-product-detail {
 
   .product-detail {
     &__trust-strip {
-      margin-top: 24px;
+      margin-top: 28px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(15, 23, 42, 0.1);
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 14px;
@@ -1649,24 +1651,15 @@ app-product-detail {
 
     &__trust-item {
       min-width: 0;
-      padding: 18px 20px;
-      border-radius: 26px;
-      background: rgba(255, 255, 255, 0.92);
-      box-shadow: 0 22px 34px rgba(15, 23, 42, 0.06);
+      padding: 0;
       display: flex;
       align-items: center;
       gap: 12px;
 
       .material-symbols-outlined {
-        width: 42px;
-        height: 42px;
-        border-radius: 14px;
-        display: grid;
-        place-items: center;
-        background: var(--detail-accent-soft);
         color: var(--detail-accent);
-        font-size: 1.15rem;
-        flex: 0 0 42px;
+        font-size: 1.75rem;
+        flex: 0 0 auto;
       }
 
       p {
