@@ -1,7 +1,8 @@
 import { Component, input, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { I18nService } from '../../../shared/services/i18n.service';
-import { buildProductUrl } from '../../../shared/utils/route-helpers';
+import { ApiProduct } from '../../../shared/services/api.service';
+import { buildProductUrl, getCategoryLabel } from '../../../shared/utils/route-helpers';
 
 /**
  * Product card used in catalog grids and carousels.
@@ -19,7 +20,7 @@ export class ProductCardComponent {
   product = input<any>(null);
   name = input('');
   brand = input('');
-  variant = input<'grid' | 'carousel'>('grid');
+  variant = input<'grid' | 'carousel' | 'discovery'>('grid');
 
   i18n = inject(I18nService);
 
@@ -35,9 +36,9 @@ export class ProductCardComponent {
   get displayBrand(): string {
     const p = this.product();
     if (p) {
-      const brand = p['brand'];
+      const brand = p.brand;
       if (typeof brand === 'string') return brand;
-      if (brand && typeof brand === 'object') return (brand as { name: string }).name || '';
+      if (brand && typeof brand === 'object') return brand.name || '';
     }
     return this.brand();
   }
@@ -46,8 +47,8 @@ export class ProductCardComponent {
     const p = this.product();
     if (!p) return '#';
     const lang = this.i18n.currentLang();
-    const slug = p['slug'] as { es: string; en: string } | undefined;
-    const category = p['category'] as string;
+    const slug = p.slug;
+    const category = p.category;
     if (slug && category) {
       return buildProductUrl(category, slug[lang], lang);
     }
@@ -56,14 +57,13 @@ export class ProductCardComponent {
 
   get productCategory(): string {
     const p = this.product();
-    return (p?.['category'] as string) ?? 'farmacos';
+    return p?.category ?? 'farmacos';
   }
 
   get productImage(): string | undefined {
     const p = this.product();
     if (!p) return undefined;
-    const images = p['images'] as string[] | undefined;
-    return images?.[0];
+    return p.images?.[0];
   }
 
   /** NFR-002: WebP source for <picture> element */
@@ -71,5 +71,48 @@ export class ProductCardComponent {
     const img = this.productImage;
     if (!img) return undefined;
     return img.replace(/\.(jpe?g|png)$/i, '.webp');
+  }
+
+  get displayCategoryLabel(): string {
+    return getCategoryLabel(this.productCategory, this.i18n.currentLang());
+  }
+
+  get displayDescription(): string {
+    const p = this.product() as ApiProduct | null;
+    if (!p?.description) return '';
+    return this.i18n.t(p.description);
+  }
+
+  get brandLogo(): string | undefined {
+    const p = this.product() as ApiProduct | null;
+    if (!p?.brand || typeof p.brand === 'string') return undefined;
+    return p.brand.logo;
+  }
+
+  get brandInitials(): string {
+    const tokens = this.displayBrand
+      .split(/\s+/)
+      .filter(Boolean)
+      .slice(0, 2);
+    return tokens.map(token => token[0]?.toUpperCase() ?? '').join('') || 'H';
+  }
+
+  get quickFacts(): string[] {
+    const p = this.product() as ApiProduct | null;
+    if (!p) return [];
+
+    const firstSpecies = p.species?.slice(0, 2).join(', ');
+    const firstPresentation = p.presentations?.[0];
+
+    if (p.category === 'farmacos') {
+      return [firstSpecies, p.family, firstPresentation].filter(Boolean) as string[];
+    }
+
+    if (p.category === 'alimentos') {
+      return [firstSpecies, p.lifeStage, firstPresentation].filter(Boolean) as string[];
+    }
+
+    return [p.equipmentType, firstPresentation, !firstPresentation ? this.displayBrand : undefined]
+      .filter(Boolean) as string[];
   }
 }

@@ -1,13 +1,24 @@
-import { Component, inject, signal, effect, OnInit, OnDestroy, PLATFORM_ID, HostListener } from '@angular/core';
-import { isPlatformBrowser, DOCUMENT } from '@angular/common';
+import { Component, HostListener, OnDestroy, OnInit, PLATFORM_ID, computed, effect, inject, signal } from '@angular/core';
+import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { BreadcrumbComponent } from '../../../shared/components/breadcrumb/breadcrumb.component';
 import { ProductCardComponent } from '../../components/product-card/product-card.component';
-import { ApiService, ApiProduct } from '../../../shared/services/api.service';
+import { ApiProduct, ApiService } from '../../../shared/services/api.service';
 import { I18nService } from '../../../shared/services/i18n.service';
 import { SeoService } from '../../../shared/services/seo.service';
-import { getCategorySlug, getCategoryLabel, getCatalogSegment, getHomeLabel, getContactSegment } from '../../../shared/utils/route-helpers';
+import { getCatalogSegment, getCategoryLabel, getCategorySlug, getContactSegment, getHomeLabel } from '../../../shared/utils/route-helpers';
+
+interface ProductFactCard {
+  icon: string;
+  label: string;
+  value: string;
+}
+
+interface ProductTextSection {
+  title: string;
+  value: string;
+}
 
 @Component({
   selector: 'app-product-detail',
@@ -28,17 +39,16 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   relatedProducts = signal<ApiProduct[]>([]);
   loading = signal(true);
   notFound = signal(false);
-  error = signal(false); // BUG-012: Separate error state from notFound
+  error = signal(false);
   selectedImage = signal(0);
   stickyVisible = signal(false);
   lightboxOpen = signal(false);
   private currentSlug = '';
+  private stickyObserver: IntersectionObserver | null = null;
 
-  // REQ-026 fix: Toggle body class so WhatsApp FAB repositions above sticky bar on mobile
   private stickyBodyClassEffect = isPlatformBrowser(this.platformId)
     ? effect(() => {
-        const visible = this.stickyVisible();
-        if (visible) {
+        if (this.stickyVisible()) {
           this.document.body.classList.add('has-sticky-bottom-bar');
         } else {
           this.document.body.classList.remove('has-sticky-bottom-bar');
@@ -46,140 +56,329 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
       })
     : null;
 
-  get breadcrumbs() {
-    const p = this.product();
+  summaryFacts = computed<ProductFactCard[]>(() => {
+    const product = this.product();
+    if (!product) return [];
+
     const lang = this.i18n.currentLang();
-    if (!p) return [];
-    const catalog = getCatalogSegment(lang);
-    const catSlug = getCategorySlug(p.category, lang);
+    const facts: ProductFactCard[] = [];
+    const species = product.species?.slice(0, 2).join(', ');
+    const firstPresentation = product.presentations?.[0];
+
+    if (species) {
+      facts.push({
+        icon: 'pets',
+        label: lang === 'es' ? 'Especies' : 'Species',
+        value: species,
+      });
+    }
+
+    if (product.category === 'farmacos' && product.family) {
+      facts.push({
+        icon: 'category',
+        label: lang === 'es' ? 'Familia' : 'Family',
+        value: product.family,
+      });
+    }
+
+    if (product.category === 'alimentos' && product.lifeStage) {
+      facts.push({
+        icon: 'footprint',
+        label: lang === 'es' ? 'Etapa' : 'Life stage',
+        value: product.lifeStage,
+      });
+    }
+
+    if (product.category === 'equipos' && product.equipmentType) {
+      facts.push({
+        icon: 'biotech',
+        label: lang === 'es' ? 'Tipo' : 'Type',
+        value: product.equipmentType,
+      });
+    }
+
+    if (firstPresentation) {
+      facts.push({
+        icon: 'inventory_2',
+        label: lang === 'es' ? 'Presentacion' : 'Presentation',
+        value: firstPresentation,
+      });
+    }
+
+    return facts.slice(0, 3);
+  });
+
+  detailFacts = computed<ProductFactCard[]>(() => {
+    const product = this.product();
+    if (!product) return [];
+
+    const lang = this.i18n.currentLang();
+    const facts: ProductFactCard[] = [];
+    const species = product.species?.join(', ');
+
+    if (this.brandName) {
+      facts.push({
+        icon: 'verified',
+        label: lang === 'es' ? 'Marca' : 'Brand',
+        value: this.brandName,
+      });
+    }
+
+    if (species) {
+      facts.push({
+        icon: 'pets',
+        label: lang === 'es' ? 'Cobertura' : 'Coverage',
+        value: species,
+      });
+    }
+
+    if (product.category === 'farmacos') {
+      if (product.family) {
+        facts.push({
+          icon: 'medication',
+          label: lang === 'es' ? 'Familia terapeutica' : 'Therapeutic family',
+          value: product.family,
+        });
+      }
+      if (product.sanitaryRegistry) {
+        facts.push({
+          icon: 'badge',
+          label: lang === 'es' ? 'Registro sanitario' : 'Sanitary registry',
+          value: product.sanitaryRegistry,
+        });
+      }
+    }
+
+    if (product.category === 'alimentos' && product.lifeStage) {
+      facts.push({
+        icon: 'nutrition',
+        label: lang === 'es' ? 'Etapa de vida' : 'Life stage',
+        value: product.lifeStage,
+      });
+    }
+
+    if (product.category === 'equipos') {
+      if (product.equipmentType) {
+        facts.push({
+          icon: 'precision_manufacturing',
+          label: lang === 'es' ? 'Tipo de equipo' : 'Equipment type',
+          value: product.equipmentType,
+        });
+      }
+      if (product.warranty) {
+        facts.push({
+          icon: 'shield',
+          label: lang === 'es' ? 'Garantia' : 'Warranty',
+          value: this.i18n.t(product.warranty),
+        });
+      }
+    }
+
+    return facts;
+  });
+
+  technicalSections = computed<ProductTextSection[]>(() => {
+    const product = this.product();
+    if (!product) return [];
+
+    const lang = this.i18n.currentLang();
+    const sections: ProductTextSection[] = [];
+
+    const pushSection = (titleEs: string, titleEn: string, value?: { es: string; en: string } | string | null) => {
+      if (!value) return;
+      const resolvedValue = typeof value === 'string' ? value : this.i18n.t(value);
+      if (!resolvedValue) return;
+      sections.push({
+        title: lang === 'es' ? titleEs : titleEn,
+        value: resolvedValue,
+      });
+    };
+
+    pushSection('Descripcion', 'Description', product.description);
+
+    if (product.category === 'farmacos') {
+      pushSection('Composicion', 'Composition', product.composition);
+      pushSection('Indicaciones', 'Indications', product.indications);
+    }
+
+    if (product.category === 'alimentos') {
+      pushSection('Ingredientes principales', 'Main ingredients', product.ingredients);
+      pushSection('Informacion nutricional', 'Nutritional information', product.nutritionalInfo);
+    }
+
+    if (product.category === 'equipos') {
+      pushSection('Especificaciones tecnicas', 'Technical specifications', product.specifications);
+      pushSection('Usos recomendados', 'Recommended uses', product.recommendedUses);
+      pushSection('Garantia', 'Warranty', product.warranty);
+    }
+
+    return sections;
+  });
+
+  storytellingBlocks = computed(() => this.product()?.storytelling ?? []);
+
+  get breadcrumbs() {
+    const product = this.product();
+    const lang = this.i18n.currentLang();
+    if (!product) return [];
+
+    const catalogSegment = getCatalogSegment(lang);
+    const categorySlug = getCategorySlug(product.category, lang);
+
     return [
       { label: getHomeLabel(lang), url: this.i18n.getLangPrefix() },
-      { label: lang === 'es' ? 'Catalogo' : 'Catalog', url: this.i18n.getLangPrefix() + '/' + catalog },
-      { label: getCategoryLabel(p.category, lang), url: this.i18n.getLangPrefix() + '/' + catalog + '/' + catSlug },
-      { label: this.i18n.t(p.name) }
+      { label: lang === 'es' ? 'Catalogo' : 'Catalog', url: `${this.i18n.getLangPrefix()}/${catalogSegment}` },
+      { label: getCategoryLabel(product.category, lang), url: `${this.i18n.getLangPrefix()}/${catalogSegment}/${categorySlug}` },
+      { label: this.i18n.t(product.name) }
     ];
   }
 
   get contactLink(): string {
+    const product = this.product();
     const lang = this.i18n.currentLang();
-    const p = this.product();
-    const slug = p ? p.slug[lang] : '';
-    return '/' + lang + '/' + getContactSegment(lang) + '?producto=' + slug;
+    const slug = product ? product.slug[lang] : '';
+    return `/${lang}/${getContactSegment(lang)}?producto=${slug}`;
+  }
+
+  get categoryLabel(): string {
+    const product = this.product();
+    return product ? getCategoryLabel(product.category, this.i18n.currentLang()) : '';
+  }
+
+  get categoryIcon(): string {
+    const category = this.product()?.category;
+    if (category === 'farmacos') return 'pill';
+    if (category === 'alimentos') return 'pets';
+    return 'biotech';
   }
 
   get brandName(): string {
-    const p = this.product();
-    if (!p || !p.brand) return '';
-    if (typeof p.brand === 'object') return p.brand.name;
-    return '';
+    const product = this.product();
+    return product?.brand?.name || '';
   }
 
   get brandSlug(): string {
-    const p = this.product();
-    if (!p || !p.brand) return '';
-    if (typeof p.brand === 'object') return p.brand.slug;
-    return '';
+    const product = this.product();
+    return product?.brand?.slug || '';
+  }
+
+  get brandLogo(): string | undefined {
+    return this.product()?.brand?.logo;
+  }
+
+  get brandInitials(): string {
+    return this.brandName
+      .split(/\s+/)
+      .filter(Boolean)
+      .slice(0, 2)
+      .map(token => token[0]?.toUpperCase() ?? '')
+      .join('') || 'H';
+  }
+
+  get categoryLink(): string {
+    const product = this.product();
+    const lang = this.i18n.currentLang();
+    if (!product) return '#';
+    return `/${lang}/${getCatalogSegment(lang)}/${getCategorySlug(product.category, lang)}`;
   }
 
   get whatsappLink(): string {
-    const p = this.product();
-    if (!p) return '#';
+    const product = this.product();
+    if (!product) return '#';
     const lang = this.i18n.currentLang();
     const brandPart = this.brandName ? (lang === 'es' ? ` de ${this.brandName}` : ` by ${this.brandName}`) : '';
-    const msg = lang === 'es'
-      ? `Hola, me interesa el producto ${p.name.es}${brandPart}. Me gustaria recibir informacion.`
-      : `Hello, I am interested in the product ${p.name.en}${brandPart}. I would like to receive information.`;
-    return `https://wa.me/50622609020?text=${encodeURIComponent(msg)}`;
+    const message = lang === 'es'
+      ? `Hola, me interesa el producto ${product.name.es}${brandPart}. Me gustaria recibir informacion.`
+      : `Hello, I am interested in the product ${product.name.en}${brandPart}. I would like to receive information.`;
+    return `https://wa.me/50622609020?text=${encodeURIComponent(message)}`;
   }
 
   async ngOnInit(): Promise<void> {
     const slug = this.route.snapshot.paramMap.get('slug');
     this.currentSlug = slug || '';
+
     if (slug) {
       await this.loadProduct(slug);
     }
+
     this.loading.set(false);
 
-    // Sticky bar via IntersectionObserver
-    if (typeof window !== 'undefined') {
-      setTimeout(() => {
-        const infoSection = document.querySelector('.product-detail__info');
-        if (infoSection) {
-          const observer = new IntersectionObserver(
-            ([entry]) => this.stickyVisible.set(!entry.isIntersecting),
-            { threshold: 0 }
-          );
-          observer.observe(infoSection);
-        }
-      }, 1000);
+    if (isPlatformBrowser(this.platformId)) {
+      setTimeout(() => this.observeStickySummary(), 100);
     }
   }
 
-  /**
-   * BUG-012: Load product with proper error differentiation.
-   * 404 = product not found (show not found page)
-   * Other errors = API error (show error state with retry)
-   */
+  private observeStickySummary(): void {
+    this.stickyObserver?.disconnect();
+    const summaryCard = this.document.querySelector('.product-detail__summary-card');
+    if (!summaryCard) return;
+
+    this.stickyObserver = new IntersectionObserver(
+      ([entry]) => this.stickyVisible.set(!entry.isIntersecting),
+      { threshold: 0.2 }
+    );
+
+    this.stickyObserver.observe(summaryCard);
+  }
+
   private async loadProduct(slug: string): Promise<void> {
     this.loading.set(true);
     this.notFound.set(false);
     this.error.set(false);
+
     try {
       const lang = this.i18n.currentLang();
       const product = await this.api.getProductBySlug(slug, lang);
       this.product.set(product);
+      this.selectedImage.set(0);
 
-      // REQ-125: Dynamic meta tags
       const productName = this.i18n.t(product.name);
-      const productDesc = this.i18n.t(product.description) || '';
-      const brandName = typeof product.brand === 'object' && product.brand ? product.brand.name : '';
+      const brandName = product.brand?.name || '';
       const metaTitle = product.metaTitle ? this.i18n.t(product.metaTitle) : (brandName ? `${productName} - ${brandName}` : productName);
-      const metaDesc = product.metaDescription ? this.i18n.t(product.metaDescription) : productDesc.substring(0, 160);
-
-      const catSlugEs = getCategorySlug(product.category, 'es');
-      const catSlugEn = getCategorySlug(product.category, 'en');
+      const metaDescription = product.metaDescription ? this.i18n.t(product.metaDescription) : this.i18n.t(product.description).slice(0, 160);
       const productUrl = `/${lang}/${getCatalogSegment(lang)}/${getCategorySlug(product.category, lang)}/${product.slug[lang]}`;
 
       this.seo.setMetaTags({
         title: metaTitle,
-        description: metaDesc,
+        description: metaDescription,
         url: productUrl,
         image: product.images?.[0],
         type: 'product',
       });
 
-      // NFR-011: hreflang
       this.seo.setHreflang(
-        `/es/catalogo/${catSlugEs}/${product.slug.es}`,
-        `/en/catalog/${catSlugEn}/${product.slug.en}`
+        `/es/catalogo/${getCategorySlug(product.category, 'es')}/${product.slug.es}`,
+        `/en/catalog/${getCategorySlug(product.category, 'en')}/${product.slug.en}`
       );
 
-      // REQ-126: Product JSON-LD schema
       this.seo.setProductSchema({
         name: productName,
-        description: metaDesc,
+        description: metaDescription,
         brand: brandName,
         category: getCategoryLabel(product.category, lang),
         image: product.images?.[0],
         url: productUrl,
       });
 
-      // Load related products
       try {
         const related = await this.api.getRelatedProducts(product._id);
         this.relatedProducts.set(related);
       } catch {
-        // Non-critical
+        this.relatedProducts.set([]);
       }
-    } catch (err) {
-      // BUG-012: Differentiate between 404 (not found) and other errors (API down)
-      if (err instanceof HttpErrorResponse && err.status === 404) {
+
+      if (isPlatformBrowser(this.platformId)) {
+        setTimeout(() => this.observeStickySummary(), 100);
+      }
+    } catch (error) {
+      if (error instanceof HttpErrorResponse && error.status === 404) {
         this.notFound.set(true);
       } else {
         this.error.set(true);
       }
+    } finally {
+      this.loading.set(false);
     }
-    this.loading.set(false);
   }
 
   async retry(): Promise<void> {
@@ -188,38 +387,33 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
     }
   }
 
-  /** NFR-023: Keyboard navigation for lightbox */
   @HostListener('document:keydown', ['$event'])
   onKeydown(event: KeyboardEvent): void {
     if (!this.lightboxOpen()) return;
-    const p = this.product();
-    if (!p || !p.images || p.images.length === 0) return;
 
-    switch (event.key) {
-      case 'Escape':
-        this.lightboxOpen.set(false);
-        break;
-      case 'ArrowLeft':
-        this.selectedImage.set(
-          (this.selectedImage() - 1 + p.images.length) % p.images.length
-        );
-        break;
-      case 'ArrowRight':
-        this.selectedImage.set(
-          (this.selectedImage() + 1) % p.images.length
-        );
-        break;
+    const product = this.product();
+    if (!product?.images?.length) return;
+
+    if (event.key === 'Escape') {
+      this.lightboxOpen.set(false);
+    }
+
+    if (event.key === 'ArrowLeft') {
+      this.selectedImage.set((this.selectedImage() - 1 + product.images.length) % product.images.length);
+    }
+
+    if (event.key === 'ArrowRight') {
+      this.selectedImage.set((this.selectedImage() + 1) % product.images.length);
     }
   }
 
-  /** NFR-002: Convert image URL to WebP variant for <picture> <source> */
   toWebP(url: string): string {
     return url.replace(/\.(jpe?g|png)$/i, '.webp');
   }
 
   ngOnDestroy(): void {
     this.seo.clearDynamicTags();
-    // REQ-026 fix: Clean up body class when leaving product detail page
+    this.stickyObserver?.disconnect();
     if (isPlatformBrowser(this.platformId)) {
       this.document.body.classList.remove('has-sticky-bottom-bar');
     }

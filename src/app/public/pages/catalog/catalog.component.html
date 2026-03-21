@@ -1,351 +1,325 @@
-<!-- CATALOG PAGE -->
-<section class="catalog-page">
-  <!-- Page Header -->
-  <div class="catalog-header">
+<section class="catalog-discovery catalog-page" [class.catalog-discovery--pharma]="currentTheme() === 'farmacos'" [class.catalog-discovery--food]="currentTheme() === 'alimentos'" [class.catalog-discovery--equipment]="currentTheme() === 'equipos'">
+  <header class="catalog-discovery__hero">
     <div class="container">
       <app-breadcrumb [items]="breadcrumbs" />
 
-      <div class="catalog-header__content">
-        <span class="catalog-header__eyebrow">
-          {{ i18n.currentLang() === 'es' ? 'Nuestros productos' : 'Our products' }}
-        </span>
-        <h1 class="catalog-header__title">
-          {{ i18n.currentLang() === 'es' ? 'Catalogo de Productos' : 'Product Catalog' }}
-        </h1>
-        <p class="catalog-header__count" aria-live="polite" aria-atomic="true">
-          {{ totalProducts() }} {{ i18n.currentLang() === 'es' ? 'productos' : 'products' }}
-        </p>
+      <div class="catalog-discovery__hero-grid">
+        <div class="catalog-discovery__hero-copy">
+          <span class="catalog-discovery__eyebrow">
+            {{ i18n.currentLang() === 'es' ? 'Catalogo HESA' : 'HESA catalog' }}
+          </span>
+          <h1 class="catalog-discovery__title">{{ heroTitle }}</h1>
+          <p class="catalog-discovery__description">{{ heroDescription }}</p>
+        </div>
+
+        <div class="catalog-discovery__hero-card">
+          <span class="catalog-discovery__hero-label">
+            {{ i18n.currentLang() === 'es' ? 'Descubrimiento rapido' : 'Quick discovery' }}
+          </span>
+          <strong class="catalog-discovery__hero-count">{{ totalProducts() }}</strong>
+          <p class="catalog-discovery__hero-meta">
+            {{ i18n.currentLang() === 'es' ? 'productos disponibles para explorar en tiempo real.' : 'products available to explore in real time.' }}
+          </p>
+        </div>
+      </div>
+
+      <div class="catalog-discovery__switcher" role="tablist" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Categorias del catalogo' : 'Catalog categories'">
+        <button
+          type="button"
+          class="catalog-discovery__switch"
+          [class.catalog-discovery__switch--active]="selectedCategory() === ''"
+          (click)="selectCategory('')">
+          <span class="material-symbols-outlined" aria-hidden="true">{{ getCategoryIcon('') }}</span>
+          {{ i18n.currentLang() === 'es' ? 'Todos' : 'All' }}
+        </button>
+        @for (category of categoryTabs; track category) {
+          <button
+            type="button"
+            class="catalog-discovery__switch"
+            [class.catalog-discovery__switch--active]="selectedCategory() === category"
+            (click)="selectCategory(category)">
+            <span class="material-symbols-outlined" aria-hidden="true">{{ getCategoryIcon(category) }}</span>
+            {{ getLocalizedCategoryLabel(category) }}
+          </button>
+        }
+      </div>
+
+      <div class="catalog-discovery__toolbar">
+        <label class="catalog-discovery__search">
+          <span class="material-symbols-outlined" aria-hidden="true">search</span>
+          <input
+            type="search"
+            [value]="searchTerm()"
+            (input)="onSearchInput($any($event.target).value)"
+            [attr.placeholder]="searchPlaceholder"
+            [attr.aria-label]="searchPlaceholder">
+        </label>
+
+        <button
+          type="button"
+          class="catalog-discovery__mobile-filters"
+          (click)="toggleMobileFilters()"
+          [attr.aria-label]="i18n.currentLang() === 'es' ? 'Abrir filtros' : 'Open filters'">
+          <span class="material-symbols-outlined" aria-hidden="true">tune</span>
+          {{ i18n.currentLang() === 'es' ? 'Filtros' : 'Filters' }}
+          @if (activeFilters().length > 0) {
+            <span class="catalog-discovery__mobile-badge">{{ activeFilters().length }}</span>
+          }
+        </button>
       </div>
     </div>
-  </div>
+  </header>
 
-  <!-- Filters & Grid -->
   <div class="container">
-
-    <!-- Mobile Filter Trigger -->
-    <button
-      class="filter-trigger"
-      (click)="toggleMobileFilters()"
-      [attr.aria-label]="i18n.currentLang() === 'es' ? 'Filtrar productos' : 'Filter products'">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>
-      </svg>
-      {{ i18n.currentLang() === 'es' ? 'Filtros' : 'Filters' }}
-      @if (activeFilters().length > 0) {
-        <span class="filter-trigger__badge">{{ activeFilters().length }}</span>
-      }
-    </button>
-
-    <!-- Desktop Filter Bar -->
-    <div class="filter-bar" role="group" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Filtros del catalogo' : 'Catalog filters'">
-      <div class="filter-bar__row">
-        <select
-          class="filter-bar__select"
-          [value]="selectedCategory()"
-          (change)="applyFilter('category', $any($event.target).value)"
-          [attr.aria-label]="i18n.currentLang() === 'es' ? 'Filtrar por categoria' : 'Filter by category'">
-          <option value="">{{ i18n.currentLang() === 'es' ? 'Categoria' : 'Category' }}</option>
-          <option value="farmacos">{{ i18n.currentLang() === 'es' ? 'Farmacos' : 'Pharmaceuticals' }}</option>
-          <option value="alimentos">{{ i18n.currentLang() === 'es' ? 'Alimentos' : 'Food' }}</option>
-          <option value="equipos">{{ i18n.currentLang() === 'es' ? 'Equipos' : 'Equipment' }}</option>
-        </select>
-
-        <select
-          class="filter-bar__select"
-          [value]="selectedBrand()"
-          (change)="applyFilter('brand', $any($event.target).value)"
-          [attr.aria-label]="i18n.currentLang() === 'es' ? 'Filtrar por marca' : 'Filter by brand'">
-          <option value="">{{ i18n.currentLang() === 'es' ? 'Marca' : 'Brand' }}</option>
-          @for (brand of filterValues().brands; track brand.id) {
-            <option [value]="brand.id">{{ brand.name }}</option>
+    <div class="catalog-discovery__shell">
+      <aside class="catalog-filters">
+        <div class="catalog-filters__header">
+          <div>
+            <p class="catalog-filters__eyebrow">{{ i18n.currentLang() === 'es' ? 'Filtrar catalogo' : 'Filter catalog' }}</p>
+            <h2 class="catalog-filters__title">{{ i18n.currentLang() === 'es' ? 'Encuentre mas rapido' : 'Find faster' }}</h2>
+          </div>
+          @if (activeFilters().length > 0 || selectedCategory()) {
+            <button type="button" class="catalog-filters__clear" (click)="clearFilters()">
+              {{ i18n.currentLang() === 'es' ? 'Limpiar todo' : 'Clear all' }}
+            </button>
           }
-        </select>
+        </div>
+
+        <div class="catalog-filters__group">
+          <label class="catalog-filters__label">{{ i18n.currentLang() === 'es' ? 'Marca' : 'Brand' }}</label>
+          <select class="catalog-filters__select" [value]="selectedBrand()" (change)="applyFilter('brand', $any($event.target).value)">
+            <option value="">{{ i18n.currentLang() === 'es' ? 'Todas las marcas' : 'All brands' }}</option>
+            @for (brand of filterValues().brands; track brand.id) {
+              <option [value]="brand.id">{{ brand.name }}</option>
+            }
+          </select>
+        </div>
 
         @if (showSpeciesFilter() && filterValues().species.length > 0) {
-          <select
-            class="filter-bar__select"
-            [value]="selectedSpecies()"
-            (change)="applyFilter('species', $any($event.target).value)"
-            [attr.aria-label]="i18n.currentLang() === 'es' ? 'Filtrar por especie' : 'Filter by species'">
-            <option value="">{{ i18n.currentLang() === 'es' ? 'Especie' : 'Species' }}</option>
-            @for (sp of filterValues().species; track sp.es) {
-              <option [value]="sp.es">{{ i18n.currentLang() === 'es' ? sp.es : (sp.en || sp.es) }}</option>
-            }
-          </select>
-        }
-
-        @if (showFamilyFilter() && filterValues().families.length > 0) {
-          <select
-            class="filter-bar__select"
-            [value]="selectedFamily()"
-            (change)="applyFilter('family', $any($event.target).value)"
-            [attr.aria-label]="i18n.currentLang() === 'es' ? 'Filtrar por familia' : 'Filter by family'">
-            <option value="">{{ i18n.currentLang() === 'es' ? 'Familia' : 'Family' }}</option>
-            @for (fam of filterValues().families; track fam.es) {
-              <option [value]="fam.es">{{ i18n.currentLang() === 'es' ? fam.es : (fam.en || fam.es) }}</option>
-            }
-          </select>
-        }
-
-        @if (showLifeStageFilter() && filterValues().lifeStages.length > 0) {
-          <select
-            class="filter-bar__select"
-            [value]="selectedLifeStage()"
-            (change)="applyFilter('lifeStage', $any($event.target).value)"
-            [attr.aria-label]="i18n.currentLang() === 'es' ? 'Filtrar por etapa de vida' : 'Filter by life stage'">
-            <option value="">{{ i18n.currentLang() === 'es' ? 'Etapa de vida' : 'Life Stage' }}</option>
-            @for (ls of filterValues().lifeStages; track ls.es) {
-              <option [value]="ls.es">{{ i18n.currentLang() === 'es' ? ls.es : (ls.en || ls.es) }}</option>
-            }
-          </select>
-        }
-
-        @if (showEquipmentTypeFilter() && filterValues().equipmentTypes.length > 0) {
-          <select
-            class="filter-bar__select"
-            [value]="selectedEquipmentType()"
-            (change)="applyFilter('equipmentType', $any($event.target).value)"
-            [attr.aria-label]="i18n.currentLang() === 'es' ? 'Filtrar por tipo de equipo' : 'Filter by equipment type'">
-            <option value="">{{ i18n.currentLang() === 'es' ? 'Tipo' : 'Type' }}</option>
-            @for (et of filterValues().equipmentTypes; track et.es) {
-              <option [value]="et.es">{{ i18n.currentLang() === 'es' ? et.es : (et.en || et.es) }}</option>
-            }
-          </select>
-        }
-      </div>
-    </div>
-
-    <!-- Mobile Filter Drawer -->
-    @if (mobileFiltersOpen()) {
-      <div class="filter-drawer__backdrop" (click)="toggleMobileFilters()"></div>
-      <div class="filter-drawer" role="dialog" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Filtros' : 'Filters'">
-        <div class="filter-drawer__header">
-          <h3 class="filter-drawer__title">{{ i18n.currentLang() === 'es' ? 'Filtros' : 'Filters' }}</h3>
-          <button class="filter-drawer__close" (click)="toggleMobileFilters()" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Cerrar filtros' : 'Close filters'">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-              <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-            </svg>
-          </button>
-        </div>
-        <div class="filter-drawer__body">
-          <div class="filter-drawer__group">
-            <label class="filter-drawer__label">{{ i18n.currentLang() === 'es' ? 'Categoria' : 'Category' }}</label>
-            <select class="filter-bar__select" [value]="selectedCategory()" (change)="applyFilter('category', $any($event.target).value)">
-              <option value="">{{ i18n.currentLang() === 'es' ? 'Todas' : 'All' }}</option>
-              <option value="farmacos">{{ i18n.currentLang() === 'es' ? 'Farmacos' : 'Pharmaceuticals' }}</option>
-              <option value="alimentos">{{ i18n.currentLang() === 'es' ? 'Alimentos' : 'Food' }}</option>
-              <option value="equipos">{{ i18n.currentLang() === 'es' ? 'Equipos' : 'Equipment' }}</option>
-            </select>
-          </div>
-          <div class="filter-drawer__group">
-            <label class="filter-drawer__label">{{ i18n.currentLang() === 'es' ? 'Marca' : 'Brand' }}</label>
-            <select class="filter-bar__select" [value]="selectedBrand()" (change)="applyFilter('brand', $any($event.target).value)">
-              <option value="">{{ i18n.currentLang() === 'es' ? 'Todas' : 'All' }}</option>
-              @for (brand of filterValues().brands; track brand.id) {
-                <option [value]="brand.id">{{ brand.name }}</option>
+          <div class="catalog-filters__group">
+            <label class="catalog-filters__label">{{ i18n.currentLang() === 'es' ? 'Especie' : 'Species' }}</label>
+            <select class="catalog-filters__select" [value]="selectedSpecies()" (change)="applyFilter('species', $any($event.target).value)">
+              <option value="">{{ i18n.currentLang() === 'es' ? 'Todas las especies' : 'All species' }}</option>
+              @for (species of filterValues().species; track species.es) {
+                <option [value]="species.es">{{ getLocalizedOption(species) }}</option>
               }
             </select>
           </div>
-          @if (showSpeciesFilter() && filterValues().species.length > 0) {
-            <div class="filter-drawer__group">
-              <label class="filter-drawer__label">{{ i18n.currentLang() === 'es' ? 'Especie' : 'Species' }}</label>
-              <select class="filter-bar__select" [value]="selectedSpecies()" (change)="applyFilter('species', $any($event.target).value)">
-                <option value="">{{ i18n.currentLang() === 'es' ? 'Todas' : 'All' }}</option>
-                @for (sp of filterValues().species; track sp.es) {
-                  <option [value]="sp.es">{{ i18n.currentLang() === 'es' ? sp.es : (sp.en || sp.es) }}</option>
-                }
-              </select>
-            </div>
-          }
-          @if (showFamilyFilter() && filterValues().families.length > 0) {
-            <div class="filter-drawer__group">
-              <label class="filter-drawer__label">{{ i18n.currentLang() === 'es' ? 'Familia' : 'Family' }}</label>
-              <select class="filter-bar__select" [value]="selectedFamily()" (change)="applyFilter('family', $any($event.target).value)">
-                <option value="">{{ i18n.currentLang() === 'es' ? 'Todas' : 'All' }}</option>
-                @for (fam of filterValues().families; track fam.es) {
-                  <option [value]="fam.es">{{ i18n.currentLang() === 'es' ? fam.es : (fam.en || fam.es) }}</option>
-                }
-              </select>
-            </div>
-          }
-          @if (showLifeStageFilter() && filterValues().lifeStages.length > 0) {
-            <div class="filter-drawer__group">
-              <label class="filter-drawer__label">{{ i18n.currentLang() === 'es' ? 'Etapa de vida' : 'Life Stage' }}</label>
-              <select class="filter-bar__select" [value]="selectedLifeStage()" (change)="applyFilter('lifeStage', $any($event.target).value)">
-                <option value="">{{ i18n.currentLang() === 'es' ? 'Todas' : 'All' }}</option>
-                @for (ls of filterValues().lifeStages; track ls.es) {
-                  <option [value]="ls.es">{{ i18n.currentLang() === 'es' ? ls.es : (ls.en || ls.es) }}</option>
-                }
-              </select>
-            </div>
-          }
-          @if (showEquipmentTypeFilter() && filterValues().equipmentTypes.length > 0) {
-            <div class="filter-drawer__group">
-              <label class="filter-drawer__label">{{ i18n.currentLang() === 'es' ? 'Tipo' : 'Type' }}</label>
-              <select class="filter-bar__select" [value]="selectedEquipmentType()" (change)="applyFilter('equipmentType', $any($event.target).value)">
-                <option value="">{{ i18n.currentLang() === 'es' ? 'Todos' : 'All' }}</option>
-                @for (et of filterValues().equipmentTypes; track et.es) {
-                  <option [value]="et.es">{{ i18n.currentLang() === 'es' ? et.es : (et.en || et.es) }}</option>
-                }
-              </select>
-            </div>
-          }
-        </div>
-        <div class="filter-drawer__footer">
-          @if (activeFilters().length > 0) {
-            <button class="btn btn-outline btn-block" (click)="clearFilters()">
-              {{ i18n.currentLang() === 'es' ? 'Limpiar filtros' : 'Clear filters' }}
-            </button>
-          }
-          <button class="btn btn-primary btn-block" (click)="applyMobileFilters()">
-            {{ i18n.currentLang() === 'es' ? 'Aplicar filtros' : 'Apply filters' }}
-          </button>
-        </div>
-      </div>
-    }
-
-    <!-- Active Filter Pills -->
-    @if (activeFilters().length > 0) {
-      <div class="filter-pills">
-        @for (filter of activeFilters(); track filter.key) {
-          <span class="filter-pills__item">
-            {{ filter.label }}
-            <button
-              class="filter-pills__remove"
-              (click)="removeFilter(filter.key)"
-              [attr.aria-label]="(i18n.currentLang() === 'es' ? 'Remover filtro: ' : 'Remove filter: ') + filter.label">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-              </svg>
-            </button>
-          </span>
         }
-        <button class="filter-pills__clear" (click)="clearFilters()">
+
+        @if (showFamilyFilter() && filterValues().families.length > 0) {
+          <div class="catalog-filters__group">
+            <label class="catalog-filters__label">{{ i18n.currentLang() === 'es' ? 'Familia' : 'Family' }}</label>
+            <select class="catalog-filters__select" [value]="selectedFamily()" (change)="applyFilter('family', $any($event.target).value)">
+              <option value="">{{ i18n.currentLang() === 'es' ? 'Todas las familias' : 'All families' }}</option>
+              @for (family of filterValues().families; track family.es) {
+                <option [value]="family.es">{{ getLocalizedOption(family) }}</option>
+              }
+            </select>
+          </div>
+        }
+
+        @if (showLifeStageFilter() && filterValues().lifeStages.length > 0) {
+          <div class="catalog-filters__group">
+            <label class="catalog-filters__label">{{ i18n.currentLang() === 'es' ? 'Etapa de vida' : 'Life stage' }}</label>
+            <select class="catalog-filters__select" [value]="selectedLifeStage()" (change)="applyFilter('lifeStage', $any($event.target).value)">
+              <option value="">{{ i18n.currentLang() === 'es' ? 'Todas las etapas' : 'All life stages' }}</option>
+              @for (lifeStage of filterValues().lifeStages; track lifeStage.es) {
+                <option [value]="lifeStage.es">{{ getLocalizedOption(lifeStage) }}</option>
+              }
+            </select>
+          </div>
+        }
+
+        @if (showEquipmentTypeFilter() && filterValues().equipmentTypes.length > 0) {
+          <div class="catalog-filters__group">
+            <label class="catalog-filters__label">{{ i18n.currentLang() === 'es' ? 'Tipo de equipo' : 'Equipment type' }}</label>
+            <select class="catalog-filters__select" [value]="selectedEquipmentType()" (change)="applyFilter('equipmentType', $any($event.target).value)">
+              <option value="">{{ i18n.currentLang() === 'es' ? 'Todos los tipos' : 'All types' }}</option>
+              @for (equipmentType of filterValues().equipmentTypes; track equipmentType.es) {
+                <option [value]="equipmentType.es">{{ getLocalizedOption(equipmentType) }}</option>
+              }
+            </select>
+          </div>
+        }
+      </aside>
+
+      <div class="catalog-results">
+        <div class="catalog-results__header">
+          <div>
+            <p class="catalog-results__eyebrow">{{ i18n.currentLang() === 'es' ? 'Resultados' : 'Results' }}</p>
+            <h2 class="catalog-results__title">
+              {{ totalProducts() }}
+              {{ i18n.currentLang() === 'es' ? 'productos para explorar' : 'products to explore' }}
+            </h2>
+          </div>
+          @if (activeFilters().length > 0 || selectedCategory()) {
+            <button type="button" class="catalog-results__clear" (click)="clearFilters()">
+              {{ i18n.currentLang() === 'es' ? 'Limpiar busqueda' : 'Reset search' }}
+            </button>
+          }
+        </div>
+
+        @if (activeFilters().length > 0) {
+          <div class="catalog-results__pills">
+            @for (filter of activeFilters(); track filter.key) {
+              <span class="catalog-results__pill">
+                {{ filter.label }}
+                <button type="button" (click)="removeFilter(filter.key)" [attr.aria-label]="(i18n.currentLang() === 'es' ? 'Remover filtro ' : 'Remove filter ') + filter.label">
+                  <span class="material-symbols-outlined" aria-hidden="true">close</span>
+                </button>
+              </span>
+            }
+          </div>
+        }
+
+        @if (loading()) {
+          <div class="catalog-results__grid" aria-busy="true">
+            @for (item of [1,2,3,4,5,6,7,8,9]; track item) {
+              <div class="catalog-results__skeleton"></div>
+            }
+          </div>
+        } @else if (error()) {
+          <div class="catalog-state">
+            <span class="material-symbols-outlined catalog-state__icon" aria-hidden="true">error</span>
+            <h3>{{ i18n.currentLang() === 'es' ? 'No pudimos cargar el catalogo' : 'We could not load the catalog' }}</h3>
+            <p>{{ i18n.currentLang() === 'es' ? 'Verifique su conexion e intente nuevamente.' : 'Please check your connection and try again.' }}</p>
+            <button type="button" class="btn btn-primary" (click)="retry()">
+              {{ i18n.currentLang() === 'es' ? 'Reintentar' : 'Retry' }}
+            </button>
+          </div>
+        } @else if (products().length === 0) {
+          <div class="catalog-state">
+            <span class="material-symbols-outlined catalog-state__icon" aria-hidden="true">search_off</span>
+            <h3>{{ i18n.currentLang() === 'es' ? 'No encontramos productos con esos criterios' : 'We could not find products with those criteria' }}</h3>
+            <p>{{ i18n.currentLang() === 'es' ? 'Pruebe con otra combinacion de filtros o limpie la busqueda para volver al catalogo completo.' : 'Try another filter combination or clear the search to return to the full catalog.' }}</p>
+            <button type="button" class="btn btn-outline" (click)="clearFilters()">
+              {{ i18n.currentLang() === 'es' ? 'Limpiar todo' : 'Clear all' }}
+            </button>
+          </div>
+        } @else {
+          <div class="catalog-results__grid">
+            @for (product of products(); track product._id) {
+              <app-product-card [product]="product" variant="discovery" />
+            }
+          </div>
+
+          @if (totalPages() > 1) {
+            <nav class="catalog-pagination" role="navigation" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Paginacion del catalogo' : 'Catalog pagination'">
+              <span class="catalog-pagination__summary">
+                {{ i18n.currentLang() === 'es' ? 'Mostrando' : 'Showing' }}
+                <strong>{{ (currentPage() - 1) * pageSize + 1 }}&ndash;{{ Math.min(currentPage() * pageSize, totalProducts()) }}</strong>
+                {{ i18n.currentLang() === 'es' ? 'de' : 'of' }}
+                <strong>{{ totalProducts() }}</strong>
+              </span>
+
+              <div class="catalog-pagination__controls">
+                <button type="button" class="catalog-pagination__btn" [disabled]="currentPage() === 1" (click)="goToPage(currentPage() - 1)" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Pagina anterior' : 'Previous page'">
+                  <span class="material-symbols-outlined" aria-hidden="true">chevron_left</span>
+                </button>
+                @for (page of pagesArray; track page) {
+                  <button
+                    type="button"
+                    class="catalog-pagination__btn"
+                    [class.catalog-pagination__btn--active]="page === currentPage()"
+                    (click)="goToPage(page)"
+                    [attr.aria-label]="(i18n.currentLang() === 'es' ? 'Pagina ' : 'Page ') + page"
+                    [attr.aria-current]="page === currentPage() ? 'page' : null">
+                    {{ page }}
+                  </button>
+                }
+                <button type="button" class="catalog-pagination__btn" [disabled]="currentPage() === totalPages()" (click)="goToPage(currentPage() + 1)" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Pagina siguiente' : 'Next page'">
+                  <span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>
+                </button>
+              </div>
+            </nav>
+          }
+        }
+      </div>
+    </div>
+  </div>
+
+  @if (mobileFiltersOpen()) {
+    <div class="catalog-drawer__backdrop" (click)="toggleMobileFilters()"></div>
+    <div class="catalog-drawer" role="dialog" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Filtros del catalogo' : 'Catalog filters'">
+      <div class="catalog-drawer__header">
+        <div>
+          <p class="catalog-drawer__eyebrow">{{ i18n.currentLang() === 'es' ? 'Filtros' : 'Filters' }}</p>
+          <h3 class="catalog-drawer__title">{{ i18n.currentLang() === 'es' ? 'Refine el catalogo' : 'Refine the catalog' }}</h3>
+        </div>
+        <button type="button" class="catalog-drawer__close" (click)="toggleMobileFilters()" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Cerrar filtros' : 'Close filters'">
+          <span class="material-symbols-outlined" aria-hidden="true">close</span>
+        </button>
+      </div>
+
+      <div class="catalog-drawer__body">
+        <div class="catalog-filters__group">
+          <label class="catalog-filters__label">{{ i18n.currentLang() === 'es' ? 'Marca' : 'Brand' }}</label>
+          <select class="catalog-filters__select" [value]="selectedBrand()" (change)="applyFilter('brand', $any($event.target).value)">
+            <option value="">{{ i18n.currentLang() === 'es' ? 'Todas las marcas' : 'All brands' }}</option>
+            @for (brand of filterValues().brands; track brand.id) {
+              <option [value]="brand.id">{{ brand.name }}</option>
+            }
+          </select>
+        </div>
+
+        @if (showSpeciesFilter() && filterValues().species.length > 0) {
+          <div class="catalog-filters__group">
+            <label class="catalog-filters__label">{{ i18n.currentLang() === 'es' ? 'Especie' : 'Species' }}</label>
+            <select class="catalog-filters__select" [value]="selectedSpecies()" (change)="applyFilter('species', $any($event.target).value)">
+              <option value="">{{ i18n.currentLang() === 'es' ? 'Todas las especies' : 'All species' }}</option>
+              @for (species of filterValues().species; track species.es) {
+                <option [value]="species.es">{{ getLocalizedOption(species) }}</option>
+              }
+            </select>
+          </div>
+        }
+
+        @if (showFamilyFilter() && filterValues().families.length > 0) {
+          <div class="catalog-filters__group">
+            <label class="catalog-filters__label">{{ i18n.currentLang() === 'es' ? 'Familia' : 'Family' }}</label>
+            <select class="catalog-filters__select" [value]="selectedFamily()" (change)="applyFilter('family', $any($event.target).value)">
+              <option value="">{{ i18n.currentLang() === 'es' ? 'Todas las familias' : 'All families' }}</option>
+              @for (family of filterValues().families; track family.es) {
+                <option [value]="family.es">{{ getLocalizedOption(family) }}</option>
+              }
+            </select>
+          </div>
+        }
+
+        @if (showLifeStageFilter() && filterValues().lifeStages.length > 0) {
+          <div class="catalog-filters__group">
+            <label class="catalog-filters__label">{{ i18n.currentLang() === 'es' ? 'Etapa de vida' : 'Life stage' }}</label>
+            <select class="catalog-filters__select" [value]="selectedLifeStage()" (change)="applyFilter('lifeStage', $any($event.target).value)">
+              <option value="">{{ i18n.currentLang() === 'es' ? 'Todas las etapas' : 'All life stages' }}</option>
+              @for (lifeStage of filterValues().lifeStages; track lifeStage.es) {
+                <option [value]="lifeStage.es">{{ getLocalizedOption(lifeStage) }}</option>
+              }
+            </select>
+          </div>
+        }
+
+        @if (showEquipmentTypeFilter() && filterValues().equipmentTypes.length > 0) {
+          <div class="catalog-filters__group">
+            <label class="catalog-filters__label">{{ i18n.currentLang() === 'es' ? 'Tipo de equipo' : 'Equipment type' }}</label>
+            <select class="catalog-filters__select" [value]="selectedEquipmentType()" (change)="applyFilter('equipmentType', $any($event.target).value)">
+              <option value="">{{ i18n.currentLang() === 'es' ? 'Todos los tipos' : 'All types' }}</option>
+              @for (equipmentType of filterValues().equipmentTypes; track equipmentType.es) {
+                <option [value]="equipmentType.es">{{ getLocalizedOption(equipmentType) }}</option>
+              }
+            </select>
+          </div>
+        }
+      </div>
+
+      <div class="catalog-drawer__footer">
+        <button type="button" class="btn btn-outline" (click)="clearFilters()">
           {{ i18n.currentLang() === 'es' ? 'Limpiar todo' : 'Clear all' }}
         </button>
-      </div>
-    }
-
-    <!-- Loading Skeleton -->
-    @if (loading()) {
-      <div class="product-grid" aria-busy="true">
-        @for (i of [1,2,3,4,5,6,7,8,9,10,11,12]; track i) {
-          <div class="skeleton-card">
-            <div class="skeleton skeleton-card__image"></div>
-            <div class="skeleton-card__body">
-              <div class="skeleton skeleton-card__line skeleton-card__line--wide"></div>
-              <div class="skeleton skeleton-card__line skeleton-card__line--medium"></div>
-            </div>
-          </div>
-        }
-      </div>
-    }
-
-    <!-- Error State -->
-    @else if (error()) {
-      <div class="state-message state-message--error">
-        <div class="state-message__icon" aria-hidden="true">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
-          </svg>
-        </div>
-        <h2 class="state-message__title">
-          {{ i18n.currentLang() === 'es' ? 'No pudimos cargar los productos' : 'We could not load the products' }}
-        </h2>
-        <p class="state-message__text">
-          {{ i18n.currentLang() === 'es' ? 'Verifica tu conexion e intenta de nuevo.' : 'Check your connection and try again.' }}
-        </p>
-        <button class="btn btn-primary" (click)="retry()">
-          {{ i18n.currentLang() === 'es' ? 'Reintentar' : 'Retry' }}
+        <button type="button" class="btn btn-primary" (click)="applyMobileFilters()">
+          {{ i18n.currentLang() === 'es' ? 'Ver resultados' : 'View results' }}
         </button>
       </div>
-    }
-
-    <!-- Empty State: filters active but no results -->
-    @else if (products().length === 0 && activeFilters().length > 0) {
-      <div class="state-message state-message--empty">
-        <div class="state-message__icon" aria-hidden="true">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="8" y1="11" x2="14" y2="11"/>
-          </svg>
-        </div>
-        <h2 class="state-message__title">
-          {{ i18n.currentLang() === 'es' ? 'Sin resultados para estos filtros' : 'No results for these filters' }}
-        </h2>
-        <p class="state-message__text">
-          {{ i18n.currentLang() === 'es' ? 'Intenta limpiar algunos filtros para ver mas resultados.' : 'Try clearing some filters to see more results.' }}
-        </p>
-        <button class="btn btn-outline" (click)="clearFilters()">
-          {{ i18n.currentLang() === 'es' ? 'Limpiar filtros' : 'Clear filters' }}
-        </button>
-      </div>
-    }
-
-    <!-- Empty State: no products at all -->
-    @else if (products().length === 0) {
-      <div class="state-message state-message--empty">
-        <div class="state-message__illustration" aria-hidden="true">
-          <svg width="100" height="100" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="20" y="30" width="80" height="60" rx="12" fill="var(--neutral-100)" stroke="var(--neutral-200)" stroke-width="2"/>
-            <rect x="32" y="44" width="22" height="22" rx="6" fill="var(--neutral-200)"/>
-            <rect x="62" y="46" width="26" height="6" rx="3" fill="var(--neutral-200)"/>
-            <rect x="62" y="58" width="18" height="4" rx="2" fill="var(--neutral-200)" opacity="0.5"/>
-          </svg>
-        </div>
-        <h2 class="state-message__title">
-          {{ i18n.currentLang() === 'es' ? 'Aun no hay productos en el catalogo' : 'No products in catalog yet' }}
-        </h2>
-        <p class="state-message__text">
-          {{ i18n.currentLang() === 'es' ? 'Vuelve pronto, estamos preparando nuestro catalogo.' : 'Come back soon, we are preparing our catalog.' }}
-        </p>
-      </div>
-    }
-
-    <!-- Product Grid -->
-    @else {
-      <div class="product-grid">
-        @for (product of products(); track product._id) {
-          <app-product-card [product]="product" />
-        }
-      </div>
-
-      <!-- Pagination -->
-      @if (totalPages() > 1) {
-        <nav class="pagination" role="navigation" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Paginacion del catalogo' : 'Catalog pagination'">
-          <span class="pagination__summary">
-            {{ i18n.currentLang() === 'es' ? 'Mostrando' : 'Showing' }}
-            <strong>{{ (currentPage() - 1) * pageSize + 1 }}&ndash;{{ Math.min(currentPage() * pageSize, totalProducts()) }}</strong>
-            {{ i18n.currentLang() === 'es' ? 'de' : 'of' }}
-            <strong>{{ totalProducts() }}</strong>
-          </span>
-          <div class="pagination__controls" role="group" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Controles de pagina' : 'Page controls'">
-            <button
-              class="pagination__btn"
-              [disabled]="currentPage() === 1"
-              (click)="goToPage(currentPage() - 1)"
-              [attr.aria-label]="i18n.currentLang() === 'es' ? 'Pagina anterior' : 'Previous page'">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
-            </button>
-            @for (page of pagesArray; track page) {
-              <button
-                class="pagination__btn"
-                [class.pagination__btn--active]="page === currentPage()"
-                (click)="goToPage(page)"
-                [attr.aria-label]="(i18n.currentLang() === 'es' ? 'Pagina ' : 'Page ') + page"
-                [attr.aria-current]="page === currentPage() ? 'page' : null">
-                {{ page }}
-              </button>
-            }
-            <button
-              class="pagination__btn"
-              [disabled]="currentPage() === totalPages()"
-              (click)="goToPage(currentPage() + 1)"
-              [attr.aria-label]="i18n.currentLang() === 'es' ? 'Pagina siguiente' : 'Next page'">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
-            </button>
-          </div>
-        </nav>
-      }
-    }
-  </div>
+    </div>
+  }
 </section>
