@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy, inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser, DOCUMENT } from '@angular/common';
 import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs';
@@ -17,14 +17,16 @@ import { SeoService } from './shared/services/seo.service';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   isAdminRoute = false;
+  hideWhatsappFab = false;
   private router = inject(Router);
   private i18n = inject(I18nService);
   private platformId = inject(PLATFORM_ID);
   private api = inject(ApiService);
   private seo = inject(SeoService);
   private document = inject(DOCUMENT);
+  private footerObserver?: IntersectionObserver;
 
   ngOnInit(): void {
     // BUG-V05: Only run browser-specific logic in the browser (not during prerendering)
@@ -45,7 +47,26 @@ export class AppComponent implements OnInit {
       filter((event): event is NavigationEnd => event instanceof NavigationEnd)
     ).subscribe(event => {
       this.isAdminRoute = event.url.startsWith('/admin');
+
+      if (isPlatformBrowser(this.platformId)) {
+        if (this.isAdminRoute) {
+          this.disconnectFooterObserver();
+          this.hideWhatsappFab = false;
+        } else {
+          window.requestAnimationFrame(() => this.observeFooterVisibility());
+        }
+      }
     });
+  }
+
+  ngAfterViewInit(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      window.requestAnimationFrame(() => this.observeFooterVisibility());
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.disconnectFooterObserver();
   }
 
   private async loadSiteConfig(): Promise<void> {
@@ -122,5 +143,35 @@ export class AppComponent implements OnInit {
     img.src = `https://www.facebook.com/tr?id=${pixelId}&ev=PageView&noscript=1`;
     noscript.appendChild(img);
     this.document.body.appendChild(noscript);
+  }
+
+  private observeFooterVisibility(): void {
+    if (!isPlatformBrowser(this.platformId) || this.isAdminRoute) {
+      return;
+    }
+
+    const footer = this.document.querySelector('app-footer');
+    if (!footer || typeof IntersectionObserver === 'undefined') {
+      this.hideWhatsappFab = false;
+      return;
+    }
+
+    this.disconnectFooterObserver();
+
+    this.footerObserver = new IntersectionObserver(
+      entries => {
+        this.hideWhatsappFab = entries.some(entry => entry.isIntersecting);
+      },
+      {
+        threshold: 0.02
+      }
+    );
+
+    this.footerObserver.observe(footer);
+  }
+
+  private disconnectFooterObserver(): void {
+    this.footerObserver?.disconnect();
+    this.footerObserver = undefined;
   }
 }

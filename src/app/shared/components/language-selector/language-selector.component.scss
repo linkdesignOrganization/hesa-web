@@ -121,27 +121,31 @@
 // Footer variant — simple text toggle
 // =============================================================================
 .lang-footer {
-  font-size: var(--text-small);
-  color: rgba(255, 255, 255, 0.65);
+  font-size: 13px;
+  color: var(--neutral-900);
   font-weight: var(--weight-medium);
   letter-spacing: 0.02em;
-  transition: color var(--transition-fast);
-  padding: 0;
-  background: none;
-  border: none;
+  transition: color var(--transition-fast), background-color var(--transition-fast),
+    border-color var(--transition-fast);
+  padding: 0 14px;
+  background: var(--neutral-white);
+  border: 1px solid transparent;
+  border-radius: var(--radius-pill);
   cursor: pointer;
-  min-height: 44px;
+  min-height: 40px;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
 
   &:hover {
-    color: var(--neutral-white);
+    color: var(--neutral-900);
+    background: #f3f7fb;
+    border-color: rgba(15, 23, 42, 0.08);
   }
 
   &:focus-visible {
     outline: 2px solid var(--neutral-white);
     outline-offset: 2px;
-    border-radius: var(--radius-sm);
   }
 }
 

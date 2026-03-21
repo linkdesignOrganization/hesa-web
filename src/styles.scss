@@ -219,9 +219,28 @@ app-home {
       border-radius: 40px;
       background:
         radial-gradient(circle at top right, rgba(255, 255, 255, 0.65), transparent 40%),
-        linear-gradient(180deg, #e6f0f0 0%, #d2e1e4 100%);
+        linear-gradient(180deg, #f4f8ff 0%, #e3e8ee 100%);
       box-shadow: 0 26px 58px rgba(15, 23, 42, 0.08);
       overflow: hidden;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+
+      &[data-category='farmacos'] {
+        background:
+          radial-gradient(circle at top right, rgba(255, 255, 255, 0.74), transparent 38%),
+          linear-gradient(180deg, rgba(229, 244, 252, 0.98) 0%, rgba(255, 255, 255, 1) 100%);
+      }
+
+      &[data-category='alimentos'] {
+        background:
+          radial-gradient(circle at top right, rgba(255, 255, 255, 0.74), transparent 38%),
+          linear-gradient(180deg, rgba(241, 250, 236, 0.98) 0%, rgba(255, 255, 255, 1) 100%);
+      }
+
+      &[data-category='equipos'] {
+        background:
+          radial-gradient(circle at top right, rgba(255, 255, 255, 0.72), transparent 38%),
+          linear-gradient(180deg, rgba(240, 247, 246, 0.98) 0%, rgba(255, 255, 255, 1) 100%);
+      }
 
       @media (max-width: 767px) {
         padding: 18px 16px 20px;
@@ -370,16 +389,16 @@ app-home {
       }
 
       &--active {
-        background: var(--brand-secondary);
-        color: var(--neutral-white);
-        border-color: var(--brand-secondary);
+        background: var(--neutral-white);
+        color: var(--neutral-900);
+        border-color: rgba(15, 23, 42, 0.08);
         box-shadow: none;
         transform: none;
       }
 
       &--active:hover {
-        background: var(--brand-secondary);
-        color: var(--neutral-white);
+        background: var(--neutral-white);
+        color: var(--neutral-900);
       }
     }
 
@@ -428,17 +447,18 @@ app-home {
       gap: 8px;
       padding: 12px 18px;
       border-radius: 999px;
-      background: var(--neutral-900);
-      color: var(--neutral-white);
+      background: var(--neutral-white);
+      color: var(--neutral-900);
       text-decoration: none;
       font-size: 14px;
       font-weight: var(--weight-semibold);
-      transition: transform 0.22s ease, opacity 0.22s ease;
+      transition: transform 0.22s ease, opacity 0.22s ease, background-color 0.22s ease;
 
       &:hover {
         transform: translateY(-1px);
-        opacity: 0.92;
-        color: var(--neutral-white);
+        opacity: 1;
+        background: rgba(255, 255, 255, 0.86);
+        color: var(--neutral-900);
       }
 
       .material-symbols-outlined {
@@ -865,25 +885,6 @@ app-home {
       background: var(--neutral-white);
     }
 
-    &__category {
-      position: absolute;
-      top: 12px;
-      left: 12px;
-      z-index: 2;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 7px 11px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.86);
-      backdrop-filter: blur(18px);
-      color: var(--neutral-900);
-      font-size: 11px;
-      font-weight: var(--weight-semibold);
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
-
     &__brand-logo-wrap {
       position: absolute;
       top: 12px;
@@ -892,10 +893,10 @@ app-home {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-width: 76px;
-      max-width: 128px;
-      min-height: 34px;
-      padding: 7px 12px;
+      min-width: 114px;
+      max-width: 192px;
+      min-height: 51px;
+      padding: 10px 18px;
       border-radius: 999px;
       background: rgba(255, 255, 255, 0.9);
       backdrop-filter: blur(18px);
@@ -904,7 +905,7 @@ app-home {
     &__brand-logo {
       width: auto;
       max-width: 100%;
-      max-height: 18px;
+      max-height: 27px;
       object-fit: contain;
     }
 
@@ -1050,7 +1051,7 @@ app-home {
     &--light {
       background:
         radial-gradient(circle at top right, rgba(255, 255, 255, 0.65), transparent 40%),
-        linear-gradient(180deg, #e6f0f0 0%, #d2e1e4 100%);
+        linear-gradient(180deg, #f4f8ff 0%, #e3e8ee 100%);
       padding: 40px 34px 32px;
 
       @media (max-width: 767px) {

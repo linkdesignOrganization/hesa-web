@@ -1,4 +1,4 @@
-import { Component, inject, signal, OnInit, PLATFORM_ID } from '@angular/core';
+import { Component, inject, signal, OnInit, PLATFORM_ID, Input } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs';
@@ -12,6 +12,8 @@ import { I18nService } from '../../services/i18n.service';
   styleUrl: './whatsapp-fab.component.scss'
 })
 export class WhatsappFabComponent implements OnInit {
+  @Input() isHidden = false;
+
   private api = inject(ApiService);
   private i18n = inject(I18nService);
   private router = inject(Router);

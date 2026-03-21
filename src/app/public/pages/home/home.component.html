@@ -241,7 +241,7 @@
     <div
       #parallaxLayer
       class="service-spotlight__media"
-      data-parallax-speed="0.12"
+      data-parallax-speed="0.2"
       aria-hidden="true"></div>
 
     <div class="service-spotlight__content">
@@ -286,7 +286,7 @@
 
 <!-- FEATURED SHOWCASE -->
 <section class="featured-showcase fade-in-section">
-  <div class="featured-showcase__shell">
+  <div class="featured-showcase__shell" [attr.data-category]="activeShowcaseTab()">
     <div class="featured-showcase__marquee" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Marcas destacadas de esta seleccion' : 'Featured brands in this selection'">
       <div class="featured-showcase__marquee-track">
         @for (group of showcaseMarqueeGroups; track group) {
@@ -303,7 +303,7 @@
 
     <div class="featured-showcase__intro">
       <div class="featured-showcase__intro-copy">
-        <h2 class="featured-showcase__title">{{ i18n.currentLang() === 'es' ? 'Productos Destacados' : 'Featured Products' }}</h2>
+        <h2 class="featured-showcase__title">{{ i18n.currentLang() === 'es' ? 'Productos destacados' : 'Featured Products' }}</h2>
       </div>
       <p class="featured-showcase__intro-text">{{ getLocalizedText(activeShowcaseTabData().description) }}</p>
     </div>
@@ -333,8 +333,6 @@
           [routerLink]="getLocalizedText(item.href)"
           [attr.aria-label]="(i18n.currentLang() === 'es' ? 'Explorar ' : 'Explore ') + getLocalizedText(item.name)">
           <div class="showcase-product-card__media" [attr.data-category]="item.category">
-            <span class="showcase-product-card__category">{{ getShowcaseCategoryLabel(item.category) }}</span>
-
             @if (item.brandLogo) {
               <div class="showcase-product-card__brand-logo-wrap">
                 <img [src]="item.brandLogo" [alt]="item.brand" class="showcase-product-card__brand-logo" loading="lazy">
@@ -386,7 +384,7 @@
       <div
         #parallaxLayer
         class="alliances-insight-section__media"
-        data-parallax-speed="0.07"
+        data-parallax-speed="0.14"
         [style.--alliances-image-desktop]="'url(' + alliancesInsight.imageDesktop + ')'"
         [style.--alliances-image-mobile]="'url(' + alliancesInsight.imageMobile + ')'"
         aria-hidden="true"></div>

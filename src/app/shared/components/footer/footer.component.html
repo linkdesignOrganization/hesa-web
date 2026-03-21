@@ -1,76 +1,84 @@
 <footer class="footer" role="contentinfo" aria-label="Pie de pagina">
   <div class="footer__main container">
-    <div class="footer__grid">
-      <!-- Column 1: Brand -->
-      <div class="footer__brand">
-        <div class="footer__logo">HESA</div>
-        <p class="footer__tagline">{{ i18n.currentLang() === 'es' ? 'Distribución de salud animal en Costa Rica desde 1987.' : 'Animal health distribution in Costa Rica since 1987.' }}</p>
-        <div class="footer__social-links">
-          <a href="https://facebook.com/hesacr" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="footer__social-link">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-          </a>
-          <a href="https://instagram.com/hesacr" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="footer__social-link">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-          </a>
-        </div>
-      </div>
+    <div class="footer__shell">
+      <section class="footer__card footer__card--primary">
+        <h2 class="footer__headline">
+          {{ i18n.currentLang() === 'es'
+            ? 'Un proveedor que responde'
+            : 'A supplier that responds' }}
+        </h2>
+        <p class="footer__hero-text">
+          {{ i18n.currentLang() === 'es'
+            ? 'Atendemos veterinarias, pet shops, agroservicios y fabricantes con cobertura nacional, marcas exclusivas y un equipo comercial que sí acompaña cada cuenta.'
+            : 'We support clinics, pet shops, agro stores, and manufacturers with nationwide coverage, exclusive brands, and a commercial team that stays close to every account.' }}
+        </p>
 
-      <!-- Column 2: Navigation -->
-      <div class="footer__section" [class.footer__section--open]="openSection() === 'nav'">
-        <button class="footer__section-toggle" (click)="toggleSection('nav')" [attr.aria-expanded]="openSection() === 'nav'" aria-controls="footer-nav">
-          <span>{{ i18n.currentLang() === 'es' ? 'Navegación' : 'Navigation' }}</span>
-          <svg class="footer__toggle-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="footer__section-content" id="footer-nav">
-          <h3 class="footer__section-title footer__section-title--desktop">{{ i18n.currentLang() === 'es' ? 'Navegación' : 'Navigation' }}</h3>
-          <nav>
-            <a [routerLink]="i18n.getLangPrefix()" class="footer__link">{{ i18n.currentLang() === 'es' ? 'Inicio' : 'Home' }}</a>
-            <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo' : 'catalog')" class="footer__link">{{ i18n.currentLang() === 'es' ? 'Catálogo' : 'Catalog' }}</a>
-            <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'marcas' : 'brands')" class="footer__link">{{ i18n.currentLang() === 'es' ? 'Marcas' : 'Brands' }}</a>
-            <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'nosotros' : 'about')" class="footer__link">{{ i18n.currentLang() === 'es' ? 'Nosotros' : 'About' }}</a>
-          </nav>
+        <div class="footer__nav-grid">
+          @for (section of footerSections; track section.key) {
+            <div class="footer__nav-group">
+              <h3 class="footer__nav-title">{{ t(section.title) }}</h3>
+              <nav class="footer__links" [attr.aria-label]="t(section.title)">
+                @for (link of section.links; track link.label.es) {
+                  <a [routerLink]="t(link.route)" class="footer__link">{{ t(link.label) }}</a>
+                }
+              </nav>
+            </div>
+          }
         </div>
-      </div>
 
-      <!-- Column 3: Company -->
-      <div class="footer__section" [class.footer__section--open]="openSection() === 'company'">
-        <button class="footer__section-toggle" (click)="toggleSection('company')" [attr.aria-expanded]="openSection() === 'company'" aria-controls="footer-company">
-          <span>{{ i18n.currentLang() === 'es' ? 'Empresa' : 'Company' }}</span>
-          <svg class="footer__toggle-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="footer__section-content" id="footer-company">
-          <h3 class="footer__section-title footer__section-title--desktop">{{ i18n.currentLang() === 'es' ? 'Empresa' : 'Company' }}</h3>
-          <nav>
-            <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'distribuidores' : 'distributors')" class="footer__link">{{ i18n.currentLang() === 'es' ? 'Socios' : 'Partners' }}</a>
-            <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'contacto' : 'contact')" class="footer__link">{{ i18n.currentLang() === 'es' ? 'Contacto' : 'Contact' }}</a>
-          </nav>
+        <div class="footer__utility">
+          <div class="footer__utility-brand">
+            <img src="/logo.svg" alt="HESA" class="footer__utility-logo" loading="lazy">
+          </div>
+          <app-language-selector variant="footer" />
         </div>
-      </div>
+      </section>
 
-      <!-- Column 4: Contact -->
-      <div class="footer__section" [class.footer__section--open]="openSection() === 'contact'">
-        <button class="footer__section-toggle" (click)="toggleSection('contact')" [attr.aria-expanded]="openSection() === 'contact'" aria-controls="footer-contact">
-          <span>{{ i18n.currentLang() === 'es' ? 'Contacto' : 'Contact' }}</span>
-          <svg class="footer__toggle-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="footer__section-content" id="footer-contact">
-          <h3 class="footer__section-title footer__section-title--desktop">{{ i18n.currentLang() === 'es' ? 'Contacto' : 'Contact' }}</h3>
-          <div class="footer__contact-info">
-            <p>+506 2260-9020</p>
-            <p>info&#64;hesa.co.cr</p>
-            <p>{{ i18n.currentLang() === 'es' ? 'Heredia, Costa Rica' : 'Heredia, Costa Rica' }}</p>
-            <p>{{ i18n.currentLang() === 'es' ? 'Lun — Vie: 8:00 - 17:00' : 'Mon — Fri: 8:00 - 17:00' }}</p>
+      <aside class="footer__card footer__card--contact" aria-label="Información de contacto">
+        <span class="footer__contact-kicker">{{ i18n.currentLang() === 'es' ? 'Contacto directo' : 'Direct contact' }}</span>
+        <div class="footer__contact-list">
+          @for (item of contactItems; track item.label.es) {
+            @if (item.href) {
+              <a [href]="item.href" class="footer__contact-item">
+                <span class="footer__contact-icon material-symbols-outlined" aria-hidden="true">{{ item.icon }}</span>
+                <span class="footer__contact-copy">
+                  <span class="footer__contact-label">{{ t(item.label) }}</span>
+                  <span class="footer__contact-value">{{ t(item.value) }}</span>
+                </span>
+              </a>
+            } @else {
+              <div class="footer__contact-item">
+                <span class="footer__contact-icon material-symbols-outlined" aria-hidden="true">{{ item.icon }}</span>
+                <span class="footer__contact-copy">
+                  <span class="footer__contact-label">{{ t(item.label) }}</span>
+                  <span class="footer__contact-value">{{ t(item.value) }}</span>
+                </span>
+              </div>
+            }
+          }
+        </div>
+
+        <div class="footer__contact-bottom">
+          <p class="footer__social-title">{{ i18n.currentLang() === 'es' ? 'Síganos' : 'Follow us' }}</p>
+          <div class="footer__social-links">
+            @for (link of socialLinks; track link.href) {
+              <a [href]="link.href" target="_blank" rel="noopener noreferrer" [attr.aria-label]="link.label" class="footer__social-link">
+                @switch (link.icon) {
+                  @case ('facebook') {
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                  }
+                  @case ('instagram') {
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                  }
+                  @case ('whatsapp') {
+                    <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M13.601 2.326A7.854 7.854 0 0 0 8.024 0C3.656 0 .1 3.557.1 7.928c0 1.398.365 2.762 1.058 3.965L0 16l4.225-1.107a7.92 7.92 0 0 0 3.797.965h.003c4.367 0 7.925-3.557 7.925-7.928a7.88 7.88 0 0 0-2.349-5.604ZM8.025 14.52h-.002a6.6 6.6 0 0 1-3.36-.92l-.241-.144-2.506.656.669-2.443-.157-.25a6.56 6.56 0 0 1-1.007-3.49c0-3.64 2.964-6.604 6.607-6.604a6.56 6.56 0 0 1 4.689 1.944 6.56 6.56 0 0 1 1.932 4.665c-.002 3.64-2.967 6.604-6.624 6.604Zm3.62-4.948c-.198-.099-1.17-.578-1.352-.644-.181-.066-.313-.099-.445.1-.132.197-.511.644-.627.776-.115.132-.23.148-.429.05-.198-.099-.838-.309-1.596-.986-.59-.525-.99-1.174-1.105-1.372-.116-.197-.012-.304.087-.402.09-.09.198-.23.297-.346.1-.116.132-.198.198-.33.066-.132.033-.248-.017-.347-.05-.099-.445-1.074-.61-1.471-.161-.387-.325-.334-.445-.34l-.379-.007a.728.728 0 0 0-.528.248c-.181.198-.693.677-.693 1.653 0 .975.71 1.918.809 2.05.099.132 1.398 2.135 3.387 2.994.473.203.841.325 1.129.416.474.151.905.13 1.246.08.38-.057 1.17-.479 1.336-.941.165-.462.165-.859.115-.941-.05-.083-.181-.132-.38-.231Z"/></svg>
+                  }
+                }
+              </a>
+            }
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Bottom bar -->
-  <div class="footer__bottom">
-    <div class="container footer__bottom-inner">
-      <p class="footer__copyright">&copy; {{ currentYear }} HESA — Herrera y Elizondo S.A.</p>
-      <app-language-selector variant="footer" />
+      </aside>
     </div>
   </div>
 </footer>

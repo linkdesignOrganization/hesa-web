@@ -463,7 +463,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         const distanceFromCenter = rect.top + rect.height / 2 - viewportHeight / 2;
         const normalizedDistance = distanceFromCenter / viewportHeight;
         const speed = Number(layer.dataset['parallaxSpeed'] ?? '0.1');
-        const offset = Math.max(Math.min(normalizedDistance * speed * -viewportHeight, 46), -46);
+        const offset = Math.max(Math.min(normalizedDistance * speed * -viewportHeight, 78), -78);
 
         layer.style.setProperty('--parallax-offset', `${offset.toFixed(2)}px`);
       });

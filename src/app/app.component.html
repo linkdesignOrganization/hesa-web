@@ -9,6 +9,6 @@
 </main>
 @if (!isAdminRoute) {
   <app-footer />
-  <app-whatsapp-fab />
+  <app-whatsapp-fab [isHidden]="hideWhatsappFab" />
 }
 <app-toast-container />
