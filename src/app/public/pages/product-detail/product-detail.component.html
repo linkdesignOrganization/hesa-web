@@ -56,6 +56,14 @@
           <div class="product-detail__media-card">
             <button
               type="button"
+              class="product-detail__share-fab"
+              (click)="$event.stopPropagation(); shareProduct()"
+              [attr.aria-label]="i18n.currentLang() === 'es' ? 'Compartir producto' : 'Share product'">
+              <span class="material-symbols-outlined" aria-hidden="true">share</span>
+            </button>
+
+            <button
+              type="button"
               class="product-detail__media-stage"
               (click)="currentProduct.images.length > 0 ? lightboxOpen.set(true) : null"
               [attr.aria-label]="i18n.currentLang() === 'es' ? 'Abrir galeria del producto' : 'Open product gallery'">
@@ -91,14 +99,9 @@
 
         <aside class="product-detail__summary">
           <div class="product-detail__summary-card">
-            <div class="product-detail__summary-top">
-              <span class="product-detail__category-pill">
-                <span class="material-symbols-outlined" aria-hidden="true">{{ categoryIcon }}</span>
-                {{ categoryLabel }}
-              </span>
-
+            <div class="product-detail__hero-meta-strip">
               @if (brandName) {
-                <a class="product-detail__brand-chip" [routerLink]="brandRoute">
+                <a class="product-detail__hero-meta-item product-detail__hero-meta-item--brand" [routerLink]="brandRoute">
                   <span class="product-detail__brand-mark">
                     @if (brandLogo) {
                       <img [src]="brandLogo" [alt]="brandName" loading="lazy">
@@ -106,12 +109,28 @@
                       <span>{{ brandInitials }}</span>
                     }
                   </span>
-                  <span class="product-detail__brand-copy">
+                  <span class="product-detail__hero-meta-copy">
                     <span class="product-detail__brand-label">{{ i18n.currentLang() === 'es' ? 'Marca' : 'Brand' }}</span>
                     <strong>{{ brandName }}</strong>
                   </span>
                 </a>
               }
+
+              <div class="product-detail__hero-meta-item">
+                <span class="product-detail__hero-meta-icon material-symbols-outlined" aria-hidden="true">{{ categoryIcon }}</span>
+                <span class="product-detail__hero-meta-copy">
+                  <span class="product-detail__brand-label">{{ i18n.currentLang() === 'es' ? 'Categoría' : 'Category' }}</span>
+                  <strong>{{ categoryLabel }}</strong>
+                </span>
+              </div>
+
+              <div class="product-detail__hero-meta-item">
+                <span class="product-detail__hero-meta-icon material-symbols-outlined" aria-hidden="true">check_circle</span>
+                <span class="product-detail__hero-meta-copy">
+                  <span class="product-detail__brand-label">{{ i18n.currentLang() === 'es' ? 'Estado' : 'Status' }}</span>
+                  <strong>{{ i18n.currentLang() === 'es' ? 'Producto disponible' : 'Product available' }}</strong>
+                </span>
+              </div>
             </div>
 
             <h1 class="product-detail__name">{{ productDisplayName }}</h1>
@@ -120,53 +139,42 @@
               <p class="product-detail__lead">{{ productLead }}</p>
             }
 
-            @if (summaryFacts().length > 0) {
-              <div class="product-detail__quick-grid">
-                @for (fact of summaryFacts(); track fact.label) {
-                  <div class="product-detail__quick-card">
-                    <span class="material-symbols-outlined" aria-hidden="true">{{ fact.icon }}</span>
-                    <div>
-                      <p>{{ fact.label }}</p>
-                      <strong>{{ fact.value }}</strong>
+            @if (summaryRows().length > 0) {
+              <div class="product-detail__info-rows">
+                @for (row of summaryRows(); track row.label) {
+                  <div class="product-detail__info-row">
+                    <div class="product-detail__info-row-head">
+                      <span class="material-symbols-outlined" aria-hidden="true">{{ row.icon }}</span>
+                      <p>{{ row.label }}:</p>
+                    </div>
+
+                    <div class="product-detail__chips product-detail__chips--inline">
+                      @for (item of row.items; track item) {
+                        <span class="product-detail__chip">{{ item }}</span>
+                      }
                     </div>
                   </div>
                 }
               </div>
             }
 
-            @if (currentProduct.presentations.length > 0) {
-              <div class="product-detail__presentations">
-                <p class="product-detail__section-label">{{ i18n.currentLang() === 'es' ? 'Presentaciones disponibles' : 'Available presentations' }}</p>
-                <div class="product-detail__chips">
-                  @for (presentation of currentProduct.presentations; track presentation) {
-                    <span class="product-detail__chip">{{ presentation }}</span>
-                  }
-                </div>
-              </div>
-            }
-
             <div class="product-detail__hero-actions">
               @if (currentProduct.pdfUrl) {
-                <a [href]="currentProduct.pdfUrl" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg btn-block">
+                <a [href]="currentProduct.pdfUrl" target="_blank" rel="noopener noreferrer" class="btn btn-primary product-detail__hero-cta">
                   <span class="material-symbols-outlined" aria-hidden="true">download</span>
                   {{ downloadCtaLabel }}
                 </a>
               } @else {
-                <a class="btn btn-primary btn-lg btn-block" [routerLink]="contactRoute" [queryParams]="infoContactParams">
+                <a class="btn btn-primary product-detail__hero-cta" [routerLink]="contactRoute" [queryParams]="infoContactParams">
                   <span class="material-symbols-outlined" aria-hidden="true">download</span>
                   {{ downloadCtaLabel }}
                 </a>
               }
 
-              <a class="btn btn-outline btn-lg btn-block" [routerLink]="contactRoute" [queryParams]="availabilityContactParams">
+              <a class="btn btn-outline product-detail__hero-cta" [routerLink]="contactRoute" [queryParams]="availabilityContactParams">
                 <span class="material-symbols-outlined" aria-hidden="true">contact_support</span>
                 {{ i18n.currentLang() === 'es' ? 'Consultar disponibilidad' : 'Check availability' }}
               </a>
-
-              <button type="button" class="product-detail__share-btn" (click)="shareProduct()">
-                <span class="material-symbols-outlined" aria-hidden="true">share</span>
-                {{ i18n.currentLang() === 'es' ? 'Compartir producto' : 'Share product' }}
-              </button>
             </div>
           </div>
         </aside>

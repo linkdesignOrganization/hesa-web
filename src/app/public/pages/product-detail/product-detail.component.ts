@@ -10,10 +10,10 @@ import { SeoService } from '../../../shared/services/seo.service';
 import { ToastService } from '../../../shared/services/toast.service';
 import { buildProductUrl, getBrandsSegment, getCatalogSegment, getCategoryLabel, getCategorySlug, getContactSegment, getHomeLabel } from '../../../shared/utils/route-helpers';
 
-interface ProductFactCard {
+interface ProductSummaryRow {
   icon: string;
   label: string;
-  value: string;
+  items: string[];
 }
 
 interface ProductTrustItem {
@@ -80,64 +80,56 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
       })
     : null;
 
-  summaryFacts = computed<ProductFactCard[]>(() => {
+  summaryRows = computed<ProductSummaryRow[]>(() => {
     const product = this.product();
     if (!product) return [];
 
     const lang = this.i18n.currentLang();
-    const facts: ProductFactCard[] = [];
-    const species = product.species?.slice(0, 2).join(', ');
-    const presentations = product.presentations?.slice(0, 2).join(' · ');
-
-    if (species) {
-      facts.push({
-        icon: 'pets',
-        label: lang === 'es' ? 'Especie destino' : 'Target species',
-        value: species,
+    const rows: ProductSummaryRow[] = [];
+    const addRow = (icon: string, labelEs: string, labelEn: string, items?: string[]) => {
+      if (!items?.length) return;
+      rows.push({
+        icon,
+        label: lang === 'es' ? labelEs : labelEn,
+        items,
       });
-    }
+    };
+
+    addRow('pets', 'Especies', 'Species', product.species);
 
     if (product.category === 'farmacos' && product.family) {
-      facts.push({
+      rows.push({
         icon: 'local_pharmacy',
-        label: lang === 'es' ? 'Familia farmacéutica' : 'Pharma family',
-        value: product.family,
+        label: lang === 'es' ? 'Familia' : 'Family',
+        items: [product.family],
       });
     }
 
     if (product.category === 'alimentos' && product.lifeStage) {
-      facts.push({
-        icon: 'schedule',
+      rows.push({
+        icon: 'pets',
         label: lang === 'es' ? 'Etapa de vida' : 'Life stage',
-        value: product.lifeStage,
+        items: [product.lifeStage],
       });
     }
 
     if (product.category === 'equipos' && product.equipmentType) {
-      facts.push({
+      rows.push({
         icon: 'precision_manufacturing',
         label: lang === 'es' ? 'Tipo de equipo' : 'Equipment type',
-        value: product.equipmentType,
+        items: [product.equipmentType],
       });
     }
 
-    if (presentations) {
-      facts.push({
+    if (product.presentations?.length) {
+      rows.push({
         icon: 'inventory_2',
         label: lang === 'es' ? 'Presentaciones' : 'Presentations',
-        value: presentations,
+        items: product.presentations,
       });
     }
 
-    if (product.sanitaryRegistry) {
-      facts.push({
-        icon: 'verified',
-        label: lang === 'es' ? 'Registro' : 'Registry',
-        value: product.sanitaryRegistry,
-      });
-    }
-
-    return facts.slice(0, 3);
+    return rows.slice(0, 3);
   });
 
   trustItems = computed<ProductTrustItem[]>(() => {

@@ -1556,11 +1556,11 @@ app-home {
 
 app-product-detail {
   .product-state {
-    padding-top: 120px;
+    padding-top: 0;
     padding-bottom: var(--section-gap-desktop);
 
     @media (max-width: 767px) {
-      padding-top: 92px;
+      padding-top: 0;
       padding-bottom: var(--section-gap-mobile);
     }
 
