@@ -1,4 +1,4 @@
-import { Component, inject, signal, OnInit, OnDestroy, computed } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild, computed, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BreadcrumbComponent } from '../../../shared/components/breadcrumb/breadcrumb.component';
 import { ProductCardComponent } from '../../components/product-card/product-card.component';
@@ -44,6 +44,7 @@ export class CatalogComponent implements OnInit, OnDestroy {
   private router = inject(Router);
   private seo = inject(SeoService);
   i18n = inject(I18nService);
+  @ViewChild('resultsStart') private resultsStart?: ElementRef<HTMLElement>;
 
   products = signal<ApiProduct[]>([]);
   loading = signal(true);
@@ -329,6 +330,7 @@ export class CatalogComponent implements OnInit, OnDestroy {
     await this.loadFilters();
     this.syncFiltersToUrl();
     await this.loadProducts();
+    this.scrollToResults();
   }
 
   onSearchInput(term: string): void {
@@ -351,6 +353,7 @@ export class CatalogComponent implements OnInit, OnDestroy {
 
     this.syncFiltersToUrl();
     await this.loadProducts();
+    this.scrollToResults();
   }
 
   async removeFilter(key: FilterKey | 'search', value?: string): Promise<void> {
@@ -371,6 +374,7 @@ export class CatalogComponent implements OnInit, OnDestroy {
     this.currentPage.set(1);
     this.syncFiltersToUrl();
     await this.loadProducts();
+    this.scrollToResults();
   }
 
   async clearFilters(): Promise<void> {
@@ -386,13 +390,14 @@ export class CatalogComponent implements OnInit, OnDestroy {
     await this.loadFilters();
     this.syncFiltersToUrl();
     await this.loadProducts();
+    this.scrollToResults();
   }
 
   async goToPage(page: number): Promise<void> {
     this.currentPage.set(page);
     this.syncFiltersToUrl();
     await this.loadProducts();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    this.scrollToResults();
   }
 
   toggleMobileFilters(): void {
@@ -589,5 +594,15 @@ export class CatalogComponent implements OnInit, OnDestroy {
     if (key === 'family') return this.filterValues().families;
     if (key === 'lifeStage') return this.filterValues().lifeStages;
     return this.filterValues().equipmentTypes;
+  }
+
+  private scrollToResults(): void {
+    if (typeof window === 'undefined') return;
+
+    const target = this.resultsStart?.nativeElement;
+    if (!target) return;
+
+    const top = target.getBoundingClientRect().top + window.scrollY - 24;
+    window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
   }
 }

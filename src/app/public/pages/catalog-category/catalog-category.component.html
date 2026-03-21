@@ -75,15 +75,16 @@
     <div class="catalog-discovery__shell">
       <aside class="catalog-filters">
         <div class="catalog-filters__header">
-          <div>
+          <div class="catalog-filters__header-main">
             <p class="catalog-filters__eyebrow">{{ i18n.currentLang() === 'es' ? 'Filtrar categoria' : 'Filter category' }}</p>
             <h2 class="catalog-filters__title">{{ i18n.currentLang() === 'es' ? 'Encuentre mas rapido' : 'Find faster' }}</h2>
+            @if (activeFilters().length > 0) {
+              <button type="button" class="catalog-filters__clear-btn" (click)="clearFilters()">
+                <span class="material-symbols-outlined" aria-hidden="true">filter_alt_off</span>
+                {{ i18n.currentLang() === 'es' ? 'Limpiar filtros' : 'Clear filters' }}
+              </button>
+            }
           </div>
-          @if (activeFilters().length > 0) {
-            <button type="button" class="catalog-filters__clear" (click)="clearFilters()">
-              {{ i18n.currentLang() === 'es' ? 'Limpiar todo' : 'Clear all' }}
-            </button>
-          }
         </div>
 
         @for (group of filterGroups(); track group.key) {
@@ -108,18 +109,13 @@
         }
       </aside>
 
-      <div class="catalog-results">
+      <div #resultsStart class="catalog-results">
         <div class="catalog-results__header">
           <div>
             <p class="catalog-results__eyebrow">{{ i18n.currentLang() === 'es' ? 'Productos disponibles' : 'Available products' }}</p>
           </div>
           <div class="catalog-results__header-actions">
             <span class="catalog-results__summary-badge">{{ resultsCountLabel }}</span>
-            @if (activeFilters().length > 0) {
-              <button type="button" class="catalog-results__clear" (click)="clearFilters()">
-                {{ i18n.currentLang() === 'es' ? 'Limpiar busqueda' : 'Reset search' }}
-              </button>
-            }
           </div>
         </div>
 

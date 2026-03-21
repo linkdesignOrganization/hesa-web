@@ -16,22 +16,22 @@
   &--pharma {
     --card-accent: var(--brand-primary);
     --card-accent-soft: rgba(0, 141, 201, 0.14);
-    --card-gradient: radial-gradient(circle at top right, rgba(255, 255, 255, 0.78), transparent 42%),
-      linear-gradient(180deg, #f4f8ff 0%, #e3e8ee 100%);
+    --card-gradient: radial-gradient(circle at top right, rgba(255, 255, 255, 0.74), transparent 38%),
+      linear-gradient(180deg, rgba(229, 244, 252, 0.98) 0%, rgba(255, 255, 255, 1) 100%);
   }
 
   &--food {
     --card-accent: var(--brand-secondary);
     --card-accent-soft: rgba(80, 185, 42, 0.16);
-    --card-gradient: radial-gradient(circle at top right, rgba(255, 255, 255, 0.74), transparent 42%),
-      linear-gradient(180deg, #f5faec 0%, #e3eed7 100%);
+    --card-gradient: radial-gradient(circle at top right, rgba(255, 255, 255, 0.74), transparent 38%),
+      linear-gradient(180deg, rgba(241, 250, 236, 0.98) 0%, rgba(255, 255, 255, 1) 100%);
   }
 
   &--equipment {
     --card-accent: #0f6b64;
     --card-accent-soft: rgba(15, 118, 110, 0.14);
-    --card-gradient: radial-gradient(circle at top right, rgba(255, 255, 255, 0.72), transparent 42%),
-      linear-gradient(180deg, #f0f7f6 0%, #e5eeed 100%);
+    --card-gradient: radial-gradient(circle at top right, rgba(255, 255, 255, 0.72), transparent 38%),
+      linear-gradient(180deg, rgba(240, 247, 246, 0.98) 0%, rgba(255, 255, 255, 1) 100%);
   }
 
   &:focus-visible {
@@ -124,7 +124,7 @@
     margin: 0;
     font-size: var(--text-body);
     line-height: 1.18;
-    font-weight: var(--weight-semibold);
+    font-weight: var(--weight-medium);
     color: var(--neutral-900);
     display: -webkit-box;
     -webkit-box-orient: vertical;
@@ -352,9 +352,9 @@
   }
 
   .product-card__name {
-    font-size: clamp(22px, 2vw, 30px);
-    line-height: 1.02;
-    letter-spacing: -0.04em;
-    font-weight: var(--weight-extrabold);
+    font-size: clamp(18px, 1.4vw, 22px);
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    font-weight: var(--weight-bold);
   }
 }
