@@ -15,6 +15,7 @@ import { initFadeInObserver } from '../../../shared/utils/fade-in-observer';
   styleUrl: './distributors.component.scss'
 })
 export class DistributorsComponent implements OnInit, AfterViewInit, OnDestroy {
+  readonly defaultHeroImage = 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=1600&q=80&auto=format&fit=crop';
   private el = inject(ElementRef);
   private seo = inject(SeoService);
   private api = inject(ApiService);
@@ -70,6 +71,10 @@ export class DistributorsComponent implements OnInit, AfterViewInit, OnDestroy {
     const section = this.content()?.sections?.find(s => s.key === key);
     if (!section) return '';
     return this.i18n.t(section.value) || '';
+  }
+
+  getHeroImage(): string {
+    return this.content()?.heroImage || this.defaultHeroImage;
   }
 
   ngAfterViewInit(): void {

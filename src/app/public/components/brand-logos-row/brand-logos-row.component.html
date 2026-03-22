@@ -1,13 +1,14 @@
 <section class="logos-section fade-in-section">
-  <div class="logos-section__header">
-    <span class="logos-section__eyebrow">{{ i18n.currentLang() === 'es' ? 'Nuestros Socios' : 'Our Partners' }}</span>
-    <h2 class="logos-section__title">{{ i18n.currentLang() === 'es' ? 'Marcas Destacadas' : 'Featured Brands' }}</h2>
-    <p class="logos-section__subtitle">{{ i18n.currentLang() === 'es' ? 'Distribuimos las mejores marcas internacionales de salud animal' : 'We distribute the best international animal health brands' }}</p>
+  <div class="container">
+    <div class="logos-section__header">
+      <span class="logos-section__eyebrow">{{ i18n.currentLang() === 'es' ? 'Nuestros Socios' : 'Our Partners' }}</span>
+      <h2 class="logos-section__title">{{ i18n.currentLang() === 'es' ? 'Marcas Destacadas' : 'Featured Brands' }}</h2>
+      <p class="logos-section__subtitle">{{ i18n.currentLang() === 'es' ? 'Distribuimos las mejores marcas internacionales de salud animal' : 'We distribute the best international animal health brands' }}</p>
+    </div>
   </div>
 
   <div class="logos-section__marquee-wrapper">
     <div class="logos-section__marquee" role="list">
-      <!-- First set of logos (original) -->
       @for (brand of featuredBrands(); track brand._id) {
         <a
           [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'marcas' : 'brands') + '/' + brand.slug"
@@ -15,10 +16,7 @@
           role="listitem"
           [attr.aria-label]="(i18n.currentLang() === 'es' ? 'Ver productos de ' : 'View products by ') + brand.name">
           @if (brand.logo) {
-            <picture>
-              <source [srcset]="toWebP(brand.logo)" type="image/webp">
-              <img [src]="brand.logo" [alt]="brand.name" class="logos-section__logo-img" loading="lazy">
-            </picture>
+            <img [src]="brand.logo" [alt]="brand.name" class="logos-section__logo-img" loading="lazy">
           } @else {
             <span class="logos-section__logo-initial">{{ brand.name.charAt(0) }}</span>
           }
@@ -26,7 +24,6 @@
         </a>
       }
 
-      <!-- Duplicate set for seamless marquee loop -->
       @for (brand of featuredBrands(); track brand._id) {
         <a
           [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'marcas' : 'brands') + '/' + brand.slug"
@@ -36,10 +33,7 @@
           tabindex="-1"
           [attr.aria-label]="(i18n.currentLang() === 'es' ? 'Ver productos de ' : 'View products by ') + brand.name">
           @if (brand.logo) {
-            <picture>
-              <source [srcset]="toWebP(brand.logo)" type="image/webp">
-              <img [src]="brand.logo" [alt]="brand.name" class="logos-section__logo-img" loading="lazy">
-            </picture>
+            <img [src]="brand.logo" [alt]="brand.name" class="logos-section__logo-img" loading="lazy">
           } @else {
             <span class="logos-section__logo-initial">{{ brand.name.charAt(0) }}</span>
           }
@@ -49,10 +43,12 @@
     </div>
   </div>
 
-  <a
-    [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'marcas' : 'brands')"
-    class="logos-section__view-all">
-    {{ i18n.currentLang() === 'es' ? 'Ver todas las marcas' : 'View all brands' }}
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
-  </a>
+  <div class="container">
+    <a
+      [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'marcas' : 'brands')"
+      class="logos-section__view-all">
+      {{ i18n.currentLang() === 'es' ? 'Ver todas las marcas' : 'View all brands' }}
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+    </a>
+  </div>
 </section>

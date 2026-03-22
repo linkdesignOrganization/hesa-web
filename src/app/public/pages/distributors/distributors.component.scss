@@ -1,194 +1,247 @@
-// =============================================================================
-// Partners Page (DC-042, DC-095, DC-096)
-// Repurposed from Distributors — pitches HESA's capabilities to manufacturers
-// =============================================================================
+.partners-page {
+  --partners-surface: radial-gradient(circle at top right, rgba(255, 255, 255, 0.78), transparent 42%),
+    linear-gradient(180deg, #f4f8ff 0%, #e3e8ee 100%);
 
-// ---- Hero ----
-.partners-hero {
-  position: relative;
-  min-height: 60vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  background-color: var(--neutral-900);
-  padding-top: 70px;
-  overflow: hidden;
-
-  @media (max-width: 767px) {
-    min-height: 50vh;
+  a,
+  button {
+    cursor: pointer;
   }
 
-  &__bg {
-    position: absolute;
-    inset: 0;
-    background-size: cover;
-    background-position: center;
+  &__hero {
+    padding-top: 0;
+    background: var(--partners-surface);
   }
 
-  &__overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      180deg,
-      rgba(0, 0, 0, 0.55) 0%,
-      rgba(0, 0, 0, 0.65) 100%
-    );
-    z-index: 1;
+  &__hero-shell {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 34px;
+    align-items: center;
+    padding: 14px 0 44px;
+
+    @media (min-width: 1024px) {
+      grid-template-columns: minmax(0, 1.02fr) minmax(0, 0.98fr);
+      gap: 56px;
+      padding: 18px 0 54px;
+    }
   }
 
-  &__content {
-    position: relative;
-    z-index: 2;
-    max-width: 740px;
-    padding-block: var(--space-16);
+  &__hero-copy {
+    max-width: 720px;
   }
 
   &__eyebrow {
-    font-size: var(--text-eyebrow);
-    font-weight: var(--weight-semibold);
+    display: inline-flex;
+    align-items: center;
+    min-height: 34px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.84);
+    color: var(--brand-primary);
     text-transform: uppercase;
-    letter-spacing: var(--tracking-wider);
-    color: rgba(255, 255, 255, 0.7);
-    margin-bottom: var(--space-4);
+    letter-spacing: 0.08em;
+    font-size: var(--text-label);
+    font-weight: var(--weight-bold);
   }
 
   &__title {
-    font-size: clamp(36px, 5vw, var(--text-display));
+    margin: 14px 0 0;
+    max-width: 12ch;
+    font-size: clamp(32px, 4vw, 52px);
+    line-height: 1.05;
+    letter-spacing: -1.5px;
     font-weight: var(--weight-extrabold);
-    color: var(--neutral-white);
-    letter-spacing: var(--tracking-tight);
-    line-height: var(--leading-none);
-  }
-
-  &__subtitle {
-    font-size: var(--text-body-xl);
-    color: rgba(255, 255, 255, 0.85);
-    margin-top: var(--space-5);
-    line-height: var(--leading-relaxed);
-    margin-bottom: var(--space-10);
-    max-width: 620px;
-    margin-inline: auto;
+    color: var(--neutral-900);
 
     @media (max-width: 767px) {
-      font-size: var(--text-body-lg);
+      max-width: none;
+    }
+  }
+
+  &__description {
+    margin: 16px 0 0;
+    max-width: 700px;
+    color: rgba(15, 23, 42, 0.7);
+    font-size: 17px;
+    line-height: 1.7;
+
+    @media (max-width: 767px) {
+      font-size: 15px;
+      line-height: 1.65;
+    }
+  }
+
+  &__hero-cta {
+    margin-top: 28px;
+  }
+
+  &__hero-media {
+    width: 100%;
+  }
+
+  &__hero-frame {
+    position: relative;
+    overflow: hidden;
+    border-radius: 36px;
+    min-height: clamp(360px, 44vw, 620px);
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(10, 18, 28, 0.16) 100%),
+      linear-gradient(90deg, rgba(10, 18, 28, 0.08) 0%, rgba(10, 18, 28, 0.02) 36%, rgba(10, 18, 28, 0.1) 100%);
+    box-shadow: 0 28px 60px rgba(15, 23, 42, 0.1);
+
+    @media (max-width: 991px) {
+      border-radius: 30px;
+      min-height: 320px;
+    }
+
+    @media (max-width: 767px) {
+      border-radius: 24px;
+      min-height: 280px;
+    }
+  }
+
+  &__hero-image {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center center;
+  }
+
+  &__benefits,
+  &__timeline,
+  &__contact {
+    background: var(--neutral-white);
+  }
+
+  &__section-heading {
+    margin: 0 auto 36px;
+    max-width: 760px;
+
+    &--centered {
+      text-align: center;
+    }
+  }
+
+  &__section-title {
+    margin: 14px 0 0;
+    max-width: 14ch;
+    font-size: clamp(32px, 4vw, 52px);
+    line-height: 1.05;
+    letter-spacing: -1.5px;
+    font-weight: var(--weight-extrabold);
+    color: var(--neutral-900);
+
+    @media (max-width: 767px) {
+      max-width: none;
+    }
+  }
+
+  &__timeline-shell,
+  &__contact .partners-contact__shell {
+    border-radius: 36px;
+    background: var(--partners-surface);
+    padding: 34px;
+
+    @media (max-width: 991px) {
+      border-radius: 30px;
+      padding: 28px;
+    }
+
+    @media (max-width: 767px) {
+      border-radius: 24px;
+      padding: 22px 18px;
     }
   }
 }
 
-// ---- Benefits Grid ----
 .partners-benefits {
-  background-color: var(--surface-cream);
-
-  &__eyebrow {
-    text-align: center;
-    margin-bottom: var(--space-3);
-  }
-
-  &__heading {
-    text-align: center;
-    margin-bottom: var(--space-12);
-  }
-
   &__grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-6);
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 18px;
 
-    @media (min-width: 1024px) {
-      grid-template-columns: repeat(3, 1fr);
-      gap: var(--space-8);
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    @media (max-width: 599px) {
-      grid-template-columns: 1fr;
+    @media (min-width: 1200px) {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
     }
   }
 
   &__card {
-    background-color: var(--neutral-white);
+    min-height: 100%;
+    padding: 22px;
     border-radius: var(--radius-card-public);
-    box-shadow: var(--shadow-sm);
-    padding: var(--space-8) var(--space-6);
-    text-align: center;
-    transition: var(--transition-card);
+    background:
+      radial-gradient(circle at top right, rgba(255, 255, 255, 0.72), transparent 42%),
+      linear-gradient(180deg, #f4f8ff 0%, #e3e8ee 100%);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    transition: transform var(--transition-card), box-shadow var(--transition-card);
 
     &:hover {
-      box-shadow: var(--shadow-md);
-      transform: translateY(-2px);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 34px rgba(15, 23, 42, 0.1);
     }
   }
 
   &__icon {
     width: 56px;
     height: 56px;
-    border-radius: 50%;
-    background-color: var(--brand-primary-light);
-    display: flex;
+    border-radius: 18px;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto var(--space-4);
+    background: rgba(255, 255, 255, 0.86);
+    color: var(--brand-primary);
   }
 
   &__title {
-    font-size: var(--text-body-lg);
+    margin: 0;
+    font-size: 22px;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
     font-weight: var(--weight-bold);
     color: var(--neutral-900);
-    margin-bottom: var(--space-2);
-    letter-spacing: var(--tracking-tight);
   }
 
   &__desc {
-    font-size: var(--text-small);
-    color: var(--neutral-400);
-    line-height: var(--leading-normal);
+    margin: 0;
+    color: rgba(15, 23, 42, 0.68);
+    font-size: 15px;
+    line-height: 1.65;
   }
 }
 
-// ---- Timeline ----
-.partners-timeline {
-  background-color: var(--neutral-white);
-
-  &__eyebrow {
-    text-align: center;
-    margin-bottom: var(--space-3);
-  }
-
-  &__heading {
-    text-align: center;
-    margin-bottom: var(--space-12);
-  }
-}
-
-// ---- Contact Form ----
 .partners-contact {
-  background-color: var(--neutral-50);
-
   &__layout {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-12);
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
     align-items: start;
 
-    @media (min-width: 768px) {
-      grid-template-columns: 5fr 7fr;
-      gap: var(--space-16);
+    @media (min-width: 1024px) {
+      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+      gap: 48px;
     }
   }
 
   &__info {
-    .text-eyebrow {
-      margin-bottom: var(--space-3);
-    }
-
-    .text-h2 {
-      margin-bottom: var(--space-4);
-    }
+    max-width: 500px;
   }
 
   &__desc {
-    font-size: var(--text-body);
-    color: var(--neutral-400);
-    line-height: var(--leading-relaxed);
+    margin: 16px 0 0;
+    color: rgba(15, 23, 42, 0.68);
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  &__form {
+    min-width: 0;
   }
 }

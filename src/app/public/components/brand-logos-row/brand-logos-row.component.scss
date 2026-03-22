@@ -1,152 +1,138 @@
-// =============================================================================
-// Brand Logos Row — Premium Marquee (DC-032, DC-097, DC-140)
-// =============================================================================
-
 @keyframes marquee-scroll {
   0% {
     transform: translateX(0);
   }
+
   100% {
     transform: translateX(-50%);
   }
 }
 
 .logos-section {
-  padding: 80px 0 64px;
-  background-color: var(--neutral-50);
+  padding: 100px 0;
+  background: var(--neutral-white);
   overflow: hidden;
 
-  // ── Header ──────────────────────────────────────────────────────────────
   &__header {
     text-align: center;
-    max-width: 640px;
-    margin: 0 auto 48px;
-    padding: 0 24px;
+    max-width: 720px;
+    margin: 0 auto 38px;
   }
 
   &__eyebrow {
-    display: block;
-    font-size: var(--text-eyebrow);
-    font-weight: var(--weight-semibold);
-    letter-spacing: var(--tracking-wider);
-    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    min-height: 34px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.84);
     color: var(--brand-primary);
-    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: var(--text-label);
+    font-weight: var(--weight-bold);
   }
 
   &__title {
-    font-size: var(--text-h2);
-    font-weight: var(--weight-bold);
+    margin: 14px 0 0;
+    font-size: clamp(32px, 4vw, 52px);
+    line-height: 1.05;
+    letter-spacing: -1.5px;
+    font-weight: var(--weight-extrabold);
     color: var(--neutral-900);
-    letter-spacing: var(--tracking-tight);
-    line-height: 1.15;
-    margin-bottom: 16px;
-
-    @media (max-width: 767px) {
-      font-size: 28px;
-    }
   }
 
   &__subtitle {
+    margin: 16px auto 0;
+    max-width: 620px;
+    color: rgba(15, 23, 42, 0.7);
     font-size: 17px;
-    color: var(--neutral-400);
-    line-height: 1.6;
-    margin: 0;
+    line-height: 1.7;
 
     @media (max-width: 767px) {
       font-size: 15px;
+      line-height: 1.65;
     }
   }
 
-  // ── Marquee wrapper & track ─────────────────────────────────────────────
   &__marquee-wrapper {
     position: relative;
     width: 100%;
+    padding: 10px 0;
 
-    // Fade edges for seamless marquee illusion
     &::before,
     &::after {
       content: '';
       position: absolute;
       top: 0;
       bottom: 0;
-      width: 80px;
+      width: 84px;
       z-index: 2;
       pointer-events: none;
     }
 
     &::before {
       left: 0;
-      background: linear-gradient(to right, var(--neutral-50), transparent);
+      background: linear-gradient(to right, var(--neutral-white), transparent);
     }
 
     &::after {
       right: 0;
-      background: linear-gradient(to left, var(--neutral-50), transparent);
+      background: linear-gradient(to left, var(--neutral-white), transparent);
     }
   }
 
   &__marquee {
     display: flex;
-    align-items: stretch;
-    gap: 24px;
+    align-items: center;
+    gap: 30px;
     width: max-content;
-    animation: marquee-scroll 40s linear infinite;
-    padding: 8px 0;
+    animation: marquee-scroll 44s linear infinite;
 
     &:hover {
       animation-play-state: paused;
     }
 
     @media (max-width: 767px) {
-      gap: 16px;
-      animation-duration: 30s;
+      gap: 20px;
+      animation-duration: 34s;
     }
   }
 
-  // ── Individual logo card ────────────────────────────────────────────────
   &__logo {
-    display: flex;
+    display: inline-flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 12px;
-    flex-shrink: 0;
-    width: 180px;
-    padding: 28px 20px;
-    background-color: #fff;
-    border-radius: var(--radius-card-public);
-    border: 1px solid var(--neutral-200);
+    min-width: 150px;
     text-decoration: none;
     cursor: pointer;
-    transition:
-      transform var(--transition-card),
-      box-shadow var(--transition-card),
-      border-color var(--transition-fast);
+    transition: transform 300ms ease, opacity 220ms ease;
 
     &:hover {
       transform: translateY(-4px);
-      box-shadow: var(--shadow-md);
-      border-color: var(--brand-primary);
     }
 
     &:focus-visible {
       outline: 2px solid var(--brand-primary);
-      outline-offset: 2px;
+      outline-offset: 4px;
+      border-radius: 14px;
     }
 
     @media (max-width: 767px) {
-      width: 150px;
-      padding: 20px 16px;
+      min-width: 118px;
+      gap: 8px;
     }
   }
 
   &__logo-img {
-    max-width: 120px;
-    max-height: 72px;
+    display: block;
+    max-width: 132px;
+    max-height: 64px;
     object-fit: contain;
-    filter: grayscale(1) opacity(0.55);
-    transition: filter 0.35s ease-out;
+    filter: grayscale(1) opacity(0.58);
+    transition: filter 280ms ease;
 
     .logos-section__logo:hover & {
       filter: grayscale(0) opacity(1);
@@ -154,51 +140,43 @@
   }
 
   &__logo-initial {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     width: 52px;
     height: 52px;
-    border-radius: 12px;
-    background-color: var(--brand-primary);
-    color: #fff;
+    border-radius: 14px;
+    background: var(--brand-primary);
+    color: var(--neutral-white);
     font-size: 22px;
     font-weight: var(--weight-extrabold);
-    letter-spacing: -0.02em;
-    transition: transform var(--transition-fast);
-
-    .logos-section__logo:hover & {
-      transform: scale(1.05);
-    }
   }
 
   &__logo-name {
-    font-size: var(--text-small);
+    max-width: 150px;
+    color: rgba(15, 23, 42, 0.7);
+    font-size: 12px;
     font-weight: var(--weight-semibold);
-    color: var(--neutral-900);
     line-height: 1.3;
     text-align: center;
+    letter-spacing: 0.02em;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 100%;
   }
 
-  // ── View all link ───────────────────────────────────────────────────────
   &__view-all {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    margin-top: 40px;
-    padding: 0 24px;
-    font-size: 15px;
-    font-weight: var(--weight-semibold);
+    justify-content: center;
+    width: 100%;
+    margin-top: 34px;
     color: var(--brand-primary);
     text-decoration: none;
+    font-size: 15px;
+    font-weight: var(--weight-semibold);
     transition: gap var(--transition-fast);
-    // Center horizontally
-    width: 100%;
-    justify-content: center;
 
     svg {
       transition: transform var(--transition-fast);
@@ -215,7 +193,7 @@
     &:focus-visible {
       outline: 2px solid var(--brand-primary);
       outline-offset: 2px;
-      border-radius: var(--radius-btn);
+      border-radius: 999px;
     }
   }
 }
