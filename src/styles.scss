@@ -10,7 +10,7 @@
 @use 'scss/badges';
 
 app-home {
-  --home-section-gap-desktop: 120px;
+  --home-section-gap-desktop: 100px;
   --home-section-gap-mobile: 56px;
 
   .feature-cards-section {
@@ -2116,7 +2116,7 @@ app-product-detail {
 app-about {
   .about-horizontal-advantages {
     background: var(--neutral-white);
-    padding: 0 0 120px;
+    padding: 0 0 100px;
 
     &__desktop {
       display: block;
@@ -2225,6 +2225,7 @@ app-about {
       justify-content: center;
       align-self: center;
       min-height: 100%;
+      padding: 24px 20px 24px 0;
     }
 
     &__panel-title {
@@ -2387,6 +2388,10 @@ app-about {
         padding: 24px;
       }
 
+      &__content {
+        padding: 18px 8px 18px 0;
+      }
+
       &__slide {
         width: min(100%, 360px);
         height: 360px;
@@ -2401,6 +2406,10 @@ app-about {
 
       &__mobile-panel {
         grid-template-columns: 1fr;
+      }
+
+      &__content {
+        padding: 0;
       }
 
       &__slide {

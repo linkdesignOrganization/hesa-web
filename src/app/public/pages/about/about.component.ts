@@ -91,7 +91,7 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
     es: 'No tercerizamos la relación comercial. Nuestros agentes visitan cada zona del país, conocen a sus clientes por nombre y entienden sus necesidades. Esa cercanía, combinada con alianzas sólidas con fabricantes internacionales, nos ha permitido crecer junto al sector veterinario costarricense durante más de tres décadas.',
     en: 'We do not outsource the commercial relationship. Our agents visit every region in the country, know their clients by name, and understand their needs. That closeness, combined with strong partnerships with international manufacturers, has allowed us to grow alongside Costa Rica’s veterinary sector for more than three decades.'
   } as const;
-  readonly marketPresenceBadge = 'Herrera & Elizondo - 1988';
+  readonly marketPresenceBadge = 'Herrera & Elizondo S.A.';
   readonly teamShowcaseEyebrow = {
     es: 'Nuestro equipo',
     en: 'Our team'
