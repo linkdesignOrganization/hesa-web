@@ -367,9 +367,14 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
     // Load all home data from API
     try {
-      const homeData = await this.api.getHomeData();
+      const [homeData, brands] = await Promise.all([
+        this.api.getHomeData(),
+        this.api.getBrands().catch(() => [] as ApiBrand[]),
+      ]);
       this.hero.set(homeData.hero);
-      this.featuredShowcaseBrandLogos.set(this.toFeaturedShowcaseBrandLogos(homeData.featuredBrands, homeData.featuredProducts));
+      this.featuredShowcaseBrandLogos.set(
+        this.toFeaturedShowcaseBrandLogos(brands, homeData.featuredBrands, homeData.featuredProducts)
+      );
       this.featuredShowcaseItems.set(this.buildFeaturedShowcaseItems(homeData.featuredProducts));
       this.heroLoading.set(false);
     } catch {
@@ -509,8 +514,19 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     };
   }
 
-  private toFeaturedShowcaseBrandLogos(brands: ApiBrand[], products: ApiProduct[]): FeaturedShowcaseBrandLogo[] {
-    const fromFeaturedBrands = brands
+  private toFeaturedShowcaseBrandLogos(allBrands: ApiBrand[], featuredBrands: ApiBrand[], products: ApiProduct[]): FeaturedShowcaseBrandLogo[] {
+    const fromAllBrands = allBrands
+      .filter(brand => !!brand.logo)
+      .map(brand => ({
+        name: brand.name,
+        src: brand.logo!,
+      }));
+
+    if (fromAllBrands.length) {
+      return this.shuffle(this.dedupeBrandLogos(fromAllBrands));
+    }
+
+    const fromFeaturedBrands = featuredBrands
       .filter(brand => !!brand.logo)
       .map(brand => ({
         name: brand.name,
