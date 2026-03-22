@@ -30,6 +30,25 @@
     margin-top: var(--space-8);
     display: flex;
 
+    .btn-primary {
+      background-color: var(--neutral-900);
+      color: var(--neutral-white);
+      border-color: var(--neutral-900);
+
+      &:hover {
+        background-color: var(--neutral-700);
+        border-color: var(--neutral-700);
+        color: var(--neutral-white);
+        transform: translateY(-1px);
+      }
+
+      &:active {
+        background-color: var(--neutral-900);
+        border-color: var(--neutral-900);
+        transform: translateY(0);
+      }
+    }
+
     @media (max-width: 767px) {
       .btn {
         width: 100%;

@@ -61,6 +61,13 @@
               <path d="M14.5 14.5L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
             </svg>
           </button>
+          <a
+            [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'contacto' : 'contact')"
+            class="header__icon-btn"
+            [attr.aria-label]="i18n.currentLang() === 'es' ? 'Contactar soporte' : 'Contact support'"
+            (click)="closeHeaderMenus()">
+            <span class="material-symbols-outlined" aria-hidden="true">headset_mic</span>
+          </a>
           <app-language-selector variant="header" />
           <button
             class="header__hamburger"
@@ -247,8 +254,7 @@
     <div class="mobile-menu__divider"></div>
     <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'marcas' : 'brands')" class="mobile-menu__link mobile-menu__link--secondary" (click)="closeMobileMenu()">{{ i18n.currentLang() === 'es' ? 'Marcas' : 'Brands' }}</a>
     <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'nosotros' : 'about')" class="mobile-menu__link mobile-menu__link--secondary" (click)="closeMobileMenu()">{{ i18n.currentLang() === 'es' ? 'Nosotros' : 'About' }}</a>
-    <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'distribuidores' : 'distributors')" class="mobile-menu__link mobile-menu__link--secondary" (click)="closeMobileMenu()">Partners</a>
-    <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'clientes' : 'clients')" class="mobile-menu__link mobile-menu__link--secondary" (click)="closeMobileMenu()">{{ i18n.currentLang() === 'es' ? 'Clientes' : 'Clients' }}</a>
+    <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'distribuidores' : 'distributors')" class="mobile-menu__link mobile-menu__link--secondary" (click)="closeMobileMenu()">{{ i18n.currentLang() === 'es' ? 'Nuevo Partner' : 'New Partner' }}</a>
     <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'contacto' : 'contact')" class="mobile-menu__link mobile-menu__link--secondary" (click)="closeMobileMenu()">{{ i18n.currentLang() === 'es' ? 'Contacto' : 'Contact' }}</a>
   </nav>
 

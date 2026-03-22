@@ -4,7 +4,7 @@ import { LanguageSelectorComponent } from '../language-selector/language-selecto
 import { SearchOverlayComponent } from '../search-overlay/search-overlay.component';
 import { ApiProduct, ApiService, FilterValues } from '../../services/api.service';
 import { I18nService } from '../../services/i18n.service';
-import { buildProductUrl, getBrandsSegment, getClientsSegment, getPartnersSegment } from '../../utils/route-helpers';
+import { buildProductUrl, getBrandsSegment, getPartnersSegment } from '../../utils/route-helpers';
 
 interface LocalizedText {
   es: string;
@@ -188,17 +188,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
     return `/${lang}/${getPartnersSegment(lang)}`;
   }
 
-  getClientsRoute(): string {
-    const lang = this.i18n.currentLang();
-    return `/${lang}/${getClientsSegment(lang)}`;
-  }
-
   getAboutMenuItems(): Array<{ label: string; route: string }> {
     const lang = this.i18n.currentLang();
     return [
       { label: lang === 'es' ? 'Sobre HESA' : 'About HESA', route: this.getAboutRoute() },
-      { label: 'Partners', route: this.getPartnersRoute() },
-      { label: lang === 'es' ? 'Clientes' : 'Clients', route: this.getClientsRoute() },
+      { label: lang === 'es' ? 'Nuevo Partner' : 'New Partner', route: this.getPartnersRoute() },
       { label: lang === 'es' ? 'Marcas' : 'Brands', route: `/${lang}/${getBrandsSegment(lang)}` },
     ];
   }

@@ -6,7 +6,9 @@
 .contact-header {
   padding-top: 140px;
   padding-bottom: 48px;
-  background-color: var(--surface-cream);
+  background:
+    radial-gradient(circle at top right, rgba(255, 255, 255, 0.65), transparent 40%),
+    linear-gradient(180deg, #f4f8ff 0%, #e3e8ee 100%);
 
   @media (max-width: 767px) {
     padding-top: 110px;
