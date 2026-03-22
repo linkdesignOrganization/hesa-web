@@ -1,6 +1,5 @@
 import { Component, inject, signal, AfterViewInit, OnInit, OnDestroy, ElementRef } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { TimelineComponent } from '../../components/timeline/timeline.component';
 import { ContactFormComponent } from '../../components/contact-form/contact-form.component';
 import { ApiService, ApiBrand, ApiPageContent } from '../../../shared/services/api.service';
 import { I18nService } from '../../../shared/services/i18n.service';
@@ -11,7 +10,7 @@ import { initFadeInObserver } from '../../../shared/utils/fade-in-observer';
 @Component({
   selector: 'app-distributors',
   standalone: true,
-  imports: [RouterLink, TimelineComponent, ContactFormComponent],
+  imports: [RouterLink, ContactFormComponent],
   templateUrl: './distributors.component.html',
   styleUrl: './distributors.component.scss'
 })
@@ -21,7 +20,8 @@ export class DistributorsComponent implements OnInit, AfterViewInit, OnDestroy {
   private api = inject(ApiService);
   i18n = inject(I18nService);
   private fadeObserver: IntersectionObserver | null = null;
-  private timelineObserver: IntersectionObserver | null = null;
+  private parallaxAnimationFrame: number | null = null;
+  private parallaxCleanup: Array<() => void> = [];
 
   content = signal<ApiPageContent | null>(null);
   brands = signal<ApiBrand[]>([]);
@@ -73,6 +73,39 @@ export class DistributorsComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     }
   ];
+
+  readonly operationalCards = {
+    card1: {
+      icon: 'local_shipping',
+      title: {
+        es: 'Operación propia',
+        en: 'In-house operation'
+      },
+      subtitle: {
+        es: 'Logística y distribución',
+        en: 'Logistics and distribution'
+      },
+      body: {
+        es: 'No subcontratamos. Nuestro equipo comercial visita clientes en todo el país con rutas programadas. Su marca llega directamente al punto de venta.',
+        en: 'We do not outsource. Our commercial team visits clients nationwide on scheduled routes, so your brand reaches the point of sale directly.'
+      },
+      email: 'ventas@hesa.co.cr'
+    },
+    card2: {
+      title: {
+        es: 'Comunicación directa y constante',
+        en: 'Direct and consistent communication'
+      },
+      body: {
+        es: 'Reportes de ventas, retroalimentación del mercado y coordinación cercana. Trabajamos como una extensión de su equipo comercial.',
+        en: 'Sales reporting, market feedback, and close coordination. We work as an extension of your commercial team.'
+      },
+      cta: {
+        es: 'Contactar',
+        en: 'Contact'
+      }
+    }
+  } as const;
 
   async ngOnInit(): Promise<void> {
     // REQ-181: SEO meta tags for distributors page
@@ -126,30 +159,57 @@ export class DistributorsComponent implements OnInit, AfterViewInit, OnDestroy {
     if (typeof window === 'undefined') return;
     setTimeout(() => {
       this.fadeObserver = initFadeInObserver(this.el);
-      this.initTimelineObserver();
+      this.setupParallax();
     }, 300);
   }
 
   ngOnDestroy(): void {
     this.fadeObserver?.disconnect();
-    this.timelineObserver?.disconnect();
+    this.parallaxCleanup.forEach(cleanup => cleanup());
+    this.parallaxCleanup = [];
+    if (this.parallaxAnimationFrame !== null) {
+      window.cancelAnimationFrame(this.parallaxAnimationFrame);
+      this.parallaxAnimationFrame = null;
+    }
     this.seo.clearDynamicTags();
   }
 
-  private initTimelineObserver(): void {
-    const timeline = this.el.nativeElement.querySelector('.timeline--pre-animation');
-    if (!timeline) return;
+  private setupParallax(): void {
+    if (typeof window === 'undefined') return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-    this.timelineObserver = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          timeline.classList.add('timeline--animated');
-          this.timelineObserver?.disconnect();
-        }
-      },
-      { threshold: 0.2 }
-    );
+    const host = this.el.nativeElement as HTMLElement;
+    const layers = Array.from(host.querySelectorAll('[data-parallax-layer]')) as HTMLElement[];
+    if (!layers.length) return;
 
-    this.timelineObserver.observe(timeline);
+    const updateParallax = () => {
+      this.parallaxAnimationFrame = null;
+      const viewportHeight = window.innerHeight || 1;
+
+      layers.forEach(layer => {
+        const section = layer.closest<HTMLElement>('[data-parallax-section]');
+        if (!section) return;
+
+        const rect = section.getBoundingClientRect();
+        const distanceFromCenter = rect.top + rect.height / 2 - viewportHeight / 2;
+        const normalizedDistance = distanceFromCenter / viewportHeight;
+        const speed = Number(layer.dataset['parallaxSpeed'] ?? '0.1');
+        const offset = Math.max(Math.min(normalizedDistance * speed * -viewportHeight, 78), -78);
+
+        layer.style.setProperty('--parallax-offset', `${offset.toFixed(2)}px`);
+      });
+    };
+
+    const requestParallaxUpdate = () => {
+      if (this.parallaxAnimationFrame !== null) return;
+      this.parallaxAnimationFrame = window.requestAnimationFrame(updateParallax);
+    };
+
+    requestParallaxUpdate();
+    window.addEventListener('scroll', requestParallaxUpdate, { passive: true });
+    window.addEventListener('resize', requestParallaxUpdate);
+
+    this.parallaxCleanup.push(() => window.removeEventListener('scroll', requestParallaxUpdate));
+    this.parallaxCleanup.push(() => window.removeEventListener('resize', requestParallaxUpdate));
   }
 }

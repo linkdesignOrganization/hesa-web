@@ -37,7 +37,7 @@
 <section class="partners-page partners-page__brands section-spacing fade-in-section">
   <div class="container">
     <div class="partners-page__section-heading partners-page__section-heading--centered partners-page__section-heading--brands">
-      <span class="partners-page__eyebrow">{{ i18n.currentLang() === 'es' ? 'Nuestros socios' : 'Our partners' }}</span>
+      <span class="partners-page__eyebrow partners-page__eyebrow--brand-solid">{{ i18n.currentLang() === 'es' ? 'Nuestros socios' : 'Our partners' }}</span>
       <h2 class="partners-page__section-title partners-page__section-title--centered">
         {{ i18n.currentLang() === 'es' ? 'Marcas que confían en HESA' : 'Brands that trust HESA' }}
       </h2>
@@ -66,15 +66,79 @@
   </div>
 </section>
 
-<section class="partners-page partners-page__timeline section-spacing">
+<section class="partners-page partners-page__operations section-spacing fade-in-section">
   <div class="container">
-    <div class="partners-page__timeline-shell fade-in-section">
-      <div class="partners-page__section-heading partners-page__section-heading--centered">
-        <p class="partners-page__eyebrow">{{ i18n.currentLang() === 'es' ? 'Proceso de Alianza' : 'Partnership Process' }}</p>
-        <h2 class="partners-page__section-title">{{ getSection('timelineTitle') || (i18n.currentLang() === 'es' ? 'Como Funciona' : 'How It Works') }}</h2>
-      </div>
+    <div class="partners-operations">
+      <article class="partners-operations__card partners-operations__card--primary">
+        <div class="partners-operations__top partners-operations__top--compact">
+          <div class="partners-operations__icon">
+            <span class="material-symbols-outlined" aria-hidden="true">{{ operationalCards.card1.icon }}</span>
+          </div>
+          <div class="partners-operations__meta">
+            <h3 class="partners-operations__title">{{ i18n.t(operationalCards.card1.title) }}</h3>
+            <p class="partners-operations__subtitle">{{ i18n.t(operationalCards.card1.subtitle) }}</p>
+          </div>
+        </div>
+        <p class="partners-operations__body">{{ i18n.t(operationalCards.card1.body) }}</p>
+        <a class="partners-operations__email" [href]="'mailto:' + operationalCards.card1.email">{{ operationalCards.card1.email }}</a>
+      </article>
 
-      <app-timeline />
+      <article class="partners-operations__card partners-operations__card--secondary">
+        <h3 class="partners-operations__title">{{ i18n.t(operationalCards.card2.title) }}</h3>
+        <p class="partners-operations__body">{{ i18n.t(operationalCards.card2.body) }}</p>
+        <button type="button" class="btn btn-dark partners-operations__cta" (click)="scrollToContactForm()">
+          <span>{{ i18n.t(operationalCards.card2.cta) }}</span>
+          <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+        </button>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="service-spotlight fade-in-section">
+  <div class="service-spotlight__inner" data-parallax-section>
+    <div
+      class="service-spotlight__media"
+      data-parallax-layer
+      data-parallax-speed="0.2"
+      aria-hidden="true"></div>
+
+    <div class="service-spotlight__content">
+      <h2 class="service-spotlight__headline">
+        <span class="service-spotlight__headline-main">
+          {{ i18n.currentLang() === 'es'
+            ? 'Llevamos su marca a cada rincón del país y construimos juntos'
+            : 'We take your brand to every corner of the country and build together' }}
+        </span>
+        <span class="service-spotlight__headline-accent">
+          {{ i18n.currentLang() === 'es'
+            ? ' una presencia que perdura.'
+            : ' a presence that endures.' }}
+        </span>
+      </h2>
+    </div>
+
+    <div class="service-spotlight__pills">
+      <a
+        [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/farmacos' : 'catalog/pharmaceuticals')"
+        class="service-spotlight__pill frosted-white">
+        {{ i18n.currentLang() === 'es' ? 'Farmacos' : 'Pharmaceuticals' }}
+      </a>
+      <a
+        [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/alimentos' : 'catalog/food')"
+        class="service-spotlight__pill frosted-white">
+        {{ i18n.currentLang() === 'es' ? 'Alimentos' : 'Food' }}
+      </a>
+      <a
+        [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/equipos' : 'catalog/equipment')"
+        class="service-spotlight__pill frosted-white">
+        {{ i18n.currentLang() === 'es' ? 'Equipos' : 'Equipment' }}
+      </a>
+      <a
+        [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo' : 'catalog')"
+        class="service-spotlight__pill frosted-white">
+        {{ i18n.currentLang() === 'es' ? 'Ver todo' : 'Shop all' }}
+      </a>
     </div>
   </div>
 </section>
@@ -84,7 +148,7 @@
     <div class="partners-contact__shell fade-in-section">
       <div class="partners-contact__layout">
         <div class="partners-contact__info">
-          <p class="partners-page__eyebrow">{{ i18n.currentLang() === 'es' ? 'Hablemos' : "Let's Talk" }}</p>
+          <p class="partners-page__eyebrow partners-page__eyebrow--brand-solid">{{ i18n.currentLang() === 'es' ? 'Hablemos' : "Let's Talk" }}</p>
           <h2 class="partners-page__section-title">{{ getSection('formTitle') || (i18n.currentLang() === 'es' ? 'Inicie la Conversacion' : 'Start the Conversation') }}</h2>
           <p class="partners-contact__desc">{{ getSection('formDescription') || (i18n.currentLang() === 'es' ? 'Complete el formulario y nuestro equipo comercial se comunicara con usted en un plazo de 48 horas para discutir oportunidades de distribucion.' : 'Fill out the form and our commercial team will get in touch within 48 hours to discuss distribution opportunities.') }}</p>
         </div>
