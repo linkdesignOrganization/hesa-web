@@ -36,8 +36,8 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
     { src: '/logoimv.svg', alt: 'IMV' }
   ] as const;
   readonly familyCompaniesTitle = {
-    es: 'Una red de confianza que comenzó en 1988',
-    en: 'A trusted network that began in 1988'
+    es: 'Una red de confianza que comenzó en 1988 y sigue hoy',
+    en: 'A trusted network that began in 1988 and continues today'
   } as const;
   readonly familyCompaniesCopy = {
     es: 'Lo que empezó como un negocio familiar hoy es un grupo de cuatro empresas respaldado por alianzas con los mejores fabricantes del sector. Juntos, atendemos a todo el mercado veterinario costarricense.',
