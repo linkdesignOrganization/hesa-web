@@ -5,7 +5,7 @@
 .brands-discovery {
   --brands-accent: var(--brand-primary);
   --brands-surface: radial-gradient(circle at top right, rgba(255, 255, 255, 0.78), transparent 42%),
-    linear-gradient(180deg, #f4f8ff 0%, #e3e8ee 100%);
+    linear-gradient(180deg, #f2f7ff 0%, #c6e8ff 100%);
 
   a,
   button {
@@ -95,7 +95,7 @@
   padding: 18px;
   background:
     radial-gradient(circle at top right, rgba(255, 255, 255, 0.72), transparent 42%),
-    linear-gradient(180deg, #f4f8ff 0%, #e3e8ee 100%);
+    linear-gradient(180deg, #f2f7ff 0%, #c6e8ff 100%);
   border: 1px solid rgba(15, 23, 42, 0.08);
 
   &__logo {

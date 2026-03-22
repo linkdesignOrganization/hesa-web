@@ -2,7 +2,7 @@
   --detail-accent: var(--brand-primary);
   --detail-accent-soft: rgba(0, 141, 201, 0.14);
   --detail-surface: radial-gradient(circle at top right, rgba(255, 255, 255, 0.78), transparent 42%),
-    linear-gradient(180deg, #f4f8ff 0%, #e3e8ee 100%);
+    linear-gradient(180deg, #f2f7ff 0%, #c6e8ff 100%);
   --detail-positioning-bg: linear-gradient(180deg, #dbe9f6 0%, #c9dff0 100%);
 
   padding-top: 0;
@@ -214,14 +214,17 @@
   }
 
   &__hero-meta-strip {
-    display: flex;
-    align-items: stretch;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 14px;
     padding: 14px 18px;
     border-radius: 30px;
     background: var(--detail-surface);
     margin-top: 18px;
+
+    @media (max-width: 767px) {
+      grid-template-columns: 1fr;
+    }
   }
 
   &__hero-meta-item {
@@ -229,7 +232,6 @@
     align-items: center;
     gap: 12px;
     min-width: 0;
-    flex: 1 1 180px;
     color: inherit;
     text-decoration: none;
   }
