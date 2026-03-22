@@ -2161,6 +2161,16 @@ app-about {
       color: var(--neutral-white);
       border: 0;
       cursor: pointer;
+      outline: none;
+      box-shadow: none;
+      -webkit-tap-highlight-color: transparent;
+
+      &:focus,
+      &:focus-visible,
+      &:active {
+        outline: none;
+        box-shadow: none;
+      }
     }
 
     &__toggle {
@@ -2202,14 +2212,19 @@ app-about {
       border-radius: 32px;
       padding: 28px;
       display: grid;
-      grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
-      gap: 32px;
-      align-items: stretch;
+      grid-template-columns: minmax(320px, 420px) minmax(0, 1fr);
+      gap: 52px;
+      align-items: center;
     }
 
     &__content {
       min-width: 0;
       color: var(--neutral-white);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-self: center;
+      min-height: 100%;
     }
 
     &__panel-title {
@@ -2239,7 +2254,10 @@ app-about {
 
     &__slide {
       margin: 0;
+      width: min(100%, 420px);
+      height: 420px;
       min-height: 420px;
+      max-height: 420px;
       border-radius: 28px;
       background: #fff;
       display: flex;
@@ -2250,28 +2268,20 @@ app-about {
       padding: 28px;
       animation: about-advantage-slide-fade 460ms ease both;
       overflow: hidden;
+      margin-inline: auto;
+      flex: 0 0 420px;
 
       &--brand {
         border: none;
-        width: 100%;
       }
 
       &--product {
         justify-content: center;
-        width: min(100%, 360px);
-        height: 360px;
-        min-height: 360px;
-        max-height: 360px;
-        margin-inline: auto;
-        flex: 0 0 360px;
       }
 
       &--image {
         padding: 0;
-        background: #fff;
-        width: 100%;
-        height: 100%;
-        min-height: 100%;
+        background: transparent;
       }
 
       &--empty {
@@ -2284,8 +2294,8 @@ app-about {
 
     &__brand-logo {
       display: block;
-      width: min(100%, 320px);
-      max-height: 180px;
+      width: min(100%, 300px);
+      height: min(100%, 180px);
       object-fit: contain;
     }
 
@@ -2294,14 +2304,14 @@ app-about {
       width: 100%;
       height: 100%;
       object-fit: contain;
+      object-position: center;
     }
 
     &__coverage-image {
       width: 100%;
       height: 100%;
-      min-height: 100%;
       object-fit: cover;
-      object-position: 68% center;
+      object-position: 78% center;
       display: block;
     }
 
@@ -2372,21 +2382,17 @@ app-about {
       }
 
       &__panel {
-        grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-        gap: 26px;
+        grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
+        gap: 40px;
         padding: 24px;
       }
 
       &__slide {
-        min-height: 380px;
-      }
-
-      &__slide--product {
-        width: min(100%, 332px);
-        height: 332px;
-        min-height: 332px;
-        max-height: 332px;
-        flex-basis: 332px;
+        width: min(100%, 360px);
+        height: 360px;
+        min-height: 360px;
+        max-height: 360px;
+        flex-basis: 360px;
       }
     }
 
@@ -2401,14 +2407,18 @@ app-about {
         min-height: 320px;
         border-radius: 24px;
         padding: 22px;
+        width: 100%;
+        height: 320px;
+        max-height: 320px;
+        flex-basis: 320px;
       }
 
       &__slide--product {
         width: 100%;
-        height: 300px;
-        min-height: 300px;
-        max-height: 300px;
-        flex-basis: 300px;
+        height: 320px;
+        min-height: 320px;
+        max-height: 320px;
+        flex-basis: 320px;
       }
 
       &__slide--image {
@@ -2439,13 +2449,16 @@ app-about {
       &__slide {
         min-height: 260px;
         gap: 14px;
+        height: 260px;
+        max-height: 260px;
+        flex-basis: 260px;
       }
 
       &__slide--product {
-        height: 240px;
-        min-height: 240px;
-        max-height: 240px;
-        flex-basis: 240px;
+        height: 260px;
+        min-height: 260px;
+        max-height: 260px;
+        flex-basis: 260px;
       }
 
       &__slide--image {

@@ -99,6 +99,7 @@
             <button
               type="button"
               class="about-horizontal-advantages__toggle"
+              tabindex="-1"
               [attr.aria-expanded]="activeAdvantageTab() === item.id"
               [attr.aria-label]="i18n.t(item.label)"
               (click)="setActiveAdvantageTab(item.id)">
@@ -168,6 +169,7 @@
           <button
             type="button"
             class="about-horizontal-advantages__mobile-toggle"
+            tabindex="-1"
             [attr.aria-expanded]="activeAdvantageTab() === item.id"
             (click)="setActiveAdvantageTab(item.id)">
             <span class="about-horizontal-advantages__mobile-label">{{ i18n.t(item.label) }}</span>
