@@ -56,7 +56,7 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
   policiesContent = signal<ApiPageContent | null>(null);
   activeMobileMarqueeBrand = signal<string | null>(null);
   presenceParallaxOffset = signal(0);
-  activeAdvantageTab = signal<AboutHorizontalAccordionTabId>('exclusive-brands');
+  activeAdvantageTab = signal<AboutHorizontalAccordionTabId>('national-coverage');
   advantageBrandSlides = signal<AboutBrandSlide[]>([]);
   advantageProductSlides = signal<AboutProductSlide[]>([]);
   advantageBrandIndex = signal(0);
@@ -113,11 +113,24 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
     { src: '/team/10.jpg', alt: 'Equipo HESA 10', name: 'Sofía Araya' },
     { src: '/team/11.jpg', alt: 'Equipo HESA 11', name: 'Andrés Villalobos' }
   ] as const;
-  readonly aboutAdvantageTitle = {
-    es: 'La ventaja de trabajar con HESA',
-    en: 'The advantage of working with HESA'
-  } as const;
   readonly aboutAdvantageItems: readonly AboutHorizontalAccordionItem[] = [
+    {
+      id: 'national-coverage',
+      label: {
+        es: 'Cobertura nacional',
+        en: 'Nationwide coverage'
+      },
+      color: '#008DC9',
+      title: {
+        es: 'Llegamos a donde está su negocio',
+        en: 'We reach where your business is'
+      },
+      body: {
+        es: 'Nuestros 18 agentes comerciales recorren el país con rutas programadas. No importa si está en el Valle Central o en la zona más alejada: su pedido llega sin intermediarios y con seguimiento directo.',
+        en: 'Our 18 field agents travel the country on scheduled routes. Whether you are in the Central Valley or the most remote area, your order arrives without intermediaries and with direct follow-up.'
+      },
+      mediaType: 'image'
+    },
     {
       id: 'exclusive-brands',
       label: {
@@ -151,23 +164,6 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
         en: 'You do not have to wait weeks for an import. We keep steady inventory of the lines we distribute so your order ships when you need it. That is the advantage of working with a supplier that plans ahead.'
       },
       mediaType: 'products'
-    },
-    {
-      id: 'national-coverage',
-      label: {
-        es: 'Cobertura nacional',
-        en: 'Nationwide coverage'
-      },
-      color: '#008DC9',
-      title: {
-        es: 'Llegamos a donde está su negocio',
-        en: 'We reach where your business is'
-      },
-      body: {
-        es: 'Nuestros 18 agentes comerciales recorren el país con rutas programadas. No importa si está en el Valle Central o en la zona más alejada: su pedido llega sin intermediarios y con seguimiento directo.',
-        en: 'Our 18 field agents travel the country on scheduled routes. Whether you are in the Central Valley or the most remote area, your order arrives without intermediaries and with direct follow-up.'
-      },
-      mediaType: 'image'
     }
   ] as const;
 
@@ -257,8 +253,8 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
     return this.i18n.currentLang() === 'es' ? this.teamShowcaseTitle.es : this.teamShowcaseTitle.en;
   }
 
-  getAboutAdvantageTitle(): string {
-    return this.i18n.currentLang() === 'es' ? this.aboutAdvantageTitle.es : this.aboutAdvantageTitle.en;
+  getAboutCatalogRoute(): string {
+    return this.i18n.currentLang() === 'es' ? '/es/catalogo' : '/en/catalog';
   }
 
   setActiveAdvantageTab(tabId: AboutHorizontalAccordionTabId): void {

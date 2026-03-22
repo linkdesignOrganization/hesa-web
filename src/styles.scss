@@ -2118,20 +2118,6 @@ app-about {
     background: var(--neutral-white);
     padding: 0 0 120px;
 
-    &__header {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-
-    &__title {
-      font-size: clamp(32px, 4vw, 52px);
-      font-weight: var(--weight-extrabold);
-      letter-spacing: var(--tracking-tighter);
-      line-height: 0.96;
-      color: var(--neutral-900);
-      text-wrap: balance;
-    }
-
     &__desktop {
       display: block;
 
@@ -2158,14 +2144,14 @@ app-about {
 
     &__accordion {
       display: flex;
-      flex: 0 0 72px;
+      flex: 0 0 82px;
       min-width: 0;
       height: 560px;
       overflow: hidden;
       transition: flex-grow 780ms cubic-bezier(0.22, 1, 0.36, 1);
 
       &--expanded {
-        flex: 1 1 72px;
+        flex: 1 1 82px;
       }
     }
 
@@ -2178,8 +2164,8 @@ app-about {
     }
 
     &__toggle {
-      width: 72px;
-      min-width: 72px;
+      width: 82px;
+      min-width: 82px;
       border-radius: 28px;
       display: flex;
       align-items: center;
@@ -2191,10 +2177,11 @@ app-about {
       margin: 0;
       transform: rotate(-90deg);
       white-space: nowrap;
-      font-size: 1rem;
-      font-weight: var(--weight-bold);
-      letter-spacing: var(--tracking-wide);
+      font-size: 1.14rem;
+      font-weight: var(--weight-extrabold);
+      letter-spacing: 0.08em;
       text-transform: uppercase;
+      color: var(--neutral-white);
     }
 
     &__panel-shell {
@@ -2222,6 +2209,7 @@ app-about {
 
     &__content {
       min-width: 0;
+      color: var(--neutral-white);
     }
 
     &__panel-title {
@@ -2231,13 +2219,14 @@ app-about {
       font-weight: var(--weight-extrabold);
       letter-spacing: var(--tracking-tighter);
       text-wrap: balance;
+      color: var(--neutral-white);
     }
 
     &__panel-text {
       margin: 0;
       font-size: var(--text-body-lg);
       line-height: var(--leading-relaxed);
-      color: rgba(255, 255, 255, 0.88);
+      color: rgba(255, 255, 255, 0.92);
     }
 
     &__media {
@@ -2248,8 +2237,7 @@ app-about {
       margin: 0;
       min-height: 420px;
       border-radius: 28px;
-      background: rgba(255, 255, 255, 0.18);
-      border: 1px solid rgba(255, 255, 255, 0.22);
+      background: #fff;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -2259,20 +2247,27 @@ app-about {
       animation: about-advantage-slide-fade 460ms ease both;
       overflow: hidden;
 
+      &--brand {
+        border: none;
+      }
+
       &--product {
         justify-content: center;
+        width: min(100%, 360px);
+        min-height: 360px;
+        margin-inline: auto;
       }
 
       &--image {
         padding: 0;
-        background: rgba(255, 255, 255, 0.16);
+        background: #fff;
       }
 
       &--empty {
         font-size: 1.05rem;
         font-weight: var(--weight-semibold);
         text-align: center;
-        color: rgba(255, 255, 255, 0.9);
+        color: rgba(15, 23, 42, 0.68);
       }
     }
 
@@ -2285,8 +2280,8 @@ app-about {
 
     &__product-image {
       display: block;
-      width: min(100%, 320px);
-      max-height: 320px;
+      width: 100%;
+      height: 100%;
       object-fit: contain;
     }
 
@@ -2294,29 +2289,28 @@ app-about {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: 68% center;
       display: block;
     }
 
-    &__slide-caption {
-      text-align: center;
-      font-size: 0.98rem;
-      line-height: 1.3;
-      color: rgba(255, 255, 255, 0.94);
-      text-wrap: balance;
+    &__panel-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      margin-top: 24px;
+      padding: 0 20px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.96);
+      color: var(--neutral-900);
+      font-size: 0.96rem;
+      font-weight: var(--weight-semibold);
+      text-decoration: none;
+      transition: transform 180ms ease, background-color 180ms ease;
 
-      &--stacked {
-        display: grid;
-        gap: 6px;
-
-        strong {
-          font-size: 1.02rem;
-          font-weight: var(--weight-semibold);
-        }
-
-        span {
-          font-size: 0.92rem;
-          color: rgba(255, 255, 255, 0.8);
-        }
+      &:hover {
+        transform: translateY(-1px);
+        background: #fff;
       }
     }
 
@@ -2337,15 +2331,17 @@ app-about {
     }
 
     &__mobile-label {
-      font-size: 1rem;
-      font-weight: var(--weight-bold);
-      letter-spacing: var(--tracking-wide);
+      font-size: 1.04rem;
+      font-weight: var(--weight-extrabold);
+      letter-spacing: 0.08em;
       text-transform: uppercase;
+      color: var(--neutral-white);
     }
 
     &__mobile-icon {
       font-size: 24px;
       transition: transform 220ms ease;
+      color: var(--neutral-white);
     }
 
     &__mobile-item--expanded &__mobile-icon {
@@ -2377,10 +2373,6 @@ app-about {
     @media (max-width: 1024px) {
       padding-bottom: 96px;
 
-      &__header {
-        margin-bottom: 28px;
-      }
-
       &__mobile-panel {
         grid-template-columns: 1fr;
       }
@@ -2389,6 +2381,11 @@ app-about {
         min-height: 320px;
         border-radius: 24px;
         padding: 22px;
+      }
+
+      &__slide--product {
+        width: 100%;
+        min-height: 300px;
       }
 
       &__panel-title {
@@ -2403,10 +2400,6 @@ app-about {
     @media (max-width: 767px) {
       padding-bottom: 84px;
 
-      &__title {
-        text-align: center;
-      }
-
       &__mobile-toggle {
         padding: 16px 18px;
       }
@@ -2418,6 +2411,10 @@ app-about {
       &__slide {
         min-height: 260px;
         gap: 14px;
+      }
+
+      &__slide--product {
+        min-height: 240px;
       }
 
       &__brand-logo {
