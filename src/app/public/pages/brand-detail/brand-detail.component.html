@@ -98,14 +98,11 @@
         <div class="brand-catalog__hero-grid">
           <div class="brand-catalog__hero-logo">
             @if (brand()!.logo) {
-              <picture>
-                <source [srcset]="toWebP(brand()!.logo!)" type="image/webp">
-                <img
-                  [src]="brand()!.logo"
-                  [alt]="brand()!.name"
-                  class="brand-catalog__hero-logo-img"
-                  loading="eager">
-              </picture>
+              <img
+                [src]="brand()!.logo!"
+                [alt]="brand()!.name"
+                class="brand-catalog__hero-logo-img"
+                loading="eager">
             } @else {
               <span class="brand-catalog__hero-logo-initial">{{ brand()!.name.charAt(0) }}</span>
             }
@@ -143,80 +140,17 @@
     </div>
 
     <div class="container">
-      @if (products().length > 0 || activeFilters.length > 0) {
-        <div class="brand-catalog__shell">
-          <aside class="brand-filters">
-            <div class="brand-filters__header">
-              <div class="brand-filters__header-main">
-                <p class="brand-filters__eyebrow">{{ i18n.currentLang() === 'es' ? 'Filtrar marca' : 'Filter brand' }}</p>
-                <h2 class="brand-filters__title">{{ i18n.currentLang() === 'es' ? 'Encuentre mas rapido' : 'Find faster' }}</h2>
-                @if (activeFilters.length > 0) {
-                  <button type="button" class="brand-filters__clear-btn" (click)="clearFilters()">
-                    <span class="material-symbols-outlined" aria-hidden="true">filter_alt_off</span>
-                    {{ i18n.currentLang() === 'es' ? 'Limpiar filtros' : 'Clear filters' }}
-                  </button>
-                }
-              </div>
-            </div>
+      @if (products().length > 0) {
+        <div class="brand-results brand-results--standalone">
+          <div class="brand-results__header">
+            <h2 class="brand-results__title">
+              {{ i18n.currentLang() === 'es' ? 'Productos de ' + brand()!.name : brand()!.name + ' products' }}
+            </h2>
+          </div>
 
-            @if (categoryOptions.length > 0) {
-              <div class="brand-filters__group">
-                <p class="brand-filters__label">{{ i18n.currentLang() === 'es' ? 'Categoria' : 'Category' }}</p>
-                <div class="brand-filters__checks">
-                  @for (option of categoryOptions; track option.value) {
-                    <label class="brand-filters__check">
-                      <input
-                        class="brand-filters__checkbox"
-                        type="checkbox"
-                        [checked]="selectedCategory() === option.value"
-                        (change)="applyFilter('category', option.value)">
-                      <span class="brand-filters__check-mark">
-                        <span class="material-symbols-outlined" aria-hidden="true">check</span>
-                      </span>
-                      <span class="brand-filters__check-label">{{ option.label }}</span>
-                    </label>
-                  }
-                </div>
-              </div>
-            }
-          </aside>
-
-          <div class="brand-results">
-            <div class="brand-results__header">
-              <h2 class="brand-results__title">
-                {{ i18n.currentLang() === 'es' ? 'Productos de ' + brand()!.name : brand()!.name + ' products' }}
-              </h2>
-            </div>
-
-            @if (activeFilters.length > 0) {
-              <div class="brand-results__pills">
-                @for (f of activeFilters; track f.key) {
-                  <span class="brand-results__pill">
-                    {{ f.label }}
-                    <button
-                      type="button"
-                      (click)="applyFilter(f.key, '')"
-                      [attr.aria-label]="(i18n.currentLang() === 'es' ? 'Quitar filtro: ' : 'Remove filter: ') + f.label">
-                      <span class="material-symbols-outlined" aria-hidden="true">close</span>
-                    </button>
-                  </span>
-                }
-              </div>
-            }
-
-            @if (products().length > 0) {
-              <div class="brand-results__grid">
-                @for (product of products(); track product._id) {
-                  <app-product-card [product]="product" variant="discovery" />
-                }
-              </div>
-            } @else {
-              <div class="brand-results__empty">
-                <p>{{ i18n.currentLang() === 'es' ? 'No se encontraron productos con estos filtros' : 'No products found with these filters' }}</p>
-                <button class="btn btn-outline" (click)="clearFilters()">
-                  {{ i18n.currentLang() === 'es' ? 'Limpiar filtros' : 'Clear filters' }}
-                </button>
-              </div>
+          <div class="brand-results__grid">
+            @for (product of products(); track product._id) {
+              <app-product-card [product]="product" variant="discovery" />
             }
           </div>
         </div>

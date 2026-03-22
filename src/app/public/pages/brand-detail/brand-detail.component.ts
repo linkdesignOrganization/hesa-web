@@ -1,5 +1,5 @@
 import { Component, inject, signal, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { BreadcrumbComponent } from '../../../shared/components/breadcrumb/breadcrumb.component';
 import { ProductCardComponent } from '../../components/product-card/product-card.component';
@@ -19,7 +19,6 @@ type ProductCategoryKey = 'farmacos' | 'alimentos' | 'equipos';
 })
 export class BrandDetailComponent implements OnInit, OnDestroy {
   private route = inject(ActivatedRoute);
-  private router = inject(Router);
   private api = inject(ApiService);
   private seo = inject(SeoService);
   i18n = inject(I18nService);
@@ -30,7 +29,6 @@ export class BrandDetailComponent implements OnInit, OnDestroy {
   notFound = signal(false);
   error = signal(false); // BUG-013: Separate error state from notFound
 
-  selectedCategory = signal('');
   private brandSlug = '';
 
   get breadcrumbs() {
@@ -85,8 +83,6 @@ export class BrandDetailComponent implements OnInit, OnDestroy {
       const params: Record<string, string | number | undefined> = {
         limit: 100,
       };
-      const normalizedCategory = this.normalizedSelectedCategory();
-      if (normalizedCategory) params['category'] = normalizedCategory;
 
       const firstPage = await this.api.getBrandProducts(this.brandSlug, params);
 
@@ -108,18 +104,6 @@ export class BrandDetailComponent implements OnInit, OnDestroy {
     } catch {
       // Non-critical
     }
-  }
-
-  async applyFilter(key: string, value: string): Promise<void> {
-    if (key === 'category') {
-      this.selectedCategory.set(this.selectedCategory() === value ? '' : value);
-    }
-    await this.loadProducts();
-  }
-
-  async clearFilters(): Promise<void> {
-    this.selectedCategory.set('');
-    await this.loadProducts();
   }
 
   async retryLoad(): Promise<void> {
@@ -150,31 +134,12 @@ export class BrandDetailComponent implements OnInit, OnDestroy {
     }
   }
 
-  /** NFR-002: Convert image URL to WebP variant for <picture> <source> */
-  toWebP(url: string): string {
-    return url.replace(/\.(jpe?g|png)$/i, '.webp');
-  }
-
-  get categoryOptions(): Array<{ value: string; label: string }> {
-    const brand = this.brand();
-    if (!brand?.categories?.length) return [];
-
-    const options = brand.categories
-      .map(category => {
-        const normalized = this.normalizeCategory(category);
-        if (!normalized) return null;
-        return {
-          value: normalized,
-          label: getCategoryLabel(normalized, this.i18n.currentLang()),
-        };
-      })
-      .filter((option): option is { value: ProductCategoryKey; label: string } => !!option);
-
-    return options;
-  }
-
   get brandCategoryLabels(): string[] {
-    return this.categoryOptions.map(option => option.label);
+    const categories = this.brand()?.categories ?? [];
+    return categories
+      .map(category => this.normalizeCategory(category))
+      .filter((category): category is ProductCategoryKey => !!category)
+      .map(category => getCategoryLabel(category, this.i18n.currentLang()));
   }
 
   get brandThemeClass(): string {
@@ -196,28 +161,11 @@ export class BrandDetailComponent implements OnInit, OnDestroy {
     return '';
   }
 
-  get activeFilters(): { key: string; label: string }[] {
-    const filters: { key: string; label: string }[] = [];
-    if (this.selectedCategory()) {
-      filters.push({
-        key: 'category',
-        label: this.categoryOptions.find(option => option.value === this.selectedCategory())?.label || this.selectedCategory()
-      });
-    }
-    return filters;
-  }
-
   private normalizeCategory(category: string): ProductCategoryKey | null {
     const normalized = category.trim().toLowerCase();
     if (['farmacos', 'pharmaceuticals'].includes(normalized)) return 'farmacos';
     if (['alimentos', 'food'].includes(normalized)) return 'alimentos';
     if (['equipos', 'equipment'].includes(normalized)) return 'equipos';
     return null;
-  }
-
-  private normalizedSelectedCategory(): ProductCategoryKey | undefined {
-    const selected = this.selectedCategory();
-    if (!selected) return undefined;
-    return this.normalizeCategory(selected) ?? undefined;
   }
 }

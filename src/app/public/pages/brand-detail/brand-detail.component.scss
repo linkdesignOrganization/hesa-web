@@ -47,7 +47,7 @@
 
   &__hero-grid {
     display: grid;
-    grid-template-columns: minmax(180px, 220px) minmax(0, 1fr);
+    grid-template-columns: minmax(240px, 300px) minmax(0, 1fr);
     gap: 24px;
     align-items: center;
     margin-top: 18px;
@@ -63,24 +63,24 @@
   }
 
   &__hero-logo {
-    min-height: 190px;
+    min-height: 230px;
     border-radius: 34px;
     background: rgba(255, 255, 255, 0.88);
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 24px;
+    padding: 30px;
     box-shadow: 0 26px 42px rgba(15, 23, 42, 0.06);
 
     @media (max-width: 767px) {
-      min-height: 150px;
+      min-height: 170px;
       border-radius: 28px;
     }
   }
 
   &__hero-logo-img {
     width: 100%;
-    max-height: 120px;
+    max-height: 150px;
     object-fit: contain;
     display: block;
   }
@@ -166,145 +166,14 @@
     }
   }
 
-  &__shell {
-    display: grid;
-    grid-template-columns: minmax(260px, 290px) minmax(0, 1fr);
-    gap: 18px;
-    align-items: start;
-    margin-top: 30px;
-
-    @media (max-width: 991px) {
-      grid-template-columns: 1fr;
-    }
-  }
-}
-
-.brand-filters {
-  position: static;
-  padding: 28px;
-  border-radius: 34px;
-  background: var(--brand-surface);
-  box-shadow: 0 24px 40px rgba(15, 23, 42, 0.06);
-
-  @media (max-width: 991px) {
-    padding: 24px;
-  }
-
-  &__header {
-    display: block;
-    margin-bottom: 22px;
-  }
-
-  &__header-main {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-  }
-
-  &__eyebrow,
-  &__label {
-    margin: 0 0 10px;
-    font-size: 0.78rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: rgba(15, 23, 42, 0.48);
-    font-weight: var(--weight-bold);
-  }
-
-  &__title {
-    margin: 0;
-    color: var(--neutral-900);
-    font-size: 1.55rem;
-    line-height: 1.05;
-    letter-spacing: -0.04em;
-    font-weight: var(--weight-extrabold);
-  }
-
-  &__clear-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    min-height: 38px;
-    padding: 0 14px;
-    border-radius: 999px;
-    border: 1px solid rgba(15, 23, 42, 0.1);
-    background: rgba(255, 255, 255, 0.82);
-    color: rgba(15, 23, 42, 0.72);
-    font: inherit;
-    font-size: 0.84rem;
-    font-weight: var(--weight-semibold);
-
-    .material-symbols-outlined {
-      font-size: 1rem;
-    }
-  }
-
-  &__group + &__group {
-    margin-top: 18px;
-  }
-
-  &__checks {
-    display: grid;
-    gap: 10px;
-  }
-
-  &__check {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    min-height: 44px;
-    padding: 10px 12px;
-    border-radius: 18px;
-    background: rgba(255, 255, 255, 0.72);
-    border: 1px solid transparent;
-    transition: border-color 180ms ease, background-color 180ms ease, transform 180ms ease;
-
-    &:hover {
-      border-color: rgba(15, 23, 42, 0.1);
-      background: rgba(255, 255, 255, 0.92);
-    }
-  }
-
-  &__checkbox {
-    position: absolute;
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  &__check-mark {
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    border: 1.5px solid rgba(15, 23, 42, 0.18);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    flex: 0 0 22px;
-    color: transparent;
-    background: transparent;
-    transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease;
-
-    .material-symbols-outlined {
-      font-size: 0.9rem;
-    }
-  }
-
-  &__checkbox:checked + &__check-mark {
-    border-color: var(--brand-accent);
-    background: var(--brand-accent);
-    color: var(--neutral-white);
-  }
-
-  &__check-label {
-    color: var(--neutral-900);
-    font-size: 0.92rem;
-    font-weight: var(--weight-medium);
-  }
 }
 
 .brand-results {
   min-width: 0;
+
+  &--standalone {
+    margin-top: 30px;
+  }
 
   &__header {
     display: flex;
@@ -361,6 +230,7 @@
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 18px;
+    align-items: stretch;
 
     @media (max-width: 1279px) {
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -368,6 +238,11 @@
 
     @media (max-width: 767px) {
       grid-template-columns: 1fr;
+    }
+
+    app-product-card {
+      display: block;
+      height: 100%;
     }
   }
 

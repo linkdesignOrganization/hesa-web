@@ -255,11 +255,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
           queryParam: 'species' as const,
           options: toOptions(values.species),
         },
-        {
-          title: { es: 'Por tipo', en: 'By type' },
-          queryParam: 'family' as const,
-          options: toOptions(values.families),
-        },
       ].filter(group => group.options.length > 0);
     }
 
@@ -269,11 +264,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
           title: { es: 'Por especie', en: 'By species' },
           queryParam: 'species' as const,
           options: toOptions(values.species),
-        },
-        {
-          title: { es: 'Por tipo', en: 'By type' },
-          queryParam: 'lifeStage' as const,
-          options: toOptions(values.lifeStages),
         },
       ].filter(group => group.options.length > 0);
     }
@@ -293,7 +283,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
       slug: brand.slug,
     }));
 
-    return this.chunkArray(links, 6);
+    if (links.length === 0) return [];
+    if (links.length <= 6) return [links];
+    return [links.slice(0, 6), links.slice(6)];
   }
 
   getMegaFeaturedCards(category: MegaCategory): MegaFeaturedCard[] {
@@ -379,16 +371,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     return metaByCategory[product.category].filter(Boolean).slice(0, 2) as LocalizedText[];
   }
-
-  private chunkArray<T>(items: T[], size: number): T[][] {
-    if (items.length === 0) return [];
-    const chunks: T[][] = [];
-    for (let index = 0; index < items.length; index += size) {
-      chunks.push(items.slice(index, index + size));
-    }
-    return chunks;
-  }
-
   private shuffle<T>(items: T[]): T[] {
     const next = [...items];
     for (let index = next.length - 1; index > 0; index -= 1) {

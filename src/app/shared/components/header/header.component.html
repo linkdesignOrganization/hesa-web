@@ -107,7 +107,8 @@
           [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo' : 'catalog')"
           routerLinkActive="header__nav-link--active"
           [routerLinkActiveOptions]="{ exact: true }"
-          class="header__nav-link header__nav-link--all">
+          class="header__nav-link header__nav-link--all"
+          (click)="closeHeaderMenus()">
           <span class="header__nav-label">
             <span>{{ i18n.currentLang() === 'es' ? 'Ver todos' : 'Shop All' }}</span>
             <span class="material-symbols-outlined header__nav-hover-icon" aria-hidden="true">arrow_circle_right</span>

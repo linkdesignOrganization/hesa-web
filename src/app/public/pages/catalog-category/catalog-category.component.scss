@@ -542,6 +542,7 @@
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 16px;
+    align-items: stretch;
 
     @media (max-width: 767px) {
       grid-template-columns: 1fr;
@@ -549,6 +550,11 @@
 
     @media (min-width: 1280px) {
       grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    app-product-card {
+      display: block;
+      height: 100%;
     }
   }
 

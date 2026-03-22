@@ -54,7 +54,7 @@ export class CatalogComponent implements OnInit, OnDestroy {
   currentPage = signal(1);
   totalProducts = signal(0);
   totalPages = signal(0);
-  pageSize = 24;
+  pageSize = 12;
   mobileFiltersOpen = signal(false);
   catalogBaseTotal = signal(0);
 
