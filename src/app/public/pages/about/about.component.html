@@ -384,3 +384,49 @@
     </div>
   </div>
 </section>
+
+<section class="alliances-insight-section fade-in-section">
+  <div class="alliances-insight-section__inner">
+    <h2 class="alliances-insight-section__headline">
+      <span class="alliances-insight-section__headline-lead">{{ i18n.t(aboutClosingAlliance.headlineLead) }}</span>
+      <span class="alliances-insight-section__headline-accent"> {{ i18n.t(aboutClosingAlliance.headlineAccent) }}</span>
+    </h2>
+
+    <div class="alliances-insight-section__visual">
+      <div
+        class="alliances-insight-section__media"
+        [style.--alliances-image-desktop]="'url(' + aboutClosingAlliance.imageDesktop + ')'"
+        [style.--alliances-image-mobile]="'url(' + aboutClosingAlliance.imageMobile + ')'"
+        aria-hidden="true"></div>
+
+      <div class="alliances-insight-section__chrome">
+        <div class="alliances-insight-section__tags" aria-hidden="true">
+          @for (tag of aboutClosingAlliance.tags; track tag.es) {
+            <span class="alliances-insight-section__tag frosted-white">{{ i18n.t(tag) }}</span>
+          }
+        </div>
+
+        <article class="alliances-insight-section__card">
+          <div class="alliances-insight-section__card-top">
+            <span class="alliances-insight-section__card-label">{{ i18n.t(aboutClosingAlliance.card.label) }}</span>
+
+            <a
+              class="alliances-insight-section__card-cta"
+              [routerLink]="getAboutContactRoute()">
+              <span>{{ i18n.t(aboutClosingAlliance.card.ctaText) }}</span>
+              <span class="material-symbols-outlined" aria-hidden="true">arrow_outward</span>
+            </a>
+          </div>
+
+          <h3 class="alliances-insight-section__card-title">{{ i18n.t(aboutClosingAlliance.card.title) }}</h3>
+          <p class="alliances-insight-section__card-body">{{ i18n.t(aboutClosingAlliance.card.body) }}</p>
+
+          <div class="alliances-insight-section__card-stat">
+            <span class="alliances-insight-section__card-stat-value">{{ aboutClosingAlliance.card.statValue }}</span>
+            <span class="alliances-insight-section__card-stat-label">{{ i18n.t(aboutClosingAlliance.card.statLabel) }}</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>

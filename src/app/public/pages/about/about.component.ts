@@ -5,7 +5,7 @@ import { TeamMemberCardComponent } from '../../components/team-member-card/team-
 import { ApiService, ApiTeamMember, ApiPageContent, ApiBrand, ApiProduct } from '../../../shared/services/api.service';
 import { I18nService } from '../../../shared/services/i18n.service';
 import { SeoService } from '../../../shared/services/seo.service';
-import { getBrandsSegment } from '../../../shared/utils/route-helpers';
+import { getBrandsSegment, getContactSegment } from '../../../shared/utils/route-helpers';
 import { initFadeInObserver } from '../../../shared/utils/fade-in-observer';
 
 type AboutHorizontalAccordionTabId = 'exclusive-brands' | 'inventory-available' | 'national-coverage';
@@ -30,6 +30,22 @@ interface AboutProductSlide {
   name: { es: string; en: string };
   brandName: string;
   image: string;
+}
+
+interface AboutClosingAllianceSection {
+  headlineLead: { es: string; en: string };
+  headlineAccent: { es: string; en: string };
+  imageDesktop: string;
+  imageMobile: string;
+  tags: readonly { es: string; en: string }[];
+  card: {
+    label: { es: string; en: string };
+    ctaText: { es: string; en: string };
+    title: { es: string; en: string };
+    body: { es: string; en: string };
+    statValue: string;
+    statLabel: { es: string; en: string };
+  };
 }
 
 @Component({
@@ -113,6 +129,47 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
     { src: '/team/10.jpg', alt: 'Equipo HESA 10', name: 'Sofía Araya' },
     { src: '/team/11.jpg', alt: 'Equipo HESA 11', name: 'Andrés Villalobos' }
   ] as const;
+  readonly aboutClosingAlliance: AboutClosingAllianceSection = {
+    headlineLead: {
+      es: 'Buscamos fabricantes que quieran crecer en Centroamérica',
+      en: 'We are looking for manufacturers ready to grow across Central America'
+    },
+    headlineAccent: {
+      es: 'con un socio que cumple',
+      en: 'with a partner that delivers'
+    },
+    imageDesktop: '/closen.jpg',
+    imageMobile: '/closen.jpg',
+    tags: [
+      { es: 'Representación exclusiva', en: 'Exclusive representation' },
+      { es: 'Cobertura nacional', en: 'National coverage' },
+      { es: 'Equipo propio', en: 'In-house team' },
+      { es: 'Trayectoria', en: 'Track record' }
+    ],
+    card: {
+      label: {
+        es: 'Nuevas alianzas',
+        en: 'New partnerships'
+      },
+      ctaText: {
+        es: 'Contáctenos',
+        en: 'Contact us'
+      },
+      title: {
+        es: 'Abra la puerta al mercado costarricense',
+        en: 'Open the door to the Costa Rican market'
+      },
+      body: {
+        es: 'Más de tres décadas conectando fabricantes internacionales con veterinarias, agroservicios y comercios en todo el territorio.',
+        en: 'More than three decades connecting international manufacturers with clinics, agri-stores, and retailers across the entire territory.'
+      },
+      statValue: '500+',
+      statLabel: {
+        es: 'puntos de venta atendidos',
+        en: 'points of sale served'
+      }
+    }
+  };
   readonly aboutAdvantageItems: readonly AboutHorizontalAccordionItem[] = [
     {
       id: 'exclusive-brands',
@@ -255,6 +312,11 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
 
   getAboutCatalogRoute(): string {
     return this.i18n.currentLang() === 'es' ? '/es/catalogo' : '/en/catalog';
+  }
+
+  getAboutContactRoute(): string {
+    const lang = this.i18n.currentLang();
+    return `/${lang}/${getContactSegment(lang)}`;
   }
 
   setActiveAdvantageTab(tabId: AboutHorizontalAccordionTabId): void {
