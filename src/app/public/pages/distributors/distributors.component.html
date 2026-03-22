@@ -1,58 +1,39 @@
 <section class="partners-page partners-page__hero">
   <div class="container">
-    <div class="partners-page__hero-shell fade-in-section">
+    <div class="partners-page__hero-intro fade-in-section">
       <div class="partners-page__hero-copy">
-        <p class="partners-page__eyebrow">{{ i18n.currentLang() === 'es' ? 'Alianzas Internacionales' : 'International Partnerships' }}</p>
-        <h1 class="partners-page__title">{{ getSection('heroTitle') || (i18n.currentLang() === 'es' ? 'Socios Estrategicos' : 'Strategic Partners') }}</h1>
-        <p class="partners-page__description">{{ getSection('heroSubtitle') || (i18n.currentLang() === 'es' ? 'Conectamos a los fabricantes mas importantes del mundo con el mercado veterinario costarricense a traves de una red de distribucion nacional propia con 37 anos de experiencia.' : "We connect the world's leading manufacturers with the Costa Rican veterinary market through our own national distribution network with 37 years of experience.") }}</p>
-        <button type="button" (click)="scrollToContactForm()" class="btn btn-primary partners-page__hero-cta">{{ i18n.currentLang() === 'es' ? 'Inicie la Conversacion' : 'Start the Conversation' }}</button>
+        <h1 class="partners-page__title">
+          {{ i18n.currentLang() === 'es'
+            ? 'Su puerta de entrada al mercado veterinario costarricense'
+            : 'Your gateway to the Costa Rican veterinary market' }}
+        </h1>
       </div>
 
-      <div class="partners-page__hero-media">
-        <div class="partners-page__hero-frame">
-          <img [src]="getHeroImage()" [alt]="getSection('heroTitle') || (i18n.currentLang() === 'es' ? 'Socios Estrategicos' : 'Strategic Partners')" class="partners-page__hero-image" loading="eager" fetchpriority="high">
-        </div>
+      <div class="partners-page__hero-copy partners-page__hero-copy--supporting">
+        <p class="partners-page__description">
+          {{ i18n.currentLang() === 'es'
+            ? 'Ofrecemos a fabricantes internacionales una operacion lista para distribuir: equipo comercial propio, logistica nacional y relaciones comerciales activas con mas de 500 puntos de venta.'
+            : 'We offer international manufacturers a distribution-ready operation: our own commercial team, nationwide logistics, and active business relationships with more than 500 points of sale.' }}
+        </p>
       </div>
     </div>
-  </div>
-</section>
 
-<section class="partners-page partners-page__benefits section-spacing">
-  <div class="container">
-    <div class="partners-page__section-heading fade-in-section">
-      <p class="partners-page__eyebrow">{{ i18n.currentLang() === 'es' ? 'Ventajas Competitivas' : 'Competitive Advantages' }}</p>
-      <h2 class="partners-page__section-title">{{ getSection('whyTitle') || (i18n.currentLang() === 'es' ? 'Por que Asociarse con HESA' : 'Why Partner with HESA') }}</h2>
-    </div>
-
-    <div class="partners-benefits__grid">
-      @for (benefit of benefits; track benefit.title.es) {
-        <article class="partners-benefits__card fade-in-section">
-          <div class="partners-benefits__icon">
-            @switch (benefit.icon) {
-              @case ('globe') {
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-              }
-              @case ('truck') {
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-              }
-              @case ('shield') {
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              }
-              @case ('users') {
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-              }
-              @case ('award') {
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
-              }
-              @case ('trending-up') {
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
-              }
-            }
-          </div>
-          <h3 class="partners-benefits__title">{{ i18n.t(benefit.title) }}</h3>
-          <p class="partners-benefits__desc">{{ i18n.t(benefit.desc) }}</p>
-        </article>
-      }
+    <div class="partners-page__hero-stage fade-in-section">
+      <div class="partners-page__hero-stage-grid">
+        @for (card of headerCards; track card.title.es) {
+          <article class="partners-header-card">
+            <div class="partners-header-card__icon">
+              <span class="material-symbols-outlined" aria-hidden="true">{{ card.icon }}</span>
+            </div>
+            <h2 class="partners-header-card__title">{{ i18n.t(card.title) }}</h2>
+            <p class="partners-header-card__body">{{ i18n.t(card.body) }}</p>
+            <button type="button" class="partners-header-card__cta" (click)="scrollToContactForm()">
+              <span>{{ i18n.t(card.cta) }}</span>
+              <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+            </button>
+          </article>
+        }
+      </div>
     </div>
   </div>
 </section>

@@ -15,7 +15,6 @@ import { initFadeInObserver } from '../../../shared/utils/fade-in-observer';
   styleUrl: './distributors.component.scss'
 })
 export class DistributorsComponent implements OnInit, AfterViewInit, OnDestroy {
-  readonly defaultHeroImage = 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=1600&q=80&auto=format&fit=crop';
   private el = inject(ElementRef);
   private seo = inject(SeoService);
   private api = inject(ApiService);
@@ -25,13 +24,67 @@ export class DistributorsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   content = signal<ApiPageContent | null>(null);
 
-  benefits = [
-    { icon: 'globe', title: { es: 'Cobertura Nacional', en: 'National Coverage' }, desc: { es: 'Red de distribucion propia en todo Costa Rica', en: 'Own distribution network throughout Costa Rica' } },
-    { icon: 'truck', title: { es: 'Flotilla Propia', en: 'Own Fleet' }, desc: { es: '18-20 agentes de ventas con visitas quincenales', en: '18-20 sales agents with biweekly visits' } },
-    { icon: 'shield', title: { es: 'Cadena de Frio', en: 'Cold Chain' }, desc: { es: 'Almacenamiento y transporte con control de temperatura', en: 'Storage and transport with temperature control' } },
-    { icon: 'users', title: { es: 'Equipo Comercial', en: 'Commercial Team' }, desc: { es: '50+ colaboradores especializados en salud animal', en: '50+ collaborators specialized in animal health' } },
-    { icon: 'award', title: { es: '37 Anos de Experiencia', en: '37 Years of Experience' }, desc: { es: 'Empresa familiar con trayectoria comprobada', en: 'Family business with a proven track record' } },
-    { icon: 'trending-up', title: { es: 'Mercado en Crecimiento', en: 'Growing Market' }, desc: { es: 'Sector veterinario en expansion con alta demanda de productos de calidad', en: 'Expanding veterinary sector with high demand for quality products' } }
+  readonly headerCards = [
+    {
+      icon: 'public',
+      title: {
+        es: 'Alcance regional',
+        en: 'Regional reach'
+      },
+      body: {
+        es: 'Presencia en Costa Rica con planes de expansion a Centroamerica. Su marca entra a un mercado en crecimiento.',
+        en: 'Presence in Costa Rica with expansion plans into Central America. Your brand enters a growing market.'
+      },
+      cta: {
+        es: 'Conozca mas',
+        en: 'Learn more'
+      }
+    },
+    {
+      icon: 'storefront',
+      title: {
+        es: 'Red comercial activa',
+        en: 'Active commercial network'
+      },
+      body: {
+        es: 'Mas de 500 veterinarias, agroservicios y comercios atendidos por nuestro equipo de ventas propio.',
+        en: 'More than 500 veterinary clinics, agro-services, and retail accounts served by our in-house sales team.'
+      },
+      cta: {
+        es: 'Conozca mas',
+        en: 'Learn more'
+      }
+    },
+    {
+      icon: 'handshake',
+      title: {
+        es: 'Representacion exclusiva',
+        en: 'Exclusive representation'
+      },
+      body: {
+        es: 'Trabajamos con marcas que distribuimos de forma exclusiva. Eso significa foco, compromiso y resultados.',
+        en: 'We work with brands we distribute exclusively. That means focus, commitment, and measurable results.'
+      },
+      cta: {
+        es: 'Conozca mas',
+        en: 'Learn more'
+      }
+    },
+    {
+      icon: 'inventory_2',
+      title: {
+        es: 'Inventario y logistica',
+        en: 'Inventory and logistics'
+      },
+      body: {
+        es: 'Mantenemos stock local y despachamos a todo el pais. Su producto siempre disponible para el cliente final.',
+        en: 'We maintain local stock and dispatch nationwide, keeping your product consistently available to the end customer.'
+      },
+      cta: {
+        es: 'Conozca mas',
+        en: 'Learn more'
+      }
+    }
   ];
 
   async ngOnInit(): Promise<void> {
@@ -71,10 +124,6 @@ export class DistributorsComponent implements OnInit, AfterViewInit, OnDestroy {
     const section = this.content()?.sections?.find(s => s.key === key);
     if (!section) return '';
     return this.i18n.t(section.value) || '';
-  }
-
-  getHeroImage(): string {
-    return this.content()?.heroImage || this.defaultHeroImage;
   }
 
   ngAfterViewInit(): void {
