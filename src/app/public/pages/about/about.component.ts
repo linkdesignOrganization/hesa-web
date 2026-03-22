@@ -1,8 +1,6 @@
 import { Component, inject, signal, OnInit, AfterViewInit, OnDestroy, ElementRef, HostListener } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ValueStatComponent } from '../../components/value-stat/value-stat.component';
-import { TeamMemberCardComponent } from '../../components/team-member-card/team-member-card.component';
-import { ApiService, ApiTeamMember, ApiPageContent, ApiBrand, ApiProduct } from '../../../shared/services/api.service';
+import { ApiService, ApiBrand, ApiProduct } from '../../../shared/services/api.service';
 import { I18nService } from '../../../shared/services/i18n.service';
 import { SeoService } from '../../../shared/services/seo.service';
 import { getBrandsSegment, getContactSegment } from '../../../shared/utils/route-helpers';
@@ -51,7 +49,7 @@ interface AboutClosingAllianceSection {
 @Component({
   selector: 'app-about',
   standalone: true,
-  imports: [ValueStatComponent, TeamMemberCardComponent, RouterLink],
+  imports: [RouterLink],
   templateUrl: './about.component.html',
   styleUrl: './about.component.scss'
 })
@@ -65,11 +63,7 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
   private advantageBrandInterval: number | null = null;
   private advantageProductInterval: number | null = null;
 
-  team = signal<ApiTeamMember[]>([]);
   brands = signal<ApiBrand[]>([]);
-  loading = signal(true);
-  content = signal<ApiPageContent | null>(null);
-  policiesContent = signal<ApiPageContent | null>(null);
   activeMobileMarqueeBrand = signal<string | null>(null);
   presenceParallaxOffset = signal(0);
   activeAdvantageTab = signal<AboutHorizontalAccordionTabId>('exclusive-brands');
@@ -224,15 +218,7 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   ] as const;
 
-  stats = [
-    { number: '37', suffix: '+', label: { es: 'Anos de trayectoria', en: 'Years of experience' } },
-    { number: '50', suffix: '+', label: { es: 'Colaboradores', en: 'Collaborators' } },
-    { number: '100', suffix: '%', label: { es: 'Cobertura nacional', en: 'National coverage' } },
-    { number: '4', suffix: '', label: { es: 'Empresas del grupo', en: 'Group companies' } }
-  ];
-
   async ngOnInit(): Promise<void> {
-    // BUG-005/NFR-006: SEO meta tags and hreflang for about page
     const lang = this.i18n.currentLang();
     this.seo.setMetaTags({
       title: lang === 'es' ? 'Nosotros' : 'About Us',
@@ -243,26 +229,10 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
     });
     this.seo.setHreflang('/es/nosotros', '/en/about');
 
-    // Load data from API (including politicas content for REQ-162 to REQ-166)
-    const [teamResult, contentResult, policiesResult, brandsResult, productsResult] = await Promise.allSettled([
-      this.api.getTeamMembers(),
-      this.api.getPageContent('nosotros'),
-      this.api.getPageContent('politicas'),
+    const [brandsResult, productsResult] = await Promise.allSettled([
       this.api.getBrands(),
       this.loadAllAdvantageProducts(),
     ]);
-
-    if (teamResult.status === 'fulfilled') {
-      this.team.set(teamResult.value);
-    }
-
-    if (contentResult.status === 'fulfilled') {
-      this.content.set(contentResult.value);
-    }
-
-    if (policiesResult.status === 'fulfilled') {
-      this.policiesContent.set(policiesResult.value);
-    }
 
     if (brandsResult.status === 'fulfilled') {
       this.brands.set(brandsResult.value);
@@ -273,7 +243,6 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
       this.advantageProductSlides.set(this.toAdvantageProductSlides(productsResult.value));
     }
 
-    this.loading.set(false);
     this.syncAdvantageAutoplay();
   }
 
@@ -383,25 +352,6 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
   private isTouchInteractionMode(): boolean {
     if (typeof window === 'undefined') return false;
     return window.matchMedia('(hover: none), (pointer: coarse)').matches;
-  }
-
-  /** Helper to get section value from loaded content */
-  getSectionValue(key: string): { es: string; en: string } {
-    const section = this.content()?.sections?.find(s => s.key === key);
-    return section?.value || { es: '', en: '' };
-  }
-
-  /** Get localized section value */
-  getSection(key: string): string {
-    const val = this.getSectionValue(key);
-    return this.i18n.t(val) || '';
-  }
-
-  /** Get localized section value from politicas content (REQ-162 to REQ-166) */
-  getPolicySection(key: string): string {
-    const section = this.policiesContent()?.sections?.find(s => s.key === key);
-    if (!section) return '';
-    return this.i18n.t(section.value) || '';
   }
 
   ngAfterViewInit(): void {

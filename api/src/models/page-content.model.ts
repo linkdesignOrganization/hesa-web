@@ -9,7 +9,7 @@ export interface IPageSection {
 }
 
 export interface IPageContent extends Document {
-  pageKey: 'nosotros' | 'distribuidores' | 'contacto' | 'politicas';
+  pageKey: 'distribuidores' | 'contacto';
   sections: IPageSection[];
   heroImage?: string;
   updatedAt: Date;
@@ -30,7 +30,7 @@ const pageContentSchema = new Schema<IPageContent>(
   {
     pageKey: {
       type: String,
-      enum: ['nosotros', 'distribuidores', 'contacto', 'politicas'],
+      enum: ['distribuidores', 'contacto'],
       required: true,
       unique: true,
     },

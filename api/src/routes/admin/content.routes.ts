@@ -31,7 +31,7 @@ router.get('/', async (_req: AuthRequest, res: Response) => {
 router.get('/:pageKey', async (req: AuthRequest, res: Response) => {
   try {
     const pageKey = req.params.pageKey.substring(0, 50);
-    const validPages = ['nosotros', 'distribuidores', 'contacto', 'politicas'];
+    const validPages = ['distribuidores', 'contacto'];
     if (!validPages.includes(pageKey)) {
       res.status(404).json({ error: 'Page not found' });
       return;
@@ -52,7 +52,7 @@ router.get('/:pageKey', async (req: AuthRequest, res: Response) => {
 router.put('/:pageKey', sanitizeBody, async (req: AuthRequest, res: Response) => {
   try {
     const pageKey = req.params.pageKey.substring(0, 50);
-    const validPages = ['nosotros', 'distribuidores', 'contacto', 'politicas'];
+    const validPages = ['distribuidores', 'contacto'];
     if (!validPages.includes(pageKey)) {
       res.status(404).json({ error: 'Page not found' });
       return;
@@ -68,10 +68,8 @@ router.put('/:pageKey', sanitizeBody, async (req: AuthRequest, res: Response) =>
     const content = await contentService.updatePageContent(pageKey, sections, heroImage);
 
     const pageLabels: Record<string, string> = {
-      nosotros: 'Nosotros',
       distribuidores: 'Distribuidores',
       contacto: 'Contacto',
-      politicas: 'Politicas Comerciales',
     };
 
     await logActivity({
@@ -96,7 +94,7 @@ router.put('/:pageKey', sanitizeBody, async (req: AuthRequest, res: Response) =>
 router.post('/:pageKey/image', adminUploadSingleImage.single('image'), async (req: AuthRequest, res: Response) => {
   try {
     const pageKey = req.params.pageKey.substring(0, 50);
-    const validPages = ['nosotros', 'distribuidores', 'contacto', 'politicas'];
+    const validPages = ['distribuidores', 'contacto'];
     if (!validPages.includes(pageKey)) {
       res.status(404).json({ error: 'Page not found' });
       return;

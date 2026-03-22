@@ -11,7 +11,7 @@ const router = Router();
 router.get('/:pageKey', async (req: Request, res: Response) => {
   try {
     const pageKey = req.params.pageKey.substring(0, 50);
-    const validPages = ['nosotros', 'distribuidores', 'contacto', 'politicas'];
+    const validPages = ['distribuidores', 'contacto'];
     if (!validPages.includes(pageKey)) {
       res.status(404).json({ error: 'Page not found' });
       return;

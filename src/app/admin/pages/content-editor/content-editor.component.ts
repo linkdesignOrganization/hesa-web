@@ -1,6 +1,6 @@
 import { Component, inject, signal, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { ApiService, ApiPageContent, ApiPageSection } from '../../../shared/services/api.service';
 import { ToastService } from '../../../shared/services/toast.service';
 
@@ -14,7 +14,6 @@ import { ToastService } from '../../../shared/services/toast.service';
 export class AdminContentEditorComponent implements OnInit {
   private api = inject(ApiService);
   private toast = inject(ToastService);
-  private route = inject(ActivatedRoute);
   private router = inject(Router);
 
   loading = signal(true);
@@ -27,16 +26,14 @@ export class AdminContentEditorComponent implements OnInit {
   heroImage = signal('');
 
   private static pageLabels: Record<string, string> = {
-    nosotros: 'Nosotros',
     distribuidores: 'Distribuidores',
     contacto: 'Contacto',
-    politicas: 'Politicas Comerciales',
   };
 
   async ngOnInit(): Promise<void> {
-    // Extract pageKey from route path: contenido/nosotros -> nosotros
+    // Extract pageKey from route path: contenido/distribuidores -> distribuidores
     const urlSegments = this.router.url.split('/');
-    const key = urlSegments[urlSegments.length - 1] || 'nosotros';
+    const key = urlSegments[urlSegments.length - 1] || 'distribuidores';
     this.pageKey.set(key);
     this.pageLabel.set(AdminContentEditorComponent.pageLabels[key] || key);
     await this.loadContent();

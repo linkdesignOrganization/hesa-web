@@ -5,7 +5,6 @@ import { PageContent, IPageContent, IPageSection } from '../models/page-content.
  * Uses professional Unsplash photos for a premium look.
  */
 const defaultHeroImages: Record<string, string> = {
-  nosotros: 'https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?w=1920&q=80&auto=format&fit=crop',
   distribuidores: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1920&q=80&auto=format&fit=crop',
 };
 
@@ -14,16 +13,6 @@ const defaultHeroImages: Record<string, string> = {
  * Used when a page doesn't exist yet in the database.
  */
 const defaultPageSections: Record<string, IPageSection[]> = {
-  nosotros: [
-    { key: 'heroTitle', label: { es: 'Titulo del Hero', en: 'Hero Title' }, value: { es: 'Herrera y Elizondo S.A.', en: 'Herrera y Elizondo S.A.' }, type: 'text' },
-    { key: 'heroSubtitle', label: { es: 'Subtitulo del Hero', en: 'Hero Subtitle' }, value: { es: 'Desde 1989, conectando la industria veterinaria costarricense con las mejores marcas del mundo', en: 'Since 1989, connecting the Costa Rican veterinary industry with the world\'s best brands' }, type: 'text' },
-    { key: 'historyTitle', label: { es: 'Titulo Historia', en: 'History Title' }, value: { es: 'Nuestra Historia', en: 'Our History' }, type: 'text' },
-    { key: 'historyContent', label: { es: 'Contenido Historia', en: 'History Content' }, value: { es: 'HESA nacio en 1989 como una empresa familiar costarricense dedicada a la importacion y distribucion de productos para la salud animal. Fundada por la familia Herrera y Elizondo, la empresa ha crecido durante dos generaciones hasta convertirse en uno de los distribuidores mas importantes del sector veterinario en Costa Rica.', en: 'HESA was born in 1989 as a Costa Rican family business dedicated to the import and distribution of animal health products. Founded by the Herrera and Elizondo family, the company has grown over two generations to become one of the most important distributors in the veterinary sector in Costa Rica.' }, type: 'textarea' },
-    { key: 'missionTitle', label: { es: 'Titulo Mision', en: 'Mission Title' }, value: { es: 'Nuestra Mision', en: 'Our Mission' }, type: 'text' },
-    { key: 'missionContent', label: { es: 'Contenido Mision', en: 'Mission Content' }, value: { es: 'Distribuir productos veterinarios de la mas alta calidad, garantizando disponibilidad, servicio tecnico y cobertura nacional. Somos el puente entre los fabricantes internacionales y los profesionales veterinarios costarricenses.', en: 'To distribute veterinary products of the highest quality, guaranteeing availability, technical service and national coverage. We are the bridge between international manufacturers and Costa Rican veterinary professionals.' }, type: 'textarea' },
-    { key: 'coverageTitle', label: { es: 'Titulo Cobertura', en: 'Coverage Title' }, value: { es: 'Cobertura Nacional', en: 'National Coverage' }, type: 'text' },
-    { key: 'coverageSubtitle', label: { es: 'Subtitulo Cobertura', en: 'Coverage Subtitle' }, value: { es: 'Llegamos a todo Costa Rica con visitas quincenales y flotilla propia de entrega', en: 'We reach all of Costa Rica with biweekly visits and our own delivery fleet' }, type: 'text' },
-  ],
   distribuidores: [
     { key: 'heroTitle', label: { es: 'Titulo del Hero', en: 'Hero Title' }, value: { es: 'Conviertase en Nuestro Socio de Distribucion en Costa Rica', en: 'Become Our Distribution Partner in Costa Rica' }, type: 'text' },
     { key: 'heroSubtitle', label: { es: 'Subtitulo del Hero', en: 'Hero Subtitle' }, value: { es: '37 anos de trayectoria comprobada en distribucion de productos veterinarios. Cobertura nacional, flotilla propia y equipo de ventas especializado.', en: '37 years of proven track record in veterinary product distribution. Nationwide coverage, own fleet, and specialized sales team.' }, type: 'textarea' },
@@ -38,14 +27,6 @@ const defaultPageSections: Record<string, IPageSection[]> = {
     { key: 'email', label: { es: 'Correo', en: 'Email' }, value: { es: 'info@hesa.co.cr', en: 'info@hesa.co.cr' }, type: 'text' },
     { key: 'address', label: { es: 'Direccion', en: 'Address' }, value: { es: 'Calle 2, av 12. Heredia, Costa Rica', en: 'Calle 2, av 12. Heredia, Costa Rica' }, type: 'text' },
     { key: 'hours', label: { es: 'Horario', en: 'Hours' }, value: { es: 'Lunes a Viernes: 8:00 - 17:00', en: 'Monday to Friday: 8:00 - 17:00' }, type: 'text' },
-  ],
-  politicas: [
-    { key: 'creditTitle', label: { es: 'Titulo Credito', en: 'Credit Title' }, value: { es: 'Politicas de Credito', en: 'Credit Policies' }, type: 'text' },
-    { key: 'creditContent', label: { es: 'Contenido Credito', en: 'Credit Content' }, value: { es: 'Ofrecemos condiciones de credito flexibles para nuestros clientes. Los plazos de pago se definen segun el historial comercial y el volumen de compra. Consulte con su agente de ventas para conocer las condiciones personalizadas.', en: 'We offer flexible credit conditions for our clients. Payment terms are defined based on commercial history and purchase volume. Consult with your sales agent for personalized conditions.' }, type: 'textarea' },
-    { key: 'deliveryTitle', label: { es: 'Titulo Entrega', en: 'Delivery Title' }, value: { es: 'Tiempos de Entrega', en: 'Delivery Times' }, type: 'text' },
-    { key: 'deliveryContent', label: { es: 'Contenido Entrega', en: 'Delivery Content' }, value: { es: 'Gran Area Metropolitana: 24-48 horas. Zonas rurales: 2-3 dias habiles. Zonas muy alejadas: servicio de encomienda disponible. Nuestros agentes de ventas realizan visitas quincenales a todos los clientes.', en: 'Greater Metropolitan Area: 24-48 hours. Rural areas: 2-3 business days. Remote areas: package delivery service available. Our sales agents make biweekly visits to all clients.' }, type: 'textarea' },
-    { key: 'coverageTitle', label: { es: 'Titulo Cobertura', en: 'Coverage Title' }, value: { es: 'Cobertura de Entrega', en: 'Delivery Coverage' }, type: 'text' },
-    { key: 'coverageContent', label: { es: 'Contenido Cobertura', en: 'Coverage Content' }, value: { es: 'Contamos con flotilla propia de entrega, agentes en todas las zonas del pais y servicio de encomienda para zonas muy alejadas. Nuestros 18-20 agentes de ventas propios cubren todo el territorio nacional con visitas quincenales.', en: 'We have our own delivery fleet, agents in all areas of the country and package delivery service for very remote areas. Our 18-20 own sales agents cover the entire national territory with biweekly visits.' }, type: 'textarea' },
   ],
 };
 
@@ -77,7 +58,7 @@ export async function getPageContent(pageKey: string): Promise<IPageContent> {
  */
 export async function getAllPageContents(): Promise<IPageContent[]> {
   // Ensure all pages exist
-  for (const pageKey of ['nosotros', 'distribuidores', 'contacto', 'politicas']) {
+  for (const pageKey of ['distribuidores', 'contacto']) {
     await getPageContent(pageKey);
   }
   return PageContent.find().sort({ pageKey: 1 }).lean() as unknown as Promise<IPageContent[]>;
