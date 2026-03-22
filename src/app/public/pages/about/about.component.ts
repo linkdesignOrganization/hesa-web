@@ -66,6 +66,7 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
   brands = signal<ApiBrand[]>([]);
   activeMobileMarqueeBrand = signal<string | null>(null);
   presenceParallaxOffset = signal(0);
+  closingAllianceParallaxOffset = signal(0);
   activeAdvantageTab = signal<AboutHorizontalAccordionTabId>('exclusive-brands');
   advantageBrandSlides = signal<AboutBrandSlide[]>([]);
   advantageProductSlides = signal<AboutProductSlide[]>([]);
@@ -385,21 +386,32 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
     if (typeof window === 'undefined') return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       this.presenceParallaxOffset.set(0);
+      this.closingAllianceParallaxOffset.set(0);
       return;
     }
 
     const mediaShell = this.el.nativeElement.querySelector('.about-market-presence__media-shell');
-    if (!(mediaShell instanceof HTMLElement)) {
-      this.presenceParallaxOffset.set(0);
-      return;
+    const closingVisual = this.el.nativeElement.querySelector('.alliances-insight-section__visual');
+
+    this.presenceParallaxOffset.set(
+      this.calculateParallaxOffset(mediaShell, 42)
+    );
+    this.closingAllianceParallaxOffset.set(
+      this.calculateParallaxOffset(closingVisual, 34)
+    );
+  }
+
+  private calculateParallaxOffset(target: Element | null, intensity: number): number {
+    if (!(target instanceof HTMLElement) || typeof window === 'undefined') {
+      return 0;
     }
 
-    const rect = mediaShell.getBoundingClientRect();
+    const rect = target.getBoundingClientRect();
     const viewportCenter = window.innerHeight / 2;
     const elementCenter = rect.top + rect.height / 2;
     const normalizedDistance = Math.max(-1, Math.min(1, (elementCenter - viewportCenter) / window.innerHeight));
 
-    this.presenceParallaxOffset.set(Math.round(normalizedDistance * -42));
+    return Math.round(normalizedDistance * -intensity);
   }
 
   private async loadAllAdvantageProducts(): Promise<ApiProduct[]> {

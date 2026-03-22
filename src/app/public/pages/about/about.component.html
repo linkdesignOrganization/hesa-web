@@ -267,6 +267,7 @@
     <div class="alliances-insight-section__visual">
       <div
         class="alliances-insight-section__media"
+        [style.--parallax-offset.px]="closingAllianceParallaxOffset()"
         [style.--alliances-image-desktop]="'url(' + aboutClosingAlliance.imageDesktop + ')'"
         [style.--alliances-image-mobile]="'url(' + aboutClosingAlliance.imageMobile + ')'"
         aria-hidden="true"></div>
