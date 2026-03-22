@@ -19,8 +19,9 @@ export async function reassignProductsToActiveBrands(): Promise<ProductBrandReas
   const brandDocs = await Brand.find({
     logo: { $exists: true, $ne: '' },
   })
-    .sort({ name: 1 })
     .lean();
+
+  brandDocs.sort((a, b) => a.name.localeCompare(b.name));
 
   if (brandDocs.length === 0) {
     throw new Error('No active brands with logos are available for reassignment');
@@ -28,8 +29,18 @@ export async function reassignProductsToActiveBrands(): Promise<ProductBrandReas
 
   const products = await Product.find({})
     .select('_id category brand createdAt')
-    .sort({ createdAt: 1, _id: 1 })
     .lean();
+
+  products.sort((a, b) => {
+    const createdAtA = a.createdAt ? new Date(a.createdAt).getTime() : 0;
+    const createdAtB = b.createdAt ? new Date(b.createdAt).getTime() : 0;
+
+    if (createdAtA !== createdAtB) {
+      return createdAtA - createdAtB;
+    }
+
+    return String(a._id).localeCompare(String(b._id));
+  });
 
   const productsWithoutBrandBefore = products.filter(product => !product.brand).length;
 
