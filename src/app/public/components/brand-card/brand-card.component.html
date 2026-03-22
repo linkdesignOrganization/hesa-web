@@ -19,14 +19,14 @@
       {{ displayCountry }}
     </p>
 
-    @if (displayCategories.length) {
+    @if (displayCategoryBadges.length) {
       <div class="brand-card__badges">
-        @for (cat of displayCategories; track cat) {
+        @for (cat of displayCategoryBadges; track cat.label) {
           <span
             class="badge"
-            [class.badge-pharma]="cat === 'Farmacos'"
-            [class.badge-food]="cat === 'Alimentos'"
-            [class.badge-equipment]="cat === 'Equipos'">{{ cat }}</span>
+            [class.badge-pharma]="cat.key === 'farmacos'"
+            [class.badge-food]="cat.key === 'alimentos'"
+            [class.badge-equipment]="cat.key === 'equipos'">{{ cat.label }}</span>
         }
       </div>
     }

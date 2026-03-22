@@ -3,10 +3,12 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { BreadcrumbComponent } from '../../../shared/components/breadcrumb/breadcrumb.component';
 import { ProductCardComponent } from '../../components/product-card/product-card.component';
-import { ApiService, ApiBrand, ApiProduct, FilterValues } from '../../../shared/services/api.service';
+import { ApiService, ApiBrand, ApiProduct } from '../../../shared/services/api.service';
 import { I18nService } from '../../../shared/services/i18n.service';
 import { SeoService } from '../../../shared/services/seo.service';
-import { getHomeLabel, getBrandsSegment } from '../../../shared/utils/route-helpers';
+import { getCategoryLabel, getHomeLabel, getBrandsSegment } from '../../../shared/utils/route-helpers';
+
+type ProductCategoryKey = 'farmacos' | 'alimentos' | 'equipos';
 
 @Component({
   selector: 'app-brand-detail',
@@ -28,10 +30,7 @@ export class BrandDetailComponent implements OnInit, OnDestroy {
   notFound = signal(false);
   error = signal(false); // BUG-013: Separate error state from notFound
 
-  // REQ-152: Filters for brand products
   selectedCategory = signal('');
-  selectedSpecies = signal('');
-  filterValues = signal<FilterValues>({ brands: [], species: [], families: [], lifeStages: [], equipmentTypes: [] });
   private brandSlug = '';
 
   get breadcrumbs() {
@@ -81,28 +80,45 @@ export class BrandDetailComponent implements OnInit, OnDestroy {
     this.seo.clearDynamicTags();
   }
 
-  // REQ-152: Load brand products with filters
   private async loadProducts(): Promise<void> {
     try {
-      const params: Record<string, string | number | undefined> = {};
-      if (this.selectedCategory()) params['category'] = this.selectedCategory();
-      if (this.selectedSpecies()) params['species'] = this.selectedSpecies();
-      const productResult = await this.api.getBrandProducts(this.brandSlug, params);
-      this.products.set(productResult.data);
+      const params: Record<string, string | number | undefined> = {
+        limit: 100,
+      };
+      const normalizedCategory = this.normalizedSelectedCategory();
+      if (normalizedCategory) params['category'] = normalizedCategory;
+
+      const firstPage = await this.api.getBrandProducts(this.brandSlug, params);
+
+      if (firstPage.totalPages <= 1) {
+        this.products.set(firstPage.data);
+        return;
+      }
+
+      const remainingPages = await Promise.all(
+        Array.from({ length: firstPage.totalPages - 1 }, (_, index) =>
+          this.api.getBrandProducts(this.brandSlug, {
+            ...params,
+            page: index + 2,
+          })
+        )
+      );
+
+      this.products.set([firstPage, ...remainingPages].flatMap(page => page.data));
     } catch {
       // Non-critical
     }
   }
 
   async applyFilter(key: string, value: string): Promise<void> {
-    if (key === 'category') this.selectedCategory.set(value);
-    if (key === 'species') this.selectedSpecies.set(value);
+    if (key === 'category') {
+      this.selectedCategory.set(this.selectedCategory() === value ? '' : value);
+    }
     await this.loadProducts();
   }
 
   async clearFilters(): Promise<void> {
     this.selectedCategory.set('');
-    this.selectedSpecies.set('');
     await this.loadProducts();
   }
 
@@ -139,10 +155,69 @@ export class BrandDetailComponent implements OnInit, OnDestroy {
     return url.replace(/\.(jpe?g|png)$/i, '.webp');
   }
 
+  get categoryOptions(): Array<{ value: string; label: string }> {
+    const brand = this.brand();
+    if (!brand?.categories?.length) return [];
+
+    const options = brand.categories
+      .map(category => {
+        const normalized = this.normalizeCategory(category);
+        if (!normalized) return null;
+        return {
+          value: normalized,
+          label: getCategoryLabel(normalized, this.i18n.currentLang()),
+        };
+      })
+      .filter((option): option is { value: ProductCategoryKey; label: string } => !!option);
+
+    return options;
+  }
+
+  get brandCategoryLabels(): string[] {
+    return this.categoryOptions.map(option => option.label);
+  }
+
+  get brandThemeClass(): string {
+    const brand = this.brand();
+    const categories = brand?.categories ?? [];
+
+    if (categories.some(category => this.normalizeCategory(category) === 'farmacos')) {
+      return 'brand-catalog--pharma';
+    }
+
+    if (categories.some(category => this.normalizeCategory(category) === 'alimentos')) {
+      return 'brand-catalog--food';
+    }
+
+    if (categories.some(category => this.normalizeCategory(category) === 'equipos')) {
+      return 'brand-catalog--equipment';
+    }
+
+    return '';
+  }
+
   get activeFilters(): { key: string; label: string }[] {
     const filters: { key: string; label: string }[] = [];
-    if (this.selectedCategory()) filters.push({ key: 'category', label: this.selectedCategory() });
-    if (this.selectedSpecies()) filters.push({ key: 'species', label: this.selectedSpecies() });
+    if (this.selectedCategory()) {
+      filters.push({
+        key: 'category',
+        label: this.categoryOptions.find(option => option.value === this.selectedCategory())?.label || this.selectedCategory()
+      });
+    }
     return filters;
+  }
+
+  private normalizeCategory(category: string): ProductCategoryKey | null {
+    const normalized = category.trim().toLowerCase();
+    if (['farmacos', 'pharmaceuticals'].includes(normalized)) return 'farmacos';
+    if (['alimentos', 'food'].includes(normalized)) return 'alimentos';
+    if (['equipos', 'equipment'].includes(normalized)) return 'equipos';
+    return null;
+  }
+
+  private normalizedSelectedCategory(): ProductCategoryKey | undefined {
+    const selected = this.selectedCategory();
+    if (!selected) return undefined;
+    return this.normalizeCategory(selected) ?? undefined;
   }
 }

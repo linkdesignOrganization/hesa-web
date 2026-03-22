@@ -1,28 +1,24 @@
-<!-- BRANDS LIST PAGE -->
-<section class="brands-page">
-  <!-- Page Header -->
-  <div class="brands-header">
+<section class="brands-discovery brands-page">
+  <header class="brands-discovery__hero">
     <div class="container">
       <app-breadcrumb [items]="breadcrumbs" />
 
-      <div class="brands-header__content">
-        <span class="brands-header__eyebrow">
+      <div class="brands-discovery__hero-copy">
+        <span class="brands-discovery__eyebrow">
           {{ i18n.currentLang() === 'es' ? 'Marcas exclusivas' : 'Exclusive brands' }}
         </span>
-        <h1 class="brands-header__title">
-          {{ i18n.currentLang() === 'es' ? 'Nuestras Marcas' : 'Our Brands' }}
+        <h1 class="brands-discovery__title">
+          {{ i18n.currentLang() === 'es' ? 'Nuestras marcas' : 'Our brands' }}
         </h1>
-        <p class="brands-header__subtitle">
+        <p class="brands-discovery__description">
           {{ i18n.currentLang() === 'es' ? 'Distribuimos exclusivamente las mejores marcas internacionales de la industria veterinaria. Cada marca ha sido cuidadosamente seleccionada por su calidad, respaldo cientifico y trayectoria.' : 'We exclusively distribute the best international brands in the veterinary industry. Each brand has been carefully selected for its quality, scientific backing and track record.' }}
         </p>
       </div>
     </div>
-  </div>
+  </header>
 
-  <!-- Page Body -->
-  <div class="container">
+  <div class="container brands-discovery__body">
     @if (loading()) {
-      <!-- Loading Skeleton Grid -->
       <div class="brands-grid">
         @for (i of [1,2,3,4,5,6,7,8]; track i) {
           <div class="skeleton-brand-card">
@@ -35,7 +31,6 @@
         }
       </div>
     } @else if (error()) {
-      <!-- Error State -->
       <div class="state-message state-message--error" role="alert">
         <div class="state-message__icon" aria-hidden="true">
           <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -55,7 +50,6 @@
         </button>
       </div>
     } @else if (brands().length === 0) {
-      <!-- Empty State -->
       <div class="state-message state-message--empty" role="status">
         <div class="state-message__icon" aria-hidden="true">
           <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -75,7 +69,6 @@
         </a>
       </div>
     } @else {
-      <!-- Brand Cards Grid -->
       <div class="brands-grid">
         @for (brand of brands(); track brand._id) {
           <app-brand-card [brand]="brand" />

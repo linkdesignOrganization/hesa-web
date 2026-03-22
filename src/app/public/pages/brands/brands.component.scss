@@ -1,124 +1,115 @@
-// =============================================================================
-// Brands List Page — Premium Redesign
-// Cream header, editorial typography, generous whitespace
-// =============================================================================
+.brands-page {
+  padding-bottom: var(--section-gap-desktop);
+}
 
-// ---- Page Header ----
-.brands-header {
-  padding-top: 110px;
-  padding-bottom: var(--space-12);
-  background-color: var(--surface-cream);
+.brands-discovery {
+  --brands-accent: var(--brand-primary);
+  --brands-surface: radial-gradient(circle at top right, rgba(255, 255, 255, 0.78), transparent 42%),
+    linear-gradient(180deg, #f4f8ff 0%, #e3e8ee 100%);
 
-  @media (min-width: 768px) {
-    padding-bottom: var(--space-16);
+  a,
+  button {
+    cursor: pointer;
   }
 
-  &__content {
-    margin-top: var(--space-8);
+  &__hero {
+    padding-top: 0;
+    padding-bottom: 38px;
+    background: var(--brands-surface);
 
-    @media (min-width: 768px) {
-      margin-top: var(--space-10);
+    @media (max-width: 767px) {
+      padding-bottom: 24px;
     }
+  }
+
+  &__hero-copy {
+    margin-top: 18px;
+    max-width: 860px;
   }
 
   &__eyebrow {
-    display: block;
-    font-size: var(--text-eyebrow);
-    font-weight: var(--weight-semibold);
-    letter-spacing: var(--tracking-wider);
+    display: inline-flex;
+    align-items: center;
+    min-height: 34px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.84);
+    color: var(--brands-accent);
     text-transform: uppercase;
-    color: var(--brand-primary);
-    margin-bottom: var(--space-3);
+    letter-spacing: 0.08em;
+    font-size: var(--text-label);
+    font-weight: var(--weight-bold);
   }
 
   &__title {
-    font-size: var(--text-h3);
+    margin: 14px 0 0;
+    max-width: 12ch;
+    font-size: clamp(32px, 4vw, 52px);
+    line-height: 1.05;
+    letter-spacing: -1.5px;
     font-weight: var(--weight-extrabold);
-    letter-spacing: var(--tracking-tighter);
     color: var(--neutral-900);
-    line-height: var(--leading-tight);
 
-    @media (min-width: 768px) {
-      font-size: var(--text-h2);
-    }
-
-    @media (min-width: 1280px) {
-      font-size: var(--text-h1);
+    @media (max-width: 767px) {
+      max-width: none;
     }
   }
 
-  &__subtitle {
-    margin-top: var(--space-4);
-    font-size: var(--text-body);
-    color: var(--neutral-400);
-    max-width: 640px;
-    line-height: var(--leading-relaxed);
+  &__description {
+    margin: 16px 0 0;
+    max-width: 760px;
+    color: rgba(15, 23, 42, 0.7);
+    font-size: 17px;
+    line-height: 1.7;
 
-    @media (min-width: 768px) {
-      font-size: var(--text-body-lg);
-      margin-top: var(--space-5);
+    @media (max-width: 767px) {
+      font-size: 15px;
+      line-height: 1.65;
     }
-  }
-}
-
-// ---- Page Body ----
-.brands-page {
-  padding-bottom: var(--section-gap-mobile);
-
-  @media (min-width: 768px) {
-    padding-bottom: var(--section-gap-tablet);
-  }
-
-  @media (min-width: 1280px) {
-    padding-bottom: var(--section-gap-desktop);
-  }
-}
-
-// =============================================================================
-// Brand Cards Grid
-// 2 cols mobile, 3 cols tablet, 4 cols desktop
-// =============================================================================
-
-.brands-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-5);
-  margin-top: var(--space-10);
-
-  @media (min-width: 768px) {
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-6);
-    margin-top: var(--space-12);
-  }
-
-  @media (min-width: 1280px) {
-    grid-template-columns: repeat(4, 1fr);
-    gap: var(--space-8);
-  }
-}
-
-// =============================================================================
-// Skeleton Loading Cards
-// =============================================================================
-
-.skeleton-brand-card {
-  border-radius: var(--radius-card-public);
-  overflow: hidden;
-  background-color: var(--neutral-white);
-  border: 1px solid var(--neutral-100);
-
-  &__logo {
-    aspect-ratio: 3 / 2;
-    border-radius: var(--radius-image);
-    margin: var(--space-4);
-    margin-bottom: 0;
   }
 
   &__body {
-    padding: var(--space-4);
+    padding-top: 30px;
+  }
+}
+
+.brands-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+  }
+
+  @media (min-width: 1280px) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.skeleton-brand-card {
+  min-height: 100%;
+  border-radius: var(--radius-card-public);
+  overflow: hidden;
+  padding: 18px;
+  background:
+    radial-gradient(circle at top right, rgba(255, 255, 255, 0.72), transparent 42%),
+    linear-gradient(180deg, #f4f8ff 0%, #e3e8ee 100%);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+
+  &__logo {
+    min-height: 150px;
+    border-radius: 26px;
+    margin-bottom: 18px;
+    background-color: rgba(255, 255, 255, 0.9);
+  }
+
+  &__body {
     display: flex;
     flex-direction: column;
-    gap: var(--space-2);
+    gap: 8px;
+    padding: 4px;
   }
 
   &__line {
@@ -126,32 +117,25 @@
     border-radius: var(--radius-sm);
 
     &--wide {
-      width: 75%;
+      width: 72%;
     }
 
     &--medium {
-      width: 45%;
+      width: 40%;
     }
   }
 }
-
-// =============================================================================
-// State Messages (Error, Empty)
-// =============================================================================
 
 .state-message {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: var(--space-20) var(--space-6);
-  gap: var(--space-4);
-  margin-top: var(--space-10);
-
-  @media (min-width: 768px) {
-    padding: var(--section-gap-mobile) var(--space-6);
-    margin-top: var(--space-12);
-  }
+  padding: clamp(60px, 9vw, 110px) 24px;
+  gap: 16px;
+  border-radius: 34px;
+  background: var(--brands-surface);
+  border: 1px solid rgba(15, 23, 42, 0.06);
 
   &__icon {
     width: 72px;
@@ -160,7 +144,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: var(--space-2);
+    margin-bottom: 6px;
   }
 
   &--error &__icon {
@@ -169,24 +153,24 @@
   }
 
   &--empty &__icon {
-    background-color: var(--neutral-100);
-    color: var(--neutral-400);
+    background-color: rgba(15, 23, 42, 0.07);
+    color: rgba(15, 23, 42, 0.45);
   }
 
   &__title {
-    font-size: var(--text-h4);
+    margin: 0;
+    font-size: clamp(24px, 3vw, 34px);
     font-weight: var(--weight-bold);
     color: var(--neutral-900);
     letter-spacing: var(--tracking-tight);
-    line-height: var(--leading-snug);
-    margin: 0;
+    line-height: 1.05;
   }
 
   &__text {
+    margin: 0 0 4px;
+    max-width: 460px;
     font-size: var(--text-body);
-    color: var(--neutral-400);
-    max-width: 420px;
-    line-height: var(--leading-normal);
-    margin: 0 0 var(--space-2);
+    color: rgba(15, 23, 42, 0.62);
+    line-height: 1.7;
   }
 }

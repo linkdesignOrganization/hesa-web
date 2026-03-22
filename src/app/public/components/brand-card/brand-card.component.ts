@@ -1,7 +1,7 @@
 import { Component, input, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { I18nService } from '../../../shared/services/i18n.service';
-import { getBrandsSegment } from '../../../shared/utils/route-helpers';
+import { getBrandsSegment, getCategoryLabel } from '../../../shared/utils/route-helpers';
 
 @Component({
   selector: 'app-brand-card',
@@ -19,9 +19,26 @@ export class BrandCardComponent {
 
   i18n = inject(I18nService);
 
+  private normalizeCategory(category: string): 'farmacos' | 'alimentos' | 'equipos' | null {
+    const normalized = category.trim().toLowerCase();
+    if (['farmacos', 'pharmaceuticals'].includes(normalized)) return 'farmacos';
+    if (['alimentos', 'food'].includes(normalized)) return 'alimentos';
+    if (['equipos', 'equipment'].includes(normalized)) return 'equipos';
+    return null;
+  }
+
+  get displayCategoryBadges(): Array<{ key: 'farmacos' | 'alimentos' | 'equipos' | null; label: string }> {
+    return ((this.brand()?.['categories'] as string[]) || this.categories()).map(category => {
+      const normalized = this.normalizeCategory(category);
+      return {
+        key: normalized,
+        label: normalized ? getCategoryLabel(normalized, this.i18n.currentLang()) : category,
+      };
+    });
+  }
+
   get displayName(): string { return (this.brand()?.['name'] as string) || this.name(); }
   get displayCountry(): string { return (this.brand()?.['country'] as string) || this.country(); }
-  get displayCategories(): string[] { return (this.brand()?.['categories'] as string[]) || this.categories(); }
   get logoInitial(): string { return (this.brand()?.['logoPlaceholder'] as string) || this.displayName.charAt(0); }
   get logoUrl(): string | undefined { return this.brand()?.['logo'] as string | undefined; }
 

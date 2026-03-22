@@ -6,20 +6,23 @@
 .brand-card {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
+  align-items: stretch;
+  text-align: left;
   text-decoration: none;
   color: inherit;
-  background-color: #fff;
-  border: 1px solid var(--neutral-200);
+  background:
+    radial-gradient(circle at top right, rgba(255, 255, 255, 0.72), transparent 42%),
+    linear-gradient(180deg, #f4f8ff 0%, #e3e8ee 100%);
+  border: 1px solid rgba(15, 23, 42, 0.08);
   border-radius: var(--radius-card-public);
-  padding: 32px 24px 28px;
-  transition: var(--transition-card);
+  padding: 18px;
+  gap: 16px;
+  min-height: 100%;
+  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
   cursor: pointer;
 
-  // Hover — subtle shadow lift + border accent
   &:hover {
-    box-shadow: var(--shadow-md);
+    box-shadow: 0 24px 40px rgba(15, 23, 42, 0.1);
     border-color: var(--neutral-300);
     transform: translateY(-2px);
   }
@@ -38,23 +41,23 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    min-height: 96px;
-    padding: 24px 16px;
-    margin-bottom: 20px;
+    min-height: 150px;
+    padding: 22px 18px;
     background-color: #fff;
-    border-radius: 12px;
+    border-radius: 26px;
+    box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.04);
   }
 
   &__logo-img {
     max-width: 100%;
-    max-height: 64px;
+    max-height: 86px;
     object-fit: contain;
   }
 
   &__logo-initial {
     font-size: 44px;
-    font-weight: var(--weight-semibold);
-    color: var(--neutral-200);
+    font-weight: var(--weight-bold);
+    color: rgba(15, 23, 42, 0.25);
     line-height: 1;
     user-select: none;
   }
@@ -65,26 +68,27 @@
   &__info {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 4px;
+    align-items: flex-start;
+    gap: 6px;
     width: 100%;
+    padding: 2px 4px 4px;
   }
 
   &__name {
-    font-size: var(--text-body);
-    font-weight: var(--weight-medium);
+    font-size: 1.05rem;
+    font-weight: var(--weight-semibold);
     color: var(--neutral-900);
     margin: 0;
-    line-height: 1.3;
+    line-height: 1.25;
   }
 
   &__country {
     display: inline-flex;
     align-items: center;
     gap: 5px;
-    font-size: var(--text-small);
-    color: var(--neutral-400);
-    margin: 0 0 8px;
+    font-size: 0.88rem;
+    color: rgba(15, 23, 42, 0.56);
+    margin: 0 0 6px;
     line-height: 1;
   }
 
@@ -99,8 +103,21 @@
   &__badges {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 6px;
-    margin-top: 4px;
+    margin-top: 2px;
+  }
+
+  @media (max-width: 767px) {
+    padding: 16px;
+
+    &__logo-wrapper {
+      min-height: 124px;
+      border-radius: 22px;
+    }
+
+    &__logo-img {
+      max-height: 72px;
+    }
   }
 }

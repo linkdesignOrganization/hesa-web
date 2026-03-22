@@ -1,14 +1,13 @@
 <!-- BRAND DETAIL PAGE -->
 @if (loading()) {
-  <!-- Loading Skeleton -->
-  <section class="brand-detail-page">
-    <div class="brand-detail-header">
+  <section class="brand-catalog brand-detail-page">
+    <div class="brand-catalog__hero">
       <div class="container">
-        <div class="brand-detail-hero brand-detail-hero--skeleton">
-          <div class="brand-detail-hero__logo-wrap">
+        <div class="brand-catalog__hero-grid brand-catalog__hero-grid--loading">
+          <div class="brand-catalog__hero-logo">
             <div class="skeleton" style="width: 100%; height: 100%; border-radius: var(--radius-image);"></div>
           </div>
-          <div class="brand-detail-hero__info">
+          <div class="brand-catalog__hero-copy">
             <div class="skeleton" style="width: 60%; height: 28px; border-radius: var(--radius-sm);"></div>
             <div class="skeleton" style="width: 35%; height: 16px; border-radius: var(--radius-sm); margin-top: 12px;"></div>
             <div class="skeleton" style="width: 100%; height: 14px; border-radius: var(--radius-sm); margin-top: 20px;"></div>
@@ -18,7 +17,7 @@
       </div>
     </div>
     <div class="container">
-      <div class="brand-detail-products__grid" style="margin-top: var(--space-12);">
+      <div class="brand-results__grid" style="margin-top: 30px;">
         @for (i of [1,2,3,4,5,6]; track i) {
           <div class="skeleton-brand-product">
             <div class="skeleton-brand-product__image skeleton"></div>
@@ -32,8 +31,7 @@
     </div>
   </section>
 } @else if (error()) {
-  <!-- BUG-013: Error State (API failure) -->
-  <section class="brand-detail-page">
+  <section class="brand-catalog brand-detail-page">
     <div class="brand-detail-state">
       <div class="container">
         <div class="state-message state-message--error" role="alert">
@@ -63,8 +61,7 @@
     </div>
   </section>
 } @else if (notFound() || !brand()) {
-  <!-- BUG-V06: Not Found State -->
-  <section class="brand-detail-page">
+  <section class="brand-catalog brand-detail-page">
     <div class="brand-detail-state">
       <div class="container">
         <div class="state-message state-message--empty" role="status">
@@ -89,34 +86,38 @@
     </div>
   </section>
 } @else if (brand()) {
-  <section class="brand-detail-page">
-    <!-- Brand Hero Header -->
-    <div class="brand-detail-header">
+  <section
+    class="brand-catalog brand-detail-page"
+    [class.brand-catalog--pharma]="brandThemeClass === 'brand-catalog--pharma'"
+    [class.brand-catalog--food]="brandThemeClass === 'brand-catalog--food'"
+    [class.brand-catalog--equipment]="brandThemeClass === 'brand-catalog--equipment'">
+    <div class="brand-catalog__hero">
       <div class="container">
         <app-breadcrumb [items]="breadcrumbs" />
 
-        <div class="brand-detail-hero">
-          <!-- Brand Logo -->
-          <div class="brand-detail-hero__logo-wrap">
+        <div class="brand-catalog__hero-grid">
+          <div class="brand-catalog__hero-logo">
             @if (brand()!.logo) {
               <picture>
                 <source [srcset]="toWebP(brand()!.logo!)" type="image/webp">
                 <img
                   [src]="brand()!.logo"
                   [alt]="brand()!.name"
-                  class="brand-detail-hero__logo-img"
+                  class="brand-catalog__hero-logo-img"
                   loading="eager">
               </picture>
             } @else {
-              <span class="brand-detail-hero__logo-initial">{{ brand()!.name.charAt(0) }}</span>
+              <span class="brand-catalog__hero-logo-initial">{{ brand()!.name.charAt(0) }}</span>
             }
           </div>
 
-          <!-- Brand Info -->
-          <div class="brand-detail-hero__info">
-            <h1 class="brand-detail-hero__name">{{ brand()!.name }}</h1>
+          <div class="brand-catalog__hero-copy">
+            <span class="brand-catalog__eyebrow">
+              {{ i18n.currentLang() === 'es' ? 'Marca seleccionada' : 'Selected brand' }}
+            </span>
+            <h1 class="brand-catalog__title">{{ brand()!.name }}</h1>
 
-            <p class="brand-detail-hero__country">
+            <p class="brand-catalog__country">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <circle cx="12" cy="12" r="10"/>
                 <line x1="2" y1="12" x2="22" y2="12"/>
@@ -125,91 +126,102 @@
               {{ brand()!.country }}
             </p>
 
-            <div class="brand-detail-hero__badges">
-              @for (cat of brand()!.categories; track cat) {
-                <span
-                  class="badge"
-                  [class.badge-pharma]="cat === 'Farmacos'"
-                  [class.badge-food]="cat === 'Alimentos'"
-                  [class.badge-equipment]="cat === 'Equipos'">
-                  {{ cat }}
-                </span>
-              }
-            </div>
+            @if (brandCategoryLabels.length > 0) {
+              <div class="brand-catalog__badges">
+                @for (cat of brandCategoryLabels; track cat) {
+                  <span class="brand-catalog__badge">{{ cat }}</span>
+                }
+              </div>
+            }
 
             @if (i18n.t(brand()!.description)) {
-              <p class="brand-detail-hero__desc">{{ i18n.t(brand()!.description) }}</p>
+              <p class="brand-catalog__description">{{ i18n.t(brand()!.description) }}</p>
             }
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Products Section -->
     <div class="container">
       @if (products().length > 0 || activeFilters.length > 0) {
-        <div class="brand-detail-products">
-          <h2 class="brand-detail-products__title">
-            {{ i18n.currentLang() === 'es' ? 'Productos de ' + brand()!.name : brand()!.name + ' Products' }}
-          </h2>
-
-          <!-- REQ-152: Filters -->
-          <div class="brand-detail-filters">
-            <select
-              class="brand-detail-filters__select"
-              [value]="selectedCategory()"
-              (change)="applyFilter('category', $any($event.target).value)"
-              [attr.aria-label]="i18n.currentLang() === 'es' ? 'Filtrar por categoria' : 'Filter by category'">
-              <option value="">{{ i18n.currentLang() === 'es' ? 'Todas las categorias' : 'All categories' }}</option>
-              @for (cat of brand()!.categories; track cat) {
-                <option [value]="cat">{{ cat }}</option>
-              }
-            </select>
-          </div>
-
-          <!-- Active Filter Pills -->
-          @if (activeFilters.length > 0) {
-            <div class="brand-detail-pills">
-              @for (f of activeFilters; track f.key) {
-                <span class="brand-detail-pills__item">
-                  {{ f.label }}
-                  <button
-                    class="brand-detail-pills__remove"
-                    (click)="applyFilter(f.key, '')"
-                    [attr.aria-label]="(i18n.currentLang() === 'es' ? 'Quitar filtro: ' : 'Remove filter: ') + f.label">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                      <line x1="18" y1="6" x2="6" y2="18"/>
-                      <line x1="6" y1="6" x2="18" y2="18"/>
-                    </svg>
+        <div class="brand-catalog__shell">
+          <aside class="brand-filters">
+            <div class="brand-filters__header">
+              <div class="brand-filters__header-main">
+                <p class="brand-filters__eyebrow">{{ i18n.currentLang() === 'es' ? 'Filtrar marca' : 'Filter brand' }}</p>
+                <h2 class="brand-filters__title">{{ i18n.currentLang() === 'es' ? 'Encuentre mas rapido' : 'Find faster' }}</h2>
+                @if (activeFilters.length > 0) {
+                  <button type="button" class="brand-filters__clear-btn" (click)="clearFilters()">
+                    <span class="material-symbols-outlined" aria-hidden="true">filter_alt_off</span>
+                    {{ i18n.currentLang() === 'es' ? 'Limpiar filtros' : 'Clear filters' }}
                   </button>
-                </span>
-              }
-              <button class="brand-detail-pills__clear" (click)="clearFilters()">
-                {{ i18n.currentLang() === 'es' ? 'Limpiar filtros' : 'Clear filters' }}
-              </button>
+                }
+              </div>
             </div>
-          }
 
-          <!-- Product Grid -->
-          @if (products().length > 0) {
-            <div class="brand-detail-products__grid">
-              @for (product of products(); track product._id) {
-                <app-product-card [product]="product" />
-              }
+            @if (categoryOptions.length > 0) {
+              <div class="brand-filters__group">
+                <p class="brand-filters__label">{{ i18n.currentLang() === 'es' ? 'Categoria' : 'Category' }}</p>
+                <div class="brand-filters__checks">
+                  @for (option of categoryOptions; track option.value) {
+                    <label class="brand-filters__check">
+                      <input
+                        class="brand-filters__checkbox"
+                        type="checkbox"
+                        [checked]="selectedCategory() === option.value"
+                        (change)="applyFilter('category', option.value)">
+                      <span class="brand-filters__check-mark">
+                        <span class="material-symbols-outlined" aria-hidden="true">check</span>
+                      </span>
+                      <span class="brand-filters__check-label">{{ option.label }}</span>
+                    </label>
+                  }
+                </div>
+              </div>
+            }
+          </aside>
+
+          <div class="brand-results">
+            <div class="brand-results__header">
+              <h2 class="brand-results__title">
+                {{ i18n.currentLang() === 'es' ? 'Productos de ' + brand()!.name : brand()!.name + ' products' }}
+              </h2>
             </div>
-          } @else {
-            <!-- No results with active filters -->
-            <div class="brand-detail-products__empty">
-              <p>{{ i18n.currentLang() === 'es' ? 'No se encontraron productos con estos filtros' : 'No products found with these filters' }}</p>
-              <button class="btn btn-outline" (click)="clearFilters()">
-                {{ i18n.currentLang() === 'es' ? 'Limpiar filtros' : 'Clear filters' }}
-              </button>
-            </div>
-          }
+
+            @if (activeFilters.length > 0) {
+              <div class="brand-results__pills">
+                @for (f of activeFilters; track f.key) {
+                  <span class="brand-results__pill">
+                    {{ f.label }}
+                    <button
+                      type="button"
+                      (click)="applyFilter(f.key, '')"
+                      [attr.aria-label]="(i18n.currentLang() === 'es' ? 'Quitar filtro: ' : 'Remove filter: ') + f.label">
+                      <span class="material-symbols-outlined" aria-hidden="true">close</span>
+                    </button>
+                  </span>
+                }
+              </div>
+            }
+
+            @if (products().length > 0) {
+              <div class="brand-results__grid">
+                @for (product of products(); track product._id) {
+                  <app-product-card [product]="product" variant="discovery" />
+                }
+              </div>
+            } @else {
+              <div class="brand-results__empty">
+                <p>{{ i18n.currentLang() === 'es' ? 'No se encontraron productos con estos filtros' : 'No products found with these filters' }}</p>
+                <button class="btn btn-outline" (click)="clearFilters()">
+                  {{ i18n.currentLang() === 'es' ? 'Limpiar filtros' : 'Clear filters' }}
+                </button>
+              </div>
+            }
+          </div>
         </div>
       } @else {
-        <!-- No products at all -->
-        <div class="brand-detail-products__empty brand-detail-products__empty--standalone">
+        <div class="brand-results__empty brand-results__empty--standalone">
           <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--neutral-300)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="m7.5 4.27 9 5.15"/>
             <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/>
