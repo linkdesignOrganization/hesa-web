@@ -1,16 +1,17 @@
 import { Component, inject, signal, AfterViewInit, OnInit, OnDestroy, ElementRef } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { TimelineComponent } from '../../components/timeline/timeline.component';
 import { ContactFormComponent } from '../../components/contact-form/contact-form.component';
-import { BrandLogosRowComponent } from '../../components/brand-logos-row/brand-logos-row.component';
-import { ApiService, ApiPageContent } from '../../../shared/services/api.service';
+import { ApiService, ApiBrand, ApiPageContent } from '../../../shared/services/api.service';
 import { I18nService } from '../../../shared/services/i18n.service';
 import { SeoService } from '../../../shared/services/seo.service';
+import { getBrandsSegment } from '../../../shared/utils/route-helpers';
 import { initFadeInObserver } from '../../../shared/utils/fade-in-observer';
 
 @Component({
   selector: 'app-distributors',
   standalone: true,
-  imports: [TimelineComponent, ContactFormComponent, BrandLogosRowComponent],
+  imports: [RouterLink, TimelineComponent, ContactFormComponent],
   templateUrl: './distributors.component.html',
   styleUrl: './distributors.component.scss'
 })
@@ -23,6 +24,8 @@ export class DistributorsComponent implements OnInit, AfterViewInit, OnDestroy {
   private timelineObserver: IntersectionObserver | null = null;
 
   content = signal<ApiPageContent | null>(null);
+  brands = signal<ApiBrand[]>([]);
+  readonly marqueeGroups = [0, 1] as const;
 
   readonly headerCards = [
     {
@@ -34,10 +37,6 @@ export class DistributorsComponent implements OnInit, AfterViewInit, OnDestroy {
       body: {
         es: 'Presencia en Costa Rica con planes de expansion a Centroamerica. Su marca entra a un mercado en crecimiento.',
         en: 'Presence in Costa Rica with expansion plans into Central America. Your brand enters a growing market.'
-      },
-      cta: {
-        es: 'Conozca mas',
-        en: 'Learn more'
       }
     },
     {
@@ -49,10 +48,6 @@ export class DistributorsComponent implements OnInit, AfterViewInit, OnDestroy {
       body: {
         es: 'Mas de 500 veterinarias, agroservicios y comercios atendidos por nuestro equipo de ventas propio.',
         en: 'More than 500 veterinary clinics, agro-services, and retail accounts served by our in-house sales team.'
-      },
-      cta: {
-        es: 'Conozca mas',
-        en: 'Learn more'
       }
     },
     {
@@ -64,10 +59,6 @@ export class DistributorsComponent implements OnInit, AfterViewInit, OnDestroy {
       body: {
         es: 'Trabajamos con marcas que distribuimos de forma exclusiva. Eso significa foco, compromiso y resultados.',
         en: 'We work with brands we distribute exclusively. That means focus, commitment, and measurable results.'
-      },
-      cta: {
-        es: 'Conozca mas',
-        en: 'Learn more'
       }
     },
     {
@@ -79,10 +70,6 @@ export class DistributorsComponent implements OnInit, AfterViewInit, OnDestroy {
       body: {
         es: 'Mantenemos stock local y despachamos a todo el pais. Su producto siempre disponible para el cliente final.',
         en: 'We maintain local stock and dispatch nationwide, keeping your product consistently available to the end customer.'
-      },
-      cta: {
-        es: 'Conozca mas',
-        en: 'Learn more'
       }
     }
   ];
@@ -99,12 +86,17 @@ export class DistributorsComponent implements OnInit, AfterViewInit, OnDestroy {
     });
     this.seo.setHreflang('/es/distribuidores', '/en/distributors');
 
-    // Load page content from API
-    try {
-      const pageContent = await this.api.getPageContent('distribuidores');
-      this.content.set(pageContent);
-    } catch {
-      // Silent fallback — use hardcoded defaults in template
+    const [pageContentResult, brandsResult] = await Promise.allSettled([
+      this.api.getPageContent('distribuidores'),
+      this.api.getBrands()
+    ]);
+
+    if (pageContentResult.status === 'fulfilled') {
+      this.content.set(pageContentResult.value);
+    }
+
+    if (brandsResult.status === 'fulfilled') {
+      this.brands.set(brandsResult.value.filter(brand => !!brand.logo));
     }
   }
 
@@ -124,6 +116,10 @@ export class DistributorsComponent implements OnInit, AfterViewInit, OnDestroy {
     const section = this.content()?.sections?.find(s => s.key === key);
     if (!section) return '';
     return this.i18n.t(section.value) || '';
+  }
+
+  buildBrandRoute(slug: string): string {
+    return this.i18n.getLangPrefix() + '/' + getBrandsSegment(this.i18n.currentLang()) + '/' + slug;
   }
 
   ngAfterViewInit(): void {

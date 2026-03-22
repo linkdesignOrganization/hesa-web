@@ -27,10 +27,6 @@
             </div>
             <h2 class="partners-header-card__title">{{ i18n.t(card.title) }}</h2>
             <p class="partners-header-card__body">{{ i18n.t(card.body) }}</p>
-            <button type="button" class="partners-header-card__cta" (click)="scrollToContactForm()">
-              <span>{{ i18n.t(card.cta) }}</span>
-              <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
-            </button>
           </article>
         }
       </div>
@@ -38,7 +34,37 @@
   </div>
 </section>
 
-<app-brand-logos-row />
+<section class="partners-page partners-page__brands section-spacing fade-in-section">
+  <div class="container">
+    <div class="partners-page__section-heading partners-page__section-heading--centered partners-page__section-heading--brands">
+      <span class="partners-page__eyebrow">{{ i18n.currentLang() === 'es' ? 'Nuestros socios' : 'Our partners' }}</span>
+      <h2 class="partners-page__section-title partners-page__section-title--centered">
+        {{ i18n.currentLang() === 'es' ? 'Marcas que confían en HESA' : 'Brands that trust HESA' }}
+      </h2>
+    </div>
+  </div>
+
+  <div class="partners-brand-marquee">
+    <div class="partners-brand-marquee__viewport">
+      <div
+        class="partners-brand-marquee__track"
+        [attr.aria-label]="i18n.currentLang() === 'es' ? 'Marcas asociadas con HESA' : 'Brands partnered with HESA'">
+        @for (group of marqueeGroups; track group) {
+          <div class="partners-brand-marquee__group" [attr.aria-hidden]="group === 1">
+            @for (brand of brands(); track brand._id) {
+              <a
+                [routerLink]="buildBrandRoute(brand.slug)"
+                class="partners-brand-marquee__item"
+                [attr.aria-label]="(i18n.currentLang() === 'es' ? 'Ver marca ' : 'View brand ') + brand.name">
+                <img [src]="brand.logo" [alt]="brand.name" class="partners-brand-marquee__logo" loading="lazy">
+              </a>
+            }
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</section>
 
 <section class="partners-page partners-page__timeline section-spacing">
   <div class="container">
