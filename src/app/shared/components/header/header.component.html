@@ -157,7 +157,7 @@
               @if (getMegaBrandColumns(category).length > 0) {
                 <div class="mega__brand-block">
                   <span class="mega__heading">{{ i18n.currentLang() === 'es' ? 'Por marca' : 'By brand' }}</span>
-                  <div class="mega__brand-columns">
+                  <div class="mega__brand-columns" [class.mega__brand-columns--split]="getMegaBrandColumns(category).length > 1">
                     @for (column of getMegaBrandColumns(category); track $index) {
                       <div class="mega__brand-column">
                         @for (brand of column; track brand.slug) {

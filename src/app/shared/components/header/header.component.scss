@@ -534,12 +534,18 @@
 
   &__brand-block {
     min-width: 0;
+    align-self: start;
   }
 
   &__brand-columns {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: minmax(0, 1fr);
     gap: 0 24px;
+
+    &--split {
+      grid-template-columns: repeat(2, minmax(140px, 1fr));
+      min-width: 320px;
+    }
   }
 
   &__brand-column {
