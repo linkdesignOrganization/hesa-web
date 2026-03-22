@@ -31,20 +31,26 @@
     display: flex;
 
     .btn-primary {
+      min-height: 50px;
+      padding: 14px 28px;
+      border-radius: var(--radius-pill);
       background-color: var(--neutral-900);
       color: var(--neutral-white);
       border-color: var(--neutral-900);
+      box-shadow: none;
 
       &:hover {
         background-color: var(--neutral-700);
         border-color: var(--neutral-700);
         color: var(--neutral-white);
+        box-shadow: none;
         transform: translateY(-1px);
       }
 
       &:active {
         background-color: var(--neutral-900);
         border-color: var(--neutral-900);
+        box-shadow: none;
         transform: translateY(0);
       }
     }

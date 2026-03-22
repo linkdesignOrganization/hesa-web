@@ -3,6 +3,7 @@
   --detail-accent-soft: rgba(0, 141, 201, 0.14);
   --detail-surface: radial-gradient(circle at top right, rgba(255, 255, 255, 0.78), transparent 42%),
     linear-gradient(180deg, #f4f8ff 0%, #e3e8ee 100%);
+  --detail-positioning-bg: linear-gradient(180deg, #dbe9f6 0%, #c9dff0 100%);
 
   padding-top: 0;
   padding-bottom: var(--section-gap-desktop);
@@ -12,6 +13,7 @@
     --detail-accent-soft: rgba(80, 185, 42, 0.16);
     --detail-surface: radial-gradient(circle at top right, rgba(255, 255, 255, 0.76), transparent 42%),
       linear-gradient(180deg, #f5faec 0%, #e3eed7 100%);
+    --detail-positioning-bg: linear-gradient(180deg, #edf8df 0%, #dceec7 100%);
   }
 
   &--equipment {
@@ -19,6 +21,7 @@
     --detail-accent-soft: rgba(15, 118, 110, 0.14);
     --detail-surface: radial-gradient(circle at top right, rgba(255, 255, 255, 0.76), transparent 42%),
       linear-gradient(180deg, #f0f7f6 0%, #e5eeed 100%);
+    --detail-positioning-bg: linear-gradient(180deg, #dcefeb 0%, #c8e1dd 100%);
   }
 
   @media (max-width: 767px) {
@@ -42,7 +45,7 @@
 
   &__hero {
     display: grid;
-    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 22px;
     align-items: start;
     margin-top: 16px;
@@ -475,7 +478,7 @@
     margin-top: 28px;
     padding: 0;
     overflow: hidden;
-    background: linear-gradient(180deg, #dbe9f6 0%, #c9dff0 100%);
+    background: var(--detail-positioning-bg);
     display: grid;
     grid-template-columns: minmax(0, 0.9fr) minmax(320px, 1.1fr);
     align-items: stretch;
