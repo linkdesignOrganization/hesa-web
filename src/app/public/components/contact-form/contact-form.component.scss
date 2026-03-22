@@ -30,17 +30,19 @@
     margin-top: var(--space-8);
     display: flex;
 
-    .btn-primary {
+    .btn.btn-primary {
       min-height: 50px;
       padding: 14px 28px;
       border-radius: var(--radius-pill);
       background-color: var(--neutral-900);
+      background-image: none;
       color: var(--neutral-white);
       border-color: var(--neutral-900);
       box-shadow: none;
 
       &:hover {
         background-color: var(--neutral-700);
+        background-image: none;
         border-color: var(--neutral-700);
         color: var(--neutral-white);
         box-shadow: none;
