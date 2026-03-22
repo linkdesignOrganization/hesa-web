@@ -1,6 +1,7 @@
 import { Router, Request, Response } from 'express';
 import * as homeService from '../../services/home.service';
 import { importMockCatalog } from '../../services/mock-catalog-import.service';
+import { reassignProductsToActiveBrands } from '../../services/product-brand-reassignment.service';
 
 const router = Router();
 
@@ -103,6 +104,21 @@ router.post('/import-mock-catalog', async (_req: Request, res: Response) => {
     console.error('Mock catalog import error:', error);
     const message = error instanceof Error ? error.message : 'Unknown error';
     res.status(500).json({ error: 'Mock catalog import failed', message });
+  }
+});
+
+/**
+ * POST /api/public/home/reassign-product-brands
+ * TEMPORARY: Reassign all products to currently active brands with logos.
+ */
+router.post('/reassign-product-brands', async (_req: Request, res: Response) => {
+  try {
+    const summary = await reassignProductsToActiveBrands();
+    res.json({ success: true, summary });
+  } catch (error) {
+    console.error('Product brand reassignment error:', error);
+    const message = error instanceof Error ? error.message : 'Unknown error';
+    res.status(500).json({ error: 'Product brand reassignment failed', message });
   }
 });
 
