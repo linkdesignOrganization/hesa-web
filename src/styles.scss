@@ -2204,7 +2204,7 @@ app-about {
       display: grid;
       grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
       gap: 32px;
-      align-items: center;
+      align-items: stretch;
     }
 
     &__content {
@@ -2231,6 +2231,10 @@ app-about {
 
     &__media {
       min-width: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
     }
 
     &__slide {
@@ -2249,18 +2253,25 @@ app-about {
 
       &--brand {
         border: none;
+        width: 100%;
       }
 
       &--product {
         justify-content: center;
         width: min(100%, 360px);
+        height: 360px;
         min-height: 360px;
+        max-height: 360px;
         margin-inline: auto;
+        flex: 0 0 360px;
       }
 
       &--image {
         padding: 0;
         background: #fff;
+        width: 100%;
+        height: 100%;
+        min-height: 100%;
       }
 
       &--empty {
@@ -2288,6 +2299,7 @@ app-about {
     &__coverage-image {
       width: 100%;
       height: 100%;
+      min-height: 100%;
       object-fit: cover;
       object-position: 68% center;
       display: block;
@@ -2368,6 +2380,14 @@ app-about {
       &__slide {
         min-height: 380px;
       }
+
+      &__slide--product {
+        width: min(100%, 332px);
+        height: 332px;
+        min-height: 332px;
+        max-height: 332px;
+        flex-basis: 332px;
+      }
     }
 
     @media (max-width: 1024px) {
@@ -2385,7 +2405,15 @@ app-about {
 
       &__slide--product {
         width: 100%;
+        height: 300px;
         min-height: 300px;
+        max-height: 300px;
+        flex-basis: 300px;
+      }
+
+      &__slide--image {
+        height: 320px;
+        min-height: 320px;
       }
 
       &__panel-title {
@@ -2414,7 +2442,15 @@ app-about {
       }
 
       &__slide--product {
+        height: 240px;
         min-height: 240px;
+        max-height: 240px;
+        flex-basis: 240px;
+      }
+
+      &__slide--image {
+        height: 260px;
+        min-height: 260px;
       }
 
       &__brand-logo {

@@ -146,7 +146,7 @@
                 <div class="about-horizontal-advantages__content">
                   <h3 class="about-horizontal-advantages__panel-title">{{ i18n.t(item.title) }}</h3>
                   <p class="about-horizontal-advantages__panel-text">{{ i18n.t(item.body) }}</p>
-                  @if (item.id === 'exclusive-brands') {
+                  @if (item.id === 'inventory-available') {
                     <a [routerLink]="getAboutCatalogRoute()" class="about-horizontal-advantages__panel-cta">
                       {{ i18n.currentLang() === 'es' ? 'Ver catalogo' : 'View catalog' }}
                     </a>
@@ -215,7 +215,7 @@
               <div class="about-horizontal-advantages__content">
                 <h3 class="about-horizontal-advantages__panel-title">{{ i18n.t(item.title) }}</h3>
                 <p class="about-horizontal-advantages__panel-text">{{ i18n.t(item.body) }}</p>
-                @if (item.id === 'exclusive-brands') {
+                @if (item.id === 'inventory-available') {
                   <a [routerLink]="getAboutCatalogRoute()" class="about-horizontal-advantages__panel-cta">
                     {{ i18n.currentLang() === 'es' ? 'Ver catalogo' : 'View catalog' }}
                   </a>
