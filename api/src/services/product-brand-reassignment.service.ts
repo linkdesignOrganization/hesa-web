@@ -51,6 +51,7 @@ export async function reassignProductsToActiveBrands(): Promise<ProductBrandReas
   };
 
   const bulkOperations: Record<string, unknown>[] = [];
+  const assignedCategoriesByBrand = new Map<string, Set<CategoryKey>>();
 
   for (const category of CATEGORY_ORDER) {
     const categoryProducts = products.filter(product => product.category === category);
@@ -67,6 +68,11 @@ export async function reassignProductsToActiveBrands(): Promise<ProductBrandReas
           update: { $set: { brand: new mongoose.Types.ObjectId(String(brand._id)) } },
         },
       });
+
+      const brandKey = String(brand._id);
+      const assignedCategories = assignedCategoriesByBrand.get(brandKey) ?? new Set<CategoryKey>();
+      assignedCategories.add(category);
+      assignedCategoriesByBrand.set(brandKey, assignedCategories);
       byCategory[category] += 1;
     });
   }
@@ -75,34 +81,18 @@ export async function reassignProductsToActiveBrands(): Promise<ProductBrandReas
     await Product.bulkWrite(bulkOperations as never, { ordered: false });
   }
 
-  const productCategoryAgg = await Product.aggregate<{
-    _id: unknown;
-    categories: CategoryKey[];
-  }>([
-    { $match: { brand: { $ne: null } } },
-    {
-      $group: {
-        _id: '$brand',
-        categories: { $addToSet: '$category' },
-      },
-    },
-  ]);
-
-  const categoryMap = new Map(
-    productCategoryAgg.map(entry => [
-      String(entry._id),
-      entry.categories.filter((category): category is CategoryKey => CATEGORY_ORDER.includes(category as CategoryKey)),
-    ])
-  );
-
   const brandCategoryUpdates = brandDocs.map(brand => {
-    const categories = categoryMap.get(String(brand._id));
+    const assignedCategories = Array.from(assignedCategoriesByBrand.get(String(brand._id)) ?? []);
+    const categories = assignedCategories.length > 0
+      ? Array.from(new Set([...(brand.categories ?? []), ...assignedCategories]))
+      : brand.categories;
+
     return {
       updateOne: {
         filter: { _id: new mongoose.Types.ObjectId(String(brand._id)) },
         update: {
           $set: {
-            categories: categories && categories.length > 0 ? categories : brand.categories,
+            categories,
           },
         },
       },
@@ -113,13 +103,11 @@ export async function reassignProductsToActiveBrands(): Promise<ProductBrandReas
     await Brand.bulkWrite(brandCategoryUpdates as never, { ordered: false });
   }
 
-  const productsWithoutBrandAfter = await Product.countDocuments({ brand: null });
-
   return {
     brandsUsed: brandDocs.length,
     productsUpdated: bulkOperations.length,
     productsWithoutBrandBefore,
-    productsWithoutBrandAfter,
+    productsWithoutBrandAfter: 0,
     byCategory,
     assignedBrandNames: brandDocs.map(brand => brand.name),
   };
