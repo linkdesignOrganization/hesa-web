@@ -1,33 +1,5 @@
 <!-- ABOUT PAGE — Editorial storytelling layout -->
 
-<section class="about-brand-marquee fade-in-section">
-  <div class="about-brand-marquee__viewport">
-    <div
-      class="about-brand-marquee__track"
-      [class.about-brand-marquee__track--paused]="!!activeMobileMarqueeBrand()"
-      [attr.aria-label]="i18n.currentLang() === 'es' ? 'Marcas del grupo HESA' : 'HESA group brands'">
-      @for (group of marqueeGroups; track group) {
-        <div class="about-brand-marquee__group" [attr.aria-hidden]="group === 1">
-          @for (brand of brands(); track brand._id) {
-            <a
-              [routerLink]="buildBrandRoute(brand.slug)"
-              class="about-brand-marquee__item"
-              [class.about-brand-marquee__item--active]="activeMobileMarqueeBrand() === brand.slug"
-              [attr.aria-label]="(i18n.currentLang() === 'es' ? 'Ver marca ' : 'View brand ') + brand.name"
-              (click)="onMarqueeBrandClick($event, brand.slug)">
-              @if (brand.logo) {
-                <img [src]="brand.logo" [alt]="brand.name" class="about-brand-marquee__logo" loading="lazy">
-              } @else {
-                <span class="about-brand-marquee__fallback">{{ brand.name }}</span>
-              }
-            </a>
-          }
-        </div>
-      }
-    </div>
-  </div>
-</section>
-
 <section class="about-family-showcase fade-in-section">
   <div class="container">
     <div class="about-family-showcase__inner">
@@ -37,14 +9,15 @@
             [src]="familyCompanyPrimaryLogo.src"
             [alt]="familyCompanyPrimaryLogo.alt"
             class="about-family-showcase__logo-image about-family-showcase__logo-image--primary"
-            loading="lazy">
+            loading="eager"
+            fetchpriority="high">
         </div>
       </div>
 
       <div class="about-family-showcase__logos about-family-showcase__logos--secondary">
         @for (logo of familyCompanySecondaryLogos; track logo.src) {
           <div class="about-family-showcase__logo-item">
-            <img [src]="logo.src" [alt]="logo.alt" class="about-family-showcase__logo-image" loading="lazy">
+            <img [src]="logo.src" [alt]="logo.alt" class="about-family-showcase__logo-image" loading="eager">
           </div>
         }
       </div>
@@ -52,6 +25,34 @@
       <div class="about-family-showcase__content">
         <h1 class="about-family-showcase__title">{{ getFamilyCompaniesTitle() }}</h1>
         <p class="about-family-showcase__text">{{ getFamilyCompaniesCopy() }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="about-brand-marquee">
+    <div class="about-brand-marquee__viewport">
+      <div
+        class="about-brand-marquee__track"
+        [class.about-brand-marquee__track--paused]="!!activeMobileMarqueeBrand()"
+        [attr.aria-label]="i18n.currentLang() === 'es' ? 'Marcas del grupo HESA' : 'HESA group brands'">
+        @for (group of marqueeGroups; track group) {
+          <div class="about-brand-marquee__group" [attr.aria-hidden]="group === 1">
+            @for (brand of brands(); track brand._id) {
+              <a
+                [routerLink]="buildBrandRoute(brand.slug)"
+                class="about-brand-marquee__item"
+                [class.about-brand-marquee__item--active]="activeMobileMarqueeBrand() === brand.slug"
+                [attr.aria-label]="(i18n.currentLang() === 'es' ? 'Ver marca ' : 'View brand ') + brand.name"
+                (click)="onMarqueeBrandClick($event, brand.slug)">
+                @if (brand.logo) {
+                  <img [src]="brand.logo" [alt]="brand.name" class="about-brand-marquee__logo" loading="lazy">
+                } @else {
+                  <span class="about-brand-marquee__fallback">{{ brand.name }}</span>
+                }
+              </a>
+            }
+          </div>
+        }
       </div>
     </div>
   </div>
