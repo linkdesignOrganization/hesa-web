@@ -1,5 +1,52 @@
 <!-- ABOUT PAGE — Editorial storytelling layout -->
 
+<section class="about-brand-marquee fade-in-section">
+  <div class="about-brand-marquee__viewport">
+    <div
+      class="about-brand-marquee__track"
+      [class.about-brand-marquee__track--paused]="!!activeMobileMarqueeBrand()"
+      [attr.aria-label]="i18n.currentLang() === 'es' ? 'Marcas del grupo HESA' : 'HESA group brands'">
+      @for (group of marqueeGroups; track group) {
+        <div class="about-brand-marquee__group" [attr.aria-hidden]="group === 1">
+          @for (brand of brands(); track brand._id) {
+            <a
+              [routerLink]="buildBrandRoute(brand.slug)"
+              class="about-brand-marquee__item"
+              [class.about-brand-marquee__item--active]="activeMobileMarqueeBrand() === brand.slug"
+              [attr.aria-label]="(i18n.currentLang() === 'es' ? 'Ver marca ' : 'View brand ') + brand.name"
+              (click)="onMarqueeBrandClick($event, brand.slug)">
+              @if (brand.logo) {
+                <img [src]="brand.logo" [alt]="brand.name" class="about-brand-marquee__logo" loading="lazy">
+              } @else {
+                <span class="about-brand-marquee__fallback">{{ brand.name }}</span>
+              }
+            </a>
+          }
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<section class="about-family-showcase fade-in-section">
+  <div class="container">
+    <div class="about-family-showcase__inner">
+      <div class="about-family-showcase__logos">
+        @for (logo of familyCompanyLogos; track logo.src) {
+          <div class="about-family-showcase__logo-item">
+            <img [src]="logo.src" [alt]="logo.alt" class="about-family-showcase__logo-image" loading="lazy">
+          </div>
+        }
+      </div>
+
+      <div class="about-family-showcase__content">
+        <h1 class="about-family-showcase__title">{{ getFamilyCompaniesTitle() }}</h1>
+        <p class="about-family-showcase__text">{{ getFamilyCompaniesCopy() }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- Hero -->
 <section class="about-hero">
   <div class="about-hero__bg" style="background-image: url('https://images.unsplash.com/photo-1606567595334-d39972c85dbe?w=1400&q=80')"></div>

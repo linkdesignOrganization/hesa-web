@@ -1,10 +1,11 @@
-import { Component, inject, signal, OnInit, AfterViewInit, OnDestroy, ElementRef } from '@angular/core';
+import { Component, inject, signal, OnInit, AfterViewInit, OnDestroy, ElementRef, HostListener } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ValueStatComponent } from '../../components/value-stat/value-stat.component';
 import { TeamMemberCardComponent } from '../../components/team-member-card/team-member-card.component';
-import { ApiService, ApiTeamMember, ApiPageContent } from '../../../shared/services/api.service';
+import { ApiService, ApiTeamMember, ApiPageContent, ApiBrand } from '../../../shared/services/api.service';
 import { I18nService } from '../../../shared/services/i18n.service';
 import { SeoService } from '../../../shared/services/seo.service';
+import { getBrandsSegment } from '../../../shared/utils/route-helpers';
 import { initFadeInObserver } from '../../../shared/utils/fade-in-observer';
 
 @Component({
@@ -22,9 +23,26 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
   private fadeObserver: IntersectionObserver | null = null;
 
   team = signal<ApiTeamMember[]>([]);
+  brands = signal<ApiBrand[]>([]);
   loading = signal(true);
   content = signal<ApiPageContent | null>(null);
   policiesContent = signal<ApiPageContent | null>(null);
+  activeMobileMarqueeBrand = signal<string | null>(null);
+  readonly marqueeGroups = [0, 1] as const;
+  readonly familyCompanyLogos = [
+    { src: '/logo.svg', alt: 'HESA' },
+    { src: '/logozoofarma.svg', alt: 'ZooFarma' },
+    { src: '/logosemilla.jpeg', alt: 'Semilla' },
+    { src: '/logoimv.svg', alt: 'IMV' }
+  ] as const;
+  readonly familyCompaniesTitle = {
+    es: 'Una familia de empresas',
+    en: 'A family of companies'
+  } as const;
+  readonly familyCompaniesCopy = {
+    es: 'Desde 1988, cuatro empresas han crecido juntas bajo la misma visión: ser el proveedor veterinario más confiable del país. Hoy operamos como un solo grupo con cobertura nacional.',
+    en: 'Since 1988, four companies have grown together under the same vision: to be the country’s most trusted veterinary supplier. Today we operate as one group with nationwide coverage.'
+  } as const;
 
   stats = [
     { number: '37', suffix: '+', label: { es: 'Anos de trayectoria', en: 'Years of experience' } },
@@ -47,18 +65,60 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
 
     // Load data from API (including politicas content for REQ-162 to REQ-166)
     try {
-      const [teamData, contentData, policiesData] = await Promise.all([
+      const [teamData, contentData, policiesData, brandsData] = await Promise.all([
         this.api.getTeamMembers(),
         this.api.getPageContent('nosotros'),
         this.api.getPageContent('politicas'),
+        this.api.getBrands(),
       ]);
       this.team.set(teamData);
       this.content.set(contentData);
       this.policiesContent.set(policiesData);
+      this.brands.set(brandsData);
     } catch {
       // Graceful fallback — page still shows with hardcoded defaults
     }
     this.loading.set(false);
+  }
+
+  buildBrandRoute(slug: string): string {
+    const lang = this.i18n.currentLang();
+    return `/${lang}/${getBrandsSegment(lang)}/${slug}`;
+  }
+
+  getFamilyCompaniesTitle(): string {
+    return this.i18n.currentLang() === 'es' ? this.familyCompaniesTitle.es : this.familyCompaniesTitle.en;
+  }
+
+  getFamilyCompaniesCopy(): string {
+    return this.i18n.currentLang() === 'es' ? this.familyCompaniesCopy.es : this.familyCompaniesCopy.en;
+  }
+
+  onMarqueeBrandClick(event: MouseEvent, slug: string): void {
+    if (!this.isTouchInteractionMode()) return;
+
+    if (this.activeMobileMarqueeBrand() !== slug) {
+      event.preventDefault();
+      event.stopPropagation();
+      this.activeMobileMarqueeBrand.set(slug);
+    }
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent): void {
+    if (!this.activeMobileMarqueeBrand()) return;
+    const target = event.target;
+    if (!(target instanceof Node)) return;
+
+    const marquee = this.el.nativeElement.querySelector('.about-brand-marquee');
+    if (marquee?.contains(target)) return;
+
+    this.activeMobileMarqueeBrand.set(null);
+  }
+
+  private isTouchInteractionMode(): boolean {
+    if (typeof window === 'undefined') return false;
+    return window.matchMedia('(hover: none), (pointer: coarse)').matches;
   }
 
   /** Helper to get section value from loaded content */

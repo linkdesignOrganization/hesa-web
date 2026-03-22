@@ -256,7 +256,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
           options: toOptions(values.species),
         },
         {
-          title: { es: 'Por familia', en: 'By family' },
+          title: { es: 'Por tipo', en: 'By type' },
           queryParam: 'family' as const,
           options: toOptions(values.families),
         },
@@ -271,7 +271,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
           options: toOptions(values.species),
         },
         {
-          title: { es: 'Por etapa', en: 'By life stage' },
+          title: { es: 'Por tipo', en: 'By type' },
           queryParam: 'lifeStage' as const,
           options: toOptions(values.lifeStages),
         },
@@ -293,7 +293,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       slug: brand.slug,
     }));
 
-    return this.chunkArray(links, 5);
+    return this.chunkArray(links, 6);
   }
 
   getMegaFeaturedCards(category: MegaCategory): MegaFeaturedCard[] {

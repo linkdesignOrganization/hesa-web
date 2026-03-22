@@ -2,6 +2,179 @@
 // About Page — Editorial Storytelling Layout
 // =============================================================================
 
+@keyframes about-brand-marquee-scroll {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.about-brand-marquee {
+  padding: 28px 0 18px;
+  background: var(--neutral-white);
+  overflow: hidden;
+
+  &__viewport {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  &__track {
+    display: flex;
+    align-items: center;
+    gap: 64px;
+    width: max-content;
+    animation: about-brand-marquee-scroll 34s linear infinite;
+    will-change: transform;
+
+    &:hover {
+      animation-play-state: paused;
+    }
+
+    &--paused {
+      animation-play-state: paused;
+    }
+
+    @media (max-width: 767px) {
+      gap: 36px;
+      animation-duration: 28s;
+    }
+  }
+
+  &__group {
+    display: flex;
+    align-items: center;
+    gap: 64px;
+
+    @media (max-width: 767px) {
+      gap: 36px;
+    }
+  }
+
+  &__item {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    min-width: 110px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform var(--transition-card), opacity var(--transition-fast);
+
+    &:hover,
+    &--active {
+      transform: scale(1.14);
+    }
+  }
+
+  &__logo {
+    display: block;
+    max-width: 140px;
+    max-height: 58px;
+    object-fit: contain;
+
+    @media (max-width: 767px) {
+      max-width: 112px;
+      max-height: 44px;
+    }
+  }
+
+  &__fallback {
+    display: inline-block;
+    font-size: 28px;
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-tight);
+    color: var(--neutral-900);
+    white-space: nowrap;
+
+    @media (max-width: 767px) {
+      font-size: 22px;
+    }
+  }
+}
+
+.about-family-showcase {
+  background: var(--neutral-white);
+  border-top: 1px solid rgba(15, 23, 42, 0.08);
+  padding: 28px 0 56px;
+
+  &__inner {
+    display: grid;
+    gap: 28px;
+  }
+
+  &__logos {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    align-items: center;
+    gap: 40px;
+
+    @media (max-width: 767px) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 28px 20px;
+    }
+  }
+
+  &__logo-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 132px;
+    transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1), opacity 240ms ease;
+    will-change: transform;
+
+    &:hover {
+      transform: translateY(-8px);
+    }
+
+    @media (max-width: 767px) {
+      min-height: 96px;
+    }
+  }
+
+  &__logo-image {
+    display: block;
+    max-width: 100%;
+    max-height: 84px;
+    object-fit: contain;
+
+    @media (max-width: 767px) {
+      max-height: 62px;
+    }
+  }
+
+  &__content {
+    max-width: 980px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  &__title {
+    font-size: clamp(2.8rem, 5.3vw, 5rem);
+    font-weight: var(--weight-extrabold);
+    letter-spacing: var(--tracking-tighter);
+    line-height: 0.96;
+    color: var(--neutral-900);
+    margin-bottom: 24px;
+    text-wrap: balance;
+  }
+
+  &__text {
+    max-width: 780px;
+    margin: 0 auto;
+    font-size: var(--text-body-lg);
+    line-height: var(--leading-relaxed);
+    color: var(--neutral-500);
+
+    @media (max-width: 767px) {
+      font-size: var(--text-body);
+    }
+  }
+}
+
 // ---- Hero ----
 .about-hero {
   position: relative;
