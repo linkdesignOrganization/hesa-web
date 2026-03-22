@@ -58,6 +58,211 @@
   </div>
 </section>
 
+<section class="about-market-presence fade-in-section">
+  <div class="container">
+    <div class="about-market-presence__grid">
+      <div class="about-market-presence__content">
+        <div class="about-market-presence__tags">
+          @for (tag of getMarketPresenceTags(); track tag) {
+            <span class="about-market-presence__tag">{{ tag }}</span>
+          }
+        </div>
+
+        <h2 class="about-market-presence__title">{{ getMarketPresenceTitle() }}</h2>
+        <p class="about-market-presence__text">{{ getMarketPresenceCopy() }}</p>
+      </div>
+
+      <div class="about-market-presence__media-shell">
+        <span class="about-market-presence__badge">{{ marketPresenceBadge }}</span>
+        <div class="about-market-presence__media-frame">
+          <img
+            src="/oldphoto.jpg"
+            alt="Herrera & Elizondo - 1988"
+            class="about-market-presence__image"
+            loading="lazy"
+            [style.--about-market-parallax.px]="presenceParallaxOffset()">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about-team-showcase fade-in-section">
+  <div class="container">
+    <div class="about-team-showcase__header">
+      <span class="about-team-showcase__eyebrow">{{ getTeamShowcaseEyebrow() }}</span>
+      <h2 class="about-team-showcase__title">{{ getTeamShowcaseTitle() }}</h2>
+    </div>
+  </div>
+
+  <div class="about-team-showcase__marquee">
+    <div class="about-team-showcase__viewport">
+      <div class="about-team-showcase__track">
+        @for (group of teamShowcaseMarqueeGroups; track group) {
+          <div class="about-team-showcase__group" [attr.aria-hidden]="group === 1">
+            @for (image of teamShowcaseImages; track image.src) {
+              <figure class="about-team-showcase__item">
+                <img [src]="image.src" [alt]="image.alt" class="about-team-showcase__image" loading="lazy">
+                <figcaption class="about-team-showcase__badge">{{ image.name }}</figcaption>
+              </figure>
+            }
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about-horizontal-advantages fade-in-section">
+  <div class="container">
+    <div class="about-horizontal-advantages__header">
+      <h2 class="about-horizontal-advantages__title">{{ getAboutAdvantageTitle() }}</h2>
+    </div>
+
+    <div class="about-horizontal-advantages__desktop">
+      <div class="about-horizontal-advantages__accordions">
+        @for (item of aboutAdvantageItems; track item.id) {
+          <article
+            class="about-horizontal-advantages__accordion"
+            [class.about-horizontal-advantages__accordion--expanded]="activeAdvantageTab() === item.id"
+            [style.--about-advantage-color]="item.color">
+            <button
+              type="button"
+              class="about-horizontal-advantages__toggle"
+              [attr.aria-expanded]="activeAdvantageTab() === item.id"
+              [attr.aria-label]="i18n.t(item.label)"
+              (click)="setActiveAdvantageTab(item.id)">
+              <h3 class="about-horizontal-advantages__toggle-label">{{ i18n.t(item.label) }}</h3>
+            </button>
+
+            <div class="about-horizontal-advantages__panel-shell">
+              <div class="about-horizontal-advantages__panel">
+                <div class="about-horizontal-advantages__media">
+                  @switch (item.mediaType) {
+                    @case ('brands') {
+                      @if (currentAdvantageBrandSlide(); as slide) {
+                        @for (token of [advantageBrandSlideToken()]; track token) {
+                          <figure class="about-horizontal-advantages__slide about-horizontal-advantages__slide--brand">
+                            <img [src]="slide.logo" [alt]="slide.name" class="about-horizontal-advantages__brand-logo" loading="lazy">
+                            <figcaption class="about-horizontal-advantages__slide-caption">{{ slide.name }}</figcaption>
+                          </figure>
+                        }
+                      } @else {
+                        <div class="about-horizontal-advantages__slide about-horizontal-advantages__slide--empty">
+                          <span>{{ i18n.currentLang() === 'es' ? 'Marcas HESA' : 'HESA brands' }}</span>
+                        </div>
+                      }
+                    }
+                    @case ('products') {
+                      @if (currentAdvantageProductSlide(); as slide) {
+                        @for (token of [advantageProductSlideToken()]; track token) {
+                          <figure class="about-horizontal-advantages__slide about-horizontal-advantages__slide--product">
+                            <img [src]="slide.image" [alt]="i18n.t(slide.name)" class="about-horizontal-advantages__product-image" loading="lazy">
+                            <figcaption class="about-horizontal-advantages__slide-caption about-horizontal-advantages__slide-caption--stacked">
+                              <strong>{{ i18n.t(slide.name) }}</strong>
+                              @if (slide.brandName) {
+                                <span>{{ slide.brandName }}</span>
+                              }
+                            </figcaption>
+                          </figure>
+                        }
+                      } @else {
+                        <div class="about-horizontal-advantages__slide about-horizontal-advantages__slide--empty">
+                          <span>{{ i18n.currentLang() === 'es' ? 'Inventario HESA' : 'HESA inventory' }}</span>
+                        </div>
+                      }
+                    }
+                    @default {
+                      <figure class="about-horizontal-advantages__slide about-horizontal-advantages__slide--image">
+                        <img src="/tab3.jpg" [alt]="i18n.t(item.title)" class="about-horizontal-advantages__coverage-image" loading="lazy">
+                      </figure>
+                    }
+                  }
+                </div>
+
+                <div class="about-horizontal-advantages__content">
+                  <h3 class="about-horizontal-advantages__panel-title">{{ i18n.t(item.title) }}</h3>
+                  <p class="about-horizontal-advantages__panel-text">{{ i18n.t(item.body) }}</p>
+                </div>
+              </div>
+            </div>
+          </article>
+        }
+      </div>
+    </div>
+
+    <div class="about-horizontal-advantages__mobile">
+      @for (item of aboutAdvantageItems; track item.id) {
+        <article
+          class="about-horizontal-advantages__mobile-item"
+          [class.about-horizontal-advantages__mobile-item--expanded]="activeAdvantageTab() === item.id"
+          [style.--about-advantage-color]="item.color">
+          <button
+            type="button"
+            class="about-horizontal-advantages__mobile-toggle"
+            [attr.aria-expanded]="activeAdvantageTab() === item.id"
+            (click)="setActiveAdvantageTab(item.id)">
+            <span class="about-horizontal-advantages__mobile-label">{{ i18n.t(item.label) }}</span>
+            <span class="material-symbols-outlined about-horizontal-advantages__mobile-icon">keyboard_arrow_down</span>
+          </button>
+
+          @if (activeAdvantageTab() === item.id) {
+            <div class="about-horizontal-advantages__mobile-panel">
+              <div class="about-horizontal-advantages__media">
+                @switch (item.mediaType) {
+                  @case ('brands') {
+                    @if (currentAdvantageBrandSlide(); as slide) {
+                      @for (token of [advantageBrandSlideToken()]; track token) {
+                        <figure class="about-horizontal-advantages__slide about-horizontal-advantages__slide--brand">
+                          <img [src]="slide.logo" [alt]="slide.name" class="about-horizontal-advantages__brand-logo" loading="lazy">
+                          <figcaption class="about-horizontal-advantages__slide-caption">{{ slide.name }}</figcaption>
+                        </figure>
+                      }
+                    } @else {
+                      <div class="about-horizontal-advantages__slide about-horizontal-advantages__slide--empty">
+                        <span>{{ i18n.currentLang() === 'es' ? 'Marcas HESA' : 'HESA brands' }}</span>
+                      </div>
+                    }
+                  }
+                  @case ('products') {
+                    @if (currentAdvantageProductSlide(); as slide) {
+                      @for (token of [advantageProductSlideToken()]; track token) {
+                        <figure class="about-horizontal-advantages__slide about-horizontal-advantages__slide--product">
+                          <img [src]="slide.image" [alt]="i18n.t(slide.name)" class="about-horizontal-advantages__product-image" loading="lazy">
+                          <figcaption class="about-horizontal-advantages__slide-caption about-horizontal-advantages__slide-caption--stacked">
+                            <strong>{{ i18n.t(slide.name) }}</strong>
+                            @if (slide.brandName) {
+                              <span>{{ slide.brandName }}</span>
+                            }
+                          </figcaption>
+                        </figure>
+                      }
+                    } @else {
+                      <div class="about-horizontal-advantages__slide about-horizontal-advantages__slide--empty">
+                        <span>{{ i18n.currentLang() === 'es' ? 'Inventario HESA' : 'HESA inventory' }}</span>
+                      </div>
+                    }
+                  }
+                  @default {
+                    <figure class="about-horizontal-advantages__slide about-horizontal-advantages__slide--image">
+                      <img src="/tab3.jpg" [alt]="i18n.t(item.title)" class="about-horizontal-advantages__coverage-image" loading="lazy">
+                    </figure>
+                  }
+                }
+              </div>
+
+              <div class="about-horizontal-advantages__content">
+                <h3 class="about-horizontal-advantages__panel-title">{{ i18n.t(item.title) }}</h3>
+                <p class="about-horizontal-advantages__panel-text">{{ i18n.t(item.body) }}</p>
+              </div>
+            </div>
+          }
+        </article>
+      }
+    </div>
+  </div>
+</section>
+
 <!-- Hero -->
 <section class="about-hero">
   <div class="about-hero__bg" style="background-image: url('https://images.unsplash.com/photo-1606567595334-d39972c85dbe?w=1400&q=80')"></div>

@@ -2,11 +2,35 @@ import { Component, inject, signal, OnInit, AfterViewInit, OnDestroy, ElementRef
 import { RouterLink } from '@angular/router';
 import { ValueStatComponent } from '../../components/value-stat/value-stat.component';
 import { TeamMemberCardComponent } from '../../components/team-member-card/team-member-card.component';
-import { ApiService, ApiTeamMember, ApiPageContent, ApiBrand } from '../../../shared/services/api.service';
+import { ApiService, ApiTeamMember, ApiPageContent, ApiBrand, ApiProduct } from '../../../shared/services/api.service';
 import { I18nService } from '../../../shared/services/i18n.service';
 import { SeoService } from '../../../shared/services/seo.service';
 import { getBrandsSegment } from '../../../shared/utils/route-helpers';
 import { initFadeInObserver } from '../../../shared/utils/fade-in-observer';
+
+type AboutHorizontalAccordionTabId = 'exclusive-brands' | 'inventory-available' | 'national-coverage';
+
+interface AboutHorizontalAccordionItem {
+  id: AboutHorizontalAccordionTabId;
+  label: { es: string; en: string };
+  color: string;
+  title: { es: string; en: string };
+  body: { es: string; en: string };
+  mediaType: 'brands' | 'products' | 'image';
+}
+
+interface AboutBrandSlide {
+  id: string;
+  name: string;
+  logo: string;
+}
+
+interface AboutProductSlide {
+  id: string;
+  name: { es: string; en: string };
+  brandName: string;
+  image: string;
+}
 
 @Component({
   selector: 'app-about',
@@ -21,6 +45,9 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
   i18n = inject(I18nService);
   private el = inject(ElementRef);
   private fadeObserver: IntersectionObserver | null = null;
+  private presenceParallaxFrame: number | null = null;
+  private advantageBrandInterval: number | null = null;
+  private advantageProductInterval: number | null = null;
 
   team = signal<ApiTeamMember[]>([]);
   brands = signal<ApiBrand[]>([]);
@@ -28,7 +55,16 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
   content = signal<ApiPageContent | null>(null);
   policiesContent = signal<ApiPageContent | null>(null);
   activeMobileMarqueeBrand = signal<string | null>(null);
+  presenceParallaxOffset = signal(0);
+  activeAdvantageTab = signal<AboutHorizontalAccordionTabId>('exclusive-brands');
+  advantageBrandSlides = signal<AboutBrandSlide[]>([]);
+  advantageProductSlides = signal<AboutProductSlide[]>([]);
+  advantageBrandIndex = signal(0);
+  advantageProductIndex = signal(0);
+  advantageBrandSlideToken = signal(0);
+  advantageProductSlideToken = signal(0);
   readonly marqueeGroups = [0, 1] as const;
+  readonly teamShowcaseMarqueeGroups = [0, 1] as const;
   readonly familyCompanyPrimaryLogo = { src: '/logo.svg', alt: 'HESA' } as const;
   readonly familyCompanySecondaryLogos = [
     { src: '/logozoofarma.svg', alt: 'ZooFarma' },
@@ -43,6 +79,97 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
     es: 'Lo que empezó como un negocio familiar hoy es un grupo de cuatro empresas respaldado por alianzas con los mejores fabricantes del sector. Juntos, atendemos a todo el mercado veterinario costarricense.',
     en: 'What started as a family business is now a four-company group backed by partnerships with the best manufacturers in the sector. Together, we serve the entire Costa Rican veterinary market.'
   } as const;
+  readonly marketPresenceTags = {
+    es: ['37 años', '18 agentes en ruta', '+500 clientes', 'Marcas exclusivas'],
+    en: ['37 years', '18 field agents', '500+ clients', 'Exclusive brands']
+  } as const;
+  readonly marketPresenceTitle = {
+    es: 'Presencia real en todo el país',
+    en: 'Real presence across the country'
+  } as const;
+  readonly marketPresenceCopy = {
+    es: 'No tercerizamos la relación comercial. Nuestros agentes visitan cada zona del país, conocen a sus clientes por nombre y entienden sus necesidades. Esa cercanía, combinada con alianzas sólidas con fabricantes internacionales, nos ha permitido crecer junto al sector veterinario costarricense durante más de tres décadas.',
+    en: 'We do not outsource the commercial relationship. Our agents visit every region in the country, know their clients by name, and understand their needs. That closeness, combined with strong partnerships with international manufacturers, has allowed us to grow alongside Costa Rica’s veterinary sector for more than three decades.'
+  } as const;
+  readonly marketPresenceBadge = 'Herrera & Elizondo - 1988';
+  readonly teamShowcaseEyebrow = {
+    es: 'Nuestro equipo',
+    en: 'Our team'
+  } as const;
+  readonly teamShowcaseTitle = {
+    es: 'Conozca al equipo',
+    en: 'Meet the team'
+  } as const;
+  readonly teamShowcaseImages = [
+    { src: '/team/1.jpg', alt: 'Equipo HESA 1', name: 'Adriana Herrera' },
+    { src: '/team/2.jpg', alt: 'Equipo HESA 2', name: 'Mauricio Elizondo' },
+    { src: '/team/3.jpg', alt: 'Equipo HESA 3', name: 'Daniela Chaves' },
+    { src: '/team/4.jpg', alt: 'Equipo HESA 4', name: 'Gabriel Mora' },
+    { src: '/team/5.jpg', alt: 'Equipo HESA 5', name: 'Valeria Solano' },
+    { src: '/team/6.jpg', alt: 'Equipo HESA 6', name: 'Fernando Quesada' },
+    { src: '/team/7.jpg', alt: 'Equipo HESA 7', name: 'Carolina Rojas' },
+    { src: '/team/8.jpg', alt: 'Equipo HESA 8', name: 'Esteban Vargas' },
+    { src: '/team/9.jpg', alt: 'Equipo HESA 9', name: 'Mariana Brenes' },
+    { src: '/team/10.jpg', alt: 'Equipo HESA 10', name: 'Sofía Araya' },
+    { src: '/team/11.jpg', alt: 'Equipo HESA 11', name: 'Andrés Villalobos' }
+  ] as const;
+  readonly aboutAdvantageTitle = {
+    es: 'La ventaja de trabajar con HESA',
+    en: 'The advantage of working with HESA'
+  } as const;
+  readonly aboutAdvantageItems: readonly AboutHorizontalAccordionItem[] = [
+    {
+      id: 'exclusive-brands',
+      label: {
+        es: 'Marcas exclusivas',
+        en: 'Exclusive brands'
+      },
+      color: '#50B92A',
+      title: {
+        es: 'Representamos marcas que no encuentra en otro lado',
+        en: 'We represent brands you will not find anywhere else'
+      },
+      body: {
+        es: 'Trabajamos con fabricantes internacionales que confían en nosotros como su único canal en Costa Rica. Eso significa disponibilidad garantizada, soporte técnico directo y condiciones comerciales que solo un representante exclusivo puede ofrecer.',
+        en: 'We work with international manufacturers who trust us as their sole channel in Costa Rica. That means guaranteed availability, direct technical support, and commercial conditions that only an exclusive representative can offer.'
+      },
+      mediaType: 'brands'
+    },
+    {
+      id: 'inventory-available',
+      label: {
+        es: 'Inventario disponible',
+        en: 'Available inventory'
+      },
+      color: '#1A8A7A',
+      title: {
+        es: 'Producto en bodega, listo para despachar',
+        en: 'Product in stock, ready to ship'
+      },
+      body: {
+        es: 'No tiene que esperar semanas por una importación. Mantenemos inventario constante de las líneas que distribuimos para que su pedido salga cuando lo necesita. Esa es la ventaja de trabajar con un proveedor que planifica.',
+        en: 'You do not have to wait weeks for an import. We keep steady inventory of the lines we distribute so your order ships when you need it. That is the advantage of working with a supplier that plans ahead.'
+      },
+      mediaType: 'products'
+    },
+    {
+      id: 'national-coverage',
+      label: {
+        es: 'Cobertura nacional',
+        en: 'Nationwide coverage'
+      },
+      color: '#008DC9',
+      title: {
+        es: 'Llegamos a donde está su negocio',
+        en: 'We reach where your business is'
+      },
+      body: {
+        es: 'Nuestros 18 agentes comerciales recorren el país con rutas programadas. No importa si está en el Valle Central o en la zona más alejada: su pedido llega sin intermediarios y con seguimiento directo.',
+        en: 'Our 18 field agents travel the country on scheduled routes. Whether you are in the Central Valley or the most remote area, your order arrives without intermediaries and with direct follow-up.'
+      },
+      mediaType: 'image'
+    }
+  ] as const;
 
   stats = [
     { number: '37', suffix: '+', label: { es: 'Anos de trayectoria', en: 'Years of experience' } },
@@ -64,21 +191,37 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
     this.seo.setHreflang('/es/nosotros', '/en/about');
 
     // Load data from API (including politicas content for REQ-162 to REQ-166)
-    try {
-      const [teamData, contentData, policiesData, brandsData] = await Promise.all([
-        this.api.getTeamMembers(),
-        this.api.getPageContent('nosotros'),
-        this.api.getPageContent('politicas'),
-        this.api.getBrands(),
-      ]);
-      this.team.set(teamData);
-      this.content.set(contentData);
-      this.policiesContent.set(policiesData);
-      this.brands.set(brandsData);
-    } catch {
-      // Graceful fallback — page still shows with hardcoded defaults
+    const [teamResult, contentResult, policiesResult, brandsResult, productsResult] = await Promise.allSettled([
+      this.api.getTeamMembers(),
+      this.api.getPageContent('nosotros'),
+      this.api.getPageContent('politicas'),
+      this.api.getBrands(),
+      this.loadAllAdvantageProducts(),
+    ]);
+
+    if (teamResult.status === 'fulfilled') {
+      this.team.set(teamResult.value);
     }
+
+    if (contentResult.status === 'fulfilled') {
+      this.content.set(contentResult.value);
+    }
+
+    if (policiesResult.status === 'fulfilled') {
+      this.policiesContent.set(policiesResult.value);
+    }
+
+    if (brandsResult.status === 'fulfilled') {
+      this.brands.set(brandsResult.value);
+      this.advantageBrandSlides.set(this.toAdvantageBrandSlides(brandsResult.value));
+    }
+
+    if (productsResult.status === 'fulfilled') {
+      this.advantageProductSlides.set(this.toAdvantageProductSlides(productsResult.value));
+    }
+
     this.loading.set(false);
+    this.syncAdvantageAutoplay();
   }
 
   buildBrandRoute(slug: string): string {
@@ -92,6 +235,59 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
 
   getFamilyCompaniesCopy(): string {
     return this.i18n.currentLang() === 'es' ? this.familyCompaniesCopy.es : this.familyCompaniesCopy.en;
+  }
+
+  getMarketPresenceTags(): readonly string[] {
+    return this.i18n.currentLang() === 'es' ? this.marketPresenceTags.es : this.marketPresenceTags.en;
+  }
+
+  getMarketPresenceTitle(): string {
+    return this.i18n.currentLang() === 'es' ? this.marketPresenceTitle.es : this.marketPresenceTitle.en;
+  }
+
+  getMarketPresenceCopy(): string {
+    return this.i18n.currentLang() === 'es' ? this.marketPresenceCopy.es : this.marketPresenceCopy.en;
+  }
+
+  getTeamShowcaseEyebrow(): string {
+    return this.i18n.currentLang() === 'es' ? this.teamShowcaseEyebrow.es : this.teamShowcaseEyebrow.en;
+  }
+
+  getTeamShowcaseTitle(): string {
+    return this.i18n.currentLang() === 'es' ? this.teamShowcaseTitle.es : this.teamShowcaseTitle.en;
+  }
+
+  getAboutAdvantageTitle(): string {
+    return this.i18n.currentLang() === 'es' ? this.aboutAdvantageTitle.es : this.aboutAdvantageTitle.en;
+  }
+
+  setActiveAdvantageTab(tabId: AboutHorizontalAccordionTabId): void {
+    if (this.activeAdvantageTab() === tabId) return;
+    this.activeAdvantageTab.set(tabId);
+
+    if (tabId === 'exclusive-brands') {
+      this.advantageBrandIndex.set(0);
+      this.advantageBrandSlideToken.update(token => token + 1);
+    }
+
+    if (tabId === 'inventory-available') {
+      this.advantageProductIndex.set(0);
+      this.advantageProductSlideToken.update(token => token + 1);
+    }
+
+    this.syncAdvantageAutoplay();
+  }
+
+  currentAdvantageBrandSlide(): AboutBrandSlide | null {
+    const slides = this.advantageBrandSlides();
+    if (!slides.length) return null;
+    return slides[this.advantageBrandIndex() % slides.length] ?? slides[0];
+  }
+
+  currentAdvantageProductSlide(): AboutProductSlide | null {
+    const slides = this.advantageProductSlides();
+    if (!slides.length) return null;
+    return slides[this.advantageProductIndex() % slides.length] ?? slides[0];
   }
 
   onMarqueeBrandClick(event: MouseEvent, slug: string): void {
@@ -114,6 +310,16 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
     if (marquee?.contains(target)) return;
 
     this.activeMobileMarqueeBrand.set(null);
+  }
+
+  @HostListener('window:scroll')
+  onWindowScroll(): void {
+    this.schedulePresenceParallaxUpdate();
+  }
+
+  @HostListener('window:resize')
+  onWindowResize(): void {
+    this.schedulePresenceParallaxUpdate();
   }
 
   private isTouchInteractionMode(): boolean {
@@ -144,11 +350,133 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
     if (typeof window === 'undefined') return;
     setTimeout(() => {
       this.fadeObserver = initFadeInObserver(this.el);
+      this.schedulePresenceParallaxUpdate();
     }, 500);
   }
 
   ngOnDestroy(): void {
     this.fadeObserver?.disconnect();
+    if (typeof window !== 'undefined' && this.presenceParallaxFrame !== null) {
+      window.cancelAnimationFrame(this.presenceParallaxFrame);
+    }
+    this.clearAdvantageIntervals();
     this.seo.clearDynamicTags();
+  }
+
+  private schedulePresenceParallaxUpdate(): void {
+    if (typeof window === 'undefined') return;
+    if (this.presenceParallaxFrame !== null) return;
+
+    this.presenceParallaxFrame = window.requestAnimationFrame(() => {
+      this.presenceParallaxFrame = null;
+      this.updatePresenceParallax();
+    });
+  }
+
+  private updatePresenceParallax(): void {
+    if (typeof window === 'undefined') return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      this.presenceParallaxOffset.set(0);
+      return;
+    }
+
+    const mediaShell = this.el.nativeElement.querySelector('.about-market-presence__media-shell');
+    if (!(mediaShell instanceof HTMLElement)) {
+      this.presenceParallaxOffset.set(0);
+      return;
+    }
+
+    const rect = mediaShell.getBoundingClientRect();
+    const viewportCenter = window.innerHeight / 2;
+    const elementCenter = rect.top + rect.height / 2;
+    const normalizedDistance = Math.max(-1, Math.min(1, (elementCenter - viewportCenter) / window.innerHeight));
+
+    this.presenceParallaxOffset.set(Math.round(normalizedDistance * -42));
+  }
+
+  private async loadAllAdvantageProducts(): Promise<ApiProduct[]> {
+    const firstPage = await this.api.getProducts({ page: 1, limit: 100 });
+
+    if (firstPage.totalPages <= 1) {
+      return firstPage.data;
+    }
+
+    const remainingPages = await Promise.all(
+      Array.from({ length: firstPage.totalPages - 1 }, (_, index) =>
+        this.api.getProducts({ page: index + 2, limit: firstPage.limit })
+      )
+    );
+
+    return [firstPage, ...remainingPages].flatMap(page => page.data);
+  }
+
+  private toAdvantageBrandSlides(brands: ApiBrand[]): AboutBrandSlide[] {
+    const seen = new Set<string>();
+
+    return brands
+      .filter(brand => !!brand.logo)
+      .filter(brand => {
+        if (seen.has(brand.slug)) return false;
+        seen.add(brand.slug);
+        return true;
+      })
+      .map(brand => ({
+        id: brand._id,
+        name: brand.name,
+        logo: brand.logo!,
+      }));
+  }
+
+  private toAdvantageProductSlides(products: ApiProduct[]): AboutProductSlide[] {
+    const filtered = products.filter(product => product.isActive && !!product.images?.[0]);
+    return this.shuffle(filtered).map(product => ({
+      id: product._id,
+      name: product.name,
+      brandName: product.brand?.name || '',
+      image: product.images[0],
+    }));
+  }
+
+  private syncAdvantageAutoplay(): void {
+    this.clearAdvantageIntervals();
+
+    if (typeof window === 'undefined') return;
+
+    if (this.activeAdvantageTab() === 'exclusive-brands' && this.advantageBrandSlides().length > 1) {
+      this.advantageBrandInterval = window.setInterval(() => {
+        this.advantageBrandIndex.update(index => (index + 1) % this.advantageBrandSlides().length);
+        this.advantageBrandSlideToken.update(token => token + 1);
+      }, 2600);
+    }
+
+    if (this.activeAdvantageTab() === 'inventory-available' && this.advantageProductSlides().length > 1) {
+      this.advantageProductInterval = window.setInterval(() => {
+        this.advantageProductIndex.update(index => (index + 1) % this.advantageProductSlides().length);
+        this.advantageProductSlideToken.update(token => token + 1);
+      }, 2900);
+    }
+  }
+
+  private clearAdvantageIntervals(): void {
+    if (typeof window === 'undefined') return;
+
+    if (this.advantageBrandInterval !== null) {
+      window.clearInterval(this.advantageBrandInterval);
+      this.advantageBrandInterval = null;
+    }
+
+    if (this.advantageProductInterval !== null) {
+      window.clearInterval(this.advantageProductInterval);
+      this.advantageProductInterval = null;
+    }
+  }
+
+  private shuffle<T>(items: T[]): T[] {
+    const next = [...items];
+    for (let index = next.length - 1; index > 0; index -= 1) {
+      const swapIndex = Math.floor(Math.random() * (index + 1));
+      [next[index], next[swapIndex]] = [next[swapIndex], next[index]];
+    }
+    return next;
   }
 }

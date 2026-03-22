@@ -12,6 +12,28 @@
   }
 }
 
+@keyframes about-team-marquee-scroll {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes about-advantage-slide-fade {
+  0% {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 .about-brand-marquee {
   padding: 20px 0 0;
   background: var(--neutral-white);
@@ -206,6 +228,250 @@
 
     @media (max-width: 767px) {
       font-size: var(--text-body);
+    }
+  }
+}
+
+.about-market-presence {
+  background: var(--neutral-white);
+  padding: 40px 0 120px;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.02fr) minmax(0, 0.98fr);
+    gap: 64px;
+    align-items: center;
+
+    @media (max-width: 1023px) {
+      gap: 40px;
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__content {
+    max-width: 720px;
+  }
+
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-bottom: 34px;
+  }
+
+  &__tag {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 18px;
+    border: 1px solid rgba(15, 23, 42, 0.12);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.92);
+    font-size: 0.96rem;
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-tight);
+    color: var(--neutral-700);
+    white-space: nowrap;
+  }
+
+  &__title {
+    max-width: 700px;
+    font-size: clamp(32px, 4.6vw, 68px);
+    font-weight: var(--weight-extrabold);
+    letter-spacing: var(--tracking-tighter);
+    line-height: 0.96;
+    color: var(--neutral-900);
+    margin-bottom: 26px;
+    text-wrap: balance;
+  }
+
+  &__text {
+    max-width: 760px;
+    font-size: var(--text-body-lg);
+    line-height: var(--leading-relaxed);
+    color: var(--neutral-500);
+
+    @media (max-width: 767px) {
+      font-size: var(--text-body);
+    }
+  }
+
+  &__media-shell {
+    position: relative;
+    min-width: 0;
+  }
+
+  &__badge {
+    position: absolute;
+    right: 22px;
+    bottom: 22px;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 11px 16px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.52);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 18px 38px rgba(15, 23, 42, 0.12);
+    font-size: 0.92rem;
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-tight);
+    color: var(--neutral-900);
+    backdrop-filter: blur(18px) saturate(155%);
+    -webkit-backdrop-filter: blur(18px) saturate(155%);
+
+    @media (max-width: 767px) {
+      right: 16px;
+      bottom: 16px;
+      padding: 10px 14px;
+      font-size: 0.84rem;
+    }
+  }
+
+  &__media-frame {
+    position: relative;
+    aspect-ratio: 1.08 / 1;
+    overflow: hidden;
+    border-radius: 42px;
+    background:
+      radial-gradient(circle at top right, rgba(255, 255, 255, 0.55), transparent 36%),
+      linear-gradient(180deg, #eef4fb 0%, #dde6f0 100%);
+
+    @media (max-width: 767px) {
+      aspect-ratio: 1 / 1.06;
+      border-radius: 32px;
+    }
+  }
+
+  &__image {
+    width: 100%;
+    height: calc(100% + 88px);
+    margin-top: -44px;
+    object-fit: cover;
+    transform: translate3d(0, var(--about-market-parallax, 0px), 0) scale(1.04);
+    transform-origin: center center;
+    will-change: transform;
+    transition: transform 220ms linear;
+  }
+}
+
+.about-team-showcase {
+  background: var(--neutral-white);
+  padding: 12px 0 112px;
+  overflow: hidden;
+
+  &__header {
+    text-align: center;
+    margin-bottom: 44px;
+  }
+
+  &__eyebrow {
+    display: inline-block;
+    margin-bottom: 14px;
+    font-size: var(--text-eyebrow);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--neutral-500);
+  }
+
+  &__title {
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: var(--weight-extrabold);
+    letter-spacing: var(--tracking-tighter);
+    line-height: 0.96;
+    color: var(--neutral-900);
+    text-transform: none;
+  }
+
+  &__marquee {
+    width: 100%;
+  }
+
+  &__viewport {
+    overflow: hidden;
+    width: 100%;
+  }
+
+  &__track {
+    display: flex;
+    align-items: center;
+    width: max-content;
+    animation: about-team-marquee-scroll 90s linear infinite;
+    will-change: transform;
+
+    &:hover {
+      animation-play-state: paused;
+    }
+  }
+
+  &__group {
+    display: flex;
+    align-items: stretch;
+    gap: 18px;
+    padding-inline: 9px;
+
+    @media (max-width: 767px) {
+      gap: 14px;
+      padding-inline: 7px;
+    }
+  }
+
+  &__item {
+    position: relative;
+    flex: 0 0 clamp(260px, 28vw, 360px);
+    aspect-ratio: 1.48 / 1;
+    overflow: hidden;
+    border-radius: 28px;
+    background:
+      radial-gradient(circle at top right, rgba(255, 255, 255, 0.35), transparent 34%),
+      linear-gradient(180deg, #f4f8ff 0%, #e3e8ee 100%);
+
+    @media (max-width: 767px) {
+      flex-basis: 280px;
+      border-radius: 24px;
+    }
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  &__badge {
+    position: absolute;
+    right: 16px;
+    bottom: 16px;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    max-width: calc(100% - 32px);
+    padding: 10px 14px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.42);
+    box-shadow: 0 16px 32px rgba(15, 23, 42, 0.12);
+    backdrop-filter: blur(16px) saturate(145%);
+    -webkit-backdrop-filter: blur(16px) saturate(145%);
+    font-size: 0.9rem;
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-tight);
+    line-height: 1;
+    color: var(--neutral-white);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    @media (max-width: 767px) {
+      right: 12px;
+      bottom: 12px;
+      max-width: calc(100% - 24px);
+      padding: 9px 12px;
+      font-size: 0.82rem;
     }
   }
 }

@@ -2112,3 +2112,327 @@ app-product-detail {
     background-position-x: -200%;
   }
 }
+
+app-about {
+  .about-horizontal-advantages {
+    background: var(--neutral-white);
+    padding: 0 0 120px;
+
+    &__header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    &__title {
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: var(--weight-extrabold);
+      letter-spacing: var(--tracking-tighter);
+      line-height: 0.96;
+      color: var(--neutral-900);
+      text-wrap: balance;
+    }
+
+    &__desktop {
+      display: block;
+
+      @media (max-width: 1024px) {
+        display: none;
+      }
+    }
+
+    &__mobile {
+      display: none;
+
+      @media (max-width: 1024px) {
+        display: grid;
+        gap: 12px;
+      }
+    }
+
+    &__accordions {
+      display: flex;
+      gap: 8px;
+      align-items: stretch;
+      min-width: 0;
+    }
+
+    &__accordion {
+      display: flex;
+      flex: 0 0 72px;
+      min-width: 0;
+      height: 560px;
+      overflow: hidden;
+      transition: flex-grow 780ms cubic-bezier(0.22, 1, 0.36, 1);
+
+      &--expanded {
+        flex: 1 1 72px;
+      }
+    }
+
+    &__toggle,
+    &__mobile-toggle {
+      background: var(--about-advantage-color);
+      color: var(--neutral-white);
+      border: 0;
+      cursor: pointer;
+    }
+
+    &__toggle {
+      width: 72px;
+      min-width: 72px;
+      border-radius: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+    }
+
+    &__toggle-label {
+      margin: 0;
+      transform: rotate(-90deg);
+      white-space: nowrap;
+      font-size: 1rem;
+      font-weight: var(--weight-bold);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+    }
+
+    &__panel-shell {
+      flex: 1;
+      min-width: 0;
+      overflow: hidden;
+      margin-left: 8px;
+    }
+
+    &__panel,
+    &__mobile-panel {
+      background: var(--about-advantage-color);
+      color: var(--neutral-white);
+    }
+
+    &__panel {
+      height: 100%;
+      border-radius: 32px;
+      padding: 28px;
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+      gap: 32px;
+      align-items: center;
+    }
+
+    &__content {
+      min-width: 0;
+    }
+
+    &__panel-title {
+      margin: 0 0 18px;
+      font-size: clamp(28px, 2.8vw, 44px);
+      line-height: 0.98;
+      font-weight: var(--weight-extrabold);
+      letter-spacing: var(--tracking-tighter);
+      text-wrap: balance;
+    }
+
+    &__panel-text {
+      margin: 0;
+      font-size: var(--text-body-lg);
+      line-height: var(--leading-relaxed);
+      color: rgba(255, 255, 255, 0.88);
+    }
+
+    &__media {
+      min-width: 0;
+    }
+
+    &__slide {
+      margin: 0;
+      min-height: 420px;
+      border-radius: 28px;
+      background: rgba(255, 255, 255, 0.18);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      padding: 28px;
+      animation: about-advantage-slide-fade 460ms ease both;
+      overflow: hidden;
+
+      &--product {
+        justify-content: center;
+      }
+
+      &--image {
+        padding: 0;
+        background: rgba(255, 255, 255, 0.16);
+      }
+
+      &--empty {
+        font-size: 1.05rem;
+        font-weight: var(--weight-semibold);
+        text-align: center;
+        color: rgba(255, 255, 255, 0.9);
+      }
+    }
+
+    &__brand-logo {
+      display: block;
+      width: min(100%, 320px);
+      max-height: 180px;
+      object-fit: contain;
+    }
+
+    &__product-image {
+      display: block;
+      width: min(100%, 320px);
+      max-height: 320px;
+      object-fit: contain;
+    }
+
+    &__coverage-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    &__slide-caption {
+      text-align: center;
+      font-size: 0.98rem;
+      line-height: 1.3;
+      color: rgba(255, 255, 255, 0.94);
+      text-wrap: balance;
+
+      &--stacked {
+        display: grid;
+        gap: 6px;
+
+        strong {
+          font-size: 1.02rem;
+          font-weight: var(--weight-semibold);
+        }
+
+        span {
+          font-size: 0.92rem;
+          color: rgba(255, 255, 255, 0.8);
+        }
+      }
+    }
+
+    &__mobile-item {
+      border-radius: 28px;
+      overflow: hidden;
+      background: var(--about-advantage-color);
+    }
+
+    &__mobile-toggle {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 18px 20px;
+      text-align: left;
+    }
+
+    &__mobile-label {
+      font-size: 1rem;
+      font-weight: var(--weight-bold);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+    }
+
+    &__mobile-icon {
+      font-size: 24px;
+      transition: transform 220ms ease;
+    }
+
+    &__mobile-item--expanded &__mobile-icon {
+      transform: rotate(180deg);
+    }
+
+    &__mobile-panel {
+      display: grid;
+      gap: 20px;
+      padding: 0 20px 20px;
+    }
+
+    @media (max-width: 1280px) {
+      &__accordion {
+        height: 520px;
+      }
+
+      &__panel {
+        grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+        gap: 26px;
+        padding: 24px;
+      }
+
+      &__slide {
+        min-height: 380px;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      padding-bottom: 96px;
+
+      &__header {
+        margin-bottom: 28px;
+      }
+
+      &__mobile-panel {
+        grid-template-columns: 1fr;
+      }
+
+      &__slide {
+        min-height: 320px;
+        border-radius: 24px;
+        padding: 22px;
+      }
+
+      &__panel-title {
+        font-size: clamp(26px, 6vw, 38px);
+      }
+
+      &__panel-text {
+        font-size: var(--text-body);
+      }
+    }
+
+    @media (max-width: 767px) {
+      padding-bottom: 84px;
+
+      &__title {
+        text-align: center;
+      }
+
+      &__mobile-toggle {
+        padding: 16px 18px;
+      }
+
+      &__mobile-panel {
+        padding: 0 18px 18px;
+      }
+
+      &__slide {
+        min-height: 260px;
+        gap: 14px;
+      }
+
+      &__brand-logo {
+        width: min(100%, 220px);
+        max-height: 120px;
+      }
+
+      &__product-image {
+        width: min(100%, 220px);
+        max-height: 220px;
+      }
+
+      &__panel-text {
+        font-size: 0.98rem;
+      }
+    }
+  }
+}
