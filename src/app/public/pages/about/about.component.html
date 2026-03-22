@@ -31,8 +31,18 @@
 <section class="about-family-showcase fade-in-section">
   <div class="container">
     <div class="about-family-showcase__inner">
-      <div class="about-family-showcase__logos">
-        @for (logo of familyCompanyLogos; track logo.src) {
+      <div class="about-family-showcase__logos about-family-showcase__logos--primary">
+        <div class="about-family-showcase__logo-item about-family-showcase__logo-item--primary">
+          <img
+            [src]="familyCompanyPrimaryLogo.src"
+            [alt]="familyCompanyPrimaryLogo.alt"
+            class="about-family-showcase__logo-image about-family-showcase__logo-image--primary"
+            loading="lazy">
+        </div>
+      </div>
+
+      <div class="about-family-showcase__logos about-family-showcase__logos--secondary">
+        @for (logo of familyCompanySecondaryLogos; track logo.src) {
           <div class="about-family-showcase__logo-item">
             <img [src]="logo.src" [alt]="logo.alt" class="about-family-showcase__logo-image" loading="lazy">
           </div>

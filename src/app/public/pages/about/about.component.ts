@@ -29,19 +29,19 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
   policiesContent = signal<ApiPageContent | null>(null);
   activeMobileMarqueeBrand = signal<string | null>(null);
   readonly marqueeGroups = [0, 1] as const;
-  readonly familyCompanyLogos = [
-    { src: '/logo.svg', alt: 'HESA' },
+  readonly familyCompanyPrimaryLogo = { src: '/logo.svg', alt: 'HESA' } as const;
+  readonly familyCompanySecondaryLogos = [
     { src: '/logozoofarma.svg', alt: 'ZooFarma' },
     { src: '/logosemilla.jpeg', alt: 'Semilla' },
     { src: '/logoimv.svg', alt: 'IMV' }
   ] as const;
   readonly familyCompaniesTitle = {
-    es: 'Una familia de empresas',
-    en: 'A family of companies'
+    es: 'Una red de confianza que comenzó en 1988',
+    en: 'A trusted network that began in 1988'
   } as const;
   readonly familyCompaniesCopy = {
-    es: 'Desde 1988, cuatro empresas han crecido juntas bajo la misma visión: ser el proveedor veterinario más confiable del país. Hoy operamos como un solo grupo con cobertura nacional.',
-    en: 'Since 1988, four companies have grown together under the same vision: to be the country’s most trusted veterinary supplier. Today we operate as one group with nationwide coverage.'
+    es: 'Lo que empezó como un negocio familiar hoy es un grupo de cuatro empresas respaldado por alianzas con los mejores fabricantes del sector. Juntos, atendemos a todo el mercado veterinario costarricense.',
+    en: 'What started as a family business is now a four-company group backed by partnerships with the best manufacturers in the sector. Together, we serve the entire Costa Rican veterinary market.'
   } as const;
 
   stats = [
