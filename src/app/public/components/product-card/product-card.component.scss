@@ -34,10 +34,10 @@
   }
 
   &--equipment {
-    --card-accent: #0f6b64;
-    --card-accent-soft: rgba(15, 118, 110, 0.14);
+    --card-accent: #1c9598;
+    --card-accent-soft: rgba(28, 149, 152, 0.14);
     --card-gradient: radial-gradient(circle at top right, rgba(255, 255, 255, 0.72), transparent 38%),
-      linear-gradient(180deg, rgba(240, 247, 246, 0.98) 0%, rgba(255, 255, 255, 1) 100%);
+      linear-gradient(180deg, rgba(236, 249, 250, 0.98) 0%, rgba(255, 255, 255, 1) 100%);
   }
 
   &:focus-visible {
@@ -169,8 +169,8 @@
   }
 
   &--equipment &__fact {
-    background: rgba(15, 118, 110, 0.1);
-    color: #0f6b64;
+    background: rgba(28, 149, 152, 0.1);
+    color: #1c9598;
   }
 
   &__footer {

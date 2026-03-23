@@ -206,7 +206,7 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
         es: 'Cobertura nacional',
         en: 'Nationwide coverage'
       },
-      color: '#1A8A7A',
+      color: '#1C9598',
       title: {
         es: 'Llegamos a donde está su negocio',
         en: 'We reach where your business is'

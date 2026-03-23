@@ -239,7 +239,7 @@ app-home {
       &[data-category='equipos'] {
         background:
           radial-gradient(circle at top right, rgba(255, 255, 255, 0.72), transparent 38%),
-          linear-gradient(180deg, rgba(240, 247, 246, 0.98) 0%, rgba(255, 255, 255, 1) 100%);
+          linear-gradient(180deg, rgba(236, 249, 250, 0.98) 0%, rgba(255, 255, 255, 1) 100%);
       }
 
       @media (max-width: 767px) {
@@ -869,7 +869,7 @@ app-home {
     &[data-category='equipos'] {
       background:
         radial-gradient(circle at top right, rgba(255, 255, 255, 0.72), transparent 38%),
-        linear-gradient(180deg, rgba(240, 247, 246, 0.98) 0%, rgba(255, 255, 255, 1) 100%);
+        linear-gradient(180deg, rgba(236, 249, 250, 0.98) 0%, rgba(255, 255, 255, 1) 100%);
     }
 
     &__media {
@@ -977,8 +977,8 @@ app-home {
     }
 
     &[data-category='equipos'] &__meta-pill {
-      background: rgba(15, 118, 110, 0.1);
-      color: #0f6b64;
+      background: rgba(28, 149, 152, 0.1);
+      color: #1c9598;
     }
 
     &__footer {
@@ -1349,9 +1349,9 @@ app-home {
     }
 
     &[data-category='equipos'] {
-      --hero-card-surface: rgba(240, 247, 246, 0.98);
-      --hero-card-meta-bg: rgba(15, 118, 110, 0.1);
-      --hero-card-meta-color: #0f6b64;
+      --hero-card-surface: rgba(236, 249, 250, 0.98);
+      --hero-card-meta-bg: rgba(28, 149, 152, 0.1);
+      --hero-card-meta-color: #1c9598;
     }
 
     @media (max-width: 991px) {
