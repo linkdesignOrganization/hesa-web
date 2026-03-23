@@ -50,7 +50,8 @@
                     alt=""
                     class="hero-columns__image"
                     [attr.loading]="$index === 0 ? 'eager' : 'lazy'"
-                    [attr.fetchpriority]="$index === 0 ? 'high' : 'low'">
+                    [attr.fetchpriority]="$index === 0 ? 'high' : 'low'"
+                    [attr.decoding]="$index === 0 ? 'sync' : 'async'">
                 </picture>
               } @else {
                 <div class="hero-columns__image-placeholder"></div>
@@ -194,8 +195,8 @@
 
     <article class="feature-card feature-card--video">
       <div class="feature-card__media" aria-hidden="true">
-        <video #featureVideoLayer class="feature-card__video" [class.feature-card__video--active]="activeFeatureVideoLayer() === 0" muted playsinline preload="auto" disablePictureInPicture></video>
-        <video #featureVideoLayer class="feature-card__video" [class.feature-card__video--active]="activeFeatureVideoLayer() === 1" muted playsinline preload="auto" disablePictureInPicture></video>
+        <video #featureVideoLayer class="feature-card__video" [class.feature-card__video--active]="activeFeatureVideoLayer() === 0" muted playsinline preload="metadata" disablePictureInPicture></video>
+        <video #featureVideoLayer class="feature-card__video" [class.feature-card__video--active]="activeFeatureVideoLayer() === 1" muted playsinline preload="metadata" disablePictureInPicture></video>
       </div>
       <div class="feature-card__video-content">
         <h3 class="feature-card__headline">

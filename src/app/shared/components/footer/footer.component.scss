@@ -53,6 +53,8 @@
     padding: 50px 24px 22px;
     background: var(--brand-primary);
     color: var(--neutral-white);
+    display: flex;
+    flex-direction: column;
 
     @media (min-width: 768px) {
       padding: 50px 32px 24px;
@@ -183,6 +185,8 @@
       align-items: flex-end;
       justify-content: space-between;
       gap: 14px;
+      margin-top: auto;
+      min-height: 118px;
     }
   }
 
@@ -206,8 +210,13 @@
 
   &__utility app-language-selector,
   &__utility .lang-footer {
+    display: inline-flex;
     margin-left: auto;
     align-self: flex-end;
+
+    @media (max-width: 767px) {
+      margin-top: auto;
+    }
   }
 
   &__contact-kicker {

@@ -92,6 +92,11 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   private parallaxCleanup: Array<() => void> = [];
   private parallaxAnimationFrame: number | null = null;
   private readonly viewportResizeHandler = (): void => this.syncViewportMode();
+  private readonly featureVideoBootstrap = (): void => {
+    window.removeEventListener('load', this.featureVideoBootstrap);
+    window.setTimeout(() => this.setupFeatureVideo(), 300);
+  };
+  private heroPreloadLinks: HTMLLinkElement[] = [];
 
   @ViewChildren('featureVideoLayer') featureVideoRefs?: QueryList<ElementRef<HTMLVideoElement>>;
   @ViewChildren('parallaxLayer') parallaxLayerRefs?: QueryList<ElementRef<HTMLElement>>;
@@ -377,6 +382,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         this.api.getBrands().catch(() => [] as ApiBrand[]),
       ]);
       this.hero.set(homeData.hero);
+      this.syncHeroPreload(homeData.hero.slides[0] ?? null);
       this.featuredShowcaseBrandLogos.set(
         this.toFeaturedShowcaseBrandLogos(brands, homeData.featuredBrands, homeData.featuredProducts)
       );
@@ -587,8 +593,12 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     window.addEventListener('resize', this.viewportResizeHandler, { passive: true });
     setTimeout(() => {
       this.fadeObserver = initFadeInObserver(this.el);
-      this.setupFeatureVideo();
       this.setupParallax();
+      if (document.readyState === 'complete') {
+        this.featureVideoBootstrap();
+      } else {
+        window.addEventListener('load', this.featureVideoBootstrap, { once: true });
+      }
     }, 500);
   }
 
@@ -638,7 +648,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       video.defaultMuted = true;
       video.muted = true;
       video.playsInline = true;
-      video.preload = 'auto';
+      video.preload = 'metadata';
       video.loop = false;
     });
 
@@ -754,7 +764,9 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     this.parallaxCleanup = [];
     if (typeof window !== 'undefined') {
       window.removeEventListener('resize', this.viewportResizeHandler);
+      window.removeEventListener('load', this.featureVideoBootstrap);
     }
+    this.clearHeroPreloadLinks();
     this.featureVideoListeners.forEach(removeListener => removeListener());
     this.featureVideoListeners = [];
     this.seo.clearDynamicTags();
@@ -763,5 +775,39 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   private syncViewportMode(): void {
     if (typeof window === 'undefined') return;
     this.isMobileViewport.set(window.innerWidth <= this.MOBILE_BREAKPOINT);
+  }
+
+  private syncHeroPreload(slide: ApiHeroSlide | null): void {
+    if (typeof document === 'undefined') return;
+
+    this.clearHeroPreloadLinks();
+
+    const sources = [slide?.imageDesktop, slide?.imageMobile].filter(
+      (value): value is string => typeof value === 'string' && value.trim().length > 0
+    );
+
+    const uniqueSources = [...new Set(sources)];
+    this.heroPreloadLinks = uniqueSources.map(source => {
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.as = 'image';
+      link.href = source;
+      document.head.appendChild(link);
+      return link;
+    });
+  }
+
+  private clearHeroPreloadLinks(): void {
+    if (typeof document === 'undefined' || this.heroPreloadLinks.length === 0) {
+      this.heroPreloadLinks = [];
+      return;
+    }
+
+    this.heroPreloadLinks.forEach(link => {
+      if (link.parentNode) {
+        link.parentNode.removeChild(link);
+      }
+    });
+    this.heroPreloadLinks = [];
   }
 }
