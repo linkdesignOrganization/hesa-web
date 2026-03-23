@@ -54,12 +54,13 @@ export class I18nService {
   }
 
   private detectLanguage(): void {
-    // BUG-V05: Use isPlatformBrowser for SSR safety
+    // Default site language is fixed to Spanish unless the URL explicitly requests English.
     if (!isPlatformBrowser(this.platformId)) {
-      // During server-side prerendering, detect from the router URL
       const url = this.router.url;
       if (url.startsWith('/en/') || url === '/en') {
         this.currentLang.set('en');
+      } else {
+        this.currentLang.set('es');
       }
       return;
     }
@@ -67,11 +68,8 @@ export class I18nService {
     const path = window.location.pathname;
     if (path.startsWith('/en/') || path === '/en') {
       this.currentLang.set('en');
-    } else if (path.startsWith('/es/') || path === '/es') {
-      this.currentLang.set('es');
     } else {
-      const browserLang = navigator.language?.substring(0, 2);
-      this.currentLang.set(browserLang === 'en' ? 'en' : 'es');
+      this.currentLang.set('es');
     }
   }
 

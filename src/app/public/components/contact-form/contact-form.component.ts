@@ -100,12 +100,66 @@ export class ContactFormComponent {
     return value.replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, '').trim();
   }
 
+  private clearFormLevelError(errs: Record<string, string>): void {
+    delete errs['_form'];
+  }
+
+  private getGenericSubmitErrorMsg(): string {
+    return this.i18n.currentLang() === 'es'
+      ? 'No pudimos enviar tu mensaje. Intenta de nuevo.'
+      : 'We could not send your message. Please try again.';
+  }
+
+  private mapBackendErrors(errors: Record<string, string>): Record<string, string> {
+    const mapped: Record<string, string> = {};
+
+    if (this.variant() === 'general') {
+      const fieldMap: Record<string, string> = {
+        consultationType: 'type',
+      };
+
+      for (const [key, message] of Object.entries(errors)) {
+        mapped[fieldMap[key] || key] = message;
+      }
+
+      return mapped;
+    }
+
+    const manufacturerFieldMap: Record<string, string> = {
+      companyName: 'company',
+      contactName: 'contactName',
+      contactEmail: 'contactEmail',
+      contactPhone: 'contactPhone',
+      country: 'country',
+      message: 'mfrMessage',
+      productTypes: 'productTypes',
+    };
+
+    for (const [key, message] of Object.entries(errors)) {
+      mapped[manufacturerFieldMap[key] || key] = message;
+    }
+
+    return mapped;
+  }
+
+  handleInputInteraction(): void {
+    const errs = { ...this.errors() };
+    this.clearFormLevelError(errs);
+
+    if (this.formState() === 'error') {
+      this.formState.set('idle');
+    }
+
+    this.errors.set(errs);
+  }
+
   validateField(field: string, value: string): void {
     // REQ-204: Reset error state when user interacts, allowing retry without losing data
     if (this.formState() === 'error') {
       this.formState.set('idle');
     }
     const errs = { ...this.errors() };
+    this.clearFormLevelError(errs);
     const maxLengthMap: Record<string, number> = {
       name: ContactFormComponent.MAX_NAME_LENGTH,
       contactName: ContactFormComponent.MAX_NAME_LENGTH,
@@ -172,6 +226,7 @@ export class ContactFormComponent {
     // Rate limiting: prevent spam submissions
     const now = Date.now();
     if (now - this.lastSubmitTime < ContactFormComponent.RATE_LIMIT_MS) {
+      this.formState.set('error');
       this.errors.set({ _form: this.getRateLimitMsg() });
       return;
     }
@@ -208,12 +263,12 @@ export class ContactFormComponent {
 
     this.errors.set(errs);
     if (Object.keys(errs).length > 0) {
+      this.formState.set('idle');
       this.scrollToFirstError();
       return;
     }
 
     this.formState.set('submitting');
-    this.lastSubmitTime = Date.now();
 
     try {
       if (this.variant() === 'general') {
@@ -238,9 +293,31 @@ export class ContactFormComponent {
           website: this.honeypot,
         });
       }
+      this.lastSubmitTime = Date.now();
       this.formState.set('success');
+      this.errors.set({});
     } catch (error: unknown) {
       console.error('Contact form submission failed:', error);
+      const httpError = error as {
+        status?: number;
+        error?: {
+          errors?: Record<string, string>;
+          error?: string;
+        };
+      };
+
+      if (httpError.status === 400 && httpError.error?.errors) {
+        const mappedErrors = this.mapBackendErrors(httpError.error.errors);
+        this.errors.set(mappedErrors);
+        this.formState.set('idle');
+        this.scrollToFirstError();
+        return;
+      }
+
+      const backendMessage = httpError.error?.error;
+      this.errors.set({
+        _form: backendMessage || this.getGenericSubmitErrorMsg(),
+      });
       this.formState.set('error');
     }
   }

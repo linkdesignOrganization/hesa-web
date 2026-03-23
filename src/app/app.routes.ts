@@ -9,7 +9,7 @@ import { unsavedChangesGuard } from './shared/guards/unsaved-changes.guard';
  * Components may further customize titles via SeoService.setMetaTags().
  */
 export const routes: Routes = [
-  // Root redirect to /es/ (default) -- actual language detection happens in AppComponent
+  // Root redirect to /es/ (default site language)
   { path: '', redirectTo: 'es', pathMatch: 'full' },
 
   // Spanish public routes

@@ -80,7 +80,6 @@ export class AdminSettingsComponent implements OnInit {
 
       if (this.activeTab === 'general') {
         data['siteName'] = this.config.siteName;
-        data['defaultLang'] = this.config.defaultLang;
         data['ga4Id'] = this.config.ga4Id;
         data['ga4Enabled'] = this.config.ga4Enabled;
         data['fbPixelId'] = this.config.fbPixelId;

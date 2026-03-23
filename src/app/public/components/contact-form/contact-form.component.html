@@ -13,7 +13,7 @@
     <p class="contact-form__success-desc">{{ i18n.currentLang() === 'es' ? 'Nos pondremos en contacto pronto. Gracias por escribirnos.' : 'We will get in touch soon. Thank you for writing to us.' }}</p>
   </div>
 } @else {
-  <form class="contact-form" (submit)="$event.preventDefault(); submit()" action="javascript:void(0)" method="post">
+  <form class="contact-form" (submit)="$event.preventDefault(); submit()" (input)="handleInputInteraction()" action="javascript:void(0)" method="post">
     <!-- Honeypot -->
     <div style="position: absolute; left: -9999px;">
       <input type="text" name="website" [(ngModel)]="honeypot" tabindex="-1" autocomplete="off">
@@ -310,7 +310,7 @@
       </div>
     }
 
-    @if (formState() === 'error') {
+    @if (formState() === 'error' && !errors()['_form']) {
       <div class="contact-form__error-msg" role="alert">
         {{ i18n.currentLang() === 'es' ? 'No pudimos enviar tu mensaje. Intenta de nuevo.' : 'We could not send your message. Please try again.' }}
       </div>

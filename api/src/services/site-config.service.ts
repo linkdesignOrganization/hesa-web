@@ -38,6 +38,7 @@ export async function getAllConfig(): Promise<Record<string, unknown>> {
     return accObj;
   }, null);
   if (latest) merged.updatedAt = latest.updatedAt;
+  merged.defaultLang = 'es';
   return merged;
 }
 
@@ -87,6 +88,7 @@ export async function getPublicConfig(): Promise<Record<string, unknown>> {
       }
     }
   }
+  result.defaultLang = 'es';
   return result;
 }
 

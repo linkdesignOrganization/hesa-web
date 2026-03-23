@@ -31,14 +31,6 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit(): void {
     // BUG-V05: Only run browser-specific logic in the browser (not during prerendering)
     if (isPlatformBrowser(this.platformId)) {
-      // Language detection: redirect root to appropriate language
-      const path = window.location.pathname;
-      if (path === '/' || path === '') {
-        const browserLang = navigator.language?.substring(0, 2);
-        const lang = browserLang === 'en' ? 'en' : 'es';
-        this.router.navigateByUrl('/' + lang, { replaceUrl: true });
-      }
-
       // Load site config for global OG image and analytics (NFR-027, NFR-029, NFR-030)
       this.loadSiteConfig();
     }

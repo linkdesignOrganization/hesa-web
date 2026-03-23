@@ -13,7 +13,7 @@ import { optimizeImageForProfile } from '../../utils/image-processor';
 
 /** Allowed fields per config key to prevent arbitrary field injection */
 const ALLOWED_FIELDS: Record<string, string[]> = {
-  general: ['siteName', 'defaultLang', 'logoUrl', 'ga4Id', 'ga4Enabled', 'fbPixelId', 'fbPixelEnabled'],
+  general: ['siteName', 'logoUrl', 'ga4Id', 'ga4Enabled', 'fbPixelId', 'fbPixelEnabled'],
   contacto: ['phone', 'email', 'address', 'hours', 'whatsapp'],
   redes: ['facebook', 'instagram', 'linkedin', 'youtube'],
   seo: ['metaTitle', 'metaDescription', 'ogImage'],
