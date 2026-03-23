@@ -507,6 +507,12 @@
   &__card--secondary &__cta {
     margin-top: auto;
   }
+
+  @media (max-width: 767px) {
+    &__card--secondary &__cta {
+      margin-top: 60px;
+    }
+  }
 }
 
 .partners-contact {
