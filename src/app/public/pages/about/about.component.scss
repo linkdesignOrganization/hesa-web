@@ -126,6 +126,10 @@
   &__inner {
     display: grid;
     gap: 30px;
+
+    @media (max-width: 767px) {
+      gap: 22px;
+    }
   }
 
   &__logos {
@@ -207,6 +211,10 @@
     max-width: 980px;
     margin: 18px auto 0;
     text-align: center;
+
+    @media (max-width: 767px) {
+      margin-top: 8px;
+    }
   }
 
   &__title {
@@ -236,6 +244,10 @@
   background: var(--neutral-white);
   padding: 40px 0 100px;
 
+  @media (max-width: 767px) {
+    padding: 28px 0 56px;
+  }
+
   &__grid {
     display: grid;
     grid-template-columns: minmax(0, 1.02fr) minmax(0, 0.98fr);
@@ -257,6 +269,11 @@
     flex-wrap: wrap;
     gap: 14px;
     margin-bottom: 34px;
+
+    @media (max-width: 767px) {
+      gap: 8px;
+      margin-bottom: 22px;
+    }
   }
 
   &__tag {
@@ -272,6 +289,11 @@
     letter-spacing: var(--tracking-tight);
     color: var(--neutral-700);
     white-space: nowrap;
+
+    @media (max-width: 767px) {
+      padding: 9px 12px;
+      font-size: 0.8rem;
+    }
   }
 
   &__title {
@@ -322,10 +344,10 @@
     -webkit-backdrop-filter: blur(18px) saturate(155%);
 
     @media (max-width: 767px) {
-      right: 16px;
-      bottom: 16px;
-      padding: 10px 14px;
-      font-size: 0.84rem;
+      right: 14px;
+      bottom: 14px;
+      padding: 9px 12px;
+      font-size: 0.78rem;
     }
   }
 

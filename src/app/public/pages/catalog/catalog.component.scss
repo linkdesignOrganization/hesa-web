@@ -746,12 +746,115 @@
     padding-bottom: var(--section-gap-mobile);
   }
 
-  .catalog-discovery__toolbar {
-    flex-direction: column;
+  .catalog-discovery__controls {
+    gap: 12px;
+    margin-top: 20px;
   }
 
-  .catalog-discovery__mobile-filters,
+  .catalog-discovery__hero-card {
+    padding: 20px;
+    border-radius: 26px;
+  }
+
+  .catalog-discovery__switcher {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    overflow: visible;
+    padding-bottom: 0;
+  }
+
+  .catalog-discovery__switch {
+    min-width: 0;
+    min-height: 40px;
+    justify-content: center;
+    gap: 6px;
+    padding: 0 12px;
+    font-size: 0.8rem;
+
+    .material-symbols-outlined {
+      font-size: 0.9rem;
+    }
+  }
+
+  .catalog-discovery__toolbar {
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+  }
+
   .catalog-discovery__search {
+    min-height: 42px;
+    padding: 0 14px;
+    font-size: 0.82rem;
+  }
+
+  .catalog-discovery__mobile-filters {
+    width: auto;
+    min-height: 42px;
+    padding: 0 14px;
+    font-size: 0.82rem;
+    flex: 0 0 auto;
+  }
+
+  .catalog-results__header {
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+
+  .catalog-results__summary-badge {
+    min-height: 36px;
+    padding: 0 12px;
+    font-size: 0.82rem;
+  }
+
+  .catalog-results__pills {
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+
+  .catalog-results__pill {
+    min-height: 36px;
+    padding: 0 8px 0 12px;
+    font-size: 0.8rem;
+  }
+
+  .catalog-results__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .catalog-results__skeleton {
+    min-height: 320px;
+    border-radius: 24px;
+  }
+
+  .catalog-state {
+    min-height: 300px;
+    padding: 36px 18px;
+    border-radius: 28px;
+  }
+
+  .catalog-pagination {
+    margin-top: 24px;
+    padding-top: 16px;
+  }
+
+  .catalog-pagination__summary {
     width: 100%;
+    font-size: 0.82rem;
+  }
+
+  .catalog-pagination__controls {
+    width: 100%;
+    justify-content: space-between;
+    gap: 6px;
+  }
+
+  .catalog-pagination__btn {
+    min-width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    flex: 1 1 auto;
   }
 }

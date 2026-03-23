@@ -60,6 +60,9 @@
     @media (max-width: 767px) {
       .btn {
         width: 100%;
+        min-height: 46px;
+        padding: 12px 20px;
+        font-size: 13px;
       }
     }
 

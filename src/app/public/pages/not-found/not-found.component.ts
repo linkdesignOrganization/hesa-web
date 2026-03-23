@@ -62,6 +62,30 @@ import { I18nService } from '../../../shared/services/i18n.service';
       justify-content: center;
       flex-wrap: wrap;
     }
+    @media (max-width: 767px) {
+      .not-found-page {
+        min-height: 72vh;
+        padding: 40px 0;
+      }
+      .not-found-page__content {
+        max-width: 100%;
+      }
+      .not-found-page__desc {
+        font-size: 14px;
+        margin-bottom: 24px;
+      }
+      .not-found-page__actions {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+      .not-found-page__actions .btn {
+        width: 100%;
+        min-height: 44px;
+        padding: 0 12px;
+        font-size: 13px;
+      }
+    }
   `]
 })
 export class NotFoundComponent {

@@ -7,8 +7,8 @@
   padding-bottom: 96px;
 
   @media (max-width: 767px) {
-    padding-top: 100px;
-    padding-bottom: 64px;
+    padding-top: 92px;
+    padding-bottom: 48px;
   }
 
   // ---- Header ----
@@ -167,6 +167,11 @@
     grid-template-columns: 1fr;
     gap: 24px;
 
+    @media (max-width: 767px) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
     @media (min-width: 768px) {
       grid-template-columns: repeat(2, 1fr);
     }
@@ -185,6 +190,11 @@
     display: grid;
     grid-template-columns: 1fr;
     gap: 24px;
+
+    @media (max-width: 767px) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
 
     @media (min-width: 768px) {
       grid-template-columns: repeat(2, 1fr);

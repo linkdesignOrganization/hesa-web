@@ -11,8 +11,8 @@
     linear-gradient(180deg, #f2f7ff 0%, #c6e8ff 100%);
 
   @media (max-width: 767px) {
-    padding-top: 110px;
-    padding-bottom: 36px;
+    padding-top: 96px;
+    padding-bottom: 28px;
   }
 
   .text-eyebrow {
@@ -54,7 +54,7 @@
   padding-block: 64px 96px;
 
   @media (max-width: 767px) {
-    padding-block: 40px 64px;
+    padding-block: 32px 52px;
   }
 }
 
@@ -69,6 +69,10 @@
     gap: 80px;
     align-items: start;
   }
+
+  @media (max-width: 767px) {
+    gap: 28px;
+  }
 }
 
 // ---- Contact information sidebar ----
@@ -77,16 +81,30 @@
   flex-direction: column;
   gap: 36px;
 
+  @media (max-width: 767px) {
+    gap: 24px;
+  }
+
   &__blocks {
     display: flex;
     flex-direction: column;
     gap: 28px;
+
+    @media (max-width: 767px) {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px 12px;
+    }
   }
 
   &__block {
     display: flex;
     align-items: flex-start;
     gap: 16px;
+
+    @media (max-width: 767px) {
+      gap: 10px;
+    }
   }
 
   &__icon {
@@ -98,6 +116,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
+    @media (max-width: 767px) {
+      width: 38px;
+      height: 38px;
+      border-radius: 14px;
+    }
   }
 
   &__label {
@@ -114,6 +138,10 @@
     color: var(--neutral-900);
     line-height: var(--leading-normal);
     font-weight: var(--weight-medium);
+
+    @media (max-width: 767px) {
+      font-size: 13px;
+    }
   }
 
   // Social links
@@ -134,6 +162,10 @@
   &__social-links {
     display: flex;
     gap: 12px;
+
+    @media (max-width: 767px) {
+      gap: 10px;
+    }
   }
 
   &__social-link {
@@ -152,6 +184,12 @@
       color: var(--neutral-white);
       transform: translateY(-2px);
       box-shadow: var(--shadow-sm);
+    }
+
+    @media (max-width: 767px) {
+      width: 40px;
+      height: 40px;
+      border-radius: 16px;
     }
   }
 
@@ -180,7 +218,7 @@
   border: 1px solid var(--neutral-100);
 
   @media (max-width: 767px) {
-    padding: 28px 20px;
+    padding: 24px 18px;
     border-radius: var(--radius-card-public);
   }
 }

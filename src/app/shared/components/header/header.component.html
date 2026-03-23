@@ -247,18 +247,41 @@
   </div>
 
   <nav class="mobile-menu__nav">
-    <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/farmacos' : 'catalog/pharmaceuticals')" class="mobile-menu__link" (click)="closeMobileMenu()"><span class="material-symbols-outlined mobile-menu__link-icon" aria-hidden="true">{{ categoryIcons.farmacos }}</span><span>{{ i18n.currentLang() === 'es' ? 'Fármacos' : 'Pharmaceuticals' }}</span></a>
-    <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/alimentos' : 'catalog/food')" class="mobile-menu__link" (click)="closeMobileMenu()"><span class="material-symbols-outlined mobile-menu__link-icon" aria-hidden="true">{{ categoryIcons.alimentos }}</span><span>{{ i18n.currentLang() === 'es' ? 'Alimentos' : 'Food' }}</span></a>
-    <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/equipos' : 'catalog/equipment')" class="mobile-menu__link" (click)="closeMobileMenu()"><span class="material-symbols-outlined mobile-menu__link-icon" aria-hidden="true">{{ categoryIcons.equipos }}</span><span>{{ i18n.currentLang() === 'es' ? 'Equipos' : 'Equipment' }}</span></a>
-    <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo' : 'catalog')" class="mobile-menu__link" (click)="closeMobileMenu()">{{ i18n.currentLang() === 'es' ? 'Ver todos' : 'Shop All' }}</a>
-    <div class="mobile-menu__divider"></div>
-    <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'marcas' : 'brands')" class="mobile-menu__link mobile-menu__link--secondary" (click)="closeMobileMenu()">{{ i18n.currentLang() === 'es' ? 'Marcas' : 'Brands' }}</a>
-    <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'nosotros' : 'about')" class="mobile-menu__link mobile-menu__link--secondary" (click)="closeMobileMenu()">{{ i18n.currentLang() === 'es' ? 'Nosotros' : 'About' }}</a>
-    <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'distribuidores' : 'distributors')" class="mobile-menu__link mobile-menu__link--secondary" (click)="closeMobileMenu()">{{ i18n.currentLang() === 'es' ? 'Nuevo Partner' : 'New Partner' }}</a>
-    <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'contacto' : 'contact')" class="mobile-menu__link mobile-menu__link--secondary" (click)="closeMobileMenu()">{{ i18n.currentLang() === 'es' ? 'Contacto' : 'Contact' }}</a>
+    <div class="mobile-menu__primary-grid">
+      <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/farmacos' : 'catalog/pharmaceuticals')" class="mobile-menu__primary-card" (click)="closeMobileMenu()">
+        <span class="material-symbols-outlined mobile-menu__primary-icon" aria-hidden="true">{{ categoryIcons.farmacos }}</span>
+        <span>{{ i18n.currentLang() === 'es' ? 'Fármacos' : 'Pharmaceuticals' }}</span>
+      </a>
+      <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/alimentos' : 'catalog/food')" class="mobile-menu__primary-card" (click)="closeMobileMenu()">
+        <span class="material-symbols-outlined mobile-menu__primary-icon" aria-hidden="true">{{ categoryIcons.alimentos }}</span>
+        <span>{{ i18n.currentLang() === 'es' ? 'Alimentos' : 'Food' }}</span>
+      </a>
+      <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/equipos' : 'catalog/equipment')" class="mobile-menu__primary-card" (click)="closeMobileMenu()">
+        <span class="material-symbols-outlined mobile-menu__primary-icon" aria-hidden="true">{{ categoryIcons.equipos }}</span>
+        <span>{{ i18n.currentLang() === 'es' ? 'Equipos' : 'Equipment' }}</span>
+      </a>
+      <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo' : 'catalog')" class="mobile-menu__primary-card mobile-menu__primary-card--all" (click)="closeMobileMenu()">
+        <span class="material-symbols-outlined mobile-menu__primary-icon" aria-hidden="true">grid_view</span>
+        <span>{{ i18n.currentLang() === 'es' ? 'Ver todos' : 'Shop all' }}</span>
+      </a>
+    </div>
+
+    <div class="mobile-menu__secondary-links">
+      <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'marcas' : 'brands')" class="mobile-menu__secondary-link" (click)="closeMobileMenu()">{{ i18n.currentLang() === 'es' ? 'Marcas' : 'Brands' }}</a>
+      <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'nosotros' : 'about')" class="mobile-menu__secondary-link" (click)="closeMobileMenu()">{{ i18n.currentLang() === 'es' ? 'Nosotros' : 'About' }}</a>
+      <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'distribuidores' : 'distributors')" class="mobile-menu__secondary-link" (click)="closeMobileMenu()">{{ i18n.currentLang() === 'es' ? 'Nuevo Partner' : 'New Partner' }}</a>
+      <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'contacto' : 'contact')" class="mobile-menu__secondary-link" (click)="closeMobileMenu()">{{ i18n.currentLang() === 'es' ? 'Contacto' : 'Contact' }}</a>
+    </div>
   </nav>
 
   <div class="mobile-menu__footer">
+    <a
+      [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'contacto' : 'contact')"
+      class="mobile-menu__support"
+      (click)="closeMobileMenu()">
+      <span class="material-symbols-outlined" aria-hidden="true">headset_mic</span>
+      <span>{{ i18n.currentLang() === 'es' ? 'Soporte' : 'Support' }}</span>
+    </a>
     <app-language-selector variant="header" />
   </div>
 </div>

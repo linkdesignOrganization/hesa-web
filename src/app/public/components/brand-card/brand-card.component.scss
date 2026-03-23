@@ -108,15 +108,26 @@
   }
 
   @media (max-width: 767px) {
-    padding: 16px;
+    padding: 14px;
+    gap: 12px;
 
     &__logo-wrapper {
-      min-height: 124px;
-      border-radius: 22px;
+      min-height: 108px;
+      padding: 18px 14px;
+      border-radius: 20px;
     }
 
     &__logo-img {
-      max-height: 72px;
+      max-height: 58px;
+    }
+
+    &__name {
+      font-size: 0.96rem;
+    }
+
+    &__country {
+      font-size: 0.8rem;
+      margin-bottom: 4px;
     }
   }
 }
