@@ -290,7 +290,7 @@
     <div class="featured-showcase__marquee" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Marcas destacadas de esta selección' : 'Featured brands in this selection'">
       <div class="featured-showcase__marquee-track">
         @for (group of showcaseMarqueeGroups; track group) {
-          <div class="featured-showcase__marquee-group" [attr.aria-hidden]="group === 1">
+          <div class="featured-showcase__marquee-group" [attr.aria-hidden]="group > 0">
             @for (logo of featuredShowcaseBrandLogos(); track logo.name) {
               <div class="featured-showcase__marquee-item">
                 <img [src]="logo.src" [alt]="logo.name" class="featured-showcase__marquee-logo" loading="lazy">

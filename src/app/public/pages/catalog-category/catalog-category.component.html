@@ -12,19 +12,21 @@
           <p class="catalog-discovery__description">{{ heroDescription }}</p>
         </div>
 
-        <div class="catalog-discovery__hero-card">
-          <span class="catalog-discovery__hero-label">
-            {{ i18n.currentLang() === 'es' ? 'En esta categoría' : 'In this category' }}
-          </span>
-          <div class="catalog-discovery__hero-badges">
-            @for (badge of categorySummaryBadges(); track badge.key) {
-              <span class="catalog-discovery__hero-badge">
-                <strong>{{ badge.value }}</strong>
-                <span>{{ badge.label }}</span>
-              </span>
-            }
+        @if (!isMobileViewport()) {
+          <div class="catalog-discovery__hero-card">
+            <span class="catalog-discovery__hero-label">
+              {{ i18n.currentLang() === 'es' ? 'En esta categoría' : 'In this category' }}
+            </span>
+            <div class="catalog-discovery__hero-badges">
+              @for (badge of categorySummaryBadges(); track badge.key) {
+                <span class="catalog-discovery__hero-badge">
+                  <strong>{{ badge.value }}</strong>
+                  <span>{{ badge.label }}</span>
+                </span>
+              }
+            </div>
           </div>
-        </div>
+        }
       </div>
 
       <div class="catalog-discovery__controls">

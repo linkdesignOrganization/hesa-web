@@ -25,7 +25,7 @@ export class DistributorsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   content = signal<ApiPageContent | null>(null);
   brands = signal<ApiBrand[]>([]);
-  readonly marqueeGroups = [0, 1] as const;
+  readonly marqueeGroups = [0, 1, 2, 3] as const;
 
   readonly headerCards = [
     {

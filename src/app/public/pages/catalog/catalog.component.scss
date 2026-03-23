@@ -746,14 +746,13 @@
     padding-bottom: var(--section-gap-mobile);
   }
 
+  .catalog-discovery__hero-card {
+    display: none;
+  }
+
   .catalog-discovery__controls {
     gap: 12px;
     margin-top: 20px;
-  }
-
-  .catalog-discovery__hero-card {
-    padding: 20px;
-    border-radius: 26px;
   }
 
   .catalog-discovery__switcher {

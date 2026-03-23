@@ -190,7 +190,12 @@
 
               <a class="btn product-detail__hero-cta product-detail__hero-cta--dark-outline" [routerLink]="contactRoute" [queryParams]="availabilityContactParams">
                 <span class="material-symbols-outlined" aria-hidden="true">contact_support</span>
-                {{ i18n.currentLang() === 'es' ? 'Consultar disponibilidad' : 'Check availability' }}
+                <span class="product-detail__hero-cta-label product-detail__hero-cta-label--desktop">
+                  {{ i18n.currentLang() === 'es' ? 'Consultar disponibilidad' : 'Check availability' }}
+                </span>
+                <span class="product-detail__hero-cta-label product-detail__hero-cta-label--mobile">
+                  {{ i18n.currentLang() === 'es' ? 'Consultar' : 'Check' }}
+                </span>
               </a>
             </div>
           </div>

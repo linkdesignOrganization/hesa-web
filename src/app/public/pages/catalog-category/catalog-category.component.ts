@@ -58,6 +58,7 @@ export class CatalogCategoryComponent implements OnInit, OnDestroy {
   pageSize = 12;
   mobileFiltersOpen = signal(false);
   searchTerm = signal('');
+  isMobileViewport = signal(typeof window !== 'undefined' ? window.innerWidth <= 767 : false);
   Math = Math;
 
   selectedSpecies = signal<string[]>([]);
@@ -78,6 +79,7 @@ export class CatalogCategoryComponent implements OnInit, OnDestroy {
   });
 
   private searchDebounceId: ReturnType<typeof setTimeout> | null = null;
+  private readonly viewportResizeHandler = () => this.syncViewportMode();
   readonly categoryTabs: ProductCategoryKey[] = ['farmacos', 'alimentos', 'equipos'];
 
   activeFilters = computed<FilterChip[]>(() => {
@@ -261,6 +263,10 @@ export class CatalogCategoryComponent implements OnInit, OnDestroy {
   }
 
   async ngOnInit(): Promise<void> {
+    this.syncViewportMode();
+    if (typeof window !== 'undefined') {
+      window.addEventListener('resize', this.viewportResizeHandler);
+    }
     const url = this.route.snapshot.url;
     this.categorySlug = url[url.length - 1]?.path || '';
     this.restoreFiltersFromUrl();
@@ -285,6 +291,9 @@ export class CatalogCategoryComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.seo.clearDynamicTags();
     this.clearSearchDebounce();
+    if (typeof window !== 'undefined') {
+      window.removeEventListener('resize', this.viewportResizeHandler);
+    }
   }
 
   getCategoryLink(category: ProductCategoryKey): string {
@@ -310,6 +319,11 @@ export class CatalogCategoryComponent implements OnInit, OnDestroy {
 
   getLocalizedOption(option: { es: string; en: string }): string {
     return this.i18n.currentLang() === 'es' ? option.es : (option.en || option.es);
+  }
+
+  private syncViewportMode(): void {
+    if (typeof window === 'undefined') return;
+    this.isMobileViewport.set(window.innerWidth <= 767);
   }
 
   isFilterSelected(key: FilterKey, value: string): boolean {

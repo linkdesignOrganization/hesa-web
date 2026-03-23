@@ -83,7 +83,7 @@
     }
 
     @media (max-width: 767px) {
-      padding: 36px 18px 16px;
+      padding: 36px 18px 28px;
     }
   }
 
@@ -179,8 +179,9 @@
     border-top: none;
 
     @media (max-width: 767px) {
-      flex-direction: column;
-      align-items: flex-start;
+      flex-direction: row;
+      align-items: flex-end;
+      justify-content: space-between;
       gap: 14px;
     }
   }
@@ -189,6 +190,7 @@
     display: inline-flex;
     align-items: center;
     gap: 16px;
+    min-width: 0;
   }
 
   &__utility-logo {
@@ -200,6 +202,12 @@
     @media (max-width: 767px) {
       height: 126px;
     }
+  }
+
+  &__utility app-language-selector,
+  &__utility .lang-footer {
+    margin-left: auto;
+    align-self: flex-end;
   }
 
   &__contact-kicker {

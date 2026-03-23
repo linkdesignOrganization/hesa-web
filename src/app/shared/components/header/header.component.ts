@@ -103,6 +103,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     if (typeof window !== 'undefined') {
       window.removeEventListener('scroll', this.onScroll);
     }
+    this.syncMobileMenuState(false);
   }
 
   toggleMega(category: MegaCategory): void {
@@ -124,17 +125,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   toggleMobileMenu(): void {
-    this.isMobileMenuOpen.update(v => !v);
-    if (this.isMobileMenuOpen()) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
+    const nextValue = !this.isMobileMenuOpen();
+    this.isMobileMenuOpen.set(nextValue);
+    this.syncMobileMenuState(nextValue);
   }
 
   closeMobileMenu(): void {
     this.isMobileMenuOpen.set(false);
-    document.body.style.overflow = '';
+    this.syncMobileMenuState(false);
   }
 
   toggleSubmenu(): void {
@@ -297,6 +295,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
   closeHeaderMenus(): void {
     this.closeMega();
     this.closeAboutMenu();
+  }
+
+  private syncMobileMenuState(isOpen: boolean): void {
+    if (typeof document === 'undefined') return;
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+    document.body.classList.toggle('mobile-menu-open', isOpen);
   }
 
   private async loadMegaFilters(): Promise<void> {

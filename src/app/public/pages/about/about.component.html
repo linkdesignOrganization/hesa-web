@@ -36,7 +36,7 @@
         [class.about-brand-marquee__track--paused]="!!activeMobileMarqueeBrand()"
         [attr.aria-label]="i18n.currentLang() === 'es' ? 'Marcas del grupo HESA' : 'HESA group brands'">
         @for (group of marqueeGroups; track group) {
-          <div class="about-brand-marquee__group" [attr.aria-hidden]="group === 1">
+          <div class="about-brand-marquee__group" [attr.aria-hidden]="group > 0">
             @for (brand of brands(); track brand._id) {
               <a
                 [routerLink]="buildBrandRoute(brand.slug)"
@@ -176,8 +176,8 @@
             <span class="material-symbols-outlined about-horizontal-advantages__mobile-icon">keyboard_arrow_down</span>
           </button>
 
-          @if (activeAdvantageTab() === item.id) {
-            <div class="about-horizontal-advantages__mobile-panel">
+          <div class="about-horizontal-advantages__mobile-panel">
+            <div class="about-horizontal-advantages__mobile-panel-inner">
               <div class="about-horizontal-advantages__media">
                 @switch (item.mediaType) {
                   @case ('brands') {
@@ -224,7 +224,7 @@
                 }
               </div>
             </div>
-          }
+          </div>
         </article>
       }
     </div>
@@ -243,7 +243,7 @@
     <div class="about-team-showcase__viewport">
       <div class="about-team-showcase__track">
         @for (group of teamShowcaseMarqueeGroups; track group) {
-          <div class="about-team-showcase__group" [attr.aria-hidden]="group === 1">
+          <div class="about-team-showcase__group" [attr.aria-hidden]="group > 0">
             @for (image of teamShowcaseImages; track image.src) {
               <figure class="about-team-showcase__item">
                 <img [src]="image.src" [alt]="image.alt" class="about-team-showcase__image" loading="lazy">

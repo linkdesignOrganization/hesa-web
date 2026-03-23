@@ -8,7 +8,7 @@
   }
 
   100% {
-    transform: translateX(-50%);
+    transform: translateX(-25%);
   }
 }
 
@@ -18,7 +18,7 @@
   }
 
   100% {
-    transform: translateX(-50%);
+    transform: translateX(-25%);
   }
 }
 
@@ -150,9 +150,18 @@
     }
 
     @media (max-width: 767px) {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 28px 20px;
-      max-width: 420px;
+      gap: 24px 16px;
+
+      &--primary {
+        grid-template-columns: 1fr;
+        max-width: 100%;
+      }
+
+      &--secondary {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px 12px;
+        max-width: 100%;
+      }
     }
   }
 
@@ -451,8 +460,10 @@
       linear-gradient(180deg, #f2f7ff 0%, #c6e8ff 100%);
 
     @media (max-width: 767px) {
-      flex-basis: 280px;
+      flex-basis: clamp(232px, 72vw, 280px);
       border-radius: 24px;
+      background: transparent;
+      box-shadow: none;
     }
   }
 
@@ -461,6 +472,7 @@
     height: 100%;
     object-fit: cover;
     display: block;
+    border-radius: inherit;
   }
 
   &__badge {
@@ -494,6 +506,14 @@
       max-width: calc(100% - 24px);
       padding: 9px 12px;
       font-size: 0.82rem;
+    }
+  }
+}
+
+.alliances-insight-section {
+  @media (max-width: 767px) {
+    &__chrome {
+      gap: 96px;
     }
   }
 }

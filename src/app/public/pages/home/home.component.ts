@@ -70,6 +70,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   private readonly FEATURE_VIDEO_FADE_MS = 700;
   private readonly FEATURE_VIDEO_SWITCH_THRESHOLD_SECONDS = 0.55;
   private readonly SHOWCASE_TAB_FADE_MS = 180;
+  private readonly MOBILE_BREAKPOINT = 767;
   private readonly featureVideoSources = [
     '/cat.mp4',
     '/dog.mp4',
@@ -90,6 +91,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   private showcaseTransitionTimeout: ReturnType<typeof setTimeout> | null = null;
   private parallaxCleanup: Array<() => void> = [];
   private parallaxAnimationFrame: number | null = null;
+  private readonly viewportResizeHandler = (): void => this.syncViewportMode();
 
   @ViewChildren('featureVideoLayer') featureVideoRefs?: QueryList<ElementRef<HTMLVideoElement>>;
   @ViewChildren('parallaxLayer') parallaxLayerRefs?: QueryList<ElementRef<HTMLElement>>;
@@ -103,6 +105,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   });
 
   activeSlide = signal(0);
+  isMobileViewport = signal(false);
 
   heroMode = computed(() => this.hero().mode);
   activeFeatureVideoLayer = signal<0 | 1>(0);
@@ -131,7 +134,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   readonly featuredShowcaseBrandLogos = signal<FeaturedShowcaseBrandLogo[]>(this.featuredShowcaseFallbackBrandLogos);
 
-  readonly showcaseMarqueeGroups = [0, 1] as const;
+  readonly showcaseMarqueeGroups = [0, 1, 2, 3] as const;
 
   private readonly featuredShowcaseFallbackItems: Record<FeaturedShowcaseCategoryId, FeaturedShowcaseItem[]> = {
     farmacos: [
@@ -348,11 +351,13 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     const tab = this.featuredShowcaseTabs.find(item => item.id === this.activeShowcaseTab()) ?? this.featuredShowcaseTabs[0];
     return {
       ...tab,
-      items: this.featuredShowcaseItems()[tab.id] ?? []
+      items: (this.featuredShowcaseItems()[tab.id] ?? []).slice(0, this.isMobileViewport() ? 4 : 3)
     };
   });
 
   async ngOnInit(): Promise<void> {
+    this.syncViewportMode();
+
     // NFR-006/NFR-008: Home page SEO
     const lang = this.i18n.currentLang();
     this.seo.setMetaTags({
@@ -488,7 +493,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       if (!pool.length) continue;
 
       nextState[category] = this.shuffle(pool)
-        .slice(0, 3)
+        .slice(0, 6)
         .map(product => this.toFeaturedShowcaseItem(product));
     }
 
@@ -579,6 +584,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     if (typeof window === 'undefined') return;
+    window.addEventListener('resize', this.viewportResizeHandler, { passive: true });
     setTimeout(() => {
       this.fadeObserver = initFadeInObserver(this.el);
       this.setupFeatureVideo();
@@ -746,8 +752,16 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     this.parallaxCleanup.forEach(cleanup => cleanup());
     this.parallaxCleanup = [];
+    if (typeof window !== 'undefined') {
+      window.removeEventListener('resize', this.viewportResizeHandler);
+    }
     this.featureVideoListeners.forEach(removeListener => removeListener());
     this.featureVideoListeners = [];
     this.seo.clearDynamicTags();
+  }
+
+  private syncViewportMode(): void {
+    if (typeof window === 'undefined') return;
+    this.isMobileViewport.set(window.innerWidth <= this.MOBILE_BREAKPOINT);
   }
 }

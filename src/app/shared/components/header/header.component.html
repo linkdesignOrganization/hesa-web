@@ -247,6 +247,8 @@
   </div>
 
   <nav class="mobile-menu__nav">
+    <p class="mobile-menu__title">{{ i18n.currentLang() === 'es' ? 'Seleccione una opción' : 'Select an option' }}</p>
+
     <div class="mobile-menu__primary-grid">
       <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/farmacos' : 'catalog/pharmaceuticals')" class="mobile-menu__primary-card" (click)="closeMobileMenu()">
         <span class="material-symbols-outlined mobile-menu__primary-icon" aria-hidden="true">{{ categoryIcons.farmacos }}</span>
@@ -280,7 +282,7 @@
       class="mobile-menu__support"
       (click)="closeMobileMenu()">
       <span class="material-symbols-outlined" aria-hidden="true">headset_mic</span>
-      <span>{{ i18n.currentLang() === 'es' ? 'Soporte' : 'Support' }}</span>
+      <span>{{ i18n.currentLang() === 'es' ? 'Contacto' : 'Contact' }}</span>
     </a>
     <app-language-selector variant="header" />
   </div>

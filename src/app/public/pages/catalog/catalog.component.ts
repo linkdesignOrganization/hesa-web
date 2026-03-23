@@ -57,6 +57,7 @@ export class CatalogComponent implements OnInit, OnDestroy {
   pageSize = 12;
   mobileFiltersOpen = signal(false);
   catalogBaseTotal = signal(0);
+  isMobileViewport = signal(typeof window !== 'undefined' ? window.innerWidth <= 767 : false);
 
   selectedCategory = signal<CatalogCategoryKey>('');
   selectedBrandIds = signal<string[]>([]);
@@ -75,6 +76,7 @@ export class CatalogComponent implements OnInit, OnDestroy {
   });
 
   private searchDebounceId: ReturnType<typeof setTimeout> | null = null;
+  private readonly viewportResizeHandler = () => this.syncViewportMode();
 
   readonly categoryTabs: Exclude<CatalogCategoryKey, ''>[] = ['farmacos', 'alimentos', 'equipos'];
 
@@ -260,6 +262,10 @@ export class CatalogComponent implements OnInit, OnDestroy {
   }
 
   async ngOnInit(): Promise<void> {
+    this.syncViewportMode();
+    if (typeof window !== 'undefined') {
+      window.addEventListener('resize', this.viewportResizeHandler);
+    }
     this.restoreFiltersFromUrl();
 
     const lang = this.i18n.currentLang();
@@ -281,6 +287,9 @@ export class CatalogComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.seo.clearDynamicTags();
     this.clearSearchDebounce();
+    if (typeof window !== 'undefined') {
+      window.removeEventListener('resize', this.viewportResizeHandler);
+    }
   }
 
   getLocalizedCategoryLabel(category: Exclude<CatalogCategoryKey, ''>): string {
@@ -322,6 +331,11 @@ export class CatalogComponent implements OnInit, OnDestroy {
 
   showEquipmentTypeFilter(): boolean {
     return this.selectedCategory() === 'equipos';
+  }
+
+  private syncViewportMode(): void {
+    if (typeof window === 'undefined') return;
+    this.isMobileViewport.set(window.innerWidth <= 767);
   }
 
   async selectCategory(category: CatalogCategoryKey): Promise<void> {

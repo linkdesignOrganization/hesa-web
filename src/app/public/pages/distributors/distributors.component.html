@@ -18,7 +18,12 @@
       </div>
     </div>
 
-    <div class="partners-page__hero-stage fade-in-section">
+    <div class="partners-page__hero-stage fade-in-section" data-parallax-section>
+      <div
+        class="partners-page__hero-stage-media"
+        data-parallax-layer
+        data-parallax-speed="0.18"
+        aria-hidden="true"></div>
       <div class="partners-page__hero-stage-grid">
         @for (card of headerCards; track card.title.es) {
           <article class="partners-header-card">
@@ -50,7 +55,7 @@
         class="partners-brand-marquee__track"
         [attr.aria-label]="i18n.currentLang() === 'es' ? 'Marcas asociadas con HESA' : 'Brands partnered with HESA'">
         @for (group of marqueeGroups; track group) {
-          <div class="partners-brand-marquee__group" [attr.aria-hidden]="group === 1">
+          <div class="partners-brand-marquee__group" [attr.aria-hidden]="group > 0">
             @for (brand of brands(); track brand._id) {
               <a
                 [routerLink]="buildBrandRoute(brand.slug)"
@@ -82,8 +87,10 @@
       </article>
 
       <article class="partners-operations__card partners-operations__card--secondary">
-        <h3 class="partners-operations__title">{{ i18n.t(operationalCards.card2.title) }}</h3>
-        <p class="partners-operations__body">{{ i18n.t(operationalCards.card2.body) }}</p>
+        <div class="partners-operations__copy-block">
+          <h3 class="partners-operations__title">{{ i18n.t(operationalCards.card2.title) }}</h3>
+          <p class="partners-operations__body">{{ i18n.t(operationalCards.card2.body) }}</p>
+        </div>
         <button type="button" class="btn btn-dark partners-operations__cta" (click)="scrollToContactForm()">
           <span>{{ i18n.t(operationalCards.card2.cta) }}</span>
           <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>

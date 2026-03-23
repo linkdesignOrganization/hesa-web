@@ -61,9 +61,18 @@ app-header {
       flex: 1;
       display: flex;
       flex-direction: column;
-      gap: 18px;
-      padding: 18px 14px 20px;
+      gap: 20px;
+      padding: 16px 0 20px;
       overflow-y: auto;
+    }
+
+    &__title {
+      margin: 0;
+      padding: 0 16px;
+      color: var(--neutral-900);
+      font-size: 15px;
+      font-weight: var(--weight-semibold);
+      line-height: 1.35;
     }
 
     &__primary-grid,
@@ -75,46 +84,43 @@ app-header {
     }
 
     &__primary-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
+      grid-template-columns: 1fr;
+      gap: 0;
     }
 
     &__primary-card {
-      min-height: 92px;
-      padding: 16px 14px;
-      border-radius: 24px;
-      background:
-        radial-gradient(circle at top right, rgba(255, 255, 255, 0.76), transparent 42%),
-        linear-gradient(180deg, #f2f7ff 0%, #c6e8ff 100%);
+      min-height: 72px;
+      padding: 18px 16px;
+      border-radius: 0;
+      background: transparent;
+      border-top: 1px solid rgba(15, 23, 42, 0.08);
+      border-bottom: 1px solid rgba(15, 23, 42, 0.08);
       color: var(--neutral-900);
       text-decoration: none;
       display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 12px;
-      box-shadow: 0 18px 32px rgba(15, 23, 42, 0.05);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 14px;
+      box-shadow: none;
+      transition: background-color 0.2s ease, color 0.2s ease;
 
       &:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 22px 34px rgba(15, 23, 42, 0.08);
+        background: rgba(15, 23, 42, 0.03);
       }
 
       span:last-child {
-        font-size: 14px;
+        font-size: 16px;
         font-weight: var(--weight-bold);
-        line-height: 1.15;
+        line-height: 1.2;
       }
 
       &--all {
-        background:
-          radial-gradient(circle at top right, rgba(255, 255, 255, 0.8), transparent 42%),
-          linear-gradient(180deg, #f5faec 0%, #e3eed7 100%);
+        background: transparent;
       }
     }
 
     &__primary-icon {
-      font-size: 20px;
+      font-size: 26px;
       line-height: 1;
       color: rgba(15, 23, 42, 0.7);
     }
@@ -122,6 +128,7 @@ app-header {
     &__secondary-links {
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 8px;
+      padding: 0 14px;
       transition-delay: 0.06s;
     }
 
@@ -185,6 +192,11 @@ app-header {
   }
 }
 
+body.mobile-menu-open app-whatsapp-fab {
+  opacity: 0;
+  pointer-events: none;
+}
+
 app-home {
   --home-section-gap-desktop: 100px;
   --home-section-gap-mobile: 56px;
@@ -209,12 +221,9 @@ app-home {
       }
 
       @media (max-width: 767px) {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 12px;
-
-        > .feature-card--video {
-          grid-column: 1 / -1;
-        }
+        grid-template-columns: 1fr;
+        gap: 14px;
+        justify-items: center;
       }
     }
   }
@@ -248,7 +257,7 @@ app-home {
 
       @media (max-width: 767px) {
         min-height: 460px;
-        padding: 20px 18px 18px;
+        padding: 45px 18px 18px;
         border-radius: 30px;
       }
     }
@@ -455,7 +464,8 @@ app-home {
       display: flex;
       align-items: center;
       width: max-content;
-      animation: featured-showcase-marquee 30s linear infinite;
+      animation: featured-showcase-marquee 34s linear infinite;
+      will-change: transform;
     }
 
     &__marquee-group {
@@ -571,7 +581,7 @@ app-home {
       }
 
       @media (max-width: 767px) {
-        padding: 0 0 12px;
+        padding: 0 0 10px;
         overflow: visible;
       }
     }
@@ -586,8 +596,8 @@ app-home {
 
       @media (max-width: 767px) {
         display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 8px;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 6px;
         width: 100%;
         padding: 0;
       }
@@ -635,9 +645,9 @@ app-home {
       @media (max-width: 767px) {
         min-width: 0;
         justify-content: center;
-        padding: 10px 12px;
-        gap: 6px;
-        font-size: 12px;
+        padding: 10px 8px;
+        gap: 4px;
+        font-size: 11px;
       }
     }
 
@@ -645,7 +655,7 @@ app-home {
       font-size: 18px;
 
       @media (max-width: 767px) {
-        font-size: 15px;
+        font-size: 14px;
       }
     }
 
@@ -841,7 +851,7 @@ app-home {
 
       @media (max-width: 767px) {
         padding: 18px;
-        gap: 20px;
+        gap: 60px;
       }
     }
 
@@ -861,9 +871,9 @@ app-home {
       @media (max-width: 767px) {
         width: 100%;
         align-self: stretch;
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        justify-content: stretch;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
         gap: 8px;
       }
     }
@@ -1337,6 +1347,7 @@ app-home {
     @media (max-width: 767px) {
       min-height: 320px;
       border-radius: 28px;
+      width: min(100%, 90vw);
     }
 
     &--light {
@@ -1848,7 +1859,7 @@ app-home {
   }
 
   to {
-    transform: translateX(-50%);
+    transform: translateX(-25%);
   }
 }
 
@@ -2687,8 +2698,19 @@ app-about {
 
     &__mobile-panel {
       display: grid;
+      grid-template-rows: 0fr;
+      padding: 0 20px;
+      opacity: 0;
+      transition: grid-template-rows 320ms cubic-bezier(0.22, 1, 0.36, 1), padding 320ms ease, opacity 220ms ease;
+    }
+
+    &__mobile-panel-inner {
+      min-height: 0;
+      overflow: hidden;
+      display: grid;
       gap: 20px;
-      padding: 0 20px 20px;
+      transform: translateY(-8px);
+      transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     @media (max-width: 1280px) {
@@ -2718,8 +2740,14 @@ app-about {
     @media (max-width: 1024px) {
       padding-bottom: 96px;
 
-      &__mobile-panel {
-        grid-template-columns: 1fr;
+      &__mobile-item--expanded &__mobile-panel {
+        grid-template-rows: 1fr;
+        padding-bottom: 20px;
+        opacity: 1;
+      }
+
+      &__mobile-item--expanded &__mobile-panel-inner {
+        transform: translateY(0);
       }
 
       &__content {
@@ -2766,7 +2794,15 @@ app-about {
       }
 
       &__mobile-panel {
-        padding: 0 18px 18px;
+        padding: 0 18px;
+      }
+
+      &__mobile-panel-inner {
+        gap: 18px;
+      }
+
+      &__mobile-item--expanded &__mobile-panel {
+        padding-bottom: 18px;
       }
 
       &__slide {

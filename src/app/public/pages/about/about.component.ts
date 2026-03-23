@@ -74,8 +74,8 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
   advantageProductIndex = signal(0);
   advantageBrandSlideToken = signal(0);
   advantageProductSlideToken = signal(0);
-  readonly marqueeGroups = [0, 1] as const;
-  readonly teamShowcaseMarqueeGroups = [0, 1] as const;
+  readonly marqueeGroups = [0, 1, 2, 3] as const;
+  readonly teamShowcaseMarqueeGroups = [0, 1, 2, 3] as const;
   readonly familyCompanyPrimaryLogo = { src: '/logo.svg', alt: 'HESA' } as const;
   readonly familyCompanySecondaryLogos = [
     { src: '/logozoofarma.svg', alt: 'ZooFarma' },
