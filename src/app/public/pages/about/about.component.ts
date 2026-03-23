@@ -79,7 +79,7 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
   readonly familyCompanyPrimaryLogo = { src: '/logo.svg', alt: 'HESA' } as const;
   readonly familyCompanySecondaryLogos = [
     { src: '/logozoofarma.svg', alt: 'ZooFarma' },
-    { src: '/logosemilla.jpeg', alt: 'Semilla' },
+    { src: '/logosemilla.webp', alt: 'Semilla' },
     { src: '/logoimv.svg', alt: 'IMV' }
   ] as const;
   readonly familyCompaniesTitle = {
@@ -112,17 +112,17 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
     en: 'Meet the team'
   } as const;
   readonly teamShowcaseImages = [
-    { src: '/team/1.jpg', alt: 'Equipo HESA 1', name: 'Adriana Herrera' },
-    { src: '/team/2.jpg', alt: 'Equipo HESA 2', name: 'Mauricio Elizondo' },
-    { src: '/team/3.jpg', alt: 'Equipo HESA 3', name: 'Daniela Chaves' },
-    { src: '/team/4.jpg', alt: 'Equipo HESA 4', name: 'Gabriel Mora' },
-    { src: '/team/5.jpg', alt: 'Equipo HESA 5', name: 'Valeria Solano' },
-    { src: '/team/6.jpg', alt: 'Equipo HESA 6', name: 'Fernando Quesada' },
-    { src: '/team/7.jpg', alt: 'Equipo HESA 7', name: 'Carolina Rojas' },
-    { src: '/team/8.jpg', alt: 'Equipo HESA 8', name: 'Esteban Vargas' },
-    { src: '/team/9.jpg', alt: 'Equipo HESA 9', name: 'Mariana Brenes' },
-    { src: '/team/10.jpg', alt: 'Equipo HESA 10', name: 'Sofía Araya' },
-    { src: '/team/11.jpg', alt: 'Equipo HESA 11', name: 'Andrés Villalobos' }
+    { src: '/team/1.webp', alt: 'Equipo HESA 1', name: 'Adriana Herrera' },
+    { src: '/team/2.webp', alt: 'Equipo HESA 2', name: 'Mauricio Elizondo' },
+    { src: '/team/3.webp', alt: 'Equipo HESA 3', name: 'Daniela Chaves' },
+    { src: '/team/4.webp', alt: 'Equipo HESA 4', name: 'Gabriel Mora' },
+    { src: '/team/5.webp', alt: 'Equipo HESA 5', name: 'Valeria Solano' },
+    { src: '/team/6.webp', alt: 'Equipo HESA 6', name: 'Fernando Quesada' },
+    { src: '/team/7.webp', alt: 'Equipo HESA 7', name: 'Carolina Rojas' },
+    { src: '/team/8.webp', alt: 'Equipo HESA 8', name: 'Esteban Vargas' },
+    { src: '/team/9.webp', alt: 'Equipo HESA 9', name: 'Mariana Brenes' },
+    { src: '/team/10.webp', alt: 'Equipo HESA 10', name: 'Sofía Araya' },
+    { src: '/team/11.webp', alt: 'Equipo HESA 11', name: 'Andrés Villalobos' }
   ] as const;
   readonly aboutClosingAlliance: AboutClosingAllianceSection = {
     headlineLead: {
@@ -133,8 +133,8 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
       es: 'con un socio que cumple',
       en: 'with a partner that delivers'
     },
-    imageDesktop: '/closen.jpg',
-    imageMobile: '/closen.jpg',
+    imageDesktop: '/closen.webp',
+    imageMobile: '/closen.webp',
     tags: [
       { es: 'Representación exclusiva', en: 'Exclusive representation' },
       { es: 'Cobertura nacional', en: 'National coverage' },
