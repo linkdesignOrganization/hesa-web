@@ -20,9 +20,9 @@ export class ClientsComponent implements OnInit, AfterViewInit, OnDestroy {
   clientTypes = [
     {
       icon: 'hospital',
-      title: { es: 'Clinicas y Hospitales Veterinarios', en: 'Veterinary Clinics & Hospitals' },
+      title: { es: 'Clínicas y Hospitales Veterinarios', en: 'Veterinary Clinics & Hospitals' },
       description: {
-        es: 'Atendemos clinicas y hospitales veterinarios de todo el pais con farmacos, insumos y equipos de la mas alta calidad.',
+        es: 'Atendemos clínicas y hospitales veterinarios de todo el país con fármacos, insumos y equipos de la más alta calidad.',
         en: 'We serve veterinary clinics and hospitals across the country with pharmaceuticals, supplies, and top-quality equipment.'
       }
     },
@@ -38,7 +38,7 @@ export class ClientsComponent implements OnInit, AfterViewInit, OnDestroy {
       icon: 'store',
       title: { es: 'Agroservicios', en: 'Agricultural Supply Stores' },
       description: {
-        es: 'Proveemos agroservicios en todo el territorio nacional con productos para la salud animal y nutricion.',
+        es: 'Proveemos agroservicios en todo el territorio nacional con productos para la salud animal y nutrición.',
         en: 'We supply agricultural stores across the national territory with animal health and nutrition products.'
       }
     },
@@ -46,7 +46,7 @@ export class ClientsComponent implements OnInit, AfterViewInit, OnDestroy {
       icon: 'pharmacy',
       title: { es: 'Farmacias Veterinarias', en: 'Veterinary Pharmacies' },
       description: {
-        es: 'Distribuimos a farmacias veterinarias una amplia gama de farmacos y productos especializados de marcas exclusivas.',
+        es: 'Distribuimos a farmacias veterinarias una amplia gama de fármacos y productos especializados de marcas exclusivas.',
         en: 'We distribute a wide range of pharmaceuticals and specialized products from exclusive brands to veterinary pharmacies.'
       }
     }
@@ -57,7 +57,7 @@ export class ClientsComponent implements OnInit, AfterViewInit, OnDestroy {
       icon: 'globe',
       title: { es: 'Suministro directo de marcas internacionales', en: 'Direct supply from international brands' },
       description: {
-        es: 'Acceso a productos de los fabricantes mas reconocidos del mundo, importados directamente por HESA.',
+        es: 'Acceso a productos de los fabricantes más reconocidos del mundo, importados directamente por HESA.',
         en: 'Access to products from the world\'s most recognized manufacturers, imported directly by HESA.'
       }
     },
@@ -81,15 +81,15 @@ export class ClientsComponent implements OnInit, AfterViewInit, OnDestroy {
       icon: 'headset',
       title: { es: 'Representantes de ventas capacitados', en: 'Trained sales representatives' },
       description: {
-        es: 'Agentes comerciales con conocimiento tecnico para asesorarle en la seleccion de los mejores productos.',
+        es: 'Agentes comerciales con conocimiento técnico para asesorarle en la selección de los mejores productos.',
         en: 'Commercial agents with technical knowledge to advise you on selecting the best products.'
       }
     },
     {
       icon: 'book',
-      title: { es: 'Capacitacion y soporte tecnico', en: 'Product training and technical support' },
+      title: { es: 'Capacitación y soporte técnico', en: 'Product training and technical support' },
       description: {
-        es: 'Programas de capacitacion sobre productos y soporte tecnico permanente para su equipo.',
+        es: 'Programas de capacitación sobre productos y soporte técnico permanente para su equipo.',
         en: 'Product training programs and ongoing technical support for your team.'
       }
     }
@@ -100,7 +100,7 @@ export class ClientsComponent implements OnInit, AfterViewInit, OnDestroy {
       number: '1',
       title: { es: 'Contacte a nuestro equipo de ventas', en: 'Contact our sales team' },
       description: {
-        es: 'Comuniquese con nosotros por telefono, WhatsApp o formulario de contacto.',
+        es: 'Comuníquese con nosotros por teléfono, WhatsApp o formulario de contacto.',
         en: 'Reach out to us by phone, WhatsApp, or contact form.'
       }
     },
@@ -108,7 +108,7 @@ export class ClientsComponent implements OnInit, AfterViewInit, OnDestroy {
       number: '2',
       title: { es: 'Reciba atencion personalizada', en: 'Receive personalized attention' },
       description: {
-        es: 'Un agente de ventas le visitara para conocer las necesidades de su negocio.',
+        es: 'Un agente de ventas le visitará para conocer las necesidades de su negocio.',
         en: 'A sales agent will visit you to understand your business needs.'
       }
     },
@@ -127,7 +127,7 @@ export class ClientsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.seo.setMetaTags({
       title: lang === 'es' ? 'Nuestros Clientes' : 'Our Clients',
       description: lang === 'es'
-        ? 'HESA atiende clinicas veterinarias, pet shops, agroservicios y farmacias veterinarias en todo Costa Rica con productos de calidad.'
+        ? 'HESA atiende clínicas veterinarias, pet shops, agroservicios y farmacias veterinarias en toda Costa Rica con productos de calidad.'
         : 'HESA serves veterinary clinics, pet shops, agricultural stores, and veterinary pharmacies across Costa Rica with quality products.',
       url: `/${lang}/${lang === 'es' ? 'clientes' : 'clients'}`,
     });

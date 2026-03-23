@@ -12,7 +12,7 @@
       <div class="partners-page__hero-copy partners-page__hero-copy--supporting">
         <p class="partners-page__description">
           {{ i18n.currentLang() === 'es'
-            ? 'Ofrecemos a fabricantes internacionales una operacion lista para distribuir: equipo comercial propio, logistica nacional y relaciones comerciales activas con mas de 500 puntos de venta.'
+            ? 'Ofrecemos a fabricantes internacionales una operación lista para distribuir: equipo comercial propio, logística nacional y relaciones comerciales activas con más de 500 puntos de venta.'
             : 'We offer international manufacturers a distribution-ready operation: our own commercial team, nationwide logistics, and active business relationships with more than 500 points of sale.' }}
         </p>
       </div>
@@ -120,7 +120,7 @@
       <a
         [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/farmacos' : 'catalog/pharmaceuticals')"
         class="service-spotlight__pill frosted-white">
-        {{ i18n.currentLang() === 'es' ? 'Farmacos' : 'Pharmaceuticals' }}
+        {{ i18n.currentLang() === 'es' ? 'Fármacos' : 'Pharmaceuticals' }}
       </a>
       <a
         [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/alimentos' : 'catalog/food')"
@@ -148,7 +148,7 @@
         <div class="partners-contact__info">
           <p class="partners-page__eyebrow partners-page__eyebrow--brand-solid">{{ i18n.currentLang() === 'es' ? 'Hablemos' : "Let's Talk" }}</p>
           <h2 class="partners-page__section-title">{{ getSection('formTitle') || (i18n.currentLang() === 'es' ? 'Inicie la Conversacion' : 'Start the Conversation') }}</h2>
-          <p class="partners-contact__desc">{{ getSection('formDescription') || (i18n.currentLang() === 'es' ? 'Complete el formulario y nuestro equipo comercial se comunicara con usted en un plazo de 48 horas para discutir oportunidades de distribucion.' : 'Fill out the form and our commercial team will get in touch within 48 hours to discuss distribution opportunities.') }}</p>
+          <p class="partners-contact__desc">{{ getSection('formDescription') || (i18n.currentLang() === 'es' ? 'Complete el formulario y nuestro equipo comercial se comunicará con usted en un plazo de 48 horas para discutir oportunidades de distribución.' : 'Fill out the form and our commercial team will get in touch within 48 hours to discuss distribution opportunities.') }}</p>
         </div>
         <div class="partners-contact__form">
           <app-contact-form variant="manufacturer" />

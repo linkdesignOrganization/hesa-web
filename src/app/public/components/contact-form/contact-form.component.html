@@ -44,7 +44,7 @@
 
         <div class="form-group">
           <label class="form-label" for="email">
-            {{ i18n.currentLang() === 'es' ? 'Correo electronico' : 'Email' }}
+            {{ i18n.currentLang() === 'es' ? 'Correo electrónico' : 'Email' }}
             <span class="required">*</span>
           </label>
           <input
@@ -65,7 +65,7 @@
 
         <div class="form-group">
           <label class="form-label" for="phone">
-            {{ i18n.currentLang() === 'es' ? 'Telefono' : 'Phone' }}
+            {{ i18n.currentLang() === 'es' ? 'Teléfono' : 'Phone' }}
           </label>
           <input
             type="tel"
@@ -90,8 +90,8 @@
             name="consultationType"
             (blur)="validateField('type', consultationType)"
             aria-required="true">
-            <option value="" disabled>{{ i18n.currentLang() === 'es' ? 'Selecciona una opcion' : 'Select an option' }}</option>
-            <option value="info">{{ i18n.currentLang() === 'es' ? 'Informacion de productos' : 'Product information' }}</option>
+            <option value="" disabled>{{ i18n.currentLang() === 'es' ? 'Selecciona una opción' : 'Select an option' }}</option>
+            <option value="info">{{ i18n.currentLang() === 'es' ? 'Información de productos' : 'Product information' }}</option>
             <option value="comercial">{{ i18n.currentLang() === 'es' ? 'Condiciones comerciales' : 'Commercial conditions' }}</option>
             <option value="soporte">{{ i18n.currentLang() === 'es' ? 'Soporte' : 'Support' }}</option>
             <option value="otro">{{ i18n.currentLang() === 'es' ? 'Otro' : 'Other' }}</option>
@@ -103,7 +103,7 @@
 
         <div class="form-group form-group-full">
           <label class="form-label" for="product">
-            {{ i18n.currentLang() === 'es' ? 'Producto de interes' : 'Product of interest' }}
+            {{ i18n.currentLang() === 'es' ? 'Producto de interés' : 'Product of interest' }}
           </label>
           <input
             type="text"
@@ -160,7 +160,7 @@
 
         <div class="form-group">
           <label class="form-label" for="country">
-            {{ i18n.currentLang() === 'es' ? 'Pais de origen' : 'Country of Origin' }}
+            {{ i18n.currentLang() === 'es' ? 'País de origen' : 'Country of Origin' }}
             <span class="required">*</span>
           </label>
           <select
@@ -171,14 +171,14 @@
             name="country"
             (blur)="validateField('country', country)"
             aria-required="true">
-            <option value="" disabled>{{ i18n.currentLang() === 'es' ? 'Seleccione un pais' : 'Select a country' }}</option>
+            <option value="" disabled>{{ i18n.currentLang() === 'es' ? 'Seleccione un país' : 'Select a country' }}</option>
             <option value="United States">{{ i18n.currentLang() === 'es' ? 'Estados Unidos' : 'United States' }}</option>
-            <option value="Mexico">{{ i18n.currentLang() === 'es' ? 'Mexico' : 'Mexico' }}</option>
+            <option value="Mexico">{{ i18n.currentLang() === 'es' ? 'México' : 'Mexico' }}</option>
             <option value="Brazil">{{ i18n.currentLang() === 'es' ? 'Brasil' : 'Brazil' }}</option>
             <option value="Germany">{{ i18n.currentLang() === 'es' ? 'Alemania' : 'Germany' }}</option>
             <option value="France">{{ i18n.currentLang() === 'es' ? 'Francia' : 'France' }}</option>
             <option value="China">{{ i18n.currentLang() === 'es' ? 'China' : 'China' }}</option>
-            <option value="Japan">{{ i18n.currentLang() === 'es' ? 'Japon' : 'Japan' }}</option>
+            <option value="Japan">{{ i18n.currentLang() === 'es' ? 'Japón' : 'Japan' }}</option>
             <option value="India">{{ i18n.currentLang() === 'es' ? 'India' : 'India' }}</option>
             <option value="Other">{{ i18n.currentLang() === 'es' ? 'Otro' : 'Other' }}</option>
           </select>
@@ -210,7 +210,7 @@
 
         <div class="form-group">
           <label class="form-label" for="contact-email">
-            {{ i18n.currentLang() === 'es' ? 'Correo electronico' : 'Email' }}
+            {{ i18n.currentLang() === 'es' ? 'Correo electrónico' : 'Email' }}
             <span class="required">*</span>
           </label>
           <input
@@ -231,7 +231,7 @@
 
         <div class="form-group">
           <label class="form-label" for="contact-phone">
-            {{ i18n.currentLang() === 'es' ? 'Telefono' : 'Phone' }}
+            {{ i18n.currentLang() === 'es' ? 'Teléfono' : 'Phone' }}
           </label>
           <input
             type="tel"
@@ -251,7 +251,7 @@
             type="text"
             id="product-types"
             class="form-control"
-            [placeholder]="i18n.currentLang() === 'es' ? 'Farmacos, alimentos, equipos...' : 'Pharmaceuticals, food, equipment...'"
+            [placeholder]="i18n.currentLang() === 'es' ? 'Fármacos, alimentos, equipos...' : 'Pharmaceuticals, food, equipment...'"
             [(ngModel)]="productTypes"
             name="productTypes"
             maxlength="200">
@@ -266,7 +266,7 @@
             id="mfr-message"
             class="form-control"
             [class.form-control--error]="errors()['mfrMessage']"
-            [placeholder]="i18n.currentLang() === 'es' ? 'Cuentenos sobre su empresa y productos...' : 'Tell us about your company and products...'"
+            [placeholder]="i18n.currentLang() === 'es' ? 'Cuéntenos sobre su empresa y productos...' : 'Tell us about your company and products...'"
             [(ngModel)]="mfrMessage"
             name="mfrMessage"
             (blur)="validateField('mfrMessage', mfrMessage)"
@@ -286,7 +286,7 @@
               </svg>
             </span>
             <span class="contact-form__checkbox-text">
-              {{ i18n.currentLang() === 'es' ? 'Acepto los terminos y condiciones' : 'I accept the terms and conditions' }}
+              {{ i18n.currentLang() === 'es' ? 'Acepto los términos y condiciones' : 'I accept the terms and conditions' }}
             </span>
           </label>
         </div>

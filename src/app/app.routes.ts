@@ -14,8 +14,8 @@ export const routes: Routes = [
 
   // Spanish public routes
   { path: 'es', title: 'Inicio | HESA - Herrera y Elizondo S.A.', loadComponent: () => import('./public/pages/home/home.component').then(m => m.HomeComponent) },
-  { path: 'es/catalogo', title: 'Catalogo de Productos | HESA - Herrera y Elizondo S.A.', loadComponent: () => import('./public/pages/catalog/catalog.component').then(m => m.CatalogComponent) },
-  { path: 'es/catalogo/farmacos', title: 'Farmacos Veterinarios | HESA - Herrera y Elizondo S.A.', loadComponent: () => import('./public/pages/catalog-category/catalog-category.component').then(m => m.CatalogCategoryComponent) },
+  { path: 'es/catalogo', title: 'Catálogo de Productos | HESA - Herrera y Elizondo S.A.', loadComponent: () => import('./public/pages/catalog/catalog.component').then(m => m.CatalogComponent) },
+  { path: 'es/catalogo/farmacos', title: 'Fármacos Veterinarios | HESA - Herrera y Elizondo S.A.', loadComponent: () => import('./public/pages/catalog-category/catalog-category.component').then(m => m.CatalogCategoryComponent) },
   { path: 'es/catalogo/alimentos', title: 'Alimentos para Animales | HESA - Herrera y Elizondo S.A.', loadComponent: () => import('./public/pages/catalog-category/catalog-category.component').then(m => m.CatalogCategoryComponent) },
   { path: 'es/catalogo/equipos', title: 'Equipos Veterinarios | HESA - Herrera y Elizondo S.A.', loadComponent: () => import('./public/pages/catalog-category/catalog-category.component').then(m => m.CatalogCategoryComponent) },
   { path: 'es/catalogo/:category/:slug', title: 'Producto | HESA - Herrera y Elizondo S.A.', loadComponent: () => import('./public/pages/product-detail/product-detail.component').then(m => m.ProductDetailComponent) },
@@ -27,7 +27,7 @@ export const routes: Routes = [
   { path: 'es/por-que-hesa', title: 'Por qué HESA | HESA - Herrera y Elizondo S.A.', loadComponent: () => import('./public/pages/why-hesa/why-hesa.component').then(m => m.WhyHesaComponent) },
   { path: 'es/clientes', title: 'Clientes | HESA - Herrera y Elizondo S.A.', loadComponent: () => import('./public/pages/clients/clients.component').then(m => m.ClientsComponent) },
   { path: 'es/contacto', title: 'Contacto | HESA - Herrera y Elizondo S.A.', loadComponent: () => import('./public/pages/contact/contact.component').then(m => m.ContactComponent) },
-  { path: 'es/busqueda', title: 'Busqueda | HESA - Herrera y Elizondo S.A.', loadComponent: () => import('./public/pages/search-results/search-results.component').then(m => m.SearchResultsComponent) },
+  { path: 'es/busqueda', title: 'Búsqueda | HESA - Herrera y Elizondo S.A.', loadComponent: () => import('./public/pages/search-results/search-results.component').then(m => m.SearchResultsComponent) },
 
   // English public routes
   { path: 'en', title: 'Home | HESA - Herrera y Elizondo S.A.', loadComponent: () => import('./public/pages/home/home.component').then(m => m.HomeComponent) },
@@ -62,7 +62,7 @@ export const routes: Routes = [
       { path: 'marcas', title: 'Marcas | HESA Admin', loadComponent: () => import('./admin/pages/brands-list/brands-list.component').then(m => m.AdminBrandsListComponent) },
       { path: 'marcas/crear', title: 'Crear Marca | HESA Admin', loadComponent: () => import('./admin/pages/brand-form/brand-form.component').then(m => m.AdminBrandFormComponent), canDeactivate: [unsavedChangesGuard] },
       { path: 'marcas/:id/editar', title: 'Editar Marca | HESA Admin', loadComponent: () => import('./admin/pages/brand-form/brand-form.component').then(m => m.AdminBrandFormComponent), canDeactivate: [unsavedChangesGuard] },
-      { path: 'categorias', title: 'Categorias | HESA Admin', loadComponent: () => import('./admin/pages/categories/categories.component').then(m => m.AdminCategoriesComponent) },
+      { path: 'categorias', title: 'Categorías | HESA Admin', loadComponent: () => import('./admin/pages/categories/categories.component').then(m => m.AdminCategoriesComponent) },
       { path: 'home/hero', loadComponent: () => import('./admin/pages/home-hero/home-hero.component').then(m => m.AdminHomeHeroComponent) },
       { path: 'home/productos-destacados', loadComponent: () => import('./admin/pages/featured-products/featured-products.component').then(m => m.AdminFeaturedProductsComponent) },
       { path: 'home/marcas-destacadas', loadComponent: () => import('./admin/pages/featured-brands/featured-brands.component').then(m => m.AdminFeaturedBrandsComponent) },
@@ -70,7 +70,7 @@ export const routes: Routes = [
       { path: 'mensajes', title: 'Mensajes | HESA Admin', loadComponent: () => import('./admin/pages/messages/messages.component').then(m => m.AdminMessagesComponent) },
       { path: 'mensajes/:id', loadComponent: () => import('./admin/pages/message-detail/message-detail.component').then(m => m.AdminMessageDetailComponent) },
       { path: 'actividad', title: 'Actividad | HESA Admin', loadComponent: () => import('./admin/pages/activity-log/activity-log.component').then(m => m.AdminActivityLogComponent) },
-      { path: 'configuracion/general', title: 'Configuracion | HESA Admin', loadComponent: () => import('./admin/pages/settings/settings.component').then(m => m.AdminSettingsComponent) },
+      { path: 'configuracion/general', title: 'Configuración | HESA Admin', loadComponent: () => import('./admin/pages/settings/settings.component').then(m => m.AdminSettingsComponent) },
       { path: 'configuracion/contacto', loadComponent: () => import('./admin/pages/settings/settings.component').then(m => m.AdminSettingsComponent) },
       { path: 'configuracion/redes', loadComponent: () => import('./admin/pages/settings/settings.component').then(m => m.AdminSettingsComponent) },
       { path: 'configuracion/seo', loadComponent: () => import('./admin/pages/settings/settings.component').then(m => m.AdminSettingsComponent) },
@@ -79,5 +79,5 @@ export const routes: Routes = [
   },
 
   // 404 page
-  { path: '**', title: 'Pagina no encontrada | HESA', loadComponent: () => import('./public/pages/not-found/not-found.component').then(m => m.NotFoundComponent) }
+  { path: '**', title: 'Página no encontrada | HESA', loadComponent: () => import('./public/pages/not-found/not-found.component').then(m => m.NotFoundComponent) }
 ];

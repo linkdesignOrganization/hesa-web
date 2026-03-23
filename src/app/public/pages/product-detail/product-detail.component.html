@@ -14,11 +14,11 @@
       <div class="product-state__card">
         <span class="material-symbols-outlined product-state__icon" aria-hidden="true">error</span>
         <h1>{{ i18n.currentLang() === 'es' ? 'No pudimos cargar el producto' : 'We could not load this product' }}</h1>
-        <p>{{ i18n.currentLang() === 'es' ? 'Hubo un problema al cargar la informacion. Intente nuevamente o vuelva al catalogo.' : 'There was a problem loading the information. Please try again or go back to the catalog.' }}</p>
+        <p>{{ i18n.currentLang() === 'es' ? 'Hubo un problema al cargar la información. Intente nuevamente o vuelva al catálogo.' : 'There was a problem loading the information. Please try again or go back to the catalog.' }}</p>
         <div class="product-state__actions">
           <button class="btn btn-primary" (click)="retry()">{{ i18n.currentLang() === 'es' ? 'Reintentar' : 'Retry' }}</button>
           <a class="btn btn-outline" [routerLink]="['/' + i18n.currentLang(), i18n.currentLang() === 'es' ? 'catalogo' : 'catalog']">
-            {{ i18n.currentLang() === 'es' ? 'Volver al catalogo' : 'Back to catalog' }}
+            {{ i18n.currentLang() === 'es' ? 'Volver al catálogo' : 'Back to catalog' }}
           </a>
         </div>
       </div>
@@ -29,10 +29,10 @@
     <div class="container">
       <div class="product-state__card">
         <span class="material-symbols-outlined product-state__icon" aria-hidden="true">inventory_2</span>
-        <h1>{{ i18n.currentLang() === 'es' ? 'Este producto no esta disponible' : 'This product is not available' }}</h1>
-        <p>{{ i18n.currentLang() === 'es' ? 'El producto que busca ya no forma parte del catalogo o fue removido.' : 'The product you are looking for is no longer part of the catalog or has been removed.' }}</p>
+        <h1>{{ i18n.currentLang() === 'es' ? 'Este producto no está disponible' : 'This product is not available' }}</h1>
+        <p>{{ i18n.currentLang() === 'es' ? 'El producto que busca ya no forma parte del catálogo o fue removido.' : 'The product you are looking for is no longer part of the catalog or has been removed.' }}</p>
         <a class="btn btn-primary" [routerLink]="['/' + i18n.currentLang(), i18n.currentLang() === 'es' ? 'catalogo' : 'catalog']">
-          {{ i18n.currentLang() === 'es' ? 'Volver al catalogo' : 'Back to catalog' }}
+          {{ i18n.currentLang() === 'es' ? 'Volver al catálogo' : 'Back to catalog' }}
         </a>
       </div>
     </div>
@@ -66,7 +66,7 @@
               type="button"
               class="product-detail__media-stage"
               (click)="currentProduct.images.length > 0 ? lightboxOpen.set(true) : null"
-              [attr.aria-label]="i18n.currentLang() === 'es' ? 'Abrir galeria del producto' : 'Open product gallery'">
+              [attr.aria-label]="i18n.currentLang() === 'es' ? 'Abrir galería del producto' : 'Open product gallery'">
               @if (currentProduct.images.length > 0) {
                 <img [src]="currentProduct.images[selectedImage()]" [alt]="productDisplayName" class="product-detail__hero-image">
               } @else {
@@ -263,8 +263,8 @@
   </section>
 
   @if (lightboxOpen() && currentProduct.images.length > 0) {
-    <div class="lightbox" (click)="lightboxOpen.set(false)" role="dialog" aria-modal="true" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Galeria de producto' : 'Product gallery'">
-      <button type="button" class="lightbox__close" (click)="lightboxOpen.set(false)" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Cerrar galeria' : 'Close gallery'">
+    <div class="lightbox" (click)="lightboxOpen.set(false)" role="dialog" aria-modal="true" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Galería de producto' : 'Product gallery'">
+      <button type="button" class="lightbox__close" (click)="lightboxOpen.set(false)" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Cerrar galería' : 'Close gallery'">
         <span class="material-symbols-outlined" aria-hidden="true">close</span>
       </button>
 

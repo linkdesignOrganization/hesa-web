@@ -86,7 +86,7 @@ export class CatalogCategoryComponent implements OnInit, OnDestroy {
     if (this.searchTerm()) {
       filters.push({
         key: 'search',
-        label: `${this.i18n.currentLang() === 'es' ? 'Busqueda' : 'Search'}: ${this.searchTerm()}`
+        label: `${this.i18n.currentLang() === 'es' ? 'Búsqueda' : 'Search'}: ${this.searchTerm()}`
       });
     }
 
@@ -211,7 +211,7 @@ export class CatalogCategoryComponent implements OnInit, OnDestroy {
     const lang = this.i18n.currentLang();
     return [
       { label: getHomeLabel(lang), url: this.i18n.getLangPrefix() },
-      { label: lang === 'es' ? 'Catalogo' : 'Catalog', url: `${this.i18n.getLangPrefix()}/${getCatalogSegment(lang)}` },
+      { label: lang === 'es' ? 'Catálogo' : 'Catalog', url: `${this.i18n.getLangPrefix()}/${getCatalogSegment(lang)}` },
       { label: this.categoryName }
     ];
   }
@@ -239,18 +239,18 @@ export class CatalogCategoryComponent implements OnInit, OnDestroy {
 
     if (this.categoryType === 'farmacos') {
       return this.i18n.currentLang() === 'es'
-        ? 'Soluciones farmaceuticas con familias terapéuticas claras, marcas activas y fichas listas para decision comercial.'
+        ? 'Soluciones farmacéuticas con familias terapéuticas claras, marcas activas y fichas listas para decisión comercial.'
         : 'Pharmaceutical solutions with clear therapeutic families, active brands and datasheets ready for commercial review.';
     }
 
     if (this.categoryType === 'alimentos') {
       return this.i18n.currentLang() === 'es'
-        ? 'Portafolio de alimentos formulados para especies y etapas especificas, con presentaciones faciles de comparar.'
+        ? 'Portafolio de alimentos formulados para especies y etapas específicas, con presentaciones fáciles de comparar.'
         : 'Food portfolio tailored to species and life stages, with presentations that are easy to compare.';
     }
 
     return this.i18n.currentLang() === 'es'
-      ? 'Equipos y herramientas con foco tecnico, informacion estructurada y soporte para escoger la solucion adecuada.'
+      ? 'Equipos y herramientas con foco técnico, información estructurada y soporte para escoger la solución adecuada.'
       : 'Equipment and tools with a technical focus, structured information and support to choose the right solution.';
   }
 

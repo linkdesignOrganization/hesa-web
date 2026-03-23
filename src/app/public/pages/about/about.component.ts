@@ -224,7 +224,7 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
     this.seo.setMetaTags({
       title: lang === 'es' ? 'Nosotros' : 'About Us',
       description: lang === 'es'
-        ? 'HESA - Empresa familiar costarricense con mas de 37 anos de experiencia en la distribucion de productos veterinarios.'
+        ? 'HESA - Empresa familiar costarricense con más de 37 años de experiencia en la distribución de productos veterinarios.'
         : 'HESA - Costa Rican family business with over 37 years of experience in veterinary product distribution.',
       url: `/${lang}/${lang === 'es' ? 'nosotros' : 'about'}`,
     });

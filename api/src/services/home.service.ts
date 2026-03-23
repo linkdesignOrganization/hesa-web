@@ -5,19 +5,19 @@ import mongoose from 'mongoose';
 
 function createDefaultSingleHeroSlide(): IHeroSlide {
   return {
-    tag: { es: 'Atencion cercana', en: 'Close support' },
+    tag: { es: 'Atención cercana', en: 'Close support' },
     headline: {
-      es: 'Soluciones veterinarias que respaldan su operacion diaria',
+      es: 'Soluciones veterinarias que respaldan su operación diaria',
       en: 'Veterinary solutions that support your daily operation',
     },
     subtitle: {
       es: 'Marcas confiables, disponibilidad constante y un equipo comercial listo para atender a su negocio.',
       en: 'Trusted brands, steady availability, and a commercial team ready to support your business.',
     },
-    ctaText: { es: 'Ver catalogo', en: 'View catalog' },
+    ctaText: { es: 'Ver catálogo', en: 'View catalog' },
     ctaLink: '/es/catalogo',
     product: null,
-    tagsEs: ['Farmacos', 'Alimentos', 'Equipos'],
+    tagsEs: ['Fármacos', 'Alimentos', 'Equipos'],
     tagsEn: ['Pharmaceuticals', 'Food', 'Equipment'],
     imageDesktop: '/hero.jpg',
     imageMobile: '/hero.jpg',
@@ -54,8 +54,8 @@ export async function getHomeConfig(): Promise<IHomeConfig> {
         slides: [{
           tag: { es: 'DESDE 1987', en: 'SINCE 1987' },
           headline: { es: 'Conectamos la industria veterinaria con las mejores marcas del mundo', en: 'Connecting the veterinary industry with the world\'s best brands' },
-          subtitle: { es: 'Importacion y distribucion de farmacos veterinarios, alimentos para animales y equipos veterinarios en Costa Rica', en: 'Import and distribution of veterinary pharmaceuticals, animal food, and veterinary equipment in Costa Rica' },
-          ctaText: { es: 'Explorar catalogo', en: 'Explore catalog' },
+          subtitle: { es: 'Importación y distribución de fármacos veterinarios, alimentos para animales y equipos veterinarios en Costa Rica', en: 'Import and distribution of veterinary pharmaceuticals, animal food, and veterinary equipment in Costa Rica' },
+          ctaText: { es: 'Explorar catálogo', en: 'Explore catalog' },
           ctaLink: '/es/catalogo',
         }],
       },
@@ -69,7 +69,7 @@ export async function getHomeConfig(): Promise<IHomeConfig> {
       tag: config.hero.tag,
       headline: config.hero.headline,
       subtitle: config.hero.subtitle,
-      ctaText: config.hero.ctaPrimary || { es: 'Explorar catalogo', en: 'Explore catalog' },
+      ctaText: config.hero.ctaPrimary || { es: 'Explorar catálogo', en: 'Explore catalog' },
       ctaLink: '/es/catalogo',
     };
     if (config.hero.image) {

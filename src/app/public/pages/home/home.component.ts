@@ -108,7 +108,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   activeFeatureVideoLayer = signal<0 | 1>(0);
 
   private readonly showcaseCategoryLabels: Record<FeaturedShowcaseCategoryId, LocalizedText> = {
-    farmacos: { es: 'Farmacos', en: 'Pharmaceuticals' },
+    farmacos: { es: 'Fármacos', en: 'Pharmaceuticals' },
     alimentos: { es: 'Alimentos', en: 'Food' },
     equipos: { es: 'Equipos', en: 'Equipment' }
   };
@@ -146,7 +146,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
           en: buildProductUrl('farmacos', 'clamovet-250-mg-40-tablet-box', 'en')
         },
         species: { es: 'Perros y gatos', en: 'Dogs and cats' },
-        family: { es: 'Antibiotico', en: 'Antibiotic' },
+        family: { es: 'Antibiótico', en: 'Antibiotic' },
         lifeStage: { es: 'Uso clinico', en: 'Clinical use' },
         presentations: [{ es: 'Caja x40 tabletas', en: '40-tablet box' }]
       },
@@ -176,7 +176,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
           en: buildProductUrl('farmacos', 'tobramax-5-ml', 'en')
         },
         species: { es: 'Perros y gatos', en: 'Dogs and cats' },
-        family: { es: 'Oftalmologico', en: 'Ophthalmic' },
+        family: { es: 'Oftalmológico', en: 'Ophthalmic' },
         lifeStage: { es: 'Consulta diaria', en: 'Daily consult' },
         presentations: [{ es: 'Frasco 5 ml', en: '5 ml bottle' }]
       }
@@ -358,7 +358,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     this.seo.setMetaTags({
       title: lang === 'es' ? 'Inicio' : 'Home',
       description: lang === 'es'
-        ? 'HESA - Importacion y distribucion de farmacos veterinarios, alimentos para animales y equipos veterinarios en Costa Rica.'
+        ? 'HESA - Importación y distribución de fármacos veterinarios, alimentos para animales y equipos veterinarios en Costa Rica.'
         : 'HESA - Leading veterinary distributor in Costa Rica. Import and distribution of veterinary pharmaceuticals, animal food, and veterinary equipment. 37+ years of experience.',
       url: `/${lang}`,
     });

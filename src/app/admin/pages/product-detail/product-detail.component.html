@@ -62,7 +62,7 @@
 
         @if (product()!.description && product()!.description.es) {
           <div class="product-detail__section">
-            <h3 class="product-detail__section-title">Descripcion</h3>
+            <h3 class="product-detail__section-title">Descripción</h3>
             <p class="product-detail__section-text">{{ product()!.description.es }}</p>
           </div>
         }
@@ -92,10 +92,10 @@
         <!-- PDF link -->
         @if (product()!.pdfUrl) {
           <div class="product-detail__section">
-            <h3 class="product-detail__section-title">Ficha Tecnica</h3>
+            <h3 class="product-detail__section-title">Ficha técnica</h3>
             <a [href]="product()!.pdfUrl" target="_blank" rel="noopener" class="product-detail__pdf-link">
               <span class="material-symbols-outlined">picture_as_pdf</span>
-              Descargar ficha tecnica (PDF)
+              Descargar ficha técnica (PDF)
             </a>
           </div>
         }

@@ -20,9 +20,9 @@
 
   <form class="adm-card bf-form" [formGroup]="brandForm" (ngSubmit)="onSubmit()">
 
-    <!-- Section: Informacion de la Marca -->
+    <!-- Section: Información de la Marca -->
     <div class="adm-form-section">
-      <h2 class="adm-form-section__title">Informacion de la Marca</h2>
+      <h2 class="adm-form-section__title">Información de la Marca</h2>
 
       <div class="adm-form-grid">
         <div class="adm-form-group">
@@ -37,27 +37,27 @@
         </div>
 
         <div class="adm-form-group">
-          <label class="adm-form-label" for="brand-country">Pais de origen <span class="required">*</span></label>
+          <label class="adm-form-label" for="brand-country">País de origen <span class="required">*</span></label>
           <select id="brand-country" class="adm-form-select" [class.is-invalid]="isFieldInvalid('country')" formControlName="country" (blur)="onFieldBlur('country')">
-            <option value="" disabled>Seleccionar pais</option>
+            <option value="" disabled>Seleccionar país</option>
             <option value="Estados Unidos">Estados Unidos</option>
-            <option value="Canada">Canada</option>
+            <option value="Canada">Canadá</option>
             <option value="Alemania">Alemania</option>
             <option value="Francia">Francia</option>
             <option value="Suiza">Suiza</option>
             <option value="Holanda">Holanda</option>
             <option value="Italia">Italia</option>
-            <option value="Espana">Espana</option>
+            <option value="Espana">España</option>
             <option value="Reino Unido">Reino Unido</option>
             <option value="Brasil">Brasil</option>
             <option value="Argentina">Argentina</option>
-            <option value="Mexico">Mexico</option>
+            <option value="Mexico">México</option>
             <option value="Colombia">Colombia</option>
             <option value="Costa Rica">Costa Rica</option>
             <option value="China">China</option>
             <option value="India">India</option>
             <option value="Corea del Sur">Corea del Sur</option>
-            <option value="Japon">Japon</option>
+            <option value="Japon">Japón</option>
             <option value="Australia">Australia</option>
             <option value="Otro">Otro</option>
           </select>
@@ -71,12 +71,12 @@
 
         <!-- Category checkboxes -->
         <div class="adm-form-group adm-form-group--full">
-          <label class="adm-form-label">Categorias</label>
+          <label class="adm-form-label">Categorías</label>
           <div class="bf-categories">
             <label class="adm-form-check">
               <input type="checkbox" [checked]="categoryChecked('farmacos')" (change)="toggleCategory('farmacos')">
               <span class="material-symbols-outlined" style="font-size: 18px; color: var(--adm-pharma-color);">medication</span>
-              Farmacos
+              Fármacos
             </label>
             <label class="adm-form-check">
               <input type="checkbox" [checked]="categoryChecked('alimentos')" (change)="toggleCategory('alimentos')">
@@ -93,13 +93,13 @@
 
         <!-- Description ES -->
         <div class="adm-form-group adm-form-group--full">
-          <label class="adm-form-label" for="brand-desc-es">Descripcion (ES)</label>
-          <textarea id="brand-desc-es" class="adm-form-control" formControlName="descriptionEs" placeholder="Descripcion de la marca..." rows="3"></textarea>
+          <label class="adm-form-label" for="brand-desc-es">Descripción (ES)</label>
+          <textarea id="brand-desc-es" class="adm-form-control" formControlName="descriptionEs" placeholder="Descripción de la marca..." rows="3"></textarea>
         </div>
 
         <!-- Description EN -->
         <div class="adm-form-group adm-form-group--full">
-          <label class="adm-form-label" for="brand-desc-en">Descripcion (EN)</label>
+          <label class="adm-form-label" for="brand-desc-en">Descripción (EN)</label>
           <textarea id="brand-desc-en" class="adm-form-control" formControlName="descriptionEn" placeholder="Brand description..." rows="3"></textarea>
         </div>
       </div>
@@ -128,8 +128,8 @@
           <div class="adm-uploader__icon">
             <span class="material-symbols-outlined">add_photo_alternate</span>
           </div>
-          <p class="adm-uploader__text">Arrastra el logo aqui o <strong>selecciona archivo</strong></p>
-          <span class="adm-uploader__hint">PNG, JPG o WebP hasta 25MB. Se optimiza automaticamente.</span>
+          <p class="adm-uploader__text">Arrastra el logo aquí o <strong>selecciona archivo</strong></p>
+          <span class="adm-uploader__hint">PNG, JPG o WebP hasta 25MB. Se optimiza automáticamente.</span>
         </div>
       }
       <input #logoInput type="file" accept="image/png,image/jpeg,image/webp" style="display: none;" (change)="onLogoSelected($event)">
@@ -158,7 +158,7 @@
           <span class="material-symbols-outlined">warning</span>
         </div>
         <h3 class="adm-modal__title">Tienes cambios sin guardar</h3>
-        <p class="adm-modal__desc">Si sales ahora, perderas los cambios realizados en esta marca.</p>
+        <p class="adm-modal__desc">Si sales ahora, perderás los cambios realizados en esta marca.</p>
       </div>
       <div class="adm-modal__footer">
         <button class="adm-btn adm-btn--secondary" (click)="confirmLeave()">Salir sin guardar</button>

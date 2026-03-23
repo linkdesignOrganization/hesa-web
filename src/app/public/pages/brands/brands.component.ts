@@ -36,7 +36,7 @@ export class BrandsComponent implements OnInit, OnDestroy {
     this.seo.setMetaTags({
       title: lang === 'es' ? 'Marcas' : 'Brands',
       description: lang === 'es'
-        ? 'Marcas exclusivas de farmacos veterinarios, alimentos y equipos distribuidas por HESA en Costa Rica.'
+        ? 'Marcas exclusivas de fármacos veterinarios, alimentos y equipos distribuidas por HESA en Costa Rica.'
         : 'Exclusive international brands of veterinary pharmaceuticals, food, and equipment distributed by HESA, a trusted distributor in Costa Rica.',
       url: `/${lang}/${getBrandsSegment(lang)}`,
     });

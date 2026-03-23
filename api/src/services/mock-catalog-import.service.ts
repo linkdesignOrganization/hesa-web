@@ -127,7 +127,7 @@ async function resolvePublicDir(): Promise<string> {
     }
   }
 
-  throw new Error('No se encontro el directorio public para importar el catalogo mock');
+  throw new Error('No se encontró el directorio public para importar el catálogo mock');
 }
 
 function encodePublicPath(relativePath: string): string {
@@ -253,7 +253,7 @@ async function resolveBrandDetails(publicDir: string, definition: MockBrandDefin
 }> {
   let country = definition.country || 'Internacional';
   let description = definition.description || {
-    es: `${definition.name} forma parte del catalogo mock de HESA y se utiliza para pruebas de navegacion, filtros y contenido comercial en la categoria de ${definition.category}.`,
+      es: `${definition.name} forma parte del catálogo mock de HESA y se utiliza para pruebas de navegación, filtros y contenido comercial en la categoría de ${definition.category}.`,
     en: `${definition.name} is part of HESA's mock catalog and is used for navigation, filter, and commercial content testing in the ${definition.category} category.`,
   };
 
@@ -299,7 +299,7 @@ function deriveFoodLifeStage(name: string, speciesKey: string): { es: string; en
 function deriveFoodPresentations(name: string, speciesKey: string): string[] {
   const lower = normalizeKey(name);
   if (/(can|stew|salsa|pate|humed)/.test(lower)) {
-    return ['Lata individual', 'Caja master'];
+    return ['Lata individual', 'Caja máster'];
   }
   if (speciesKey === 'peces') return ['Saco 10 kg', 'Saco 25 kg'];
   if (speciesKey === 'caballos') return ['Saco 20 kg', 'Saco 40 kg'];
@@ -310,15 +310,15 @@ function deriveFoodPresentations(name: string, speciesKey: string): string[] {
 function deriveFoodDescriptions(nameEs: string, brandName: string, speciesEs: string, lifeStageEs: string) {
   return {
     description: {
-      es: `${nameEs} es un alimento mock de ${brandName} creado para pruebas del catalogo HESA. Su propuesta nutricional se orienta a ${speciesEs.toLowerCase()} en etapa ${lifeStageEs.toLowerCase()}, con enfoque en digestibilidad, energia sostenida y buena aceptacion.`,
+      es: `${nameEs} es un alimento mock de ${brandName} creado para pruebas del catálogo HESA. Su propuesta nutricional se orienta a ${speciesEs.toLowerCase()} en etapa ${lifeStageEs.toLowerCase()}, con enfoque en digestibilidad, energía sostenida y buena aceptación.`,
       en: `${nameEs} is a mock ${brandName} nutrition product created for HESA catalog testing. It is positioned for ${speciesEs.toLowerCase()} in the ${lifeStageEs.toLowerCase()} stage, with emphasis on digestibility, steady energy, and strong palatability.`,
     },
     ingredients: {
-      es: `Proteina animal seleccionada, cereales funcionales, grasas estabilizadas, vitaminas, minerales y fibras fermentables en una formulacion mock pensada para pruebas de contenido.`,
+      es: `Proteína animal seleccionada, cereales funcionales, grasas estabilizadas, vitaminas, minerales y fibras fermentables en una formulación mock pensada para pruebas de contenido.`,
       en: `Selected animal protein, functional grains, stabilized fats, vitamins, minerals, and fermentable fibers in a mock formulation designed for content testing.`,
     },
     nutritionalInfo: {
-      es: `Proteina: 28%. Grasa: 16%. Fibra: 3%. Humedad: 10%. Energia metabolizable estimada: 3,650 kcal/kg.`,
+      es: `Proteína: 28%. Grasa: 16%. Fibra: 3%. Humedad: 10%. Energía metabolizable estimada: 3,650 kcal/kg.`,
       en: `Protein: 28%. Fat: 16%. Fiber: 3%. Moisture: 10%. Estimated metabolizable energy: 3,650 kcal/kg.`,
     },
   };
@@ -342,15 +342,15 @@ function derivePharmaPresentations(name: string): string[] {
 function derivePharmaDescriptions(nameEs: string, brandName: string, family: string, index: number) {
   return {
     description: {
-      es: `${nameEs} es un farmaco mock de ${brandName} preparado para pruebas funcionales del sitio. Se presenta dentro de la familia ${family.toLowerCase()} y comunica una propuesta comercial enfocada en disponibilidad y consistencia terapeutica.`,
+      es: `${nameEs} es un fármaco mock de ${brandName} preparado para pruebas funcionales del sitio. Se presenta dentro de la familia ${family.toLowerCase()} y comunica una propuesta comercial enfocada en disponibilidad y consistencia terapéutica.`,
       en: `${nameEs} is a mock ${brandName} pharmaceutical created for site testing. It belongs to the ${family.toLowerCase()} family and communicates a commercial proposition focused on availability and therapeutic consistency.`,
     },
     composition: {
-      es: `Composicion mock de referencia para ${nameEs}: principio activo principal, excipientes funcionales y vehiculo c.s.p. para fines de demostracion.`,
+      es: `Composición mock de referencia para ${nameEs}: principio activo principal, excipientes funcionales y vehículo c.s.p. para fines de demostración.`,
       en: `Mock reference composition for ${nameEs}: main active ingredient, functional excipients, and vehicle q.s. for demonstration purposes.`,
     },
     indications: {
-      es: `Indicado de forma mock para protocolos veterinarios relacionados con ${family.toLowerCase()}, bajo supervision profesional y con adaptacion segun especie y condicion clinica.`,
+      es: `Indicado de forma mock para protocolos veterinarios relacionados con ${family.toLowerCase()}, bajo supervisión profesional y con adaptación según especie y condición clínica.`,
       en: `Mock indication for veterinary protocols related to ${family.toLowerCase()}, under professional supervision and adapted to species and clinical condition.`,
     },
     sanitaryRegistry: `MOCK-VET-${String(index + 1).padStart(4, '0')}`,
@@ -360,19 +360,19 @@ function derivePharmaDescriptions(nameEs: string, brandName: string, family: str
 function deriveEquipmentDescriptions(nameEs: string, brandName: string, equipmentType: string) {
   return {
     description: {
-      es: `${nameEs} es un equipo mock de ${brandName} creado para pruebas del catalogo HESA. Se ubica en la linea de ${equipmentType.toLowerCase()} y comunica una propuesta profesional para clinicas, hospitales y distribuidores.`,
+      es: `${nameEs} es un equipo mock de ${brandName} creado para pruebas del catálogo HESA. Se ubica en la línea de ${equipmentType.toLowerCase()} y comunica una propuesta profesional para clínicas, hospitales y distribuidores.`,
       en: `${nameEs} is a mock ${brandName} equipment product created for HESA catalog testing. It belongs to the ${equipmentType.toLowerCase()} line and communicates a professional proposition for clinics, hospitals, and distributors.`,
     },
     specifications: {
-      es: `Especificaciones mock: estructura de uso clinico, materiales de grado profesional, configuracion estable y compatibilidad con rutinas veterinarias de ${equipmentType.toLowerCase()}.`,
+      es: `Especificaciones mock: estructura de uso clínico, materiales de grado profesional, configuración estable y compatibilidad con rutinas veterinarias de ${equipmentType.toLowerCase()}.`,
       en: `Mock specifications: clinical-use structure, professional-grade materials, stable configuration, and compatibility with veterinary ${equipmentType.toLowerCase()} workflows.`,
     },
     recommendedUses: {
-      es: `Recomendado de forma mock para procedimientos, atencion diaria y expansion operativa dentro de areas de ${equipmentType.toLowerCase()}.`,
+      es: `Recomendado de forma mock para procedimientos, atención diaria y expansión operativa dentro de áreas de ${equipmentType.toLowerCase()}.`,
       en: `Mock-recommended for procedures, daily care, and operational expansion within ${equipmentType.toLowerCase()} environments.`,
     },
     warranty: {
-      es: `Garantia mock de 12 meses con acompanamiento tecnico y capacitacion inicial para fines de demostracion del sitio.`,
+      es: `Garantía mock de 12 meses con acompañamiento técnico y capacitación inicial para fines de demostración del sitio.`,
       en: `Mock 12-month warranty with technical guidance and initial training for site demonstration purposes.`,
     },
   };
@@ -393,7 +393,7 @@ function buildStorytelling(nameEs: string, brandName: string, relativePath: stri
 
 function buildMeta(nameEs: string, brandName: string, category: CategoryKey) {
   const categoryLabels: Record<CategoryKey, { es: string; en: string }> = {
-    farmacos: { es: 'Farmacos', en: 'Pharmaceuticals' },
+    farmacos: { es: 'Fármacos', en: 'Pharmaceuticals' },
     alimentos: { es: 'Alimentos', en: 'Food' },
     equipos: { es: 'Equipos', en: 'Equipment' },
   };
@@ -404,7 +404,7 @@ function buildMeta(nameEs: string, brandName: string, category: CategoryKey) {
       en: `${nameEs} | ${brandName} | HESA`,
     },
     metaDescription: {
-      es: `${nameEs} dentro del catalogo mock de ${categoryLabels[category].es} de HESA para pruebas de navegacion, detalle y filtros.`,
+      es: `${nameEs} dentro del catálogo mock de ${categoryLabels[category].es} de HESA para pruebas de navegación, detalle y filtros.`,
       en: `${nameEs} inside HESA's mock ${categoryLabels[category].en} catalog for navigation, detail, and filter testing.`,
     },
   };
@@ -479,7 +479,7 @@ function ensureUniqueSlugs(
 
 function createSyntheticPharmaAsset(baseAsset: AssetRecord, index: number): AssetRecord {
   const baseName = baseAsset.info?.productName || path.basename(baseAsset.fileName, path.extname(baseAsset.fileName));
-  const syntheticName = `${baseName} Formula Clinica ${index + 1}`;
+  const syntheticName = `${baseName} Fórmula Clínica ${index + 1}`;
   return {
     ...baseAsset,
     info: {

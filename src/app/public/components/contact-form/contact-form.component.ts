@@ -71,19 +71,19 @@ export class ContactFormComponent {
   }
 
   private getInvalidEmailMsg(): string {
-    return this.i18n.currentLang() === 'es' ? 'Formato de email invalido' : 'Invalid email format';
+    return this.i18n.currentLang() === 'es' ? 'Formato de correo electrónico inválido' : 'Invalid email format';
   }
 
   private getTooLongMsg(max: number): string {
-    return this.i18n.currentLang() === 'es' ? `Maximo ${max} caracteres` : `Maximum ${max} characters`;
+    return this.i18n.currentLang() === 'es' ? `Máximo ${max} caracteres` : `Maximum ${max} characters`;
   }
 
   private getInvalidPhoneMsg(): string {
-    return this.i18n.currentLang() === 'es' ? 'Formato de telefono invalido' : 'Invalid phone format';
+    return this.i18n.currentLang() === 'es' ? 'Formato de teléfono inválido' : 'Invalid phone format';
   }
 
   private getRateLimitMsg(): string {
-    return this.i18n.currentLang() === 'es' ? 'Por favor espera antes de enviar otro mensaje' : 'Please wait before sending another message';
+    return this.i18n.currentLang() === 'es' ? 'Por favor, espere antes de enviar otro mensaje' : 'Please wait before sending another message';
   }
 
   private isValidEmail(value: string): boolean {

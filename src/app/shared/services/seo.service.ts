@@ -123,7 +123,7 @@ export class SeoService {
       '@type': 'Organization',
       name: 'HESA - Herrera y Elizondo S.A.',
       url: this.baseUrl,
-      description: 'Importacion y distribucion de farmacos veterinarios, alimentos para animales y equipos veterinarios en Costa Rica',
+      description: 'Importación y distribución de fármacos veterinarios, alimentos para animales y equipos veterinarios en Costa Rica',
       foundingDate: '1989',
       address: {
         '@type': 'PostalAddress',

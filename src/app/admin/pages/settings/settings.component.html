@@ -4,7 +4,7 @@
   <!-- Page Header -->
   <div class="adm-page-header">
     <div class="adm-page-header__left">
-      <h1 class="adm-page-header__title">Configuracion</h1>
+      <h1 class="adm-page-header__title">Configuración</h1>
       <p class="adm-page-header__subtitle">Ajustes generales del sitio web</p>
     </div>
   </div>
@@ -28,7 +28,7 @@
 
       @if (activeTab === 'general') {
         <div class="adm-form-section">
-          <h2 class="adm-form-section__title">Configuracion General</h2>
+          <h2 class="adm-form-section__title">Configuración General</h2>
           <p class="adm-form-section__desc">Nombre del sitio e idioma por defecto</p>
           <div class="adm-form-grid">
             <div class="adm-form-group">
@@ -38,8 +38,8 @@
             <div class="adm-form-group">
               <label class="adm-form-label">Idioma por defecto</label>
               <select class="adm-form-select" [(ngModel)]="config.defaultLang" name="defaultLang">
-                <option value="es">Espanol</option>
-                <option value="en">Ingles</option>
+                <option value="es">Español</option>
+                <option value="en">Inglés</option>
               </select>
             </div>
           </div>
@@ -49,7 +49,7 @@
 
         <div class="adm-form-section">
           <h2 class="adm-form-section__title">Integraciones</h2>
-          <p class="adm-form-section__desc">Google Analytics y Facebook Pixel (preparados para activacion futura)</p>
+          <p class="adm-form-section__desc">Google Analytics y Facebook Pixel (preparados para activación futura)</p>
           <div class="adm-form-grid">
             <div class="adm-form-group">
               <label class="adm-form-label">Google Analytics 4 -- Measurement ID</label>
@@ -73,37 +73,37 @@
 
       @if (activeTab === 'contacto') {
         <div class="adm-form-section">
-          <h2 class="adm-form-section__title">Informacion de Contacto</h2>
-          <p class="adm-form-section__desc">Datos de contacto que se muestran en el sitio publico</p>
+          <h2 class="adm-form-section__title">Información de Contacto</h2>
+          <p class="adm-form-section__desc">Datos de contacto que se muestran en el sitio público</p>
           <div class="adm-form-grid">
             <div class="adm-form-group">
-              <label class="adm-form-label">Telefono principal</label>
+              <label class="adm-form-label">Teléfono principal</label>
               <input type="text" class="adm-form-control" [(ngModel)]="config.phone" name="phone" placeholder="+506 2260-9020" maxlength="20">
             </div>
             <div class="adm-form-group">
-              <label class="adm-form-label">Correo electronico</label>
+              <label class="adm-form-label">Correo electrónico</label>
               <input type="email" class="adm-form-control" [(ngModel)]="config.email" name="email" placeholder="hola@linkdesign.cr" maxlength="254">
             </div>
             <div class="adm-form-group">
-              <label class="adm-form-label">Direccion (Espanol)</label>
+              <label class="adm-form-label">Dirección (Español)</label>
               <input type="text" class="adm-form-control" [(ngModel)]="addressEs" name="addressEs" maxlength="200">
             </div>
             <div class="adm-form-group">
-              <label class="adm-form-label">Direccion (Ingles)</label>
+              <label class="adm-form-label">Dirección (Inglés)</label>
               <input type="text" class="adm-form-control" [(ngModel)]="addressEn" name="addressEn" maxlength="200">
             </div>
             <div class="adm-form-group">
-              <label class="adm-form-label">Horario (Espanol)</label>
+              <label class="adm-form-label">Horario (Español)</label>
               <input type="text" class="adm-form-control" [(ngModel)]="hoursEs" name="hoursEs" placeholder="Lunes a Viernes: 8:00 - 17:00" maxlength="200">
             </div>
             <div class="adm-form-group">
-              <label class="adm-form-label">Horario (Ingles)</label>
+              <label class="adm-form-label">Horario (Inglés)</label>
               <input type="text" class="adm-form-control" [(ngModel)]="hoursEn" name="hoursEn" placeholder="Monday to Friday: 8:00 - 17:00" maxlength="200">
             </div>
             <div class="adm-form-group adm-form-group--full">
-              <label class="adm-form-label">Numero de WhatsApp (para boton flotante)</label>
+              <label class="adm-form-label">Número de WhatsApp (para botón flotante)</label>
               <input type="text" class="adm-form-control" [(ngModel)]="config.whatsapp" name="whatsapp" placeholder="+50622390000" maxlength="20">
-              <span class="adm-form-hint">Numero completo con codigo de pais, sin espacios ni guiones</span>
+              <span class="adm-form-hint">Número completo con código de país, sin espacios ni guiones</span>
             </div>
           </div>
         </div>
@@ -140,24 +140,24 @@
           <p class="adm-form-section__desc">Metadatos para buscadores y compartir en redes</p>
           <div class="adm-form-grid">
             <div class="adm-form-group">
-              <label class="adm-form-label">Meta titulo (Espanol)</label>
+              <label class="adm-form-label">Meta título (Español)</label>
               <input type="text" class="adm-form-control" [(ngModel)]="metaTitleEs" name="metaTitleEs" maxlength="70">
             </div>
             <div class="adm-form-group">
-              <label class="adm-form-label">Meta titulo (Ingles)</label>
+              <label class="adm-form-label">Meta título (Inglés)</label>
               <input type="text" class="adm-form-control" [(ngModel)]="metaTitleEn" name="metaTitleEn" maxlength="70">
             </div>
             <div class="adm-form-group adm-form-group--full">
-              <label class="adm-form-label">Meta descripcion (Espanol)</label>
+              <label class="adm-form-label">Meta descripción (Español)</label>
               <textarea class="adm-form-control" [(ngModel)]="metaDescEs" name="metaDescEs" rows="2" maxlength="160"></textarea>
             </div>
             <div class="adm-form-group adm-form-group--full">
-              <label class="adm-form-label">Meta descripcion (Ingles)</label>
+              <label class="adm-form-label">Meta descripción (Inglés)</label>
               <textarea class="adm-form-control" [(ngModel)]="metaDescEn" name="metaDescEn" rows="2" maxlength="160"></textarea>
             </div>
             <div class="adm-form-group adm-form-group--full">
               <label class="adm-form-label">Imagen para compartir (OG Image)</label>
-              <span class="adm-form-hint">Tamano recomendado: 1200x630px. El sistema la optimiza automaticamente.</span>
+              <span class="adm-form-hint">Tamaño recomendado: 1200x630px. El sistema la optimiza automáticamente.</span>
               @if (config.ogImage) {
                 <div class="settings-og-preview">
                   <img [src]="config.ogImage" alt="OG Image preview">
@@ -181,7 +181,7 @@
           @if (saving()) {
             <span class="adm-spinner adm-spinner--sm adm-spinner--white"></span> Guardando...
           } @else {
-            <span class="material-symbols-outlined">save</span> Guardar configuracion
+            <span class="material-symbols-outlined">save</span> Guardar configuración
           }
         </button>
       </div>

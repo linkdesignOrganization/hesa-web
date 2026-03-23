@@ -149,7 +149,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
 
     return [
       { label: getHomeLabel(lang), url: this.i18n.getLangPrefix() },
-      { label: lang === 'es' ? 'Catalogo' : 'Catalog', url: `${this.i18n.getLangPrefix()}/${catalogSegment}` },
+      { label: lang === 'es' ? 'Catálogo' : 'Catalog', url: `${this.i18n.getLangPrefix()}/${catalogSegment}` },
       { label: getCategoryLabel(product.category, lang), url: `${this.i18n.getLangPrefix()}/${catalogSegment}/${categorySlug}` },
       { label: this.i18n.t(product.name) }
     ];

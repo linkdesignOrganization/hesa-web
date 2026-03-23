@@ -70,7 +70,7 @@ export class AdminTeamEditorComponent implements OnInit {
 
   async saveMember(): Promise<void> {
     if (!this.formName.es.trim() || !this.formTitle.es.trim()) {
-      this.toast.warning('Nombre y cargo en espanol son requeridos');
+      this.toast.warning('Nombre y cargo en español son requeridos');
       return;
     }
 
@@ -154,7 +154,7 @@ export class AdminTeamEditorComponent implements OnInit {
     const file = event.dataTransfer?.files?.[0];
     if (!file) return;
     if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type)) {
-      this.toast.error('Solo se permiten imagenes JPG, PNG o WebP');
+      this.toast.error('Solo se permiten imágenes JPG, PNG o WebP');
       return;
     }
     this.setPhotoFile(file);
@@ -167,7 +167,7 @@ export class AdminTeamEditorComponent implements OnInit {
 
   private setPhotoFile(file: File): void {
     if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type)) {
-      this.toast.error('Solo se permiten imagenes JPG, PNG o WebP');
+      this.toast.error('Solo se permiten imágenes JPG, PNG o WebP');
       return;
     }
     this.pendingPhotoFile.set(file);

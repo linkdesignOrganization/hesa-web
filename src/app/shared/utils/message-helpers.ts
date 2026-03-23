@@ -7,7 +7,7 @@
 /** Map message type key to display label (REQ-296) */
 export function getTypeLabel(type: string): string {
   const labels: Record<string, string> = {
-    info: 'Informacion',
+    info: 'Información',
     comercial: 'Comercial',
     soporte: 'Soporte',
     fabricante: 'Fabricante',

@@ -42,7 +42,7 @@ export class AdminCategoriesComponent implements OnInit {
       const data = await this.api.adminGetCategories();
       this.categories.set(data);
     } catch {
-      this.toast.error('Error al cargar las categorias');
+      this.toast.error('Error al cargar las categorías');
     }
     this.loading.set(false);
   }

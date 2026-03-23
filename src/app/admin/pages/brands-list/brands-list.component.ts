@@ -25,12 +25,12 @@ export class AdminBrandsListComponent implements OnInit {
 
   deleteModalDescription(): string {
     const brand = this.brandToDelete();
-    if (!brand) return 'Esta accion no se puede deshacer.';
+    if (!brand) return 'Esta acción no se puede deshacer.';
     const count = brand.productCount ?? 0;
     if (count > 0) {
-      return `La marca "${brand.name}" tiene ${count} producto(s) asociado(s). Al eliminarla, estos productos quedaran sin marca. Esta accion no se puede deshacer.`;
+      return `La marca "${brand.name}" tiene ${count} producto(s) asociado(s). Al eliminarla, estos productos quedarán sin marca. Esta acción no se puede deshacer.`;
     }
-    return `Se eliminara la marca "${brand.name}" y no se podra recuperar.`;
+    return `Se eliminará la marca "${brand.name}" y no se podrá recuperar.`;
   }
 
   async ngOnInit(): Promise<void> {
@@ -69,7 +69,7 @@ export class AdminBrandsListComponent implements OnInit {
       try {
         const result = await this.api.adminDeleteBrand(brand._id);
         if (result.hadProducts > 0) {
-          this.toast.warning(`Marca "${brand.name}" eliminada. Tenia ${result.hadProducts} productos asociados.`);
+          this.toast.warning(`Marca "${brand.name}" eliminada. Tenía ${result.hadProducts} productos asociados.`);
         } else {
           this.toast.success(`Marca "${brand.name}" eliminada correctamente.`);
         }

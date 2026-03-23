@@ -92,7 +92,7 @@ export class AdminBrandFormComponent implements HasUnsavedChanges, OnInit {
     if (input.files && input.files[0]) {
       const file = input.files[0];
       if (!['image/png', 'image/jpeg', 'image/webp'].includes(file.type)) {
-        this.toast.error('Solo se permiten imagenes PNG, JPG o WebP');
+        this.toast.error('Solo se permiten imágenes PNG, JPG o WebP');
         return;
       }
       this.logoFile.set(file);
@@ -110,7 +110,7 @@ export class AdminBrandFormComponent implements HasUnsavedChanges, OnInit {
     if (event.dataTransfer?.files && event.dataTransfer.files[0]) {
       const file = event.dataTransfer.files[0];
       if (!['image/png', 'image/jpeg', 'image/webp'].includes(file.type)) {
-        this.toast.error('Solo se permiten imagenes PNG, JPG o WebP');
+        this.toast.error('Solo se permiten imágenes PNG, JPG o WebP');
         return;
       }
       this.logoFile.set(file);
@@ -146,7 +146,7 @@ export class AdminBrandFormComponent implements HasUnsavedChanges, OnInit {
     if (control.errors['required']) {
       const labels: Record<string, string> = {
         name: 'El nombre de la marca es obligatorio',
-        country: 'Selecciona el pais de origen',
+        country: 'Selecciona el país de origen',
       };
       return labels[fieldName] || 'Este campo es obligatorio';
     }

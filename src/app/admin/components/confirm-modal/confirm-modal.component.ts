@@ -8,8 +8,8 @@ import { Component, input, signal, output, OnInit } from '@angular/core';
 })
 export class ConfirmModalComponent implements OnInit {
   variant = input<'danger' | 'warning'>('danger');
-  title = input<string>('Estas seguro?');
-  description = input<string>('Esta accion no se puede deshacer.');
+  title = input<string>('¿Está seguro?');
+  description = input<string>('Esta acción no se puede deshacer.');
   message = input<string>(''); // Alias for description, used by messages component
   confirmLabel = input<string>('Eliminar');
   confirmText = input<string>(''); // Alias for confirmLabel

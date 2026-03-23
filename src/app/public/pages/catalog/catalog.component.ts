@@ -84,7 +84,7 @@ export class CatalogComponent implements OnInit, OnDestroy {
     if (this.searchTerm()) {
       filters.push({
         key: 'search',
-        label: `${this.i18n.currentLang() === 'es' ? 'Busqueda' : 'Search'}: ${this.searchTerm()}`
+        label: `${this.i18n.currentLang() === 'es' ? 'Búsqueda' : 'Search'}: ${this.searchTerm()}`
       });
     }
 
@@ -184,7 +184,7 @@ export class CatalogComponent implements OnInit, OnDestroy {
       },
       {
         key: 'categories',
-        label: this.i18n.currentLang() === 'es' ? 'categorias' : 'categories',
+        label: this.i18n.currentLang() === 'es' ? 'categorías' : 'categories',
         value: this.selectedCategory() ? 1 : this.categoryTabs.length
       }
     ];
@@ -203,7 +203,7 @@ export class CatalogComponent implements OnInit, OnDestroy {
     const lang = this.i18n.currentLang();
     return [
       { label: getHomeLabel(lang), url: this.i18n.getLangPrefix() },
-      { label: lang === 'es' ? 'Catalogo' : 'Catalog' }
+      { label: lang === 'es' ? 'Catálogo' : 'Catalog' }
     ];
   }
 
@@ -215,7 +215,7 @@ export class CatalogComponent implements OnInit, OnDestroy {
     const lang = this.i18n.currentLang();
     const category = this.selectedCategory();
     if (!category) {
-      return lang === 'es' ? 'Catalogo de productos' : 'Product catalog';
+      return lang === 'es' ? 'Catálogo de productos' : 'Product catalog';
     }
     return getCategoryLabel(category, lang);
   }
@@ -226,30 +226,30 @@ export class CatalogComponent implements OnInit, OnDestroy {
 
     if (category === 'farmacos') {
       return lang === 'es'
-        ? 'Farmacos veterinarios con disponibilidad constante, marcas reconocidas y soporte comercial para mover el inventario correcto.'
+        ? 'Fármacos veterinarios con disponibilidad constante, marcas reconocidas y soporte comercial para mover el inventario correcto.'
         : 'Veterinary pharmaceuticals with reliable availability, trusted brands and commercial support to move the right inventory.';
     }
 
     if (category === 'alimentos') {
       return lang === 'es'
-        ? 'Lineas de alimentacion con formulaciones especializadas, portafolio amplio y opciones para multiples especies y etapas.'
+        ? 'Líneas de alimentación con formulaciones especializadas, portafolio amplio y opciones para múltiples especies y etapas.'
         : 'Food lines with specialized formulations, broad assortment and options for multiple species and life stages.';
     }
 
     if (category === 'equipos') {
       return lang === 'es'
-        ? 'Equipos y soluciones para la practica veterinaria con marcas de respaldo y fichas tecnicas listas para consulta.'
+        ? 'Equipos y soluciones para la práctica veterinaria con marcas de respaldo y fichas técnicas listas para consulta.'
         : 'Equipment and solutions for veterinary practice with trusted brands and technical information ready for review.';
     }
 
     return lang === 'es'
-      ? 'Explore un catalogo curado para clinicas, pet shops, agroservicios y operaciones que necesitan productos confiables para cada categoria.'
+      ? 'Explore un catálogo curado para clínicas, pet shops, agroservicios y operaciones que necesitan productos confiables para cada categoría.'
       : 'Explore a curated catalog for clinics, pet shops, agro stores and operations that need reliable products across every category.';
   }
 
   get searchPlaceholder(): string {
     return this.i18n.currentLang() === 'es'
-      ? 'Buscar por producto, marca o presentacion'
+      ? 'Buscar por producto, marca o presentación'
       : 'Search by product, brand or presentation';
   }
 
@@ -265,9 +265,9 @@ export class CatalogComponent implements OnInit, OnDestroy {
     const lang = this.i18n.currentLang();
     const catalogSegment = getCatalogSegment(lang);
     this.seo.setMetaTags({
-      title: lang === 'es' ? 'Catalogo de Productos' : 'Product Catalog',
+      title: lang === 'es' ? 'Catálogo de Productos' : 'Product Catalog',
       description: lang === 'es'
-        ? 'Catalogo completo de farmacos veterinarios, alimentos para animales y equipos veterinarios de HESA.'
+        ? 'Catálogo completo de fármacos veterinarios, alimentos para animales y equipos veterinarios de HESA.'
         : 'Complete catalog of veterinary pharmaceuticals, animal food, and veterinary equipment. HESA is a leading distributor in Costa Rica with 37+ years of experience.',
       url: `/${lang}/${catalogSegment}`,
     });

@@ -78,11 +78,11 @@ export class AdminActivityLogComponent implements OnInit {
     const entities: Record<string, string> = {
       product: 'Producto',
       brand: 'Marca',
-      category: 'Categoria',
+      category: 'Categoría',
       message: 'Mensaje',
       team_member: 'Miembro de equipo',
       content: 'Contenido',
-      settings: 'Configuracion',
+      settings: 'Configuración',
     };
     const action = actions[activity.action] || activity.action;
     const entity = entities[activity.entity] || activity.entity;

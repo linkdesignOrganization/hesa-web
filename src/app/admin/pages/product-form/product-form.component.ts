@@ -42,7 +42,7 @@ export class AdminProductFormComponent implements HasUnsavedChanges, OnInit {
   pendingImageFiles = signal<File[]>([]);
   pendingImagePreviews = signal<string[]>([]);
   existingPdfUrl = signal<string | null>(null);
-  existingPdfName = signal<string>('Ficha tecnica');
+  existingPdfName = signal<string>('Ficha técnica');
   pendingPdfFile = signal<File | null>(null);
   pendingPdfName = signal<string>('');
   uploadingImages = signal(false);
@@ -142,7 +142,7 @@ export class AdminProductFormComponent implements HasUnsavedChanges, OnInit {
       this.existingPdfUrl.set(product.pdfUrl || null);
       if (product.pdfUrl) {
         const parts = product.pdfUrl.split('/');
-        this.existingPdfName.set(decodeURIComponent(parts[parts.length - 1]) || 'Ficha tecnica.pdf');
+        this.existingPdfName.set(decodeURIComponent(parts[parts.length - 1]) || 'Ficha técnica.pdf');
       }
 
       this._hasChanges.set(false);
@@ -232,7 +232,7 @@ export class AdminProductFormComponent implements HasUnsavedChanges, OnInit {
     const files = Array.from(event.dataTransfer.files);
     const imageFiles = files.filter(f => ['image/png', 'image/jpeg', 'image/webp'].includes(f.type));
     if (imageFiles.length === 0) {
-      this.toast.error('Solo se permiten imagenes PNG, JPG o WebP');
+      this.toast.error('Solo se permiten imágenes PNG, JPG o WebP');
       return;
     }
     if (this.productId()) {
@@ -268,16 +268,16 @@ export class AdminProductFormComponent implements HasUnsavedChanges, OnInit {
     const filesToUpload = files.slice(0, maxRemaining);
 
     if (files.length > maxRemaining) {
-      this.toast.warning(`Solo se pueden subir ${maxRemaining} imagenes mas.`);
+      this.toast.warning(`Solo se pueden subir ${maxRemaining} imágenes más.`);
     }
 
     this.uploadingImages.set(true);
     try {
       const updatedProduct = await this.api.adminUploadProductImages(this.productId()!, filesToUpload);
       this.existingImages.set(updatedProduct.images || []);
-      this.toast.success('Imagenes subidas correctamente');
+      this.toast.success('Imágenes subidas correctamente');
     } catch (error: any) {
-      const message = error?.error?.error || 'Error al subir las imagenes';
+      const message = error?.error?.error || 'Error al subir las imágenes';
       this.toast.error(message);
     } finally {
       this.uploadingImages.set(false);
@@ -349,9 +349,9 @@ export class AdminProductFormComponent implements HasUnsavedChanges, OnInit {
       const updatedProduct = await this.api.adminUploadProductPdf(this.productId()!, file);
       this.existingPdfUrl.set(updatedProduct.pdfUrl || null);
       this.existingPdfName.set(file.name);
-      this.toast.success('Ficha tecnica subida correctamente');
+      this.toast.success('Ficha técnica subida correctamente');
     } catch {
-      this.toast.error('Error al subir la ficha tecnica');
+      this.toast.error('Error al subir la ficha técnica');
     } finally {
       this.uploadingPdf.set(false);
     }
@@ -362,9 +362,9 @@ export class AdminProductFormComponent implements HasUnsavedChanges, OnInit {
     try {
       await this.api.adminDeleteProductPdf(this.productId()!);
       this.existingPdfUrl.set(null);
-      this.toast.success('Ficha tecnica eliminada');
+      this.toast.success('Ficha técnica eliminada');
     } catch {
-      this.toast.error('Error al eliminar la ficha tecnica');
+      this.toast.error('Error al eliminar la ficha técnica');
     }
   }
 
@@ -388,7 +388,7 @@ export class AdminProductFormComponent implements HasUnsavedChanges, OnInit {
     if (control.errors['required']) {
       const labels: Record<string, string> = {
         nameEs: 'El nombre del producto es obligatorio',
-        category: 'Selecciona una categoria',
+        category: 'Selecciona una categoría',
       };
       return labels[fieldName] || 'Este campo es obligatorio';
     }
@@ -424,7 +424,7 @@ export class AdminProductFormComponent implements HasUnsavedChanges, OnInit {
           try {
             await this.uploadImages(this.pendingImageFiles());
           } catch {
-            this.toast.warning('Producto creado, pero hubo un error al subir las imagenes.');
+            this.toast.warning('Producto creado, pero hubo un error al subir las imágenes.');
           }
         }
         if (this.pendingPdfFile()) {

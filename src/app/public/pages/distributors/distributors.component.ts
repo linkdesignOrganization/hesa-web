@@ -64,11 +64,11 @@ export class DistributorsComponent implements OnInit, AfterViewInit, OnDestroy {
     {
       icon: 'inventory_2',
       title: {
-        es: 'Inventario y logistica',
+        es: 'Inventario y logística',
         en: 'Inventory and logistics'
       },
       body: {
-        es: 'Mantenemos stock local y despachamos a todo el pais. Su producto siempre disponible para el cliente final.',
+        es: 'Mantenemos stock local y despachamos a todo el país. Su producto siempre disponible para el cliente final.',
         en: 'We maintain local stock and dispatch nationwide, keeping your product consistently available to the end customer.'
       }
     }
@@ -113,7 +113,7 @@ export class DistributorsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.seo.setMetaTags({
       title: lang === 'es' ? 'Distribuidores' : 'Become a Distributor',
       description: lang === 'es'
-        ? 'HESA es su socio estrategico para la distribucion de productos veterinarios en Costa Rica. 37+ anos distribuyendo farmacos, alimentos y equipos veterinarios.'
+        ? 'HESA es su socio estratégico para la distribución de productos veterinarios en Costa Rica. 37+ años distribuyendo fármacos, alimentos y equipos veterinarios.'
         : 'Partner with HESA, a leading veterinary distributor in Costa Rica. 37+ years distributing pharmaceuticals, animal food, and veterinary equipment nationwide.',
       url: `/${lang}/${lang === 'es' ? 'distribuidores' : 'distributors'}`,
     });

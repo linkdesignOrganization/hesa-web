@@ -66,7 +66,7 @@ export class WhatsappFabComponent implements OnInit {
 
     if (!context) {
       context = lang === 'es'
-        ? 'Hola, me gustaria obtener informacion'
+        ? 'Hola, me gustaría obtener información'
         : 'Hi, I would like to get information';
     }
 

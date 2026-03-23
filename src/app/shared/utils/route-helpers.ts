@@ -7,7 +7,7 @@ const CATEGORY_SLUG_MAP: Record<string, Record<Lang, string>> = {
 };
 
 const CATEGORY_LABEL_MAP: Record<string, Record<Lang, string>> = {
-  farmacos: { es: 'Farmacos', en: 'Pharmaceuticals' },
+  farmacos: { es: 'Fármacos', en: 'Pharmaceuticals' },
   alimentos: { es: 'Alimentos', en: 'Food' },
   equipos: { es: 'Equipos', en: 'Equipment' },
 };

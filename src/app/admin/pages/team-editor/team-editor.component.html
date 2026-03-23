@@ -23,7 +23,7 @@
           <span class="material-symbols-outlined">person</span>
         </div>
         <p class="adm-empty__title">No hay miembros del equipo</p>
-        <p class="adm-empty__desc">La seccion de Equipo de Liderazgo no se mostrara en el sitio publico hasta que agregues miembros.</p>
+        <p class="adm-empty__desc">La sección de Equipo de Liderazgo no se mostrará en el sitio público hasta que agregues miembros.</p>
         <button class="adm-btn adm-btn--primary" (click)="openAddModal()">
           <span class="material-symbols-outlined">add</span>
           Agregar primer miembro
@@ -74,7 +74,7 @@
       </div>
       <div class="adm-modal__body">
         <div class="adm-tabs team-editor__modal-tabs">
-          <button class="adm-tab" [class.adm-tab--active]="formLang() === 'es'" (click)="formLang.set('es')">Espanol</button>
+          <button class="adm-tab" [class.adm-tab--active]="formLang() === 'es'" (click)="formLang.set('es')">Español</button>
           <button class="adm-tab" [class.adm-tab--active]="formLang() === 'en'" (click)="formLang.set('en')">English</button>
         </div>
 
@@ -85,7 +85,7 @@
           </div>
           <div class="adm-form-group">
             <label class="adm-form-label">Cargo <span class="team-editor__required">*</span></label>
-            <input type="text" class="adm-form-control" [(ngModel)]="formTitle.es" placeholder="Cargo o posicion">
+            <input type="text" class="adm-form-control" [(ngModel)]="formTitle.es" placeholder="Cargo o posición">
           </div>
         } @else {
           <div class="adm-form-group">
@@ -113,7 +113,7 @@
             <div class="adm-uploader" (click)="photoInput.click()" (dragover)="onPhotoDragOver($event)" (drop)="onPhotoDrop($event)">
               <span class="material-symbols-outlined">add_photo_alternate</span>
               <p class="adm-uploader__text">Arrastra una imagen o <span class="adm-uploader__link">selecciona archivo</span></p>
-              <span class="adm-uploader__hint">JPG, PNG o WebP hasta 25MB. Se optimiza automaticamente.</span>
+              <span class="adm-uploader__hint">JPG, PNG o WebP hasta 25MB. Se optimiza automáticamente.</span>
             </div>
           }
           <input #photoInput type="file" accept="image/jpeg,image/png,image/webp" style="display: none;" (change)="onPhotoSelected($event)">
@@ -136,5 +136,5 @@
 <!-- Confirm Delete Modal -->
 <app-confirm-modal #deleteModal
   [title]="'Eliminar miembro'"
-  [description]="'Estas seguro de eliminar a ' + (deletingMember()?.name?.es || '') + '?'"
+  [description]="'¿Está seguro de eliminar a ' + (deletingMember()?.name?.es || '') + '?'"
   (confirmed)="executeDelete()" />

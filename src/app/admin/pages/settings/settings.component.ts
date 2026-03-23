@@ -68,7 +68,7 @@ export class AdminSettingsComponent implements OnInit {
       this.metaDescEs = (settings.metaDescription as { es: string; en: string })?.es || '';
       this.metaDescEn = (settings.metaDescription as { es: string; en: string })?.en || '';
     } catch {
-      this.toast.error('Error al cargar la configuracion');
+      this.toast.error('Error al cargar la configuración');
     }
     this.loading.set(false);
   }
@@ -102,9 +102,9 @@ export class AdminSettingsComponent implements OnInit {
       }
 
       await this.api.adminUpdateSettings(this.activeTab, data);
-      this.toast.success('Configuracion guardada correctamente');
+      this.toast.success('Configuración guardada correctamente');
     } catch {
-      this.toast.error('Error al guardar la configuracion');
+      this.toast.error('Error al guardar la configuración');
     }
     this.saving.set(false);
   }

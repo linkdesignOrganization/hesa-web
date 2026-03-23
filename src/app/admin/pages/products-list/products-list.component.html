@@ -19,8 +19,8 @@
     </div>
     <div class="adm-toolbar__filter">
       <select [value]="selectedCategory()" (change)="onCategoryChange($event)">
-        <option value="">Todas las categorias</option>
-        <option value="farmacos">Farmacos</option>
+        <option value="">Todas las categorías</option>
+        <option value="farmacos">Fármacos</option>
         <option value="alimentos">Alimentos</option>
         <option value="equipos">Equipos</option>
       </select>
@@ -76,8 +76,8 @@
         <div class="adm-empty__icon">
           <span class="material-symbols-outlined">image</span>
         </div>
-        <h2 class="adm-empty__title">No hay productos aun</h2>
-        <p class="adm-empty__desc">Agrega tu primer producto al catalogo para que aparezca en el sitio publico.</p>
+        <h2 class="adm-empty__title">No hay productos aún</h2>
+        <p class="adm-empty__desc">Agrega tu primer producto al catálogo para que aparezca en el sitio público.</p>
         <a routerLink="/admin/productos/crear" class="adm-btn adm-btn--primary">
           <span class="material-symbols-outlined">add</span>
           Crear tu primer producto
@@ -155,7 +155,7 @@
             <tr>
               <th>Producto</th>
               <th>Marca</th>
-              <th>Categoria</th>
+              <th>Categoría</th>
               <th>Estado</th>
               <th style="text-align: right;">Acciones</th>
             </tr>
@@ -220,7 +220,7 @@
             <span class="adm-table-mobile__value">{{ getBrandName(product) }}</span>
           </div>
           <div class="adm-table-mobile__row">
-            <span class="adm-table-mobile__label">Categoria</span>
+            <span class="adm-table-mobile__label">Categoría</span>
             <span class="adm-table-mobile__value">
               <span class="adm-badge" [class.adm-badge--pharma]="product.category === 'farmacos'" [class.adm-badge--food]="product.category === 'alimentos'" [class.adm-badge--equipment]="product.category === 'equipos'">{{ getCategoryLabel(product.category) }}</span>
             </span>
@@ -274,7 +274,7 @@
           <span class="material-symbols-outlined">warning</span>
         </div>
         <h3 id="delete-modal-title" class="adm-modal__title">Eliminar producto</h3>
-        <p class="adm-modal__desc">Esta accion no se puede deshacer. El producto <strong>"{{ productToDelete()!.name.es }}"</strong> sera eliminado permanentemente.</p>
+        <p class="adm-modal__desc">Esta acción no se puede deshacer. El producto <strong>"{{ productToDelete()!.name.es }}"</strong> será eliminado permanentemente.</p>
       </div>
       <div class="adm-modal__footer">
         <button class="adm-btn adm-btn--secondary" (click)="cancelDelete()" autofocus>Cancelar</button>

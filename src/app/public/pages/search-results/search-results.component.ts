@@ -30,7 +30,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     const lang = this.i18n.currentLang();
     return [
       { label: getHomeLabel(lang), url: this.i18n.getLangPrefix() },
-      { label: lang === 'es' ? 'Resultados de busqueda' : 'Search results' }
+      { label: lang === 'es' ? 'Resultados de búsqueda' : 'Search results' }
     ];
   }
 

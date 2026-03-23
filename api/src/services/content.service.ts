@@ -14,18 +14,18 @@ const defaultHeroImages: Record<string, string> = {
  */
 const defaultPageSections: Record<string, IPageSection[]> = {
   distribuidores: [
-    { key: 'heroTitle', label: { es: 'Titulo del Hero', en: 'Hero Title' }, value: { es: 'Conviertase en Nuestro Socio de Distribucion en Costa Rica', en: 'Become Our Distribution Partner in Costa Rica' }, type: 'text' },
-    { key: 'heroSubtitle', label: { es: 'Subtitulo del Hero', en: 'Hero Subtitle' }, value: { es: '37 anos de trayectoria comprobada en distribucion de productos veterinarios. Cobertura nacional, flotilla propia y equipo de ventas especializado.', en: '37 years of proven track record in veterinary product distribution. Nationwide coverage, own fleet, and specialized sales team.' }, type: 'textarea' },
-    { key: 'whyTitle', label: { es: 'Titulo Por que HESA', en: 'Why HESA Title' }, value: { es: 'Por que Elegir HESA', en: 'Why Choose HESA' }, type: 'text' },
-    { key: 'timelineTitle', label: { es: 'Titulo Timeline', en: 'Timeline Title' }, value: { es: 'Como Funciona', en: 'How It Works' }, type: 'text' },
-    { key: 'formTitle', label: { es: 'Titulo Formulario', en: 'Form Title' }, value: { es: 'Inicie su Alianza', en: 'Start Your Partnership' }, type: 'text' },
-    { key: 'formDescription', label: { es: 'Descripcion Formulario', en: 'Form Description' }, value: { es: 'Complete el formulario y nuestro equipo comercial se comunicara con usted en un plazo de 48 horas para discutir oportunidades de distribucion.', en: 'Fill out the form and our commercial team will get in touch within 48 hours to discuss distribution opportunities.' }, type: 'textarea' },
+    { key: 'heroTitle', label: { es: 'Título del hero', en: 'Hero Title' }, value: { es: 'Conviértase en nuestro socio de distribución en Costa Rica', en: 'Become Our Distribution Partner in Costa Rica' }, type: 'text' },
+    { key: 'heroSubtitle', label: { es: 'Subtítulo del hero', en: 'Hero Subtitle' }, value: { es: '37 años de trayectoria comprobada en distribución de productos veterinarios. Cobertura nacional, flotilla propia y equipo de ventas especializado.', en: '37 years of proven track record in veterinary product distribution. Nationwide coverage, own fleet, and specialized sales team.' }, type: 'textarea' },
+    { key: 'whyTitle', label: { es: 'Título Por qué HESA', en: 'Why HESA Title' }, value: { es: 'Por qué elegir HESA', en: 'Why Choose HESA' }, type: 'text' },
+    { key: 'timelineTitle', label: { es: 'Título timeline', en: 'Timeline Title' }, value: { es: 'Cómo funciona', en: 'How It Works' }, type: 'text' },
+    { key: 'formTitle', label: { es: 'Título formulario', en: 'Form Title' }, value: { es: 'Inicie su alianza', en: 'Start Your Partnership' }, type: 'text' },
+    { key: 'formDescription', label: { es: 'Descripción formulario', en: 'Form Description' }, value: { es: 'Complete el formulario y nuestro equipo comercial se comunicará con usted en un plazo de 48 horas para discutir oportunidades de distribución.', en: 'Fill out the form and our commercial team will get in touch within 48 hours to discuss distribution opportunities.' }, type: 'textarea' },
   ],
   contacto: [
-    { key: 'pageTitle', label: { es: 'Titulo de Pagina', en: 'Page Title' }, value: { es: 'Contactenos', en: 'Contact Us' }, type: 'text' },
-    { key: 'phone', label: { es: 'Telefono', en: 'Phone' }, value: { es: '+506 2260-9020', en: '+506 2260-9020' }, type: 'text' },
+    { key: 'pageTitle', label: { es: 'Título de página', en: 'Page Title' }, value: { es: 'Contáctenos', en: 'Contact Us' }, type: 'text' },
+    { key: 'phone', label: { es: 'Teléfono', en: 'Phone' }, value: { es: '+506 2260-9020', en: '+506 2260-9020' }, type: 'text' },
     { key: 'email', label: { es: 'Correo', en: 'Email' }, value: { es: 'info@hesa.co.cr', en: 'info@hesa.co.cr' }, type: 'text' },
-    { key: 'address', label: { es: 'Direccion', en: 'Address' }, value: { es: 'Calle 2, av 12. Heredia, Costa Rica', en: 'Calle 2, av 12. Heredia, Costa Rica' }, type: 'text' },
+    { key: 'address', label: { es: 'Dirección', en: 'Address' }, value: { es: 'Calle 2, av. 12. Heredia, Costa Rica', en: 'Calle 2, av. 12. Heredia, Costa Rica' }, type: 'text' },
     { key: 'hours', label: { es: 'Horario', en: 'Hours' }, value: { es: 'Lunes a Viernes: 8:00 - 17:00', en: 'Monday to Friday: 8:00 - 17:00' }, type: 'text' },
   ],
 };

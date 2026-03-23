@@ -7,7 +7,7 @@
       <span class="admin__sidebar-subtitle">Admin</span>
     </div>
 
-    <nav class="admin__sidebar-nav" aria-label="Panel de administracion">
+    <nav class="admin__sidebar-nav" aria-label="Panel de administración">
       <!-- Primary navigation -->
       <div class="admin__sidebar-section">
         <a routerLink="/admin/dashboard" routerLinkActive="admin__sidebar-link--active" class="admin__sidebar-link">
@@ -17,7 +17,7 @@
 
         <a routerLink="/admin/categorias" routerLinkActive="admin__sidebar-link--active" class="admin__sidebar-link">
           <span class="material-symbols-outlined admin__sidebar-icon">layers</span>
-          <span class="admin__sidebar-label">Categorias</span>
+          <span class="admin__sidebar-label">Categorías</span>
         </a>
 
         <a routerLink="/admin/marcas" routerLinkActive="admin__sidebar-link--active" class="admin__sidebar-link">
@@ -76,7 +76,7 @@
       <div class="admin__sidebar-section">
         <a routerLink="/admin/configuracion/general" routerLinkActive="admin__sidebar-link--active" class="admin__sidebar-link">
           <span class="material-symbols-outlined admin__sidebar-icon">settings</span>
-          <span class="admin__sidebar-label">Configuracion</span>
+          <span class="admin__sidebar-label">Configuración</span>
         </a>
       </div>
     </nav>
@@ -89,7 +89,7 @@
   <div class="admin__main">
     <!-- Header / Topbar -->
     <header class="admin__header">
-      <button class="admin__hamburger" (click)="toggleMobileSidebar()" aria-label="Abrir menu">
+      <button class="admin__hamburger" (click)="toggleMobileSidebar()" aria-label="Abrir menú">
         <span class="material-symbols-outlined">menu</span>
       </button>
 
@@ -107,7 +107,7 @@
           aria-autocomplete="list"
           aria-controls="admin-search-results"
           [attr.aria-expanded]="searchOpen()"
-          aria-label="Busqueda global del panel">
+          aria-label="Búsqueda global del panel">
 
         @if (searchOpen()) {
           <div class="admin__search-dropdown" id="admin-search-results" role="listbox">
@@ -188,11 +188,11 @@
             <div class="admin__header-dropdown">
               <a routerLink="/admin/configuracion/general" class="admin__header-dropdown-item">
                 <span class="material-symbols-outlined">settings</span>
-                Configuracion
+                Configuración
               </a>
               <button class="admin__header-dropdown-item admin__header-dropdown-item--danger" (click)="logout()">
                 <span class="material-symbols-outlined">logout</span>
-                Cerrar sesion
+                Cerrar sesión
               </button>
             </div>
           }

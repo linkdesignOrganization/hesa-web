@@ -20,7 +20,7 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
         if (!handlingAuthRedirect) {
           handlingAuthRedirect = true;
           toast.error(lang === 'es'
-            ? 'Tu sesion ha expirado. Inicia sesion de nuevo.'
+            ? 'Tu sesión ha expirado. Inicia sesión de nuevo.'
             : 'Your session has expired. Please log in again.');
           router.navigate(['/admin/login']);
           setTimeout(() => { handlingAuthRedirect = false; }, 3000);

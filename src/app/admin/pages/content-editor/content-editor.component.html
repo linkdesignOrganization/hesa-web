@@ -23,7 +23,7 @@
     <!-- Hero Image (for distribuidores) -->
     @if (pageKey() === 'distribuidores') {
       <div class="content-editor__image-section">
-        <label class="adm-form-label">Imagen Hero</label>
+        <label class="adm-form-label">Imagen hero</label>
         @if (heroImage()) {
           <div class="content-editor__image-preview" [style.background-image]="'url(' + heroImage() + ')'">
             <button class="adm-btn adm-btn--secondary adm-btn--sm" (click)="imageInput.click()">Cambiar imagen</button>
@@ -32,7 +32,7 @@
           <div class="adm-uploader" (click)="imageInput.click()">
             <span class="material-symbols-outlined">add_photo_alternate</span>
             <p class="adm-uploader__text">Haz clic para subir imagen</p>
-            <span class="adm-uploader__hint">JPG, PNG o WebP hasta 25MB. Se optimiza automaticamente.</span>
+            <span class="adm-uploader__hint">JPG, PNG o WebP hasta 25MB. Se optimiza automáticamente.</span>
           </div>
         }
         <input #imageInput type="file" accept="image/jpeg,image/png,image/webp" style="display: none;" (change)="onImageSelected($event)">
@@ -41,7 +41,7 @@
 
     <!-- Language Tabs -->
     <div class="adm-tabs">
-      <button class="adm-tab" [class.adm-tab--active]="activeLang() === 'es'" (click)="activeLang.set('es')">Espanol</button>
+      <button class="adm-tab" [class.adm-tab--active]="activeLang() === 'es'" (click)="activeLang.set('es')">Español</button>
       <button class="adm-tab" [class.adm-tab--active]="activeLang() === 'en'" (click)="activeLang.set('en')">English</button>
     </div>
 

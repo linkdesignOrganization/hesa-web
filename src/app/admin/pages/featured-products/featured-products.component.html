@@ -23,7 +23,7 @@
           <span class="material-symbols-outlined">image</span>
         </div>
         <p class="adm-empty__title">No hay productos destacados</p>
-        <p class="adm-empty__desc">La seccion no se mostrara en el home.</p>
+        <p class="adm-empty__desc">La sección no se mostrará en el home.</p>
         <button class="adm-btn adm-btn--primary" (click)="showModal.set(true)">
           <span class="material-symbols-outlined">add</span>
           Agregar productos
@@ -81,7 +81,7 @@
         </div>
         <div class="featured-products__filters">
           <button class="adm-tab" [class.adm-tab--active]="filterCategory() === ''" (click)="filterCategory.set(''); filterAvailable()">Todos</button>
-          <button class="adm-tab" [class.adm-tab--active]="filterCategory() === 'farmacos'" (click)="filterCategory.set('farmacos'); filterAvailable()">Farmacos</button>
+          <button class="adm-tab" [class.adm-tab--active]="filterCategory() === 'farmacos'" (click)="filterCategory.set('farmacos'); filterAvailable()">Fármacos</button>
           <button class="adm-tab" [class.adm-tab--active]="filterCategory() === 'alimentos'" (click)="filterCategory.set('alimentos'); filterAvailable()">Alimentos</button>
           <button class="adm-tab" [class.adm-tab--active]="filterCategory() === 'equipos'" (click)="filterCategory.set('equipos'); filterAvailable()">Equipos</button>
         </div>
@@ -111,7 +111,7 @@
       </div>
       <div class="adm-modal__footer">
         <button class="adm-btn adm-btn--secondary" (click)="showModal.set(false)">Cancelar</button>
-        <button class="adm-btn adm-btn--primary" (click)="applySelection()">Aplicar seleccion</button>
+        <button class="adm-btn adm-btn--primary" (click)="applySelection()">Aplicar selección</button>
       </div>
     </div>
   </div>

@@ -4,8 +4,8 @@
   <!-- Page Header -->
   <div class="adm-page-header">
     <div class="adm-page-header__left">
-      <h1 class="adm-page-header__title">Categorias y Filtros</h1>
-      <p class="adm-page-header__subtitle">Gestiona las familias, especies y tipos de equipo de cada categoria</p>
+      <h1 class="adm-page-header__title">Categorías y filtros</h1>
+      <p class="adm-page-header__subtitle">Gestiona las familias, especies y tipos de equipo de cada categoría</p>
     </div>
   </div>
 
@@ -31,7 +31,7 @@
         @if (cat.families && cat.families.length > 0) {
           <div class="cat-card__group">
             <h3 class="cat-card__group-title">
-              <span class="material-symbols-outlined">medication</span> Familias farmaceuticas
+              <span class="material-symbols-outlined">medication</span> Familias farmacéuticas
             </h3>
             <div class="adm-chips">
               @for (val of cat.families; track val.es) {
@@ -128,12 +128,12 @@
       </div>
       <div class="adm-modal__body">
         <div class="adm-form-group" style="margin-bottom: 16px;">
-          <label class="adm-form-label">Valor (espanol) <span class="required">*</span></label>
-          <input type="text" class="adm-form-control" [(ngModel)]="addValueEs" placeholder="Nuevo valor en espanol" (keydown.enter)="submitAddTag()">
+          <label class="adm-form-label">Valor (español) <span class="required">*</span></label>
+          <input type="text" class="adm-form-control" [(ngModel)]="addValueEs" placeholder="Nuevo valor en español" (keydown.enter)="submitAddTag()">
         </div>
         <div class="adm-form-group">
-          <label class="adm-form-label">Traduccion (ingles)</label>
-          <input type="text" class="adm-form-control" [(ngModel)]="addValueEn" placeholder="Traduccion al ingles (opcional)" (keydown.enter)="submitAddTag()">
+          <label class="adm-form-label">Traducción (inglés)</label>
+          <input type="text" class="adm-form-control" [(ngModel)]="addValueEn" placeholder="Traducción al inglés (opcional)" (keydown.enter)="submitAddTag()">
         </div>
       </div>
       <div class="adm-modal__footer">

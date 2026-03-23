@@ -20,10 +20,10 @@
 
   <form class="adm-card pf-form" [formGroup]="productForm" (ngSubmit)="onSubmit()">
 
-    <!-- Section 1: Informacion Basica -->
+    <!-- Section 1: Información Básica -->
     <div class="adm-form-section">
-      <h2 class="adm-form-section__title">Informacion Basica</h2>
-      <p class="adm-form-section__desc">Datos principales del producto visibles en el catalogo</p>
+      <h2 class="adm-form-section__title">Información Básica</h2>
+      <p class="adm-form-section__desc">Datos principales del producto visibles en el catálogo</p>
 
       <div class="adm-form-grid">
         <div class="adm-form-group">
@@ -52,13 +52,13 @@
 
         <!-- Category selector cards -->
         <div class="adm-form-group adm-form-group--full">
-          <label class="adm-form-label">Categoria <span class="required">*</span></label>
+          <label class="adm-form-label">Categoría <span class="required">*</span></label>
           <div class="pf-category-cards">
             <button type="button" class="pf-category-card" [class.pf-category-card--active]="selectedCategory() === 'farmacos'" [class.pf-category-card--error]="isFieldInvalid('category')" (click)="selectCategory('farmacos')">
               <div class="pf-category-card__icon pf-category-card__icon--pharma">
                 <span class="material-symbols-outlined">medication</span>
               </div>
-              <span class="pf-category-card__label">Farmacos</span>
+              <span class="pf-category-card__label">Fármacos</span>
             </button>
             <button type="button" class="pf-category-card" [class.pf-category-card--active]="selectedCategory() === 'alimentos'" [class.pf-category-card--error]="isFieldInvalid('category')" (click)="selectCategory('alimentos')">
               <div class="pf-category-card__icon pf-category-card__icon--food">
@@ -85,10 +85,10 @@
 
     <hr class="adm-form-divider">
 
-    <!-- Section 2: Especies y Clasificacion -->
+    <!-- Section 2: Especies y Clasificación -->
     <div class="adm-form-section">
-      <h2 class="adm-form-section__title">Especies y Clasificacion</h2>
-      <p class="adm-form-section__desc">Define las especies de destino y clasificacion segun categoria</p>
+      <h2 class="adm-form-section__title">Especies y Clasificación</h2>
+      <p class="adm-form-section__desc">Define las especies de destino y clasificación según categoría</p>
 
       <div class="adm-form-grid">
         <!-- Species checkboxes (from category) -->
@@ -107,20 +107,20 @@
         } @else if (selectedCategory() && selectedCategory() !== 'equipos') {
           <div class="adm-form-group adm-form-group--full">
             <label class="adm-form-label">Especies</label>
-            <p class="adm-form-hint">No hay especies configuradas para esta categoria. Agregalas en Categorias.</p>
+            <p class="adm-form-hint">No hay especies configuradas para esta categoría. Agrégalas en Categorías.</p>
           </div>
         }
 
         <!-- Conditional: Familia Farmaceutica -->
         @if (selectedCategory() === 'farmacos') {
           <div class="adm-form-group pf-conditional-field">
-            <label class="adm-form-label" for="prod-family">Familia Farmaceutica</label>
+            <label class="adm-form-label" for="prod-family">Familia Farmacéutica</label>
             <select id="prod-family" class="adm-form-select" formControlName="family">
               <option value="">Seleccionar familia</option>
-              <option>Antibioticos</option>
+              <option>Antibióticos</option>
               <option>Desparasitantes</option>
               <option>Vitaminas</option>
-              <option>Analgosicos</option>
+              <option>Analgésicos</option>
               <option>Antiinflamatorios</option>
             </select>
           </div>
@@ -146,8 +146,8 @@
             <label class="adm-form-label" for="prod-eqtype">Tipo de Equipo</label>
             <select id="prod-eqtype" class="adm-form-select" formControlName="equipmentType">
               <option value="">Seleccionar tipo</option>
-              <option>Diagnostico</option>
-              <option>Quirurgico</option>
+              <option>Diagnóstico</option>
+              <option>Quirúrgico</option>
               <option>Laboratorio</option>
               <option>Instrumental</option>
             </select>
@@ -181,28 +181,28 @@
 
     <hr class="adm-form-divider">
 
-    <!-- Section 3: Descripcion y Contenido -->
+    <!-- Section 3: Descripción y Contenido -->
     <div class="adm-form-section">
-      <h2 class="adm-form-section__title">Descripcion y Contenido</h2>
-      <p class="adm-form-section__desc">Informacion detallada del producto</p>
+      <h2 class="adm-form-section__title">Descripción y Contenido</h2>
+      <p class="adm-form-section__desc">Información detallada del producto</p>
 
       <!-- Language Tabs -->
       <div class="adm-tabs" style="margin-bottom: 20px;">
-        <button type="button" class="adm-tab" [class.adm-tab--active]="activeTab() === 'es'" (click)="switchTab('es')">Espanol</button>
+        <button type="button" class="adm-tab" [class.adm-tab--active]="activeTab() === 'es'" (click)="switchTab('es')">Español</button>
         <button type="button" class="adm-tab" [class.adm-tab--active]="activeTab() === 'en'" (click)="switchTab('en')">English</button>
       </div>
 
       @if (activeTab() === 'es') {
         <div class="adm-form-grid">
           <div class="adm-form-group adm-form-group--full">
-            <label class="adm-form-label" for="prod-desc-es">Descripcion</label>
-            <textarea id="prod-desc-es" class="adm-form-control" formControlName="descriptionEs" placeholder="Describe el producto en espanol..." rows="4"></textarea>
+            <label class="adm-form-label" for="prod-desc-es">Descripción</label>
+            <textarea id="prod-desc-es" class="adm-form-control" formControlName="descriptionEs" placeholder="Describe el producto en español..." rows="4"></textarea>
           </div>
 
           @if (selectedCategory() === 'farmacos') {
             <div class="adm-form-group adm-form-group--full pf-conditional-field">
-              <label class="adm-form-label" for="prod-composition-es">Composicion</label>
-              <textarea id="prod-composition-es" class="adm-form-control" formControlName="compositionEs" placeholder="Composicion del producto..." rows="3"></textarea>
+              <label class="adm-form-label" for="prod-composition-es">Composición</label>
+              <textarea id="prod-composition-es" class="adm-form-control" formControlName="compositionEs" placeholder="Composición del producto..." rows="3"></textarea>
             </div>
           }
 
@@ -212,23 +212,23 @@
               <textarea id="prod-ingredients-es" class="adm-form-control" formControlName="ingredientsEs" placeholder="Ingredientes principales del alimento..." rows="3"></textarea>
             </div>
             <div class="adm-form-group adm-form-group--full pf-conditional-field">
-              <label class="adm-form-label" for="prod-nutritional-es">Informacion nutricional</label>
-              <textarea id="prod-nutritional-es" class="adm-form-control" formControlName="nutritionalInfoEs" placeholder="Informacion nutricional..." rows="3"></textarea>
+              <label class="adm-form-label" for="prod-nutritional-es">Información nutricional</label>
+              <textarea id="prod-nutritional-es" class="adm-form-control" formControlName="nutritionalInfoEs" placeholder="Información nutricional..." rows="3"></textarea>
             </div>
           }
 
           @if (selectedCategory() === 'equipos') {
             <div class="adm-form-group adm-form-group--full pf-conditional-field">
-              <label class="adm-form-label" for="prod-specs-es">Especificaciones tecnicas</label>
-              <textarea id="prod-specs-es" class="adm-form-control" formControlName="specificationsEs" placeholder="Especificaciones tecnicas del equipo..." rows="3"></textarea>
+              <label class="adm-form-label" for="prod-specs-es">Especificaciones técnicas</label>
+              <textarea id="prod-specs-es" class="adm-form-control" formControlName="specificationsEs" placeholder="Especificaciones técnicas del equipo..." rows="3"></textarea>
             </div>
             <div class="adm-form-group adm-form-group--full pf-conditional-field">
               <label class="adm-form-label" for="prod-uses-es">Usos recomendados</label>
               <textarea id="prod-uses-es" class="adm-form-control" formControlName="recommendedUsesEs" placeholder="Usos recomendados..." rows="3"></textarea>
             </div>
             <div class="adm-form-group adm-form-group--full pf-conditional-field">
-              <label class="adm-form-label" for="prod-warranty-es">Garantia</label>
-              <textarea id="prod-warranty-es" class="adm-form-control" formControlName="warrantyEs" placeholder="Informacion de garantia..." rows="2"></textarea>
+              <label class="adm-form-label" for="prod-warranty-es">Garantía</label>
+              <textarea id="prod-warranty-es" class="adm-form-control" formControlName="warrantyEs" placeholder="Información de garantía..." rows="2"></textarea>
             </div>
           }
         </div>
@@ -277,10 +277,10 @@
 
     <hr class="adm-form-divider">
 
-    <!-- Section 4: Imagenes -->
+    <!-- Section 4: Imágenes -->
     <div class="adm-form-section">
-      <h2 class="adm-form-section__title">Imagenes</h2>
-      <p class="adm-form-section__desc">Sube las fotos del producto (maximo 6). La primera sera la imagen principal.</p>
+      <h2 class="adm-form-section__title">Imágenes</h2>
+      <p class="adm-form-section__desc">Sube las fotos del producto (máximo 6). La primera será la imagen principal.</p>
 
       <!-- Existing images gallery -->
       @if (existingImages().length > 0 || pendingImagePreviews().length > 0) {
@@ -319,25 +319,25 @@
           <div class="adm-uploader__icon">
             <span class="material-symbols-outlined">add_photo_alternate</span>
           </div>
-          <p class="adm-uploader__text">Arrastra imagenes aqui o <strong>selecciona archivos</strong></p>
-          <span class="adm-uploader__hint">PNG, JPG o WebP hasta 25MB. Se optimizan automaticamente ({{ 6 - existingImages().length - pendingImagePreviews().length }} restantes)</span>
+          <p class="adm-uploader__text">Arrastra imágenes aquí o <strong>selecciona archivos</strong></p>
+          <span class="adm-uploader__hint">PNG, JPG o WebP hasta 25MB. Se optimizan automáticamente ({{ 6 - existingImages().length - pendingImagePreviews().length }} restantes)</span>
         </div>
       }
       <input #imageInput type="file" accept="image/png,image/jpeg,image/webp" multiple style="display: none;" (change)="onImagesSelected($event)">
       @if (uploadingImages()) {
         <div class="pf-upload-progress">
           <div class="adm-progress"><div class="adm-progress__bar" style="width: 100%;"></div></div>
-          <span class="pf-upload-progress__text">Subiendo imagenes...</span>
+          <span class="pf-upload-progress__text">Subiendo imágenes...</span>
         </div>
       }
     </div>
 
     <hr class="adm-form-divider">
 
-    <!-- Section 5: Ficha Tecnica (PDF) -->
+    <!-- Section 5: Ficha técnica (PDF) -->
     <div class="adm-form-section">
-      <h2 class="adm-form-section__title">Ficha Tecnica (PDF)</h2>
-      <p class="adm-form-section__desc">Sube la ficha tecnica del producto en formato PDF (opcional)</p>
+      <h2 class="adm-form-section__title">Ficha técnica (PDF)</h2>
+      <p class="adm-form-section__desc">Sube la ficha técnica del producto en formato PDF (opcional)</p>
 
       @if (existingPdfUrl()) {
         <div class="pf-pdf-card">
@@ -359,7 +359,7 @@
           </div>
           <div class="pf-pdf-card__info">
             <p class="pf-pdf-card__name">{{ pendingPdfName() }}</p>
-            <p class="pf-pdf-card__link" style="cursor: default; color: var(--adm-text-muted);">Se subira al guardar</p>
+            <p class="pf-pdf-card__link" style="cursor: default; color: var(--adm-text-muted);">Se subirá al guardar</p>
           </div>
           <button type="button" class="pf-pdf-card__remove" aria-label="Quitar PDF" (click)="removePendingPdf()">
             <span class="material-symbols-outlined">close</span>
@@ -370,7 +370,7 @@
           <div class="adm-uploader__icon">
             <span class="material-symbols-outlined">picture_as_pdf</span>
           </div>
-          <p class="adm-uploader__text">Arrastra el PDF aqui o <strong>selecciona archivo</strong></p>
+          <p class="adm-uploader__text">Arrastra el PDF aquí o <strong>selecciona archivo</strong></p>
           <span class="adm-uploader__hint">PDF hasta 10MB</span>
         </div>
       }
@@ -385,15 +385,15 @@
 
     <hr class="adm-form-divider">
 
-    <!-- Section 6: Configuracion -->
+    <!-- Section 6: Configuración -->
     <div class="adm-form-section">
-      <h2 class="adm-form-section__title">Configuracion</h2>
+      <h2 class="adm-form-section__title">Configuración</h2>
       <p class="adm-form-section__desc">Estado y visibilidad del producto</p>
 
       <div class="pf-toggle-row">
         <div>
           <span class="adm-form-label">Producto activo</span>
-          <p class="adm-form-hint">El producto sera visible en el catalogo publico</p>
+          <p class="adm-form-hint">El producto será visible en el catálogo público</p>
         </div>
         <label class="adm-form-switch">
           <input type="checkbox" formControlName="isActive">
@@ -409,7 +409,7 @@
       <hr class="adm-form-divider">
       <div class="adm-form-section">
         <h2 class="adm-form-section__title" style="color: var(--adm-danger);">Zona de peligro</h2>
-        <p class="adm-form-section__desc">Esta accion es irreversible</p>
+        <p class="adm-form-section__desc">Esta acción es irreversible</p>
         <button type="button" class="adm-btn adm-btn--danger" (click)="requestDeleteProduct()">
           <span class="material-symbols-outlined">delete</span>
           Eliminar producto
@@ -434,7 +434,7 @@
           <span class="material-symbols-outlined">warning</span>
         </div>
         <h3 class="adm-modal__title">Tienes cambios sin guardar</h3>
-        <p class="adm-modal__desc">Si sales ahora, perderas los cambios realizados en este producto.</p>
+        <p class="adm-modal__desc">Si sales ahora, perderás los cambios realizados en este producto.</p>
       </div>
       <div class="adm-modal__footer">
         <button class="adm-btn adm-btn--secondary" (click)="confirmLeave()">Salir sin guardar</button>
@@ -453,7 +453,7 @@
           <span class="material-symbols-outlined">delete</span>
         </div>
         <h3 class="adm-modal__title">Eliminar producto</h3>
-        <p class="adm-modal__desc">Esta accion eliminara el producto de forma permanente. No se puede deshacer.</p>
+        <p class="adm-modal__desc">Esta acción eliminará el producto de forma permanente. No se puede deshacer.</p>
       </div>
       <div class="adm-modal__footer">
         <button class="adm-btn adm-btn--secondary" (click)="cancelDelete()">Cancelar</button>

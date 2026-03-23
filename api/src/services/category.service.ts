@@ -109,13 +109,13 @@ export async function seedCategories(): Promise<void> {
   const defaults: Partial<ICategory>[] = [
     {
       key: 'farmacos',
-      name: { es: 'Farmacos', en: 'Pharmaceuticals' },
+      name: { es: 'Fármacos', en: 'Pharmaceuticals' },
       description: {
         es: 'Medicamentos veterinarios de las mejores marcas internacionales',
         en: 'Veterinary pharmaceuticals from the best international brands',
       },
       families: [
-        { es: 'Antibioticos', en: 'Antibiotics' },
+        { es: 'Antibióticos', en: 'Antibiotics' },
         { es: 'Desparasitantes', en: 'Dewormers' },
         { es: 'Vitaminas', en: 'Vitamins' },
         { es: 'Antiinflamatorios', en: 'Anti-inflammatories' },
@@ -134,7 +134,7 @@ export async function seedCategories(): Promise<void> {
       key: 'alimentos',
       name: { es: 'Alimentos', en: 'Food' },
       description: {
-        es: 'Alimentos premium para mascotas y animales de produccion',
+        es: 'Alimentos premium para mascotas y animales de producción',
         en: 'Premium food for pets and production animals',
       },
       species: [
@@ -156,8 +156,8 @@ export async function seedCategories(): Promise<void> {
         en: 'Professional veterinary equipment and instruments',
       },
       equipmentTypes: [
-        { es: 'Diagnostico', en: 'Diagnostic' },
-        { es: 'Cirugia', en: 'Surgery' },
+        { es: 'Diagnóstico', en: 'Diagnostic' },
+        { es: 'Cirugía', en: 'Surgery' },
         { es: 'Monitoreo', en: 'Monitoring' },
         { es: 'Laboratorio', en: 'Laboratory' },
       ],

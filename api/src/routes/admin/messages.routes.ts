@@ -84,8 +84,8 @@ router.get('/export', async (req: Request, res: Response) => {
 
     // Build CSV
     const headers = [
-      'ID', 'Nombre', 'Email', 'Telefono', 'Tipo', 'Estado',
-      'Producto', 'Mensaje', 'Empresa', 'Pais', 'Fuente',
+      'ID', 'Nombre', 'Email', 'Teléfono', 'Tipo', 'Estado',
+      'Producto', 'Mensaje', 'Empresa', 'País', 'Fuente',
       'Notas', 'Fecha',
     ];
     const rows = messages.map(m => [

@@ -15,7 +15,7 @@
           role="option"
           [attr.aria-selected]="i18n.currentLang() === 'es'"
           (click)="selectLanguage('es')">
-          Espanol
+          Español
         </button>
         <button
           class="lang-selector__option"
@@ -30,6 +30,6 @@
   </div>
 } @else {
   <button class="lang-footer" (click)="selectLanguage(i18n.currentLang() === 'es' ? 'en' : 'es')">
-    {{ i18n.currentLang() === 'es' ? 'English' : 'Espanol' }}
+    {{ i18n.currentLang() === 'es' ? 'English' : 'Español' }}
   </button>
 }

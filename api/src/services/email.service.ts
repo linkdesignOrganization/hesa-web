@@ -32,7 +32,7 @@ interface ContactEmailData {
 
 function buildGeneralEmailHtml(data: ContactEmailData): string {
   const typeLabels: Record<string, string> = {
-    info: 'Informacion de productos',
+    info: 'Información de productos',
     comercial: 'Condiciones comerciales',
     soporte: 'Soporte',
     otro: 'Otro',
@@ -47,7 +47,7 @@ function buildGeneralEmailHtml(data: ContactEmailData): string {
         <table style="width: 100%; border-collapse: collapse;">
           <tr><td style="padding: 8px 0; color: #6B7280; font-size: 14px; width: 140px;">Nombre:</td><td style="padding: 8px 0; font-size: 14px; font-weight: 500;">${escapeHtml(data.name)}</td></tr>
           <tr><td style="padding: 8px 0; color: #6B7280; font-size: 14px;">Email:</td><td style="padding: 8px 0; font-size: 14px;"><a href="mailto:${escapeHtml(data.email)}" style="color: #008DC9;">${escapeHtml(data.email)}</a></td></tr>
-          ${data.phone ? `<tr><td style="padding: 8px 0; color: #6B7280; font-size: 14px;">Telefono:</td><td style="padding: 8px 0; font-size: 14px;">${escapeHtml(data.phone)}</td></tr>` : ''}
+          ${data.phone ? `<tr><td style="padding: 8px 0; color: #6B7280; font-size: 14px;">Teléfono:</td><td style="padding: 8px 0; font-size: 14px;">${escapeHtml(data.phone)}</td></tr>` : ''}
           <tr><td style="padding: 8px 0; color: #6B7280; font-size: 14px;">Tipo:</td><td style="padding: 8px 0; font-size: 14px;"><span style="background: #EBF5FF; color: #008DC9; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 600;">${typeLabels[data.type] || data.type}</span></td></tr>
           ${data.productOfInterest ? `<tr><td style="padding: 8px 0; color: #6B7280; font-size: 14px;">Producto:</td><td style="padding: 8px 0; font-size: 14px;">${escapeHtml(data.productOfInterest)}</td></tr>` : ''}
         </table>
@@ -69,10 +69,10 @@ function buildManufacturerEmailHtml(data: ContactEmailData): string {
       <div style="background: white; border: 1px solid #E5E7EB; border-top: none; padding: 24px; border-radius: 0 0 12px 12px;">
         <table style="width: 100%; border-collapse: collapse;">
           <tr><td style="padding: 8px 0; color: #6B7280; font-size: 14px; width: 140px;">Empresa:</td><td style="padding: 8px 0; font-size: 14px; font-weight: 500;">${escapeHtml(data.companyName || '')}</td></tr>
-          <tr><td style="padding: 8px 0; color: #6B7280; font-size: 14px;">Pais:</td><td style="padding: 8px 0; font-size: 14px;">${escapeHtml(data.country || '')}</td></tr>
+          <tr><td style="padding: 8px 0; color: #6B7280; font-size: 14px;">País:</td><td style="padding: 8px 0; font-size: 14px;">${escapeHtml(data.country || '')}</td></tr>
           <tr><td style="padding: 8px 0; color: #6B7280; font-size: 14px;">Contacto:</td><td style="padding: 8px 0; font-size: 14px;">${escapeHtml(data.contactName || data.name)}</td></tr>
           <tr><td style="padding: 8px 0; color: #6B7280; font-size: 14px;">Email:</td><td style="padding: 8px 0; font-size: 14px;"><a href="mailto:${escapeHtml(data.contactEmail || data.email)}" style="color: #008DC9;">${escapeHtml(data.contactEmail || data.email)}</a></td></tr>
-          ${data.contactPhone ? `<tr><td style="padding: 8px 0; color: #6B7280; font-size: 14px;">Telefono:</td><td style="padding: 8px 0; font-size: 14px;">${escapeHtml(data.contactPhone)}</td></tr>` : ''}
+          ${data.contactPhone ? `<tr><td style="padding: 8px 0; color: #6B7280; font-size: 14px;">Teléfono:</td><td style="padding: 8px 0; font-size: 14px;">${escapeHtml(data.contactPhone)}</td></tr>` : ''}
           ${data.productTypes ? `<tr><td style="padding: 8px 0; color: #6B7280; font-size: 14px;">Productos:</td><td style="padding: 8px 0; font-size: 14px;">${escapeHtml(data.productTypes)}</td></tr>` : ''}
         </table>
         <hr style="border: none; border-top: 1px solid #E5E7EB; margin: 16px 0;">

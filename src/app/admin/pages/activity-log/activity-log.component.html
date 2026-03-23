@@ -70,7 +70,7 @@
           <span class="material-symbols-outlined">chevron_left</span>
           Anterior
         </button>
-        <span class="adm-pagination__info">Pagina {{ currentPage() }} de {{ totalPages() }}</span>
+        <span class="adm-pagination__info">Página {{ currentPage() }} de {{ totalPages() }}</span>
         <button class="adm-btn adm-btn--secondary adm-btn--sm" [disabled]="currentPage() >= totalPages()" (click)="goToPage(currentPage() + 1)">
           Siguiente
           <span class="material-symbols-outlined">chevron_right</span>

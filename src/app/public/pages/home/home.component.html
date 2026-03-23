@@ -263,7 +263,7 @@
       <a
         [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/farmacos' : 'catalog/pharmaceuticals')"
         class="service-spotlight__pill frosted-white">
-        {{ i18n.currentLang() === 'es' ? 'Farmacos' : 'Pharmaceuticals' }}
+        {{ i18n.currentLang() === 'es' ? 'Fármacos' : 'Pharmaceuticals' }}
       </a>
       <a
         [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo/alimentos' : 'catalog/food')"
@@ -287,7 +287,7 @@
 <!-- FEATURED SHOWCASE -->
 <section class="featured-showcase fade-in-section">
   <div class="featured-showcase__shell" [attr.data-category]="activeShowcaseTab()">
-    <div class="featured-showcase__marquee" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Marcas destacadas de esta seleccion' : 'Featured brands in this selection'">
+    <div class="featured-showcase__marquee" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Marcas destacadas de esta selección' : 'Featured brands in this selection'">
       <div class="featured-showcase__marquee-track">
         @for (group of showcaseMarqueeGroups; track group) {
           <div class="featured-showcase__marquee-group" [attr.aria-hidden]="group === 1">
@@ -309,7 +309,7 @@
     </div>
 
     <div class="featured-showcase__tabs-shell">
-      <div class="featured-showcase__tabs" role="tablist" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Categorias destacadas' : 'Featured categories'">
+      <div class="featured-showcase__tabs" role="tablist" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Categorías destacadas' : 'Featured categories'">
         @for (tab of featuredShowcaseTabs; track tab.id) {
           <button
             type="button"
@@ -365,7 +365,7 @@
 
     <div class="featured-showcase__footer">
       <a [routerLink]="getLocalizedText(activeShowcaseTabData().link)" class="featured-showcase__footer-link">
-        {{ i18n.currentLang() === 'es' ? 'Ver todo el catalogo' : 'View full catalog' }}
+        {{ i18n.currentLang() === 'es' ? 'Ver todo el catálogo' : 'View full catalog' }}
         <span class="material-symbols-outlined" aria-hidden="true">arrow_outward</span>
       </a>
     </div>

@@ -27,7 +27,7 @@
     <div class="adm-toolbar__filter">
       <select [(ngModel)]="filterType" (ngModelChange)="loadMessages()">
         <option value="">Todos los tipos</option>
-        <option value="info">Informacion</option>
+        <option value="info">Información</option>
         <option value="comercial">Comercial</option>
         <option value="soporte">Soporte</option>
         <option value="fabricante">Fabricante</option>
@@ -70,8 +70,8 @@
       <div class="adm-empty__icon">
         <span class="material-symbols-outlined">chat_bubble</span>
       </div>
-      <h2 class="adm-empty__title">No hay mensajes aun</h2>
-      <p class="adm-empty__desc">Los mensajes del formulario de contacto y de distribuidores apareceran aqui cuando los visitantes del sitio los envien.</p>
+      <h2 class="adm-empty__title">No hay mensajes aún</h2>
+      <p class="adm-empty__desc">Los mensajes del formulario de contacto y de distribuidores aparecerán aquí cuando los visitantes del sitio los envíen.</p>
     </div>
   } @else if (viewMode() === 'kanban') {
     <!-- Kanban View -->
@@ -254,7 +254,7 @@
 @if (showDeleteModal()) {
   <app-confirm-modal
     title="Eliminar mensaje"
-    [message]="'Estas seguro de eliminar el mensaje de ' + (deleteTarget()?.name || '') + '? Esta accion no se puede deshacer.'"
+    [message]="'¿Está seguro de eliminar el mensaje de ' + (deleteTarget()?.name || '') + '? Esta acción no se puede deshacer.'"
     confirmText="Eliminar"
     variant="danger"
     [autoOpen]="true"

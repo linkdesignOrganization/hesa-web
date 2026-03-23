@@ -19,7 +19,7 @@
   } @else if (error()) {
     <div class="adm-card hero-editor__error">
       <div class="adm-empty">
-        <p class="adm-empty__title">Error al cargar la configuracion del hero.</p>
+        <p class="adm-empty__title">Error al cargar la configuración del hero.</p>
         <button class="adm-btn adm-btn--primary" (click)="loadConfig()">Reintentar</button>
       </div>
     </div>
@@ -107,7 +107,7 @@
                   </div>
                   <div class="hero-editor__slide-info">
                     <span class="hero-editor__slide-number">Slide {{ $index + 1 }}</span>
-                    <span class="hero-editor__slide-headline">{{ slide.headline.es || 'Sin titulo' }}</span>
+                    <span class="hero-editor__slide-headline">{{ slide.headline.es || 'Sin título' }}</span>
                   </div>
                 </div>
                 <div class="hero-editor__slide-actions">
@@ -168,11 +168,11 @@
       </div>
       <div class="adm-form-group">
         <label class="adm-form-label">Headline <span class="hero-editor__required">*</span></label>
-        <input type="text" class="adm-form-control" placeholder="Titulo principal del hero" [(ngModel)]="slide.headline.es">
+        <input type="text" class="adm-form-control" placeholder="Título principal del hero" [(ngModel)]="slide.headline.es">
       </div>
       <div class="adm-form-group">
         <label class="adm-form-label">Subtítulo</label>
-        <textarea class="adm-form-control" rows="2" placeholder="Subtitulo opcional" [(ngModel)]="slide.subtitle!.es"></textarea>
+        <textarea class="adm-form-control" rows="2" placeholder="Subtítulo opcional" [(ngModel)]="slide.subtitle!.es"></textarea>
       </div>
       <div class="adm-form-group">
         <label class="adm-form-label">Texto del botón <span class="hero-editor__required">*</span></label>
@@ -294,7 +294,7 @@
             } @else {
               <span class="material-symbols-outlined">add_photo_alternate</span>
               <p class="adm-uploader__text">Subir imagen desktop</p>
-              <span class="adm-uploader__hint">Recomendado: 1920x1080px. Se optimiza automaticamente.</span>
+              <span class="adm-uploader__hint">Recomendado: 1920x1080px. Se optimiza automáticamente.</span>
             }
           </div>
         }
@@ -321,7 +321,7 @@
             } @else {
               <span class="material-symbols-outlined">add_photo_alternate</span>
               <p class="adm-uploader__text">Subir imagen mobile</p>
-              <span class="adm-uploader__hint">Recomendado: 768x1024px. Se optimiza automaticamente.</span>
+              <span class="adm-uploader__hint">Recomendado: 768x1024px. Se optimiza automáticamente.</span>
             }
           </div>
         }

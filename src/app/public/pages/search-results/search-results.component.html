@@ -37,9 +37,9 @@
           {{ i18n.currentLang() === 'es' ? 'No encontramos coincidencias para' : 'We couldn\'t find any matches for' }}
           "<strong>{{ searchTerm() }}</strong>"
         </p>
-        <p class="search-page__empty-hint">{{ i18n.currentLang() === 'es' ? 'Intenta con terminos mas generales o revisa la ortografia' : 'Try more general terms or check the spelling' }}</p>
+        <p class="search-page__empty-hint">{{ i18n.currentLang() === 'es' ? 'Intenta con términos más generales o revisa la ortografía' : 'Try more general terms or check the spelling' }}</p>
         <a [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'catalogo' : 'catalog')" class="btn btn-primary">
-          {{ i18n.currentLang() === 'es' ? 'Explorar catalogo' : 'Explore catalog' }}
+          {{ i18n.currentLang() === 'es' ? 'Explorar catálogo' : 'Explore catalog' }}
         </a>
       </div>
     } @else {

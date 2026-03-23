@@ -165,7 +165,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   getCategoryLabel(category: MegaCategory): string {
     const labels: Record<MegaCategory, LocalizedText> = {
-      farmacos: { es: 'Farmacos', en: 'Pharmaceuticals' },
+      farmacos: { es: 'Fármacos', en: 'Pharmaceuticals' },
       alimentos: { es: 'Alimentos', en: 'Food' },
       equipos: { es: 'Equipos', en: 'Equipment' }
     };

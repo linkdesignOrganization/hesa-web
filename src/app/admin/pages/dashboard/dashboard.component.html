@@ -106,7 +106,7 @@
         <div class="dashboard__category-icon dashboard__category-icon--pharma">
           <span class="material-symbols-outlined">medication</span>
         </div>
-        <span class="dashboard__category-label">Farmacos</span>
+        <span class="dashboard__category-label">Fármacos</span>
         <div class="adm-progress">
           <div class="adm-progress__bar dashboard__bar--pharma" [style.width.%]="data()!.pharmaCount > 0 ? (data()!.pharmaActive / data()!.pharmaCount) * 100 : 0"></div>
         </div>
@@ -149,7 +149,7 @@
             <div class="adm-empty__icon">
               <span class="material-symbols-outlined" aria-hidden="true">chat_bubble</span>
             </div>
-            <p class="adm-empty__desc">Los mensajes del sitio apareceran aqui</p>
+            <p class="adm-empty__desc">Los mensajes del sitio aparecerán aquí</p>
           </div>
         }
         @for (msg of data()!.recentMessages; track msg._id) {
@@ -170,7 +170,7 @@
           <h2 class="adm-card__title">Actividad Reciente</h2>
           @if (data()!.recentActivity.length > 0) {
             <a routerLink="/admin/actividad" class="dashboard__card-link">
-              Ver mas
+              Ver más
               <span class="material-symbols-outlined">chevron_right</span>
             </a>
           }
@@ -180,7 +180,7 @@
             <div class="adm-empty__icon">
               <span class="material-symbols-outlined" aria-hidden="true">schedule</span>
             </div>
-            <p class="adm-empty__desc">La actividad del panel se registrara aqui</p>
+            <p class="adm-empty__desc">La actividad del panel se registrará aquí</p>
           </div>
         }
         @for (activity of data()!.recentActivity | slice:0:7; track activity._id) {

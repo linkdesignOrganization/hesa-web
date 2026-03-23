@@ -6,7 +6,7 @@
       <div class="catalog-discovery__hero-grid">
         <div class="catalog-discovery__hero-copy">
           <span class="catalog-discovery__eyebrow">
-            {{ i18n.currentLang() === 'es' ? 'Catalogo HESA' : 'HESA catalog' }}
+            {{ i18n.currentLang() === 'es' ? 'Catálogo HESA' : 'HESA catalog' }}
           </span>
           <h1 class="catalog-discovery__title">{{ heroTitle }}</h1>
           <p class="catalog-discovery__description">{{ heroDescription }}</p>
@@ -14,7 +14,7 @@
 
         <div class="catalog-discovery__hero-card">
           <span class="catalog-discovery__hero-label">
-            {{ i18n.currentLang() === 'es' ? 'En el catalogo' : 'In the catalog' }}
+            {{ i18n.currentLang() === 'es' ? 'En el catálogo' : 'In the catalog' }}
           </span>
           <div class="catalog-discovery__hero-badges">
             @for (badge of catalogSummaryBadges(); track badge.key) {
@@ -28,7 +28,7 @@
       </div>
 
       <div class="catalog-discovery__controls">
-        <div class="catalog-discovery__switcher" role="tablist" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Categorias del catalogo' : 'Catalog categories'">
+        <div class="catalog-discovery__switcher" role="tablist" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Categorías del catálogo' : 'Catalog categories'">
           <button
             type="button"
             class="catalog-discovery__switch"
@@ -81,8 +81,8 @@
       <aside class="catalog-filters">
         <div class="catalog-filters__header">
           <div class="catalog-filters__header-main">
-            <p class="catalog-filters__eyebrow">{{ i18n.currentLang() === 'es' ? 'Filtrar catalogo' : 'Filter catalog' }}</p>
-            <h2 class="catalog-filters__title">{{ i18n.currentLang() === 'es' ? 'Encuentre mas rapido' : 'Find faster' }}</h2>
+            <p class="catalog-filters__eyebrow">{{ i18n.currentLang() === 'es' ? 'Filtrar catálogo' : 'Filter catalog' }}</p>
+            <h2 class="catalog-filters__title">{{ i18n.currentLang() === 'es' ? 'Encuentre más rápido' : 'Find faster' }}</h2>
             @if (activeFilters().length > 0 || selectedCategory()) {
               <button type="button" class="catalog-filters__clear-btn" (click)="clearFilters()">
                 <span class="material-symbols-outlined" aria-hidden="true">filter_alt_off</span>
@@ -149,8 +149,8 @@
         } @else if (error()) {
           <div class="catalog-state">
             <span class="material-symbols-outlined catalog-state__icon" aria-hidden="true">error</span>
-            <h3>{{ i18n.currentLang() === 'es' ? 'No pudimos cargar el catalogo' : 'We could not load the catalog' }}</h3>
-            <p>{{ i18n.currentLang() === 'es' ? 'Verifique su conexion e intente nuevamente.' : 'Please check your connection and try again.' }}</p>
+            <h3>{{ i18n.currentLang() === 'es' ? 'No pudimos cargar el catálogo' : 'We could not load the catalog' }}</h3>
+            <p>{{ i18n.currentLang() === 'es' ? 'Verifique su conexión e intente nuevamente.' : 'Please check your connection and try again.' }}</p>
             <button type="button" class="btn btn-primary" (click)="retry()">
               {{ i18n.currentLang() === 'es' ? 'Reintentar' : 'Retry' }}
             </button>
@@ -159,7 +159,7 @@
           <div class="catalog-state">
             <span class="material-symbols-outlined catalog-state__icon" aria-hidden="true">search_off</span>
             <h3>{{ i18n.currentLang() === 'es' ? 'No encontramos productos con esos criterios' : 'We could not find products with those criteria' }}</h3>
-            <p>{{ i18n.currentLang() === 'es' ? 'Pruebe con otra combinacion de filtros o limpie la busqueda para volver al catalogo completo.' : 'Try another filter combination or clear the search to return to the full catalog.' }}</p>
+            <p>{{ i18n.currentLang() === 'es' ? 'Pruebe con otra combinación de filtros o limpie la búsqueda para volver al catálogo completo.' : 'Try another filter combination or clear the search to return to the full catalog.' }}</p>
             <button type="button" class="btn btn-outline" (click)="clearFilters()">
               {{ i18n.currentLang() === 'es' ? 'Limpiar todo' : 'Clear all' }}
             </button>
@@ -172,7 +172,7 @@
           </div>
 
           @if (totalPages() > 1) {
-            <nav class="catalog-pagination" role="navigation" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Paginacion del catalogo' : 'Catalog pagination'">
+            <nav class="catalog-pagination" role="navigation" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Paginación del catálogo' : 'Catalog pagination'">
               <span class="catalog-pagination__summary">
                 {{ i18n.currentLang() === 'es' ? 'Mostrando' : 'Showing' }}
                 <strong>{{ (currentPage() - 1) * pageSize + 1 }}&ndash;{{ Math.min(currentPage() * pageSize, totalProducts()) }}</strong>
@@ -181,7 +181,7 @@
               </span>
 
               <div class="catalog-pagination__controls">
-                <button type="button" class="catalog-pagination__btn" [disabled]="currentPage() === 1" (click)="goToPage(currentPage() - 1)" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Pagina anterior' : 'Previous page'">
+                <button type="button" class="catalog-pagination__btn" [disabled]="currentPage() === 1" (click)="goToPage(currentPage() - 1)" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Página anterior' : 'Previous page'">
                   <span class="material-symbols-outlined" aria-hidden="true">chevron_left</span>
                 </button>
                 @for (page of pagesArray; track page) {
@@ -190,12 +190,12 @@
                     class="catalog-pagination__btn"
                     [class.catalog-pagination__btn--active]="page === currentPage()"
                     (click)="goToPage(page)"
-                    [attr.aria-label]="(i18n.currentLang() === 'es' ? 'Pagina ' : 'Page ') + page"
+                    [attr.aria-label]="(i18n.currentLang() === 'es' ? 'Página ' : 'Page ') + page"
                     [attr.aria-current]="page === currentPage() ? 'page' : null">
                     {{ page }}
                   </button>
                 }
-                <button type="button" class="catalog-pagination__btn" [disabled]="currentPage() === totalPages()" (click)="goToPage(currentPage() + 1)" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Pagina siguiente' : 'Next page'">
+                <button type="button" class="catalog-pagination__btn" [disabled]="currentPage() === totalPages()" (click)="goToPage(currentPage() + 1)" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Página siguiente' : 'Next page'">
                   <span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>
                 </button>
               </div>
@@ -208,11 +208,11 @@
 
   @if (mobileFiltersOpen()) {
     <div class="catalog-drawer__backdrop" (click)="toggleMobileFilters()"></div>
-    <div class="catalog-drawer" role="dialog" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Filtros del catalogo' : 'Catalog filters'">
+    <div class="catalog-drawer" role="dialog" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Filtros del catálogo' : 'Catalog filters'">
       <div class="catalog-drawer__header">
         <div>
           <p class="catalog-drawer__eyebrow">{{ i18n.currentLang() === 'es' ? 'Filtros' : 'Filters' }}</p>
-          <h3 class="catalog-drawer__title">{{ i18n.currentLang() === 'es' ? 'Refine el catalogo' : 'Refine the catalog' }}</h3>
+          <h3 class="catalog-drawer__title">{{ i18n.currentLang() === 'es' ? 'Refine el catálogo' : 'Refine the catalog' }}</h3>
         </div>
         <button type="button" class="catalog-drawer__close" (click)="toggleMobileFilters()" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Cerrar filtros' : 'Close filters'">
           <span class="material-symbols-outlined" aria-hidden="true">close</span>
