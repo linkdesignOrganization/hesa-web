@@ -71,7 +71,7 @@
     } @else {
       <div class="brands-grid">
         @for (brand of brands(); track brand._id) {
-          <app-brand-card [brand]="brand" />
+          <app-brand-card [brand]="brand" surface="soft-gray" />
         }
       </div>
     }

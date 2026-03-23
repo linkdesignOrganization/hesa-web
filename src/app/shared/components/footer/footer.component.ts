@@ -66,7 +66,7 @@ export class FooterComponent {
       key: 'company',
       title: { es: 'Relación comercial', en: 'Business' },
       links: [
-        { label: { es: 'Distribuidores', en: 'Distributors' }, route: { es: '/es/distribuidores', en: '/en/distributors' } },
+        { label: { es: 'Nuevo partner', en: 'New partner' }, route: { es: '/es/distribuidores', en: '/en/distributors' } },
         { label: { es: 'Contacto', en: 'Contact' }, route: { es: '/es/contacto', en: '/en/contact' } }
       ]
     }

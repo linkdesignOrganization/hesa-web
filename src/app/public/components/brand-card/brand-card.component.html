@@ -1,4 +1,4 @@
-<a class="brand-card" [routerLink]="brandLink" [attr.aria-label]="'Ver marca ' + displayName">
+<a [class]="cardClass" [routerLink]="brandLink" [attr.aria-label]="'Ver marca ' + displayName">
   <div class="brand-card__logo-wrapper">
     @if (logoUrl) {
       <img class="brand-card__logo-img" [src]="logoUrl" [alt]="displayName + ' logo'" loading="lazy" />

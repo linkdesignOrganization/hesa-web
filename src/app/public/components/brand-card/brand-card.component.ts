@@ -16,6 +16,7 @@ export class BrandCardComponent {
   name = input('');
   country = input('');
   categories = input<string[]>([]);
+  surface = input<'gradient' | 'soft-gray'>('gradient');
 
   i18n = inject(I18nService);
 
@@ -49,5 +50,9 @@ export class BrandCardComponent {
     if (!slug) return '#';
     const lang = this.i18n.currentLang();
     return '/' + lang + '/' + getBrandsSegment(lang) + '/' + slug;
+  }
+
+  get cardClass(): string {
+    return this.surface() === 'soft-gray' ? 'brand-card brand-card--soft-gray' : 'brand-card';
   }
 }
