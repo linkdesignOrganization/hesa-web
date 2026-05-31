@@ -46,14 +46,14 @@
 - Backend: Node.js + Express
 - Base de datos: MongoDB (Azure Cosmos DB)
 - Auth: Azure Entra ID (MSAL)
-- Deploy frontend: Azure Static Web Apps
+- Deploy frontend: Azure App Service (server.js zero-dep, deploy por OIDC) — migrado desde Static Web Apps (2026-05-31)
 - Deploy backend: Azure App Service
 - CI/CD: GitHub Actions
 - Iconografia: Lucide Icons
 
 ## Deployment (Fase 6)
-- **Sitio publico**: https://gray-field-02ba8410f.2.azurestaticapps.net
-- **Panel admin**: https://gray-field-02ba8410f.2.azurestaticapps.net/admin
+- **Sitio publico**: https://hesa-web.azurewebsites.net
+- **Panel admin**: https://hesa-web.azurewebsites.net/admin
 - **API Backend**: https://hesa-api.azurewebsites.net
 - **Blob Storage**: https://hesastorage.blob.core.windows.net
 - **CI/CD**: Push a master → deploy automatico (frontend ~2min, backend ~1.5min)

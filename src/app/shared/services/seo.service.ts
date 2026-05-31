@@ -11,7 +11,7 @@ export class SeoService {
   private document = inject(DOCUMENT);
 
   private siteName = 'HESA - Herrera y Elizondo S.A.';
-  private baseUrl = 'https://www.hesa.cr';
+  private baseUrl = 'https://hesa-web.azurewebsites.net';
 
   /** Store global OG image from site config (NFR-029) */
   private globalOgImage = '';
