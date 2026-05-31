@@ -1,0 +1,69 @@
+name: Deploy hesa-web frontend to App Service
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'src/**'
+      - 'public/**'
+      - 'angular.json'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'tsconfig*.json'
+      - 'staticwebapp.config.json'
+      - 'server.js'
+      - 'deploy-package.json'
+      - '.github/workflows/azure-appservice-hesaweb.yml'
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+concurrency:
+  group: deploy-hesaweb
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Angular (production)
+        run: npx ng build --configuration=production
+
+      - name: Stage deploy package
+        run: |
+          rm -rf deploy
+          mkdir -p deploy
+          cp -a dist/hesa-web/browser deploy/browser
+          cp server.js deploy/
+          cp deploy-package.json deploy/package.json
+
+      - name: Zip package (clean, forward-slash entries, no ./)
+        run: |
+          cd deploy
+          zip -r -q ../app.zip browser server.js package.json
+
+      - name: Azure login (OIDC)
+        uses: azure/login@v2
+        with:
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Deploy to App Service
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: hesa-web
+          package: app.zip

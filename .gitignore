@@ -6,6 +6,10 @@
 /out-tsc
 /bazel-out
 
+# App Service deploy artifacts
+/deploy
+/app.zip
+
 # Node
 /node_modules
 api/node_modules

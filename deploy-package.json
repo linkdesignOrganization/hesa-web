@@ -1,0 +1,12 @@
+{
+  "name": "hesa-web-deploy",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Runtime package for hesa-web static frontend on Azure App Service (zero-dependency).",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
