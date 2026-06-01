@@ -70,8 +70,14 @@
     color: #fff;
     border-color: var(--adm-primary);
 
+    .material-symbols-outlined {
+      color: inherit;
+    }
+
     &:hover {
       background: var(--adm-primary-hover);
+      color: #fff;
+      border-color: var(--adm-primary-hover);
     }
   }
 }
@@ -294,6 +300,12 @@
       background: var(--adm-primary);
       color: #fff;
       border-color: var(--adm-primary);
+
+      &:hover {
+        background: var(--adm-primary-hover);
+        color: #fff;
+        border-color: var(--adm-primary-hover);
+      }
     }
   }
 
