@@ -272,6 +272,37 @@
 </section>
 }
 
+@if (showGallerySection()) {
+<section class="about-gallery fade-in-section">
+  <div class="container">
+    <div class="about-gallery__header">
+      <span class="about-gallery__eyebrow">{{ getGalleryEyebrow() }}</span>
+      <h2 class="about-gallery__title">{{ getGalleryTitle() }}</h2>
+    </div>
+
+    <div class="about-gallery__masonry">
+      @for (item of galleryWithImages(); track item._id) {
+        <button
+          type="button"
+          class="about-gallery__item"
+          (click)="openGalleryItem(item)"
+          [attr.aria-label]="(i18n.currentLang() === 'es' ? 'Ver evento: ' : 'View event: ') + i18n.t(item.event)">
+          <figure class="about-gallery__figure">
+            <img [src]="item.image" [alt]="i18n.t(item.event)" class="about-gallery__image" loading="lazy">
+            <figcaption class="about-gallery__chip">
+              <span class="about-gallery__chip-event">{{ i18n.t(item.event) }}</span>
+              @if (item.date) {
+                <span class="about-gallery__chip-date">{{ item.date }}</span>
+              }
+            </figcaption>
+          </figure>
+        </button>
+      }
+    </div>
+  </div>
+</section>
+}
+
 <section class="alliances-insight-section fade-in-section">
   <div class="alliances-insight-section__inner">
     <h2 class="alliances-insight-section__headline">
@@ -318,3 +349,35 @@
     </div>
   </div>
 </section>
+
+<!-- Gallery detail bottom-sheet (root level, outside any .fade-in-section) -->
+@if (selectedGalleryItem(); as item) {
+  <div class="gallery-sheet" (click)="closeGalleryItem()">
+    <div
+      class="gallery-sheet__panel"
+      role="dialog"
+      aria-modal="true"
+      [attr.aria-label]="i18n.t(item.event)"
+      (click)="$event.stopPropagation()">
+      <button
+        type="button"
+        class="gallery-sheet__close"
+        (click)="closeGalleryItem()"
+        [attr.aria-label]="i18n.currentLang() === 'es' ? 'Cerrar' : 'Close'">
+        <span class="material-symbols-outlined" aria-hidden="true">close</span>
+      </button>
+
+      <div class="gallery-sheet__media">
+        <img [src]="item.image" [alt]="i18n.t(item.event)" class="gallery-sheet__image">
+      </div>
+
+      <div class="gallery-sheet__body">
+        <h3 class="gallery-sheet__title">{{ i18n.t(item.event) }}</h3>
+        @if (item.date) {
+          <span class="gallery-sheet__date">{{ item.date }}</span>
+        }
+        <p class="gallery-sheet__description">{{ i18n.t(item.description) }}</p>
+      </div>
+    </div>
+  </div>
+}

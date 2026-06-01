@@ -1,6 +1,6 @@
 import { Component, computed, inject, signal, OnInit, AfterViewInit, OnDestroy, ElementRef, HostListener } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ApiService, ApiBrand, ApiProduct, ApiTeamMember } from '../../../shared/services/api.service';
+import { ApiService, ApiBrand, ApiProduct, ApiTeamMember, ApiGalleryItem } from '../../../shared/services/api.service';
 import { I18nService } from '../../../shared/services/i18n.service';
 import { SeoService } from '../../../shared/services/seo.service';
 import { getBrandsSegment, getContactSegment } from '../../../shared/utils/route-helpers';
@@ -90,6 +90,14 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
   readonly showTeamSection = computed(() => this.teamWithPhotos().length > 0);
   // 4+ photos => animated marquee; 1–3 => static grid (no animation).
   readonly teamIsMarquee = computed(() => this.teamWithPhotos().length >= this.MIN_TEAM_MARQUEE_PHOTOS);
+
+  // Gallery ("Responsabilidad social") — fully dynamic from the admin panel.
+  galleryItems = signal<ApiGalleryItem[]>([]);
+  readonly galleryWithImages = computed(() => this.galleryItems().filter(item => !!item.image));
+  readonly showGallerySection = computed(() => this.galleryWithImages().length > 0);
+  // Item shown in the bottom-sheet detail panel (null = closed).
+  selectedGalleryItem = signal<ApiGalleryItem | null>(null);
+
   activeMobileMarqueeBrand = signal<string | null>(null);
   presenceParallaxOffset = signal(0);
   closingAllianceParallaxOffset = signal(0);
@@ -136,6 +144,14 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
   readonly teamShowcaseTitle = {
     es: 'Conozca al equipo',
     en: 'Meet the team'
+  } as const;
+  readonly galleryEyebrow = {
+    es: 'Responsabilidad social',
+    en: 'Social responsibility'
+  } as const;
+  readonly galleryTitle = {
+    es: 'Comprometidos con la comunidad',
+    en: 'Committed to our community'
   } as const;
   readonly aboutClosingAlliance: AboutClosingAllianceSection = {
     headlineLead: {
@@ -243,10 +259,11 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
     });
     this.seo.setHreflang('/es/nosotros', '/en/about');
 
-    const [brandsResult, productsResult, teamResult] = await Promise.allSettled([
+    const [brandsResult, productsResult, teamResult, galleryResult] = await Promise.allSettled([
       this.api.getBrands(),
       this.loadAllAdvantageProducts(),
       this.api.getTeamMembers(),
+      this.api.getGalleryItems(),
     ]);
 
     if (brandsResult.status === 'fulfilled') {
@@ -260,6 +277,10 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
 
     if (teamResult.status === 'fulfilled') {
       this.teamMembers.set(teamResult.value);
+    }
+
+    if (galleryResult.status === 'fulfilled') {
+      this.galleryItems.set(galleryResult.value);
     }
 
     this.syncAdvantageAutoplay();
@@ -296,6 +317,30 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
 
   getTeamShowcaseTitle(): string {
     return this.i18n.currentLang() === 'es' ? this.teamShowcaseTitle.es : this.teamShowcaseTitle.en;
+  }
+
+  getGalleryEyebrow(): string {
+    return this.i18n.t(this.galleryEyebrow);
+  }
+
+  getGalleryTitle(): string {
+    return this.i18n.t(this.galleryTitle);
+  }
+
+  openGalleryItem(item: ApiGalleryItem): void {
+    this.selectedGalleryItem.set(item);
+    this.setBodyScrollLock(true);
+  }
+
+  closeGalleryItem(): void {
+    if (!this.selectedGalleryItem()) return;
+    this.selectedGalleryItem.set(null);
+    this.setBodyScrollLock(false);
+  }
+
+  private setBodyScrollLock(locked: boolean): void {
+    if (typeof document === 'undefined') return;
+    document.body.style.overflow = locked ? 'hidden' : '';
   }
 
   getAboutCatalogRoute(): string {
@@ -368,6 +413,13 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
     this.schedulePresenceParallaxUpdate();
   }
 
+  @HostListener('document:keydown.escape')
+  onAboutEscape(): void {
+    if (this.selectedGalleryItem()) {
+      this.closeGalleryItem();
+    }
+  }
+
   private isTouchInteractionMode(): boolean {
     if (typeof window === 'undefined') return false;
     return window.matchMedia('(hover: none), (pointer: coarse)').matches;
@@ -387,6 +439,7 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
       window.cancelAnimationFrame(this.presenceParallaxFrame);
     }
     this.clearAdvantageIntervals();
+    this.setBodyScrollLock(false);
     this.seo.clearDynamicTags();
   }
 
