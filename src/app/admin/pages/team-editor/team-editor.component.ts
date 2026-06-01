@@ -70,7 +70,13 @@ export class AdminTeamEditorComponent implements OnInit {
 
   async saveMember(): Promise<void> {
     if (!this.formName.es.trim() || !this.formTitle.es.trim()) {
+      this.formLang.set('es');
       this.toast.warning('Nombre y cargo en español son requeridos');
+      return;
+    }
+    if (!this.formName.en.trim() || !this.formTitle.en.trim()) {
+      this.formLang.set('en');
+      this.toast.warning('Nombre y cargo en inglés son requeridos');
       return;
     }
 

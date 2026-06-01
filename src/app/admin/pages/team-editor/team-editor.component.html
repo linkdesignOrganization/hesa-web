@@ -89,11 +89,11 @@
           </div>
         } @else {
           <div class="adm-form-group">
-            <label class="adm-form-label">Name</label>
+            <label class="adm-form-label">Name <span class="team-editor__required">*</span></label>
             <input type="text" class="adm-form-control" [(ngModel)]="formName.en" placeholder="Full name">
           </div>
           <div class="adm-form-group">
-            <label class="adm-form-label">Title</label>
+            <label class="adm-form-label">Title <span class="team-editor__required">*</span></label>
             <input type="text" class="adm-form-control" [(ngModel)]="formTitle.en" placeholder="Position or title">
           </div>
         }
