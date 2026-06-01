@@ -13,7 +13,7 @@
   @if (loading()) {
     <div class="gallery-grid">
       @for (i of [1,2,3,4]; track i) {
-        <div class="adm-skeleton adm-skeleton--card" style="height: 92px;"></div>
+        <div class="adm-skeleton adm-skeleton--card" style="height: 240px;"></div>
       }
     </div>
   } @else if (items().length === 0) {
@@ -34,10 +34,18 @@
     <div class="gallery-grid">
       @for (item of items(); track item._id) {
         <div class="gallery-card adm-card">
-          <div class="gallery-card__thumb">
-            <img [src]="item.image" [alt]="item.event.es" class="gallery-card__thumb-img">
+          <div class="gallery-card__media">
+            <img [src]="item.image" [alt]="item.event.es" class="gallery-card__img">
+            <div class="gallery-card__actions">
+              <button class="adm-btn adm-btn--icon gallery-card__action" aria-label="Editar" (click)="openEditModal(item)">
+                <span class="material-symbols-outlined">edit</span>
+              </button>
+              <button class="adm-btn adm-btn--icon gallery-card__action gallery-card__action--delete" aria-label="Eliminar" (click)="confirmDelete(item)">
+                <span class="material-symbols-outlined">delete</span>
+              </button>
+            </div>
           </div>
-          <div class="gallery-card__info">
+          <div class="gallery-card__body">
             <span class="gallery-card__name">{{ item.event.es }}</span>
             @if (item.date) {
               <span class="gallery-card__date">
@@ -46,14 +54,6 @@
               </span>
             }
             <span class="gallery-card__desc">{{ item.description.es }}</span>
-          </div>
-          <div class="gallery-card__actions">
-            <button class="adm-btn adm-btn--icon gallery-card__edit" aria-label="Editar" (click)="openEditModal(item)">
-              <span class="material-symbols-outlined">edit</span>
-            </button>
-            <button class="adm-btn adm-btn--icon gallery-card__delete" aria-label="Eliminar" (click)="confirmDelete(item)">
-              <span class="material-symbols-outlined">delete</span>
-            </button>
           </div>
         </div>
       }
