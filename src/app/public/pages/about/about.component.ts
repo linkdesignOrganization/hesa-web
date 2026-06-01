@@ -346,8 +346,23 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private setBodyScrollLock(locked: boolean): void {
-    if (typeof document === 'undefined') return;
-    document.body.style.overflow = locked ? 'hidden' : '';
+    if (typeof document === 'undefined' || typeof window === 'undefined') return;
+    const root = document.documentElement;
+    if (locked) {
+      // The page scrolls on <html>, so the lock must live there (body alone
+      // does nothing). Compensate the scrollbar width so the background behind
+      // the panel doesn't shift when the scrollbar disappears.
+      const scrollbarWidth = window.innerWidth - root.clientWidth;
+      root.style.overflow = 'hidden';
+      document.body.style.overflow = 'hidden';
+      if (scrollbarWidth > 0) {
+        root.style.paddingRight = `${scrollbarWidth}px`;
+      }
+    } else {
+      root.style.overflow = '';
+      root.style.paddingRight = '';
+      document.body.style.overflow = '';
+    }
   }
 
   getAboutCatalogRoute(): string {
