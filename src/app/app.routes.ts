@@ -64,6 +64,7 @@ export const routes: Routes = [
       { path: 'marcas/:id/editar', title: 'Editar Marca | HESA Admin', loadComponent: () => import('./admin/pages/brand-form/brand-form.component').then(m => m.AdminBrandFormComponent), canDeactivate: [unsavedChangesGuard] },
       { path: 'categorias', title: 'Categorías | HESA Admin', loadComponent: () => import('./admin/pages/categories/categories.component').then(m => m.AdminCategoriesComponent) },
       { path: 'equipo', title: 'Equipo | HESA Admin', loadComponent: () => import('./admin/pages/team-editor/team-editor.component').then(m => m.AdminTeamEditorComponent) },
+      { path: 'galeria', title: 'Galería | HESA Admin', loadComponent: () => import('./admin/pages/gallery/gallery.component').then(m => m.AdminGalleryComponent) },
       { path: 'home/hero', loadComponent: () => import('./admin/pages/home-hero/home-hero.component').then(m => m.AdminHomeHeroComponent) },
       { path: 'home/productos-destacados', loadComponent: () => import('./admin/pages/featured-products/featured-products.component').then(m => m.AdminFeaturedProductsComponent) },
       { path: 'home/marcas-destacadas', loadComponent: () => import('./admin/pages/featured-brands/featured-brands.component').then(m => m.AdminFeaturedBrandsComponent) },

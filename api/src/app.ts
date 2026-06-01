@@ -24,6 +24,7 @@ import publicHomeRoutes from './routes/public/home.routes';
 import publicContactRoutes from './routes/public/contact.routes';
 import publicSiteConfigRoutes from './routes/public/site-config.routes';
 import publicTeamRoutes from './routes/public/team.routes';
+import publicGalleryRoutes from './routes/public/gallery.routes';
 
 // Admin routes
 import adminProductsRoutes from './routes/admin/products.routes';
@@ -34,6 +35,7 @@ import adminMessagesRoutes from './routes/admin/messages.routes';
 import adminSettingsRoutes from './routes/admin/settings.routes';
 import adminDashboardRoutes from './routes/admin/dashboard.routes';
 import adminTeamRoutes from './routes/admin/team.routes';
+import adminGalleryRoutes from './routes/admin/gallery.routes';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -71,6 +73,7 @@ app.use('/api/public/home', publicHomeRoutes);
 app.use('/api/public/contact', publicContactRoutes);
 app.use('/api/public/config', publicSiteConfigRoutes);
 app.use('/api/public/team', publicTeamRoutes);
+app.use('/api/public/gallery', publicGalleryRoutes);
 
 // Admin API routes (auth required)
 app.use('/api/admin/products', authMiddleware, adminProductsRoutes);
@@ -81,6 +84,7 @@ app.use('/api/admin/messages', authMiddleware, adminMessagesRoutes);
 app.use('/api/admin/settings', authMiddleware, adminSettingsRoutes);
 app.use('/api/admin/dashboard', authMiddleware, adminDashboardRoutes);
 app.use('/api/admin/team', authMiddleware, adminTeamRoutes);
+app.use('/api/admin/gallery', authMiddleware, adminGalleryRoutes);
 
 // Error handling middleware
 app.use((err: Error, _req: express.Request, res: express.Response, _next: express.NextFunction) => {

@@ -2,7 +2,7 @@ import mongoose, { Schema, Document } from 'mongoose';
 
 export interface IActivityLog extends Document {
   action: 'create' | 'update' | 'delete' | 'activate' | 'deactivate';
-  entity: 'product' | 'brand' | 'category' | 'message' | 'team_member' | 'content' | 'settings';
+  entity: 'product' | 'brand' | 'category' | 'message' | 'team_member' | 'content' | 'settings' | 'gallery_item';
   entityId?: string;
   entityName?: string;
   user?: string;
@@ -19,7 +19,7 @@ const activityLogSchema = new Schema<IActivityLog>(
     },
     entity: {
       type: String,
-      enum: ['product', 'brand', 'category', 'message', 'team_member', 'content', 'settings'],
+      enum: ['product', 'brand', 'category', 'message', 'team_member', 'content', 'settings', 'gallery_item'],
       required: true,
     },
     entityId: { type: String },

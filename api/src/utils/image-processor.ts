@@ -14,6 +14,7 @@ export type ImageOptimizationProfile =
   | 'home-hero-mobile'
   | 'content-hero'
   | 'team-photo'
+  | 'gallery'
   | 'site-logo'
   | 'og-image';
 
@@ -61,6 +62,12 @@ const IMAGE_PROFILES: Record<ImageOptimizationProfile, ImageProfileConfig> = {
     fit: 'inside',
     format: 'webp',
     quality: 86,
+  },
+  gallery: {
+    width: 1600,
+    fit: 'inside',
+    format: 'webp',
+    quality: 84,
   },
   'site-logo': {
     width: 800,

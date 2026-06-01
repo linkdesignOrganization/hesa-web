@@ -1,0 +1,145 @@
+<!-- ADMIN GALLERY — Dashly X -->
+<div class="gallery-editor">
+  <div class="adm-page-header">
+    <div class="adm-page-header__left">
+      <h1 class="adm-page-header__title">Galería de eventos</h1>
+    </div>
+    <button class="adm-btn adm-btn--primary" (click)="openAddModal()">
+      <span class="material-symbols-outlined">add</span>
+      Agregar evento
+    </button>
+  </div>
+
+  @if (loading()) {
+    <div class="gallery-grid">
+      @for (i of [1,2,3,4]; track i) {
+        <div class="adm-skeleton adm-skeleton--card" style="height: 92px;"></div>
+      }
+    </div>
+  } @else if (items().length === 0) {
+    <div class="adm-card gallery-editor__empty-card">
+      <div class="adm-empty">
+        <div class="adm-empty__icon">
+          <span class="material-symbols-outlined">photo_library</span>
+        </div>
+        <p class="adm-empty__title">No hay eventos en la galería</p>
+        <p class="adm-empty__desc">La galería no se mostrará en el sitio público hasta que agregues fotos de eventos.</p>
+        <button class="adm-btn adm-btn--primary" (click)="openAddModal()">
+          <span class="material-symbols-outlined">add</span>
+          Agregar primer evento
+        </button>
+      </div>
+    </div>
+  } @else {
+    <div class="gallery-grid">
+      @for (item of items(); track item._id) {
+        <div class="gallery-card adm-card">
+          <div class="gallery-card__thumb">
+            <img [src]="item.image" [alt]="item.event.es" class="gallery-card__thumb-img">
+          </div>
+          <div class="gallery-card__info">
+            <span class="gallery-card__name">{{ item.event.es }}</span>
+            @if (item.date) {
+              <span class="gallery-card__date">
+                <span class="material-symbols-outlined">calendar_today</span>
+                {{ item.date }}
+              </span>
+            }
+            <span class="gallery-card__desc">{{ item.description.es }}</span>
+          </div>
+          <div class="gallery-card__actions">
+            <button class="adm-btn adm-btn--icon gallery-card__edit" aria-label="Editar" (click)="openEditModal(item)">
+              <span class="material-symbols-outlined">edit</span>
+            </button>
+            <button class="adm-btn adm-btn--icon gallery-card__delete" aria-label="Eliminar" (click)="confirmDelete(item)">
+              <span class="material-symbols-outlined">delete</span>
+            </button>
+          </div>
+        </div>
+      }
+    </div>
+  }
+</div>
+
+<!-- Add/Edit Modal -->
+@if (showForm()) {
+  <div class="adm-modal-backdrop" (click)="showForm.set(false)">
+    <div class="adm-modal" (click)="$event.stopPropagation()">
+      <div class="adm-modal__header">
+        <h2 class="adm-modal__title">{{ editingItem() ? 'Editar evento' : 'Agregar evento' }}</h2>
+        <button class="adm-modal__close" (click)="showForm.set(false)">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+      <div class="adm-modal__body">
+        <div class="adm-tabs gallery-editor__modal-tabs">
+          <button class="adm-tab" [class.adm-tab--active]="formLang() === 'es'" (click)="formLang.set('es')">Español</button>
+          <button class="adm-tab" [class.adm-tab--active]="formLang() === 'en'" (click)="formLang.set('en')">English</button>
+        </div>
+
+        @if (formLang() === 'es') {
+          <div class="adm-form-group">
+            <label class="adm-form-label">Evento <span class="gallery-editor__required">*</span></label>
+            <input type="text" class="adm-form-control" [(ngModel)]="formEvent.es" placeholder="Nombre del evento">
+          </div>
+          <div class="adm-form-group">
+            <label class="adm-form-label">Descripción <span class="gallery-editor__required">*</span></label>
+            <textarea class="adm-form-control" rows="4" [(ngModel)]="formDescription.es" placeholder="Descripción del evento (puede usar saltos de línea)"></textarea>
+          </div>
+        } @else {
+          <div class="adm-form-group">
+            <label class="adm-form-label">Event <span class="gallery-editor__required">*</span></label>
+            <input type="text" class="adm-form-control" [(ngModel)]="formEvent.en" placeholder="Event name">
+          </div>
+          <div class="adm-form-group">
+            <label class="adm-form-label">Description <span class="gallery-editor__required">*</span></label>
+            <textarea class="adm-form-control" rows="4" [(ngModel)]="formDescription.en" placeholder="Event description (line breaks allowed)"></textarea>
+          </div>
+        }
+
+        <!-- Date: single free-text value, shared across languages -->
+        <div class="adm-form-group">
+          <label class="adm-form-label">Fecha</label>
+          <input type="text" class="adm-form-control" [(ngModel)]="formDate" placeholder="Ej: Marzo 2024">
+        </div>
+
+        <!-- Photo upload (required) -->
+        <div class="adm-form-group">
+          <label class="adm-form-label">Foto <span class="gallery-editor__required">*</span></label>
+          @if (photoPreviewUrl()) {
+            <div class="gallery-editor__photo-preview">
+              <img [src]="photoPreviewUrl()!" class="gallery-editor__photo-img">
+              <button class="adm-btn adm-btn--secondary adm-btn--sm" (click)="photoInput.click()">Cambiar foto</button>
+              @if (!editingItem() && pendingPhotoFile()) {
+                <button class="adm-btn adm-btn--danger-ghost adm-btn--sm" (click)="removePendingPhoto()">Quitar</button>
+              }
+            </div>
+          } @else {
+            <div class="adm-uploader" (click)="photoInput.click()" (dragover)="onPhotoDragOver($event)" (drop)="onPhotoDrop($event)">
+              <span class="material-symbols-outlined">add_photo_alternate</span>
+              <p class="adm-uploader__text">Arrastra una imagen o <span class="adm-uploader__link">selecciona archivo</span></p>
+              <span class="adm-uploader__hint">JPG, PNG o WebP hasta 25MB. Se optimiza automáticamente.</span>
+            </div>
+          }
+          <input #photoInput type="file" accept="image/jpeg,image/png,image/webp" style="display: none;" (change)="onPhotoSelected($event)">
+        </div>
+      </div>
+      <div class="adm-modal__footer">
+        <button class="adm-btn adm-btn--secondary" (click)="showForm.set(false)">Cancelar</button>
+        <button class="adm-btn adm-btn--primary" [disabled]="savingItem()" (click)="saveItem()">
+          @if (savingItem()) {
+            <span class="adm-spinner"></span> Guardando...
+          } @else {
+            Guardar
+          }
+        </button>
+      </div>
+    </div>
+  </div>
+}
+
+<!-- Confirm Delete Modal -->
+<app-confirm-modal #deleteModal
+  [title]="'Eliminar evento'"
+  [description]="'¿Está seguro de eliminar este evento de la galería? La foto también se eliminará.'"
+  (confirmed)="executeDelete()" />

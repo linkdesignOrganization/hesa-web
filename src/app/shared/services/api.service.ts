@@ -124,6 +124,16 @@ export interface ApiTeamMember {
   order: number;
 }
 
+export interface ApiGalleryItem {
+  _id: string;
+  image: string;
+  event: { es: string; en: string };
+  date?: string;
+  description: { es: string; en: string };
+  createdAt: string;
+  updatedAt: string;
+}
+
 export interface ApiMessage {
   _id: string;
   name: string;
@@ -454,6 +464,12 @@ export class ApiService {
     );
   }
 
+  async getGalleryItems(): Promise<ApiGalleryItem[]> {
+    return firstValueFrom(
+      this.http.get<ApiGalleryItem[]>(`${this.baseUrl}/public/gallery`)
+    );
+  }
+
   // ==================== ADMIN HOME ====================
 
   async adminGetHomeConfig(): Promise<ApiHomeConfig> {
@@ -528,6 +544,32 @@ export class ApiService {
   async adminReorderTeam(orderedIds: string[]): Promise<ApiTeamMember[]> {
     return firstValueFrom(
       this.http.put<ApiTeamMember[]>(`${this.baseUrl}/admin/team/reorder`, { orderedIds })
+    );
+  }
+
+  // ==================== ADMIN GALLERY ====================
+
+  async adminGetGallery(): Promise<ApiGalleryItem[]> {
+    return firstValueFrom(
+      this.http.get<ApiGalleryItem[]>(`${this.baseUrl}/admin/gallery`)
+    );
+  }
+
+  async adminCreateGalleryItem(formData: FormData): Promise<ApiGalleryItem> {
+    return firstValueFrom(
+      this.http.post<ApiGalleryItem>(`${this.baseUrl}/admin/gallery`, formData)
+    );
+  }
+
+  async adminUpdateGalleryItem(id: string, formData: FormData): Promise<ApiGalleryItem> {
+    return firstValueFrom(
+      this.http.put<ApiGalleryItem>(`${this.baseUrl}/admin/gallery/${id}`, formData)
+    );
+  }
+
+  async adminDeleteGalleryItem(id: string): Promise<void> {
+    await firstValueFrom(
+      this.http.delete(`${this.baseUrl}/admin/gallery/${id}`)
     );
   }
 
