@@ -34,7 +34,7 @@ export class DistributorsComponent implements OnInit, AfterViewInit, OnDestroy {
         en: 'Regional reach'
       },
       body: {
-        es: 'Presencia en Costa Rica con planes de expansion a Centroamerica. Su marca entra a un mercado en crecimiento.',
+        es: 'Presencia en Costa Rica con planes de expansión a Centroamérica. Su marca entra a un mercado en crecimiento.',
         en: 'Presence in Costa Rica with expansion plans into Central America. Your brand enters a growing market.'
       }
     },
@@ -45,14 +45,14 @@ export class DistributorsComponent implements OnInit, AfterViewInit, OnDestroy {
         en: 'Active commercial network'
       },
       body: {
-        es: 'Mas de 500 veterinarias, agroservicios y comercios atendidos por nuestro equipo de ventas propio.',
+        es: 'Más de 500 veterinarias, agroservicios y comercios atendidos por nuestro equipo de ventas propio.',
         en: 'More than 500 veterinary clinics, agro-services, and retail accounts served by our in-house sales team.'
       }
     },
     {
       icon: 'handshake',
       title: {
-        es: 'Representacion exclusiva',
+        es: 'Representación exclusiva',
         en: 'Exclusive representation'
       },
       body: {

@@ -149,7 +149,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         },
         species: { es: 'Perros y gatos', en: 'Dogs and cats' },
         family: { es: 'Antibiótico', en: 'Antibiotic' },
-        lifeStage: { es: 'Uso clinico', en: 'Clinical use' },
+        lifeStage: { es: 'Uso clínico', en: 'Clinical use' },
         presentations: [{ es: 'Caja x40 tabletas', en: '40-tablet box' }]
       },
       {
@@ -195,7 +195,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
           en: buildProductUrl('alimentos', 'sustile-puppy-milk-replacer-400-g', 'en')
         },
         species: { es: 'Caninos', en: 'Dogs' },
-        family: { es: 'Nutricion inicial', en: 'Starter nutrition' },
+        family: { es: 'Nutrición inicial', en: 'Starter nutrition' },
         lifeStage: { es: 'Cachorros', en: 'Puppies' },
         presentations: [{ es: 'Bolsa 400 gr', en: '400 g bag' }]
       },
@@ -256,7 +256,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
           en: buildProductUrl('equipos', 'ciprovet-5-ml-eye-drops', 'en')
         },
         species: { es: 'Perros y gatos', en: 'Dogs and cats' },
-        equipmentType: { es: 'Diagnostico', en: 'Diagnostics' },
+        equipmentType: { es: 'Diagnóstico', en: 'Diagnostics' },
         presentations: [{ es: 'Frasco 5 ml', en: '5 ml bottle' }]
       },
       {
@@ -270,7 +270,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
           en: buildProductUrl('equipos', 'bactrina-8-tablet-blister', 'en')
         },
         species: { es: 'Perros y gatos', en: 'Dogs and cats' },
-        equipmentType: { es: 'Consulta clinica', en: 'Clinical consult' },
+        equipmentType: { es: 'Consulta clínica', en: 'Clinical consult' },
         presentations: [{ es: 'Blister x8', en: '8-tablet blister' }]
       }
     ]

@@ -402,6 +402,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
       'costa rica': { es: 'Costa Rica', en: 'Costa Rica' },
       'estados unidos': { es: 'Estados Unidos', en: 'United States' },
       'united states': { es: 'Estados Unidos', en: 'United States' },
+      'canada': { es: 'Canadá', en: 'Canada' },
       'francia': { es: 'Francia', en: 'France' },
       'france': { es: 'Francia', en: 'France' },
       'noruega': { es: 'Noruega', en: 'Norway' },

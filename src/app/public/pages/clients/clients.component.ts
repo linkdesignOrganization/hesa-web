@@ -106,7 +106,7 @@ export class ClientsComponent implements OnInit, AfterViewInit, OnDestroy {
     },
     {
       number: '2',
-      title: { es: 'Reciba atencion personalizada', en: 'Receive personalized attention' },
+      title: { es: 'Reciba atención personalizada', en: 'Receive personalized attention' },
       description: {
         es: 'Un agente de ventas le visitará para conocer las necesidades de su negocio.',
         en: 'A sales agent will visit you to understand your business needs.'

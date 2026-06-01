@@ -52,7 +52,7 @@ export class AdminLoginComponent implements OnInit {
       this.loginError.set(true);
       const errorObj = error as { errorMessage?: string; message?: string };
       if (errorObj.errorMessage?.includes('AADSTS50105') || errorObj.message?.includes('AADSTS50105')) {
-        this.errorMessage.set('No tienes acceso al panel de administracion. Contacta al administrador.');
+        this.errorMessage.set('No tienes acceso al panel de administración. Contacta al administrador.');
       } else {
         this.errorMessage.set('Error al iniciar sesión. Intenta de nuevo.');
       }

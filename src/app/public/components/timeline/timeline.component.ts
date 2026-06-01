@@ -14,6 +14,6 @@ export class TimelineComponent {
     { number: 1, title: { es: 'Contacto inicial', en: 'Initial Contact' }, description: { es: 'Conozca nuestra propuesta y capacidades de distribución', en: 'Learn about our proposal and distribution capabilities' } },
     { number: 2, title: { es: 'Evaluación', en: 'Evaluation' }, description: { es: 'Analizamos su catálogo y definimos la estrategia', en: 'We analyze your catalog and define the strategy' } },
     { number: 3, title: { es: 'Acuerdo comercial', en: 'Commercial Agreement' }, description: { es: 'Formalizamos los términos de la distribución', en: 'We formalize the distribution terms' } },
-    { number: 4, title: { es: 'Distribucion Activa', en: 'Active Distribution' }, description: { es: 'Cobertura nacional con nuestra flotilla propia', en: 'National coverage with our own fleet' } }
+    { number: 4, title: { es: 'Distribución activa', en: 'Active Distribution' }, description: { es: 'Cobertura nacional con nuestra flotilla propia', en: 'National coverage with our own fleet' } }
   ];
 }

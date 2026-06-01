@@ -61,7 +61,7 @@ export class ContactComponent implements OnInit, OnDestroy {
     this.seo.setMetaTags({
       title: lang === 'es' ? 'Contacto' : 'Contact',
       description: lang === 'es'
-        ? 'Contacta a HESA para consultas sobre farmacos veterinarios, alimentos para animales y equipos veterinarios en Costa Rica.'
+        ? 'Contacta a HESA para consultas sobre fármacos veterinarios, alimentos para animales y equipos veterinarios en Costa Rica.'
         : 'Contact HESA for inquiries about veterinary pharmaceuticals, animal food, and veterinary equipment in Costa Rica.',
       url: `/${lang}/${lang === 'es' ? 'contacto' : 'contact'}`,
     });

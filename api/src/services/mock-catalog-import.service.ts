@@ -674,7 +674,7 @@ export async function importMockCatalog(): Promise<MockCatalogImportSummary> {
     const brand = equipmentBrands[index % equipmentBrands.length]!;
     const nameEs = asset.info?.productName || path.basename(asset.fileName, path.extname(asset.fileName));
     const nameEn = nameEs;
-    const equipmentType = asset.info?.section || 'Diagnostico';
+    const equipmentType = asset.info?.section || 'Diagnóstico';
     const descriptions = deriveEquipmentDescriptions(nameEs, brand.name, equipmentType);
     const slugs = ensureUniqueSlugs(usedSlugs, generateProductSlugs(nameEs, nameEn));
     const meta = buildMeta(nameEs, brand.name, 'equipos');
