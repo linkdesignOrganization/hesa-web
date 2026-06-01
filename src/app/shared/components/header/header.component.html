@@ -64,9 +64,9 @@
           <a
             [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'contacto' : 'contact')"
             class="header__icon-btn"
-            [attr.aria-label]="i18n.currentLang() === 'es' ? 'Contactar soporte' : 'Contact support'"
+            [attr.aria-label]="i18n.currentLang() === 'es' ? 'Ir a contacto' : 'Go to contact'"
             (click)="closeHeaderMenus()">
-            <span class="material-symbols-outlined" aria-hidden="true">headset_mic</span>
+            <span class="material-symbols-outlined" aria-hidden="true">call</span>
           </a>
           <app-language-selector variant="header" />
           <button
@@ -281,7 +281,7 @@
       [routerLink]="i18n.getLangPrefix() + '/' + (i18n.currentLang() === 'es' ? 'contacto' : 'contact')"
       class="mobile-menu__support"
       (click)="closeMobileMenu()">
-      <span class="material-symbols-outlined" aria-hidden="true">headset_mic</span>
+      <span class="material-symbols-outlined" aria-hidden="true">call</span>
       <span>{{ i18n.currentLang() === 'es' ? 'Contacto' : 'Contact' }}</span>
     </a>
     <app-language-selector variant="header" />

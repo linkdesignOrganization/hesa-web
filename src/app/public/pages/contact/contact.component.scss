@@ -231,6 +231,12 @@
   padding: 40px;
   border: 1px solid var(--neutral-100);
 
+  @media (min-width: 1024px) {
+    margin-top: -180px;
+    position: relative;
+    z-index: 2;
+  }
+
   @media (max-width: 767px) {
     padding: 24px 18px;
     border-radius: var(--radius-card-public);
