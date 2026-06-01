@@ -229,6 +229,7 @@
   </div>
 </section>
 
+@if (showTeamSection()) {
 <section class="about-team-showcase fade-in-section">
   <div class="container">
     <div class="about-team-showcase__header">
@@ -237,23 +238,39 @@
     </div>
   </div>
 
-  <div class="about-team-showcase__marquee">
-    <div class="about-team-showcase__viewport">
-      <div class="about-team-showcase__track">
-        @for (group of teamShowcaseMarqueeGroups; track group) {
-          <div class="about-team-showcase__group" [attr.aria-hidden]="group > 0">
-            @for (image of teamShowcaseImages; track image.src) {
-              <figure class="about-team-showcase__item">
-                <img [src]="image.src" [alt]="image.alt" class="about-team-showcase__image" loading="lazy">
-                <figcaption class="about-team-showcase__badge">{{ image.name }}</figcaption>
-              </figure>
-            }
-          </div>
+  @if (teamIsMarquee()) {
+    <!-- 4+ fotos: marquee animado (4 grupos idénticos, loop -25%) -->
+    <div class="about-team-showcase__marquee">
+      <div class="about-team-showcase__viewport">
+        <div class="about-team-showcase__track">
+          @for (group of teamShowcaseMarqueeGroups; track group) {
+            <div class="about-team-showcase__group" [attr.aria-hidden]="group > 0">
+              @for (member of teamWithPhotos(); track member._id) {
+                <figure class="about-team-showcase__item">
+                  <img [src]="member.photo!" [alt]="i18n.t(member.name)" class="about-team-showcase__image" loading="lazy">
+                  <figcaption class="about-team-showcase__badge">{{ i18n.t(member.name) }}</figcaption>
+                </figure>
+              }
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  } @else {
+    <!-- 1–3 fotos: grid estático centrado (hasta 4 col desktop / 2 y 2 mobile), sin animación -->
+    <div class="container">
+      <div class="about-team-showcase__grid">
+        @for (member of teamWithPhotos(); track member._id) {
+          <figure class="about-team-showcase__item about-team-showcase__item--static">
+            <img [src]="member.photo!" [alt]="i18n.t(member.name)" class="about-team-showcase__image" loading="lazy">
+            <figcaption class="about-team-showcase__badge">{{ i18n.t(member.name) }}</figcaption>
+          </figure>
         }
       </div>
     </div>
-  </div>
+  }
 </section>
+}
 
 <section class="alliances-insight-section fade-in-section">
   <div class="alliances-insight-section__inner">

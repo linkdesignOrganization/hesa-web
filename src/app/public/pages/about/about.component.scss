@@ -509,6 +509,29 @@
       font-size: 0.82rem;
     }
   }
+
+  // Static layout for 1–3 photos (no marquee). Centered row on desktop,
+  // 2-up on mobile. Reuses the marquee card visuals (__item/__image/__badge).
+  &__grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 18px;
+
+    @media (max-width: 767px) {
+      gap: 14px;
+    }
+  }
+
+  &__item--static {
+    flex: 0 0 clamp(260px, 28vw, 320px);
+    max-width: 320px;
+
+    @media (max-width: 767px) {
+      flex: 0 0 calc(50% - 7px);
+      max-width: calc(50% - 7px);
+    }
+  }
 }
 
 .alliances-insight-section {

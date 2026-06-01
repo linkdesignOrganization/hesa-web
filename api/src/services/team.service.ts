@@ -1,38 +1,9 @@
 import { TeamMember, ITeamMember } from '../models/team-member.model';
 
 /**
- * BUG-005 FIX: Use professional stock photos from UI Faces / randomuser.me
- * instead of generated SVG silhouettes. These are diverse, professional-looking
- * portrait photos suitable for a corporate team section.
- *
- * REQ-173a: Photos must be "professional placeholder photos", not SVG silhouettes.
- */
-const teamPhotos = {
-  maleExec: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop&crop=face',
-  femaleExec: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&crop=face',
-  maleCasual: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face',
-  femaleYoung: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop&crop=face',
-  maleSenior: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face',
-  femaleProfessional: 'https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?w=400&h=400&fit=crop&crop=face',
-};
-
-/**
- * Default team members data — REQ-321c: 6 placeholder members.
- * BUG-005 FIX: Each member has a professional stock photo URL.
- */
-const defaultTeamMembers = [
-  { name: { es: 'Carlos Herrera', en: 'Carlos Herrera' }, title: { es: 'Director General', en: 'General Director' }, photo: teamPhotos.maleExec, order: 0 },
-  { name: { es: 'Ana Elizondo', en: 'Ana Elizondo' }, title: { es: 'Directora Comercial', en: 'Commercial Director' }, photo: teamPhotos.femaleExec, order: 1 },
-  { name: { es: 'Roberto Vargas', en: 'Roberto Vargas' }, title: { es: 'Gerente de Operaciones', en: 'Operations Manager' }, photo: teamPhotos.maleCasual, order: 2 },
-  { name: { es: 'Maria Fernanda Lopez', en: 'Maria Fernanda Lopez' }, title: { es: 'Gerente de Ventas', en: 'Sales Manager' }, photo: teamPhotos.femaleYoung, order: 3 },
-  { name: { es: 'Jorge Castillo', en: 'Jorge Castillo' }, title: { es: 'Director Financiero', en: 'Financial Director' }, photo: teamPhotos.maleSenior, order: 4 },
-  { name: { es: 'Laura Sanchez', en: 'Laura Sanchez' }, title: { es: 'Gerente de Logistica', en: 'Logistics Manager' }, photo: teamPhotos.femaleProfessional, order: 5 },
-];
-
-/**
  * Get all team members ordered by the `order` field.
- * Seeds defaults if collection is empty (REQ-321c).
- * BUG-005 FIX: Also migrates existing SVG placeholder photos to stock photos.
+ * No seed/placeholder data: the public team section only shows members
+ * explicitly added through the admin panel (no static photos or fallbacks).
  */
 export async function getTeamMembers(): Promise<ITeamMember[]> {
   const members = await TeamMember.find().sort({ order: 1 }).lean() as unknown as ITeamMember[];

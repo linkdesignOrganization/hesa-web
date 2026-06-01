@@ -1,6 +1,6 @@
 import { Component, computed, inject, signal, OnInit, AfterViewInit, OnDestroy, ElementRef, HostListener } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ApiService, ApiBrand, ApiProduct } from '../../../shared/services/api.service';
+import { ApiService, ApiBrand, ApiProduct, ApiTeamMember } from '../../../shared/services/api.service';
 import { I18nService } from '../../../shared/services/i18n.service';
 import { SeoService } from '../../../shared/services/seo.service';
 import { getBrandsSegment, getContactSegment } from '../../../shared/utils/route-helpers';
@@ -55,6 +55,8 @@ interface AboutClosingAllianceSection {
 })
 export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
   private readonly MIN_BRAND_MARQUEE_LOGOS = 8;
+  // 4+ team photos animate as a marquee; fewer render as a static grid.
+  private readonly MIN_TEAM_MARQUEE_PHOTOS = 4;
   private api = inject(ApiService);
   private seo = inject(SeoService);
   i18n = inject(I18nService);
@@ -79,6 +81,15 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
   readonly showBrandMarquee = computed(
     () => this.brandMarqueeBrands().length >= this.MIN_BRAND_MARQUEE_LOGOS
   );
+
+  // Team showcase — fully dynamic from the admin panel. No static photos/fallbacks.
+  teamMembers = signal<ApiTeamMember[]>([]);
+  // Only members WITH a photo count toward the showcase.
+  readonly teamWithPhotos = computed(() => this.teamMembers().filter(member => !!member.photo));
+  // No photos => the whole section is hidden.
+  readonly showTeamSection = computed(() => this.teamWithPhotos().length > 0);
+  // 4+ photos => animated marquee; 1–3 => static grid (no animation).
+  readonly teamIsMarquee = computed(() => this.teamWithPhotos().length >= this.MIN_TEAM_MARQUEE_PHOTOS);
   activeMobileMarqueeBrand = signal<string | null>(null);
   presenceParallaxOffset = signal(0);
   closingAllianceParallaxOffset = signal(0);
@@ -126,19 +137,6 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
     es: 'Conozca al equipo',
     en: 'Meet the team'
   } as const;
-  readonly teamShowcaseImages = [
-    { src: '/team/1.webp', alt: 'Equipo HESA 1', name: 'Adriana Herrera' },
-    { src: '/team/2.webp', alt: 'Equipo HESA 2', name: 'Mauricio Elizondo' },
-    { src: '/team/3.webp', alt: 'Equipo HESA 3', name: 'Daniela Chaves' },
-    { src: '/team/4.webp', alt: 'Equipo HESA 4', name: 'Gabriel Mora' },
-    { src: '/team/5.webp', alt: 'Equipo HESA 5', name: 'Valeria Solano' },
-    { src: '/team/6.webp', alt: 'Equipo HESA 6', name: 'Fernando Quesada' },
-    { src: '/team/7.webp', alt: 'Equipo HESA 7', name: 'Carolina Rojas' },
-    { src: '/team/8.webp', alt: 'Equipo HESA 8', name: 'Esteban Vargas' },
-    { src: '/team/9.webp', alt: 'Equipo HESA 9', name: 'Mariana Brenes' },
-    { src: '/team/10.webp', alt: 'Equipo HESA 10', name: 'Sofía Araya' },
-    { src: '/team/11.webp', alt: 'Equipo HESA 11', name: 'Andrés Villalobos' }
-  ] as const;
   readonly aboutClosingAlliance: AboutClosingAllianceSection = {
     headlineLead: {
       es: 'Buscamos fabricantes que quieran crecer en Centroamérica',
@@ -245,9 +243,10 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
     });
     this.seo.setHreflang('/es/nosotros', '/en/about');
 
-    const [brandsResult, productsResult] = await Promise.allSettled([
+    const [brandsResult, productsResult, teamResult] = await Promise.allSettled([
       this.api.getBrands(),
       this.loadAllAdvantageProducts(),
+      this.api.getTeamMembers(),
     ]);
 
     if (brandsResult.status === 'fulfilled') {
@@ -257,6 +256,10 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
 
     if (productsResult.status === 'fulfilled') {
       this.advantageProductSlides.set(this.toAdvantageProductSlides(productsResult.value));
+    }
+
+    if (teamResult.status === 'fulfilled') {
+      this.teamMembers.set(teamResult.value);
     }
 
     this.syncAdvantageAutoplay();
