@@ -42,6 +42,7 @@ function buildAccentTolerantRegex(term: string): RegExp {
 /**
  * Global search across products and brands.
  * Case-insensitive with regex for partial matching.
+ * Product matches include brand names and category filter fields.
  * REQ-035 to REQ-041
  */
 export async function globalSearch(
@@ -65,14 +66,28 @@ export async function globalSearch(
 }
 
 async function searchProducts(regex: RegExp, limit: number) {
+  const matchingBrands = await Brand.find({ name: regex })
+    .select('_id')
+    .limit(limit)
+    .lean();
+
+  const productClauses: Record<string, unknown>[] = [
+    { 'name.es': regex },
+    { 'name.en': regex },
+    { species: regex },
+    { family: regex },
+    { lifeStage: regex },
+    { equipmentType: regex },
+    { presentations: regex },
+  ];
+
+  if (matchingBrands.length > 0) {
+    productClauses.push({ brand: { $in: matchingBrands.map((brand) => brand._id) } });
+  }
+
   const productFilter = {
     isActive: true,
-    $or: [
-      { 'name.es': regex },
-      { 'name.en': regex },
-      { species: regex },
-      { family: regex },
-    ],
+    $or: productClauses,
   };
 
   const products = await Product.find(productFilter)
