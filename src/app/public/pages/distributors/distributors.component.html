@@ -154,8 +154,8 @@
       <div class="partners-contact__layout">
         <div class="partners-contact__info">
           <p class="partners-page__eyebrow partners-page__eyebrow--brand-solid">{{ i18n.currentLang() === 'es' ? 'Hablemos' : "Let's Talk" }}</p>
-          <h2 class="partners-page__section-title">{{ getSection('formTitle') || (i18n.currentLang() === 'es' ? 'Inicie la Conversacion' : 'Start the Conversation') }}</h2>
-          <p class="partners-contact__desc">{{ getSection('formDescription') || (i18n.currentLang() === 'es' ? 'Complete el formulario y nuestro equipo comercial se comunicará con usted en un plazo de 48 horas para discutir oportunidades de distribución.' : 'Fill out the form and our commercial team will get in touch within 48 hours to discuss distribution opportunities.') }}</p>
+          <h2 class="partners-page__section-title">{{ i18n.currentLang() === 'es' ? 'Inicie la Conversacion' : 'Start the Conversation' }}</h2>
+          <p class="partners-contact__desc">{{ i18n.currentLang() === 'es' ? 'Complete el formulario y nuestro equipo comercial se comunicará con usted en un plazo de 48 horas para discutir oportunidades de distribución.' : 'Fill out the form and our commercial team will get in touch within 48 hours to discuss distribution opportunities.' }}</p>
         </div>
         <div class="partners-contact__form">
           <app-contact-form variant="manufacturer" />

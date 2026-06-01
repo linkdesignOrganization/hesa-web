@@ -116,20 +116,6 @@ export interface ApiHomePublic {
   featuredBrands: ApiBrand[];
 }
 
-export interface ApiPageSection {
-  key: string;
-  label: { es: string; en: string };
-  value: { es: string; en: string };
-  type: 'text' | 'textarea' | 'image';
-}
-
-export interface ApiPageContent {
-  _id: string;
-  pageKey: string;
-  sections: ApiPageSection[];
-  heroImage?: string;
-}
-
 export interface ApiTeamMember {
   _id: string;
   name: { es: string; en: string };
@@ -462,12 +448,6 @@ export class ApiService {
     );
   }
 
-  async getPageContent(pageKey: string): Promise<ApiPageContent> {
-    return firstValueFrom(
-      this.http.get<ApiPageContent>(`${this.baseUrl}/public/content/${pageKey}`)
-    );
-  }
-
   async getTeamMembers(): Promise<ApiTeamMember[]> {
     return firstValueFrom(
       this.http.get<ApiTeamMember[]>(`${this.baseUrl}/public/team`)
@@ -508,34 +488,6 @@ export class ApiService {
   async adminUpdateFeaturedBrands(brandIds: string[]): Promise<ApiHomeConfig> {
     return firstValueFrom(
       this.http.put<ApiHomeConfig>(`${this.baseUrl}/admin/home/featured-brands`, { brandIds })
-    );
-  }
-
-  // ==================== ADMIN CONTENT ====================
-
-  async adminGetAllContent(): Promise<ApiPageContent[]> {
-    return firstValueFrom(
-      this.http.get<ApiPageContent[]>(`${this.baseUrl}/admin/content`)
-    );
-  }
-
-  async adminGetPageContent(pageKey: string): Promise<ApiPageContent> {
-    return firstValueFrom(
-      this.http.get<ApiPageContent>(`${this.baseUrl}/admin/content/${pageKey}`)
-    );
-  }
-
-  async adminUpdatePageContent(pageKey: string, data: Record<string, unknown>): Promise<ApiPageContent> {
-    return firstValueFrom(
-      this.http.put<ApiPageContent>(`${this.baseUrl}/admin/content/${pageKey}`, data)
-    );
-  }
-
-  async adminUploadContentImage(pageKey: string, file: File): Promise<ApiPageContent> {
-    const formData = new FormData();
-    formData.append('image', file);
-    return firstValueFrom(
-      this.http.post<ApiPageContent>(`${this.baseUrl}/admin/content/${pageKey}/image`, formData)
     );
   }
 

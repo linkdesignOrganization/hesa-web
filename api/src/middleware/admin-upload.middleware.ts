@@ -3,7 +3,7 @@ import multer from 'multer';
 /**
  * Shared multer upload configurations for admin routes.
  * Consolidates duplicated file-filter and size-limit logic from
- * products.routes, brands.routes, home.routes, content.routes, team.routes.
+ * products.routes, brands.routes, home.routes, and team.routes.
  *
  * NFR-019: Validates file type and size on upload (BUG-009).
  */

@@ -1,9 +1,17 @@
-import { Component, inject, signal, OnInit, OnDestroy } from '@angular/core';
+import { Component, computed, inject, signal, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ContactFormComponent } from '../../components/contact-form/contact-form.component';
-import { ApiService, ApiPageContent, ApiSiteConfig } from '../../../shared/services/api.service';
+import { ApiService, ApiSiteConfig } from '../../../shared/services/api.service';
 import { I18nService } from '../../../shared/services/i18n.service';
 import { SeoService } from '../../../shared/services/seo.service';
+
+type PublicSocialIcon = 'facebook' | 'instagram' | 'linkedin' | 'youtube';
+
+interface PublicSocialLink {
+  href: string;
+  icon: PublicSocialIcon;
+  label: string;
+}
 
 @Component({
   selector: 'app-contact',
@@ -20,8 +28,22 @@ export class ContactComponent implements OnInit, OnDestroy {
 
   prefilledProduct = '';
   prefilledType = '';
-  content = signal<ApiPageContent | null>(null);
   siteConfig = signal<ApiSiteConfig | null>(null);
+  readonly socialLinks = computed<PublicSocialLink[]>(() => {
+    const config = this.siteConfig();
+    if (!config) return [];
+
+    return [
+      { href: this.normalizeUrl(config.facebook), icon: 'facebook', label: 'Facebook' },
+      { href: this.normalizeUrl(config.instagram), icon: 'instagram', label: 'Instagram' },
+      { href: this.normalizeUrl(config.linkedin), icon: 'linkedin', label: 'LinkedIn' },
+      { href: this.normalizeUrl(config.youtube), icon: 'youtube', label: 'YouTube' },
+    ].filter((link): link is PublicSocialLink => !!link.href);
+  });
+  readonly whatsappHref = computed(() => {
+    const value = this.normalizeWhatsapp(this.siteConfig()?.whatsapp);
+    return value ? `https://wa.me/${value}` : '';
+  });
 
   async ngOnInit(): Promise<void> {
     const producto = this.route.snapshot.queryParamMap.get('producto');
@@ -45,24 +67,12 @@ export class ContactComponent implements OnInit, OnDestroy {
     });
     this.seo.setHreflang('/es/contacto', '/en/contact');
 
-    // Load contact page content and site config in parallel
     try {
-      const [pageContent, config] = await Promise.all([
-        this.api.getPageContent('contacto').catch(() => null),
-        this.api.getSiteConfig().catch(() => null),
-      ]);
-      if (pageContent) this.content.set(pageContent);
+      const config = await this.api.getSiteConfig().catch(() => null);
       if (config) this.siteConfig.set(config);
     } catch {
-      // Silent fallback — use hardcoded defaults
+      // Silent fallback — use hardcoded contact defaults
     }
-  }
-
-  /** Helper to get section value from loaded content */
-  getSection(key: string): string {
-    const section = this.content()?.sections?.find(s => s.key === key);
-    if (!section) return '';
-    return this.i18n.t(section.value) || '';
   }
 
   /** Get config value or fallback */
@@ -75,6 +85,14 @@ export class ContactComponent implements OnInit, OnDestroy {
       return this.i18n.t(val as { es: string; en: string });
     }
     return '';
+  }
+
+  private normalizeUrl(value: string | undefined): string {
+    return value?.trim() || '';
+  }
+
+  private normalizeWhatsapp(value: string | undefined): string {
+    return value?.replace(/[^0-9]/g, '') || '';
   }
 
   ngOnDestroy(): void {

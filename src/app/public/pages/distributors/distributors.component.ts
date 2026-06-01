@@ -1,7 +1,7 @@
 import { Component, inject, signal, AfterViewInit, OnInit, OnDestroy, ElementRef } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ContactFormComponent } from '../../components/contact-form/contact-form.component';
-import { ApiService, ApiBrand, ApiPageContent } from '../../../shared/services/api.service';
+import { ApiService, ApiBrand } from '../../../shared/services/api.service';
 import { I18nService } from '../../../shared/services/i18n.service';
 import { SeoService } from '../../../shared/services/seo.service';
 import { getBrandsSegment } from '../../../shared/utils/route-helpers';
@@ -23,7 +23,6 @@ export class DistributorsComponent implements OnInit, AfterViewInit, OnDestroy {
   private parallaxAnimationFrame: number | null = null;
   private parallaxCleanup: Array<() => void> = [];
 
-  content = signal<ApiPageContent | null>(null);
   brands = signal<ApiBrand[]>([]);
   readonly marqueeGroups = [0, 1] as const;
 
@@ -119,14 +118,9 @@ export class DistributorsComponent implements OnInit, AfterViewInit, OnDestroy {
     });
     this.seo.setHreflang('/es/distribuidores', '/en/distributors');
 
-    const [pageContentResult, brandsResult] = await Promise.allSettled([
-      this.api.getPageContent('distribuidores'),
+    const [brandsResult] = await Promise.allSettled([
       this.api.getBrands()
     ]);
-
-    if (pageContentResult.status === 'fulfilled') {
-      this.content.set(pageContentResult.value);
-    }
 
     if (brandsResult.status === 'fulfilled') {
       this.brands.set(brandsResult.value.filter(brand => !!brand.logo));
@@ -142,13 +136,6 @@ export class DistributorsComponent implements OnInit, AfterViewInit, OnDestroy {
     if (el) {
       el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
-  }
-
-  /** Helper to get section value from loaded content */
-  getSection(key: string): string {
-    const section = this.content()?.sections?.find(s => s.key === key);
-    if (!section) return '';
-    return this.i18n.t(section.value) || '';
   }
 
   buildBrandRoute(slug: string): string {

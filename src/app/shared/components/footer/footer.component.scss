@@ -366,6 +366,28 @@
     }
   }
 
+  &__whatsapp-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 42px;
+    padding: 0 14px;
+    border-radius: 999px;
+    background: var(--neutral-white);
+    border: 1px solid transparent;
+    color: var(--neutral-900);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: var(--weight-semibold);
+    transition: transform 0.22s ease, background-color 0.22s ease, color 0.22s ease;
+
+    &:hover {
+      transform: translateY(-1px);
+      background: var(--neutral-white);
+      color: var(--neutral-900);
+    }
+  }
+
   app-language-selector {
     margin-left: auto;
     align-self: flex-end;

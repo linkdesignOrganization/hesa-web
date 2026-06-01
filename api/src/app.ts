@@ -21,19 +21,19 @@ import publicSearchRoutes from './routes/public/search.routes';
 import publicCategoriesRoutes from './routes/public/categories.routes';
 import publicSitemapRoutes from './routes/public/sitemap.routes';
 import publicHomeRoutes from './routes/public/home.routes';
-import publicContentRoutes from './routes/public/content.routes';
 import publicContactRoutes from './routes/public/contact.routes';
 import publicSiteConfigRoutes from './routes/public/site-config.routes';
+import publicTeamRoutes from './routes/public/team.routes';
 
 // Admin routes
 import adminProductsRoutes from './routes/admin/products.routes';
 import adminBrandsRoutes from './routes/admin/brands.routes';
 import adminCategoriesRoutes from './routes/admin/categories.routes';
 import adminHomeRoutes from './routes/admin/home.routes';
-import adminContentRoutes from './routes/admin/content.routes';
 import adminMessagesRoutes from './routes/admin/messages.routes';
 import adminSettingsRoutes from './routes/admin/settings.routes';
 import adminDashboardRoutes from './routes/admin/dashboard.routes';
+import adminTeamRoutes from './routes/admin/team.routes';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -68,19 +68,19 @@ app.use('/api/public/search', publicSearchRoutes);
 app.use('/api/public/categories', publicCategoriesRoutes);
 app.use('/api/public/sitemap.xml', publicSitemapRoutes);
 app.use('/api/public/home', publicHomeRoutes);
-app.use('/api/public/content', publicContentRoutes);
 app.use('/api/public/contact', publicContactRoutes);
 app.use('/api/public/config', publicSiteConfigRoutes);
+app.use('/api/public/team', publicTeamRoutes);
 
 // Admin API routes (auth required)
 app.use('/api/admin/products', authMiddleware, adminProductsRoutes);
 app.use('/api/admin/brands', authMiddleware, adminBrandsRoutes);
 app.use('/api/admin/categories', authMiddleware, adminCategoriesRoutes);
 app.use('/api/admin/home', authMiddleware, adminHomeRoutes);
-app.use('/api/admin/content', authMiddleware, adminContentRoutes);
 app.use('/api/admin/messages', authMiddleware, adminMessagesRoutes);
 app.use('/api/admin/settings', authMiddleware, adminSettingsRoutes);
 app.use('/api/admin/dashboard', authMiddleware, adminDashboardRoutes);
+app.use('/api/admin/team', authMiddleware, adminTeamRoutes);
 
 // Error handling middleware
 app.use((err: Error, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
