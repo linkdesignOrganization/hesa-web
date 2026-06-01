@@ -283,6 +283,13 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
       this.galleryItems.set(galleryResult.value);
     }
 
+    // The team & gallery sections render only after this data resolves, so the
+    // initial observer pass (ngAfterViewInit) can miss them when the API is slow.
+    // Re-scan once they are in the DOM so their fade-in reveal still fires.
+    if (typeof window !== 'undefined') {
+      setTimeout(() => this.initFadeObserver(), 300);
+    }
+
     this.syncAdvantageAutoplay();
   }
 
@@ -428,9 +435,19 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
   ngAfterViewInit(): void {
     if (typeof window === 'undefined') return;
     setTimeout(() => {
-      this.fadeObserver = initFadeInObserver(this.el);
+      this.initFadeObserver();
       this.schedulePresenceParallaxUpdate();
     }, 500);
+  }
+
+  // Re-scannable fade-in observer. Conditional sections (team, gallery) only
+  // enter the DOM after their data resolves, so the first pass can miss them;
+  // calling this again after data loads re-observes everything (it disconnects
+  // the previous observer first to avoid duplicates).
+  private initFadeObserver(): void {
+    if (typeof window === 'undefined') return;
+    this.fadeObserver?.disconnect();
+    this.fadeObserver = initFadeInObserver(this.el);
   }
 
   ngOnDestroy(): void {
