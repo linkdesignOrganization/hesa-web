@@ -71,6 +71,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   private readonly FEATURE_VIDEO_SWITCH_THRESHOLD_SECONDS = 0.55;
   private readonly SHOWCASE_TAB_FADE_MS = 180;
   private readonly MOBILE_BREAKPOINT = 767;
+  private readonly MIN_BRAND_MARQUEE_LOGOS = 8;
   private readonly featureVideoSources = [
     '/cat.mp4',
     '/dog.mp4',
@@ -127,17 +128,10 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     equipos: { es: '/es/catalogo/equipos', en: '/en/catalog/equipment' }
   };
 
-  private readonly featuredShowcaseFallbackBrandLogos: FeaturedShowcaseBrandLogo[] = [
-    { name: 'Orion Pharma', src: '/brands/orion-pharma/logo.svg' },
-    { name: 'Trisal', src: '/brands/trisal/logo.png' },
-    { name: 'Kruuse', src: '/brands/kruuse/logo.svg' },
-    { name: 'Europlex', src: '/brands/europlex/logo.png' },
-    { name: 'Biozoo', src: '/brands/biozoo/logo.svg' },
-    { name: 'Mitzi', src: '/brands/mitzi/mitzi-logo.webp' },
-    { name: 'Unimedical', src: '/brands/unimedical/logo.png' }
-  ];
-
-  readonly featuredShowcaseBrandLogos = signal<FeaturedShowcaseBrandLogo[]>(this.featuredShowcaseFallbackBrandLogos);
+  readonly featuredShowcaseBrandLogos = signal<FeaturedShowcaseBrandLogo[]>([]);
+  readonly showFeaturedShowcaseMarquee = computed(
+    () => this.featuredShowcaseBrandLogos().length >= this.MIN_BRAND_MARQUEE_LOGOS
+  );
 
   readonly showcaseMarqueeGroups = [0, 1, 2, 3] as const;
 
@@ -383,9 +377,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       ]);
       this.hero.set(homeData.hero);
       this.syncHeroPreload(homeData.hero.slides[0] ?? null);
-      this.featuredShowcaseBrandLogos.set(
-        this.toFeaturedShowcaseBrandLogos(brands, homeData.featuredBrands, homeData.featuredProducts)
-      );
+      this.featuredShowcaseBrandLogos.set(this.toFeaturedShowcaseBrandLogos(brands));
       this.featuredShowcaseItems.set(this.buildFeaturedShowcaseItems(homeData.featuredProducts));
       this.heroLoading.set(false);
     } catch {
@@ -525,39 +517,15 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     };
   }
 
-  private toFeaturedShowcaseBrandLogos(allBrands: ApiBrand[], featuredBrands: ApiBrand[], products: ApiProduct[]): FeaturedShowcaseBrandLogo[] {
-    const fromAllBrands = allBrands
+  private toFeaturedShowcaseBrandLogos(allBrands: ApiBrand[]): FeaturedShowcaseBrandLogo[] {
+    return this.shuffle(this.dedupeBrandLogos(
+      allBrands
       .filter(brand => !!brand.logo)
       .map(brand => ({
         name: brand.name,
         src: brand.logo!,
-      }));
-
-    if (fromAllBrands.length) {
-      return this.shuffle(this.dedupeBrandLogos(fromAllBrands));
-    }
-
-    const fromFeaturedBrands = featuredBrands
-      .filter(brand => !!brand.logo)
-      .map(brand => ({
-        name: brand.name,
-        src: brand.logo!,
-      }));
-
-    if (fromFeaturedBrands.length) {
-      return this.shuffle(this.dedupeBrandLogos(fromFeaturedBrands));
-    }
-
-    const fromFeaturedProducts = products
-      .filter(product => !!product.brand?.logo)
-      .map(product => ({
-        name: product.brand!.name,
-        src: product.brand!.logo!,
-      }));
-
-    return fromFeaturedProducts.length
-      ? this.shuffle(this.dedupeBrandLogos(fromFeaturedProducts))
-      : this.featuredShowcaseFallbackBrandLogos;
+      }))
+    ));
   }
 
   private dedupeBrandLogos(items: FeaturedShowcaseBrandLogo[]): FeaturedShowcaseBrandLogo[] {

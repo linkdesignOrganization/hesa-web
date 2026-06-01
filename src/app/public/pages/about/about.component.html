@@ -29,33 +29,31 @@
     </div>
   </div>
 
-  <div class="about-brand-marquee">
-    <div class="about-brand-marquee__viewport">
-      <div
-        class="about-brand-marquee__track"
-        [class.about-brand-marquee__track--paused]="!!activeMobileMarqueeBrand()"
-        [attr.aria-label]="i18n.currentLang() === 'es' ? 'Marcas del grupo HESA' : 'HESA group brands'">
-        @for (group of marqueeGroups; track group) {
-          <div class="about-brand-marquee__group" [attr.aria-hidden]="group > 0">
-            @for (brand of brands(); track brand._id) {
-              <a
-                [routerLink]="buildBrandRoute(brand.slug)"
-                class="about-brand-marquee__item"
-                [class.about-brand-marquee__item--active]="activeMobileMarqueeBrand() === brand.slug"
-                [attr.aria-label]="(i18n.currentLang() === 'es' ? 'Ver marca ' : 'View brand ') + brand.name"
-                (click)="onMarqueeBrandClick($event, brand.slug)">
-                @if (brand.logo) {
-                  <img [src]="brand.logo" [alt]="brand.name" class="about-brand-marquee__logo" loading="lazy">
-                } @else {
-                  <span class="about-brand-marquee__fallback">{{ brand.name }}</span>
-                }
-              </a>
-            }
-          </div>
-        }
+  @if (showBrandMarquee()) {
+    <div class="about-brand-marquee">
+      <div class="about-brand-marquee__viewport">
+        <div
+          class="about-brand-marquee__track"
+          [class.about-brand-marquee__track--paused]="!!activeMobileMarqueeBrand()"
+          [attr.aria-label]="i18n.currentLang() === 'es' ? 'Marcas del grupo HESA' : 'HESA group brands'">
+          @for (group of marqueeGroups; track group) {
+            <div class="about-brand-marquee__group" [attr.aria-hidden]="group > 0">
+              @for (brand of brandMarqueeBrands(); track brand._id) {
+                <a
+                  [routerLink]="buildBrandRoute(brand.slug)"
+                  class="about-brand-marquee__item"
+                  [class.about-brand-marquee__item--active]="activeMobileMarqueeBrand() === brand.slug"
+                  [attr.aria-label]="(i18n.currentLang() === 'es' ? 'Ver marca ' : 'View brand ') + brand.name"
+                  (click)="onMarqueeBrandClick($event, brand.slug)">
+                  <img [src]="brand.logo!" [alt]="brand.name" class="about-brand-marquee__logo" loading="lazy">
+                </a>
+              }
+            </div>
+          }
+        </div>
       </div>
     </div>
-  </div>
+  }
 </section>
 
 <section class="about-market-presence fade-in-section">

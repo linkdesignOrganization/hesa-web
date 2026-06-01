@@ -1,4 +1,4 @@
-import { Component, inject, signal, OnInit, AfterViewInit, OnDestroy, ElementRef, HostListener } from '@angular/core';
+import { Component, computed, inject, signal, OnInit, AfterViewInit, OnDestroy, ElementRef, HostListener } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ApiService, ApiBrand, ApiProduct } from '../../../shared/services/api.service';
 import { I18nService } from '../../../shared/services/i18n.service';
@@ -54,6 +54,7 @@ interface AboutClosingAllianceSection {
   styleUrl: './about.component.scss'
 })
 export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
+  private readonly MIN_BRAND_MARQUEE_LOGOS = 8;
   private api = inject(ApiService);
   private seo = inject(SeoService);
   i18n = inject(I18nService);
@@ -64,6 +65,20 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
   private advantageProductInterval: number | null = null;
 
   brands = signal<ApiBrand[]>([]);
+  readonly brandMarqueeBrands = computed(() => {
+    const seen = new Set<string>();
+
+    return this.brands()
+      .filter(brand => !!brand.logo)
+      .filter(brand => {
+        if (seen.has(brand.slug)) return false;
+        seen.add(brand.slug);
+        return true;
+      });
+  });
+  readonly showBrandMarquee = computed(
+    () => this.brandMarqueeBrands().length >= this.MIN_BRAND_MARQUEE_LOGOS
+  );
   activeMobileMarqueeBrand = signal<string | null>(null);
   presenceParallaxOffset = signal(0);
   closingAllianceParallaxOffset = signal(0);

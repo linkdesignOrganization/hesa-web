@@ -288,19 +288,21 @@
 <!-- FEATURED SHOWCASE -->
 <section class="featured-showcase fade-in-section">
   <div class="featured-showcase__shell" [attr.data-category]="activeShowcaseTab()">
-    <div class="featured-showcase__marquee" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Marcas destacadas de esta selección' : 'Featured brands in this selection'">
-      <div class="featured-showcase__marquee-track">
-        @for (group of showcaseMarqueeGroups; track group) {
-          <div class="featured-showcase__marquee-group" [attr.aria-hidden]="group > 0">
-            @for (logo of featuredShowcaseBrandLogos(); track logo.name) {
-              <div class="featured-showcase__marquee-item">
-                <img [src]="logo.src" [alt]="logo.name" class="featured-showcase__marquee-logo" loading="lazy">
-              </div>
-            }
-          </div>
-        }
+    @if (showFeaturedShowcaseMarquee()) {
+      <div class="featured-showcase__marquee" [attr.aria-label]="i18n.currentLang() === 'es' ? 'Marcas destacadas de esta selección' : 'Featured brands in this selection'">
+        <div class="featured-showcase__marquee-track">
+          @for (group of showcaseMarqueeGroups; track group) {
+            <div class="featured-showcase__marquee-group" [attr.aria-hidden]="group > 0">
+              @for (logo of featuredShowcaseBrandLogos(); track logo.src) {
+                <div class="featured-showcase__marquee-item">
+                  <img [src]="logo.src" [alt]="logo.name" class="featured-showcase__marquee-logo" loading="lazy">
+                </div>
+              }
+            </div>
+          }
+        </div>
       </div>
-    </div>
+    }
 
     <div class="featured-showcase__intro">
       <div class="featured-showcase__intro-copy">
