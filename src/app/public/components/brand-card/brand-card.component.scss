@@ -36,6 +36,25 @@
     background: #f5f7fa;
   }
 
+  &__featured-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    align-self: flex-start;
+    padding: 7px 11px;
+    border-radius: 999px;
+    background: rgba(255, 196, 61, 0.16);
+    color: #a15c00;
+    font-size: 0.75rem;
+    font-weight: var(--weight-bold);
+    line-height: 1;
+    letter-spacing: 0.01em;
+  }
+
+  &__featured-icon {
+    flex-shrink: 0;
+  }
+
   // ---------------------------------------------------------------------------
   // Logo area
   // ---------------------------------------------------------------------------
@@ -114,6 +133,11 @@
   @media (max-width: 767px) {
     padding: 14px;
     gap: 12px;
+
+    &__featured-badge {
+      padding: 6px 10px;
+      font-size: 0.7rem;
+    }
 
     &__logo-wrapper {
       min-height: 108px;

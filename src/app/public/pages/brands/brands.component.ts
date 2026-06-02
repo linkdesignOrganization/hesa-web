@@ -1,4 +1,4 @@
-import { Component, inject, signal, OnInit, OnDestroy } from '@angular/core';
+import { Component, computed, inject, signal, OnInit, OnDestroy } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { BreadcrumbComponent } from '../../../shared/components/breadcrumb/breadcrumb.component';
 import { BrandCardComponent } from '../../components/brand-card/brand-card.component';
@@ -19,6 +19,19 @@ export class BrandsComponent implements OnInit, OnDestroy {
   private seo = inject(SeoService);
   i18n = inject(I18nService);
   brands = signal<ApiBrand[]>([]);
+  sortedBrands = computed(() => {
+    return [...this.brands()].sort((a, b) => {
+      if (!!a.isFeatured !== !!b.isFeatured) {
+        return a.isFeatured ? -1 : 1;
+      }
+
+      const orderA = a.featuredOrder ?? Number.MAX_SAFE_INTEGER;
+      const orderB = b.featuredOrder ?? Number.MAX_SAFE_INTEGER;
+      if (orderA !== orderB) return orderA - orderB;
+
+      return a.name.localeCompare(b.name, 'es', { sensitivity: 'base' });
+    });
+  });
   loading = signal(true);
   error = signal(false);
 

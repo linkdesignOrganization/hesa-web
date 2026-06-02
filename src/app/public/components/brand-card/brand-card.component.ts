@@ -42,6 +42,10 @@ export class BrandCardComponent {
   get displayCountry(): string { return (this.brand()?.['country'] as string) || this.country(); }
   get logoInitial(): string { return (this.brand()?.['logoPlaceholder'] as string) || this.displayName.charAt(0); }
   get logoUrl(): string | undefined { return this.brand()?.['logo'] as string | undefined; }
+  get isFeatured(): boolean { return !!this.brand()?.['isFeatured']; }
+  get featuredBadgeLabel(): string {
+    return this.i18n.currentLang() === 'es' ? 'Destacada' : 'Featured';
+  }
 
   get brandLink(): string {
     const b = this.brand();
