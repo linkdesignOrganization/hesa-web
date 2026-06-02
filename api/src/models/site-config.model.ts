@@ -42,7 +42,7 @@ const siteConfigSchema = new Schema<ISiteConfig>(
     defaultLang: { type: String, default: 'es' },
     logoUrl: { type: String },
     phone: { type: String, default: '+506 2260-9020' },
-    email: { type: String, default: 'hola@linkdesign.cr' },
+    email: { type: String, default: 'info@hesa.co.cr' },
     address: { type: bilingualField, default: { es: 'Calle 2, av. 12. Heredia, Costa Rica', en: 'Calle 2, av. 12. Heredia, Costa Rica' } },
     hours: { type: bilingualField, default: { es: 'Lunes a Viernes: 8:00 - 17:00', en: 'Monday to Friday: 8:00 - 17:00' } },
     whatsapp: { type: String, default: '+50622390000' },

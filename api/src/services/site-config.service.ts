@@ -1,6 +1,29 @@
 import { SiteConfig, ISiteConfig } from '../models/site-config.model';
 
 const CONFIG_KEYS = ['general', 'contacto', 'redes', 'seo'] as const;
+const CONFIG_FIELDS: Record<(typeof CONFIG_KEYS)[number], string[]> = {
+  general: ['siteName', 'defaultLang', 'logoUrl', 'ga4Id', 'ga4Enabled', 'fbPixelId', 'fbPixelEnabled'],
+  contacto: ['phone', 'email', 'address', 'hours', 'whatsapp'],
+  redes: ['facebook', 'instagram', 'linkedin', 'youtube'],
+  seo: ['metaTitle', 'metaDescription', 'ogImage'],
+};
+
+function mergeConfigDocs(configs: Array<Record<string, unknown>>): Record<string, unknown> {
+  const merged: Record<string, unknown> = {};
+
+  for (const config of configs) {
+    const key = config.key as (typeof CONFIG_KEYS)[number] | undefined;
+    if (!key) continue;
+
+    for (const field of CONFIG_FIELDS[key]) {
+      if (field in config) {
+        merged[field] = config[field];
+      }
+    }
+  }
+
+  return merged;
+}
 
 /**
  * Initialize site config documents if they don't exist.
@@ -21,15 +44,7 @@ export async function seedSiteConfig(): Promise<void> {
  */
 export async function getAllConfig(): Promise<Record<string, unknown>> {
   const configs = await SiteConfig.find().lean();
-  const merged: Record<string, unknown> = {};
-  for (const config of configs) {
-    const obj = config as Record<string, unknown>;
-    for (const [k, v] of Object.entries(obj)) {
-      if (k !== '_id' && k !== '__v' && k !== 'key' && k !== 'createdAt' && k !== 'updatedAt') {
-        merged[k] = v;
-      }
-    }
-  }
+  const merged = mergeConfigDocs(configs as Array<Record<string, unknown>>);
   // Include updatedAt from the most recently updated config
   const latest = configs.reduce<Record<string, unknown> | null>((acc, c) => {
     const cObj = c as Record<string, unknown>;
@@ -79,15 +94,7 @@ export async function updateConfig(
  */
 export async function getPublicConfig(): Promise<Record<string, unknown>> {
   const configs = await SiteConfig.find().lean();
-  const result: Record<string, unknown> = {};
-  for (const config of configs) {
-    const obj = config as Record<string, unknown>;
-    for (const [k, v] of Object.entries(obj)) {
-      if (k !== '_id' && k !== '__v' && k !== 'key' && k !== 'createdAt' && k !== 'updatedAt') {
-        result[k] = v;
-      }
-    }
-  }
+  const result = mergeConfigDocs(configs as Array<Record<string, unknown>>);
   result.defaultLang = 'es';
   return result;
 }
