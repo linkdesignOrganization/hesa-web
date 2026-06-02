@@ -90,18 +90,20 @@
   }
 
   &__sidebar-logo {
-    font-size: 24px;
-    font-weight: 800;
-    color: var(--adm-primary);
-    letter-spacing: -0.02em;
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    max-width: 168px;
+
+    @media (min-width: 1024px) and (max-width: 1279px) {
+      max-width: 110px;
+    }
   }
 
-  &__sidebar-subtitle {
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--adm-text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
+  &__sidebar-logo-svg {
+    width: 100%;
+    height: auto;
+    display: block;
   }
 
   // Sidebar navigation container
