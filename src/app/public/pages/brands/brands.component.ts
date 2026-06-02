@@ -19,15 +19,21 @@ export class BrandsComponent implements OnInit, OnDestroy {
   private seo = inject(SeoService);
   i18n = inject(I18nService);
   brands = signal<ApiBrand[]>([]);
+  featuredBrandIds = signal<string[]>([]);
   sortedBrands = computed(() => {
+    const featuredOrder = new Map(this.featuredBrandIds().map((id, index) => [id, index]));
+
     return [...this.brands()].sort((a, b) => {
-      if (!!a.isFeatured !== !!b.isFeatured) {
-        return a.isFeatured ? -1 : 1;
+      const aIsFeatured = featuredOrder.has(a._id);
+      const bIsFeatured = featuredOrder.has(b._id);
+
+      if (aIsFeatured !== bIsFeatured) {
+        return aIsFeatured ? -1 : 1;
       }
 
-      const orderA = a.featuredOrder ?? Number.MAX_SAFE_INTEGER;
-      const orderB = b.featuredOrder ?? Number.MAX_SAFE_INTEGER;
-      if (orderA !== orderB) return orderA - orderB;
+      if (aIsFeatured && bIsFeatured) {
+        return (featuredOrder.get(a._id) ?? Number.MAX_SAFE_INTEGER) - (featuredOrder.get(b._id) ?? Number.MAX_SAFE_INTEGER);
+      }
 
       return a.name.localeCompare(b.name, 'es', { sensitivity: 'base' });
     });
@@ -66,11 +72,19 @@ export class BrandsComponent implements OnInit, OnDestroy {
     this.loading.set(true);
     this.error.set(false);
     try {
-      const data = await this.api.getBrands();
+      const [data, homeData] = await Promise.all([
+        this.api.getBrands(),
+        this.api.getHomeData().catch(() => null),
+      ]);
       this.brands.set(data);
+      this.featuredBrandIds.set((homeData?.featuredBrands ?? []).map(brand => brand._id));
     } catch {
       this.error.set(true);
     }
     this.loading.set(false);
+  }
+
+  isFeaturedBrand(brandId: string): boolean {
+    return this.featuredBrandIds().includes(brandId);
   }
 }

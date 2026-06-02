@@ -71,7 +71,7 @@
     } @else {
       <div class="brands-grid">
         @for (brand of sortedBrands(); track brand._id) {
-          <app-brand-card [brand]="brand" surface="soft-gray" />
+          <app-brand-card [brand]="brand" [featured]="isFeaturedBrand(brand._id)" surface="soft-gray" />
         }
       </div>
     }

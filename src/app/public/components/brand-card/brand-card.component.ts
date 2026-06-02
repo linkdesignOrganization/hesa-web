@@ -17,6 +17,7 @@ export class BrandCardComponent {
   country = input('');
   categories = input<string[]>([]);
   surface = input<'gradient' | 'soft-gray'>('gradient');
+  featured = input<boolean | null>(null);
 
   i18n = inject(I18nService);
 
@@ -42,7 +43,11 @@ export class BrandCardComponent {
   get displayCountry(): string { return (this.brand()?.['country'] as string) || this.country(); }
   get logoInitial(): string { return (this.brand()?.['logoPlaceholder'] as string) || this.displayName.charAt(0); }
   get logoUrl(): string | undefined { return this.brand()?.['logo'] as string | undefined; }
-  get isFeatured(): boolean { return !!this.brand()?.['isFeatured']; }
+  get isFeatured(): boolean {
+    const featuredInput = this.featured();
+    if (featuredInput !== null) return featuredInput;
+    return !!this.brand()?.['isFeatured'];
+  }
   get featuredBadgeLabel(): string {
     return this.i18n.currentLang() === 'es' ? 'Destacada' : 'Featured';
   }
