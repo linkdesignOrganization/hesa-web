@@ -43,7 +43,7 @@ export class AdminTeamEditorComponent implements OnInit {
       const members = await this.api.adminGetTeam();
       this.team.set(members);
     } catch {
-      this.toast.error('Error al cargar el equipo');
+      this.toast.error('Error al cargar las personas del equipo');
     }
     this.loading.set(false);
   }
@@ -60,7 +60,7 @@ export class AdminTeamEditorComponent implements OnInit {
 
   openEditModal(member: ApiTeamMember): void {
     this.editingMember.set(member);
-    this.formName = { ...member.name };
+    this.formName = { es: member.name.es || '', en: member.name.en || member.name.es || '' };
     this.formTitle = { ...member.title };
     this.pendingPhotoFile.set(null);
     this.photoPreviewUrl.set(member.photo || null);
@@ -74,34 +74,39 @@ export class AdminTeamEditorComponent implements OnInit {
       this.toast.warning('Nombre y cargo en español son requeridos');
       return;
     }
-    if (!this.formName.en.trim() || !this.formTitle.en.trim()) {
+    if (!this.formTitle.en.trim()) {
       this.formLang.set('en');
-      this.toast.warning('Nombre y cargo en inglés son requeridos');
+      this.toast.warning('La posición en inglés es requerida');
       return;
     }
+
+    const payload = {
+      name: {
+        es: this.formName.es.trim(),
+        en: this.formName.es.trim(),
+      },
+      title: {
+        es: this.formTitle.es.trim(),
+        en: this.formTitle.en.trim(),
+      },
+    };
 
     this.savingMember.set(true);
     try {
       if (this.editingMember()) {
-        await this.api.adminUpdateTeamMember(this.editingMember()!._id, {
-          name: this.formName,
-          title: this.formTitle,
-        });
+        await this.api.adminUpdateTeamMember(this.editingMember()!._id, payload);
         // Upload photo if a new file was selected during edit
         if (this.pendingPhotoFile()) {
           await this.api.adminUploadTeamPhoto(this.editingMember()!._id, this.pendingPhotoFile()!);
         }
-        this.toast.success('Miembro actualizado');
+        this.toast.success('Persona actualizada');
       } else {
         // Create member first, then upload photo if one was selected
-        const created = await this.api.adminCreateTeamMember({
-          name: this.formName,
-          title: this.formTitle,
-        });
+        const created = await this.api.adminCreateTeamMember(payload);
         if (this.pendingPhotoFile()) {
           await this.api.adminUploadTeamPhoto(created._id, this.pendingPhotoFile()!);
         }
-        this.toast.success('Miembro agregado');
+        this.toast.success('Persona agregada');
       }
       this.showForm.set(false);
       await this.loadTeam();
@@ -123,7 +128,7 @@ export class AdminTeamEditorComponent implements OnInit {
 
     try {
       await this.api.adminDeleteTeamMember(member._id);
-      this.toast.success('Miembro eliminado');
+      this.toast.success('Persona eliminada');
       await this.loadTeam();
     } catch {
       this.toast.error('Error al eliminar');

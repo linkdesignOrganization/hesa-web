@@ -2,11 +2,11 @@
 <div class="team-editor">
   <div class="adm-page-header">
     <div class="adm-page-header__left">
-      <h1 class="adm-page-header__title">Equipo de Liderazgo</h1>
+      <h1 class="adm-page-header__title">Personas</h1>
     </div>
     <button class="adm-btn adm-btn--primary" (click)="openAddModal()">
       <span class="material-symbols-outlined">add</span>
-      Agregar miembro
+      Agregar persona
     </button>
   </div>
 
@@ -22,11 +22,11 @@
         <div class="adm-empty__icon">
           <span class="material-symbols-outlined">person</span>
         </div>
-        <p class="adm-empty__title">No hay miembros del equipo</p>
-        <p class="adm-empty__desc">La sección de Equipo de Liderazgo no se mostrará en el sitio público hasta que agregues miembros.</p>
+        <p class="adm-empty__title">No hay personas del equipo</p>
+        <p class="adm-empty__desc">La sección de personas del equipo no se mostrará en el sitio público hasta que agregues al menos una.</p>
         <button class="adm-btn adm-btn--primary" (click)="openAddModal()">
           <span class="material-symbols-outlined">add</span>
-          Agregar primer miembro
+          Agregar primera persona
         </button>
       </div>
     </div>
@@ -67,7 +67,7 @@
   <div class="adm-modal-backdrop" (click)="showForm.set(false)">
     <div class="adm-modal" (click)="$event.stopPropagation()">
       <div class="adm-modal__header">
-        <h2 class="adm-modal__title">{{ editingMember() ? 'Editar Miembro' : 'Agregar Miembro' }}</h2>
+        <h2 class="adm-modal__title">{{ editingMember() ? 'Editar persona' : 'Agregar persona' }}</h2>
         <button class="adm-modal__close" (click)="showForm.set(false)">
           <span class="material-symbols-outlined">close</span>
         </button>
@@ -88,10 +88,6 @@
             <input type="text" class="adm-form-control" [(ngModel)]="formTitle.es" placeholder="Cargo o posición">
           </div>
         } @else {
-          <div class="adm-form-group">
-            <label class="adm-form-label">Name <span class="team-editor__required">*</span></label>
-            <input type="text" class="adm-form-control" [(ngModel)]="formName.en" placeholder="Full name">
-          </div>
           <div class="adm-form-group">
             <label class="adm-form-label">Title <span class="team-editor__required">*</span></label>
             <input type="text" class="adm-form-control" [(ngModel)]="formTitle.en" placeholder="Position or title">
@@ -135,6 +131,6 @@
 
 <!-- Confirm Delete Modal -->
 <app-confirm-modal #deleteModal
-  [title]="'Eliminar miembro'"
+  [title]="'Eliminar persona'"
   [description]="'¿Está seguro de eliminar a ' + (deletingMember()?.name?.es || '') + '?'"
   (confirmed)="executeDelete()" />

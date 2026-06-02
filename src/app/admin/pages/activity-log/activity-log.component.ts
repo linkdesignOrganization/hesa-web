@@ -80,7 +80,7 @@ export class AdminActivityLogComponent implements OnInit {
       brand: 'Marca',
       category: 'Categoría',
       message: 'Mensaje',
-      team_member: 'Miembro de equipo',
+      team_member: 'Persona del equipo',
       content: 'Contenido',
       settings: 'Configuración',
     };

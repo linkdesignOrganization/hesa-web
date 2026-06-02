@@ -32,9 +32,19 @@ router.get('/', async (_req: AuthRequest, res: Response) => {
  */
 router.post('/', sanitizeBody, async (req: AuthRequest, res: Response) => {
   try {
-    const { name, title } = req.body;
-    if (!name?.es || !title?.es || !name?.en || !title?.en) {
-      res.status(400).json({ error: 'name (es/en) and title (es/en) are required' });
+    const rawName = req.body?.name;
+    const rawTitle = req.body?.title;
+    const name = {
+      es: rawName?.es,
+      en: rawName?.en || rawName?.es,
+    };
+    const title = {
+      es: rawTitle?.es,
+      en: rawTitle?.en,
+    };
+
+    if (!name.es || !title.es || !title.en) {
+      res.status(400).json({ error: 'name (es) and title (es/en) are required' });
       return;
     }
 
@@ -92,7 +102,16 @@ router.put('/reorder', sanitizeBody, async (req: AuthRequest, res: Response) => 
  */
 router.put('/:id', sanitizeBody, async (req: AuthRequest, res: Response) => {
   try {
-    const member = await teamService.updateTeamMember(req.params.id, req.body);
+    const payload = { ...req.body } as Record<string, any>;
+
+    if (payload.name) {
+      payload.name = {
+        es: payload.name.es,
+        en: payload.name.en || payload.name.es,
+      };
+    }
+
+    const member = await teamService.updateTeamMember(req.params.id, payload);
     if (!member) {
       res.status(404).json({ error: 'Team member not found' });
       return;
