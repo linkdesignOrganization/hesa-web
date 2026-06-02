@@ -243,6 +243,24 @@
     text-overflow: ellipsis;
   }
 
+  &__slide-status {
+    display: inline-flex;
+    align-items: center;
+    align-self: flex-start;
+    margin-top: 4px;
+    padding: 3px 8px;
+    border-radius: 999px;
+    background: rgba(15, 23, 42, 0.06);
+    color: var(--adm-text-muted);
+    font-size: 11px;
+    font-weight: 600;
+
+    &--active {
+      background: rgba(20, 118, 255, 0.08);
+      color: var(--adm-primary);
+    }
+  }
+
   &__slide-actions {
     display: flex;
     align-items: center;
@@ -392,6 +410,28 @@
     padding: var(--adm-sp-3) var(--adm-sp-4);
   }
 
+  &__product-state {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: var(--adm-sp-2);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--adm-text-muted);
+
+    &--active {
+      color: var(--adm-primary);
+    }
+  }
+
+  &__product-state-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: currentColor;
+    flex-shrink: 0;
+  }
+
   &__product-thumb {
     width: 40px;
     height: 40px;
@@ -434,6 +474,12 @@
   &__product-brand {
     font-size: var(--adm-badge-size);
     color: var(--adm-text-body);
+  }
+
+  &__product-empty {
+    margin: 0 0 var(--adm-sp-2);
+    font-size: 12px;
+    color: var(--adm-text-muted);
   }
 
   // ── Tags ──

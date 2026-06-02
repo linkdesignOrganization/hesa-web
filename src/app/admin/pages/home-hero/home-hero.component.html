@@ -108,6 +108,9 @@
                   <div class="hero-editor__slide-info">
                     <span class="hero-editor__slide-number">Slide {{ $index + 1 }}</span>
                     <span class="hero-editor__slide-headline">{{ slide.headline.es || 'Sin título' }}</span>
+                    <span class="hero-editor__slide-status" [class.hero-editor__slide-status--active]="hasAssociatedProduct(slide.product)">
+                      {{ getProductStateLabel(slide.product) }}
+                    </span>
                   </div>
                 </div>
                 <div class="hero-editor__slide-actions">
@@ -207,7 +210,11 @@
     <!-- Product Selector -->
     <div class="adm-form-group">
       <label class="adm-form-label">Producto asociado</label>
-      @if (isProductObject(slide.product)) {
+      <div class="hero-editor__product-state" [class.hero-editor__product-state--active]="hasAssociatedProduct(slide.product)">
+        <span class="hero-editor__product-state-dot" aria-hidden="true"></span>
+        <span>{{ getProductStateLabel(slide.product) }}</span>
+      </div>
+      @if (hasAssociatedProduct(slide.product)) {
         <div class="hero-editor__product-card adm-card">
           <div class="hero-editor__product-thumb">
             @if (getProductImage(slide.product)) {
@@ -220,11 +227,15 @@
             <span class="hero-editor__product-name">{{ getProductName(slide.product) }}</span>
             <span class="hero-editor__product-brand">{{ getProductBrand(slide.product) }}</span>
           </div>
+          <button class="adm-btn adm-btn--secondary adm-btn--sm" (click)="openProductModal(index)">
+            Cambiar
+          </button>
           <button class="adm-btn adm-btn--icon" aria-label="Quitar producto" (click)="removeProduct(index)">
             <span class="material-symbols-outlined">close</span>
           </button>
         </div>
       } @else {
+        <p class="hero-editor__product-empty">Este hero no tiene un producto vinculado todavía.</p>
         <button class="adm-btn adm-btn--secondary" (click)="openProductModal(index)">
           <span class="material-symbols-outlined">add_shopping_cart</span> Seleccionar producto
         </button>

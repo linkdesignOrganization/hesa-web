@@ -19,7 +19,7 @@ function validateIdArray(ids: unknown): ids is string[] {
  */
 router.get('/', async (_req: AuthRequest, res: Response) => {
   try {
-    const config = await homeService.getHomeConfig();
+    const config = await homeService.getAdminHomeConfigPopulated();
     res.json(config);
   } catch (error) {
     console.error('Error fetching home config:', error);

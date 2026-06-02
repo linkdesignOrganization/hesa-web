@@ -45,22 +45,25 @@ export class AdminHomeHeroComponent implements OnInit {
     await this.loadConfig();
   }
 
+  private applyConfig(config: ApiHomeConfig): void {
+    this.heroMode.set(config.hero.mode || 'single');
+    this.viewingMode.set(config.hero.mode || 'single');
+    this.singleSlide.set(config.hero.single || this.createEmptySlide());
+    this.slides.set(
+      config.hero.slides && config.hero.slides.length > 0
+        ? config.hero.slides
+        : [this.createEmptySlide()]
+    );
+    this.activeSlideIndex.set(0);
+    this.expandedSlides.set(new Set([0]));
+  }
+
   async loadConfig(): Promise<void> {
     this.loading.set(true);
     this.error.set(false);
     try {
       const config = await this.api.adminGetHomeConfig();
-      this.heroMode.set(config.hero.mode || 'single');
-      this.viewingMode.set(config.hero.mode || 'single');
-      // Load single slide data
-      this.singleSlide.set(config.hero.single || this.createEmptySlide());
-      // Load carousel slides
-      const loadedSlides = config.hero.slides && config.hero.slides.length > 0
-        ? config.hero.slides
-        : [this.createEmptySlide()];
-      this.slides.set(loadedSlides);
-      this.activeSlideIndex.set(0);
-      this.expandedSlides.set(new Set([0]));
+      this.applyConfig(config);
     } catch {
       this.error.set(true);
     }
@@ -104,7 +107,8 @@ export class AdminHomeHeroComponent implements OnInit {
           product: this.serializeProduct(slide.product),
         }));
       }
-      await this.api.adminUpdateHero(payload);
+      const config = await this.api.adminUpdateHero(payload);
+      this.applyConfig(config);
       this.toast.success(mode === 'single' ? 'Portada simple activada' : 'Carrusel activado');
     } catch {
       this.toast.error('Error al activar el modo');
@@ -176,9 +180,7 @@ export class AdminHomeHeroComponent implements OnInit {
       }
 
       const config = await this.api.adminUpdateHero(payload);
-      // Reload from server
-      if (config.hero.single) this.singleSlide.set(config.hero.single);
-      if (config.hero.slides?.length) this.slides.set(config.hero.slides);
+      this.applyConfig(config);
       this.toast.success('Hero actualizado correctamente');
     } catch {
       this.toast.error('Error al guardar los cambios');
@@ -317,21 +319,35 @@ export class AdminHomeHeroComponent implements OnInit {
 
   getProductName(product: ApiProduct | string | null | undefined): string {
     if (!product) return '';
-    if (typeof product === 'string') return product;
+    if (typeof product === 'string') return this.findCachedProduct(product)?.name?.es || 'Producto asociado';
     return product.name?.es || '';
   }
 
   getProductImage(product: ApiProduct | string | null | undefined): string {
-    if (!product || typeof product === 'string') return '';
+    if (!product) return '';
+    if (typeof product === 'string') return this.findCachedProduct(product)?.images?.[0] || '';
     return product.images?.[0] || '';
   }
 
   getProductBrand(product: ApiProduct | string | null | undefined): string {
-    if (!product || typeof product === 'string') return '';
+    if (!product) return '';
+    if (typeof product === 'string') return this.findCachedProduct(product)?.brand?.name || '';
     return product.brand?.name || '';
   }
 
   isProductObject(product: ApiProduct | string | null | undefined): boolean {
     return !!product && typeof product === 'object';
+  }
+
+  hasAssociatedProduct(product: ApiProduct | string | null | undefined): boolean {
+    return this.serializeProduct(product) !== null;
+  }
+
+  getProductStateLabel(product: ApiProduct | string | null | undefined): string {
+    return this.hasAssociatedProduct(product) ? 'Con producto asociado' : 'Sin producto asociado';
+  }
+
+  private findCachedProduct(productId: string): ApiProduct | undefined {
+    return this.allProducts.find(product => product._id === productId);
   }
 }

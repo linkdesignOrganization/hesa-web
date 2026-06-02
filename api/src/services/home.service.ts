@@ -148,7 +148,7 @@ export async function updateHero(heroData: {
   target: 'single' | 'carousel';
   single?: IHeroSlide;
   slides?: IHeroSlide[];
-}): Promise<IHomeConfig | null> {
+}): Promise<Record<string, unknown> | null> {
   const config = await getHomeConfig();
   const updateFields: Record<string, unknown> = {
     'hero.mode': heroData.mode,
@@ -159,11 +159,14 @@ export async function updateHero(heroData: {
   if (heroData.target === 'carousel' && heroData.slides) {
     updateFields['hero.slides'] = heroData.slides;
   }
-  return HomeConfig.findByIdAndUpdate(
+  const updated = await HomeConfig.findByIdAndUpdate(
     config._id,
     { $set: updateFields },
     { new: true }
-  ).lean() as unknown as Promise<IHomeConfig | null>;
+  ).lean() as unknown as IHomeConfig | null;
+
+  if (!updated) return null;
+  return populateHeroConfig(updated);
 }
 
 /**
@@ -174,7 +177,7 @@ export async function updateSlideImage(
   slideIndex: number,
   imageType: 'desktop' | 'mobile',
   imageUrl: string
-): Promise<IHomeConfig | null> {
+): Promise<Record<string, unknown> | null> {
   const config = await getHomeConfig();
   const field = imageType === 'desktop' ? 'imageDesktop' : 'imageMobile';
 
@@ -184,19 +187,25 @@ export async function updateSlideImage(
       [field]: imageUrl,
     };
 
-    return HomeConfig.findByIdAndUpdate(
+    const updated = await HomeConfig.findByIdAndUpdate(
       config._id,
       { $set: { 'hero.single': singleSlide } },
       { new: true }
-    ).lean() as unknown as Promise<IHomeConfig | null>;
+    ).lean() as unknown as IHomeConfig | null;
+
+    if (!updated) return null;
+    return populateHeroConfig(updated);
   }
 
   const key = target === 'single' ? `hero.single.${field}` : `hero.slides.${slideIndex}.${field}`;
-  return HomeConfig.findByIdAndUpdate(
+  const updated = await HomeConfig.findByIdAndUpdate(
     config._id,
     { $set: { [key]: imageUrl } },
     { new: true }
-  ).lean() as unknown as Promise<IHomeConfig | null>;
+  ).lean() as unknown as IHomeConfig | null;
+
+  if (!updated) return null;
+  return populateHeroConfig(updated);
 }
 
 /**
@@ -218,6 +227,27 @@ async function populateSlideProduct(slide: IHeroSlide): Promise<Record<string, u
     }
   }
   return result;
+}
+
+async function populateHeroConfig(config: IHomeConfig): Promise<Record<string, unknown>> {
+  const single = config.hero?.single ? await populateSlideProduct(config.hero.single) : null;
+  const slides = config.hero?.slides?.length
+    ? await Promise.all(config.hero.slides.map(populateSlideProduct))
+    : [];
+
+  return {
+    ...config,
+    hero: {
+      ...config.hero,
+      single,
+      slides,
+    },
+  };
+}
+
+export async function getAdminHomeConfigPopulated(): Promise<Record<string, unknown>> {
+  const config = await getHomeConfig();
+  return populateHeroConfig(config);
 }
 
 /**
