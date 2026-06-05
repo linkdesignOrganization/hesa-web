@@ -38,29 +38,15 @@
 
         <div class="adm-form-group">
           <label class="adm-form-label" for="brand-country">País de origen <span class="required">*</span></label>
-          <select id="brand-country" class="adm-form-select" [class.is-invalid]="isFieldInvalid('country')" formControlName="country" (blur)="onFieldBlur('country')">
-            <option value="" disabled>Seleccionar país</option>
-            <option value="Estados Unidos">Estados Unidos</option>
-            <option value="Canadá">Canadá</option>
-            <option value="Alemania">Alemania</option>
-            <option value="Francia">Francia</option>
-            <option value="Suiza">Suiza</option>
-            <option value="Holanda">Holanda</option>
-            <option value="Italia">Italia</option>
-            <option value="España">España</option>
-            <option value="Reino Unido">Reino Unido</option>
-            <option value="Brasil">Brasil</option>
-            <option value="Argentina">Argentina</option>
-            <option value="México">México</option>
-            <option value="Colombia">Colombia</option>
-            <option value="Costa Rica">Costa Rica</option>
-            <option value="China">China</option>
-            <option value="India">India</option>
-            <option value="Corea del Sur">Corea del Sur</option>
-            <option value="Japón">Japón</option>
-            <option value="Australia">Australia</option>
-            <option value="Otro">Otro</option>
-          </select>
+          <input
+            type="text"
+            id="brand-country"
+            class="adm-form-control"
+            [class.is-invalid]="isFieldInvalid('country')"
+            formControlName="country"
+            placeholder="Ej: Costa Rica, Alemania, Reino Unido"
+            autocomplete="country-name"
+            (blur)="onFieldBlur('country')">
           @if (isFieldInvalid('country')) {
             <div class="adm-form-error" role="alert">
               <span class="material-symbols-outlined">error</span>

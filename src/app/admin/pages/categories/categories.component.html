@@ -28,19 +28,23 @@
           }
         </div>
 
-        @if (cat.families && cat.families.length > 0) {
+        @if (cat.key === 'farmacos') {
           <div class="cat-card__group">
             <h3 class="cat-card__group-title">
               <span class="material-symbols-outlined">medication</span> Familias farmacéuticas
             </h3>
             <div class="adm-chips">
-              @for (val of cat.families; track val.es) {
-                <span class="adm-chip">
-                  {{ val.es }}
-                  <button class="adm-chip__remove" aria-label="Remover" (click)="removeTag(cat, 'families', $index)">
-                    <span class="material-symbols-outlined">close</span>
-                  </button>
-                </span>
+              @if (cat.families && cat.families.length > 0) {
+                @for (val of cat.families; track val.es) {
+                  <span class="adm-chip">
+                    {{ val.es }}
+                    <button class="adm-chip__remove" aria-label="Remover" (click)="removeTag(cat, 'families', $index)">
+                      <span class="material-symbols-outlined">close</span>
+                    </button>
+                  </span>
+                }
+              } @else {
+                <span class="adm-form-hint">No hay familias configuradas todavía.</span>
               }
               <button class="cat-card__add-btn" (click)="openAddModal(cat, 'families')">
                 <span class="material-symbols-outlined">add</span>
@@ -49,19 +53,23 @@
           </div>
         }
 
-        @if (cat.species && cat.species.length > 0) {
+        @if (cat.key === 'farmacos' || cat.key === 'alimentos') {
           <div class="cat-card__group">
             <h3 class="cat-card__group-title">
               <span class="material-symbols-outlined">pets</span> Especies
             </h3>
             <div class="adm-chips">
-              @for (val of cat.species; track val.es) {
-                <span class="adm-chip">
-                  {{ val.es }}
-                  <button class="adm-chip__remove" aria-label="Remover" (click)="removeTag(cat, 'species', $index)">
-                    <span class="material-symbols-outlined">close</span>
-                  </button>
-                </span>
+              @if (cat.species && cat.species.length > 0) {
+                @for (val of cat.species; track val.es) {
+                  <span class="adm-chip">
+                    {{ val.es }}
+                    <button class="adm-chip__remove" aria-label="Remover" (click)="removeTag(cat, 'species', $index)">
+                      <span class="material-symbols-outlined">close</span>
+                    </button>
+                  </span>
+                }
+              } @else {
+                <span class="adm-form-hint">No hay especies configuradas todavía.</span>
               }
               <button class="cat-card__add-btn" (click)="openAddModal(cat, 'species')">
                 <span class="material-symbols-outlined">add</span>
@@ -70,19 +78,23 @@
           </div>
         }
 
-        @if (cat.lifeStages && cat.lifeStages.length > 0) {
+        @if (cat.key === 'alimentos') {
           <div class="cat-card__group">
             <h3 class="cat-card__group-title">
               <span class="material-symbols-outlined">schedule</span> Etapas de vida
             </h3>
             <div class="adm-chips">
-              @for (val of cat.lifeStages; track val.es) {
-                <span class="adm-chip">
-                  {{ val.es }}
-                  <button class="adm-chip__remove" aria-label="Remover" (click)="removeTag(cat, 'lifeStages', $index)">
-                    <span class="material-symbols-outlined">close</span>
-                  </button>
-                </span>
+              @if (cat.lifeStages && cat.lifeStages.length > 0) {
+                @for (val of cat.lifeStages; track val.es) {
+                  <span class="adm-chip">
+                    {{ val.es }}
+                    <button class="adm-chip__remove" aria-label="Remover" (click)="removeTag(cat, 'lifeStages', $index)">
+                      <span class="material-symbols-outlined">close</span>
+                    </button>
+                  </span>
+                }
+              } @else {
+                <span class="adm-form-hint">No hay etapas de vida configuradas todavía.</span>
               }
               <button class="cat-card__add-btn" (click)="openAddModal(cat, 'lifeStages')">
                 <span class="material-symbols-outlined">add</span>
@@ -91,19 +103,23 @@
           </div>
         }
 
-        @if (cat.equipmentTypes && cat.equipmentTypes.length > 0) {
+        @if (cat.key === 'equipos') {
           <div class="cat-card__group">
             <h3 class="cat-card__group-title">
               <span class="material-symbols-outlined">blood_pressure</span> Tipos de equipo
             </h3>
             <div class="adm-chips">
-              @for (val of cat.equipmentTypes; track val.es) {
-                <span class="adm-chip">
-                  {{ val.es }}
-                  <button class="adm-chip__remove" aria-label="Remover" (click)="removeTag(cat, 'equipmentTypes', $index)">
-                    <span class="material-symbols-outlined">close</span>
-                  </button>
-                </span>
+              @if (cat.equipmentTypes && cat.equipmentTypes.length > 0) {
+                @for (val of cat.equipmentTypes; track val.es) {
+                  <span class="adm-chip">
+                    {{ val.es }}
+                    <button class="adm-chip__remove" aria-label="Remover" (click)="removeTag(cat, 'equipmentTypes', $index)">
+                      <span class="material-symbols-outlined">close</span>
+                    </button>
+                  </span>
+                }
+              } @else {
+                <span class="adm-form-hint">No hay tipos de equipo configurados todavía.</span>
               }
               <button class="cat-card__add-btn" (click)="openAddModal(cat, 'equipmentTypes')">
                 <span class="material-symbols-outlined">add</span>

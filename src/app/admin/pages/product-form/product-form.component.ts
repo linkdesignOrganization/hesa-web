@@ -34,6 +34,9 @@ export class AdminProductFormComponent implements HasUnsavedChanges, OnInit {
 
   // Species from category (available options) & selected species
   availableSpecies = signal<{ es: string; en: string }[]>([]);
+  availableFamilies = signal<{ es: string; en: string }[]>([]);
+  availableLifeStages = signal<{ es: string; en: string }[]>([]);
+  availableEquipmentTypes = signal<{ es: string; en: string }[]>([]);
   speciesList = signal<string[]>([]);
   presentationsList = signal<string[]>([]);
 
@@ -136,7 +139,7 @@ export class AdminProductFormComponent implements HasUnsavedChanges, OnInit {
       this.speciesList.set(product.species || []);
       this.presentationsList.set(product.presentations || []);
       if (product.category) {
-        this.updateAvailableSpecies(product.category);
+        this.updateAvailableCategoryOptions(product.category);
       }
       this.existingImages.set(product.images || []);
       this.existingPdfUrl.set(product.pdfUrl || null);
@@ -157,12 +160,28 @@ export class AdminProductFormComponent implements HasUnsavedChanges, OnInit {
     this.productForm.get('category')!.setValue(cat);
     this.productForm.get('category')!.markAsTouched();
     this._hasChanges.set(true);
-    this.updateAvailableSpecies(cat);
+    this.updateAvailableCategoryOptions(cat);
+
+    if (cat !== 'farmacos') {
+      this.productForm.get('family')!.setValue('');
+    }
+    if (cat !== 'alimentos') {
+      this.productForm.get('lifeStage')!.setValue('');
+    }
+    if (cat !== 'equipos') {
+      this.productForm.get('equipmentType')!.setValue('');
+    }
   }
 
-  private updateAvailableSpecies(cat: string): void {
+  private updateAvailableCategoryOptions(cat: string): void {
     const category = this.categories().find(c => c.key === cat);
     this.availableSpecies.set(category?.species || []);
+    this.availableFamilies.set(category?.families || []);
+    this.availableLifeStages.set(category?.lifeStages || []);
+    this.availableEquipmentTypes.set(category?.equipmentTypes || []);
+
+    const validSpecies = new Set((category?.species || []).map(species => species.es));
+    this.speciesList.update(list => list.filter(species => validSpecies.has(species)));
   }
 
   toggleSpecies(speciesEs: string): void {

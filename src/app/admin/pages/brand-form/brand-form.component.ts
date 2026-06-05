@@ -146,7 +146,7 @@ export class AdminBrandFormComponent implements HasUnsavedChanges, OnInit {
     if (control.errors['required']) {
       const labels: Record<string, string> = {
         name: 'El nombre de la marca es obligatorio',
-        country: 'Selecciona el país de origen',
+        country: 'Ingresa el país de origen',
       };
       return labels[fieldName] || 'Este campo es obligatorio';
     }
@@ -154,11 +154,19 @@ export class AdminBrandFormComponent implements HasUnsavedChanges, OnInit {
   }
 
   async onSubmit(): Promise<void> {
+    this.brandForm.patchValue(
+      {
+        name: (this.brandForm.get('name')?.value || '').trim(),
+        country: (this.brandForm.get('country')?.value || '').trim(),
+      },
+      { emitEvent: false }
+    );
+
     this.submitted.set(true);
     this.brandForm.markAllAsTouched();
 
     if (this.brandForm.invalid) {
-      const firstInvalid = document.querySelector('.form-control.is-invalid, .form-select.is-invalid');
+      const firstInvalid = document.querySelector('.adm-form-control.is-invalid, .adm-form-select.is-invalid');
       if (firstInvalid) {
         firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }

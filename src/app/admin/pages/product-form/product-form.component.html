@@ -117,12 +117,13 @@
             <label class="adm-form-label" for="prod-family">Familia Farmacéutica</label>
             <select id="prod-family" class="adm-form-select" formControlName="family">
               <option value="">Seleccionar familia</option>
-              <option>Antibióticos</option>
-              <option>Desparasitantes</option>
-              <option>Vitaminas</option>
-              <option>Analgésicos</option>
-              <option>Antiinflamatorios</option>
+              @for (family of availableFamilies(); track family.es) {
+                <option [value]="family.es">{{ family.es }}</option>
+              }
             </select>
+            @if (availableFamilies().length === 0) {
+              <p class="adm-form-hint">No hay familias configuradas para esta categoría. Agrégalas en Categorías.</p>
+            }
           </div>
         }
 
@@ -132,11 +133,13 @@
             <label class="adm-form-label" for="prod-lifestage">Etapa de Vida</label>
             <select id="prod-lifestage" class="adm-form-select" formControlName="lifeStage">
               <option value="">Seleccionar etapa</option>
-              <option>Cachorro/Kitten</option>
-              <option>Adulto</option>
-              <option>Senior</option>
-              <option>Todas las etapas</option>
+              @for (lifeStage of availableLifeStages(); track lifeStage.es) {
+                <option [value]="lifeStage.es">{{ lifeStage.es }}</option>
+              }
             </select>
+            @if (availableLifeStages().length === 0) {
+              <p class="adm-form-hint">No hay etapas de vida configuradas para esta categoría. Agrégalas en Categorías.</p>
+            }
           </div>
         }
 
@@ -146,11 +149,13 @@
             <label class="adm-form-label" for="prod-eqtype">Tipo de Equipo</label>
             <select id="prod-eqtype" class="adm-form-select" formControlName="equipmentType">
               <option value="">Seleccionar tipo</option>
-              <option>Diagnóstico</option>
-              <option>Quirúrgico</option>
-              <option>Laboratorio</option>
-              <option>Instrumental</option>
+              @for (equipmentType of availableEquipmentTypes(); track equipmentType.es) {
+                <option [value]="equipmentType.es">{{ equipmentType.es }}</option>
+              }
             </select>
+            @if (availableEquipmentTypes().length === 0) {
+              <p class="adm-form-hint">No hay tipos de equipo configurados para esta categoría. Agrégalos en Categorías.</p>
+            }
           </div>
         }
 

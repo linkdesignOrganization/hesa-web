@@ -89,28 +89,30 @@
   } @else if (viewMode() === 'card') {
     <div class="products-grid">
       @for (product of products(); track product._id) {
-        <a [routerLink]="'/admin/productos/' + product._id" class="adm-card adm-card--no-padding adm-card--hover product-card">
-          <div class="product-card__image">
-            @if (product.images && product.images.length > 0) {
-              <img [src]="product.images[0]" [alt]="product.name.es" loading="lazy" class="product-card__img">
-            } @else {
-              @if (product.category === 'farmacos') {
-                <span class="material-symbols-outlined product-card__placeholder product-card__placeholder--pharma" aria-hidden="true">medication</span>
-              } @else if (product.category === 'alimentos') {
-                <span class="material-symbols-outlined product-card__placeholder product-card__placeholder--food" aria-hidden="true">japanese_curry</span>
+        <article class="adm-card adm-card--no-padding adm-card--hover product-card">
+          <a [routerLink]="'/admin/productos/' + product._id" class="product-card__link" aria-label="Ver producto">
+            <div class="product-card__image">
+              @if (product.images && product.images.length > 0) {
+                <img [src]="product.images[0]" [alt]="product.name.es" loading="lazy" class="product-card__img">
               } @else {
-                <span class="material-symbols-outlined product-card__placeholder product-card__placeholder--equipment" aria-hidden="true">blood_pressure</span>
+                @if (product.category === 'farmacos') {
+                  <span class="material-symbols-outlined product-card__placeholder product-card__placeholder--pharma" aria-hidden="true">medication</span>
+                } @else if (product.category === 'alimentos') {
+                  <span class="material-symbols-outlined product-card__placeholder product-card__placeholder--food" aria-hidden="true">japanese_curry</span>
+                } @else {
+                  <span class="material-symbols-outlined product-card__placeholder product-card__placeholder--equipment" aria-hidden="true">blood_pressure</span>
+                }
               }
-            }
-          </div>
-          <div class="product-card__body">
-            <h3 class="product-card__name">{{ product.name.es }}</h3>
-            <p class="product-card__brand">{{ getBrandName(product) }}</p>
-            <div class="product-card__badges">
-              <span class="adm-badge" [class.adm-badge--pharma]="product.category === 'farmacos'" [class.adm-badge--food]="product.category === 'alimentos'" [class.adm-badge--equipment]="product.category === 'equipos'">{{ getCategoryLabel(product.category) }}</span>
-              <span class="adm-badge" [class.adm-badge--active]="product.isActive" [class.adm-badge--inactive]="!product.isActive">{{ product.isActive ? 'Activo' : 'Inactivo' }}</span>
             </div>
-          </div>
+            <div class="product-card__body">
+              <h3 class="product-card__name">{{ product.name.es }}</h3>
+              <p class="product-card__brand">{{ getBrandName(product) }}</p>
+              <div class="product-card__badges">
+                <span class="adm-badge" [class.adm-badge--pharma]="product.category === 'farmacos'" [class.adm-badge--food]="product.category === 'alimentos'" [class.adm-badge--equipment]="product.category === 'equipos'">{{ getCategoryLabel(product.category) }}</span>
+                <span class="adm-badge" [class.adm-badge--active]="product.isActive" [class.adm-badge--inactive]="!product.isActive">{{ product.isActive ? 'Activo' : 'Inactivo' }}</span>
+              </div>
+            </div>
+          </a>
           <div class="product-card__menu-wrapper">
             <button class="product-card__menu-btn" aria-label="Opciones del producto" (click)="toggleMenu(product._id, $event)">
               <span class="material-symbols-outlined">more_vert</span>
@@ -141,7 +143,7 @@
               </div>
             }
           </div>
-        </a>
+        </article>
       }
     </div>
 
