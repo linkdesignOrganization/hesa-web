@@ -3,6 +3,7 @@ import { NgTemplateOutlet } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ApiService, ApiHeroSlide, ApiHomeConfig, ApiProduct } from '../../../shared/services/api.service';
 import { ToastService } from '../../../shared/services/toast.service';
+import { getCategoryLabel } from '../../../shared/utils/route-helpers';
 
 @Component({
   selector: 'app-admin-home-hero',
@@ -40,6 +41,7 @@ export class AdminHomeHeroComponent implements OnInit {
   loadingProducts = signal(false);
 
   private allProducts: ApiProduct[] = [];
+  private readonly heroProductPageSize = 100;
 
   async ngOnInit(): Promise<void> {
     await this.loadConfig();
@@ -230,14 +232,34 @@ export class AdminHomeHeroComponent implements OnInit {
     if (this.allProducts.length === 0) {
       await this.loadAllProducts();
     }
-    this.productSearchResults.set(this.allProducts.slice(0, 20));
+    this.productSearchResults.set(this.allProducts);
   }
 
   private async loadAllProducts(): Promise<void> {
     this.loadingProducts.set(true);
     try {
-      const result = await this.api.adminGetProducts({ limit: 200 });
-      this.allProducts = result.data.filter(p => p.isActive);
+      const firstPage = await this.api.adminGetProducts({
+        page: 1,
+        limit: this.heroProductPageSize,
+      });
+
+      if (firstPage.totalPages <= 1) {
+        this.allProducts = this.sortHeroProducts(firstPage.data);
+      } else {
+        const remainingPages = await Promise.all(
+          Array.from({ length: firstPage.totalPages - 1 }, (_, index) =>
+            this.api.adminGetProducts({
+              page: index + 2,
+              limit: this.heroProductPageSize,
+            })
+          )
+        );
+
+        this.allProducts = this.sortHeroProducts([
+          ...firstPage.data,
+          ...remainingPages.flatMap(page => page.data),
+        ]);
+      }
     } catch {
       this.toast.error('Error al cargar productos');
     }
@@ -247,13 +269,15 @@ export class AdminHomeHeroComponent implements OnInit {
   searchProducts(term: string): void {
     this.productSearchTerm.set(term);
     if (!term.trim()) {
-      this.productSearchResults.set(this.allProducts.slice(0, 20));
+      this.productSearchResults.set(this.allProducts);
       return;
     }
     const lower = term.toLowerCase().trim();
     const filtered = this.allProducts.filter(p =>
       p.name.es.toLowerCase().includes(lower) ||
-      p.name.en.toLowerCase().includes(lower)
+      p.name.en.toLowerCase().includes(lower) ||
+      (p.brand?.name || '').toLowerCase().includes(lower) ||
+      this.getHeroCategoryLabel(p.category).toLowerCase().includes(lower)
     );
     this.productSearchResults.set(filtered);
   }
@@ -345,6 +369,47 @@ export class AdminHomeHeroComponent implements OnInit {
 
   getProductStateLabel(product: ApiProduct | string | null | undefined): string {
     return this.hasAssociatedProduct(product) ? 'Con producto asociado' : 'Sin producto asociado';
+  }
+
+  getHeroCategoryLabel(category: string): string {
+    return getCategoryLabel(category, 'es');
+  }
+
+  getHeroProductModalMeta(product: ApiProduct): string {
+    const brandName = product.brand?.name || 'Sin marca';
+    return `${brandName} | ${this.getHeroCategoryLabel(product.category)}`;
+  }
+
+  getHeroProductStatusLabel(product: ApiProduct): string {
+    return product.isActive ? 'Activo' : 'Inactivo';
+  }
+
+  private sortHeroProducts(products: ApiProduct[]): ApiProduct[] {
+    return [...products].sort((a, b) => {
+      if (a.isActive !== b.isActive) {
+        return a.isActive ? -1 : 1;
+      }
+
+      const categoryOrder = this.getHeroCategorySortOrder(a.category) - this.getHeroCategorySortOrder(b.category);
+      if (categoryOrder !== 0) {
+        return categoryOrder;
+      }
+
+      return a.name.es.localeCompare(b.name.es, 'es', { sensitivity: 'base' });
+    });
+  }
+
+  private getHeroCategorySortOrder(category: string): number {
+    switch (category) {
+      case 'farmacos':
+        return 0;
+      case 'alimentos':
+        return 1;
+      case 'equipos':
+        return 2;
+      default:
+        return 99;
+    }
   }
 
   private findCachedProduct(productId: string): ApiProduct | undefined {

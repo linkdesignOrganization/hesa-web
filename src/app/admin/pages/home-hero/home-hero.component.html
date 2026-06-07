@@ -364,8 +364,11 @@
       <div class="adm-modal__body">
         <div class="hero-editor__modal-search">
           <span class="material-symbols-outlined">search</span>
-          <input type="text" class="adm-form-control" placeholder="Buscar por nombre..." [ngModel]="productSearchTerm()" (ngModelChange)="searchProducts($event)">
+          <input type="text" class="adm-form-control" placeholder="Buscar por nombre, marca o categoría..." [ngModel]="productSearchTerm()" (ngModelChange)="searchProducts($event)">
         </div>
+        @if (!loadingProducts()) {
+          <p class="hero-editor__modal-count">{{ productSearchResults().length }} producto(s) disponibles</p>
+        }
         @if (loadingProducts()) {
           <div class="hero-editor__modal-loading">Cargando productos...</div>
         } @else {
@@ -381,7 +384,10 @@
                 </div>
                 <div class="hero-editor__modal-item-info">
                   <span class="hero-editor__modal-item-name">{{ product.name.es }}</span>
-                  <span class="hero-editor__modal-item-meta">{{ product.brand ? product.brand.name : '-' }} | {{ product.category }}</span>
+                  <span class="hero-editor__modal-item-meta">{{ getHeroProductModalMeta(product) }}</span>
+                  <span class="hero-editor__modal-item-status" [class.hero-editor__modal-item-status--inactive]="!product.isActive">
+                    {{ getHeroProductStatusLabel(product) }}
+                  </span>
                 </div>
               </div>
             }

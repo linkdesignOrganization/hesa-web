@@ -166,7 +166,7 @@ export async function updateHero(heroData: {
   ).lean() as unknown as IHomeConfig | null;
 
   if (!updated) return null;
-  return populateHeroConfig(updated);
+  return populateHeroConfig(updated, { includeInactive: true });
 }
 
 /**
@@ -194,7 +194,7 @@ export async function updateSlideImage(
     ).lean() as unknown as IHomeConfig | null;
 
     if (!updated) return null;
-    return populateHeroConfig(updated);
+    return populateHeroConfig(updated, { includeInactive: true });
   }
 
   const key = target === 'single' ? `hero.single.${field}` : `hero.slides.${slideIndex}.${field}`;
@@ -205,13 +205,16 @@ export async function updateSlideImage(
   ).lean() as unknown as IHomeConfig | null;
 
   if (!updated) return null;
-  return populateHeroConfig(updated);
+  return populateHeroConfig(updated, { includeInactive: true });
 }
 
 /**
  * Populate a single slide's product reference.
  */
-async function populateSlideProduct(slide: IHeroSlide): Promise<Record<string, unknown>> {
+async function populateSlideProduct(
+  slide: IHeroSlide,
+  options: { includeInactive?: boolean } = {}
+): Promise<Record<string, unknown>> {
   const result: Record<string, unknown> = { ...slide };
   if (slide.product) {
     const productId = typeof slide.product === 'string' ? slide.product : String(slide.product);
@@ -219,7 +222,7 @@ async function populateSlideProduct(slide: IHeroSlide): Promise<Record<string, u
       const product = await Product.findById(productId)
         .populate('brand', 'name slug logo country categories')
         .lean();
-      if (product && (product as any).isActive) {
+      if (product && (options.includeInactive || (product as any).isActive)) {
         result.product = product;
       } else {
         result.product = null;
@@ -229,10 +232,13 @@ async function populateSlideProduct(slide: IHeroSlide): Promise<Record<string, u
   return result;
 }
 
-async function populateHeroConfig(config: IHomeConfig): Promise<Record<string, unknown>> {
-  const single = config.hero?.single ? await populateSlideProduct(config.hero.single) : null;
+async function populateHeroConfig(
+  config: IHomeConfig,
+  options: { includeInactive?: boolean } = {}
+): Promise<Record<string, unknown>> {
+  const single = config.hero?.single ? await populateSlideProduct(config.hero.single, options) : null;
   const slides = config.hero?.slides?.length
-    ? await Promise.all(config.hero.slides.map(populateSlideProduct))
+    ? await Promise.all(config.hero.slides.map(slide => populateSlideProduct(slide, options)))
     : [];
 
   return {
@@ -247,7 +253,7 @@ async function populateHeroConfig(config: IHomeConfig): Promise<Record<string, u
 
 export async function getAdminHomeConfigPopulated(): Promise<Record<string, unknown>> {
   const config = await getHomeConfig();
-  return populateHeroConfig(config);
+  return populateHeroConfig(config, { includeInactive: true });
 }
 
 /**
@@ -275,7 +281,7 @@ export async function getHeroSlidesPopulated(): Promise<{ mode: string; slides: 
 
   // Carousel mode
   const slides = config.hero?.slides || [];
-  const populated = await Promise.all(slides.map(populateSlideProduct));
+  const populated = await Promise.all(slides.map(slide => populateSlideProduct(slide)));
   return { mode: 'carousel', slides: populated };
 }
 
