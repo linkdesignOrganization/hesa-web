@@ -14,16 +14,16 @@
 
   &__hero {
     padding-top: 0;
-    padding-bottom: 38px;
+    padding-bottom: 32px;
     background: var(--brands-surface);
 
     @media (max-width: 767px) {
-      padding-bottom: 24px;
+      padding-bottom: 20px;
     }
   }
 
   &__hero-copy {
-    margin-top: 18px;
+    margin-top: 14px;
     max-width: 860px;
   }
 
@@ -31,22 +31,22 @@
     display: inline-flex;
     align-items: center;
     min-height: 34px;
-    padding: 8px 14px;
+    padding: 7px 12px;
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.84);
     color: var(--brands-accent);
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    font-size: var(--text-label);
+    font-size: 11px;
     font-weight: var(--weight-bold);
   }
 
   &__title {
     margin: 14px 0 0;
     max-width: 12ch;
-    font-size: clamp(32px, 4vw, 52px);
-    line-height: 1.05;
-    letter-spacing: -1.5px;
+    font-size: clamp(30px, 3.7vw, 48px);
+    line-height: 1;
+    letter-spacing: var(--tracking-tighter);
     font-weight: var(--weight-extrabold);
     color: var(--neutral-900);
 
@@ -56,20 +56,20 @@
   }
 
   &__description {
-    margin: 16px 0 0;
+    margin: 14px 0 0;
     max-width: 760px;
     color: rgba(15, 23, 42, 0.7);
-    font-size: 17px;
-    line-height: 1.7;
+    font-size: 16px;
+    line-height: 1.64;
 
     @media (max-width: 767px) {
       font-size: 15px;
-      line-height: 1.65;
+      line-height: 1.58;
     }
   }
 
   &__body {
-    padding-top: 30px;
+    padding-top: 24px;
   }
 }
 
@@ -159,11 +159,11 @@
 
   &__title {
     margin: 0;
-    font-size: clamp(24px, 3vw, 34px);
+    font-size: clamp(22px, 2.7vw, 30px);
     font-weight: var(--weight-bold);
     color: var(--neutral-900);
     letter-spacing: var(--tracking-tight);
-    line-height: 1.05;
+    line-height: 1.08;
   }
 
   &__text {

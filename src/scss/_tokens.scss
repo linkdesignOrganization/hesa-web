@@ -78,15 +78,15 @@
     "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 
   // Type scale — generous, editorial hierarchy
-  --text-display: 72px;
-  --text-h1: 56px;
-  --text-h2: 44px;
-  --text-h3: 32px;
+  --text-display: 68px;
+  --text-h1: 52px;
+  --text-h2: 40px;
+  --text-h3: 30px;
   --text-h4: 24px;
-  --text-body-xl: 22px;
+  --text-body-xl: 20px;
   --text-body-lg: 18px;
-  --text-body: 17px;
-  --text-small: 14px;
+  --text-body: 16px;
+  --text-small: 13px;
   --text-label: 12px;
   --text-eyebrow: 13px;
 
@@ -105,8 +105,8 @@
   --leading-relaxed: 1.7;
 
   // Letter spacing
-  --tracking-tighter: -0.03em;
-  --tracking-tight: -0.02em;
+  --tracking-tighter: -0.028em;
+  --tracking-tight: -0.018em;
   --tracking-wide: 0.08em;
   --tracking-wider: 0.12em;
 
@@ -148,21 +148,21 @@
   --space-32: 128px;
 
   // Section spacing — generous whitespace like Tuft & Paw
-  --section-gap-desktop: 120px;
-  --section-gap-tablet: 96px;
-  --section-gap-mobile: 72px;
+  --section-gap-desktop: 104px;
+  --section-gap-tablet: 88px;
+  --section-gap-mobile: 64px;
 
   // Color block padding
-  --block-padding-desktop: 80px;
-  --block-padding-tablet: 64px;
-  --block-padding-mobile: 48px;
+  --block-padding-desktop: 72px;
+  --block-padding-tablet: 56px;
+  --block-padding-mobile: 40px;
 
   // Container
   --container-max-width: 1280px;
   --container-narrow: 960px;
   --container-wide: 1440px;
-  --container-padding-desktop: 48px;
-  --container-padding-mobile: 20px;
+  --container-padding-desktop: 40px;
+  --container-padding-mobile: 16px;
 
   // Admin panel spacing (DO NOT TOUCH)
   --panel-content-padding-desktop: 32px;

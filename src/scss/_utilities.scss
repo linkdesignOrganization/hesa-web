@@ -154,28 +154,28 @@
 
 // Display — hero headlines, massive impact
 .text-display {
-  font-size: clamp(40px, 6vw, var(--text-display));
+  font-size: clamp(38px, 5.2vw, var(--text-display));
   font-weight: var(--weight-extrabold);
   letter-spacing: var(--tracking-tighter);
-  line-height: var(--leading-none);
+  line-height: 0.94;
 }
 
 .text-h1 {
-  font-size: clamp(36px, 5vw, var(--text-h1));
+  font-size: clamp(34px, 4.3vw, var(--text-h1));
   font-weight: var(--weight-bold);
   letter-spacing: var(--tracking-tight);
-  line-height: var(--leading-tight);
+  line-height: 1;
 }
 
 .text-h2 {
-  font-size: clamp(28px, 3.5vw, var(--text-h2));
+  font-size: clamp(28px, 3vw, var(--text-h2));
   font-weight: var(--weight-bold);
   letter-spacing: var(--tracking-tight);
-  line-height: var(--leading-tight);
+  line-height: 1.02;
 }
 
 .text-h3 {
-  font-size: clamp(24px, 2.5vw, var(--text-h3));
+  font-size: clamp(22px, 2.1vw, var(--text-h3));
   font-weight: var(--weight-semibold);
   line-height: var(--leading-snug);
 }
@@ -189,13 +189,13 @@
 .text-body-xl {
   font-size: var(--text-body-xl);
   font-weight: var(--weight-regular);
-  line-height: var(--leading-relaxed);
+  line-height: 1.62;
 }
 
 .text-body-lg {
   font-size: var(--text-body-lg);
   font-weight: var(--weight-regular);
-  line-height: var(--leading-relaxed);
+  line-height: 1.64;
 }
 
 .text-small {
@@ -207,7 +207,7 @@
   font-size: var(--text-label);
   font-weight: var(--weight-semibold);
   text-transform: uppercase;
-  letter-spacing: var(--tracking-wide);
+  letter-spacing: var(--tracking-wider);
 }
 
 // Eyebrow — overline/kicker text, T&P style
