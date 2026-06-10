@@ -34,6 +34,7 @@ export class AdminFeaturedProductsComponent implements OnInit {
   private allProducts: ApiProduct[] = [];
   filteredAll = signal<ApiProduct[]>([]);
   private selectedIds = new Set<string>();
+  private readonly featuredProductPageSize = 100;
 
   async ngOnInit(): Promise<void> {
     await this.loadFeatured();
@@ -42,13 +43,24 @@ export class AdminFeaturedProductsComponent implements OnInit {
   async loadFeatured(): Promise<void> {
     this.loading.set(true);
     try {
-      const homeData = await this.api.getHomeData();
-      this.products.set(homeData.featuredProducts as unknown as FeaturedProduct[]);
-      this.selectedIds = new Set(homeData.featuredProducts.map((p: ApiProduct) => p._id));
+      const config = await this.api.adminGetHomeConfig();
+      const featuredProducts = config.featuredProducts
+        .filter((product): product is ApiProduct => this.isProductObject(product))
+        .map(product => this.toFeaturedProduct(product));
+
+      this.products.set(featuredProducts);
+      this.selectedIds = new Set(
+        config.featuredProducts.map(product => typeof product === 'string' ? product : product._id)
+      );
     } catch {
       this.toast.error('Error al cargar productos destacados');
     }
     this.loading.set(false);
+  }
+
+  async openModal(): Promise<void> {
+    this.showModal.set(true);
+    await this.filterAvailable();
   }
 
   onDrop(event: CdkDragDrop<FeaturedProduct[]>): void {
@@ -87,54 +99,116 @@ export class AdminFeaturedProductsComponent implements OnInit {
   }
 
   async filterAvailable(): Promise<void> {
-    if (this.allProducts.length === 0) {
-      this.loadingAll.set(true);
-      try {
-        const result = await this.api.adminGetProducts({ limit: 200 });
-        this.allProducts = result.data.filter(p => p.isActive);
-      } catch {
-        this.toast.error('Error al cargar productos');
-      }
-      this.loadingAll.set(false);
-    }
+    await this.ensureAllProductsLoaded();
 
     let filtered = this.allProducts;
     if (this.filterCategory()) {
       filtered = filtered.filter(p => p.category === this.filterCategory());
     }
     if (this.searchTerm.trim()) {
-      const term = this.searchTerm.toLowerCase().trim();
-      filtered = filtered.filter(p =>
-        p.name.es.toLowerCase().includes(term) ||
-        p.name.en.toLowerCase().includes(term)
-      );
+      const term = this.normalizeSearch(this.searchTerm);
+      filtered = filtered.filter(product => this.matchesSearch(product, term));
     }
     this.filteredAll.set(filtered);
   }
 
   applySelection(): void {
-    const currentProducts = this.products();
-    const currentIds = new Set(currentProducts.map(p => p._id));
+    const currentProducts = [...this.products().filter(product => this.selectedIds.has(product._id))];
+    const currentIds = new Set(currentProducts.map(product => product._id));
 
-    // Add newly selected products
     for (const id of this.selectedIds) {
       if (!currentIds.has(id)) {
         const product = this.allProducts.find(p => p._id === id);
         if (product) {
-          currentProducts.push({
-            _id: product._id,
-            name: product.name,
-            brand: typeof product.brand === 'object' ? product.brand : { name: '' },
-            images: product.images,
-            category: product.category,
-          } as FeaturedProduct);
+          currentProducts.push(this.toFeaturedProduct(product));
         }
       }
     }
 
-    // Remove deselected products
-    const finalProducts = currentProducts.filter(p => this.selectedIds.has(p._id));
-    this.products.set(finalProducts);
+    this.products.set(currentProducts);
     this.showModal.set(false);
+  }
+
+  private async ensureAllProductsLoaded(): Promise<void> {
+    if (this.allProducts.length > 0 || this.loadingAll()) {
+      return;
+    }
+
+    this.loadingAll.set(true);
+    try {
+      const firstPage = await this.api.adminGetProducts({ page: 1, limit: this.featuredProductPageSize });
+      const pageRequests: Promise<{ data: ApiProduct[] }>[] = [];
+
+      for (let page = 2; page <= firstPage.totalPages; page += 1) {
+        pageRequests.push(
+          this.api.adminGetProducts({ page, limit: this.featuredProductPageSize })
+        );
+      }
+
+      const remainingPages = pageRequests.length > 0 ? await Promise.all(pageRequests) : [];
+      const mergedProducts = [firstPage.data, ...remainingPages.map(page => page.data)].flat();
+
+      const dedupedProducts = new Map<string, ApiProduct>();
+      for (const product of mergedProducts) {
+        if (product.isActive) {
+          dedupedProducts.set(product._id, product);
+        }
+      }
+
+      this.allProducts = Array.from(dedupedProducts.values()).sort((a, b) =>
+        a.name.es.localeCompare(b.name.es, 'es', { sensitivity: 'base' })
+      );
+    } catch {
+      this.toast.error('Error al cargar productos');
+      this.allProducts = [];
+    }
+    this.loadingAll.set(false);
+  }
+
+  private toFeaturedProduct(product: ApiProduct): FeaturedProduct {
+    return {
+      _id: product._id,
+      name: product.name,
+      brand: product.brand ? { name: product.brand.name } : { name: '' },
+      images: product.images,
+      category: product.category,
+    };
+  }
+
+  private isProductObject(value: string | ApiProduct): value is ApiProduct {
+    return typeof value !== 'string' && !!value && typeof value._id === 'string' && !!value.name;
+  }
+
+  private matchesSearch(product: ApiProduct, term: string): boolean {
+    const fields = [
+      product.name.es,
+      product.name.en,
+      product.brand?.name || '',
+      product.category,
+      ...this.getCategorySearchTerms(product.category),
+    ];
+
+    return fields.some(field => this.normalizeSearch(field).includes(term));
+  }
+
+  private getCategorySearchTerms(category: ApiProduct['category']): string[] {
+    switch (category) {
+      case 'farmacos':
+        return ['fármacos', 'farmacos', 'farmaco', 'pharmaceuticals'];
+      case 'alimentos':
+        return ['alimentos', 'alimento', 'foods', 'food'];
+      case 'equipos':
+        return ['equipos', 'equipo', 'equipment'];
+      default:
+        return [];
+    }
+  }
+
+  private normalizeSearch(value: string): string {
+    return value
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .trim();
   }
 }

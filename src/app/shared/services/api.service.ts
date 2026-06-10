@@ -103,8 +103,8 @@ export interface ApiHomeConfig {
     single: ApiHeroSlide | null;
     slides: ApiHeroSlide[];
   };
-  featuredProducts: string[];
-  featuredBrands: string[];
+  featuredProducts: Array<string | ApiProduct>;
+  featuredBrands: Array<string | ApiBrand>;
 }
 
 export interface ApiHomePublic {

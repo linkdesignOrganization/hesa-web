@@ -168,7 +168,8 @@ router.put('/featured-products', sanitizeBody, async (req: AuthRequest, res: Res
       return;
     }
 
-    const config = await homeService.updateFeaturedProducts(productIds);
+    await homeService.updateFeaturedProducts(productIds);
+    const config = await homeService.getAdminHomeConfigPopulated();
 
     await logActivity({
       action: 'update',

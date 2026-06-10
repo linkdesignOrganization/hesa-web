@@ -251,9 +251,44 @@ async function populateHeroConfig(
   };
 }
 
+async function populateFeaturedProductsForConfig(
+  config: IHomeConfig,
+  options: { includeInactive?: boolean } = {}
+): Promise<unknown[]> {
+  if (!config.featuredProducts || config.featuredProducts.length === 0) return [];
+
+  const objectIds = config.featuredProducts
+    .filter(id => mongoose.Types.ObjectId.isValid(id))
+    .map(id => new mongoose.Types.ObjectId(id));
+
+  const productFilter: Record<string, unknown> = {
+    _id: { $in: objectIds },
+  };
+
+  if (!options.includeInactive) {
+    productFilter.isActive = true;
+  }
+
+  const products = await Product.find(productFilter)
+    .populate('brand', 'name slug logo country categories')
+    .lean();
+
+  const productMap = new Map(products.map(product => [String(product._id), product]));
+
+  return config.featuredProducts
+    .map(id => productMap.get(id))
+    .filter(Boolean);
+}
+
 export async function getAdminHomeConfigPopulated(): Promise<Record<string, unknown>> {
   const config = await getHomeConfig();
-  return populateHeroConfig(config, { includeInactive: true });
+  const heroConfig = await populateHeroConfig(config, { includeInactive: true });
+  const featuredProducts = await populateFeaturedProductsForConfig(config, { includeInactive: true });
+
+  return {
+    ...heroConfig,
+    featuredProducts,
+  };
 }
 
 /**
@@ -307,23 +342,7 @@ export async function updateFeaturedBrands(brandIds: string[]): Promise<IHomeCon
 
 export async function getFeaturedProductsPopulated(): Promise<unknown[]> {
   const config = await getHomeConfig();
-  if (!config.featuredProducts || config.featuredProducts.length === 0) return [];
-
-  const objectIds = config.featuredProducts
-    .filter(id => mongoose.Types.ObjectId.isValid(id))
-    .map(id => new mongoose.Types.ObjectId(id));
-
-  const products = await Product.find({
-    _id: { $in: objectIds },
-    isActive: true,
-  })
-    .populate('brand', 'name slug logo country categories')
-    .lean();
-
-  const productMap = new Map(products.map(p => [String(p._id), p]));
-  return config.featuredProducts
-    .map(id => productMap.get(id))
-    .filter(Boolean);
+  return populateFeaturedProductsForConfig(config);
 }
 
 export async function getFeaturedBrandsPopulated(): Promise<unknown[]> {
