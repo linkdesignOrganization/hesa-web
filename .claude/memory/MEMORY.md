@@ -8,3 +8,7 @@
 - [hesa_api_platform_cors.md](hesa_api_platform_cors.md) — CORS de hesa-api es a nivel de plataforma App Service (`az webapp cors`), no por la env `CORS_ORIGINS`
 - [Acceso admin (Entra B2B)](admin-access-entra-b2b.md) — cómo se otorga acceso a /admin; no hay allowlist en código, se invita Guest en Entra ID
 - [Correos admin HESA](hesa-admin-emails.md) — cuentas con acceso al panel admin y su estado
+- [feedback_backdrop_filter.md](feedback_backdrop_filter.md) - CSS animations with opacity/transform break backdrop-filter on child elements
+- [feedback_deploy_workflow.md](feedback_deploy_workflow.md) - Subir a prod = commit selectivo + push a master; cuidado con el WIP concurrente del usuario en el working tree
+- [feedback_icons.md](feedback_icons.md) - Only use Google Material Symbols or Bootstrap Icons — no inline SVGs or other icon libraries
+- [project_hesa_architecture.md](project_hesa_architecture.md) - Complete HESA project architecture: Angular 19 + Express monorepo on Azure with Cosmos DB, Blob Storage, and Entra ID auth
