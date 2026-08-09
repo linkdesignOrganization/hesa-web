@@ -60,3 +60,14 @@
 - **Auth admin**: Azure Entra ID, correo inicial: hola@linkdesign.cr
 - **BD**: Panel limpio — solo categorias/filtros. Sin datos placeholder.
 - **Tests**: 645+ tests automatizados Playwright
+
+
+## Memoria del proyecto
+
+@.claude/memory/MEMORY.md
+
+Ese índice viaja con el repo: está en cualquier máquina donde lo clones, sin configurar nada. Los
+archivos que lista no se cargan solos — leerlos cuando el tema aparezca.
+
+Cuando aprendas algo duradero de este proyecto, escribilo ahí: un archivo por tema y una línea en
+`MEMORY.md`. El índice se carga entero en cada sesión, así que va corto.
