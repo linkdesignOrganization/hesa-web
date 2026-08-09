@@ -66,3 +66,6 @@ Input/
 # System files
 .DS_Store
 Thumbs.db
+
+# Lo genera un hook con la ruta absoluta de esta maquina: no debe versionarse.
+.claude/settings.local.json
